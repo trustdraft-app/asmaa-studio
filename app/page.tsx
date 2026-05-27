@@ -51,7 +51,9 @@ export default function HomePage() {
       <section className="hero" id="top">
         <nav className="nav" aria-label="Primary">
           <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
-            <Image src={assetPath("/brand/asmaa-monogram-studio.jpg")} alt="" width={92} height={92} priority />
+            <span className="brand-mark" aria-hidden="true">
+              <span>AS</span>
+            </span>
             <span>
               <strong>Asmaa Studio</strong>
               <span>Photo & Video</span>
@@ -103,13 +105,10 @@ export default function HomePage() {
             <div className="reel-ribbon ribbon-one" />
             <div className="reel-ribbon ribbon-two" />
             <div className="monogram-stage">
-              <Image
-                src={assetPath("/brand/asmaa-monogram-heritage.jpg")}
-                alt="Asmaa Studio gold monogram"
-                width={853}
-                height={1280}
-                priority
-              />
+              <div className="signature-mark" aria-hidden="true">
+                <span className="sig-left">A</span>
+                <span className="sig-center">S</span>
+              </div>
             </div>
             <div className="director-frame">
               <span>01</span>

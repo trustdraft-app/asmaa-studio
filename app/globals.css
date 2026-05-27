@@ -177,14 +177,6 @@ textarea {
   gap: 12px;
 }
 
-.brand-lockup img {
-  border: 1px solid rgba(241, 203, 130, 0.18);
-  border-radius: 50%;
-  height: 46px;
-  object-fit: cover;
-  width: 46px;
-}
-
 .brand-lockup strong {
   display: block;
   font-family: var(--font-display), Georgia, serif;
@@ -195,6 +187,43 @@ textarea {
   color: var(--muted);
   display: block;
   font-size: 0.78rem;
+}
+
+.brand-mark {
+  align-items: center;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 35% 20%, rgba(255, 248, 236, 0.18), transparent 30%),
+    linear-gradient(145deg, rgba(241, 203, 130, 0.2), rgba(12, 12, 13, 0.72));
+  border: 1px solid rgba(241, 203, 130, 0.34);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 248, 236, 0.04), 0 12px 28px rgba(0, 0, 0, 0.22);
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  position: relative;
+  width: 48px;
+}
+
+.brand-mark::before {
+  background: linear-gradient(180deg, #f7dfad, #a86d32);
+  border-radius: 999px;
+  content: "";
+  height: 1px;
+  left: 9px;
+  position: absolute;
+  right: 9px;
+  top: 12px;
+}
+
+.brand-mark span {
+  color: var(--gold);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  transform: translateY(3px);
 }
 
 .nav-links {
@@ -321,7 +350,12 @@ textarea {
 
 .monogram-stage {
   aspect-ratio: 4 / 5;
-  border: 1px solid rgba(241, 203, 130, 0.26);
+  background:
+    radial-gradient(circle at 50% 34%, rgba(241, 203, 130, 0.16), transparent 30%),
+    radial-gradient(circle at 42% 55%, rgba(213, 138, 134, 0.08), transparent 34%),
+    linear-gradient(160deg, rgba(255, 248, 236, 0.065), rgba(12, 12, 13, 0.72) 48%, rgba(0, 0, 0, 0.78)),
+    #11100f;
+  border: 1px solid rgba(241, 203, 130, 0.3);
   border-radius: 8px;
   box-shadow: 0 26px 80px rgba(0, 0, 0, 0.52), inset 0 0 0 1px rgba(255, 248, 236, 0.05);
   overflow: hidden;
@@ -330,18 +364,57 @@ textarea {
   z-index: 1;
 }
 
-.monogram-stage img {
-  filter: saturate(1.06) contrast(1.08);
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-
 .monogram-stage::after {
-  background: linear-gradient(to top, rgba(8, 8, 8, 0.8), transparent 48%);
+  background:
+    linear-gradient(90deg, rgba(241, 203, 130, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(241, 203, 130, 0.06) 1px, transparent 1px),
+    linear-gradient(to top, rgba(8, 8, 8, 0.7), transparent 58%);
+  background-size: 48px 48px, 48px 48px, auto;
   content: "";
   inset: 0;
   position: absolute;
+}
+
+.monogram-stage::before {
+  border: 1px solid rgba(241, 203, 130, 0.22);
+  border-radius: 8px;
+  content: "";
+  inset: 18px;
+  position: absolute;
+  z-index: 2;
+}
+
+.signature-mark {
+  align-items: center;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+  z-index: 3;
+}
+
+.signature-mark span {
+  background: linear-gradient(180deg, #fff1cb 0%, #d8a45d 42%, #8e5827 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55));
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(9.6rem, 18vw, 14.2rem);
+  font-weight: 700;
+  line-height: 0.8;
+  position: absolute;
+}
+
+.sig-left {
+  -webkit-text-stroke: 1px rgba(255, 248, 236, 0.08);
+  transform: translateX(-18%) skewX(-7deg);
+}
+
+.sig-center {
+  color: rgba(241, 203, 130, 0.46) !important;
+  -webkit-text-stroke: 1px rgba(255, 248, 236, 0.12);
+  transform: translateX(16%) translateY(7%) scale(1.02);
 }
 
 .floating-card {
