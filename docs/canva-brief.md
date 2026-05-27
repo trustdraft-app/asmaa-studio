@@ -25,3 +25,8 @@ Premium Saudi wedding videography. Black marble-inspired background, champagne g
 ## Highlight Labels
 
 Album, Feedback, Packages, Bride Details, Video Details, First Look, Booking, BTS, Editing, Life Style.
+
+## Live Imported Website Artifact
+
+- Edit: https://www.canva.com/d/F-u8yeTlyikimX6
+- View: https://www.canva.com/d/PW-rRL7ZZI9yFd8
