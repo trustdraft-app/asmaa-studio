@@ -7,6 +7,7 @@ https://trustdraft-app.github.io/asmaa-studio/
 ## What Changed
 
 - Reworked the hero into a cinematic brand scene with motion-frame overlays, film-ribbon movement, director card, and stronger monogram staging.
+- Replaced forced JPG logo placement with a site-native `AS` monogram treatment that uses the same gold, grid, depth, and typography system as the page.
 - Replaced plain proof cards with a board-score system: privacy, story, clarity, booking.
 - Added a cinematic language section for bride entrance, luxury details, First Look, and color grading.
 - Added a conversion-funnel infographic: discovery, trust, message, booking.
