@@ -10,12 +10,16 @@ import {
 } from "lucide-react";
 import {
   assetPath,
+  areaStrategy,
+  boardScore,
   bookingRules,
   extraItems,
   highlights,
   instagramUrl,
   packages,
   bookingSteps,
+  cinematicMoments,
+  conversionFlow,
   seoFocus,
   serviceAreas,
   services,
@@ -84,23 +88,20 @@ export default function HomePage() {
               </a>
             </div>
             <div className="hero-proof" aria-label="Business highlights">
-              <div className="proof-chip">
-                <b>319+</b>
-                <span>منشور على انستقرام يعرض الأسلوب والتفاصيل</span>
-              </div>
-              <div className="proof-chip">
-                <b>5</b>
-                <span>باقات واضحة للزفة، النصف يوم، اليوم الكامل والخطوبة</span>
-              </div>
-              <div className="proof-chip">
-                <b>3</b>
-                <span>مناطق مستهدفة: الأحساء، الدمام، الخبر</span>
-              </div>
+              {boardScore.map((item) => (
+                <div className="proof-chip" key={item.label}>
+                  <b>{item.value}</b>
+                  <span>{item.label}</span>
+                  <em>{item.detail}</em>
+                </div>
+              ))}
             </div>
           </div>
 
           <div className="hero-visual" aria-hidden="true">
             <div className="motion-line" />
+            <div className="reel-ribbon ribbon-one" />
+            <div className="reel-ribbon ribbon-two" />
             <div className="monogram-stage">
               <Image
                 src={assetPath("/brand/asmaa-monogram-heritage.jpg")}
@@ -110,10 +111,42 @@ export default function HomePage() {
                 priority
               />
             </div>
+            <div className="director-frame">
+              <span>01</span>
+              <strong>Golden Entrance</strong>
+              <small>privacy · story · emotion</small>
+            </div>
             <div className="floating-card">
               <strong>الخصوصية أولا</strong>
               <span>الصفحة موجهة للعروس والنساء من العائلة، مع تحويل مباشر إلى واتساب.</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section cinematic-band" id="film-language">
+        <div className="section-inner cinematic-layout">
+          <div>
+            <span className="eyebrow">لغة فيلم الزفاف</span>
+            <h2 className="section-title">الموقع الآن يبيع إحساس الفيلم، وليس قائمة أسعار فقط.</h2>
+            <p className="section-copy">
+              العروس لا تقارن الكاميرات فقط؛ تقارن الإحساس، الأمان، الخصوصية، وطريقة ظهورها في
+              يوم لا يتكرر. لذلك الواجهة تستخدم مشاهد، إيقاع، وخرائط قرار تجعل الباقة تبدو
+              كقصة متكاملة.
+            </p>
+          </div>
+          <div className="cinema-board" aria-label="Cinematic moments">
+            {cinematicMoments.map((moment, index) => {
+              const Icon = moment.icon;
+              return (
+                <article className="cinema-shot" key={moment.title}>
+                  <span className="shot-number">{String(index + 1).padStart(2, "0")}</span>
+                  <Icon size={28} strokeWidth={1.55} />
+                  <h3>{moment.title}</h3>
+                  <p>{moment.text}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -195,6 +228,15 @@ export default function HomePage() {
               );
             })}
           </div>
+          <div className="conversion-map" aria-label="Conversion funnel infographic">
+            {conversionFlow.map((step) => (
+              <article className="conversion-node" key={step.number}>
+                <span>{step.number}</span>
+                <h3>{step.title}</h3>
+                <p>{step.detail}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -244,6 +286,19 @@ export default function HomePage() {
             {seoFocus.map((keyword) => (
               <span key={keyword}>{keyword}</span>
             ))}
+          </div>
+          <div className="area-strategy-grid">
+            {areaStrategy.map((area) => {
+              const Icon = area.icon;
+              return (
+                <article className="area-card" key={area.city}>
+                  <Icon size={26} strokeWidth={1.6} />
+                  <span>{area.angle}</span>
+                  <h3>{area.city}</h3>
+                  <p>{area.detail}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

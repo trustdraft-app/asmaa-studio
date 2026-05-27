@@ -1,11 +1,16 @@
 import {
   Camera,
   Clapperboard,
+  Crown,
   Gem,
+  MapPinned,
   HeartHandshake,
   MessageCircle,
+  Palette,
   Sparkles,
-  Video
+  ShieldCheck,
+  Video,
+  WandSparkles
 } from "lucide-react";
 
 export const whatsappNumber = "966551606334";
@@ -23,6 +28,13 @@ export const serviceAreas = [
   { slug: "alahsa", ar: "الأحساء", en: "Al Ahsa" },
   { slug: "dammam", ar: "الدمام", en: "Dammam" },
   { slug: "khobar", ar: "الخبر", en: "Khobar" }
+];
+
+export const boardScore = [
+  { value: "01", label: "الخصوصية", detail: "تجربة نسائية موجهة للعروس والعائلة" },
+  { value: "02", label: "القصة", detail: "بداية، تفاصيل، لحظة، ثم مونتاج" },
+  { value: "03", label: "الوضوح", detail: "باقات وسعر ومدة قبل أول رسالة" },
+  { value: "04", label: "الحجز", detail: "واتساب مباشر برسالة جاهزة" }
 ];
 
 export const packages = [
@@ -92,6 +104,29 @@ export const services = [
   }
 ];
 
+export const cinematicMoments = [
+  {
+    icon: Crown,
+    title: "دخول العروس",
+    text: "إيقاع بطيء، ضوء ناعم، وحضور يركز على هيبة اللحظة دون مبالغة."
+  },
+  {
+    icon: Gem,
+    title: "تفاصيل الفخامة",
+    text: "الفستان، الخاتم، المسكة، العطر، والكوشة تتحول إلى لقطات ذاكرة."
+  },
+  {
+    icon: WandSparkles,
+    title: "First Look",
+    text: "مشهد مشاعر حقيقي يظهر ردة الفعل الأولى بطريقة راقية ومريحة."
+  },
+  {
+    icon: Palette,
+    title: "تلوين سينمائي",
+    text: "لون دافئ يحافظ على البشرة، الفستان، والإضاءة الذهبية للمناسبة."
+  }
+];
+
 export const bookingSteps = [
   {
     icon: MessageCircle,
@@ -107,6 +142,34 @@ export const bookingSteps = [
     icon: HeartHandshake,
     title: "تأكيد الحجز",
     text: "يثبت الموعد بعد العربون، وتصل التذكيرات والنقاط المهمة قبل يوم التصوير."
+  }
+];
+
+export const conversionFlow = [
+  { number: "1", title: "اكتشاف", detail: "بحث جوجل، انستقرام، تيك توك، أو هاشتاق محلي." },
+  { number: "2", title: "ثقة", detail: "الموقع يوضح الباقات، المدن، الخصوصية، وأسلوب التصوير." },
+  { number: "3", title: "رسالة", detail: "كل زر يفتح واتساب برسالة جاهزة ومصدر واضح." },
+  { number: "4", title: "حجز", detail: "تأكيد التاريخ والبكج ثم العربون حسب وثيقة العمل." }
+];
+
+export const areaStrategy = [
+  {
+    icon: MapPinned,
+    city: "الأحساء",
+    angle: "المدينة الأساسية",
+    detail: "نركز المحتوى والصفحات على نية البحث الأسرع: مصورة زواج وخطوبة قريبة في الأحساء."
+  },
+  {
+    icon: Sparkles,
+    city: "الدمام",
+    angle: "سوق التوسع",
+    detail: "محتوى يستهدف العروس التي تريد مصورة نسائية واضحة الباقات وسهلة الحجز."
+  },
+  {
+    icon: ShieldCheck,
+    city: "الخبر",
+    angle: "طلب راق",
+    detail: "تقديم أكثر فخامة للخطوبة والزواجات الصغيرة ذات التفاصيل العالية."
   }
 ];
 
