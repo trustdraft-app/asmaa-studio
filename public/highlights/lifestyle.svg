@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Lifestyle highlight cover">
+  <rect width="1080" height="1080" fill="#0c0c0d"/>
+  <circle cx="540" cy="540" r="430" fill="#151211" stroke="#c99953" stroke-width="12"/>
+  <circle cx="540" cy="540" r="372" fill="none" stroke="#f1cb82" stroke-width="3" opacity=".6"/>
+  <path d="M390 610c60-150 210-150 300 0M455 510c-18-86 40-150 85-190 45 40 103 104 85 190" fill="none" stroke="#f1cb82" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M340 665h400" stroke="#f1cb82" stroke-width="24" stroke-linecap="round"/>
+  <text x="540" y="820" text-anchor="middle" fill="#fff8ec" font-family="Georgia, serif" font-size="76" font-weight="700">Life Style</text>
+</svg>

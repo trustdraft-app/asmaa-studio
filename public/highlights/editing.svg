@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Editing highlight cover">
+  <rect width="1080" height="1080" fill="#0c0c0d"/>
+  <circle cx="540" cy="540" r="430" fill="#151211" stroke="#c99953" stroke-width="12"/>
+  <circle cx="540" cy="540" r="372" fill="none" stroke="#f1cb82" stroke-width="3" opacity=".6"/>
+  <path d="M350 435h380M350 540h380M350 645h380" stroke="#f1cb82" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="475" cy="435" r="36" fill="#151211" stroke="#f1cb82" stroke-width="22"/>
+  <circle cx="620" cy="540" r="36" fill="#151211" stroke="#f1cb82" stroke-width="22"/>
+  <circle cx="520" cy="645" r="36" fill="#151211" stroke="#f1cb82" stroke-width="22"/>
+  <text x="540" y="820" text-anchor="middle" fill="#fff8ec" font-family="Georgia, serif" font-size="76" font-weight="700">Editing</text>
+</svg>

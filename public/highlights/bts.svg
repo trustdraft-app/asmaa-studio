@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Behind the scenes highlight cover">
+  <rect width="1080" height="1080" fill="#0c0c0d"/>
+  <circle cx="540" cy="540" r="430" fill="#151211" stroke="#c99953" stroke-width="12"/>
+  <circle cx="540" cy="540" r="372" fill="none" stroke="#f1cb82" stroke-width="3" opacity=".6"/>
+  <path d="M345 375h390v315H345z" fill="none" stroke="#f1cb82" stroke-width="28" stroke-linejoin="round"/>
+  <path d="M345 470h390M430 375l-58 95M540 375l-58 95M650 375l-58 95" stroke="#f1cb82" stroke-width="22" stroke-linecap="round"/>
+  <text x="540" y="600" text-anchor="middle" fill="#f1cb82" font-family="Georgia, serif" font-size="118" font-weight="700">BTS</text>
+  <text x="540" y="820" text-anchor="middle" fill="#fff8ec" font-family="Georgia, serif" font-size="76" font-weight="700">Behind</text>
+</svg>

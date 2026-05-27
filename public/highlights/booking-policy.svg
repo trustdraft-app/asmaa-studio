@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Booking policy highlight cover">
+  <rect width="1080" height="1080" fill="#0c0c0d"/>
+  <circle cx="540" cy="540" r="430" fill="#151211" stroke="#c99953" stroke-width="12"/>
+  <circle cx="540" cy="540" r="372" fill="none" stroke="#f1cb82" stroke-width="3" opacity=".6"/>
+  <rect x="350" y="305" width="380" height="420" rx="26" fill="none" stroke="#f1cb82" stroke-width="28"/>
+  <path d="M430 430h220M430 515h220M430 600h150" stroke="#f1cb82" stroke-width="24" stroke-linecap="round"/>
+  <path d="M425 285v72M655 285v72" stroke="#f1cb82" stroke-width="28" stroke-linecap="round"/>
+  <text x="540" y="820" text-anchor="middle" fill="#fff8ec" font-family="Georgia, serif" font-size="70" font-weight="700">Booking</text>
+</svg>

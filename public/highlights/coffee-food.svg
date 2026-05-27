@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Coffee and food highlight cover">
+  <rect width="1080" height="1080" fill="#0c0c0d"/>
+  <circle cx="540" cy="540" r="430" fill="#151211" stroke="#c99953" stroke-width="12"/>
+  <circle cx="540" cy="540" r="372" fill="none" stroke="#f1cb82" stroke-width="3" opacity=".6"/>
+  <path d="M355 430h300v130c0 82-67 149-149 149h-2c-82 0-149-67-149-149z" fill="none" stroke="#f1cb82" stroke-width="28" stroke-linejoin="round"/>
+  <path d="M655 470h46c42 0 76 34 76 76s-34 76-76 76h-46M330 725h360" stroke="#f1cb82" stroke-width="26" stroke-linecap="round"/>
+  <path d="M440 335c-36 36 36 52 0 88M540 335c-36 36 36 52 0 88" stroke="#f1cb82" stroke-width="20" stroke-linecap="round"/>
+  <text x="540" y="820" text-anchor="middle" fill="#fff8ec" font-family="Georgia, serif" font-size="63" font-weight="700">Coffee &amp; Food</text>
+</svg>

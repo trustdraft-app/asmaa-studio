@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Photo shoot highlight cover">
+  <rect width="1080" height="1080" fill="#0c0c0d"/>
+  <circle cx="540" cy="540" r="430" fill="#151211" stroke="#c99953" stroke-width="12"/>
+  <circle cx="540" cy="540" r="372" fill="none" stroke="#f1cb82" stroke-width="3" opacity=".6"/>
+  <path d="M330 425h110l42-65h116l42 65h110c28 0 50 22 50 50v185c0 28-22 50-50 50H330c-28 0-50-22-50-50V475c0-28 22-50 50-50z" fill="none" stroke="#f1cb82" stroke-width="28" stroke-linejoin="round"/>
+  <circle cx="540" cy="565" r="86" fill="none" stroke="#f1cb82" stroke-width="26"/>
+  <text x="540" y="820" text-anchor="middle" fill="#fff8ec" font-family="Georgia, serif" font-size="70" font-weight="700">Photo Shoot</text>
+</svg>
