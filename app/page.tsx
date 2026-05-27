@@ -9,12 +9,13 @@ import {
   ShieldCheck
 } from "lucide-react";
 import {
+  assetPath,
   bookingRules,
   extraItems,
   highlights,
   instagramUrl,
   packages,
-  process,
+  bookingSteps,
   seoFocus,
   serviceAreas,
   services,
@@ -46,7 +47,7 @@ export default function HomePage() {
       <section className="hero" id="top">
         <nav className="nav" aria-label="Primary">
           <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
-            <Image src="/brand/asmaa-monogram-studio.jpg" alt="" width={92} height={92} priority />
+            <Image src={assetPath("/brand/asmaa-monogram-studio.jpg")} alt="" width={92} height={92} priority />
             <span>
               <strong>Asmaa Studio</strong>
               <span>Photo & Video</span>
@@ -102,7 +103,7 @@ export default function HomePage() {
             <div className="motion-line" />
             <div className="monogram-stage">
               <Image
-                src="/brand/asmaa-monogram-heritage.jpg"
+                src={assetPath("/brand/asmaa-monogram-heritage.jpg")}
                 alt="Asmaa Studio gold monogram"
                 width={853}
                 height={1280}
@@ -183,7 +184,7 @@ export default function HomePage() {
             واتساب جاهزة، ثم يحافظ على الثقة من خلال سياسة حجز واضحة.
           </p>
           <div className="timeline-grid">
-            {process.map((step) => {
+            {bookingSteps.map((step) => {
               const Icon = step.icon;
               return (
                 <article className="timeline-item" key={step.title}>
@@ -259,7 +260,7 @@ export default function HomePage() {
             {highlights.map((highlight) => (
               <article className="highlight-card" key={highlight.file}>
                 <Image
-                  src={`/highlights/${highlight.file}`}
+                  src={assetPath(`/highlights/${highlight.file}`)}
                   alt={`${highlight.label} highlight cover`}
                   width={236}
                   height={236}

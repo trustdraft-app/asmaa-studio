@@ -11,6 +11,8 @@ import {
 export const whatsappNumber = "966551606334";
 export const instagramUrl = "https://www.instagram.com/asmaa.video/";
 export const tiktokUrl = "https://www.tiktok.com/@asmaa.video";
+export const assetPath = (path: string) =>
+  `${process.env.GITHUB_PAGES === "true" ? "/asmaa-studio" : ""}${path}`;
 
 export const whatsappLink = (source = "website") =>
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -90,7 +92,7 @@ export const services = [
   }
 ];
 
-export const process = [
+export const bookingSteps = [
   {
     icon: MessageCircle,
     title: "استفسار واتساب",
