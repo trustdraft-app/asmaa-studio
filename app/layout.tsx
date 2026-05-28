@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Noto_Sans_Arabic } from "next/font/google";
+import { Cormorant_Garamond, IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 
-const arabic = Noto_Sans_Arabic({
+const arabicUi = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   variable: "--font-sans",
-  display: "swap"
+  display: "swap",
+  weight: ["400", "500", "600", "700"]
 });
 
-const display = Cormorant_Garamond({
-  subsets: ["latin"],
+const arabicDisplay = Noto_Kufi_Arabic({
+  subsets: ["arabic"],
   variable: "--font-display",
+  display: "swap",
+  weight: ["500", "600", "700", "800"]
+});
+
+const latinDisplay = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-latin-display",
   display: "swap",
   weight: ["500", "600", "700"]
 });
@@ -50,7 +58,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ar" dir="rtl" className={`${arabic.variable} ${display.variable}`}>
+    <html lang="ar" dir="rtl" className={`${arabicUi.variable} ${arabicDisplay.variable} ${latinDisplay.variable}`}>
       <body>{children}</body>
     </html>
   );

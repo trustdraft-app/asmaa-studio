@@ -35,3 +35,9 @@
 
 - Converted the remaining plan findings into live homepage sections: all 20 daily SEO waves, Instagram/TikTok/WhatsApp profile copy, hashtag sets, channel launch actions, content pillars, and board growth levers.
 - Updated the homepage navigation with a direct Social anchor and kept the full SEO wave board visible on desktop/mobile.
+
+## 2026-05-28 06:37 +03
+
+- Upgraded the live Arabic typography system: IBM Plex Sans Arabic for body/UI text, Noto Kufi Arabic for premium Arabic headings, and Cormorant Garamond only for the Latin monogram/brand accent.
+- Removed viewport-width font scaling from major headings so Arabic text stays elegant, stable, and readable on mobile and desktop.
+- Verified exported `/`, `/alahsa`, `/reserve`, and `/admin` pages at 390px mobile and 1440px desktop: correct Arabic fonts, RTL metadata, visible headings, and zero horizontal overflow.

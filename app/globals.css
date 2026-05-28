@@ -506,7 +506,7 @@
 }
 
 .city-command-card h2 {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: 5.5rem;
   margin: 20px 0;
 }
 
@@ -608,6 +608,35 @@
   .city-command-card {
     min-height: 310px;
   }
+
+  .section-title {
+    font-size: 2.35rem;
+    line-height: 1.26;
+  }
+
+  .section-copy {
+    font-size: 1.02rem;
+    line-height: 1.9;
+  }
+
+  .city-command-card h2 {
+    font-size: 3.25rem;
+  }
+
+  .signature-mark span {
+    font-size: 8.2rem;
+  }
+
+  .reserve-copy h1,
+  .admin-hero h1,
+  .login-card h1 {
+    font-size: 2.75rem;
+    line-height: 1.25;
+  }
+
+  .metric-card strong {
+    font-size: 2.1rem;
+  }
 }
 
 * {
@@ -625,9 +654,13 @@ body {
     radial-gradient(circle at 86% 4%, rgba(130, 145, 118, 0.16), transparent 24rem),
     linear-gradient(135deg, #080808 0%, #151211 52%, #090908 100%);
   color: var(--ivory);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), "Tahoma", system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-synthesis-weight: none;
+  font-weight: 400;
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body::selection {
@@ -644,6 +677,23 @@ button,
 input,
 textarea {
   font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+span,
+strong,
+em,
+small,
+a,
+button,
+input,
+textarea {
+  letter-spacing: 0;
 }
 
 .page-shell {
@@ -679,17 +729,18 @@ textarea {
 }
 
 .section-title {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(2rem, 5vw, 4.8rem);
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: 3.65rem;
   font-weight: 700;
-  line-height: 1.02;
+  line-height: 1.22;
   margin: 16px 0 18px;
+  text-wrap: balance;
 }
 
 .section-copy {
   color: var(--muted);
-  font-size: clamp(1rem, 1.8vw, 1.22rem);
-  line-height: 1.95;
+  font-size: 1.14rem;
+  line-height: 2;
   margin: 0;
   max-width: 780px;
 }
@@ -779,8 +830,9 @@ textarea {
 
 .brand-lockup strong {
   display: block;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 1.22rem;
+  font-family: var(--font-latin-display), var(--font-display), serif;
+  font-size: 1.28rem;
+  letter-spacing: 0;
 }
 
 .brand-lockup span {
@@ -818,10 +870,10 @@ textarea {
 
 .brand-mark span {
   color: var(--gold);
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-latin-display), Georgia, serif;
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
   line-height: 1;
   transform: translateY(3px);
 }
@@ -851,11 +903,13 @@ textarea {
 }
 
 .hero h1 {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(3.15rem, 8.6vw, 8.6rem);
-  line-height: 0.95;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: 5.85rem;
+  font-weight: 800;
+  line-height: 1.15;
   margin: 18px 0;
   max-width: 820px;
+  text-wrap: balance;
 }
 
 .hero h1 span {
@@ -865,8 +919,8 @@ textarea {
 
 .hero-copy {
   color: rgba(255, 248, 236, 0.82);
-  font-size: clamp(1.08rem, 2vw, 1.34rem);
-  line-height: 2;
+  font-size: 1.22rem;
+  line-height: 2.05;
   margin: 0 0 28px;
   max-width: 690px;
 }
@@ -999,8 +1053,8 @@ textarea {
   background-clip: text;
   color: transparent;
   filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55));
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(9.6rem, 18vw, 14.2rem);
+  font-family: var(--font-latin-display), Georgia, serif;
+  font-size: 12.8rem;
   font-weight: 700;
   line-height: 0.8;
   position: absolute;
@@ -1078,7 +1132,7 @@ textarea {
 .director-frame strong {
   color: var(--gold);
   display: block;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
   font-size: 1.25rem;
 }
 
@@ -1161,7 +1215,7 @@ textarea {
 
 .shot-number {
   color: rgba(255, 248, 236, 0.36);
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
   font-size: 3.2rem;
   font-weight: 700;
   left: 18px;
@@ -1228,7 +1282,7 @@ textarea {
 
 .price {
   color: var(--gold);
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
   font-size: 2.4rem;
   line-height: 1;
   margin: 10px 0 0;
@@ -1415,7 +1469,7 @@ textarea {
 }
 
 .area-card h3 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
   font-size: 2rem;
   margin: 8px 0;
 }
@@ -1507,9 +1561,9 @@ textarea {
 .reserve-copy h1,
 .admin-hero h1,
 .login-card h1 {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(2.35rem, 6vw, 5.8rem);
-  line-height: 1.02;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: 4.7rem;
+  line-height: 1.18;
   margin: 18px 0;
   text-wrap: balance;
 }
@@ -1518,7 +1572,7 @@ textarea {
 .admin-hero p,
 .login-card p {
   color: rgba(255, 248, 236, 0.76);
-  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  font-size: 1.08rem;
   line-height: 1.9;
   margin: 0;
   text-wrap: pretty;
@@ -1751,7 +1805,7 @@ textarea {
 .package-picker em {
   color: var(--gold);
   display: block;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
   font-size: 1.8rem;
   font-style: normal;
   font-variant-numeric: tabular-nums;
@@ -1951,8 +2005,8 @@ textarea {
 .metric-card strong {
   color: var(--gold);
   display: block;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: 2.55rem;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   margin: 18px 0 6px;
@@ -2202,7 +2256,7 @@ textarea {
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 17vw, 4.8rem);
+    font-size: 3.45rem;
   }
 
   .hero-copy {

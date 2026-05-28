@@ -29,3 +29,9 @@
 **Decision:** Add live homepage sections for the full 20-wave plan, profile copy, hashtags, channel actions, content pillars, and board growth levers.
 **Reasoning:** The user explicitly requested all findings live, so the website must become the operating surface rather than pointing to docs.
 **Source:** User instruction, docs findings, project files, professional judgment.
+
+## 2026-05-28 06:37 +03 — Asmaa Studio
+**Question:** Which Arabic fonts should make the live website feel elegant, clear, beautiful, and user friendly?
+**Decision:** Use IBM Plex Sans Arabic for body/UI copy, Noto Kufi Arabic for display headings, and keep Cormorant Garamond limited to the Latin monogram/brand accent.
+**Reasoning:** This pairing gives readable Arabic forms for forms/navigation while giving headings a premium wedding-studio character without forcing Latin serif styling onto Arabic text.
+**Source:** User instruction, live typography review, professional judgment.

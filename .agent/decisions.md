@@ -8,3 +8,4 @@
 - Keep v1 static and WhatsApp-first to launch quickly without privacy risk from forms or databases.
 - Create local SEO pages for Al Ahsa, Dammam, and Khobar because the business is location-intent driven.
 - Add `/reserve` and `/admin` as a Supabase-ready flow with WhatsApp fallback because the live GitHub Pages site is static and direct anonymous database writes would violate the security policy.
+- Use IBM Plex Sans Arabic for body/UI, Noto Kufi Arabic for Arabic headings, and Cormorant Garamond only for Latin brand accents so Arabic text is clear, elegant, and native to the design.
