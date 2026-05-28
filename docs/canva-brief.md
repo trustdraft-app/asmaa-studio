@@ -17,7 +17,7 @@ Premium Saudi wedding videography. Black marble-inspired background, champagne g
 ## Copy Direction
 
 - العروس أولا
-- خصوصية نسائية
+- تجربة هادئة للعروس
 - باقات واضحة
 - الأحساء، الدمام، الخبر
 - الحجز عبر واتساب

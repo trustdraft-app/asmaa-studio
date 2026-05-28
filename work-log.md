@@ -24,3 +24,9 @@
 - Expanded `lib/content.ts` into the live package/content/SEO operating model and added Packages, First Look, and Snapchat highlight SVG covers.
 - Created daily automation `asmaa-daily-seo-launch-wave` to execute one live SEO/conversion wave every day at 09:00.
 - Verification passed locally: lint, typecheck, GitHub Pages export build, route smoke checks, and Playwright visual smoke on `/`, `/alahsa`, `/dammam`, `/khobar`, `/reserve`, and `/admin`.
+
+## 2026-05-28 06:18 +03
+
+- Softened live trust copy after Mohammed noted that stating obvious privacy claims can sound suspicious.
+- Replaced repeated privacy framing with calm execution, suitable style, family comfort, clear packages, and elegant workflow language.
+- Verification passed: no remaining `privacy`/`خصوصية` wording in `app`, `lib`, or `docs`; lint, typecheck, and GitHub Pages export build passed.

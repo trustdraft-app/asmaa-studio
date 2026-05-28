@@ -21,14 +21,14 @@ Use `Asmaa Studio` as the customer-facing brand and keep `asmaa.video` as the pr
 1. Local SEO pages for Al Ahsa, Dammam, and Khobar with Arabic search terms.
 2. WhatsApp-first website with one-click package inquiry messages.
 3. Better Instagram highlights that answer buyer objections: albums, feedback, bride details, video details, photo shoot, booking policy.
-4. A cleaner package story that sells peace of mind, privacy, and wedding-day confidence.
+4. A cleaner package story that sells calm execution, clarity, and wedding-day confidence.
 5. Consistent bio/link language across Instagram, TikTok, website, and WhatsApp.
 
 ## Positioning
 
 Arabic primary message:
 
-تصوير فيديو نسائي راق للأعراس والخطوبة في الأحساء والدمام والخبر، بخصوصية عالية وباقات واضحة ومونتاج يحفظ أجمل لحظات العروس.
+تصوير فيديو راق للأعراس والخطوبة في الأحساء والدمام والخبر، بأسلوب هادئ وباقات واضحة ومونتاج يحفظ أجمل لحظات العروس.
 
 English support message:
 
@@ -36,7 +36,7 @@ Female wedding videography for brides in Al Ahsa, Dammam, and Khobar.
 
 ## Risks
 
-- Publishing customer faces or private wedding scenes without permission can damage trust.
+- Publishing customer faces or intimate wedding scenes without clear approval can damage trust.
 - Splitting traffic between two domains can weaken SEO unless one domain is canonical.
 - Using only hashtags leaves demand capture dependent on social algorithms.
 - A package PDF alone makes the experience feel transactional instead of premium.

@@ -67,7 +67,7 @@ export const serviceAreas: ServiceArea[] = [
     ar: "الأحساء",
     en: "Al Ahsa",
     priority: "الموجة 01",
-    headline: "تصوير زواجات نسائي في الأحساء بهدوء وخصوصية وباقات واضحة",
+    headline: "تصوير زواجات نسائي في الأحساء بهدوء وباقات واضحة",
     metaTitle: "مصورة زواجات في الأحساء | Asmaa Studio",
     metaDescription:
       "تصوير فيديو زواج وخطوبة نسائي في الأحساء. باقات واضحة، رابط حجز للعروس، وواتساب مباشر للتوفر.",
@@ -76,7 +76,7 @@ export const serviceAreas: ServiceArea[] = [
     searchIntent: "عروس تبحث الآن عن مصورة زواج أو خطوبة نسائية قريبة وسهلة التواصل.",
     audience: "العروس، أخت العروس، أو الخالة التي تريد تأكيد السعر والتوفر بسرعة.",
     localPromise: "رد واضح على التوفر، اختيار بكج سريع، وتجهيز تفاصيل العروس قبل يوم المناسبة.",
-    cityProof: "تركيز الصفحة على مفردات الأحساء، الحجز المبكر، وخصوصية التصوير النسائي.",
+    cityProof: "تركيز الصفحة على مفردات الأحساء، الحجز المبكر، وأسلوب تصوير مريح للعائلة.",
     neighborhoodSignals: ["الهفوف", "المبرز", "القارة", "العيون", "العمران", "الطرف"],
     keywordCluster: [
       "مصورة زواجات في الأحساء",
@@ -93,9 +93,9 @@ export const serviceAreas: ServiceArea[] = [
     ],
     faq: [
       {
-        question: "هل التصوير مناسب للزواجات النسائية في الأحساء؟",
+        question: "هل التصوير مناسب لزواجات الأحساء؟",
         answer:
-          "نعم، الخدمة موجهة للتصوير النسائي مع تركيز على الخصوصية واللقطات الهادئة وتفاصيل العروس."
+          "نعم، الخدمة مناسبة للأعراس والخطوبة النسائية مع لقطات هادئة وتفاصيل مرتبة للعروس."
       },
       {
         question: "كيف تعرف العروس البكج المناسب؟",
@@ -118,7 +118,7 @@ export const serviceAreas: ServiceArea[] = [
     searchIntent: "عميلة تقارن بين مصورات وتحتاج عرضا واضحا قبل أول رسالة واتساب.",
     audience: "عروس أو أخت عروس تريد معرفة السعر والمدة ونطاق التغطية دون ملف PDF طويل.",
     localPromise: "تغطية أنيقة للزفة والخطوبة وتفاصيل القاعة مع مسار حجز مختصر.",
-    cityProof: "محتوى الصفحة يربط الدمام بالخصوصية، وضوح الباقات، وسهولة طلب الموعد.",
+    cityProof: "محتوى الصفحة يربط الدمام براحة التجربة، وضوح الباقات، وسهولة طلب الموعد.",
     neighborhoodSignals: ["الشاطئ", "الفيصلية", "النور", "الريان", "المزروعية", "الزهور"],
     keywordCluster: [
       "مصورة الدمام",
@@ -158,7 +158,7 @@ export const serviceAreas: ServiceArea[] = [
       "الخبر تحتاج عرضا راقيا: تفاصيل، مونتاج، وثقة بصرية تجعل العروس تطلب الحجز لا مجرد السعر.",
     searchIntent: "عروس تبحث عن طابع راق وتفاصيل عالية الجودة للخطوبة أو الزواج.",
     audience: "عروس تهتم بالفخامة والهدوء، أو أخت تبحث عن مصورة نسائية موثوقة.",
-    localPromise: "تفاصيل العروس والكوشة والزفة في مسار بصري مرتب ومناسب للذكريات الخاصة.",
+    localPromise: "تفاصيل العروس والكوشة والزفة في مسار بصري مرتب ومناسب لذكرى اليوم.",
     cityProof: "تقديم المدينة بنبرة فاخرة مع باقات تبرز التفاصيل لا عدد الساعات فقط.",
     neighborhoodSignals: ["العليا", "الراكة", "الكورنيش", "الثقبة", "الجسر", "اليرموك"],
     keywordCluster: [
@@ -190,7 +190,7 @@ export const serviceAreas: ServiceArea[] = [
 ];
 
 export const boardScore = [
-  { value: "01", label: "الخصوصية", detail: "رسالة واضحة للعروس والعائلة" },
+  { value: "01", label: "الراحة", detail: "رسالة واضحة للعروس والعائلة" },
   { value: "02", label: "القصة", detail: "بداية، تفاصيل، لحظة، ثم مونتاج" },
   { value: "03", label: "الوضوح", detail: "باقات وسعر ومدة قبل أول رسالة" },
   { value: "04", label: "الحجز", detail: "رابط عروس وواتساب مباشر" }
@@ -261,7 +261,7 @@ export const services: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: Video,
     title: "فيديو سينمائي",
-    text: "تغطية نسائية تحافظ على خصوصية المناسبة وتوثق المشاعر والتفاصيل دون إزعاج."
+    text: "تغطية نسائية هادئة توثق المشاعر والتفاصيل دون إزعاج."
   },
   {
     icon: Camera,
@@ -270,8 +270,8 @@ export const services: { icon: LucideIcon; title: string; text: string }[] = [
   },
   {
     icon: ShieldCheck,
-    title: "خصوصية العائلة",
-    text: "لغة الموقع والحجز تركز على راحة العروس والنساء، مع تقليل الأسئلة المتكررة."
+    title: "راحة العائلة",
+    text: "لغة الموقع والحجز تركز على وضوح التجربة للعروس والعائلة، مع تقليل الأسئلة المتكررة."
   },
   {
     icon: WandSparkles,
@@ -296,7 +296,7 @@ export const bookingSteps = [
 
 export const conversionFlow = [
   { label: "اكتشاف", detail: "انستقرام، تيك توك، بحث Google", metric: "نية عالية" },
-  { label: "ثقة", detail: "خصوصية، باقات، مدن، أسئلة", metric: "تقليل تردد" },
+  { label: "ثقة", detail: "هدوء، باقات، مدن، أسئلة", metric: "تقليل تردد" },
   { label: "اختيار", detail: "مقارنة البكجات حسب لحظات اليوم", metric: "قرار أسرع" },
   { label: "حجز", detail: "رابط عروس + واتساب بمصدر", metric: "متابعة أسهل" }
 ];
@@ -325,7 +325,7 @@ export const highlights = [
   { label: "Video details", file: "video-details.svg", text: "أسلوب الفيديو والمونتاج" },
   { label: "First Look", file: "first-look.svg", text: "لحظة الظهور الأولى" },
   { label: "Booking", file: "booking-policy.svg", text: "طريقة الحجز والوضوح" },
-  { label: "BTS", file: "bts.svg", text: "كواليس العمل بدون كشف خصوصية" },
+  { label: "BTS", file: "bts.svg", text: "كواليس العمل بشكل أنيق ومختصر" },
   { label: "Editing", file: "editing.svg", text: "المونتاج وتسليم الفيلم" },
   { label: "Life style", file: "lifestyle.svg", text: "لقطات ناعمة للحياة والتفاصيل" },
   { label: "Coffee&food", file: "coffee-food.svg", text: "ضيافة وتفاصيل طاولة" },
@@ -338,7 +338,7 @@ export const seoLaunchWaves: { day: string; title: string; channel: string; goal
   { day: "03", title: "صفحة الدمام + ستوري أسئلة", channel: "Website + Stories", goal: "التوسع بدون إعلان", ownerCue: "تصويت: زفة فقط أم Full Day" },
   { day: "04", title: "هايلايت Packages الجديد", channel: "Instagram Highlights", goal: "تقليل طلب PDF", ownerCue: "رفع غلاف Packages" },
   { day: "05", title: "صفحة الخبر + First Look", channel: "Website + TikTok", goal: "طلب راق عالي القيمة", ownerCue: "ريل 7 ثواني قبل/بعد" },
-  { day: "06", title: "FAQ: الخصوصية النسائية", channel: "Website + WhatsApp", goal: "إزالة خوف العميلة", ownerCue: "إجابة مختصرة في الحالة" },
+  { day: "06", title: "FAQ: راحة العروس يوم المناسبة", channel: "Website + WhatsApp", goal: "إزالة تردد العميلة", ownerCue: "إجابة مختصرة في الحالة" },
   { day: "07", title: "مقارنة Royal Event وFull Day", channel: "Instagram Carousel", goal: "رفع متوسط البكج", ownerCue: "CTA: اكتبي Royal" },
   { day: "08", title: "محتوى تفاصيل العروس", channel: "TikTok + Reels", goal: "جذب العروس نفسها", ownerCue: "لقطات مجوهرات ومسكة" },
   { day: "09", title: "Google Business Profile منشور", channel: "Google", goal: "إشارة محلية", ownerCue: "نشر خدمة تصوير زواجات" },
@@ -350,13 +350,13 @@ export const seoLaunchWaves: { day: string; title: string; channel: string; goal
   { day: "15", title: "Album refresh", channel: "Highlights", goal: "إظهار جودة حديثة", ownerCue: "أفضل 8 لقطات فقط" },
   { day: "16", title: "كاروسيل الزفة فقط", channel: "Instagram", goal: "حجز الميزانية الصغيرة", ownerCue: "شرح بكج 600" },
   { day: "17", title: "ريل الخطوبة", channel: "TikTok + Reels", goal: "التقاط الملكة والخطوبة", ownerCue: "ذكر بكج الخطوبة" },
-  { day: "18", title: "منشور Google ثان", channel: "Google", goal: "استمرارية محلية", ownerCue: "أضف صورة عامة غير خاصة" },
+  { day: "18", title: "منشور Google ثان", channel: "Google", goal: "استمرارية محلية", ownerCue: "أضف صورة تفاصيل عامة من العمل" },
   { day: "19", title: "Feedback بدون اقتباس مزيف", channel: "Highlights", goal: "ثقة نظيفة", ownerCue: "لقطة شاشة بعد موافقة العميلة" },
   { day: "20", title: "تقرير مصادر الحجز", channel: "Admin + WhatsApp", goal: "قياس ما يحجز فعلا", ownerCue: "تسجيل مصدر كل محادثة" }
 ];
 
 export const trustSignals: { icon: LucideIcon; title: string; detail: string }[] = [
-  { icon: ShieldCheck, title: "خصوصية قبل الجمال", detail: "لا نستخدم وعودا مزيفة أو صورا تكشف عميلات بدون إذن." },
+  { icon: ShieldCheck, title: "ذوق قبل الاستعراض", detail: "العرض البصري يبقى راقيا ومناسبا لطبيعة زواجات المنطقة." },
   { icon: BadgeCheck, title: "باقات مفهومة", detail: "السعر والمدة واللقطات الأساسية ظاهرة قبل المحادثة." },
   { icon: CalendarCheck, title: "حجز منظم", detail: "كل طلب يأتي بتاريخ ومدينة وبكج لتقليل ضياع الرسائل." },
   { icon: Search, title: "SEO يومي", detail: "20 موجة محتوى محلية تبدأ من الأحساء ثم الدمام والخبر." }

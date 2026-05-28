@@ -33,7 +33,7 @@ Create a premium Arabic-first landing page and social asset system for Asmaa Stu
 - Legacy handle: `@asmaa.video`
 - Primary CTA: WhatsApp
 - Service areas: الأحساء، الدمام، الخبر
-- Tone: private, feminine, premium, clear
+- Tone: calm, feminine, premium, clear
 
 ## Avoid
 

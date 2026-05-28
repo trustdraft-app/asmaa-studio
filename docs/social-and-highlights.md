@@ -39,7 +39,7 @@ Files live in `/public/highlights/`.
 ## Content Pillars
 
 - Detail shots: dress, rings, bouquet, perfume, kosha, venue.
-- Emotional moments: first look, entrance, family reactions where permission exists.
-- Trust: booking policy, privacy, equipment, delivery process.
+- Emotional moments: first look, entrance, family reactions where approval exists.
+- Trust: booking policy, calm workflow, equipment, delivery process.
 - Education: how to choose the right package, what to prepare before the wedding day.
 - Local intent: Al Ahsa, Dammam, Khobar venue and season tags without claiming affiliation.
