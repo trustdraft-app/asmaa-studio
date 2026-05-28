@@ -62,3 +62,10 @@
 - Added a brand favicon/icon and reduced loaded font weights to keep the Arabic typography elegant with less payload.
 - Lighthouse local score improved from `76/100/100/100` to `97/100/100/100` for performance/accessibility/best-practices/SEO.
 - GitHub Pages still reports no HTTPS certificate for `asmaa.video`; created hourly automation `asmaa-https-cert-enforcer` to enable HTTPS enforcement automatically when GitHub issues the certificate.
+
+## 2026-05-28 08:00 +03
+
+- Deployed the launch-score fixes to GitHub Pages at commit `a816a77`.
+- Live verification passed for `http://asmaa.video`, plus Playwright smoke checks for `/`, `/alahsa`, `/dammam`, `/khobar`, `/reserve?city=dammam`, `/reserve?city=khobar`, and `/admin` across mobile and desktop.
+- Live export check confirmed the marketing homepage ships without Next.js hydration scripts.
+- `asmaavideo.com` currently routes through Namecheap URL forwarding to `asmaa.video`; `asmaa.video` HTTPS remains blocked because GitHub Pages still has no issued certificate and rejects HTTPS enforcement with `The certificate does not exist yet`.

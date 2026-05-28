@@ -53,3 +53,9 @@
 **Decision:** Strip unnecessary client JavaScript from static marketing pages, add a brand favicon/icon, reduce font payload, and monitor/enforce GitHub Pages HTTPS as soon as the certificate exists.
 **Reasoning:** The customer-facing pages do not need hydration; removing it materially improves Lighthouse performance while preserving interactivity where it is actually required.
 **Source:** User instruction, Lighthouse audit, GitHub Pages API, professional judgment.
+
+## 2026-05-28 08:00 +03 — Asmaa Studio
+**Question:** Can the board honestly mark the live domains 10/10 right now?
+**Decision:** Mark the code-owned website experience as launch-passed, but keep the domain layer open until `asmaa.video` has a valid GitHub Pages HTTPS certificate and `asmaavideo.com` is moved from Namecheap forwarding to first-class HTTPS routing.
+**Reasoning:** Live Lighthouse and cURL show the remaining score loss comes from HTTP, redirects, and edge cache/transport behavior outside the committed website code.
+**Source:** Live cURL, Lighthouse, GitHub Pages API, professional judgment.
