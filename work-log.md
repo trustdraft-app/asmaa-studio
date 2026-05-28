@@ -41,3 +41,9 @@
 - Upgraded the live Arabic typography system: IBM Plex Sans Arabic for body/UI text, Noto Kufi Arabic for premium Arabic headings, and Cormorant Garamond only for the Latin monogram/brand accent.
 - Removed viewport-width font scaling from major headings so Arabic text stays elegant, stable, and readable on mobile and desktop.
 - Verified exported `/`, `/alahsa`, `/reserve`, and `/admin` pages at 390px mobile and 1440px desktop: correct Arabic fonts, RTL metadata, visible headings, and zero horizontal overflow.
+
+## 2026-05-28 06:56 +03
+
+- Rewrote the live website copy with an Arabic-first wedding buyer psychology lens: bride emotion, family reassurance, clear package choice, and easy WhatsApp follow-up.
+- Removed visible internal/agency language from the customer journey, including SEO/Admin/growth-system phrasing and privacy-style wording that could sound defensive.
+- Updated homepage, city pages, reservation link, admin setup copy, and content model so the site sells the desired memory before the operational system.

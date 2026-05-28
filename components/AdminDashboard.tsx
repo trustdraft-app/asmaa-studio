@@ -119,7 +119,7 @@ export function AdminDashboard() {
       options: { emailRedirectTo: window.location.href }
     });
     setSendingLink(false);
-    setNotice(error ? "لم نتمكن من إرسال رابط الدخول." : "تم إرسال رابط دخول آمن إلى البريد.");
+    setNotice(error ? "لم نتمكن من إرسال رابط الدخول." : "تم إرسال رابط الدخول إلى البريد.");
   };
 
   const updateStatus = async (id: string, status: ReservationStatus) => {
@@ -153,7 +153,7 @@ export function AdminDashboard() {
             <LockKeyhole size={32} />
             <span className="eyebrow">دخول صاحبة العمل</span>
             <h1>لوحة بسيطة لكل الحجوزات القادمة.</h1>
-            <p>اكتبي بريد المدير المضاف في Supabase. سيصل رابط دخول آمن بدون كلمة مرور.</p>
+            <p>اكتبي بريد المدير المضاف في Supabase. سيصل رابط دخول بدون كلمة مرور.</p>
             <label className="field">
               <span>بريد المدير</span>
               <input
@@ -317,15 +317,15 @@ function AdminSetupState() {
         </Link>
         <div className="login-card setup-card">
           <ShieldCheck size={32} />
-          <span className="eyebrow">جاهزة للربط الآمن</span>
-          <h1>لوحة الإدارة جاهزة، وتحتاج تفعيل الحفظ الآمن.</h1>
+          <span className="eyebrow">جاهزة للربط</span>
+          <h1>لوحة الإدارة جاهزة، وتحتاج تفعيل قاعدة الحجوزات.</h1>
           <p>
             رابط العروس يعمل الآن برسالة واتساب مرتبة. ظهور الحجوزات داخل هذه اللوحة يحتاج
-            ربط قاعدة البيانات الآمنة حتى لا تضيع أي بيانات عميلة.
+            ربط قاعدة البيانات حتى تظهر الطلبات القادمة في مكان واحد.
           </p>
           <div className="setup-steps">
             <span>1. تجهيز قاعدة الحجوزات</span>
-            <span>2. تفعيل رابط الحفظ الآمن</span>
+            <span>2. تفعيل رابط حفظ الطلب</span>
             <span>3. إضافة بريد صاحبة العمل للدخول</span>
           </div>
           <Link className="cta" href="/reserve">

@@ -10,7 +10,6 @@ import {
   Loader2,
   MapPin,
   MessageCircle,
-  ShieldCheck,
   Sparkles,
   Video
 } from "lucide-react";
@@ -30,8 +29,8 @@ type SubmitState = "idle" | "saving" | "saved" | "fallback" | "error";
 
 const steps = [
   { title: "المناسبة", text: "التاريخ والمدينة والقاعة" },
-  { title: "الباقة", text: "اختيار واضح بدون ملف PDF" },
-  { title: "التأكيد", text: "تجهيز رسالة واتساب أو حفظ الطلب" }
+  { title: "الباقة", text: "اختيار حسب لحظات اليوم" },
+  { title: "التأكيد", text: "تفاصيل جاهزة للمتابعة" }
 ];
 
 export function ReservationExperience() {
@@ -113,15 +112,15 @@ export function ReservationExperience() {
 
       <section className="reserve-hero">
         <div className="reserve-copy">
-          <span className="eyebrow">بديل ملف الباقات</span>
-          <h1>رابط واحد يشرح الباقات ويجمع تفاصيل الحجز بهدوء.</h1>
+          <span className="eyebrow">رابط العروس</span>
+          <h1>اختاري باقة التصوير التي تشبه يومك بخطوات هادئة وواضحة.</h1>
           <p>
-            اختاري الباقة، اكتبي تاريخ المناسبة، واتركي التفاصيل المهمة. الصفحة مصممة لتكون
-            واضحة للعروس أو أختها أو خالتها من أول دقيقة.
+            شاهدي الباقات حسب لحظات المناسبة: الزفة، تفاصيل العروس، First Look، أو اليوم الكامل.
+            اكتبي التاريخ والمدينة والقاعة، ثم نكمل المتابعة عبر واتساب.
           </p>
           <div className="trust-strip" aria-label="Trust points">
             <span>
-              <ShieldCheck size={18} /> خصوصية نسائية
+              <Sparkles size={18} /> تصوير نسائي
             </span>
             <span>
               <CalendarDays size={18} /> فحص التوفر
@@ -275,7 +274,7 @@ export function ReservationExperience() {
                   rows={4}
                   value={form.notes}
                   onChange={(event) => update("notes", event.target.value)}
-                  placeholder="أي تفاصيل مهمة: مدخل القاعة، رغبة بخصوصية أعلى، وقت معين، أو سؤال عن إضافة."
+                  placeholder="أي تفاصيل مهمة: مدخل القاعة، وقت معين، لقطة لا تريدين أن تفوت، أو سؤال عن إضافة."
                 />
               </Field>
             </div>
@@ -309,8 +308,8 @@ export function ReservationExperience() {
       <section className="reserve-infographic" aria-label="Reservation explanation">
         <article>
           <Video size={28} />
-          <h2>بدون PDF طويل</h2>
-          <p>الباقة والسعر والمدة تظهر داخل الصفحة، ثم تصل التفاصيل مرتبة لصاحبة العمل.</p>
+          <h2>الاختيار أمامك</h2>
+          <p>الباقة والسعر والمدة تظهر داخل الصفحة حتى تقارني بهدوء قبل إرسال التفاصيل.</p>
         </article>
         <article>
           <MapPin size={28} />

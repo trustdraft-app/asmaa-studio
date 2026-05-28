@@ -3,7 +3,7 @@ import { ReservationExperience } from "../../components/ReservationExperience";
 
 export const metadata: Metadata = {
   title: "رابط العروس | Asmaa Studio",
-  description: "نموذج حجز سهل للعروس لاختيار باقة تصوير الزفاف وإرسال تفاصيل المناسبة.",
+  description: "رابط حجز أنيق يساعد العروس على اختيار باقة تصوير الزفاف وإرسال تفاصيل المناسبة بخطوات بسيطة.",
   alternates: {
     canonical: "https://asmaa.video/reserve"
   }

@@ -67,23 +67,23 @@ export default function HomePage() {
           </a>
           <div className="nav-links">
             <a href="#packages">الباقات</a>
-            <a href="#seo-wave">SEO</a>
-            <a href="#social-assets">Social</a>
+            <a href="#seo-wave">المدن</a>
+            <a href="#social-assets">المحتوى</a>
             <Link href="/reserve">رابط العروس</Link>
-            <Link href="/admin">Admin</Link>
+            <Link href="/admin">المواعيد</Link>
           </div>
         </nav>
 
         <div className="hero-grid hero-grid-20x">
           <div className="hero-copy-stack">
-            <span className="eyebrow">Live growth system for Saudi Eastern weddings</span>
+            <span className="eyebrow">تصوير زواجات وخطوبة نسائي في الشرقية</span>
             <h1>
-              Asmaa Studio تتحول من حساب ينتظر الرسائل إلى ماكينة حجز يومية.
-              <span>موقع، رابط عروس، Admin، وSEO موجات.</span>
+              فيلم زفاف يليق بلحظة العروس، لا مجرد فيديو للمناسبة.
+              <span>أسلوب هادئ، تفاصيل أنيقة، وباقات واضحة من أول زيارة.</span>
             </h1>
             <p className="hero-copy">
-              هذا ليس PDF على واتساب. هذه تجربة حجز كاملة: العروس ترى الباقات، تختار المدينة
-              والتاريخ، ترى الأسلوب والباقات بوضوح، ثم تصل لصاحبة العمل رسالة منظمة قابلة للمتابعة.
+              Asmaa Studio توثق الزفة، الخطوبة، وتفاصيل العروس بلغة ناعمة تناسب زواجات الأحساء
+              والدمام والخبر. الرابط يشرح الباقات بسرعة حتى تختارين بهدوء قبل أول رسالة واتساب.
             </p>
             <div className="button-row">
               <Link className="cta" href="/reserve">
@@ -121,13 +121,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="director-frame">
-              <span>Daily wave</span>
+              <span>مشاهد اليوم</span>
               <strong>20</strong>
-              <small>SEO + social launches</small>
+              <small>تفاصيل صغيرة تصنع الفيلم</small>
             </div>
             <div className="floating-card floating-card-strong">
-              <strong>من PDF إلى رابط حجز</strong>
-              <span>Reserve / Admin / WhatsApp source tracking</span>
+              <strong>اختيار أسهل من ملف طويل</strong>
+              <span>شاهدي الباقات، اختاري المدينة، وأرسلي التفاصيل</span>
             </div>
           </div>
         </div>
@@ -135,8 +135,8 @@ export default function HomePage() {
 
       <section className="section os-section" id="live-system">
         <div className="section-inner">
-          <span className="eyebrow">نظام التشغيل الحي</span>
-          <h2 className="section-title">كل جزء في الموقع الآن يعمل كمسار بيع، وليس ديكور.</h2>
+          <span className="eyebrow">من أول نظرة إلى طلب الحجز</span>
+          <h2 className="section-title">الصفحة تقود العروس بهدوء: تشاهد الأسلوب، تفهم الباقة، ثم ترسل التفاصيل.</h2>
           <div className="operating-grid">
             {liveOperatingSystem.map((item) => {
               const Icon = item.icon;
@@ -156,11 +156,10 @@ export default function HomePage() {
         <div className="section-inner cinematic-layout">
           <div>
             <span className="eyebrow">لغة فيلم الزفاف</span>
-            <h2 className="section-title">الموقع يبيع إحساس الفيلم، ثم يثبت القرار بالأرقام.</h2>
+            <h2 className="section-title">نصور ما تشعرين به في اليوم، وليس ما يحدث أمام الكاميرا فقط.</h2>
             <p className="section-copy">
-              العروس لا تقارن الكاميرات فقط؛ تقارن الإحساس، الهدوء، الترتيب، وطريقة ظهورها في
-              يوم لا يتكرر. لذلك الواجهة تستخدم مشاهد، إيقاع، وخرائط قرار تجعل الباقة تبدو
-              كقصة متكاملة.
+              العروس تختار من يلاحظ هدوء اللحظة، لمعة الخاتم، نظرة الأهل، ودخولها الأول. لذلك
+              التجربة تعرض المشاهد كقصة متكاملة، ثم تجعل اختيار الباقة واضحا وخفيفا.
             </p>
           </div>
           <div className="moment-grid">
@@ -180,11 +179,11 @@ export default function HomePage() {
 
       <section className="section package-decision" id="packages">
         <div className="section-inner">
-          <span className="eyebrow">Package decision engine</span>
-          <h2 className="section-title">الباقات أصبحت خريطة قرار بصرية، لا قائمة أسعار.</h2>
+          <span className="eyebrow">اختاري حسب شكل يومك</span>
+          <h2 className="section-title">الباقات مرتبة حسب اللحظات التي تريدين الاحتفاظ بها.</h2>
           <p className="section-copy">
-            كل بكج يعرض السعر والمدة واللحظات التي يغطيها. هذا يقلل رسائل السؤال المتكرر ويقود
-            العروس إلى رابط الحجز أو واتساب بمصدر واضح.
+            زفة فقط، تفاصيل القاعة، First Look، أو يوم كامل من الصالون إلى القاعة. كل باقة
+            تشرح ماذا ستوثق، لمن تناسب، وكيف سيبدو القرار قبل التواصل.
           </p>
           <div className="packages-grid packages-grid-20x">
             {packages.map((item) => (
@@ -226,11 +225,11 @@ export default function HomePage() {
 
       <section className="section services-band" id="experience">
         <div className="section-inner">
-          <span className="eyebrow">Trust system</span>
-          <h2 className="section-title">نبيع راحة العروس قبل الفيديو.</h2>
+          <span className="eyebrow">ما تحتاجه العروس فعلا</span>
+          <h2 className="section-title">راحة في الاختيار، ذوق في التصوير، وترتيب في التفاصيل.</h2>
           <p className="section-copy">
-            كل رسالة في الموقع مصممة لتجيب سؤالا حقيقيا: هل الأسلوب مناسب؟ ما البكج الأفضل؟
-            كيف أحجز؟ وماذا يحدث بعد إرسال الطلب؟
+            القرار غالبا يبدأ من العروس، ويمر عبر أخت أو أم أو خالة تريد التأكد بسرعة. لذلك
+            المحتوى مكتوب بلغة مفهومة: ماذا يغطي التصوير، ما الباقة الأنسب، وكيف تبدأ المتابعة.
           </p>
           <div className="service-grid service-grid-20x">
             {services.map((service) => {
@@ -261,8 +260,8 @@ export default function HomePage() {
 
       <section className="section conversion-section">
         <div className="section-inner">
-          <span className="eyebrow">Conversion infographic</span>
-          <h2 className="section-title">المسار الجديد يحول الفضول إلى طلب حجز مرتب.</h2>
+          <span className="eyebrow">من الإعجاب إلى الموعد</span>
+          <h2 className="section-title">القرار يصبح أخف عندما ترى العروس الصورة كاملة.</h2>
           <div className="conversion-grid-20x">
             {conversionFlow.map((item, index) => (
               <article className="conversion-step" key={item.label}>
@@ -287,15 +286,15 @@ export default function HomePage() {
 
       <section className="section seo-command" id="seo-wave">
         <div className="section-inner">
-          <span className="eyebrow">20x SEO launch command</span>
-          <h2 className="section-title">كل يوم موجة بحث ومحتوى، تبدأ من الأحساء ثم الدمام والخبر.</h2>
+          <span className="eyebrow">الأحساء أولا، ثم الدمام والخبر</span>
+          <h2 className="section-title">صفحات محلية مكتوبة بالطريقة التي تبحث بها العروس فعلا.</h2>
           <div className="seo-grid seo-grid-20x">
             <div className="seo-keywords-panel">
               <Search size={28} />
-              <h3>كلمات تجارية لا كلمات عامة</h3>
+              <h3>كلمات قريبة من قرار الحجز</h3>
               <p>
-                نركز على نية الحجز: مصورة زواج، تصوير فيديو، خطوبة، عروس، ومدينة. كل صفحة
-                تحمل رابط واتساب بمصدر حتى نعرف ما يحول فعلا.
+                عندما تبحث العروس عن مصورة زواج أو تصوير خطوبة في مدينتها، تحتاج صفحة مباشرة
+                تعرض الأسلوب والباقات والخطوة التالية بدون دوران.
               </p>
               <div className="keyword-cloud">
                 {seoFocus.map((keyword) => (
@@ -327,11 +326,11 @@ export default function HomePage() {
 
       <section className="section live-findings" id="social-assets">
         <div className="section-inner">
-          <span className="eyebrow">All findings live</span>
-          <h2 className="section-title">البايو، الهاشتاقات، القنوات، والمحتوى أصبحت على الموقع.</h2>
+          <span className="eyebrow">نسخة جاهزة للحسابات</span>
+          <h2 className="section-title">كل قناة تقول نفس الوعد: تصوير أنيق، اختيار واضح، وتواصل سهل.</h2>
           <p className="section-copy">
-            أي شيء كان في الخطة صار هنا كأصل تشغيلي مباشر: تنسخه صاحبة العمل، تستخدمه في
-            الحسابات، ويرجع العميل للرابط بدل ملف PDF.
+            انستقرام وتيك توك وواتساب يجب أن تقود إلى إحساس واحد. هذه النصوص تحفظ نبرة
+            Asmaa Studio وتعيد العميلة إلى الرابط بدل إرسال ملف طويل.
           </p>
 
           <div className="profile-grid">
@@ -363,8 +362,8 @@ export default function HomePage() {
 
       <section className="section hashtag-command">
         <div className="section-inner">
-          <span className="eyebrow">Hashtag and content engine</span>
-          <h2 className="section-title">كل مدينة لها مجموعة نشر، وكل أسبوع له زاوية محتوى.</h2>
+          <span className="eyebrow">محتوى يجذب العروس المناسبة</span>
+          <h2 className="section-title">كل مدينة لها كلماتها، وكل أسبوع له زاوية تلامس قرار الحجز.</h2>
           <div className="hashtag-grid">
             {hashtagSets.map((set) => (
               <article className="hashtag-card" key={set.city}>
@@ -390,8 +389,8 @@ export default function HomePage() {
 
       <section className="section board-live">
         <div className="section-inner">
-          <span className="eyebrow">Board growth levers</span>
-          <h2 className="section-title">مجلس الإدارة صار واجهة تنفيذ، لا ملف تقييم.</h2>
+          <span className="eyebrow">ما يجعل الحجز أسهل</span>
+          <h2 className="section-title">التحسينات المهمة ظاهرة للعميلة: وعد واضح، باقات مفهومة، وخطوة تالية سهلة.</h2>
           <div className="board-lever-grid">
             {boardLevers.map((lever) => (
               <article className="board-lever-card" key={lever.title}>
@@ -405,8 +404,8 @@ export default function HomePage() {
 
       <section className="section local-domination">
         <div className="section-inner">
-          <span className="eyebrow">Local landing pages</span>
-          <h2 className="section-title">صفحات المدن أصبحت صفحات قرار محلية، لا نسخا مكررة.</h2>
+          <span className="eyebrow">قريبة من مناسبتك</span>
+          <h2 className="section-title">لكل مدينة صفحة تشبه بحث العميلة وسؤالها قبل الحجز.</h2>
           <div className="area-strategy-grid area-strategy-grid-20x">
             {areaStrategy.map((area, index) => {
               const Icon = area.icon;
@@ -434,8 +433,8 @@ export default function HomePage() {
 
       <section className="section highlights-section" id="highlights">
         <div className="section-inner">
-          <span className="eyebrow">Instagram highlight covers</span>
-          <h2 className="section-title">الهايلايت صار واجهة منظمة للحجز والثقة.</h2>
+          <span className="eyebrow">هايلايت انستقرام</span>
+          <h2 className="section-title">الهايلايت يصبح دليلا صغيرا: ألبوم، باقات، تفاصيل، وطريقة حجز.</h2>
           <div className="highlight-grid highlight-grid-20x">
             {highlights.map((item) => (
               <article className="highlight-card" key={item.label}>
@@ -455,10 +454,10 @@ export default function HomePage() {
 
       <section className="section final-cta">
         <div className="section-inner">
-          <span className="eyebrow">Next best action</span>
-          <h2 className="section-title">ارسلي رابط الحجز بدل PDF، وخلي الموقع يشرح قبل الرسالة.</h2>
+          <span className="eyebrow">الخطوة التالية</span>
+          <h2 className="section-title">اختاري الباقة التي تشبه يومك، ثم أرسلي التفاصيل برسالة واحدة.</h2>
           <p className="section-copy">
-            العروس ترى التجربة، تختار البكج، وتصل الرسالة لصاحبة العمل بمعلومات قابلة للمتابعة.
+            الرابط يختصر السؤال والانتظار: المدينة، التاريخ، الباقة، واللحظات المهمة في مكان واحد.
           </p>
           <div className="button-row">
             <Link className="cta" href="/reserve">

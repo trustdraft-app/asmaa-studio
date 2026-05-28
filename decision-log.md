@@ -35,3 +35,9 @@
 **Decision:** Use IBM Plex Sans Arabic for body/UI copy, Noto Kufi Arabic for display headings, and keep Cormorant Garamond limited to the Latin monogram/brand accent.
 **Reasoning:** This pairing gives readable Arabic forms for forms/navigation while giving headings a premium wedding-studio character without forcing Latin serif styling onto Arabic text.
 **Source:** User instruction, live typography review, professional judgment.
+
+## 2026-05-28 06:56 +03 — Asmaa Studio
+**Question:** How should the website copy speak to brides and family decision-makers without sounding suspicious or overly operational?
+**Decision:** Reframe the live copy around emotion, elegance, clear package choice, family ease, and local relevance while removing visible privacy phrasing and internal growth/SEO/Admin language from the customer journey.
+**Reasoning:** Brides buy the memory and feeling first, while sisters/aunts reduce uncertainty through simple package and date clarity; defensive wording weakens that feeling.
+**Source:** User instruction, growth-and-offer playbook, live page review, professional judgment.

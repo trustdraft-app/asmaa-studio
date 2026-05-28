@@ -91,7 +91,7 @@ export default async function CityPage({ params }: Props) {
             <div className="city-intent">
               <article>
                 <Search size={22} />
-                <strong>نية البحث</strong>
+                <strong>ما تبحث عنه العروس</strong>
                 <span>{area.searchIntent}</span>
               </article>
               <article>
@@ -111,7 +111,7 @@ export default async function CityPage({ params }: Props) {
           </div>
 
           <aside className="city-command-card">
-            <span>Local SEO command</span>
+            <span>خدمة قريبة من مناسبتك</span>
             <h2>{area.ar}</h2>
             <p>{area.localPromise}</p>
             <div>
@@ -157,12 +157,12 @@ export default async function CityPage({ params }: Props) {
       <section className="section city-proof-section">
         <div className="section-inner city-proof-grid">
           <article>
-            <span className="eyebrow">Local proof</span>
+            <span className="eyebrow">لماذا هذه الصفحة مناسبة لك</span>
             <h2>{area.cityProof}</h2>
             <p>{area.audience}</p>
           </article>
           <article>
-            <span className="eyebrow">Daily content wave</span>
+            <span className="eyebrow">ما سنركز عليه في المحتوى</span>
             <div className="city-wave-list">
               {area.contentWave.map((item) => (
                 <p key={item}>
