@@ -80,3 +80,10 @@
 
 - Removed unprofessional relative-role persona wording from live customer copy and internal positioning notes.
 - Reframed the website language around the bride/client, package clarity, event details, and professional ease.
+
+## 2026-05-28 08:34 +03
+
+- Reduced mobile homepage and reservation heading scale after screenshot review showed oversized typography.
+- Shortened the homepage hero headline and tightened the reservation mobile layout, stepper, inputs, package buttons, and infographic cards.
+- Replaced robotic reservation copy that mentioned system fallback/automatic saving with customer-facing WhatsApp follow-up language.
+- Verified locally at 390x844: homepage h1 height dropped to 121px, reserve h1 height to 76px, no horizontal overflow, and banned robotic phrases are absent.

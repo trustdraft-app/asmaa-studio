@@ -66,6 +66,12 @@
 **Reasoning:** Explicit relative-role personas sound unprofessional and distract from the premium studio positioning.
 **Source:** User instruction and live copy review.
 
+## 2026-05-28 08:34 +03 — Asmaa Studio
+**Question:** How should the site respond to oversized mobile fonts and robotic reservation copy?
+**Decision:** Reduce mobile hero and section heading scale, shorten the homepage headline, tighten the reservation mobile layout, and replace system-mechanics copy with polished customer-facing language.
+**Reasoning:** Premium mobile UX needs readable hierarchy and human wording; exposing backend fallback logic or oversized display type weakens trust.
+**Source:** User screenshots, local mobile Playwright screenshots, professional judgment.
+
 ## 2026-05-28 09:04 +03 — Asmaa Studio
 **Question:** Which remaining daily launch wave should ship next on the live site?
 **Decision:** Implement wave 14 as a dedicated `/faq` booking questions page with Arabic answers, FAQ structured data, breadcrumb structured data, homepage links, and sitemap coverage.

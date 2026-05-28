@@ -89,7 +89,7 @@ export function ReservationExperience() {
     if (!endpoint) {
       setSubmitState("fallback");
       window.open(reservationWhatsappUrl(form), "_blank", "noopener,noreferrer");
-      setMessage("تم تجهيز رسالة واتساب بالتفاصيل. بعد إرسالها تصل المعلومات مباشرة لصاحبة العمل.");
+      setMessage("جهزنا لك رسالة واتساب مرتبة بالتفاصيل. أرسليها ونكمل معك تأكيد التوفر والخطوة التالية.");
       return;
     }
 
@@ -110,7 +110,7 @@ export function ReservationExperience() {
     } catch {
       setSubmitState("fallback");
       window.open(reservationWhatsappUrl(form), "_blank", "noopener,noreferrer");
-      setMessage("لم يكتمل الحفظ الآلي، لذلك جهزنا رسالة واتساب بالتفاصيل حتى لا تضيع عليك الخطوة.");
+      setMessage("جهزنا لك رسالة واتساب مرتبة بالتفاصيل. أرسليها ونكمل معك تأكيد التوفر والخطوة التالية.");
     }
   };
 
@@ -135,7 +135,7 @@ export function ReservationExperience() {
       <section className="reserve-hero">
         <div className="reserve-copy">
           <span className="eyebrow">رابط العروس</span>
-          <h1>اختاري باقة التصوير التي تشبه يومك بخطوات هادئة وواضحة.</h1>
+          <h1>اختاري تغطية تناسب يومك بوضوح وهدوء.</h1>
           <p>
             شاهدي الباقات حسب لحظات المناسبة: الزفة، تفاصيل العروس، First Look، أو اليوم الكامل.
             اكتبي التاريخ والمدينة والقاعة، ثم نكمل المتابعة عبر واتساب.
@@ -294,7 +294,7 @@ export function ReservationExperience() {
                   <small>اختياري، لكنه يساعد على اختيار خطة التصوير المناسبة.</small>
                 </span>
               </label>
-              <Field label="ملاحظات للعروس أو العائلة">
+              <Field label="ملاحظات مهمة للتصوير">
                 <textarea
                   rows={4}
                   value={form.notes}
@@ -333,18 +333,18 @@ export function ReservationExperience() {
       <section className="reserve-infographic" aria-label="شرح طريقة الحجز">
         <article>
           <Video size={28} />
-          <h2>الاختيار أمامك</h2>
-          <p>الباقة والسعر والمدة تظهر داخل الصفحة حتى تقارني بهدوء قبل إرسال التفاصيل.</p>
+          <h2>ابدئي من شكل اليوم</h2>
+          <p>اختاري بين الزفة، التفاصيل، First Look، أو التغطية الكاملة بدون ملف طويل.</p>
         </article>
         <article>
           <MapPin size={28} />
-          <h2>مصمم للشرقية</h2>
-          <p>الأحساء أولا، ثم الدمام والخبر، مع مجال لكتابة القاعة أو الحي بدقة.</p>
+          <h2>المكان واضح من البداية</h2>
+          <p>اكتبي المدينة والقاعة أو الحي حتى نراجع التوفر على تفاصيل مناسبة لك.</p>
         </article>
         <article>
           <MessageCircle size={28} />
-          <h2>واتساب يبقى سريع</h2>
-          <p>إذا لم يكن الحفظ الآلي متاحا، تتحول التفاصيل إلى رسالة واتساب جاهزة.</p>
+          <h2>متابعة مرتبة في واتساب</h2>
+          <p>تصل الرسالة وفيها الباقة والتاريخ والموقع، فتبدأ المحادثة من نقطة واضحة.</p>
         </article>
       </section>
     </main>

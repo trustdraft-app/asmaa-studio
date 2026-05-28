@@ -79,9 +79,7 @@ export default function HomePage() {
           <div className="hero-copy-stack">
             <span className="eyebrow">تصوير زواجات وخطوبة نسائي في الشرقية</span>
             <h1>
-              فيلم زفاف يليق بلحظة العروس، لا مجرد فيديو للمناسبة.
-              {" "}
-              <span>أسلوب هادئ، تفاصيل أنيقة، وباقات واضحة من أول زيارة.</span>
+              فيلم زفاف هادئ بتفاصيل أنيقة وباقات واضحة.
             </h1>
             <p className="hero-copy">
               Asmaa Studio توثق الزفة، الخطوبة، وتفاصيل العروس بلغة ناعمة تناسب زواجات الأحساء
