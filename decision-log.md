@@ -47,3 +47,9 @@
 **Decision:** Fix all clear, code-owned issues found in the pass: city query preselection, date guard, package accessibility state, Arabic accessibility labels, customer-friendly WhatsApp source labels, admin phone normalization, hero text spacing, and highlight alt text.
 **Reasoning:** These issues directly affect booking clarity, accessibility, and owner follow-up reliability without requiring brand, legal, or money decisions.
 **Source:** User instruction, live audit scripts, Playwright/axe checks, professional judgment.
+
+## 2026-05-28 07:42 +03 — Asmaa Studio
+**Question:** What must change for the site to approach a board-level 10/10 launch score?
+**Decision:** Strip unnecessary client JavaScript from static marketing pages, add a brand favicon/icon, reduce font payload, and monitor/enforce GitHub Pages HTTPS as soon as the certificate exists.
+**Reasoning:** The customer-facing pages do not need hydration; removing it materially improves Lighthouse performance while preserving interactivity where it is actually required.
+**Source:** User instruction, Lighthouse audit, GitHub Pages API, professional judgment.

@@ -54,3 +54,11 @@
 - Fixed city-specific reservation links so `/reserve?city=dammam` and `/reserve?city=khobar` preselect the correct city.
 - Added a minimum event date, accessible package selected states, Arabic aria labels, Arabic highlight alt text, readable WhatsApp source labels, normalized admin WhatsApp phone numbers, and a clean text pause in the hero headline.
 - Verification passed: lint, typecheck, GitHub Pages export build, internal export link audit, production dependency audit, Playwright mobile/desktop route audit, and axe smoke check on `/reserve`.
+
+## 2026-05-28 07:42 +03
+
+- Applied the 10/10 board gate to the customer-facing website: performance, accessibility, SEO, best practices, conversion UX, Arabic copy, reservation flow, admin flow, and live-domain readiness.
+- Added static-export pruning for the marketing pages so `/`, `/alahsa`, `/dammam`, `/khobar`, and `404.html` ship without unnecessary Next.js hydration scripts while `/reserve` and `/admin` stay interactive.
+- Added a brand favicon/icon and reduced loaded font weights to keep the Arabic typography elegant with less payload.
+- Lighthouse local score improved from `76/100/100/100` to `97/100/100/100` for performance/accessibility/best-practices/SEO.
+- GitHub Pages still reports no HTTPS certificate for `asmaa.video`; created hourly automation `asmaa-https-cert-enforcer` to enable HTTPS enforcement automatically when GitHub issues the certificate.

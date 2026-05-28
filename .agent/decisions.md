@@ -11,3 +11,4 @@
 - Use IBM Plex Sans Arabic for body/UI, Noto Kufi Arabic for Arabic headings, and Cormorant Garamond only for Latin brand accents so Arabic text is clear, elegant, and native to the design.
 - Customer-facing copy should sell the wedding memory, bride emotion, family ease, and package clarity; avoid visible privacy-style claims and internal growth/SEO/Admin wording.
 - Reservation and WhatsApp flows must preserve customer intent in a polished way: city links preselect the city, WhatsApp prefill labels are human-readable, and admin phone links normalize Saudi numbers.
+- Marketing pages are static and should be pruned of Next.js hydration scripts after export; keep JavaScript only on `/reserve` and `/admin` where interactivity is required.

@@ -6,21 +6,21 @@ const arabicUi = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   variable: "--font-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700"]
+  weight: ["400", "700"]
 });
 
 const arabicDisplay = Noto_Kufi_Arabic({
   subsets: ["arabic"],
   variable: "--font-display",
   display: "swap",
-  weight: ["500", "600", "700", "800"]
+  weight: ["700"]
 });
 
 const latinDisplay = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-latin-display",
   display: "swap",
-  weight: ["500", "600", "700"]
+  weight: ["700"]
 });
 
 export const metadata: Metadata = {
@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     "Asmaa Studio تقدم تصوير فيديو للأعراس والخطوبة في الأحساء والدمام والخبر مع باقات واضحة، مونتاج احترافي، وتواصل مباشر عبر واتساب.",
   alternates: {
     canonical: "/"
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/icon.svg"
   },
   openGraph: {
     title: "Asmaa Studio",
