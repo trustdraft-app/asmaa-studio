@@ -107,3 +107,9 @@
 **Decision:** Add a `/guides` hub plus 12 Arabic long-tail pages for city intent, package intent, and decision-stage wedding videography searches, then wire them into homepage links, sitemap, `llms.txt`, and launch verification.
 **Reasoning:** Useful search pages should answer a specific booking question and move the visitor toward the reservation flow rather than duplicate homepage copy.
 **Source:** User request, Google Search Central guidance, existing package/city content model, local Playwright verification.
+
+## 2026-05-28 18:52 +03 — Asmaa Studio
+**Question:** How should the site respond to Mohammed saying the live website is still below ambition and asking for the strongest design pass?
+**Decision:** Ship a homepage-first cinematic redesign using a clean generated wedding still, bilingual hero hierarchy, sticky glass navigation, animated showreel scrubber, service dock, testimonial marquee, persistent WhatsApp CTA, and mobile-specific typography fixes.
+**Reasoning:** The fastest live improvement is to make the first viewport feel like a premium wedding film interface while preserving the existing static export, SEO pages, and WhatsApp conversion path.
+**Source:** User instruction, Claude design-director critique, generated visual concept review, local mobile/desktop Playwright verification.

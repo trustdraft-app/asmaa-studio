@@ -1,6 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, CalendarDays, Check, ExternalLink, MessageCircle, Play, Search } from "lucide-react";
+import type { CSSProperties } from "react";
+import {
+  ArrowLeft,
+  CalendarDays,
+  Camera,
+  Check,
+  Clapperboard,
+  ExternalLink,
+  Gem,
+  Heart,
+  Languages,
+  MessageCircle,
+  Play,
+  Search,
+  Sparkles,
+  Video
+} from "lucide-react";
 import {
   areaStrategy,
   assetPath,
@@ -49,6 +65,29 @@ const jsonLd = {
   serviceType: "Female wedding videography"
 };
 
+const showreelFrames = [
+  { time: "00:00", label: "تفاصيل العروس", width: "18%" },
+  { time: "00:08", label: "First Look", width: "16%" },
+  { time: "00:18", label: "الكوشة", width: "20%" },
+  { time: "00:31", label: "الزفة", width: "24%" },
+  { time: "00:47", label: "فيلم اليوم", width: "22%" }
+];
+
+const heroDock = [
+  { icon: Camera, label: "Photography", ar: "تصوير فوتوغرافي" },
+  { icon: Video, label: "Cinematography", ar: "تصوير فيديو" },
+  { icon: Clapperboard, label: "Editing", ar: "مونتاج سينمائي" },
+  { icon: Gem, label: "Bride details", ar: "تفاصيل العروس" },
+  { icon: Heart, label: "Pre-wedding", ar: "خطوبة وملكة" }
+];
+
+const testimonialQuotes = [
+  { quote: "كل شيء كان مرتب وواضح من أول رسالة.", meta: "عروس من الأحساء" },
+  { quote: "التفاصيل طلعت ناعمة والفيلم إحساسه هادئ.", meta: "خطوبة في الدمام" },
+  { quote: "اختيار الباقة كان سهل لأن كل لحظة مشروحة.", meta: "زواج في الخبر" },
+  { quote: "الأسلوب راق وما حسينا بأي إزعاج أثناء اليوم.", meta: "تغطية عائلية" }
+];
+
 export default function HomePage() {
   return (
     <main className="page-shell">
@@ -58,6 +97,14 @@ export default function HomePage() {
       />
 
       <section className="hero hero-20x" id="top">
+        <Image
+          className="hero-cinematic-backdrop"
+          src={assetPath("/brand/asmaa-cinematic-bridal-still.png")}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+        />
         <nav className="nav" aria-label="التنقل الرئيسي">
           <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
             <span className="brand-mark" aria-hidden="true">
@@ -74,13 +121,24 @@ export default function HomePage() {
             <Link href="/reserve">رابط العروس</Link>
             <Link href="/admin">المواعيد</Link>
           </div>
+          <div className="nav-actions" aria-label="خيارات سريعة">
+            <span className="language-pill">
+              <Languages size={15} />
+              AR / EN
+            </span>
+            <a className="nav-whatsapp" href={whatsappLink("home-nav")} target="_blank" rel="noreferrer">
+              <MessageCircle size={17} />
+              احجزي الآن
+            </a>
+          </div>
         </nav>
 
         <div className="hero-grid hero-grid-20x">
           <div className="hero-copy-stack">
-            <span className="eyebrow">تصوير زواجات وخطوبة نسائي في الشرقية</span>
+            <span className="eyebrow">Wedding films for Saudi brides</span>
             <h1>
-              فيلم زفاف هادئ بتفاصيل أنيقة وباقات واضحة.
+              <span className="hero-title-ar">نخلد أجمل القصص في أطر سينمائية خالدة.</span>
+              <span className="hero-title-en">Timeless stories in cinematic frames.</span>
             </h1>
             <p className="hero-copy">
               Asmaa Studio توثق الزفة، الخطوبة، وتفاصيل العروس بلغة ناعمة تناسب زواجات الأحساء
@@ -103,6 +161,26 @@ export default function HomePage() {
                   <em>{item.detail}</em>
                 </div>
               ))}
+            </div>
+
+            <div className="showreel-scrubber" aria-label="مسار الفيلم">
+              <div className="scrubber-head">
+                <span>Showreel 01</span>
+                <b>00:47</b>
+              </div>
+              <div className="scrubber-track" tabIndex={0} aria-label="لقطات الشوريل حسب الوقت">
+                {showreelFrames.map((frame, index) => (
+                  <span
+                    className="scrubber-frame"
+                    style={{ "--frame-width": frame.width } as CSSProperties}
+                    key={frame.label}
+                  >
+                    <em>{frame.time}</em>
+                    <strong>{frame.label}</strong>
+                    {index === 2 ? <i aria-hidden="true" /> : null}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -145,11 +223,35 @@ export default function HomePage() {
               <strong>20</strong>
               <small>تفاصيل صغيرة تصنع الفيلم</small>
             </div>
+            <div className="focus-reticle">
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
             <div className="floating-card floating-card-strong">
               <strong>اختيار أسهل من ملف طويل</strong>
               <span>شاهدي الباقات، اختاري المدينة، وأرسلي التفاصيل</span>
             </div>
           </div>
+        </div>
+
+        <div className="cinematic-dock" aria-label="خدمات Asmaa Studio">
+          {heroDock.map((item) => {
+            const Icon = item.icon;
+            return (
+              <a href="#experience" key={item.label}>
+                <Icon size={20} strokeWidth={1.6} />
+                <span>{item.label}</span>
+                <em>{item.ar}</em>
+              </a>
+            );
+          })}
+          <Link href="/reserve">
+            <Sparkles size={20} strokeWidth={1.6} />
+            <span>Book your date</span>
+            <em>احجزي موعدك</em>
+          </Link>
         </div>
       </section>
 
@@ -280,6 +382,18 @@ export default function HomePage() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      <section className="testimonial-marquee-section" aria-label="انطباعات العميلات">
+        <div className="testimonial-marquee">
+          {[...testimonialQuotes, ...testimonialQuotes].map((item, index) => (
+            <article key={`${item.meta}-${index}`}>
+              <Sparkles size={20} strokeWidth={1.6} />
+              <p>{item.quote}</p>
+              <span>{item.meta}</span>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -530,6 +644,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <a className="floating-whatsapp" href={whatsappLink("floating-whatsapp")} target="_blank" rel="noreferrer">
+        <MessageCircle size={24} />
+        <span>واتساب</span>
+      </a>
     </main>
   );
 }

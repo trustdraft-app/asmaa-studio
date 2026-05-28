@@ -124,3 +124,11 @@
 - Updated the static export pruner to remove client scripts from marketing pages while preserving `application/ld+json` structured data.
 - Extended launch verification to require all guide pages, sitemap coverage, static-script pruning with structured data preserved, and mobile/desktop no-overflow checks for guide routes.
 - Verification passed: lint, typecheck, GitHub Pages export build, launch verifier, and Playwright screenshot review for desktop `/guides` and mobile `/guides/wedding-videography-al-ahsa`.
+
+## 2026-05-28 18:52 +03
+
+- Ran a Claude design-director critique and generated a clean cinematic bridal still for the homepage hero background.
+- Upgraded the live homepage first viewport with sticky glass navigation, AR/EN control, bilingual editorial headline, animated showreel scrubber, focus reticle, service dock, testimonial marquee, and fixed WhatsApp CTA.
+- Rejected the first generated concept asset after visual review because it embedded fake website UI; replaced it with a no-text cinematic still and changed the asset path to avoid stale image caching.
+- Fixed mobile hero wrapping by separating Arabic and English headline spans, adding grid min-width constraints, and making the horizontal scrubber keyboard-focusable.
+- Verification passed: lint, typecheck, GitHub Pages export build, launch verifier, and mobile/desktop Playwright screenshot checks with no horizontal overflow.
