@@ -28,7 +28,7 @@
 ## 2026-05-28 06:18 +03
 
 - Softened live trust copy after Mohammed noted that stating obvious privacy claims can sound suspicious.
-- Replaced repeated privacy framing with calm execution, suitable style, family comfort, clear packages, and elegant workflow language.
+- Replaced repeated defensive framing with calm execution, suitable style, professional clarity, clear packages, and elegant workflow language.
 - Verification passed: no remaining `privacy`/`خصوصية` wording in `app`, `lib`, or `docs`; lint, typecheck, and GitHub Pages export build passed.
 
 ## 2026-05-28 06:31 +03
@@ -44,7 +44,7 @@
 
 ## 2026-05-28 06:56 +03
 
-- Rewrote the live website copy with an Arabic-first wedding buyer psychology lens: bride emotion, family reassurance, clear package choice, and easy WhatsApp follow-up.
+- Rewrote the live website copy with an Arabic-first wedding buyer psychology lens: bride emotion, professional reassurance, clear package choice, and easy WhatsApp follow-up.
 - Removed visible internal/agency language from the customer journey, including SEO/Admin/growth-system phrasing and privacy-style wording that could sound defensive.
 - Updated homepage, city pages, reservation link, admin setup copy, and content model so the site sells the desired memory before the operational system.
 
@@ -69,3 +69,8 @@
 - Live verification passed for `http://asmaa.video`, plus Playwright smoke checks for `/`, `/alahsa`, `/dammam`, `/khobar`, `/reserve?city=dammam`, `/reserve?city=khobar`, and `/admin` across mobile and desktop.
 - Live export check confirmed the marketing homepage ships without Next.js hydration scripts.
 - `asmaavideo.com` currently routes through Namecheap URL forwarding to `asmaa.video`; `asmaa.video` HTTPS remains blocked because GitHub Pages still has no issued certificate and rejects HTTPS enforcement with `The certificate does not exist yet`.
+
+## 2026-05-28 08:17 +03
+
+- Removed unprofessional relative-role persona wording from live customer copy and internal positioning notes.
+- Reframed the website language around the bride/client, package clarity, event details, and professional ease.

@@ -20,7 +20,7 @@
 
 ## 2026-05-28 06:18 +03 — Asmaa Studio
 **Question:** How should the site communicate trust without making normal expectations sound suspicious?
-**Decision:** Remove repeated explicit privacy framing and express trust indirectly through calm execution, suitable style, family comfort, clear packages, and elegant workflow language.
+**Decision:** Remove repeated defensive framing and express trust indirectly through calm execution, suitable style, professional clarity, clear packages, and elegant workflow language.
 **Reasoning:** Over-explaining an obvious expectation can trigger doubt; premium service copy should make the buyer feel comfortable without sounding defensive.
 **Source:** User feedback, live copy review, professional judgment.
 
@@ -37,9 +37,9 @@
 **Source:** User instruction, live typography review, professional judgment.
 
 ## 2026-05-28 06:56 +03 — Asmaa Studio
-**Question:** How should the website copy speak to brides and family decision-makers without sounding suspicious or overly operational?
-**Decision:** Reframe the live copy around emotion, elegance, clear package choice, family ease, and local relevance while removing visible privacy phrasing and internal growth/SEO/Admin language from the customer journey.
-**Reasoning:** Brides buy the memory and feeling first, while sisters/aunts reduce uncertainty through simple package and date clarity; defensive wording weakens that feeling.
+**Question:** How should the website copy speak to brides and women clients without sounding suspicious or overly operational?
+**Decision:** Reframe the live copy around emotion, elegance, clear package choice, ease of decision, and local relevance while removing defensive phrasing and internal growth/SEO/Admin language from the customer journey.
+**Reasoning:** The customer buys the memory and feeling first; simple package and date clarity should support that without awkward persona targeting.
 **Source:** User instruction, growth-and-offer playbook, live page review, professional judgment.
 
 ## 2026-05-28 07:16 +03 — Asmaa Studio
@@ -59,3 +59,9 @@
 **Decision:** Mark the code-owned website experience as launch-passed, but keep the domain layer open until `asmaa.video` has a valid GitHub Pages HTTPS certificate and `asmaavideo.com` is moved from Namecheap forwarding to first-class HTTPS routing.
 **Reasoning:** Live Lighthouse and cURL show the remaining score loss comes from HTTP, redirects, and edge cache/transport behavior outside the committed website code.
 **Source:** Live cURL, Lighthouse, GitHub Pages API, professional judgment.
+
+## 2026-05-28 08:17 +03 — Asmaa Studio
+**Question:** Should Asmaa Studio copy mention relative-role decision-maker personas?
+**Decision:** No. Use professional bride/client language only: العروس، العميلة، اختيار الباقة، تفاصيل المناسبة.
+**Reasoning:** Explicit relative-role personas sound unprofessional and distract from the premium studio positioning.
+**Source:** User instruction and live copy review.

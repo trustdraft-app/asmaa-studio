@@ -2,7 +2,7 @@
 
 Asmaa Studio is a greenfield launch project for a Saudi Eastern Province women-focused wedding videography business.
 
-Primary customer: brides, sisters, aunts, and female family members booking wedding or engagement video coverage.
+Primary customer: brides and women clients booking wedding or engagement video coverage.
 
 Primary market order:
 
