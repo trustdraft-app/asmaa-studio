@@ -65,3 +65,9 @@
 **Decision:** No. Use professional bride/client language only: العروس، العميلة، اختيار الباقة، تفاصيل المناسبة.
 **Reasoning:** Explicit relative-role personas sound unprofessional and distract from the premium studio positioning.
 **Source:** User instruction and live copy review.
+
+## 2026-05-28 09:04 +03 — Asmaa Studio
+**Question:** Which remaining daily launch wave should ship next on the live site?
+**Decision:** Implement wave 14 as a dedicated `/faq` booking questions page with Arabic answers, FAQ structured data, breadcrumb structured data, homepage links, and sitemap coverage.
+**Reasoning:** The site already shipped the broad homepage/social/city work, and the highest-impact remaining code-owned gap was reducing repeated pre-booking questions with an indexable conversion page.
+**Source:** 20-wave plan in `lib/content.ts`, live project files, professional judgment.

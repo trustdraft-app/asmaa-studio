@@ -68,6 +68,7 @@ export default function HomePage() {
           <div className="nav-links">
             <a href="#packages">الباقات</a>
             <a href="#seo-wave">المدن</a>
+            <Link href="/faq">الأسئلة</Link>
             <a href="#social-assets">المحتوى</a>
             <Link href="/reserve">رابط العروس</Link>
             <Link href="/admin">المواعيد</Link>
@@ -318,6 +319,11 @@ export default function HomePage() {
             <Link className="cta" href="/alahsa">
               افتحي صفحة الأحساء <ArrowLeft size={18} />
             </Link>
+            <Link className="ghost-cta" href="/faq">
+              أسئلة الحجز <Search size={18} />
+            </Link>
+          </div>
+          <div className="button-row wave-actions">
             <Link className="ghost-cta" href="/reserve">
               رابط العروس الآن <CalendarDays size={18} />
             </Link>

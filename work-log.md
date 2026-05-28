@@ -1,5 +1,11 @@
 # Asmaa Studio Work Log
 
+## 2026-05-28 09:04 +03
+
+- Shipped wave 14 as a live `/faq` booking questions page in Arabic with FAQPage and BreadcrumbList structured data.
+- Added homepage navigation and CTA links to `/faq`, plus sitemap inclusion so search engines can discover the page cleanly.
+- Reused the live content model for pre-booking answers covering package choice, arrival timing, WhatsApp details, deposit step, service areas, and availability confirmation.
+
 ## 2026-05-28 03:17 +03
 
 - Added `/reserve` bride-facing guided reservation flow to replace WhatsApp PDF package sending.

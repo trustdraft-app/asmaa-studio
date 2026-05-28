@@ -18,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9
     },
+    {
+      url: `${base}/faq`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
     ...serviceAreas.map((area) => ({
       url: `${base}/${area.slug}`,
       lastModified: new Date(),
