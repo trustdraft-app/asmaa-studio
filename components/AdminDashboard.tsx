@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { createClient, type Session } from "@supabase/supabase-js";
 import {
@@ -16,7 +17,7 @@ import {
   TrendingUp,
   UsersRound
 } from "lucide-react";
-import { whatsappLink } from "../lib/content";
+import { assetPath, whatsappLink } from "../lib/content";
 import {
   adminConfigReady,
   normalizePhone,
@@ -144,7 +145,7 @@ export function AdminDashboard() {
         <section className="admin-login">
           <Link className="brand-lockup" href="/">
             <span className="brand-mark" aria-hidden="true">
-              <span>AS</span>
+              <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
             </span>
             <span>
               <strong>Asmaa Studio</strong>
@@ -183,7 +184,7 @@ export function AdminDashboard() {
       <nav className="nav reserve-nav" aria-label="تنقل لوحة الحجوزات">
         <Link className="brand-lockup" href="/">
           <span className="brand-mark" aria-hidden="true">
-            <span>AS</span>
+            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
           </span>
           <span>
             <strong>Asmaa Studio</strong>
@@ -310,7 +311,7 @@ function AdminSetupState() {
       <section className="admin-login">
         <Link className="brand-lockup" href="/">
           <span className="brand-mark" aria-hidden="true">
-            <span>AS</span>
+            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
           </span>
           <span>
             <strong>Asmaa Studio</strong>

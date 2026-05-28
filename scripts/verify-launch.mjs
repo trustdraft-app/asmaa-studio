@@ -144,7 +144,7 @@ function verifyStaticOutput() {
   }
 
   const home = existsSync(join(outDir, "index.html")) ? readOutFile("index.html") : "";
-  for (const token of ["hero-photo-stack", "package-motion-meter", "moment-card", "Asmaa Studio"]) {
+  for (const token of ["hero-photo-stack", "hero-logo-image", "package-motion-meter", "moment-card", "Asmaa Studio"]) {
     if (home.includes(token)) pass(`homepage contains ${token}`);
     else fail(`homepage missing ${token}`);
   }
@@ -205,12 +205,16 @@ async function verifyBrowserOutput() {
       await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
       const homeCounts = await page.evaluate(() => ({
         heroImages: document.querySelectorAll(".hero-photo-stack img").length,
+        realLogoImages: document.querySelectorAll(".brand-mark img, .hero-logo-image").length,
         meters: document.querySelectorAll(".package-motion-meter").length,
         moments: document.querySelectorAll(".moment-card").length
       }));
 
       if (homeCounts.heroImages >= 2) pass(`${config.name} homepage has layered hero imagery`);
       else fail(`${config.name} homepage missing layered hero imagery`);
+
+      if (homeCounts.realLogoImages >= 2) pass(`${config.name} homepage uses the real logo artwork`);
+      else fail(`${config.name} homepage is missing real logo artwork`);
 
       if (homeCounts.meters >= 4) pass(`${config.name} homepage has package infographics`);
       else fail(`${config.name} homepage missing package infographics`);

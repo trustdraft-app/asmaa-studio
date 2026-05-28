@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -13,7 +14,7 @@ import {
   Sparkles,
   Video
 } from "lucide-react";
-import { packages, whatsappLink } from "../lib/content";
+import { assetPath, packages, whatsappLink } from "../lib/content";
 import {
   cityOptions,
   defaultReservation,
@@ -119,7 +120,7 @@ export function ReservationExperience() {
       <nav className="nav reserve-nav" aria-label="تنقل رابط العروس">
         <Link className="brand-lockup" href="/">
           <span className="brand-mark" aria-hidden="true">
-            <span>AS</span>
+            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
           </span>
           <span>
             <strong>Asmaa Studio</strong>

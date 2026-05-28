@@ -108,3 +108,11 @@
 - Confirmed GitHub Pages marks the domain valid, unproxied, served by Pages, and HTTPS-eligible, but the certificate is still not issued.
 - Tried to enable/refresh HTTPS through the GitHub Pages API; GitHub still returns `The certificate does not exist yet`.
 - Kept Cloudflare proxy/DNS migration on hold because the current unproxied Namecheap DNS is the correct state for GitHub certificate issuance.
+
+## 2026-05-28 15:28 +03
+
+- Replaced the fake text/CSS `A/S` logo treatment with the correct uploaded gold monogram artwork.
+- Added dedicated logo assets for nav/hero/favicon/app icon: `asmaa-logo-primary.jpg`, `asmaa-logo-heritage.jpg`, `asmaa-logo-square.png`, `favicon.png`, `apple-touch-icon.png`, and `app/icon.png`.
+- Updated homepage, reserve page, admin page, Open Graph image, favicon, and launch verification to require real logo artwork.
+- Added a Figma page named `Logo System / Live Applied` with the selected logo treatment and implementation notes.
+- Verification passed: lint, typecheck, GitHub Pages export build, launch verifier, and mobile/desktop Playwright visual checks.

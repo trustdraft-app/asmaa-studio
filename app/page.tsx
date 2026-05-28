@@ -60,8 +60,7 @@ export default function HomePage() {
         <nav className="nav" aria-label="التنقل الرئيسي">
           <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
             <span className="brand-mark" aria-hidden="true">
-              <span>A</span>
-              <span>S</span>
+              <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
             </span>
             <strong>Asmaa Studio</strong>
           </a>
@@ -129,11 +128,15 @@ export default function HomePage() {
                 height={360}
               />
             </div>
-            <div className="monogram-stage">
-              <div className="signature-mark" aria-hidden="true">
-                <span className="sig-left">A</span>
-                <span className="sig-center">S</span>
-              </div>
+            <div className="monogram-stage logo-stage">
+              <Image
+                className="hero-logo-image"
+                src={assetPath("/brand/asmaa-logo-primary.jpg")}
+                alt=""
+                width={420}
+                height={630}
+                priority
+              />
             </div>
             <div className="director-frame">
               <span>مشاهد اليوم</span>

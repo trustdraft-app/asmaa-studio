@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     canonical: "/"
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/icon.svg"
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/apple-touch-icon.png"
   },
   openGraph: {
     title: "Asmaa Studio",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Asmaa Studio",
     images: [
       {
-        url: "/brand/asmaa-monogram-heritage.jpg",
+        url: "/brand/asmaa-logo-heritage.jpg",
         width: 853,
         height: 1280,
         alt: "Asmaa Studio gold monogram"

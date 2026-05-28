@@ -95,3 +95,9 @@
 **Decision:** No Cloudflare DNS/proxy change yet; keep `asmaa.video` unproxied on the current GitHub Pages records until GitHub issues the Pages certificate.
 **Reasoning:** GitHub Pages health reports the apex and `www` records are valid, unproxied, served by Pages, and HTTPS-eligible; changing to Cloudflare proxy now can hide the GitHub records and delay certificate issuance.
 **Source:** GitHub Pages health API, live DNS checks, professional judgment.
+
+## 2026-05-28 15:28 +03 — Asmaa Studio
+**Question:** How should the website fix the forced-looking logo treatment?
+**Decision:** Use the uploaded gold monogram artwork directly across navigation, hero, favicon, app icon, reserve, and admin, and remove the CSS-drawn `A/S` substitute.
+**Reasoning:** The correct brand asset already exists; drawing a replacement monogram makes the site feel less professional and weakens recognition.
+**Source:** User-provided logo files, live UI review, Figma logo-system page `AxnBD6JO0MR3YY5XDt8LEa`.
