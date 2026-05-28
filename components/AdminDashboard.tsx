@@ -153,7 +153,7 @@ export function AdminDashboard() {
           </Link>
           <div className="login-card">
             <LockKeyhole size={32} />
-            <span className="eyebrow">دخول صاحبة العمل</span>
+            <span className="eyebrow">دخول فريق الاستوديو</span>
             <h1>لوحة بسيطة لكل الحجوزات القادمة.</h1>
             <p>اكتبي بريد المدير المضاف في Supabase. سيصل رابط دخول بدون كلمة مرور.</p>
             <label className="field">
@@ -328,7 +328,7 @@ function AdminSetupState() {
           <div className="setup-steps">
             <span>1. تجهيز قاعدة الحجوزات</span>
             <span>2. تفعيل رابط حفظ الطلب</span>
-            <span>3. إضافة بريد صاحبة العمل للدخول</span>
+            <span>3. إضافة بريد إدارة الاستوديو للدخول</span>
           </div>
           <Link className="cta" href="/reserve">
             تجربة رابط العروس

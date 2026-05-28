@@ -94,3 +94,9 @@
 - Shipped a live premium visual pass from that direction: cinematic hero image stack, motion guide layers, richer proof cards, animated story cards, and package infographic meters.
 - Reworked the package grid from a narrow price-list feeling into a responsive visual story with package progression meters and cleaner card hierarchy.
 - Verification passed locally: lint, typecheck, static export build, mobile/desktop Playwright checks, no horizontal overflow, hero visual assets present, and all five package meters render.
+
+## 2026-05-28 14:44 +03
+
+- Scanned the useful local/GitHub portfolio repos for reusable Asmaa patterns: Fattourh, ScanAbility, HalalCrypto, Sawgly, and Founder Command Center.
+- Applied the useful pieces directly: `public/llms.txt`, `npm run verify:launch`, FAQ static-script pruning, and neutral admin-team copy.
+- Documented the repo reuse audit in `docs/repo-reuse-audit.md` and kept heavier dashboard/deployment patterns out of scope.

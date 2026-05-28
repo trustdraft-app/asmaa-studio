@@ -83,3 +83,9 @@
 **Decision:** Implement wave 14 as a dedicated `/faq` booking questions page with Arabic answers, FAQ structured data, breadcrumb structured data, homepage links, and sitemap coverage.
 **Reasoning:** The site already shipped the broad homepage/social/city work, and the highest-impact remaining code-owned gap was reducing repeated pre-booking questions with an indexable conversion page.
 **Source:** 20-wave plan in `lib/content.ts`, live project files, professional judgment.
+
+## 2026-05-28 14:44 +03 — Asmaa Studio
+**Question:** Which reusable patterns from the existing AI Empire repos should be applied to Asmaa now?
+**Decision:** Import the useful operating patterns only: Fattourh-style answer-engine indexing, ScanAbility-style Playwright/axe checks, and HalalCrypto-style static/deploy proof.
+**Reasoning:** These raise launch quality and catch the exact mobile/copy/performance failures already seen, without importing unrelated dashboard or deployment complexity.
+**Source:** Repo scan of `fattourh`, `scanability`, `halalcrypto`, `sawgly`, and `founder-command-center`; professional judgment.

@@ -7,7 +7,7 @@ if (!existsSync(outDir)) {
   process.exit(0);
 }
 
-const staticRoutes = ["index.html", "alahsa.html", "dammam.html", "khobar.html", "404.html"];
+const staticRoutes = ["index.html", "alahsa.html", "dammam.html", "khobar.html", "faq.html", "404.html"];
 
 for (const route of staticRoutes) {
   const file = join(outDir, route);

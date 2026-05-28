@@ -7,3 +7,4 @@
 - Add analytics and conversion tracking after deployment.
 - Create Google Business Profile and local citation checklist after site URL is live.
 - Activate Supabase reservations by applying the migration, deploying `submit-reservation`, setting allowed origins, and adding the owner email.
+- Run `npm run verify:launch` before every deploy so mobile typography, banned wording, static export files, and accessibility regressions are caught before going live.

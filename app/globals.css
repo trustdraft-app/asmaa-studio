@@ -315,6 +315,11 @@
   padding-inline-end: 6px;
 }
 
+.wave-board-full:focus-visible {
+  outline: 2px solid rgba(223, 177, 108, 0.8);
+  outline-offset: 6px;
+}
+
 .wave-card {
   padding: 16px;
 }

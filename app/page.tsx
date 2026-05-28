@@ -322,7 +322,7 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="wave-board wave-board-full">
+            <div className="wave-board wave-board-full" tabIndex={0} aria-label="خطة النشر اليومية">
               {seoLaunchWaves.map((wave) => (
                 <article className="wave-card" key={wave.day}>
                   <span>Day {wave.day}</span>
