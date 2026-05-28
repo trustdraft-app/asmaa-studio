@@ -16,7 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const area = serviceAreas.find((item) => item.slug === city) ?? serviceAreas[0];
 
   return {
-    title: area.metaTitle,
+    title: {
+      absolute: area.metaTitle
+    },
     description: area.metaDescription,
     alternates: {
       canonical: `https://asmaa.video/${area.slug}`

@@ -24,7 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: page.metaTitle,
+    title: {
+      absolute: page.metaTitle
+    },
     description: page.metaDescription,
     alternates: {
       canonical: `https://asmaa.video/guides/${page.slug}`
