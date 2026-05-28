@@ -1,11 +1,15 @@
 import type { NextConfig } from "next";
 
 const isGithubPages = process.env.GITHUB_PAGES === "true";
+const githubPagesBasePath =
+  process.env.GITHUB_PAGES_BASE_PATH ??
+  (process.env.GITHUB_PAGES_CUSTOM_DOMAIN === "true" ? "" : "/asmaa-studio");
+const basePath = isGithubPages ? githubPagesBasePath : "";
 
 const nextConfig: NextConfig = {
   output: isGithubPages ? "export" : undefined,
-  basePath: isGithubPages ? "/asmaa-studio" : undefined,
-  assetPrefix: isGithubPages ? "/asmaa-studio/" : undefined,
+  basePath: basePath || undefined,
+  assetPrefix: basePath ? `${basePath}/` : undefined,
   turbopack: {
     root: process.cwd()
   },

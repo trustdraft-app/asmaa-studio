@@ -7,3 +7,8 @@
 - Added Supabase migration and Edge Function for secure reservation persistence.
 - Added WhatsApp fallback for the current static GitHub Pages deployment when Supabase variables are not configured.
 - Documented activation in `docs/reservation-system.md` and updated deployment/security notes.
+
+## 2026-05-28
+
+- Reconfigured the GitHub Pages export for the real custom domain `asmaa.video` instead of the temporary `/asmaa-studio` subpath.
+- Added `public/CNAME` for GitHub Pages custom-domain publication.

@@ -16,8 +16,13 @@ import {
 export const whatsappNumber = "966551606334";
 export const instagramUrl = "https://www.instagram.com/asmaa.video/";
 export const tiktokUrl = "https://www.tiktok.com/@asmaa.video";
+const publicBasePath =
+  process.env.NEXT_PUBLIC_BASE_PATH ??
+  (process.env.GITHUB_PAGES === "true" && process.env.GITHUB_PAGES_CUSTOM_DOMAIN !== "true"
+    ? "/asmaa-studio"
+    : "");
 export const assetPath = (path: string) =>
-  `${process.env.GITHUB_PAGES === "true" ? "/asmaa-studio" : ""}${path}`;
+  `${publicBasePath}${path}`;
 
 export const whatsappLink = (source = "website") =>
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(

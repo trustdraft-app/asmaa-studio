@@ -13,6 +13,8 @@
 - Live URL: https://trustdraft-app.github.io/asmaa-studio/
 - Deployment workflow: `.github/workflows/deploy-pages.yml`
 - Build mode: static export with `GITHUB_PAGES=true`
+- Custom domain target: `asmaa.video`
+- Support domain target: `asmaavideo.com` should redirect to `https://asmaa.video`
 
 This is live now because GitHub authentication was available. Vercel and Cloudflare CLI sessions were not authenticated in this environment.
 
@@ -50,7 +52,28 @@ asmaa.video      A      185.199.111.153
 www.asmaa.video  CNAME  trustdraft-app.github.io
 ```
 
-Current public DNS still points both domains at Namecheap parking nameservers/parking records, so the custom domains are not live until Namecheap DNS or nameservers are changed.
+Current public DNS still points both domains at Namecheap parking records, so the custom domains are not live until Namecheap DNS records are changed.
+
+## Namecheap DNS Records For Current GitHub Pages Deployment
+
+Set these under Namecheap Advanced DNS for `asmaa.video`:
+
+```text
+@    A      185.199.108.153
+@    A      185.199.109.153
+@    A      185.199.110.153
+@    A      185.199.111.153
+www  CNAME  trustdraft-app.github.io
+```
+
+For `asmaavideo.com`, use Namecheap URL Redirect Record to:
+
+```text
+@    URL Redirect  https://asmaa.video
+www  URL Redirect  https://asmaa.video
+```
+
+If URL Redirect is unavailable, point `asmaavideo.com` to the same GitHub Pages records only after creating a separate redirect host. GitHub Pages supports one primary custom domain for this repo, so the clean support-domain behavior is redirecting `asmaavideo.com` to `asmaa.video`.
 
 ## Security Notes
 
