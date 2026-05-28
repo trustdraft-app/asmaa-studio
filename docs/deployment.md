@@ -7,14 +7,15 @@
 - Primary domain: `asmaa.video`
 - Redirect/support domain: `asmaavideo.com`
 
-## Live Fallback Now Active
+## Live GitHub Pages Deployment
 
 - GitHub repo: https://github.com/trustdraft-app/asmaa-studio
-- Live URL: https://trustdraft-app.github.io/asmaa-studio/
+- Canonical live URL: http://asmaa.video
+- Temporary GitHub Pages URL: https://trustdraft-app.github.io/asmaa-studio/
 - Deployment workflow: `.github/workflows/deploy-pages.yml`
-- Build mode: static export with `GITHUB_PAGES=true`
-- Custom domain target: `asmaa.video`
-- Support domain target: `asmaavideo.com` should redirect to `https://asmaa.video`
+- Build mode: static export with `GITHUB_PAGES=true`, `GITHUB_PAGES_CUSTOM_DOMAIN=true`, and empty `NEXT_PUBLIC_BASE_PATH`
+- Custom domain: `asmaa.video`
+- Support domain: `asmaavideo.com` redirects to `https://asmaa.video`
 
 This is live now because GitHub authentication was available. Vercel and Cloudflare CLI sessions were not authenticated in this environment.
 
@@ -52,7 +53,7 @@ asmaa.video      A      185.199.111.153
 www.asmaa.video  CNAME  trustdraft-app.github.io
 ```
 
-Current public DNS still points both domains at Namecheap parking records, so the custom domains are not live until Namecheap DNS records are changed.
+These records are active in Namecheap as of 2026-05-28 04:35 +03. Public DNS resolves `asmaa.video` to GitHub Pages and `www.asmaa.video` to `trustdraft-app.github.io`.
 
 ## Namecheap DNS Records For Current GitHub Pages Deployment
 
@@ -74,6 +75,12 @@ www  URL Redirect  https://asmaa.video
 ```
 
 If URL Redirect is unavailable, point `asmaavideo.com` to the same GitHub Pages records only after creating a separate redirect host. GitHub Pages supports one primary custom domain for this repo, so the clean support-domain behavior is redirecting `asmaavideo.com` to `asmaa.video`.
+
+As of 2026-05-28 04:35 +03, both `asmaavideo.com` and `www.asmaavideo.com` return `302` redirects to `https://asmaa.video` through Namecheap URL Forwarding.
+
+## HTTPS Status
+
+GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Pages workflow for commit `7e5cfbe` completed successfully. HTTP is live now at `http://asmaa.video`. HTTPS enforcement is pending GitHub certificate issuance; the GitHub API currently returns `The certificate does not exist yet` when enabling `https_enforced`.
 
 ## Security Notes
 
