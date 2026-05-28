@@ -80,7 +80,7 @@ As of 2026-05-28 04:35 +03, both `asmaavideo.com` and `www.asmaavideo.com` retur
 
 ## HTTPS Status
 
-GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Pages workflow for commit `7e5cfbe` completed successfully. HTTP is live now at `http://asmaa.video`. HTTPS enforcement is pending GitHub certificate issuance; the GitHub API currently returns `The certificate does not exist yet` when enabling `https_enforced`.
+GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Pages workflow for commit `62fb3f1` completed successfully. HTTP is live now at `http://asmaa.video`. HTTPS enforcement is pending GitHub certificate issuance; the GitHub API currently returns `The certificate does not exist yet` when enabling `https_enforced`.
 
 ## Security Notes
 
