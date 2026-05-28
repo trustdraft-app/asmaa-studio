@@ -19,6 +19,14 @@ Create a premium Arabic-first landing page and social asset system for Asmaa Stu
 4. Instagram highlight cover set
 5. Local SEO page template
 
+## 20x Live Upgrade Baseline
+
+- Cinematic hero with moving command-orbit, monogram stage, daily-wave proof, and PDF-to-link conversion message.
+- Package decision engine with best-fit guidance, sequence chips, price, duration, and WhatsApp source tracking.
+- Local SEO command section with keywords, daily waves, and city cards for الأحساء، الدمام، الخبر.
+- Mobile-first city pages with search intent, neighborhood signals, package comparison, proof block, daily content wave, and FAQ schema.
+- Highlight cover system expanded to Album, Feedback, Packages, Bride Details, Video Details, First Look, Booking, BTS, Editing, Life Style, Coffee&food, and Snapchat.
+
 ## Must Preserve
 
 - Brand name: Asmaa Studio

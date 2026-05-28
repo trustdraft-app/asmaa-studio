@@ -30,3 +30,10 @@ Album, Feedback, Packages, Bride Details, Video Details, First Look, Booking, BT
 
 - Edit: https://www.canva.com/d/F-u8yeTlyikimX6
 - View: https://www.canva.com/d/PW-rRL7ZZI9yFd8
+
+## New Live Asset Priorities
+
+1. Carousel: "اختاري البكج حسب لحظات اليوم" based on the package sequence chips now live on the homepage.
+2. Story set: first 8 daily SEO waves from the homepage `20x SEO launch command`.
+3. Highlight refresh: add Packages, First Look, and Snapchat covers to match the new SVG set.
+4. WhatsApp card: send `/reserve` instead of a PDF, with one screen explaining city, date, package, and notes.

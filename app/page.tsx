@@ -1,31 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeft, CalendarDays, Check, ExternalLink, MessageCircle, Play, Search } from "lucide-react";
 import {
-  ArrowLeft,
-  CalendarCheck,
-  Camera,
-  MapPin,
-  MessageCircle,
-  Play,
-  ShieldCheck
-} from "lucide-react";
-import {
-  assetPath,
   areaStrategy,
+  assetPath,
   boardScore,
-  bookingRules,
-  extraItems,
-  highlights,
-  instagramUrl,
-  packages,
   bookingSteps,
   cinematicMoments,
   conversionFlow,
+  highlights,
+  instagramUrl,
+  liveOperatingSystem,
+  packages,
   seoFocus,
+  seoLaunchWaves,
   serviceAreas,
   services,
   tiktokUrl,
-  whatsappLink
+  trustSignals,
+  whatsappLink,
+  whatsappNumber
 } from "../lib/content";
 
 const jsonLd = {
@@ -34,13 +28,22 @@ const jsonLd = {
   name: "Asmaa Studio",
   alternateName: "Asmaa Video",
   url: "https://asmaa.video",
-  image: "https://asmaa.video/brand/asmaa-monogram-heritage.jpg",
-  telephone: "+966551606334",
-  areaServed: ["Al Ahsa", "Dammam", "Khobar", "Eastern Province Saudi Arabia"],
+  telephone: `+${whatsappNumber}`,
+  areaServed: serviceAreas.map((area) => area.en),
   priceRange: "600-2500 SAR",
+  image: "https://asmaa.video/highlights/bride-details.svg",
   sameAs: [instagramUrl, tiktokUrl],
+  makesOffer: packages.map((item) => ({
+    "@type": "Offer",
+    name: item.name,
+    price: item.price,
+    priceCurrency: "SAR",
+    description: item.summary
+  })),
   serviceType: "Female wedding videography"
 };
+
+const topWaves = seoLaunchWaves.slice(0, 8);
 
 export default function HomePage() {
   return (
@@ -49,48 +52,44 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="hero" id="top">
+
+      <section className="hero hero-20x" id="top">
         <nav className="nav" aria-label="Primary">
           <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
             <span className="brand-mark" aria-hidden="true">
-              <span>AS</span>
+              <span>A</span>
+              <span>S</span>
             </span>
-            <span>
-              <strong>Asmaa Studio</strong>
-              <span>Photo & Video</span>
-            </span>
+            <strong>Asmaa Studio</strong>
           </a>
           <div className="nav-links">
             <a href="#packages">الباقات</a>
+            <a href="#seo-wave">SEO</a>
             <Link href="/reserve">رابط العروس</Link>
-            <a href="#experience">التجربة</a>
-            <a href="#highlights">هايلايت</a>
-            <a href={whatsappLink("nav")} target="_blank" rel="noreferrer">
-              واتساب
-            </a>
+            <Link href="/admin">Admin</Link>
           </div>
         </nav>
 
-        <div className="hero-grid">
-          <div>
-            <span className="eyebrow">تصوير نسائي للأعراس والخطوبة في الشرقية</span>
+        <div className="hero-grid hero-grid-20x">
+          <div className="hero-copy-stack">
+            <span className="eyebrow">Live growth system for Saudi Eastern weddings</span>
             <h1>
-              Asmaa <span>Studio</span>
+              Asmaa Studio تتحول من حساب ينتظر الرسائل إلى ماكينة حجز يومية.
+              <span>موقع، رابط عروس، Admin، وSEO موجات.</span>
             </h1>
             <p className="hero-copy">
-              توثيق فيديو راق للعروس وتفاصيلها وزفتها في الأحساء أولا، ثم الدمام والخبر. تجربة
-              واضحة من أول رسالة واتساب إلى تسليم مونتاج يحفظ اللحظة بخصوصيتها وجمالها.
+              هذا ليس PDF على واتساب. هذه تجربة حجز كاملة: العروس ترى الباقات، تختار المدينة
+              والتاريخ، تقرأ الثقة والخصوصية، ثم تصل لصاحبة العمل رسالة منظمة قابلة للمتابعة.
             </p>
             <div className="button-row">
-              <a className="cta" href={whatsappLink("hero")} target="_blank" rel="noreferrer">
-                <MessageCircle size={19} />
-                احجزي عبر واتساب
-              </a>
-              <Link className="ghost-cta" href="/reserve">
-                <Play size={18} />
-                افتحي رابط العروس
+              <Link className="cta" href="/reserve">
+                افتحي رابط العروس <ArrowLeft size={18} />
               </Link>
+              <a className="ghost-cta" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
+                واتساب مباشر <MessageCircle size={18} />
+              </a>
             </div>
+
             <div className="hero-proof" aria-label="Business highlights">
               {boardScore.map((item) => (
                 <div className="proof-chip" key={item.label}>
@@ -102,10 +101,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-visual" aria-hidden="true">
+          <div className="hero-visual hero-command" aria-hidden="true">
             <div className="motion-line" />
             <div className="reel-ribbon ribbon-one" />
             <div className="reel-ribbon ribbon-two" />
+            <div className="command-orbit">
+              <span />
+              <span />
+              <span />
+            </div>
             <div className="monogram-stage">
               <div className="signature-mark" aria-hidden="true">
                 <span className="sig-left">A</span>
@@ -113,14 +117,33 @@ export default function HomePage() {
               </div>
             </div>
             <div className="director-frame">
-              <span>01</span>
-              <strong>Golden Entrance</strong>
-              <small>privacy · story · emotion</small>
+              <span>Daily wave</span>
+              <strong>20</strong>
+              <small>SEO + social launches</small>
             </div>
-            <div className="floating-card">
-              <strong>الخصوصية أولا</strong>
-              <span>الصفحة موجهة للعروس والنساء من العائلة، مع تحويل مباشر إلى واتساب.</span>
+            <div className="floating-card floating-card-strong">
+              <strong>من PDF إلى رابط حجز</strong>
+              <span>Reserve / Admin / WhatsApp source tracking</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section os-section" id="live-system">
+        <div className="section-inner">
+          <span className="eyebrow">نظام التشغيل الحي</span>
+          <h2 className="section-title">كل جزء في الموقع الآن يعمل كمسار بيع، وليس ديكور.</h2>
+          <div className="operating-grid">
+            {liveOperatingSystem.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article className="operating-card" key={item.label}>
+                  <Icon size={25} strokeWidth={1.6} />
+                  <strong>{item.label}</strong>
+                  <p>{item.text}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -129,21 +152,20 @@ export default function HomePage() {
         <div className="section-inner cinematic-layout">
           <div>
             <span className="eyebrow">لغة فيلم الزفاف</span>
-            <h2 className="section-title">الموقع الآن يبيع إحساس الفيلم، وليس قائمة أسعار فقط.</h2>
+            <h2 className="section-title">الموقع يبيع إحساس الفيلم، ثم يثبت القرار بالأرقام.</h2>
             <p className="section-copy">
               العروس لا تقارن الكاميرات فقط؛ تقارن الإحساس، الأمان، الخصوصية، وطريقة ظهورها في
               يوم لا يتكرر. لذلك الواجهة تستخدم مشاهد، إيقاع، وخرائط قرار تجعل الباقة تبدو
               كقصة متكاملة.
             </p>
           </div>
-          <div className="cinema-board" aria-label="Cinematic moments">
-            {cinematicMoments.map((moment, index) => {
+          <div className="moment-grid">
+            {cinematicMoments.map((moment) => {
               const Icon = moment.icon;
               return (
-                <article className="cinema-shot" key={moment.title}>
-                  <span className="shot-number">{String(index + 1).padStart(2, "0")}</span>
+                <article className="moment-card" key={moment.title}>
+                  <span>{moment.title}</span>
                   <Icon size={28} strokeWidth={1.55} />
-                  <h3>{moment.title}</h3>
                   <p>{moment.text}</p>
                 </article>
               );
@@ -152,26 +174,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="packages">
+      <section className="section package-decision" id="packages">
         <div className="section-inner">
-          <span className="eyebrow">باقات مبنية من الملف الحالي</span>
-          <h2 className="section-title">اختاري التغطية حسب حجم المناسبة.</h2>
+          <span className="eyebrow">Package decision engine</span>
+          <h2 className="section-title">الباقات أصبحت خريطة قرار بصرية، لا قائمة أسعار.</h2>
           <p className="section-copy">
-            كل بكج يعرض المدة والسعر ونطاق التغطية حتى لا تضيع العميلة بين رسائل طويلة. الزر
-            يفتح واتساب برسالة جاهزة لتقليل الاحتكاك وزيادة التحويل.
+            كل بكج يعرض السعر والمدة واللحظات التي يغطيها. هذا يقلل رسائل السؤال المتكرر ويقود
+            العروس إلى رابط الحجز أو واتساب بمصدر واضح.
           </p>
-          <div className="packages-grid">
+          <div className="packages-grid packages-grid-20x">
             {packages.map((item) => (
-              <article className={`package-card ${item.featured ? "featured" : ""}`} key={item.id}>
+              <article className={`package-card package-card-20x ${item.featured ? "featured" : ""}`} key={item.id}>
                 <header>
                   <small>بكج {item.id}</small>
                   <h3>{item.name}</h3>
                   <p className="price">{item.price} ريال</p>
                 </header>
+                {item.spotlight ? <span className="package-badge">{item.spotlight}</span> : null}
+                <p>{item.summary}</p>
+                <div className="package-best">
+                  <strong>مناسب لـ</strong>
+                  <span>{item.bestFor}</span>
+                </div>
+                <div className="package-sequence">
+                  {item.sequence.map((step) => (
+                    <span key={step}>{step}</span>
+                  ))}
+                </div>
                 <ul>
-                  <li>{item.summary}</li>
                   {item.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
+                    <li key={bullet}>
+                      <Check size={14} /> {bullet}
+                    </li>
                   ))}
                 </ul>
                 <footer>
@@ -188,13 +222,13 @@ export default function HomePage() {
 
       <section className="section services-band" id="experience">
         <div className="section-inner">
-          <span className="eyebrow">ما الذي يجعل العرض مختلفا</span>
+          <span className="eyebrow">Trust system</span>
           <h2 className="section-title">نبيع راحة العروس قبل الفيديو.</h2>
           <p className="section-copy">
-            العروس لا تريد ملف أسعار فقط؛ تريد أن تعرف أن اللحظة ستدار بهدوء، بخصوصية، وبشكل
-            يليق بالقاعة والعائلة. لذلك الواجهة تشرح الخدمة كرحلة سهلة.
+            كل رسالة في الموقع مصممة لتجيب سؤالا حقيقيا: هل التصوير خاص؟ ما البكج المناسب؟
+            كيف أحجز؟ وماذا يحدث بعد إرسال الطلب؟
           </p>
-          <div className="service-grid">
+          <div className="service-grid service-grid-20x">
             {services.map((service) => {
               const Icon = service.icon;
               return (
@@ -206,33 +240,39 @@ export default function HomePage() {
               );
             })}
           </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="section-inner">
-          <span className="eyebrow">مسار الحجز</span>
-          <h2 className="section-title">من الهاشتاق إلى واتساب إلى حجز مؤكد.</h2>
-          <p className="section-copy">
-            هذا الموقع يحول الزيارات من جوجل، انستقرام، تيك توك، والروابط الحيوية إلى محادثة
-            واتساب جاهزة، ثم يحافظ على الثقة من خلال سياسة حجز واضحة.
-          </p>
-          <div className="timeline-grid">
-            {bookingSteps.map((step) => {
-              const Icon = step.icon;
+          <div className="trust-strip">
+            {trustSignals.map((signal) => {
+              const Icon = signal.icon;
               return (
-                <article className="timeline-item" key={step.title}>
-                  <Icon size={27} strokeWidth={1.7} />
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
+                <article key={signal.title}>
+                  <Icon size={20} />
+                  <strong>{signal.title}</strong>
+                  <span>{signal.detail}</span>
                 </article>
               );
             })}
           </div>
-          <div className="conversion-map" aria-label="Conversion funnel infographic">
-            {conversionFlow.map((step) => (
-              <article className="conversion-node" key={step.number}>
-                <span>{step.number}</span>
+        </div>
+      </section>
+
+      <section className="section conversion-section">
+        <div className="section-inner">
+          <span className="eyebrow">Conversion infographic</span>
+          <h2 className="section-title">المسار الجديد يحول الفضول إلى طلب حجز مرتب.</h2>
+          <div className="conversion-grid-20x">
+            {conversionFlow.map((item, index) => (
+              <article className="conversion-step" key={item.label}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{item.label}</h3>
+                <p>{item.detail}</p>
+                <b>{item.metric}</b>
+              </article>
+            ))}
+          </div>
+          <div className="timeline-grid timeline-grid-20x">
+            {bookingSteps.map((step) => (
+              <article className="timeline-item" key={step.number}>
+                <b>{step.number}</b>
                 <h3>{step.title}</h3>
                 <p>{step.detail}</p>
               </article>
@@ -241,62 +281,68 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section services-band">
+      <section className="section seo-command" id="seo-wave">
         <div className="section-inner">
-          <span className="eyebrow">إضافات وسياسة عمل</span>
-          <h2 className="section-title">وضوح السعر يقلل التردد.</h2>
-          <div className="seo-grid">
-            <div className="seo-card">
-              <CalendarCheck size={28} />
-              <h3>الإضافات</h3>
-              {extraItems.map((item) => (
-                <p key={item.name}>
-                  {item.name}: <strong>{item.price}</strong>
-                </p>
+          <span className="eyebrow">20x SEO launch command</span>
+          <h2 className="section-title">كل يوم موجة بحث ومحتوى، تبدأ من الأحساء ثم الدمام والخبر.</h2>
+          <div className="seo-grid seo-grid-20x">
+            <div className="seo-keywords-panel">
+              <Search size={28} />
+              <h3>كلمات تجارية لا كلمات عامة</h3>
+              <p>
+                نركز على نية الحجز: مصورة زواج، تصوير فيديو، خطوبة، عروس، ومدينة. كل صفحة
+                تحمل رابط واتساب بمصدر حتى نعرف ما يحول فعلا.
+              </p>
+              <div className="keyword-cloud">
+                {seoFocus.map((keyword) => (
+                  <span key={keyword}>{keyword}</span>
+                ))}
+              </div>
+            </div>
+            <div className="wave-board">
+              {topWaves.map((wave) => (
+                <article className="wave-card" key={wave.day}>
+                  <span>Day {wave.day}</span>
+                  <strong>{wave.title}</strong>
+                  <p>{wave.channel}</p>
+                  <em>{wave.goal}</em>
+                </article>
               ))}
             </div>
-            <div className="seo-card">
-              <ShieldCheck size={28} />
-              <h3>وثيقة الحجز</h3>
-              <ol className="rules-list">
-                {bookingRules.map((rule) => (
-                  <li key={rule}>{rule}</li>
-                ))}
-              </ol>
-            </div>
+          </div>
+          <div className="button-row wave-actions">
+            <Link className="cta" href="/alahsa">
+              افتحي صفحة الأحساء <ArrowLeft size={18} />
+            </Link>
+            <Link className="ghost-cta" href="/reserve">
+              رابط العروس الآن <CalendarDays size={18} />
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="section" id="seo">
+      <section className="section local-domination">
         <div className="section-inner">
-          <span className="eyebrow">SEO محلي</span>
-          <h2 className="section-title">نضرب البحث المحلي قبل المنافسين.</h2>
-          <p className="section-copy">
-            الموقع مبني ليستهدف نية البحث العالية: عروس تبحث عن مصورة فيديو نسائية قريبة، تريد
-            السعر، المناطق، واتساب، والثقة بسرعة.
-          </p>
-          <div className="area-list">
-            {serviceAreas.map((area) => (
-              <a href={`/${area.slug}`} key={area.slug}>
-                <MapPin size={15} /> {area.ar}
-              </a>
-            ))}
-          </div>
-          <div className="area-list" aria-label="SEO focus keywords">
-            {seoFocus.map((keyword) => (
-              <span key={keyword}>{keyword}</span>
-            ))}
-          </div>
-          <div className="area-strategy-grid">
-            {areaStrategy.map((area) => {
+          <span className="eyebrow">Local landing pages</span>
+          <h2 className="section-title">صفحات المدن أصبحت صفحات قرار محلية، لا نسخا مكررة.</h2>
+          <div className="area-strategy-grid area-strategy-grid-20x">
+            {areaStrategy.map((area, index) => {
               const Icon = area.icon;
+              const city = serviceAreas[index];
               return (
                 <article className="area-card" key={area.city}>
                   <Icon size={26} strokeWidth={1.6} />
                   <span>{area.angle}</span>
                   <h3>{area.city}</h3>
                   <p>{area.detail}</p>
+                  <div className="mini-keywords">
+                    {city.keywordCluster.slice(0, 3).map((keyword) => (
+                      <em key={keyword}>{keyword}</em>
+                    ))}
+                  </div>
+                  <Link href={`/${city.slug}`}>
+                    افتحي صفحة {area.city} <ArrowLeft size={15} />
+                  </Link>
                 </article>
               );
             })}
@@ -304,25 +350,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section services-band" id="highlights">
+      <section className="section highlights-section" id="highlights">
         <div className="section-inner">
-          <span className="eyebrow">هايلايت انستقرام</span>
-          <h2 className="section-title">أيقونات جديدة بنفس روح الشعار.</h2>
-          <p className="section-copy">
-            هذه المجموعة جاهزة في مجلد الموقع بصيغة SVG، وتستخدم ذهبي على أسود مع رموز واضحة
-            بدل تكرار الشعار نفسه في كل هايلايت.
-          </p>
-          <div className="highlight-grid">
-            {highlights.map((highlight) => (
-              <article className="highlight-card" key={highlight.file}>
+          <span className="eyebrow">Instagram highlight covers</span>
+          <h2 className="section-title">الهايلايت صار واجهة منظمة للحجز والثقة.</h2>
+          <div className="highlight-grid highlight-grid-20x">
+            {highlights.map((item) => (
+              <article className="highlight-card" key={item.label}>
                 <Image
-                  src={assetPath(`/highlights/${highlight.file}`)}
-                  alt={`${highlight.label} highlight cover`}
-                  width={236}
-                  height={236}
+                  src={assetPath(`/highlights/${item.file}`)}
+                  alt={`${item.label} highlight cover`}
+                  width={160}
+                  height={160}
                 />
-                <h3>{highlight.label}</h3>
-                <p>{highlight.text}</p>
+                <h3>{item.label}</h3>
+                <p>{item.text}</p>
               </article>
             ))}
           </div>
@@ -331,41 +373,30 @@ export default function HomePage() {
 
       <section className="section final-cta">
         <div className="section-inner">
-          <span className="eyebrow">جاهزة للحجز</span>
-          <h2 className="section-title">ارسلي تاريخ المناسبة، وسنقترح البكج الأنسب.</h2>
+          <span className="eyebrow">Next best action</span>
+          <h2 className="section-title">ارسلي رابط الحجز بدل PDF، وخلي الموقع يشرح قبل الرسالة.</h2>
           <p className="section-copy">
-            الموقع لا يستبدل واتساب؛ يجعله أقوى. كل زيارة تنتهي برسالة واضحة، وسؤال محدد عن
-            التوفر، ومعلومات كافية قبل إرسال الباقات.
+            العروس ترى التجربة، تختار البكج، وتصل الرسالة لصاحبة العمل بمعلومات قابلة للمتابعة.
           </p>
           <div className="button-row">
             <Link className="cta" href="/reserve">
-              <CalendarCheck size={19} />
-              رابط العروس
+              رابط العروس <Play size={18} />
             </Link>
-            <a className="ghost-cta" href={whatsappLink("final-cta")} target="_blank" rel="noreferrer">
-              <MessageCircle size={19} />
-              واتساب الحجز
-            </a>
             <a className="ghost-cta" href={instagramUrl} target="_blank" rel="noreferrer">
-              <Camera size={18} />
-              انستقرام
+              انستقرام <ExternalLink size={18} />
             </a>
           </div>
         </div>
       </section>
-
-      <footer className="footer">
-        <span>Asmaa Studio © {new Date().getFullYear()}</span>
-        <span>الأحساء · الدمام · الخبر · واتساب +966 55 160 6334</span>
-      </footer>
     </main>
   );
 }
 
 function ClockLabel({ value }: { value: string }) {
   return (
-    <span style={{ alignItems: "center", display: "inline-flex", gap: 6, marginBottom: 12 }}>
-      <CalendarCheck size={15} /> مدة التصوير: {value}
+    <span className="clock-label">
+      <CalendarDays size={15} />
+      {value}
     </span>
   );
 }

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">First Look highlight cover</title>
+  <desc id="desc">Premium black and champagne gold first look wedding moment icon.</desc>
+  <defs>
+    <radialGradient id="bg" cx="48%" cy="32%" r="76%">
+      <stop offset="0%" stop-color="#302821"/>
+      <stop offset="58%" stop-color="#111113"/>
+      <stop offset="100%" stop-color="#050506"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="250" y1="220" x2="820" y2="850">
+      <stop offset="0%" stop-color="#fff5c9"/>
+      <stop offset="45%" stop-color="#d7a84f"/>
+      <stop offset="100%" stop-color="#6d461c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <path d="M228 612c120-210 502-210 624 0" fill="none" stroke="#fff2bf" stroke-width="4" opacity=".15"/>
+  <g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M344 744c8-186 76-310 196-372 120 62 188 186 196 372" stroke-width="24"/>
+    <path d="M540 372c-24 82-20 166 0 252 20-86 24-170 0-252z" stroke-width="20"/>
+    <path d="M388 552c72 58 232 58 304 0" stroke-width="18"/>
+    <path d="M448 290c44-36 140-36 184 0" stroke-width="20"/>
+    <circle cx="540" cy="512" r="224" stroke-width="8" opacity=".42"/>
+  </g>
+  <text x="540" y="890" fill="#fff2bf" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="700">FIRST LOOK</text>
+</svg>

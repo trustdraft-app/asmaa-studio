@@ -82,6 +82,10 @@ As of 2026-05-28 05:27 +03, both `asmaavideo.com` and `www.asmaavideo.com` retur
 
 GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Pages workflow for commit `9826638` completed successfully. HTTP is live now at `http://asmaa.video`. HTTPS enforcement is pending GitHub certificate issuance; the GitHub API currently returns `The certificate does not exist yet` when enabling `https_enforced`.
 
+## Current Live Product Baseline
+
+The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage, package decision engine, city SEO pages, expanded highlight covers, `/reserve`, `/admin`, and the daily launch-wave automation.
+
 ## Security Notes
 
 - `/reserve` has a WhatsApp fallback when no backend endpoint is configured.

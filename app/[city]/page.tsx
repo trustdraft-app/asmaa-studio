@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin, MessageCircle } from "lucide-react";
+import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "lucide-react";
 import { packages, serviceAreas, whatsappLink } from "../../lib/content";
 
 type Props = {
@@ -14,11 +14,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city } = await params;
   const area = serviceAreas.find((item) => item.slug === city) ?? serviceAreas[0];
+
   return {
-    title: `تصوير فيديو زواجات في ${area.ar}`,
-    description: `Asmaa Studio تقدم تصوير فيديو نسائي للأعراس والخطوبة في ${area.ar} مع باقات واضحة ومونتاج احترافي وتواصل مباشر عبر واتساب.`,
+    title: area.metaTitle,
+    description: area.metaDescription,
     alternates: {
-      canonical: `/${area.slug}`
+      canonical: `https://asmaa.video/${area.slug}`
+    },
+    openGraph: {
+      title: area.metaTitle,
+      description: area.metaDescription,
+      url: `https://asmaa.video/${area.slug}`,
+      type: "website",
+      locale: "ar_SA"
     }
   };
 }
@@ -27,47 +35,154 @@ export default async function CityPage({ params }: Props) {
   const { city } = await params;
   const area = serviceAreas.find((item) => item.slug === city) ?? serviceAreas[0];
 
+  const cityJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: area.headline,
+    serviceType: "Female wedding videography",
+    areaServed: area.en,
+    provider: {
+      "@type": "LocalBusiness",
+      name: "Asmaa Studio",
+      url: "https://asmaa.video"
+    },
+    offers: packages.map((item) => ({
+      "@type": "Offer",
+      name: item.name,
+      price: item.price,
+      priceCurrency: "SAR",
+      description: item.summary
+    }))
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: area.faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
+
   return (
-    <main className="page-shell">
-      <section className="section">
-        <div className="section-inner">
-          <Link className="ghost-cta" href="/">
-            العودة للرئيسية
-          </Link>
-          <div style={{ marginTop: 40 }}>
-            <span className="eyebrow">
-              <MapPin size={16} /> {area.ar}
-            </span>
-            <h1 className="section-title">تصوير فيديو زواجات نسائي في {area.ar}</h1>
-            <p className="section-copy">
-              صفحة محلية مخصصة للباحثات عن مصورة فيديو زواج وخطوبة في {area.ar}. تعرض الباقات
-              الأساسية، طريقة الحجز، وزر واتساب مباشر لتأكيد التوفر حسب التاريخ.
-            </p>
+    <main className="page-shell city-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(cityJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
+      <section className="section city-hero-20x">
+        <div className="section-inner city-hero-grid">
+          <div>
+            <Link className="ghost-cta" href="/">
+              العودة للرئيسية
+            </Link>
+            <span className="eyebrow">{area.priority} / {area.en}</span>
+            <h1 className="section-title">{area.headline}</h1>
+            <p className="section-copy">{area.heroLine}</p>
+            <div className="city-intent">
+              <article>
+                <Search size={22} />
+                <strong>نية البحث</strong>
+                <span>{area.searchIntent}</span>
+              </article>
+              <article>
+                <MapPin size={22} />
+                <strong>المنطقة</strong>
+                <span>{area.neighborhoodSignals.join("، ")}</span>
+              </article>
+            </div>
             <div className="button-row" style={{ marginTop: 28 }}>
               <a className="cta" href={whatsappLink(area.slug)} target="_blank" rel="noreferrer">
-                <MessageCircle size={19} />
-                اسألي عن توفر {area.ar}
+                اسألي عن توفر {area.ar} <MessageCircle size={18} />
               </a>
+              <Link className="ghost-cta" href={`/reserve?city=${area.slug}`}>
+                رابط العروس <CalendarDays size={18} />
+              </Link>
             </div>
           </div>
 
-          <div className="packages-grid">
-            {packages.slice(0, 3).map((item) => (
-              <article className="package-card" key={item.id}>
+          <aside className="city-command-card">
+            <span>Local SEO command</span>
+            <h2>{area.ar}</h2>
+            <p>{area.localPromise}</p>
+            <div>
+              {area.keywordCluster.map((keyword) => (
+                <em key={keyword}>{keyword}</em>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-inner">
+          <span className="eyebrow">اختيار الباقة في {area.ar}</span>
+          <h2 className="section-title">الباقة المناسبة حسب لحظات المناسبة، لا حسب السعر فقط.</h2>
+          <div className="packages-grid packages-grid-20x">
+            {packages.map((item) => (
+              <article className={`package-card package-card-20x ${item.featured ? "featured" : ""}`} key={item.id}>
                 <header>
                   <small>بكج {item.id}</small>
-                  <h2>{item.name}</h2>
+                  <h3>{item.name}</h3>
                   <p className="price">{item.price} ريال</p>
                 </header>
-                <ul>
-                  <li>{item.summary}</li>
-                  <li>مدة التصوير: {item.duration}</li>
-                </ul>
-                <footer>
-                  <a href={whatsappLink(`${area.slug}-package-${item.id}`)} target="_blank" rel="noreferrer">
-                    واتساب البكج
-                  </a>
-                </footer>
+                <p>{item.summary}</p>
+                <div className="package-best">
+                  <strong>لماذا يهم في {area.ar}</strong>
+                  <span>{item.bestFor}</span>
+                </div>
+                <div className="package-sequence">
+                  {item.sequence.map((step) => (
+                    <span key={step}>{step}</span>
+                  ))}
+                </div>
+                <a href={whatsappLink(`${area.slug}-package-${item.id}`)} target="_blank" rel="noreferrer">
+                  اسألي عن هذا البكج <ArrowLeft size={16} />
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section city-proof-section">
+        <div className="section-inner city-proof-grid">
+          <article>
+            <span className="eyebrow">Local proof</span>
+            <h2>{area.cityProof}</h2>
+            <p>{area.audience}</p>
+          </article>
+          <article>
+            <span className="eyebrow">Daily content wave</span>
+            <div className="city-wave-list">
+              {area.contentWave.map((item) => (
+                <p key={item}>
+                  <Check size={16} /> {item}
+                </p>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="section faq-section">
+        <div className="section-inner">
+          <span className="eyebrow">أسئلة {area.ar}</span>
+          <h2 className="section-title">إجابات قصيرة تقلل تردد العروس قبل واتساب.</h2>
+          <div className="faq-grid">
+            {area.faq.map((item) => (
+              <article key={item.question}>
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
               </article>
             ))}
           </div>

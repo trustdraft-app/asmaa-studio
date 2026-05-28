@@ -67,6 +67,16 @@ Asmaa Studio ⚜️
 - Review weekly: impressions, clicks, WhatsApp conversations, booked dates, and booking source.
 - Keep one canonical phone number and domain across all platforms.
 
+## 20x Daily Launch Wave
+
+The live site now exposes the first 8 waves on the homepage and keeps the full 20-wave operating model in `lib/content.ts` as `seoLaunchWaves`.
+
+- Daily automation: `asmaa-daily-seo-launch-wave`
+- Schedule: every day at 09:00
+- Rule: ship a real website/content/conversion improvement first; documentation is secondary evidence only.
+- City order: الأحساء first, الدمام second, الخبر third.
+- Measurement: every wave must preserve source-tagged WhatsApp links and verify `asmaa.video` after deploy.
+
 ## Research Notes
 
 - DataReportal's Digital 2026 Saudi Arabia report shows Instagram and TikTok remain major discovery channels in Saudi Arabia, supporting the decision to keep social-first creative while adding search capture.
