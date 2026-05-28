@@ -14,4 +14,4 @@ Primary conversion: WhatsApp message to `+966 55 160 6334`.
 
 Brand direction: rename customer-facing product from Asmaa Video to Asmaa Studio while keeping `asmaa.video` as the memorable domain.
 
-Implementation direction: static/SEO-first Next.js website with direct WhatsApp CTAs, no database, no customer form, and no AI API dependency in the first launch.
+Implementation direction: static/SEO-first Next.js website with direct WhatsApp CTAs. Current phase adds a bride-facing reservation link and owner admin dashboard with Supabase Edge Function persistence as the secure activation path; WhatsApp fallback remains live while backend credentials are unavailable.

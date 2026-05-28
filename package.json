@@ -11,17 +11,23 @@
   },
   "dependencies": {
     "@next/third-parties": "latest",
+    "@supabase/supabase-js": "^2.106.2",
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "playwright": "^1.60.0",
     "typescript": "latest"
+  },
+  "overrides": {
+    "postcss": "8.5.10"
   }
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowLeft,
   CalendarCheck,
@@ -61,6 +62,7 @@ export default function HomePage() {
           </a>
           <div className="nav-links">
             <a href="#packages">الباقات</a>
+            <Link href="/reserve">رابط العروس</Link>
             <a href="#experience">التجربة</a>
             <a href="#highlights">هايلايت</a>
             <a href={whatsappLink("nav")} target="_blank" rel="noreferrer">
@@ -84,10 +86,10 @@ export default function HomePage() {
                 <MessageCircle size={19} />
                 احجزي عبر واتساب
               </a>
-              <a className="ghost-cta" href="#packages">
+              <Link className="ghost-cta" href="/reserve">
                 <Play size={18} />
-                شاهدي الباقات
-              </a>
+                افتحي رابط العروس
+              </Link>
             </div>
             <div className="hero-proof" aria-label="Business highlights">
               {boardScore.map((item) => (
@@ -336,7 +338,11 @@ export default function HomePage() {
             التوفر، ومعلومات كافية قبل إرسال الباقات.
           </p>
           <div className="button-row">
-            <a className="cta" href={whatsappLink("final-cta")} target="_blank" rel="noreferrer">
+            <Link className="cta" href="/reserve">
+              <CalendarCheck size={19} />
+              رابط العروس
+            </Link>
+            <a className="ghost-cta" href={whatsappLink("final-cta")} target="_blank" rel="noreferrer">
               <MessageCircle size={19} />
               واتساب الحجز
             </a>

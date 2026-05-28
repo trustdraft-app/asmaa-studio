@@ -22,7 +22,11 @@ This is live now because GitHub authentication was available. Vercel and Cloudfl
 - Build command: `npm run build`
 - Install command: `npm install`
 - Output directory: managed by Next.js
-- Environment variables: none required for v1
+- Environment variables for static marketing pages: none required
+- Environment variables for live reservations:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+  - `NEXT_PUBLIC_RESERVATION_ENDPOINT`
 
 ## DNS Plan
 
@@ -50,7 +54,10 @@ Current public DNS still points both domains at Namecheap parking nameservers/pa
 
 ## Security Notes
 
-- v1 has no contact form, database, payments, auth, or API writes.
-- All conversion is outbound WhatsApp.
+- `/reserve` has a WhatsApp fallback when no backend endpoint is configured.
+- Live reservation persistence must use the Supabase Edge Function in `supabase/functions/submit-reservation`; do not enable direct anonymous table inserts from the browser.
+- `/admin` is noindex and requires Supabase Auth plus the `reservation_admins` allowlist when Supabase is configured.
 - Security headers are configured in `vercel.json`.
-- If a form or AI chat is added later, add origin checks, body limits, rate limits, PII-minimized logs, and server-side validation before launch.
+- The Edge Function applies origin checks, body limits, rate limits, no-store responses, and server-side validation before persistence.
+
+See `docs/reservation-system.md` for the exact activation steps.
