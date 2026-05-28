@@ -100,3 +100,11 @@
 - Scanned the useful local/GitHub portfolio repos for reusable Asmaa patterns: Fattourh, ScanAbility, HalalCrypto, Sawgly, and Founder Command Center.
 - Applied the useful pieces directly: `public/llms.txt`, `npm run verify:launch`, FAQ static-script pruning, and neutral admin-team copy.
 - Documented the repo reuse audit in `docs/repo-reuse-audit.md` and kept heavier dashboard/deployment patterns out of scope.
+
+## 2026-05-28 15:05 +03
+
+- Checked live DNS and GitHub Pages health for `asmaa.video`, `www.asmaa.video`, and `asmaavideo.com`.
+- Confirmed `asmaa.video` apex resolves to the four GitHub Pages IPs and `www.asmaa.video` CNAME points to `trustdraft-app.github.io`.
+- Confirmed GitHub Pages marks the domain valid, unproxied, served by Pages, and HTTPS-eligible, but the certificate is still not issued.
+- Tried to enable/refresh HTTPS through the GitHub Pages API; GitHub still returns `The certificate does not exist yet`.
+- Kept Cloudflare proxy/DNS migration on hold because the current unproxied Namecheap DNS is the correct state for GitHub certificate issuance.

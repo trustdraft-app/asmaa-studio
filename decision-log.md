@@ -89,3 +89,9 @@
 **Decision:** Import the useful operating patterns only: Fattourh-style answer-engine indexing, ScanAbility-style Playwright/axe checks, and HalalCrypto-style static/deploy proof.
 **Reasoning:** These raise launch quality and catch the exact mobile/copy/performance failures already seen, without importing unrelated dashboard or deployment complexity.
 **Source:** Repo scan of `fattourh`, `scanability`, `halalcrypto`, `sawgly`, and `founder-command-center`; professional judgment.
+
+## 2026-05-28 15:05 +03 — Asmaa Studio
+**Question:** Should the domain be moved through Cloudflare now because Namecheap and Cloudflare are logged in?
+**Decision:** No Cloudflare DNS/proxy change yet; keep `asmaa.video` unproxied on the current GitHub Pages records until GitHub issues the Pages certificate.
+**Reasoning:** GitHub Pages health reports the apex and `www` records are valid, unproxied, served by Pages, and HTTPS-eligible; changing to Cloudflare proxy now can hide the GitHub records and delay certificate issuance.
+**Source:** GitHub Pages health API, live DNS checks, professional judgment.
