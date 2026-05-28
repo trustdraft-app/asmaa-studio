@@ -15,7 +15,7 @@
 - Deployment workflow: `.github/workflows/deploy-pages.yml`
 - Build mode: static export with `GITHUB_PAGES=true`, `GITHUB_PAGES_CUSTOM_DOMAIN=true`, and empty `NEXT_PUBLIC_BASE_PATH`
 - Custom domain: `asmaa.video`
-- Support domain: `asmaavideo.com` redirects to `https://asmaa.video`
+- Support domain: `asmaavideo.com` redirects to `http://asmaa.video` until the GitHub Pages certificate is issued
 
 This is live now because GitHub authentication was available. Vercel and Cloudflare CLI sessions were not authenticated in this environment.
 
@@ -70,17 +70,17 @@ www  CNAME  trustdraft-app.github.io
 For `asmaavideo.com`, use Namecheap URL Redirect Record to:
 
 ```text
-@    URL Redirect  https://asmaa.video
-www  URL Redirect  https://asmaa.video
+@    URL Redirect  http://asmaa.video
+www  URL Redirect  http://asmaa.video
 ```
 
 If URL Redirect is unavailable, point `asmaavideo.com` to the same GitHub Pages records only after creating a separate redirect host. GitHub Pages supports one primary custom domain for this repo, so the clean support-domain behavior is redirecting `asmaavideo.com` to `asmaa.video`.
 
-As of 2026-05-28 04:35 +03, both `asmaavideo.com` and `www.asmaavideo.com` return `302` redirects to `https://asmaa.video` through Namecheap URL Forwarding.
+As of 2026-05-28 05:27 +03, both `asmaavideo.com` and `www.asmaavideo.com` return `302` redirects to `http://asmaa.video` through Namecheap URL Forwarding.
 
 ## HTTPS Status
 
-GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Pages workflow for commit `62fb3f1` completed successfully. HTTP is live now at `http://asmaa.video`. HTTPS enforcement is pending GitHub certificate issuance; the GitHub API currently returns `The certificate does not exist yet` when enabling `https_enforced`.
+GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Pages workflow for commit `9826638` completed successfully. HTTP is live now at `http://asmaa.video`. HTTPS enforcement is pending GitHub certificate issuance; the GitHub API currently returns `The certificate does not exist yet` when enabling `https_enforced`.
 
 ## Security Notes
 

@@ -8,6 +8,6 @@
 
 ## 2026-05-28 — Asmaa Studio
 **Question:** Which domain should be canonical for the live site?
-**Decision:** Use `asmaa.video` as the GitHub Pages custom domain and redirect `asmaavideo.com` to `https://asmaa.video`.
-**Reasoning:** One canonical domain avoids splitting SEO authority, and `asmaa.video` is shorter and aligned with the service category.
+**Decision:** Use `asmaa.video` as the GitHub Pages custom domain and temporarily redirect `asmaavideo.com` to `http://asmaa.video` until the GitHub Pages certificate is issued.
+**Reasoning:** One canonical domain avoids splitting SEO authority, and the temporary HTTP target avoids sending support-domain visitors into a certificate mismatch while GitHub prepares HTTPS.
 **Source:** User instruction, project `.agent/decisions.md`, professional judgment.

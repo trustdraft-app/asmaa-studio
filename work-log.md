@@ -13,6 +13,6 @@
 - Reconfigured the GitHub Pages export for the real custom domain `asmaa.video` instead of the temporary `/asmaa-studio` subpath.
 - Added `public/CNAME` for GitHub Pages custom-domain publication.
 - Updated Namecheap DNS for `asmaa.video` to the four GitHub Pages A records and `www` CNAME.
-- Updated Namecheap DNS for `asmaavideo.com` with root and `www` URL redirects to `https://asmaa.video`.
-- Verified GitHub Pages workflow success for commit `62fb3f1`, `http://asmaa.video` returning `200`, and `asmaavideo.com`/`www.asmaavideo.com` returning `302` redirects.
+- Updated Namecheap DNS for `asmaavideo.com` with root and `www` URL redirects to `http://asmaa.video` while the GitHub Pages HTTPS certificate is pending.
+- Verified GitHub Pages workflow success for commit `9826638`, `http://asmaa.video` returning `200`, and `asmaavideo.com`/`www.asmaavideo.com` returning `302` redirects to `http://asmaa.video`.
 - HTTPS enforcement is still waiting on GitHub Pages certificate issuance.
