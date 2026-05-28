@@ -41,3 +41,9 @@
 **Decision:** Reframe the live copy around emotion, elegance, clear package choice, family ease, and local relevance while removing visible privacy phrasing and internal growth/SEO/Admin language from the customer journey.
 **Reasoning:** Brides buy the memory and feeling first, while sisters/aunts reduce uncertainty through simple package and date clarity; defensive wording weakens that feeling.
 **Source:** User instruction, growth-and-offer playbook, live page review, professional judgment.
+
+## 2026-05-28 07:16 +03 — Asmaa Studio
+**Question:** Which third-party audit findings should be fixed immediately?
+**Decision:** Fix all clear, code-owned issues found in the pass: city query preselection, date guard, package accessibility state, Arabic accessibility labels, customer-friendly WhatsApp source labels, admin phone normalization, hero text spacing, and highlight alt text.
+**Reasoning:** These issues directly affect booking clarity, accessibility, and owner follow-up reliability without requiring brand, legal, or money decisions.
+**Source:** User instruction, live audit scripts, Playwright/axe checks, professional judgment.

@@ -57,7 +57,7 @@ export default function HomePage() {
       />
 
       <section className="hero hero-20x" id="top">
-        <nav className="nav" aria-label="Primary">
+        <nav className="nav" aria-label="التنقل الرئيسي">
           <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
             <span className="brand-mark" aria-hidden="true">
               <span>A</span>
@@ -79,6 +79,7 @@ export default function HomePage() {
             <span className="eyebrow">تصوير زواجات وخطوبة نسائي في الشرقية</span>
             <h1>
               فيلم زفاف يليق بلحظة العروس، لا مجرد فيديو للمناسبة.
+              {" "}
               <span>أسلوب هادئ، تفاصيل أنيقة، وباقات واضحة من أول زيارة.</span>
             </h1>
             <p className="hero-copy">
@@ -94,7 +95,7 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="hero-proof" aria-label="Business highlights">
+            <div className="hero-proof" aria-label="نقاط تميز الخدمة">
               {boardScore.map((item) => (
                 <div className="proof-chip" key={item.label}>
                   <b>{item.value}</b>
@@ -440,7 +441,7 @@ export default function HomePage() {
               <article className="highlight-card" key={item.label}>
                 <Image
                   src={assetPath(`/highlights/${item.file}`)}
-                  alt={`${item.label} highlight cover`}
+                  alt={`غلاف هايلايت ${item.text}`}
                   width={160}
                   height={160}
                 />

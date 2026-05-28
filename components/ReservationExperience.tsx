@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -33,6 +33,15 @@ const steps = [
   { title: "التأكيد", text: "تفاصيل جاهزة للمتابعة" }
 ];
 
+const cityFromQuery: Record<string, string> = {
+  alahsa: "الأحساء",
+  dammam: "الدمام",
+  khobar: "الخبر",
+  "الأحساء": "الأحساء",
+  "الدمام": "الدمام",
+  "الخبر": "الخبر"
+};
+
 export function ReservationExperience() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<ReservationInput>(defaultReservation);
@@ -40,9 +49,22 @@ export function ReservationExperience() {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
   const selectedPackage = useMemo(() => reservationPackage(form.packageId), [form.packageId]);
+  const minEventDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
   const errors = validateReservation(form);
   const hasErrors = Object.keys(errors).length > 0;
   const endpoint = reservationEndpoint();
+
+  useEffect(() => {
+    const requestedCity = new URLSearchParams(window.location.search).get("city");
+    const city = requestedCity ? cityFromQuery[requestedCity] : "";
+    if (!city) return;
+
+    const timeout = window.setTimeout(() => {
+      setForm((current) => (current.city === city ? current : { ...current, city }));
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
+  }, []);
 
   const update = <Key extends keyof ReservationInput>(key: Key, value: ReservationInput[Key]) => {
     setForm((current) => ({ ...current, [key]: value }));
@@ -94,7 +116,7 @@ export function ReservationExperience() {
 
   return (
     <main className="page-shell reserve-page" dir="rtl">
-      <nav className="nav reserve-nav" aria-label="Reservation navigation">
+      <nav className="nav reserve-nav" aria-label="تنقل رابط العروس">
         <Link className="brand-lockup" href="/">
           <span className="brand-mark" aria-hidden="true">
             <span>AS</span>
@@ -118,7 +140,7 @@ export function ReservationExperience() {
             شاهدي الباقات حسب لحظات المناسبة: الزفة، تفاصيل العروس، First Look، أو اليوم الكامل.
             اكتبي التاريخ والمدينة والقاعة، ثم نكمل المتابعة عبر واتساب.
           </p>
-          <div className="trust-strip" aria-label="Trust points">
+          <div className="trust-strip" aria-label="نقاط مساعدة قبل الحجز">
             <span>
               <Sparkles size={18} /> تصوير نسائي
             </span>
@@ -131,8 +153,8 @@ export function ReservationExperience() {
           </div>
         </div>
 
-        <div className="reserve-card" aria-label="Bride reservation form">
-          <div className="stepper" aria-label="Reservation progress">
+        <div className="reserve-card" aria-label="نموذج حجز العروس">
+          <div className="stepper" aria-label="خطوات الحجز">
             {steps.map((item, index) => (
               <button
                 aria-current={step === index ? "step" : undefined}
@@ -177,6 +199,7 @@ export function ReservationExperience() {
                 </Field>
                 <Field label="تاريخ المناسبة" error={touched ? errors.eventDate : undefined}>
                   <input
+                    min={minEventDate}
                     type="date"
                     value={form.eventDate}
                     onChange={(event) => update("eventDate", event.target.value)}
@@ -204,6 +227,8 @@ export function ReservationExperience() {
             <div className="package-picker">
               {packages.map((item) => (
                 <button
+                  aria-label={`اختيار ${item.name} بسعر ${item.price} ريال لمدة ${item.duration}`}
+                  aria-pressed={form.packageId === item.id}
                   className={form.packageId === item.id ? "selected" : ""}
                   key={item.id}
                   onClick={() => update("packageId", item.id)}
@@ -305,7 +330,7 @@ export function ReservationExperience() {
         </div>
       </section>
 
-      <section className="reserve-infographic" aria-label="Reservation explanation">
+      <section className="reserve-infographic" aria-label="شرح طريقة الحجز">
         <article>
           <Video size={28} />
           <h2>الاختيار أمامك</h2>

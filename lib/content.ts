@@ -31,9 +31,30 @@ const publicBasePath =
 
 export const assetPath = (path: string) => `${publicBasePath}${path}`;
 
+const citySourceLabels: Record<string, string> = {
+  alahsa: "صفحة الأحساء",
+  dammam: "صفحة الدمام",
+  khobar: "صفحة الخبر"
+};
+
+function readableWhatsappSource(source: string) {
+  if (source === "home-hero") return "الصفحة الرئيسية";
+  if (source === "reserve-nav") return "رابط العروس";
+  if (source === "admin-dashboard") return "لوحة المواعيد";
+  if (citySourceLabels[source]) return citySourceLabels[source];
+
+  const packageMatch = source.match(/^package-(\d+)$/);
+  if (packageMatch) return `باقة ${packageMatch[1]}`;
+
+  const cityPackageMatch = source.match(/^(alahsa|dammam|khobar)-package-(\d+)$/);
+  if (cityPackageMatch) return `${citySourceLabels[cityPackageMatch[1]]} - باقة ${cityPackageMatch[2]}`;
+
+  return "الموقع";
+}
+
 export const whatsappLink = (source = "website") =>
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    `السلام عليكم، وصلتكم من موقع Asmaa Studio (${source}) وأرغب بمعرفة التوفر واختيار الباقة المناسبة.`
+    `السلام عليكم، وصلتكم من ${readableWhatsappSource(source)} في Asmaa Studio وأرغب بمعرفة التوفر واختيار الباقة المناسبة.`
   )}`;
 
 export type CityFaq = {

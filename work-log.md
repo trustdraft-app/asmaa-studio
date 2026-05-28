@@ -47,3 +47,10 @@
 - Rewrote the live website copy with an Arabic-first wedding buyer psychology lens: bride emotion, family reassurance, clear package choice, and easy WhatsApp follow-up.
 - Removed visible internal/agency language from the customer journey, including SEO/Admin/growth-system phrasing and privacy-style wording that could sound defensive.
 - Updated homepage, city pages, reservation link, admin setup copy, and content model so the site sells the desired memory before the operational system.
+
+## 2026-05-28 07:16 +03
+
+- Ran a third-party-style audit across conversion copy, reservation UX, WhatsApp links, accessibility labels, export links, dependency audit, and mobile/desktop render behavior.
+- Fixed city-specific reservation links so `/reserve?city=dammam` and `/reserve?city=khobar` preselect the correct city.
+- Added a minimum event date, accessible package selected states, Arabic aria labels, Arabic highlight alt text, readable WhatsApp source labels, normalized admin WhatsApp phone numbers, and a clean text pause in the hero headline.
+- Verification passed: lint, typecheck, GitHub Pages export build, internal export link audit, production dependency audit, Playwright mobile/desktop route audit, and axe smoke check on `/reserve`.

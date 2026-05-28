@@ -19,6 +19,7 @@ import {
 import { whatsappLink } from "../lib/content";
 import {
   adminConfigReady,
+  normalizePhone,
   reservationPackage,
   reservationStatuses,
   type ReservationRecord,
@@ -112,10 +113,11 @@ export function AdminDashboard() {
   const metrics = useMemo(() => buildMetrics(reservations), [reservations]);
 
   const signIn = async () => {
-    if (!supabase || !email) return;
+    const ownerEmail = email.trim().toLowerCase();
+    if (!supabase || !ownerEmail) return;
     setSendingLink(true);
     const { error } = await supabase.auth.signInWithOtp({
-      email,
+      email: ownerEmail,
       options: { emailRedirectTo: window.location.href }
     });
     setSendingLink(false);
@@ -165,7 +167,7 @@ export function AdminDashboard() {
                 value={email}
               />
             </label>
-            <button className="cta" disabled={sendingLink || !email} onClick={signIn} type="button">
+            <button className="cta" disabled={sendingLink || !email.trim()} onClick={signIn} type="button">
               {sendingLink ? <Loader2 className="spin" size={18} /> : <ShieldCheck size={18} />}
               أرسلي رابط الدخول
             </button>
@@ -178,7 +180,7 @@ export function AdminDashboard() {
 
   return (
     <main className="page-shell admin-page" dir="rtl">
-      <nav className="nav reserve-nav" aria-label="Admin navigation">
+      <nav className="nav reserve-nav" aria-label="تنقل لوحة الحجوزات">
         <Link className="brand-lockup" href="/">
           <span className="brand-mark" aria-hidden="true">
             <span>AS</span>
@@ -210,7 +212,7 @@ export function AdminDashboard() {
         </a>
       </section>
 
-      <section className="metric-grid" aria-label="Reservation metrics">
+      <section className="metric-grid" aria-label="مؤشرات الحجوزات">
         <Metric icon={Sparkles} label="طلبات جديدة" value={metrics.newCount} />
         <Metric icon={CalendarCheck} label="حجوزات قادمة" value={metrics.upcomingCount} />
         <Metric icon={CheckCircle2} label="مؤكد أو عربون" value={metrics.confirmedCount} />
@@ -391,6 +393,11 @@ function buildMetrics(reservations: ReservationRecord[]) {
 }
 
 function whatsappForReservation(reservation: ReservationRecord) {
+  const normalizedPhone = normalizePhone(reservation.phone);
+  const whatsappPhone = normalizedPhone
+    .replace(/^\+/, "")
+    .replace(/^05/, "9665")
+    .replace(/^5/, "9665");
   const text = [
     `السلام عليكم ${reservation.brideName}`,
     "معك Asmaa Studio بخصوص طلب الحجز:",
@@ -399,5 +406,5 @@ function whatsappForReservation(reservation: ReservationRecord) {
     "نؤكد لك التوفر والخطوة التالية."
   ].join("\n");
 
-  return `https://wa.me/${reservation.phone.replace(/[^\d]/g, "")}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(text)}`;
 }
