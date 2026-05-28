@@ -307,6 +307,12 @@
   gap: 10px;
 }
 
+.wave-board-full {
+  max-height: 760px;
+  overflow: auto;
+  padding-inline-end: 6px;
+}
+
 .wave-card {
   padding: 16px;
 }
@@ -329,6 +335,115 @@
 
 .area-strategy-grid-20x {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.live-findings {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(232, 197, 124, 0.1), transparent 34%),
+    rgba(255, 255, 255, 0.014);
+}
+
+.profile-grid,
+.channel-grid,
+.hashtag-grid,
+.pillar-grid,
+.board-lever-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.profile-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 16px;
+}
+
+.channel-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.hashtag-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 16px;
+}
+
+.pillar-grid,
+.board-lever-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.profile-card,
+.channel-card,
+.hashtag-card,
+.pillar-card,
+.board-lever-card {
+  border: 1px solid rgba(232, 197, 124, 0.16);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)),
+    rgba(9, 9, 11, 0.72);
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+}
+
+.profile-card span,
+.channel-card span {
+  color: #e8c57c;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.profile-card h3,
+.channel-card h3,
+.hashtag-card h3,
+.pillar-card h3,
+.board-lever-card h3 {
+  color: #fff6df;
+  margin: 8px 0 10px;
+}
+
+.copy-lines {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(232, 197, 124, 0.06);
+}
+
+.copy-lines p,
+.channel-card p,
+.pillar-card p,
+.board-lever-card p,
+.profile-card em {
+  color: rgba(255, 246, 223, 0.72);
+  line-height: 1.8;
+}
+
+.profile-card em {
+  display: block;
+  margin-top: 12px;
+  font-style: normal;
+}
+
+.hashtag-card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hashtag-card span {
+  display: inline-flex;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(232, 197, 124, 0.08);
+  color: rgba(255, 246, 223, 0.82);
+  font-size: 0.76rem;
+}
+
+.board-live {
+  background:
+    radial-gradient(circle at 82% 0%, rgba(232, 197, 124, 0.1), transparent 30%),
+    rgba(255, 255, 255, 0.012);
 }
 
 .area-card {
@@ -461,11 +576,21 @@
   .timeline-grid-20x,
   .wave-board,
   .area-strategy-grid-20x,
+  .profile-grid,
+  .channel-grid,
+  .hashtag-grid,
+  .pillar-grid,
+  .board-lever-grid,
   .city-hero-grid,
   .city-intent,
   .city-proof-grid,
   .faq-grid {
     grid-template-columns: 1fr;
+  }
+
+  .wave-board-full {
+    max-height: none;
+    overflow: visible;
   }
 
   .packages-grid-20x {

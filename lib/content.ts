@@ -309,6 +309,79 @@ export const seoFocus = [
   "باقات تصوير فيديو زواج"
 ];
 
+export const profileAssets = [
+  {
+    channel: "Instagram",
+    title: "Bio مباشر",
+    lines: [
+      "مصورة فيديو للأعراس والخطوبة ⚜️",
+      "تجربة هادئة للعروس | الأحساء، الدمام، الخبر",
+      "الباقات والحجز عبر الرابط 👇"
+    ],
+    action: "ضع asmaa.video كرابط وحيد ثم ثبت Reel، Packages، Booking."
+  },
+  {
+    channel: "TikTok",
+    title: "Bio مختصر",
+    lines: [
+      "Asmaa Studio ⚜️",
+      "تصوير فيديو زواجات وخطوبة",
+      "الأحساء | الدمام | الخبر",
+      "للحجز والباقات عبر واتساب"
+    ],
+    action: "استخدم نفس رابط الموقع حتى لا تتشتت مصادر الحجز."
+  },
+  {
+    channel: "WhatsApp Business",
+    title: "رد البداية",
+    lines: [
+      "أهلا، اختاري المدينة والتاريخ والبكج من الرابط.",
+      "بعدها نراجع التوفر ونكمل التفاصيل هنا."
+    ],
+    action: "استبدل PDF القديم برابط /reserve في أول رد."
+  }
+];
+
+export const hashtagSets = [
+  {
+    city: "الأحساء",
+    tags: ["#تصوير_زواجات_الأحساء", "#مصورة_الأحساء", "#عروس_الأحساء", "#زواجات_الأحساء", "#تصوير_زفة", "#مصورة_عرايس"]
+  },
+  {
+    city: "الدمام",
+    tags: ["#مصورة_الدمام", "#تصوير_زواجات_الدمام", "#عروس_الدمام", "#زواجات_الشرقية", "#تصوير_خطوبة", "#تصوير_نسائي"]
+  },
+  {
+    city: "الخبر",
+    tags: ["#مصورة_الخبر", "#تصوير_زواجات_الخبر", "#عروس_الخبر", "#خطوبة_الخبر", "#زواجات_الخبر", "#تصوير_فيديو_زواج"]
+  }
+];
+
+export const channelActions = [
+  { label: "Search Console", task: "إرسال sitemap.xml ومراقبة صفحات المدن.", status: "جاهز الآن" },
+  { label: "Google Business", task: "توحيد الرقم والموقع ومناطق الخدمة ثم نشر تحديث أسبوعي.", status: "إشارة محلية" },
+  { label: "Instagram", task: "تغيير الاسم الظاهر إلى Asmaa Studio | أسماء ستوديو وتثبيت 3 منشورات.", status: "واجهة الثقة" },
+  { label: "TikTok", task: "استخدام نفس الرابط ونشر مقاطع قصيرة تقود إلى /reserve.", status: "اكتشاف سريع" },
+  { label: "WhatsApp", task: "إرسال رابط العروس بدل PDF في أول رسالة.", status: "تحويل مباشر" },
+  { label: "Citations", task: "إضافة بيانات موحدة في أدلة الزواجات والموردين المحليين.", status: "بناء سلطة" }
+];
+
+export const contentPillars = [
+  { title: "تفاصيل العروس", detail: "الفستان، الخواتم، المسكة، العطر، الكوشة، وتفاصيل القاعة." },
+  { title: "لحظات الإحساس", detail: "First Look، الدخول، وفرحة العائلة بصياغة هادئة." },
+  { title: "اختيار البكج", detail: "شرح الفرق بين الزفة، Royal Event، Full Day، وبكج الخطوبة." },
+  { title: "تجهيز اليوم", detail: "ماذا تجهز العروس قبل التصوير وكيف تختصر وقت الأسئلة." },
+  { title: "نية محلية", detail: "الأحساء، الدمام، الخبر، والموسم بدون ادعاء ارتباط بأي قاعة." }
+];
+
+export const boardLevers = [
+  { title: "Local SEO", detail: "صفحات مدن منفصلة وكلمات عربية تجارية لا عبارات عامة." },
+  { title: "WhatsApp-first", detail: "كل CTA يفتح محادثة بمصدر واضح بدلا من PDF مبهم." },
+  { title: "Highlights", detail: "هايلايت مرتب يجيب اعتراضات الشراء: Album، Packages، Booking، Details." },
+  { title: "Package story", detail: "البيع حسب لحظات اليوم والنتيجة المتوقعة لا حسب السعر فقط." },
+  { title: "One brand language", detail: "Asmaa Studio، نفس الرقم، نفس الرابط، ونفس الوعد في كل قناة." }
+];
+
 export const areaStrategy: { icon: LucideIcon; city: string; angle: string; detail: string }[] =
   serviceAreas.map((area, index) => ({
     icon: [MapPinned, Sparkles, ShieldCheck][index] ?? MapPinned,

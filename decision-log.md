@@ -23,3 +23,9 @@
 **Decision:** Remove repeated explicit privacy framing and express trust indirectly through calm execution, suitable style, family comfort, clear packages, and elegant workflow language.
 **Reasoning:** Over-explaining an obvious expectation can trigger doubt; premium service copy should make the buyer feel comfortable without sounding defensive.
 **Source:** User feedback, live copy review, professional judgment.
+
+## 2026-05-28 06:31 +03 — Asmaa Studio
+**Question:** How should all remaining strategic findings be made live instead of remaining in documentation?
+**Decision:** Add live homepage sections for the full 20-wave plan, profile copy, hashtags, channel actions, content pillars, and board growth levers.
+**Reasoning:** The user explicitly requested all findings live, so the website must become the operating surface rather than pointing to docs.
+**Source:** User instruction, docs findings, project files, professional judgment.

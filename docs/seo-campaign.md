@@ -69,7 +69,7 @@ Asmaa Studio ⚜️
 
 ## 20x Daily Launch Wave
 
-The live site now exposes the first 8 waves on the homepage and keeps the full 20-wave operating model in `lib/content.ts` as `seoLaunchWaves`.
+The live site now exposes all 20 waves on the homepage and keeps the full 20-wave operating model in `lib/content.ts` as `seoLaunchWaves`.
 
 - Daily automation: `asmaa-daily-seo-launch-wave`
 - Schedule: every day at 09:00

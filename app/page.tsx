@@ -5,13 +5,18 @@ import {
   areaStrategy,
   assetPath,
   boardScore,
+  boardLevers,
   bookingSteps,
+  channelActions,
   cinematicMoments,
+  contentPillars,
   conversionFlow,
+  hashtagSets,
   highlights,
   instagramUrl,
   liveOperatingSystem,
   packages,
+  profileAssets,
   seoFocus,
   seoLaunchWaves,
   serviceAreas,
@@ -43,8 +48,6 @@ const jsonLd = {
   serviceType: "Female wedding videography"
 };
 
-const topWaves = seoLaunchWaves.slice(0, 8);
-
 export default function HomePage() {
   return (
     <main className="page-shell">
@@ -65,6 +68,7 @@ export default function HomePage() {
           <div className="nav-links">
             <a href="#packages">الباقات</a>
             <a href="#seo-wave">SEO</a>
+            <a href="#social-assets">Social</a>
             <Link href="/reserve">رابط العروس</Link>
             <Link href="/admin">Admin</Link>
           </div>
@@ -299,8 +303,8 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="wave-board">
-              {topWaves.map((wave) => (
+            <div className="wave-board wave-board-full">
+              {seoLaunchWaves.map((wave) => (
                 <article className="wave-card" key={wave.day}>
                   <span>Day {wave.day}</span>
                   <strong>{wave.title}</strong>
@@ -317,6 +321,84 @@ export default function HomePage() {
             <Link className="ghost-cta" href="/reserve">
               رابط العروس الآن <CalendarDays size={18} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section live-findings" id="social-assets">
+        <div className="section-inner">
+          <span className="eyebrow">All findings live</span>
+          <h2 className="section-title">البايو، الهاشتاقات، القنوات، والمحتوى أصبحت على الموقع.</h2>
+          <p className="section-copy">
+            أي شيء كان في الخطة صار هنا كأصل تشغيلي مباشر: تنسخه صاحبة العمل، تستخدمه في
+            الحسابات، ويرجع العميل للرابط بدل ملف PDF.
+          </p>
+
+          <div className="profile-grid">
+            {profileAssets.map((asset) => (
+              <article className="profile-card" key={asset.channel}>
+                <span>{asset.channel}</span>
+                <h3>{asset.title}</h3>
+                <div className="copy-lines">
+                  {asset.lines.map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
+                </div>
+                <em>{asset.action}</em>
+              </article>
+            ))}
+          </div>
+
+          <div className="channel-grid">
+            {channelActions.map((item) => (
+              <article className="channel-card" key={item.label}>
+                <span>{item.status}</span>
+                <h3>{item.label}</h3>
+                <p>{item.task}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section hashtag-command">
+        <div className="section-inner">
+          <span className="eyebrow">Hashtag and content engine</span>
+          <h2 className="section-title">كل مدينة لها مجموعة نشر، وكل أسبوع له زاوية محتوى.</h2>
+          <div className="hashtag-grid">
+            {hashtagSets.map((set) => (
+              <article className="hashtag-card" key={set.city}>
+                <h3>{set.city}</h3>
+                <div>
+                  {set.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="pillar-grid">
+            {contentPillars.map((pillar) => (
+              <article className="pillar-card" key={pillar.title}>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section board-live">
+        <div className="section-inner">
+          <span className="eyebrow">Board growth levers</span>
+          <h2 className="section-title">مجلس الإدارة صار واجهة تنفيذ، لا ملف تقييم.</h2>
+          <div className="board-lever-grid">
+            {boardLevers.map((lever) => (
+              <article className="board-lever-card" key={lever.title}>
+                <h3>{lever.title}</h3>
+                <p>{lever.detail}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

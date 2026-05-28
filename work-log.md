@@ -30,3 +30,8 @@
 - Softened live trust copy after Mohammed noted that stating obvious privacy claims can sound suspicious.
 - Replaced repeated privacy framing with calm execution, suitable style, family comfort, clear packages, and elegant workflow language.
 - Verification passed: no remaining `privacy`/`خصوصية` wording in `app`, `lib`, or `docs`; lint, typecheck, and GitHub Pages export build passed.
+
+## 2026-05-28 06:31 +03
+
+- Converted the remaining plan findings into live homepage sections: all 20 daily SEO waves, Instagram/TikTok/WhatsApp profile copy, hashtag sets, channel launch actions, content pillars, and board growth levers.
+- Updated the homepage navigation with a direct Social anchor and kept the full SEO wave board visible on desktop/mobile.

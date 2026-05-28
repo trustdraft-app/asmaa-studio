@@ -84,7 +84,7 @@ GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Page
 
 ## Current Live Product Baseline
 
-The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage, package decision engine, city SEO pages, expanded highlight covers, `/reserve`, `/admin`, and the daily launch-wave automation.
+The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage, package decision engine, city SEO pages, expanded highlight covers, profile bio assets, hashtag sets, channel actions, content pillars, board levers, `/reserve`, `/admin`, and the daily launch-wave automation.
 
 ## Security Notes
 
