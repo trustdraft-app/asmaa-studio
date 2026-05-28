@@ -16,6 +16,7 @@ const requiredFiles = [
   "reserve.html",
   "admin.html",
   "faq.html",
+  "guides.html",
   "alahsa.html",
   "dammam.html",
   "khobar.html",
@@ -24,6 +25,21 @@ const requiredFiles = [
   "llms.txt",
   "favicon.ico",
   "CNAME"
+];
+
+const guideSlugs = [
+  "wedding-videography-al-ahsa",
+  "wedding-videography-dammam",
+  "wedding-videography-khobar",
+  "female-wedding-photographer-eastern-province",
+  "engagement-videography-eastern-province",
+  "zaffa-video-package",
+  "first-look-wedding-video",
+  "wedding-video-packages-saudi",
+  "bridal-details-video",
+  "wedding-videography-checklist",
+  "how-to-choose-wedding-videographer",
+  "wedding-video-delivery-editing"
 ];
 
 const bannedPhrases = [
@@ -40,7 +56,16 @@ const bannedPhrases = [
   "خصوصية"
 ];
 
-const marketingRoutes = ["index.html", "alahsa.html", "dammam.html", "khobar.html", "faq.html", "404.html"];
+const marketingRoutes = [
+  "index.html",
+  "alahsa.html",
+  "dammam.html",
+  "khobar.html",
+  "faq.html",
+  "guides.html",
+  "404.html",
+  ...guideSlugs.map((slug) => `guides/${slug}.html`)
+];
 const mime = {
   ".html": "text/html; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
@@ -123,6 +148,12 @@ function verifyStaticOutput() {
     else fail(`missing ${file}`);
   }
 
+  for (const slug of guideSlugs) {
+    const file = `guides/${slug}.html`;
+    if (existsSync(join(outDir, file))) pass(`built ${file}`);
+    else fail(`missing ${file}`);
+  }
+
   const cname = existsSync(join(outDir, "CNAME")) ? readOutFile("CNAME").trim() : "";
   if (cname === "asmaa.video") pass("CNAME points to asmaa.video");
   else fail(`CNAME should be asmaa.video, got "${cname}"`);
@@ -139,18 +170,25 @@ function verifyStaticOutput() {
   for (const route of marketingRoutes) {
     if (!existsSync(join(outDir, route))) continue;
     const html = readOutFile(route);
-    if (/<script[\s\S]*?<\/script>/i.test(html)) fail(`${route} still contains client scripts`);
-    else pass(`${route} is static-script pruned`);
+    const nonStructuredScripts = html.match(/<script(?![^>]*type="application\/ld\+json")[\s\S]*?<\/script>/gi) || [];
+    if (nonStructuredScripts.length > 0) fail(`${route} still contains client scripts`);
+    else pass(`${route} is static-script pruned with structured data preserved`);
   }
 
   const home = existsSync(join(outDir, "index.html")) ? readOutFile("index.html") : "";
-  for (const token of ["hero-photo-stack", "hero-logo-image", "package-motion-meter", "moment-card", "Asmaa Studio"]) {
+  for (const token of ["hero-photo-stack", "hero-logo-image", "package-motion-meter", "moment-card", "guide-card", "Asmaa Studio"]) {
     if (home.includes(token)) pass(`homepage contains ${token}`);
     else fail(`homepage missing ${token}`);
   }
 
+  const sitemap = existsSync(join(outDir, "sitemap.xml")) ? readOutFile("sitemap.xml") : "";
+  for (const slug of guideSlugs) {
+    if (sitemap.includes(`https://asmaa.video/guides/${slug}`)) pass(`sitemap contains ${slug}`);
+    else fail(`sitemap missing ${slug}`);
+  }
+
   const llms = existsSync(join(outDir, "llms.txt")) ? readOutFile("llms.txt") : "";
-  for (const token of ["Asmaa Studio", "Al Ahsa", "Dammam", "Khobar", "https://asmaa.video/reserve"]) {
+  for (const token of ["Asmaa Studio", "Al Ahsa", "Dammam", "Khobar", "https://asmaa.video/reserve", "https://asmaa.video/guides"]) {
     if (llms.includes(token)) pass(`llms.txt contains ${token}`);
     else fail(`llms.txt missing ${token}`);
   }
@@ -182,7 +220,18 @@ async function verifyBrowserOutput() {
       });
       const page = await context.newPage();
 
-      for (const route of ["/", "/reserve", "/admin", "/faq", "/alahsa", "/dammam", "/khobar"]) {
+      for (const route of [
+        "/",
+        "/reserve",
+        "/admin",
+        "/faq",
+        "/guides",
+        "/guides/wedding-videography-al-ahsa",
+        "/guides/female-wedding-photographer-eastern-province",
+        "/alahsa",
+        "/dammam",
+        "/khobar"
+      ]) {
         await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
 
         const layout = await page.evaluate(() => ({

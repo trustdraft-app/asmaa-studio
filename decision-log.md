@@ -101,3 +101,9 @@
 **Decision:** Use the uploaded gold monogram artwork directly across navigation, hero, favicon, app icon, reserve, and admin, and remove the CSS-drawn `A/S` substitute.
 **Reasoning:** The correct brand asset already exists; drawing a replacement monogram makes the site feel less professional and weakens recognition.
 **Source:** User-provided logo files, live UI review, Figma logo-system page `AxnBD6JO0MR3YY5XDt8LEa`.
+
+## 2026-05-28 16:04 +03 — Asmaa Studio
+**Question:** How should Asmaa Studio create more SEO traffic pages without adding thin content?
+**Decision:** Add a `/guides` hub plus 12 Arabic long-tail pages for city intent, package intent, and decision-stage wedding videography searches, then wire them into homepage links, sitemap, `llms.txt`, and launch verification.
+**Reasoning:** Useful search pages should answer a specific booking question and move the visitor toward the reservation flow rather than duplicate homepage copy.
+**Source:** User request, Google Search Central guidance, existing package/city content model, local Playwright verification.

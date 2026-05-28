@@ -27,9 +27,22 @@ Use these details:
 - Homepage: https://asmaa.video/
 - Reservation link: https://asmaa.video/reserve
 - FAQ: https://asmaa.video/faq
+- Guides index: https://asmaa.video/guides
 - Al Ahsa wedding videography: https://asmaa.video/alahsa
 - Dammam wedding videography: https://asmaa.video/dammam
 - Khobar wedding videography: https://asmaa.video/khobar
+- Al Ahsa wedding video guide: https://asmaa.video/guides/wedding-videography-al-ahsa
+- Dammam wedding video guide: https://asmaa.video/guides/wedding-videography-dammam
+- Khobar wedding video guide: https://asmaa.video/guides/wedding-videography-khobar
+- Female wedding photographer in Eastern Province: https://asmaa.video/guides/female-wedding-photographer-eastern-province
+- Engagement videography in Eastern Province: https://asmaa.video/guides/engagement-videography-eastern-province
+- Zaffa video package: https://asmaa.video/guides/zaffa-video-package
+- First Look wedding video: https://asmaa.video/guides/first-look-wedding-video
+- Wedding video packages: https://asmaa.video/guides/wedding-video-packages-saudi
+- Bridal details video: https://asmaa.video/guides/bridal-details-video
+- Wedding videography checklist: https://asmaa.video/guides/wedding-videography-checklist
+- How to choose a wedding videographer: https://asmaa.video/guides/how-to-choose-wedding-videographer
+- Wedding video delivery and editing: https://asmaa.video/guides/wedding-video-delivery-editing
 - Sitemap: https://asmaa.video/sitemap.xml
 - Robots: https://asmaa.video/robots.txt
 

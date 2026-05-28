@@ -42,6 +42,7 @@ function readableWhatsappSource(source: string) {
   if (source === "reserve-nav") return "رابط العروس";
   if (source === "admin-dashboard") return "لوحة المواعيد";
   if (source === "faq-page") return "صفحة الأسئلة";
+  if (source.startsWith("guide-")) return "دليل التصوير";
   if (citySourceLabels[source]) return citySourceLabels[source];
 
   const packageMatch = source.match(/^package-(\d+)$/);

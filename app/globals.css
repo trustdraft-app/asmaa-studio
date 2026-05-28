@@ -553,6 +553,188 @@
   padding: 22px;
 }
 
+.guide-index-hero,
+.guide-article-hero {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(213, 138, 134, 0.1), transparent 32%),
+    radial-gradient(circle at 82% 8%, rgba(241, 203, 130, 0.11), transparent 34%);
+}
+
+.guide-page .section-title {
+  font-size: clamp(2.05rem, 4.4vw, 3.05rem);
+  line-height: 1.32;
+  max-width: 940px;
+}
+
+.guide-command-card h2 {
+  color: #fff6df;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 1.14;
+}
+
+.guide-command-card div,
+.guide-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.guide-command-card em,
+.guide-meta-row em {
+  background: rgba(232, 197, 124, 0.08);
+  border: 1px solid rgba(232, 197, 124, 0.18);
+  border-radius: 999px;
+  color: rgba(255, 246, 223, 0.82);
+  font-size: 0.78rem;
+  font-style: normal;
+  padding: 7px 10px;
+}
+
+.guide-card-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 28px;
+}
+
+.guide-card {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)),
+    rgba(9, 9, 11, 0.72);
+  border: 1px solid rgba(232, 197, 124, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+  min-height: 285px;
+  padding: 20px;
+  position: relative;
+}
+
+.guide-card > span {
+  color: #e8c57c;
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.guide-card svg {
+  color: #e8c57c;
+}
+
+.guide-card h3 {
+  color: #fff6df;
+  font-size: 1.18rem;
+  line-height: 1.55;
+  margin: 10px 0;
+}
+
+.guide-card p {
+  color: rgba(255, 246, 223, 0.72);
+  line-height: 1.85;
+  margin: 0 0 16px;
+}
+
+.guide-card a,
+.guide-city-links a,
+.guide-index-bottom a {
+  align-items: center;
+  color: #e8c57c;
+  display: inline-flex;
+  font-weight: 800;
+  gap: 7px;
+  text-decoration: none;
+}
+
+.home-guide-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.guide-article-grid {
+  align-items: start;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 0.38fr);
+}
+
+.guide-main-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.guide-story-block,
+.guide-checklist {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)),
+    rgba(9, 9, 11, 0.72);
+  border: 1px solid rgba(232, 197, 124, 0.16);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.guide-story-block h2,
+.guide-checklist h2,
+.guide-index-bottom h2,
+.guide-city-links h2 {
+  color: #fff6df;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  line-height: 1.45;
+  margin: 0 0 12px;
+}
+
+.guide-story-block p {
+  color: rgba(255, 246, 223, 0.74);
+  line-height: 1.9;
+  margin: 0;
+}
+
+.guide-bullet-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.guide-bullet-grid span {
+  align-items: center;
+  background: rgba(232, 197, 124, 0.06);
+  border: 1px solid rgba(232, 197, 124, 0.12);
+  border-radius: 8px;
+  color: rgba(255, 246, 223, 0.84);
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.guide-bullet-grid svg,
+.guide-checklist svg {
+  color: #e8c57c;
+  flex: 0 0 auto;
+}
+
+.guide-checklist {
+  position: sticky;
+  top: 24px;
+}
+
+.guide-checklist .cta {
+  justify-content: center;
+  margin-top: 18px;
+  width: 100%;
+}
+
+.guide-package-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.guide-faq-grid {
+  grid-template-columns: 1fr;
+  margin-top: 14px;
+}
+
+.guide-related-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 @keyframes orbitPulse {
   0%,
   100% {
@@ -591,7 +773,12 @@
   .city-hero-grid,
   .city-intent,
   .city-proof-grid,
-  .faq-grid {
+  .faq-grid,
+  .guide-card-grid,
+  .home-guide-grid,
+  .guide-article-grid,
+  .guide-bullet-grid,
+  .guide-related-grid {
     grid-template-columns: 1fr;
   }
 
@@ -628,6 +815,18 @@
 
   .city-command-card h2 {
     font-size: 3.25rem;
+  }
+
+  .guide-command-card h2 {
+    font-size: 2.15rem;
+  }
+
+  .guide-card {
+    min-height: auto;
+  }
+
+  .guide-checklist {
+    position: static;
   }
 
   .reserve-copy h1,

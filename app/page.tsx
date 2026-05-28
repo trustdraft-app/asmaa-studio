@@ -26,6 +26,7 @@ import {
   whatsappLink,
   whatsappNumber
 } from "../lib/content";
+import { seoGuidePages } from "../lib/seo-pages";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -67,6 +68,7 @@ export default function HomePage() {
           <div className="nav-links">
             <a href="#packages">الباقات</a>
             <a href="#seo-wave">المدن</a>
+            <Link href="/guides">الدليل</Link>
             <Link href="/faq">الأسئلة</Link>
             <a href="#social-assets">المحتوى</a>
             <Link href="/reserve">رابط العروس</Link>
@@ -426,6 +428,37 @@ export default function HomePage() {
                 <p>{lever.detail}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section guide-directory-section" id="guides">
+        <div className="section-inner">
+          <span className="eyebrow">دليل Asmaa Studio</span>
+          <h2 className="section-title">صفحات قصيرة تجيب عن أسئلة البحث قبل الحجز.</h2>
+          <p className="section-copy">
+            بدلا من انتظار محادثة طويلة، يستطيع كل زائر فتح الصفحة الأقرب لسؤاله: المدينة،
+            الزفة، الخطوبة، تفاصيل العروس، أو طريقة اختيار الباقة.
+          </p>
+          <div className="guide-card-grid home-guide-grid">
+            {seoGuidePages.slice(0, 6).map((page, index) => (
+              <article className="guide-card" key={page.slug}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{page.title}</h3>
+                <p>{page.summary}</p>
+                <Link href={`/guides/${page.slug}`}>
+                  فتح الصفحة <ArrowLeft size={15} />
+                </Link>
+              </article>
+            ))}
+          </div>
+          <div className="button-row wave-actions">
+            <Link className="cta" href="/guides">
+              كل صفحات الدليل <Search size={18} />
+            </Link>
+            <Link className="ghost-cta" href="/reserve">
+              رابط العروس <CalendarDays size={18} />
+            </Link>
           </div>
         </div>
       </section>

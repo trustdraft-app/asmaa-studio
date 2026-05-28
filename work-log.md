@@ -116,3 +116,11 @@
 - Updated homepage, reserve page, admin page, Open Graph image, favicon, and launch verification to require real logo artwork.
 - Added a Figma page named `Logo System / Live Applied` with the selected logo treatment and implementation notes.
 - Verification passed: lint, typecheck, GitHub Pages export build, launch verifier, and mobile/desktop Playwright visual checks.
+
+## 2026-05-28 16:04 +03
+
+- Added a new `/guides` SEO hub and 12 focused Arabic guide pages for local wedding videography, engagement coverage, zaffa package searches, First Look, bridal details, package comparison, checklist, choosing a videographer, and delivery/editing.
+- Linked the guide layer from the homepage and generated metadata, canonical URLs, Article/Breadcrumb structured data, sitemap entries, and `llms.txt` entries for every new page.
+- Updated the static export pruner to remove client scripts from marketing pages while preserving `application/ld+json` structured data.
+- Extended launch verification to require all guide pages, sitemap coverage, static-script pruning with structured data preserved, and mobile/desktop no-overflow checks for guide routes.
+- Verification passed: lint, typecheck, GitHub Pages export build, launch verifier, and Playwright screenshot review for desktop `/guides` and mobile `/guides/wedding-videography-al-ahsa`.
