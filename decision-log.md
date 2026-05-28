@@ -72,6 +72,12 @@
 **Reasoning:** Premium mobile UX needs readable hierarchy and human wording; exposing backend fallback logic or oversized display type weakens trust.
 **Source:** User screenshots, local mobile Playwright screenshots, professional judgment.
 
+## 2026-05-28 13:58 +03 — Asmaa Studio
+**Question:** What is the next professional move after Mohammed rejected the site as not Figma-grade or motion-led enough?
+**Decision:** Create a real Figma direction file and ship a live premium visual-system pass: integrated cinematic hero imagery, motion guide layers, upgraded story cards, package infographic meters, and tighter responsive package layout.
+**Reasoning:** The complaint is valid; the site needed stronger visual composition and motion language, not another document or cosmetic copy tweak.
+**Source:** User instruction, Figma file `AxnBD6JO0MR3YY5XDt8LEa`, UI/UX Pro Max, Emil design engineering principles, local Playwright verification.
+
 ## 2026-05-28 09:04 +03 — Asmaa Studio
 **Question:** Which remaining daily launch wave should ship next on the live site?
 **Decision:** Implement wave 14 as a dedicated `/faq` booking questions page with Arabic answers, FAQ structured data, breadcrumb structured data, homepage links, and sitemap coverage.

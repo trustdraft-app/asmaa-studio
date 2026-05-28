@@ -114,6 +114,21 @@ export default function HomePage() {
               <span />
               <span />
             </div>
+            <div className="hero-photo-stack">
+              <Image
+                src={assetPath("/brand/asmaa-monogram-studio.jpg")}
+                alt=""
+                width={460}
+                height={620}
+                priority
+              />
+              <Image
+                src={assetPath("/brand/asmaa-monogram-heritage.jpg")}
+                alt=""
+                width={280}
+                height={360}
+              />
+            </div>
             <div className="monogram-stage">
               <div className="signature-mark" aria-hidden="true">
                 <span className="sig-left">A</span>
@@ -186,8 +201,13 @@ export default function HomePage() {
             تشرح ماذا ستوثق، لمن تناسب، وكيف سيبدو القرار قبل التواصل.
           </p>
           <div className="packages-grid packages-grid-20x">
-            {packages.map((item) => (
+            {packages.map((item, index) => (
               <article className={`package-card package-card-20x ${item.featured ? "featured" : ""}`} key={item.id}>
+                <div className="package-motion-meter" aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, meterIndex) => (
+                    <span className={meterIndex <= index ? "active" : ""} key={`${item.id}-${meterIndex}`} />
+                  ))}
+                </div>
                 <header>
                   <small>بكج {item.id}</small>
                   <h3>{item.name}</h3>
@@ -205,7 +225,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <ul>
-                  {item.bullets.map((bullet) => (
+                  {item.bullets.slice(0, 2).map((bullet) => (
                     <li key={bullet}>
                       <Check size={14} /> {bullet}
                     </li>

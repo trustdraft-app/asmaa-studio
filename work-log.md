@@ -87,3 +87,10 @@
 - Shortened the homepage hero headline and tightened the reservation mobile layout, stepper, inputs, package buttons, and infographic cards.
 - Replaced robotic reservation copy that mentioned system fallback/automatic saving with customer-facing WhatsApp follow-up language.
 - Verified locally at 390x844: homepage h1 height dropped to 121px, reserve h1 height to 76px, no horizontal overflow, and banned robotic phrases are absent.
+
+## 2026-05-28 13:58 +03
+
+- Created the Figma design direction file `Asmaa Studio Premium Motion Direction`: https://www.figma.com/design/AxnBD6JO0MR3YY5XDt8LEa
+- Shipped a live premium visual pass from that direction: cinematic hero image stack, motion guide layers, richer proof cards, animated story cards, and package infographic meters.
+- Reworked the package grid from a narrow price-list feeling into a responsive visual story with package progression meters and cleaner card hierarchy.
+- Verification passed locally: lint, typecheck, static export build, mobile/desktop Playwright checks, no horizontal overflow, hero visual assets present, and all five package meters render.
