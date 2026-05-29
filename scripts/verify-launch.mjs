@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 import { createServer } from "node:http";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { createRequire } from "node:module";
 import { extname, join, normalize } from "node:path";
 import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
-import AxeBuilder from "@axe-core/playwright";
 
 const root = process.cwd();
 const outDir = join(root, "out");
 const port = Number(process.env.PORT || 4177);
 const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
+const require = createRequire(import.meta.url);
+const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 
 const requiredFiles = [
   "index.html",
@@ -282,7 +284,14 @@ async function verifyBrowserOutput() {
       if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
       else fail(`${config.name} homepage missing story moment cards`);
 
-      const axe = await new AxeBuilder({ page }).disableRules(["color-contrast"]).analyze();
+      await page.addScriptTag({ content: axeSource });
+      const axe = await page.evaluate(async () => {
+        return window.axe.run(document, {
+          rules: {
+            "color-contrast": { enabled: false }
+          }
+        });
+      });
       const serious = axe.violations.filter((violation) => ["serious", "critical"].includes(violation.impact || ""));
       if (serious.length === 0) pass(`${config.name} homepage has no serious axe violations`);
       else fail(`${config.name} homepage axe violations: ${serious.map((item) => item.id).join(", ")}`);

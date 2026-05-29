@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "lucide-react";
 import { packages, serviceAreas, whatsappLink } from "../../../lib/content";
+import { socialPreviewImages, twitterMetadata } from "../../../lib/metadata";
 import { seoGuidePageBySlug, seoGuidePages } from "../../../lib/seo-pages";
 
 type Props = {
@@ -35,9 +36,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: page.metaTitle,
       description: page.metaDescription,
       url: `https://asmaa.video/guides/${page.slug}`,
+      siteName: "Asmaa Studio",
+      images: socialPreviewImages,
       type: "article",
       locale: "ar_SA"
-    }
+    },
+    twitter: twitterMetadata(page.metaTitle, page.metaDescription)
   };
 }
 

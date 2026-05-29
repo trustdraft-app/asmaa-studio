@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, CheckCircle2, MessageCircle } from "lucide-react";
 import { bookingFaqs, whatsappLink } from "../../lib/content";
+import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
 export const metadata: Metadata = {
   title: "أسئلة الحجز",
@@ -15,9 +16,15 @@ export const metadata: Metadata = {
     description:
       "إجابات قصيرة وواضحة عن اختيار الباقة، وقت الحضور، العربون، والخطوة التالية قبل واتساب.",
     url: "https://asmaa.video/faq",
+    siteName: "Asmaa Studio",
+    images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
-  }
+  },
+  twitter: twitterMetadata(
+    "أسئلة حجز Asmaa Studio",
+    "إجابات قصيرة وواضحة عن اختيار الباقة، وقت الحضور، العربون، والخطوة التالية قبل واتساب."
+  )
 };
 
 const faqJsonLd = {

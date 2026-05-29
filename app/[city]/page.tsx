@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "lucide-react";
 import { packages, serviceAreas, whatsappLink } from "../../lib/content";
+import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -27,9 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: area.metaTitle,
       description: area.metaDescription,
       url: `https://asmaa.video/${area.slug}`,
+      siteName: "Asmaa Studio",
+      images: socialPreviewImages,
       type: "website",
       locale: "ar_SA"
-    }
+    },
+    twitter: twitterMetadata(area.metaTitle, area.metaDescription)
   };
 }
 

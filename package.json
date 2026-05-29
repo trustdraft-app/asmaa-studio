@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/prune-static-js.mjs",
+    "build:pages": "GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true next build && node scripts/prune-static-js.mjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "verify:launch": "node scripts/verify-launch.mjs"
+    "verify:launch": "npm run build:pages && playwright install chromium && node scripts/verify-launch.mjs"
   },
   "dependencies": {
     "@next/third-parties": "latest",

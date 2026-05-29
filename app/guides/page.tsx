@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, CalendarDays, MapPin, Search } from "lucide-react";
 import { packages, serviceAreas } from "../../lib/content";
+import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { seoGuidePages } from "../../lib/seo-pages";
 
 export const metadata: Metadata = {
@@ -15,9 +16,15 @@ export const metadata: Metadata = {
     title: "دليل تصوير الزواجات والخطوبة | Asmaa Studio",
     description: "صفحات عملية تساعد العروس على اختيار الباقة والمدينة وتجهيز تفاصيل الحجز.",
     url: "https://asmaa.video/guides",
+    siteName: "Asmaa Studio",
+    images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
-  }
+  },
+  twitter: twitterMetadata(
+    "دليل تصوير الزواجات والخطوبة | Asmaa Studio",
+    "صفحات عملية تساعد العروس على اختيار الباقة والمدينة وتجهيز تفاصيل الحجز."
+  )
 };
 
 const jsonLd = {

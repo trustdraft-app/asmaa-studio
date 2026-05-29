@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next/font/google";
+import { socialPreviewImages, twitterMetadata } from "../lib/metadata";
 import "./globals.css";
 
 const arabicUi = IBM_Plex_Sans_Arabic({
@@ -44,17 +45,11 @@ export const metadata: Metadata = {
     description: "تصوير فيديو زواجات وخطوبة للأحساء والدمام والخبر.",
     url: "https://asmaa.video",
     siteName: "Asmaa Studio",
-    images: [
-      {
-        url: "/brand/asmaa-logo-heritage.jpg",
-        width: 853,
-        height: 1280,
-        alt: "Asmaa Studio gold monogram"
-      }
-    ],
+    images: socialPreviewImages,
     locale: "ar_SA",
     type: "website"
   },
+  twitter: twitterMetadata("Asmaa Studio", "تصوير فيديو زواجات وخطوبة للأحساء والدمام والخبر."),
   robots: {
     index: true,
     follow: true

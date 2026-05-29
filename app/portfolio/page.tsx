@@ -15,6 +15,7 @@ import {
   serviceAreas,
   whatsappLink
 } from "../../lib/content";
+import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
 export const metadata: Metadata = {
   title: "ألبوم لقطات الزواجات والخطوبة",
@@ -28,9 +29,15 @@ export const metadata: Metadata = {
     description:
       "صفحة ألبوم توضح شكل اللقطات التي تصنع فيلم الزفاف: الزفة، التفاصيل، First Look، والختام.",
     url: "https://asmaa.video/portfolio",
+    siteName: "Asmaa Studio",
+    images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
-  }
+  },
+  twitter: twitterMetadata(
+    "ألبوم Asmaa Studio",
+    "صفحة ألبوم توضح شكل اللقطات التي تصنع فيلم الزفاف: الزفة، التفاصيل، First Look، والختام."
+  )
 };
 
 const collectionJsonLd = {
