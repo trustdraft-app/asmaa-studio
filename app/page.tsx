@@ -117,6 +117,7 @@ export default function HomePage() {
             <a href="#seo-wave">المدن</a>
             <Link href="/guides">الدليل</Link>
             <Link href="/faq">الأسئلة</Link>
+            <Link href="/portfolio">الألبوم</Link>
             <a href="#social-assets">المحتوى</a>
             <Link href="/reserve">رابط العروس</Link>
             <Link href="/admin">المواعيد</Link>
@@ -623,6 +624,14 @@ export default function HomePage() {
                 <p>{item.text}</p>
               </article>
             ))}
+          </div>
+          <div className="button-row wave-actions">
+            <Link className="cta" href="/portfolio">
+              افتحي صفحة الألبوم <ArrowLeft size={18} />
+            </Link>
+            <Link className="ghost-cta" href="/reserve">
+              رابط العروس <CalendarDays size={18} />
+            </Link>
           </div>
         </div>
       </section>

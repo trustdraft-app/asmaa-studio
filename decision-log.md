@@ -113,3 +113,9 @@
 **Decision:** Ship a homepage-first cinematic redesign using a clean generated wedding still, bilingual hero hierarchy, sticky glass navigation, animated showreel scrubber, service dock, testimonial marquee, persistent WhatsApp CTA, and mobile-specific typography fixes.
 **Reasoning:** The fastest live improvement is to make the first viewport feel like a premium wedding film interface while preserving the existing static export, SEO pages, and WhatsApp conversion path.
 **Source:** User instruction, Claude design-director critique, generated visual concept review, local mobile/desktop Playwright verification.
+
+## 2026-05-29 09:11 +03 — Asmaa Studio
+**Question:** Which remaining daily launch wave should ship next on the live site after the FAQ and guide layers were already live?
+**Decision:** Implement wave 15 as a dedicated `/portfolio` album page, add homepage/internal links to it, refresh the Album highlight asset, and include the route in sitemap, `llms.txt`, and launch verification.
+**Reasoning:** The next highest-impact safe improvement was conversion-focused proof: a search-indexable album page that explains the eight moments brides actually compare before booking, without inventing client testimonials or unsupported claims.
+**Source:** 20-wave plan in `lib/content.ts`, live project files, professional judgment.

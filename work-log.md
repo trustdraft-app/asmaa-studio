@@ -1,5 +1,12 @@
 # Asmaa Studio Work Log
 
+## 2026-05-29 09:11 +03
+
+- Shipped wave 15 as a live `/portfolio` album page focused on the eight wedding and engagement moments brides compare before booking: entrance, First Look, bridal details, hall styling, engagement moments, detail tables, BTS, and the closing shot.
+- Wired the new album surface into the homepage navigation/highlights CTA, WhatsApp source tracking, sitemap, `llms.txt`, and launch verification so it contributes to both search discovery and booking flow.
+- Refreshed `public/highlights/album.svg` to match the new album direction and added responsive portfolio grid styling for mobile and desktop.
+- Verification passed locally with `npm run lint`, `npm run typecheck`, GitHub Pages export build, and `npm run verify:launch` after installing the required Playwright Chromium binary.
+
 ## 2026-05-28 09:04 +03
 
 - Shipped wave 14 as a live `/faq` booking questions page in Arabic with FAQPage and BreadcrumbList structured data.

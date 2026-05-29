@@ -26,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.88
     },
     {
+      url: `${base}/portfolio`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.87
+    },
+    {
       url: `${base}/guides`,
       lastModified: new Date(),
       changeFrequency: "weekly",

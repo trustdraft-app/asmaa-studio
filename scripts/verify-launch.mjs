@@ -16,6 +16,7 @@ const requiredFiles = [
   "reserve.html",
   "admin.html",
   "faq.html",
+  "portfolio.html",
   "guides.html",
   "alahsa.html",
   "dammam.html",
@@ -62,6 +63,7 @@ const marketingRoutes = [
   "dammam.html",
   "khobar.html",
   "faq.html",
+  "portfolio.html",
   "guides.html",
   "404.html",
   ...guideSlugs.map((slug) => `guides/${slug}.html`)
@@ -188,7 +190,15 @@ function verifyStaticOutput() {
   }
 
   const llms = existsSync(join(outDir, "llms.txt")) ? readOutFile("llms.txt") : "";
-  for (const token of ["Asmaa Studio", "Al Ahsa", "Dammam", "Khobar", "https://asmaa.video/reserve", "https://asmaa.video/guides"]) {
+  for (const token of [
+    "Asmaa Studio",
+    "Al Ahsa",
+    "Dammam",
+    "Khobar",
+    "https://asmaa.video/reserve",
+    "https://asmaa.video/portfolio",
+    "https://asmaa.video/guides"
+  ]) {
     if (llms.includes(token)) pass(`llms.txt contains ${token}`);
     else fail(`llms.txt missing ${token}`);
   }
@@ -225,6 +235,7 @@ async function verifyBrowserOutput() {
         "/reserve",
         "/admin",
         "/faq",
+        "/portfolio",
         "/guides",
         "/guides/wedding-videography-al-ahsa",
         "/guides/female-wedding-photographer-eastern-province",
