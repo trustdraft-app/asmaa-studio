@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
-import { packages, serviceAreas, whatsappLink } from "../../lib/content";
+import { instagramUrl, packages, serviceAreas, tiktokUrl, whatsappLink, whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
 type Props = {
@@ -45,40 +45,45 @@ export default async function CityPage({ params }: Props) {
   const cityJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `https://asmaa.video/${area.slug}#service`,
     name: area.headline,
     serviceType: "Female wedding videography",
-    areaServed: area.en,
+    inLanguage: "ar-SA",
+    areaServed: {
+      "@type": "City",
+      name: area.en,
+      alternateName: area.ar,
+      containedInPlace: {
+        "@type": "AdministrativeArea",
+        name: "Eastern Province, Saudi Arabia"
+      }
+    },
     provider: {
       "@type": "LocalBusiness",
+      "@id": "https://asmaa.video/#business",
       name: "Asmaa Studio",
-      url: "https://asmaa.video"
+      url: "https://asmaa.video/",
+      telephone: `+${whatsappNumber}`,
+      logo: "https://asmaa.video/brand/asmaa-logo-square.png",
+      sameAs: [instagramUrl, tiktokUrl]
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: area.audience
     },
     offers: packages.map((item) => ({
       "@type": "Offer",
       name: item.name,
       price: item.price,
       priceCurrency: "SAR",
-      description: item.summary
-    }))
-  };
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: area.faq.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer
-      }
+      description: item.summary,
+      url: `https://asmaa.video/reserve?city=${area.slug}&package=${item.id}`
     }))
   };
 
   return (
     <main className="page-shell city-page">
       <JsonLd data={cityJsonLd} />
-      <JsonLd data={faqJsonLd} />
 
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">

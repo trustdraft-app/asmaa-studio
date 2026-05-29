@@ -28,19 +28,6 @@ export const metadata: Metadata = {
   )
 };
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: bookingFaqs.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer
-    }
-  }))
-};
-
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -63,7 +50,6 @@ const breadcrumbJsonLd = {
 export default function FaqPage() {
   return (
     <main className="page-shell">
-      <JsonLd data={faqJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
 
       <section className="section city-hero-20x">

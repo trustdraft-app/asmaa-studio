@@ -63,23 +63,33 @@ export default async function GuidePage({ params }: Props) {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `https://asmaa.video/guides/${page.slug}#article`,
     headline: page.h1,
     description: page.metaDescription,
     inLanguage: "ar-SA",
     mainEntityOfPage: `https://asmaa.video/guides/${page.slug}`,
+    image: "https://asmaa.video/brand/asmaa-cinematic-bridal-still.png",
+    datePublished: "2026-05-28",
+    dateModified: "2026-05-29",
     author: {
       "@type": "Organization",
+      "@id": "https://asmaa.video/#business",
       name: "Asmaa Studio",
       url: "https://asmaa.video"
     },
     publisher: {
       "@type": "Organization",
+      "@id": "https://asmaa.video/#business",
       name: "Asmaa Studio",
       logo: {
         "@type": "ImageObject",
         url: "https://asmaa.video/brand/asmaa-logo-square.png"
       }
-    }
+    },
+    about: [
+      ...page.citySlugs.map((citySlug) => cityMap.get(citySlug)?.ar).filter(Boolean),
+      ...page.packageIds.map((packageId) => packages.find((item) => item.id === packageId)?.name).filter(Boolean)
+    ]
   };
 
   const breadcrumbJsonLd = {

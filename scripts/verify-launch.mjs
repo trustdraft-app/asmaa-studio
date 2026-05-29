@@ -214,6 +214,12 @@ function verifyStaticOutput() {
     const nonStructuredScripts = html.match(/<script(?![^>]*type="application\/ld\+json")[\s\S]*?<\/script>/gi) || [];
     if (nonStructuredScripts.length > 0) fail(`${route} still contains client scripts`);
     else pass(`${route} is static-script pruned with structured data preserved`);
+
+    if (html.includes('"@type":"FAQPage"') || html.includes('"@type": "FAQPage"')) {
+      fail(`${route} still exposes deprecated FAQPage structured data`);
+    } else {
+      pass(`${route} does not expose deprecated FAQPage structured data`);
+    }
   }
 
   const home = existsSync(join(outDir, "index.html")) ? readOutFile("index.html") : "";
@@ -222,10 +228,26 @@ function verifyStaticOutput() {
     else fail(`homepage missing ${token}`);
   }
 
+  for (const token of ['"@type":"LocalBusiness"', '"@type":"Service"', '"@type":"WebSite"', '"@type":"ItemList"']) {
+    if (home.includes(token)) pass(`homepage structured data contains ${token}`);
+    else fail(`homepage structured data missing ${token}`);
+  }
+
   const sitemap = existsSync(join(outDir, "sitemap.xml")) ? readOutFile("sitemap.xml") : "";
+  if (sitemap.includes("<lastmod>2026-05-29T00:00:00.000Z</lastmod>")) {
+    pass("sitemap uses deterministic content lastmod");
+  } else {
+    fail("sitemap missing deterministic content lastmod");
+  }
   for (const slug of guideSlugs) {
     if (sitemap.includes(`https://asmaa.video/guides/${slug}`)) pass(`sitemap contains ${slug}`);
     else fail(`sitemap missing ${slug}`);
+  }
+
+  const guides = existsSync(join(outDir, "guides.html")) ? readOutFile("guides.html") : "";
+  for (const token of ['"@type":"CollectionPage"', '"@type":"ItemList"', '"@type":"BreadcrumbList"']) {
+    if (guides.includes(token)) pass(`guides structured data contains ${token}`);
+    else fail(`guides structured data missing ${token}`);
   }
 
   const llms = existsSync(join(outDir, "llms.txt")) ? readOutFile("llms.txt") : "";

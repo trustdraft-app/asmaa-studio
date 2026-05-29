@@ -38,25 +38,98 @@ import {
 } from "../lib/content";
 import { seoGuidePages } from "../lib/seo-pages";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Asmaa Studio",
-  alternateName: "Asmaa Video",
-  url: "https://asmaa.video",
-  telephone: `+${whatsappNumber}`,
-  areaServed: serviceAreas.map((area) => area.en),
-  priceRange: "600-2500 SAR",
-  image: "https://asmaa.video/highlights/bride-details.svg",
-  sameAs: [instagramUrl, tiktokUrl],
-  makesOffer: packages.map((item) => ({
+const serviceAreaJsonLd = serviceAreas.map((area) => ({
+  "@type": "City",
+  name: area.en,
+  alternateName: area.ar,
+  containedInPlace: {
+    "@type": "AdministrativeArea",
+    name: "Eastern Province, Saudi Arabia"
+  }
+}));
+
+const offerCatalogJsonLd = {
+  "@type": "OfferCatalog",
+  name: "Asmaa Studio wedding videography packages",
+  itemListElement: packages.map((item, index) => ({
     "@type": "Offer",
+    position: index + 1,
     name: item.name,
     price: item.price,
     priceCurrency: "SAR",
-    description: item.summary
-  })),
-  serviceType: "Female wedding videography"
+    description: item.summary,
+    url: `https://asmaa.video/reserve?package=${item.id}`
+  }))
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://asmaa.video/#business",
+      name: "Asmaa Studio",
+      alternateName: "Asmaa Video",
+      url: "https://asmaa.video/",
+      logo: "https://asmaa.video/brand/asmaa-logo-square.png",
+      image: [
+        "https://asmaa.video/brand/asmaa-cinematic-bridal-still.png",
+        "https://asmaa.video/highlights/bride-details.svg"
+      ],
+      telephone: `+${whatsappNumber}`,
+      priceRange: "SAR 600-2500",
+      areaServed: serviceAreaJsonLd,
+      availableLanguage: ["ar-SA", "en"],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: `+${whatsappNumber}`,
+        contactType: "booking",
+        areaServed: "SA-04",
+        availableLanguage: ["Arabic", "English"]
+      },
+      sameAs: [instagramUrl, tiktokUrl],
+      hasOfferCatalog: offerCatalogJsonLd,
+      knowsAbout: [
+        "تصوير فيديو زواجات نسائي",
+        "تصوير خطوبة وملكة",
+        "تصوير First Look",
+        "تفاصيل العروس",
+        "مونتاج فيديو الزفاف"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://asmaa.video/#wedding-videography-service",
+      name: "تصوير فيديو زواجات وخطوبة نسائي في الشرقية",
+      serviceType: "Female wedding videography",
+      provider: {
+        "@id": "https://asmaa.video/#business"
+      },
+      areaServed: serviceAreaJsonLd,
+      hasOfferCatalog: offerCatalogJsonLd
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://asmaa.video/#website",
+      url: "https://asmaa.video/",
+      name: "Asmaa Studio",
+      inLanguage: "ar-SA",
+      publisher: {
+        "@id": "https://asmaa.video/#business"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://asmaa.video/#guide-list",
+      name: "دليل Asmaa Studio لتصوير الزواجات",
+      itemListElement: seoGuidePages.map((page, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: page.title,
+        url: `https://asmaa.video/guides/${page.slug}`
+      }))
+    }
+  ]
 };
 
 const showreelFrames = [

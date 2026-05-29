@@ -143,3 +143,9 @@
 **Decision:** No; update the Pages workflow to official Node 24 action releases with pinned SHAs and remove the forced Node override.
 **Reasoning:** A 10/10 launch audit should not leave known workflow deprecation warnings when official Node 24 action releases are available.
 **Source:** GitHub Actions run `26655722828`, official action metadata from GitHub repositories, professional judgment.
+
+## 2026-05-29 22:02 +03 — Asmaa Studio
+**Question:** Which deep SEO/GEO/AEO findings should be applied to the live site without creating thin or unverifiable content?
+**Decision:** Apply current Google Search Central-aligned structured data: remove deprecated FAQPage JSON-LD, strengthen homepage LocalBusiness/Service/WebSite/ItemList graph, add CollectionPage/ItemList/Breadcrumb graph to the guides hub, enrich guide Article schema, use deterministic sitemap `lastmod`, and update `llms.txt` with Eastern Province answer-engine guidance.
+**Reasoning:** The strongest SEO move now is not more keyword pages; it is accurate local entity clarity for Al Ahsa, Dammam, and Khobar, current structured-data compliance, and regression gates that prevent outdated markup from returning.
+**Source:** Google Search Central SEO starter guide, LocalBusiness structured data docs, FAQPage deprecation docs, sitemap docs, Asmaa project memory, professional judgment.

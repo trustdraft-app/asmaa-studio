@@ -30,15 +30,47 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  name: "دليل تصوير الزواجات والخطوبة",
-  url: "https://asmaa.video/guides",
-  hasPart: seoGuidePages.map((page) => ({
-    "@type": "WebPage",
-    name: page.title,
-    url: `https://asmaa.video/guides/${page.slug}`,
-    description: page.metaDescription
-  }))
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://asmaa.video/guides#collection",
+      name: "دليل تصوير الزواجات والخطوبة",
+      url: "https://asmaa.video/guides",
+      inLanguage: "ar-SA",
+      mainEntity: {
+        "@id": "https://asmaa.video/guides#item-list"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://asmaa.video/guides#item-list",
+      name: "صفحات دليل تصوير الزواجات والخطوبة",
+      itemListElement: seoGuidePages.map((page, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: page.title,
+        url: `https://asmaa.video/guides/${page.slug}`,
+        description: page.metaDescription
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "الرئيسية",
+          item: "https://asmaa.video/"
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "دليل تصوير الزواجات",
+          item: "https://asmaa.video/guides"
+        }
+      ]
+    }
+  ]
 };
 
 export default function GuidesPage() {

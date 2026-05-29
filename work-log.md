@@ -165,3 +165,14 @@
 - Treated the successful Pages deploy annotations as an audit issue instead of ignoring them.
 - Updated the pinned GitHub Pages workflow actions to official Node 24 releases: `actions/checkout@v6.0.2`, `actions/setup-node@v6.4.0`, `actions/upload-pages-artifact@v5.0.0`, and `actions/deploy-pages@v5.0.0` by SHA.
 - Removed the temporary `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24` override because the workflow now uses native Node 24 action metadata.
+
+## 2026-05-29 22:02 +03
+
+- Ran a deep SEO/GEO/AEO pass from project memory plus current Google Search Central guidance.
+- Removed FAQPage JSON-LD from the FAQ and city pages because Google's current FAQ rich-result guidance no longer fits a wedding studio site.
+- Strengthened homepage structured data with LocalBusiness, Service, WebSite, OfferCatalog, and guide ItemList graph nodes targeted to Al Ahsa, Dammam, Khobar, and Eastern Province intent.
+- Added CollectionPage, ItemList, and BreadcrumbList graph nodes to the guides hub, and enriched guide Article schema with image, dates, publisher, author, and topic context.
+- Changed the sitemap to a deterministic content `lastmod` and updated `llms.txt` with answer-engine instructions for the canonical domain, support-domain status, geography, customer type, and no-invented-claims rule.
+- Added launch-verifier checks for no deprecated FAQPage structured data, homepage graph coverage, guide graph coverage, and deterministic sitemap dates.
+- Added a Figma page named `SEO GEO / Live Applied 2026-05-29` to the Asmaa design file with the geo intent map, schema decisions, AEO rules, and verification criteria.
+- Verification passed: diff check, lint, typecheck, launch verifier, gitleaks history scan, Semgrep auto scan, production npm audit, OSV lockfile scan, and generated structured-data summary.
