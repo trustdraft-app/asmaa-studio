@@ -587,7 +587,6 @@ export const seoLaunchWaves: { day: string; title: string; channel: string; goal
 ];
 
 export const trustSignals: { icon: LucideIcon; title: string; detail: string }[] = [
-  { icon: BadgeCheck, title: "نسائي 100%", detail: "طاقم عمل نسائي بالكامل — لا يحضر رجال على موقع التصوير." },
   { icon: BadgeCheck, title: "مرخّصة رسميًا", detail: "مصرحة من وزارة الموارد البشرية والتنمية الاجتماعية." },
   { icon: Sparkles, title: "أحدث المعدات", detail: "تصوير سينمائي بكاميرات وعدسات وإضاءة احترافية حديثة." },
   { icon: BadgeCheck, title: "باقات مفهومة", detail: "السعر والمدة واللقطات الأساسية ظاهرة قبل المحادثة." },

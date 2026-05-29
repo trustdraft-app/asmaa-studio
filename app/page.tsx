@@ -240,10 +240,6 @@ export default function HomePage() {
             <div className="hero-credentials" aria-label="ضمانات Asmaa Studio">
               <span className="credential-pill credential-pill-primary">
                 <BadgeCheck size={15} strokeWidth={1.8} />
-                {credentials.womenOnlyAr}
-              </span>
-              <span className="credential-pill">
-                <BadgeCheck size={15} strokeWidth={1.8} />
                 {credentials.ministryAr}
               </span>
               <span className="credential-pill">
@@ -506,17 +502,17 @@ export default function HomePage() {
           </div>
           <div className="payment-trust-row">
             <article className="payment-trust">
-              <ShieldCheck size={22} strokeWidth={1.7} />
+              <BadgeCheck size={22} strokeWidth={1.7} />
               <div>
-                <strong>{credentials.womenOnlyAr}</strong>
-                <span>{credentials.womenOnlyEn}</span>
+                <strong>{credentials.ministryAr}</strong>
+                <span>{credentials.ministryEn}</span>
               </div>
             </article>
             <article className="payment-trust">
-              <BadgeCheck size={22} strokeWidth={1.7} />
+              <Sparkles size={22} strokeWidth={1.7} />
               <div>
-                <strong>مرخّصة من وزارة الموارد البشرية والتنمية الاجتماعية</strong>
-                <span>{credentials.ministryEn}</span>
+                <strong>{credentials.equipmentAr}</strong>
+                <span>Latest cinema-grade cameras, lenses, and lighting</span>
               </div>
             </article>
           </div>
