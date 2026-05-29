@@ -22,7 +22,7 @@ The required fix is DNS/hosting migration for `asmaavideo.com`; code changes alo
 - Canonical live URL: https://asmaa.video
 - Temporary GitHub Pages URL: https://trustdraft-app.github.io/asmaa-studio/
 - Deployment workflow: `.github/workflows/deploy-pages.yml`
-- Build mode: `npm run build:pages`, which sets `GITHUB_PAGES=true`, `GITHUB_PAGES_CUSTOM_DOMAIN=true`, and makes `/admin` render a static 404 artifact unless the admin flag is explicitly enabled.
+- Build mode: `npm run build:pages`, which sets `GITHUB_PAGES=true`, `GITHUB_PAGES_CUSTOM_DOMAIN=true`, and removes the `/admin` static artifact unless the admin flag is explicitly enabled.
 - Custom domain: `asmaa.video`
 - Support domain: `asmaavideo.com` must move away from Namecheap URL forwarding before HTTPS can work.
 
@@ -111,7 +111,7 @@ The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage
 
 - `/reserve` has a WhatsApp fallback when no backend endpoint is configured.
 - Live reservation persistence must use the Supabase Edge Function in `supabase/functions/submit-reservation`; do not enable direct anonymous table inserts from the browser.
-- `/admin` renders a 404 in the public GitHub Pages build unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`; when enabled, it is noindex and requires Supabase Auth plus the `reservation_admins` allowlist before reservation data is visible.
+- `/admin` is omitted from the public GitHub Pages build unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`; when enabled, it is noindex and requires Supabase Auth plus the `reservation_admins` allowlist before reservation data is visible.
 - Security headers are configured in `vercel.json`.
 - The Edge Function applies origin checks, body limits, rate limits, no-store responses, and server-side validation before persistence.
 

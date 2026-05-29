@@ -20,7 +20,7 @@ The production write boundary is:
 5. Edge Function validates and normalizes the payload.
 6. Edge Function writes with service role.
 7. Admin reads and updates reservations only after Supabase Auth and `reservation_admins` allowlist.
-8. The public GitHub Pages build returns a static 404 artifact for `/admin` unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`.
+8. The public GitHub Pages build omits `/admin` unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`.
 
 ## Files
 
@@ -64,7 +64,7 @@ NEXT_PUBLIC_RESERVATION_ENDPOINT=https://PROJECT_REF.supabase.co/functions/v1/su
 NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true
 ```
 
-Do not set `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true` until the Supabase project, Auth email links, and `reservation_admins` allowlist are active. Without that flag, `/admin` returns the static 404 artifact instead of the admin login or dashboard.
+Do not set `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true` until the Supabase project, Auth email links, and `reservation_admins` allowlist are active. Without that flag, the public build removes the `/admin` static artifact instead of shipping the admin login or dashboard.
 
 7. Rebuild and redeploy the website.
 

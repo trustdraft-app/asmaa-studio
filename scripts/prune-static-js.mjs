@@ -1,7 +1,8 @@
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 
 const outDir = join(process.cwd(), "out");
+const adminPanelEnabled = process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED === "true";
 
 if (!existsSync(outDir)) {
   process.exit(0);
@@ -15,7 +16,13 @@ function walkHtmlFiles(dir) {
   });
 }
 
-const keepClientRoutes = new Set(["reserve.html", "admin.html"]);
+if (!adminPanelEnabled) {
+  rmSync(join(outDir, "admin.html"), { force: true });
+  rmSync(join(outDir, "admin"), { force: true, recursive: true });
+}
+
+const keepClientRoutes = new Set(["reserve.html"]);
+if (adminPanelEnabled) keepClientRoutes.add("admin.html");
 
 for (const file of walkHtmlFiles(outDir)) {
   const route = relative(outDir, file);

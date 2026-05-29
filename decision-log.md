@@ -122,7 +122,7 @@
 
 ## 2026-05-29 21:22 +03 — Asmaa Studio
 **Question:** How should the site handle the admin dashboard while `asmaavideo.com` is down on HTTPS?
-**Decision:** Ship GitHub Pages with `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false`, remove the public `/admin` navigation link, make `/admin` render a static 404 artifact unless explicitly enabled, and document `asmaavideo.com` as a DNS/hosting migration blocker because it still points to Namecheap forwarding IP `162.255.119.149` without first-class TLS.
+**Decision:** Ship GitHub Pages with `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false`, remove the public `/admin` navigation link, remove the `/admin` static artifact unless explicitly enabled, and document `asmaavideo.com` as a DNS/hosting migration blocker because it still points to Namecheap forwarding IP `162.255.119.149` without first-class TLS.
 **Reasoning:** Customers should not see an admin affordance at all, while the admin login/dashboard can still be verified safely in an explicit build mode; code cannot issue a certificate for a domain still hosted by URL forwarding.
 **Source:** Live DNS/cURL checks, GitHub Pages build workflow, Supabase admin/RLS design, Semgrep/zizmor/security verification, professional judgment.
 

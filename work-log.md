@@ -142,9 +142,9 @@
 
 ## 2026-05-29 21:23 +03
 
-- Hardened the public GitHub Pages build so `/admin` renders a static 404 artifact by default and the homepage no longer exposes any `/admin` link.
+- Hardened the public GitHub Pages build so `/admin` is omitted by default and the homepage no longer exposes any `/admin` link.
 - Added explicit admin readiness verification: with `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`, `/admin` builds, stays `noindex`, shows only the Supabase login gate, and hides dashboard content before auth.
-- Added launch verification checks that fail if the public homepage exposes `/admin` or if the public admin route stops rendering as a 404 artifact.
+- Added launch verification checks that fail if the public homepage exposes `/admin` or if the public build starts shipping admin markup.
 - Centralized JSON-LD rendering through an escaping `JsonLd` component after Semgrep flagged direct `dangerouslySetInnerHTML` usage.
 - Hardened the GitHub Pages workflow with SHA-pinned actions, job-scoped Pages permissions, and non-persistent checkout credentials.
 - Documented the `asmaavideo.com` production blocker: both apex and `www` resolve to Namecheap forwarding IP `162.255.119.149`, so HTTPS times out until DNS moves to a first-class HTTPS host such as Vercel or Cloudflare.
