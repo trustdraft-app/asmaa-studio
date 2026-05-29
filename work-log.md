@@ -176,3 +176,4 @@
 - Added launch-verifier checks for no deprecated FAQPage structured data, homepage graph coverage, guide graph coverage, and deterministic sitemap dates.
 - Added a Figma page named `SEO GEO / Live Applied 2026-05-29` to the Asmaa design file with the geo intent map, schema decisions, AEO rules, and verification criteria.
 - Verification passed: diff check, lint, typecheck, launch verifier, gitleaks history scan, Semgrep auto scan, production npm audit, OSV lockfile scan, and generated structured-data summary.
+- Deployed commit `3134f0b` through GitHub Pages run `26656615729`; live probes confirmed homepage LocalBusiness/Service/WebSite/ItemList graph, guides CollectionPage/ItemList/Breadcrumb graph, FAQ without FAQPage schema, deterministic sitemap, geo-aware `llms.txt`, hidden `/admin`, and unchanged support-domain HTTP forwarding.
