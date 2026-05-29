@@ -178,6 +178,16 @@
 - Verification passed: diff check, lint, typecheck, launch verifier, gitleaks history scan, Semgrep auto scan, production npm audit, OSV lockfile scan, and generated structured-data summary.
 - Deployed commit `3134f0b` through GitHub Pages run `26656615729`; live probes confirmed homepage LocalBusiness/Service/WebSite/ItemList graph, guides CollectionPage/ItemList/Breadcrumb graph, FAQ without FAQPage schema, deterministic sitemap, geo-aware `llms.txt`, hidden `/admin`, and unchanged support-domain HTTP forwarding.
 
+## 2026-05-29 23:02 +03
+
+- Ran a maestro/fleet readiness pass with separate UI/SEO, security/data, and release-verification lanes after Mohammed escalated the quality bar again.
+- Fixed the remaining SEO contradiction by removing noindex `/reserve` from `sitemap.xml` and adding a launch-verifier assertion that the sitemap must exclude it.
+- Fixed the mobile first-viewport issue by hiding the floating WhatsApp pill on mobile while retaining nav/hero WhatsApp CTAs; added a Playwright assertion so the pill cannot regress into mobile proof-content overlap.
+- Strengthened `vercel.json` for the DNS-migration path with host-based permanent redirects from `asmaavideo.com` / `www.asmaavideo.com` to `https://asmaa.video` plus HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers.
+- Added fleet audit evidence in `SECURITY.md` and `.planning/ui-reviews/000-UI-REVIEW.md`; screenshot binaries stay ignored.
+- Verification passed locally after the fixes: lint, typecheck, launch verifier, admin verifier, npm audit, gitleaks, Semgrep, OSV lockfile scan, Deno check, and Vercel JSON validation.
+- Remaining blocker is still infrastructure-owned: `asmaavideo.com` HTTPS cannot be fixed in app code while DNS points to Namecheap forwarding IP `162.255.119.149`.
+
 ## 2026-05-29 22:36 +03
 
 - Ran an escalation audit across UI/UX, SEO/GEO, admin privacy, Supabase readiness, CI, and live domain constraints after Mohammed rejected the prior quality bar.

@@ -3184,10 +3184,7 @@ textarea {
   }
 
   .floating-whatsapp {
-    bottom: 14px;
-    min-height: 52px;
-    padding-inline: 15px;
-    right: 14px;
+    display: none;
   }
 
   .footer {

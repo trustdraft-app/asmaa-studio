@@ -269,6 +269,11 @@ function verifyStaticOutput() {
   } else {
     fail("sitemap must not emit unverifiable lastmod values");
   }
+  if (!sitemap.includes("<loc>https://asmaa.video/reserve</loc>")) {
+    pass("sitemap excludes noindex reserve page");
+  } else {
+    fail("sitemap must not include the noindex reserve page");
+  }
   for (const slug of guideSlugs) {
     if (sitemap.includes(`https://asmaa.video/guides/${slug}`)) pass(`sitemap contains ${slug}`);
     else fail(`sitemap missing ${slug}`);
@@ -390,6 +395,12 @@ async function verifyBrowserOutput() {
           });
           if (smallTargets.length === 0) pass(`${config.name} ${route} has comfortable tap targets`);
           else fail(`${config.name} ${route} has undersized tap targets: ${JSON.stringify(smallTargets.slice(0, 5))}`);
+
+          if (route === "/") {
+            const floatingWhatsappVisible = await page.locator(".floating-whatsapp:visible").count();
+            if (floatingWhatsappVisible === 0) pass("mobile homepage hides floating WhatsApp to avoid content overlap");
+            else fail("mobile homepage must not show the floating WhatsApp over proof content");
+          }
         }
 
         if (route === "/admin" && adminPanelEnabled) {

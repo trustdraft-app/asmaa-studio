@@ -156,6 +156,24 @@
 **Reasoning:** A later auditor can defend Organization/Service for this static wedding-videography site, while addressless LocalBusiness creates avoidable structured-data risk.
 **Source:** SEO subagent audit, project files, professional judgment.
 
+## 2026-05-29 23:02 +03 — Asmaa Studio
+**Question:** Should the final 10/10 push keep `/reserve` in the sitemap while the route is `noindex, follow`?
+**Decision:** No; remove `/reserve` from the sitemap and add a verifier gate that fails if any noindex reserve URL returns to `sitemap.xml`.
+**Reasoning:** Indexing directives and sitemap inclusion must not conflict for launch-grade SEO hygiene.
+**Source:** Fleet release verification, local source audit, professional judgment.
+
+## 2026-05-29 23:02 +03 — Asmaa Studio
+**Question:** How should the mobile floating WhatsApp overlap found by the UI fleet be handled?
+**Decision:** Hide the floating WhatsApp pill on mobile and rely on existing nav/hero CTAs, with a Playwright launch check to prevent the overlap from returning.
+**Reasoning:** A fixed CTA that covers proof content weakens the first mobile impression, and the page already has visible mobile WhatsApp conversion paths.
+**Source:** Fleet UI screenshot audit, `app/globals.css`, `scripts/verify-launch.mjs`.
+
+## 2026-05-29 23:02 +03 — Asmaa Studio
+**Question:** Should Codex try to force `asmaavideo.com` live over HTTPS without DNS/provider access?
+**Decision:** No; prepare Vercel host redirects and security headers in source, then keep the blocker explicit until DNS moves off Namecheap URL forwarding.
+**Reasoning:** The current support-domain DNS resolves to Namecheap forwarding IP `162.255.119.149`, and app code cannot issue TLS or stable HTTPS redirects for that host.
+**Source:** Live DNS/curl probes, `vercel.json`, Cloudflare/Vercel access checks.
+
 ## 2026-05-29 22:36 +03 — Asmaa Studio
 **Question:** Should Codex force Sentry, Cloudflare, Vercel, or Supabase production activation during this escalation?
 **Decision:** No; fix and gate code-owned readiness, then document the remaining infrastructure blockers because Vercel CLI is missing, Cloudflare auth is expired, Sentry CLI/DSN is absent, and no Asmaa Supabase project is linked.

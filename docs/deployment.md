@@ -93,6 +93,7 @@ www  CNAME  cname.vercel-dns.com
 ```
 
 Then configure Vercel to redirect both `asmaavideo.com` and `www.asmaavideo.com` to `https://asmaa.video`.
+The repository `vercel.json` already contains host-based permanent redirects for both support-domain hostnames plus deploy-time security headers for the Vercel path.
 
 If Cloudflare becomes authoritative DNS, move nameservers to Cloudflare, create proxied DNS records for both hostnames, and use a Redirect Rule or Worker to return a 301 to `https://asmaa.video$request_uri`.
 
@@ -114,6 +115,7 @@ The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage
 - Live reservation persistence must use the Supabase Edge Function in `supabase/functions/submit-reservation`; do not enable direct anonymous table inserts from the browser.
 - `/admin` is omitted from the public GitHub Pages build unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`; when enabled, it is noindex and requires Supabase Auth plus the `reservation_admins` allowlist before reservation data is visible.
 - Security headers are configured in `vercel.json`, but GitHub Pages does not apply them. Full CSP/HSTS/header control requires Vercel, Cloudflare Pages, or a Cloudflare Worker/Proxy layer in front of the static site.
+- `vercel.json` includes HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, and support-domain host redirects, but these only take effect after the site is actually deployed behind Vercel.
 - The Edge Function applies explicit origin checks, body limits, hashed Cloudflare-IP fingerprints, atomic RPC-backed rate limits, no-store responses, and server-side validation before persistence. It fails closed if Supabase credentials or allowed origins are missing.
 - Sentry is not active in the GitHub Pages build because no Sentry project/DSN is configured in this repo. Add Sentry only after a real DSN and release-upload token are available; do not fake monitoring with placeholder credentials.
 
