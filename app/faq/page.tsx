@@ -58,7 +58,7 @@ export default function FaqPage() {
             <Link className="ghost-cta" href="/">
               العودة للرئيسية
             </Link>
-            <span className="eyebrow">الموجة 14 / Website</span>
+            <span className="eyebrow">أسئلة قبل الحجز</span>
             <h1 className="section-title">أسئلة الحجز التي تختصر التردد قبل أول رسالة.</h1>
             <p className="section-copy">
               هذه الصفحة تجمع الإجابات القصيرة التي تحتاجها العروس عادة قبل واتساب: كيف تختار

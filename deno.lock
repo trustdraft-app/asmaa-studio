@@ -1,0 +1,29 @@
+{
+  "version": "5",
+  "remote": {
+    "https://esm.sh/@supabase/supabase-js@2.45.4": "1108d69216995335d057dbd15907caaf514a4d1ef082f097050573b9d589a57c"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@axe-core/playwright@4.11.3",
+        "npm:@next/third-parties@16.2.6",
+        "npm:@supabase/supabase-js@2.106.2",
+        "npm:@types/node@25.9.1",
+        "npm:@types/react-dom@19.2.3",
+        "npm:@types/react@19.2.15",
+        "npm:eslint-config-next@16.2.6",
+        "npm:eslint@9.39.4",
+        "npm:lucide-react@1.16.0",
+        "npm:next@16.2.6",
+        "npm:playwright@1.60.0",
+        "npm:react-dom@19.2.6",
+        "npm:react@19.2.6",
+        "npm:typescript@6.0.3"
+      ],
+      "overrides": {
+        "postcss": "8.5.10"
+      }
+    }
+  }
+}

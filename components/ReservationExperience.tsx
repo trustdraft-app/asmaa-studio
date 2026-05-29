@@ -43,6 +43,8 @@ const cityFromQuery: Record<string, string> = {
   "الخبر": "الخبر"
 };
 
+const packageIds = new Set(packages.map((item) => item.id));
+
 export function ReservationExperience() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<ReservationInput>(defaultReservation);
@@ -56,12 +58,19 @@ export function ReservationExperience() {
   const endpoint = reservationEndpoint();
 
   useEffect(() => {
-    const requestedCity = new URLSearchParams(window.location.search).get("city");
+    const query = new URLSearchParams(window.location.search);
+    const requestedCity = query.get("city");
+    const requestedPackage = query.get("package");
     const city = requestedCity ? cityFromQuery[requestedCity] : "";
-    if (!city) return;
+    const packageId = requestedPackage && packageIds.has(requestedPackage) ? requestedPackage : "";
+    if (!city && !packageId) return;
 
     const timeout = window.setTimeout(() => {
-      setForm((current) => (current.city === city ? current : { ...current, city }));
+      setForm((current) => ({
+        ...current,
+        city: city || current.city,
+        packageId: packageId || current.packageId
+      }));
     }, 0);
 
     return () => window.clearTimeout(timeout);

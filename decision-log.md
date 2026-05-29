@@ -149,3 +149,21 @@
 **Decision:** Apply current Google Search Central-aligned structured data: remove deprecated FAQPage JSON-LD, strengthen homepage LocalBusiness/Service/WebSite/ItemList graph, add CollectionPage/ItemList/Breadcrumb graph to the guides hub, enrich guide Article schema, use deterministic sitemap `lastmod`, and update `llms.txt` with Eastern Province answer-engine guidance.
 **Reasoning:** The strongest SEO move now is not more keyword pages; it is accurate local entity clarity for Al Ahsa, Dammam, and Khobar, current structured-data compliance, and regression gates that prevent outdated markup from returning.
 **Source:** Google Search Central SEO starter guide, LocalBusiness structured data docs, FAQPage deprecation docs, sitemap docs, Asmaa project memory, professional judgment.
+
+## 2026-05-29 22:36 +03 — Asmaa Studio
+**Question:** How should the escalation audit handle public LocalBusiness schema when no public address, geo coordinates, or opening hours are verified?
+**Decision:** Replace the homepage and city LocalBusiness nodes with Organization + Service structured data and gate against addressless LocalBusiness returning.
+**Reasoning:** A later auditor can defend Organization/Service for this static wedding-videography site, while addressless LocalBusiness creates avoidable structured-data risk.
+**Source:** SEO subagent audit, project files, professional judgment.
+
+## 2026-05-29 22:36 +03 — Asmaa Studio
+**Question:** Should Codex force Sentry, Cloudflare, Vercel, or Supabase production activation during this escalation?
+**Decision:** No; fix and gate code-owned readiness, then document the remaining infrastructure blockers because Vercel CLI is missing, Cloudflare auth is expired, Sentry CLI/DSN is absent, and no Asmaa Supabase project is linked.
+**Reasoning:** Fake observability or unowned DNS/secrets changes would reduce launch integrity; production activation needs real credentials/host choices while the static site remains safe.
+**Source:** CLI checks, Supabase project list, live DNS checks, professional judgment.
+
+## 2026-05-29 22:36 +03 — Asmaa Studio
+**Question:** Is the portfolio anti-rot gate failure a blocker for this Asmaa launch fix?
+**Decision:** No; log it as unrelated because the gate failed only on existing Fattourh API-route findings outside `/Users/mohammedsa/Documents/AsmaaVideo`, while Asmaa-specific gates passed.
+**Reasoning:** Sweeping unrelated Fattourh security work into an Asmaa domain/UI/SEO escalation would violate surgical-change and dirty-worktree discipline.
+**Source:** `ai-empire-anti-rot-gate.mjs` output, AGENTS.md anti-rot rule, professional judgment.

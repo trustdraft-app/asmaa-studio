@@ -66,7 +66,14 @@ const bannedPhrases = [
   "نسخة جاهزة للحسابات",
   "هاشتاق",
   "SEO",
-  "مصادر الحجز"
+  "مصادر الحجز",
+  "الموجة",
+  "ريل:",
+  "ستوري:",
+  "كاروسيل:",
+  "هايلايت:",
+  "Album refresh",
+  "تصوير فوتوغرافي"
 ];
 
 const marketingRoutes = [
@@ -203,8 +210,12 @@ function verifyStaticOutput() {
   for (const filePath of allHtml) {
     const html = readFileSync(filePath, "utf8");
     const relative = filePath.replace(`${outDir}/`, "");
-    for (const phrase of bannedPhrases) {
+	  for (const phrase of bannedPhrases) {
       if (html.includes(phrase)) fail(`${relative} contains banned wording: ${phrase}`);
+    }
+
+    if (/<title>[^<]*Asmaa Studio\s*\|\s*Asmaa Studio[^<]*<\/title>/.test(html)) {
+      fail(`${relative} has a duplicated Asmaa Studio title`);
     }
   }
 
@@ -223,21 +234,40 @@ function verifyStaticOutput() {
   }
 
   const home = existsSync(join(outDir, "index.html")) ? readOutFile("index.html") : "";
-  for (const token of ["hero-photo-stack", "hero-logo-image", "package-motion-meter", "moment-card", "guide-card", "Asmaa Studio"]) {
+  for (const token of [
+    "hero-photo-stack",
+    "hero-logo-image",
+    "package-motion-meter",
+    "moment-card",
+    "guide-card",
+    "Asmaa Studio",
+    "/brand/asmaa-cinematic-bridal-still.webp"
+  ]) {
     if (home.includes(token)) pass(`homepage contains ${token}`);
     else fail(`homepage missing ${token}`);
   }
 
-  for (const token of ['"@type":"LocalBusiness"', '"@type":"Service"', '"@type":"WebSite"', '"@type":"ItemList"']) {
+  for (const token of ['"@type":"Organization"', '"@type":"Service"', '"@type":"WebSite"', '"@type":"ItemList"']) {
     if (home.includes(token)) pass(`homepage structured data contains ${token}`);
     else fail(`homepage structured data missing ${token}`);
   }
+  if (home.includes('"@type":"LocalBusiness"') || home.includes('"@type": "LocalBusiness"')) {
+    fail("homepage must not publish addressless LocalBusiness structured data");
+  } else {
+    pass("homepage avoids addressless LocalBusiness structured data");
+  }
+
+  const reserve = existsSync(join(outDir, "reserve.html")) ? readOutFile("reserve.html") : "";
+  if (reserve.includes('name="robots" content="noindex, follow"')) pass("reserve page is noindex/follow");
+  else fail("reserve page must be noindex/follow");
 
   const sitemap = existsSync(join(outDir, "sitemap.xml")) ? readOutFile("sitemap.xml") : "";
-  if (sitemap.includes("<lastmod>2026-05-29T00:00:00.000Z</lastmod>")) {
-    pass("sitemap uses deterministic content lastmod");
+  if (sitemap.includes("<loc>https://asmaa.video/</loc>")) pass("sitemap uses slash-normalized root URL");
+  else fail("sitemap root URL must be https://asmaa.video/");
+  if (!sitemap.includes("<lastmod>")) {
+    pass("sitemap omits unverifiable lastmod values");
   } else {
-    fail("sitemap missing deterministic content lastmod");
+    fail("sitemap must not emit unverifiable lastmod values");
   }
   for (const slug of guideSlugs) {
     if (sitemap.includes(`https://asmaa.video/guides/${slug}`)) pass(`sitemap contains ${slug}`);
@@ -262,6 +292,11 @@ function verifyStaticOutput() {
   ]) {
     if (llms.includes(token)) pass(`llms.txt contains ${token}`);
     else fail(`llms.txt missing ${token}`);
+  }
+  if (!llms.includes("photography and videography") && !llms.includes("videography and photography")) {
+    pass("llms.txt keeps the service focus on wedding videography");
+  } else {
+    fail("llms.txt still mixes photography/videography as the primary service");
   }
 }
 
@@ -326,8 +361,35 @@ async function verifyBrowserOutput() {
         if (config.name === "mobile" && layout.h1Size <= 58) pass(`${route} mobile h1 size is controlled`);
         if (config.name === "mobile" && layout.h1Size > 58) fail(`${route} mobile h1 is too large: ${layout.h1Size}px`);
 
-        for (const phrase of bannedPhrases) {
+	        for (const phrase of bannedPhrases) {
           if (layout.bodyText.includes(phrase)) fail(`${config.name} ${route} renders banned wording: ${phrase}`);
+        }
+
+        if (config.name === "mobile") {
+          const smallTargets = await page.evaluate(() => {
+            return Array.from(document.querySelectorAll("a, button"))
+              .map((node) => {
+                const rect = node.getBoundingClientRect();
+                const style = window.getComputedStyle(node);
+                return {
+                  label: (node.textContent || node.getAttribute("aria-label") || node.getAttribute("href") || "")
+                    .replace(/\s+/g, " ")
+                    .trim()
+                    .slice(0, 80),
+                  height: Math.round(rect.height),
+                  width: Math.round(rect.width),
+                  visible:
+                    rect.width > 0 &&
+                    rect.height > 0 &&
+                    style.visibility !== "hidden" &&
+                    style.display !== "none" &&
+                    Number(style.opacity || "1") > 0
+                };
+              })
+              .filter((item) => item.visible && (item.height < 44 || item.width < 44));
+          });
+          if (smallTargets.length === 0) pass(`${config.name} ${route} has comfortable tap targets`);
+          else fail(`${config.name} ${route} has undersized tap targets: ${JSON.stringify(smallTargets.slice(0, 5))}`);
         }
 
         if (route === "/admin" && adminPanelEnabled) {
@@ -366,9 +428,22 @@ async function verifyBrowserOutput() {
       if (homeCounts.meters >= 4) pass(`${config.name} homepage has package infographics`);
       else fail(`${config.name} homepage missing package infographics`);
 
-      if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
+	      if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
       else fail(`${config.name} homepage missing story moment cards`);
 
+      await page.goto(`${baseUrl}/reserve?city=dammam&package=02`, { waitUntil: "networkidle" });
+      const reservePrefill = await page.evaluate(() => ({
+        selectValues: Array.from(document.querySelectorAll("select")).map((select) => select.value)
+      }));
+      if (reservePrefill.selectValues.includes("الدمام")) pass(`${config.name} reserve preselects city from query`);
+      else fail(`${config.name} reserve failed to preselect city from query`);
+
+      await page.locator(".stepper button").nth(1).click();
+      const selectedPackage = await page.locator('.package-picker button[aria-pressed="true"]').textContent();
+      if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
+      else fail(`${config.name} reserve failed to preselect package from query`);
+
+      await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
       await page.addScriptTag({ content: axeSource });
       const axe = await page.evaluate(async () => {
         return window.axe.run(document, {

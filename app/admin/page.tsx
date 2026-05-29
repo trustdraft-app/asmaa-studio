@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { AdminDashboard } from "../../components/AdminDashboard";
 
 export const metadata: Metadata = {
-  title: "لوحة الحجوزات | Asmaa Studio",
+  title: "لوحة الحجوزات",
   description: "لوحة إدارة حجوزات Asmaa Studio لمتابعة طلبات العرائس والمناسبات القادمة.",
   robots: {
     index: false,

@@ -16,11 +16,12 @@ The production write boundary is:
 1. Browser posts to `submit-reservation` Supabase Edge Function.
 2. Edge Function verifies `Origin` against `RESERVATION_ALLOWED_ORIGINS`.
 3. Edge Function enforces JSON body size limit.
-4. Edge Function rate-limits by request fingerprint.
+4. Edge Function hashes a Cloudflare-IP/user-agent fingerprint and rate-limits through an atomic Postgres RPC.
 5. Edge Function validates and normalizes the payload.
 6. Edge Function writes with service role.
 7. Admin reads and updates reservations only after Supabase Auth and `reservation_admins` allowlist.
 8. The public GitHub Pages build omits `/admin` unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`.
+9. The Edge Function fails closed when Supabase credentials or `RESERVATION_ALLOWED_ORIGINS` are missing; localhost is not allowed by default.
 
 ## Files
 
@@ -49,7 +50,7 @@ on conflict (email) do nothing;
 supabase functions deploy submit-reservation
 ```
 
-5. Set Edge Function secret:
+5. Set Edge Function secret. Include localhost only in local development, never as a production default:
 
 ```bash
 supabase secrets set RESERVATION_ALLOWED_ORIGINS="https://asmaa.video,https://www.asmaa.video,https://trustdraft-app.github.io"

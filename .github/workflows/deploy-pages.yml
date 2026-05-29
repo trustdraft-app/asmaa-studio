@@ -27,6 +27,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm audit --omit=dev
+      - run: npm run verify:launch
+      - run: npm run verify:admin
       - run: npm run build:pages
         env:
           GITHUB_PAGES: "true"

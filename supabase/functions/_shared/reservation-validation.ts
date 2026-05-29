@@ -15,8 +15,8 @@ export type ReservationPayload = {
 
 const packageNames: Record<string, string> = {
   "01": "بكج الزفة",
-  "02": "زفة + كواليس الفوتو",
-  "03": "Half Day",
+  "02": "بكج الزفة المطور",
+  "03": "Royal Event",
   "04": "Full Day",
   "05": "بكج الخطوبة"
 };

@@ -297,12 +297,16 @@
 .keyword-cloud a,
 .mini-keywords em,
 .city-command-card em {
+  align-items: center;
   padding: 7px 10px;
   border-radius: 999px;
   background: rgba(232, 197, 124, 0.08);
   color: rgba(255, 246, 223, 0.82);
+  display: inline-flex;
   font-size: 0.78rem;
   font-style: normal;
+  min-height: 44px;
+  min-width: 44px;
   text-decoration: none;
 }
 
@@ -461,12 +465,14 @@
 }
 
 .area-card a,
-.package-card-20x > a {
+.package-card-20x > a,
+.package-card footer a {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   color: #e8c57c;
   font-weight: 800;
+  min-height: 44px;
   text-decoration: none;
 }
 
@@ -645,6 +651,7 @@
   display: inline-flex;
   font-weight: 800;
   gap: 7px;
+  min-height: 44px;
   text-decoration: none;
 }
 
@@ -1087,9 +1094,12 @@ textarea {
 }
 
 .nav-links a {
+  align-items: center;
   color: rgba(255, 248, 236, 0.78);
+  display: inline-flex;
   font-size: 0.92rem;
   font-weight: 700;
+  min-height: 44px;
 }
 
 .hero-grid {
@@ -3036,7 +3046,7 @@ textarea {
   .language-pill,
   .nav-whatsapp {
     flex: 1;
-    min-height: 40px;
+    min-height: 44px;
   }
 
   .hero {
@@ -3252,7 +3262,7 @@ textarea {
   }
 
   .package-picker button {
-    min-height: auto;
+    min-height: 74px;
     padding: 12px;
   }
 

@@ -65,6 +65,51 @@ create trigger reservations_set_updated_at
 before update on public.reservations
 for each row execute function public.set_updated_at();
 
+create or replace function public.bump_reservation_rate_limit(
+  p_fingerprint text,
+  p_window_start timestamptz,
+  p_max_requests integer
+)
+returns boolean
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  current_count integer;
+begin
+  insert into public.reservation_rate_limits (
+    fingerprint,
+    window_start,
+    request_count,
+    updated_at
+  )
+  values (
+    p_fingerprint,
+    p_window_start,
+    1,
+    now()
+  )
+  on conflict (fingerprint) do update
+  set
+    request_count = case
+      when public.reservation_rate_limits.window_start < p_window_start then 1
+      else public.reservation_rate_limits.request_count + 1
+    end,
+    window_start = case
+      when public.reservation_rate_limits.window_start < p_window_start then p_window_start
+      else public.reservation_rate_limits.window_start
+    end,
+    updated_at = now()
+  returning request_count into current_count;
+
+  return current_count > p_max_requests;
+end;
+$$;
+
+revoke all on function public.bump_reservation_rate_limit(text, timestamptz, integer) from public;
+grant execute on function public.bump_reservation_rate_limit(text, timestamptz, integer) to service_role;
+
 alter table public.reservation_admins enable row level security;
 alter table public.reservations enable row level security;
 alter table public.reservation_rate_limits enable row level security;

@@ -2,8 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 import { validateReservationPayload } from "../_shared/reservation-validation.ts";
 
 const allowedOrigins = new Set(
-  (Deno.env.get("RESERVATION_ALLOWED_ORIGINS") ??
-    "https://asmaa.video,https://www.asmaa.video,https://trustdraft-app.github.io,http://localhost:3000")
+  (Deno.env.get("RESERVATION_ALLOWED_ORIGINS") ?? "")
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean)
@@ -11,9 +10,12 @@ const allowedOrigins = new Set(
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
-const supabase = createClient(supabaseUrl, serviceRoleKey, {
-  auth: { persistSession: false }
-});
+const supabase =
+  supabaseUrl && serviceRoleKey
+    ? createClient(supabaseUrl, serviceRoleKey, {
+        auth: { persistSession: false }
+      })
+    : null;
 
 const json = (body: Record<string, unknown>, status: number, origin: string | null) =>
   new Response(JSON.stringify(body), {
@@ -28,6 +30,10 @@ const json = (body: Record<string, unknown>, status: number, origin: string | nu
 
 Deno.serve(async (request) => {
   const origin = request.headers.get("origin");
+  if (!supabase || allowedOrigins.size === 0) {
+    return json({ error: "service_not_configured" }, 503, null);
+  }
+
   if (request.method === "OPTIONS") {
     if (!origin || !allowedOrigins.has(origin)) return new Response(null, { status: 403 });
     return new Response(null, { status: 204, headers: corsHeaders(origin) });
@@ -46,7 +52,7 @@ Deno.serve(async (request) => {
     return json({ error: "invalid_body_size" }, 413, origin);
   }
 
-  const fingerprint = fingerprintFromRequest(request);
+  const fingerprint = await fingerprintFromRequest(request);
   const limited = await isRateLimited(fingerprint);
   if (limited) {
     return json({ error: "rate_limited" }, 429, origin);
@@ -86,11 +92,14 @@ function corsHeaders(origin: string) {
   };
 }
 
-function fingerprintFromRequest(request: Request) {
+async function fingerprintFromRequest(request: Request) {
   const cfIp = request.headers.get("cf-connecting-ip");
-  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  const ip = cfIp && /^[a-fA-F0-9:.]{3,45}$/.test(cfIp) ? cfIp : forwarded ?? "unknown";
-  return `${ip}:${request.headers.get("user-agent")?.slice(0, 80) ?? "unknown"}`;
+  const ip = cfIp && /^[a-fA-F0-9:.]{3,45}$/.test(cfIp) ? cfIp : "unknown";
+  const userAgent = request.headers.get("user-agent")?.slice(0, 80) ?? "unknown";
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${ip}:${userAgent}`));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0"))
+    .join("")
+    .slice(0, 32);
 }
 
 async function isRateLimited(fingerprint: string) {
@@ -99,31 +108,12 @@ async function isRateLimited(fingerprint: string) {
   const now = new Date();
   const cutoff = new Date(now.getTime() - windowMinutes * 60_000).toISOString();
 
-  const { data } = await supabase
-    .from("reservation_rate_limits")
-    .select("window_start, request_count")
-    .eq("fingerprint", fingerprint)
-    .maybeSingle();
+  const { data, error } = await supabase!.rpc("bump_reservation_rate_limit", {
+    p_fingerprint: fingerprint,
+    p_window_start: cutoff,
+    p_max_requests: maxRequests
+  });
 
-  if (!data || data.window_start < cutoff) {
-    await supabase.from("reservation_rate_limits").upsert({
-      fingerprint,
-      window_start: now.toISOString(),
-      request_count: 1,
-      updated_at: now.toISOString()
-    });
-    return false;
-  }
-
-  if (data.request_count >= maxRequests) return true;
-
-  await supabase
-    .from("reservation_rate_limits")
-    .update({
-      request_count: data.request_count + 1,
-      updated_at: now.toISOString()
-    })
-    .eq("fingerprint", fingerprint);
-
-  return false;
+  if (error) return true;
+  return Boolean(data);
 }

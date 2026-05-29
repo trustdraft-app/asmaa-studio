@@ -88,7 +88,7 @@ export default function PortfolioPage() {
             <Link className="ghost-cta" href="/">
               العودة للرئيسية
             </Link>
-            <span className="eyebrow">الموجة 15 / Album refresh</span>
+            <span className="eyebrow">ألبوم قبل الحجز</span>
             <h1 className="section-title">ألبوم مختصر يوضح اللقطات التي ترفع قيمة فيلم يومك.</h1>
             <p className="section-copy">
               بدل أن تبقى كلمة الألبوم عامة، هذه الصفحة تشرح أهم المشاهد التي تسأل عنها العروس قبل

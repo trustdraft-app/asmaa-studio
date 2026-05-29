@@ -59,8 +59,8 @@ export default async function CityPage({ params }: Props) {
       }
     },
     provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://asmaa.video/#business",
+      "@type": "Organization",
+      "@id": "https://asmaa.video/#organization",
       name: "Asmaa Studio",
       url: "https://asmaa.video/",
       telephone: `+${whatsappNumber}`,

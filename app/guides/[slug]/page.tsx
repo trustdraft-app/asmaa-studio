@@ -73,13 +73,13 @@ export default async function GuidePage({ params }: Props) {
     dateModified: "2026-05-29",
     author: {
       "@type": "Organization",
-      "@id": "https://asmaa.video/#business",
+      "@id": "https://asmaa.video/#organization",
       name: "Asmaa Studio",
       url: "https://asmaa.video"
     },
     publisher: {
       "@type": "Organization",
-      "@id": "https://asmaa.video/#business",
+      "@id": "https://asmaa.video/#organization",
       name: "Asmaa Studio",
       logo: {
         "@type": "ImageObject",

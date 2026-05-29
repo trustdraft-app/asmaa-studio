@@ -4,7 +4,6 @@ import type { CSSProperties } from "react";
 import {
   ArrowLeft,
   CalendarDays,
-  Camera,
   Check,
   Clapperboard,
   ExternalLink,
@@ -66,8 +65,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://asmaa.video/#business",
+      "@type": "Organization",
+      "@id": "https://asmaa.video/#organization",
       name: "Asmaa Studio",
       alternateName: "Asmaa Video",
       url: "https://asmaa.video/",
@@ -77,8 +76,6 @@ const jsonLd = {
         "https://asmaa.video/highlights/bride-details.svg"
       ],
       telephone: `+${whatsappNumber}`,
-      priceRange: "SAR 600-2500",
-      areaServed: serviceAreaJsonLd,
       availableLanguage: ["ar-SA", "en"],
       contactPoint: {
         "@type": "ContactPoint",
@@ -87,7 +84,17 @@ const jsonLd = {
         areaServed: "SA-04",
         availableLanguage: ["Arabic", "English"]
       },
-      sameAs: [instagramUrl, tiktokUrl],
+      sameAs: [instagramUrl, tiktokUrl]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://asmaa.video/#wedding-videography-service",
+      name: "تصوير فيديو زواجات وخطوبة نسائي في الشرقية",
+      serviceType: "Female wedding videography",
+      provider: {
+        "@id": "https://asmaa.video/#organization"
+      },
+      areaServed: serviceAreaJsonLd,
       hasOfferCatalog: offerCatalogJsonLd,
       knowsAbout: [
         "تصوير فيديو زواجات نسائي",
@@ -98,24 +105,13 @@ const jsonLd = {
       ]
     },
     {
-      "@type": "Service",
-      "@id": "https://asmaa.video/#wedding-videography-service",
-      name: "تصوير فيديو زواجات وخطوبة نسائي في الشرقية",
-      serviceType: "Female wedding videography",
-      provider: {
-        "@id": "https://asmaa.video/#business"
-      },
-      areaServed: serviceAreaJsonLd,
-      hasOfferCatalog: offerCatalogJsonLd
-    },
-    {
       "@type": "WebSite",
       "@id": "https://asmaa.video/#website",
       url: "https://asmaa.video/",
       name: "Asmaa Studio",
       inLanguage: "ar-SA",
       publisher: {
-        "@id": "https://asmaa.video/#business"
+        "@id": "https://asmaa.video/#organization"
       }
     },
     {
@@ -141,7 +137,7 @@ const showreelFrames = [
 ];
 
 const heroDock = [
-  { icon: Camera, label: "Photography", ar: "تصوير فوتوغرافي" },
+  { icon: Video, label: "Wedding films", ar: "فيلم الزفاف" },
   { icon: Video, label: "Cinematography", ar: "تصوير فيديو" },
   { icon: Clapperboard, label: "Editing", ar: "مونتاج سينمائي" },
   { icon: Gem, label: "Bride details", ar: "تفاصيل العروس" },
@@ -189,7 +185,7 @@ export default function HomePage() {
       <section className="hero hero-20x" id="top">
         <Image
           className="hero-cinematic-backdrop"
-          src={assetPath("/brand/asmaa-cinematic-bridal-still.png")}
+          src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
           alt=""
           fill
           priority

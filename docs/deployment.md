@@ -11,7 +11,7 @@
 
 - `asmaa.video` and `www.asmaa.video` are live on GitHub Pages with HTTPS enforced.
 - `asmaavideo.com` and `www.asmaavideo.com` are separate public hostnames, not just marketing aliases.
-- As of 2026-05-29 21:00 +03, both `asmaavideo.com` hostnames resolve to Namecheap forwarding IP `162.255.119.149`.
+- As of 2026-05-29 22:32 +03, both `asmaavideo.com` hostnames resolve to Namecheap forwarding IP `162.255.119.149`.
 - HTTP forwarding reaches `https://asmaa.video/`, but HTTPS on `asmaavideo.com` times out because Namecheap URL forwarding is not a first-class HTTPS host with a certificate for this domain.
 
 The required fix is DNS/hosting migration for `asmaavideo.com`; code changes alone cannot issue a TLS certificate for a domain that still points at Namecheap forwarding.
@@ -23,6 +23,7 @@ The required fix is DNS/hosting migration for `asmaavideo.com`; code changes alo
 - Temporary GitHub Pages URL: https://trustdraft-app.github.io/asmaa-studio/
 - Deployment workflow: `.github/workflows/deploy-pages.yml`
 - Build mode: `npm run build:pages`, which sets `GITHUB_PAGES=true`, `GITHUB_PAGES_CUSTOM_DOMAIN=true`, and removes the `/admin` static artifact unless the admin flag is explicitly enabled.
+- Deploy gate: the Pages workflow now runs lint, typecheck, production dependency audit, launch verification, and admin-readiness verification before rebuilding the public artifact for upload.
 - Custom domain: `asmaa.video`
 - Support domain: `asmaavideo.com` must move away from Namecheap URL forwarding before HTTPS can work.
 
@@ -101,18 +102,19 @@ As of 2026-05-28 05:27 +03, both `asmaavideo.com` and `www.asmaavideo.com` retur
 
 ## HTTPS Status
 
-GitHub Pages has accepted `asmaa.video` as the custom domain and the latest Pages workflow for commit `9826638` completed successfully. HTTP is live now at `http://asmaa.video`. HTTPS enforcement is pending GitHub certificate issuance; the GitHub API currently returns `The certificate does not exist yet` when enabling `https_enforced`.
+GitHub Pages has accepted `asmaa.video` as the custom domain, the certificate exists, and HTTPS enforcement is enabled for the primary domain. `https://asmaa.video` and `https://www.asmaa.video` are the only first-class HTTPS hostnames on the current GitHub Pages deployment. `asmaavideo.com` remains an HTTP forwarding bridge until DNS moves to Vercel, Cloudflare, or another redirect host that can issue TLS for both apex and `www`.
 
 ## Current Live Product Baseline
 
-The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage, package decision engine, city SEO pages, expanded highlight covers, profile bio assets, hashtag sets, channel actions, content pillars, board levers, `/reserve`, `/admin`, and the daily launch-wave automation.
+The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage, package decision engine, city SEO pages, expanded highlight covers, `/reserve`, `/faq`, `/portfolio`, `/guides`, structured data, `llms.txt`, and strict launch verification. Public `/admin` is intentionally hidden on GitHub Pages; the admin login is verified only in explicit admin-check builds.
 
 ## Security Notes
 
 - `/reserve` has a WhatsApp fallback when no backend endpoint is configured.
 - Live reservation persistence must use the Supabase Edge Function in `supabase/functions/submit-reservation`; do not enable direct anonymous table inserts from the browser.
 - `/admin` is omitted from the public GitHub Pages build unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`; when enabled, it is noindex and requires Supabase Auth plus the `reservation_admins` allowlist before reservation data is visible.
-- Security headers are configured in `vercel.json`.
-- The Edge Function applies origin checks, body limits, rate limits, no-store responses, and server-side validation before persistence.
+- Security headers are configured in `vercel.json`, but GitHub Pages does not apply them. Full CSP/HSTS/header control requires Vercel, Cloudflare Pages, or a Cloudflare Worker/Proxy layer in front of the static site.
+- The Edge Function applies explicit origin checks, body limits, hashed Cloudflare-IP fingerprints, atomic RPC-backed rate limits, no-store responses, and server-side validation before persistence. It fails closed if Supabase credentials or allowed origins are missing.
+- Sentry is not active in the GitHub Pages build because no Sentry project/DSN is configured in this repo. Add Sentry only after a real DSN and release-upload token are available; do not fake monitoring with placeholder credentials.
 
 See `docs/reservation-system.md` for the exact activation steps.

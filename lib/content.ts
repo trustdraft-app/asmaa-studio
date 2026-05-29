@@ -94,7 +94,7 @@ export const serviceAreas: ServiceArea[] = [
     slug: "alahsa",
     ar: "الأحساء",
     en: "Al Ahsa",
-    priority: "الموجة 01",
+    priority: "الأحساء أولا",
     headline: "تصوير زواجات نسائي في الأحساء بأسلوب ناعم وتفاصيل تليق بالعروس",
     metaTitle: "مصورة زواجات في الأحساء | Asmaa Studio",
     metaDescription:
@@ -114,10 +114,10 @@ export const serviceAreas: ServiceArea[] = [
       "باقات تصوير زواج الأحساء"
     ],
     contentWave: [
-      "ريل: تفاصيل العروس قبل الزفة",
-      "ستوري: كيف تختارين مدة التصوير",
-      "كاروسيل: الفرق بين بكج الزفة وFull Day",
-      "هايلايت: طريقة الحجز والباقات"
+      "تحديد القاعة أو الحي حتى يتضح وقت الوصول.",
+      "اختيار الزفة فقط أو تفاصيل العروس قبل أول رسالة.",
+      "إرسال التاريخ والبكج الأقرب من رابط العروس.",
+      "مراجعة التوفر وتأكيد الخطوة التالية عبر واتساب."
     ],
     faq: [
       {
@@ -136,7 +136,7 @@ export const serviceAreas: ServiceArea[] = [
     slug: "dammam",
     ar: "الدمام",
     en: "Dammam",
-    priority: "الموجة 02",
+    priority: "تغطية الدمام",
     headline: "تصوير زواج وخطوبة في الدمام للعروس التي تحب الترتيب واللقطات الهادئة",
     metaTitle: "مصورة زواجات في الدمام | Asmaa Studio",
     metaDescription:
@@ -156,10 +156,10 @@ export const serviceAreas: ServiceArea[] = [
       "مصورة عرايس الدمام"
     ],
     contentWave: [
-      "ريل: لحظة First Look",
-      "ستوري: أسئلة الدمام عن مدة التغطية",
-      "كاروسيل: 5 لقطات لا تفوت",
-      "هايلايت: Video details"
+      "كتابة اسم القاعة أو الحي لتقدير ترتيب الوصول.",
+      "تحديد هل المناسبة زواج أو خطوبة أو ملكة.",
+      "اختيار مدة التغطية حسب اللقطات المطلوبة.",
+      "تجهيز ملاحظات First Look أو تفاصيل العروس قبل المتابعة."
     ],
     faq: [
       {
@@ -177,7 +177,7 @@ export const serviceAreas: ServiceArea[] = [
     slug: "khobar",
     ar: "الخبر",
     en: "Khobar",
-    priority: "الموجة 03",
+    priority: "تغطية الخبر",
     headline: "تصوير عروس وخطوبة في الخبر بإحساس فاخر وتفاصيل لا تضيع",
     metaTitle: "مصورة زواجات في الخبر | Asmaa Studio",
     metaDescription:
@@ -197,10 +197,10 @@ export const serviceAreas: ServiceArea[] = [
       "تصوير فيديو زواج الخبر"
     ],
     contentWave: [
-      "ريل: كادر المسكة والمجوهرات",
-      "ستوري: اختيار بكج الخبر",
-      "كاروسيل: لماذا Full Day مناسب للخبر",
-      "هايلايت: Bride details"
+      "تحديد أسلوب الفيلم المطلوب: هادئ، فاخر، أو مختصر.",
+      "اختيار الباقة حسب التفاصيل لا عدد الساعات فقط.",
+      "إضافة القاعة والوقت حتى تكون المتابعة دقيقة.",
+      "تأكيد التوفر قبل تثبيت الموعد والخطوة التالية."
     ],
     faq: [
       {
@@ -515,7 +515,7 @@ export const seoLaunchWaves: { day: string; title: string; channel: string; goal
   { day: "12", title: "ستوري رابط العروس", channel: "Stories + WhatsApp", goal: "تحويل الأسئلة المتكررة إلى رابط", ownerCue: "ضع رابط /reserve" },
   { day: "13", title: "ريل الخبر: تفاصيل فاخرة", channel: "TikTok", goal: "طلب Premium", ownerCue: "نص قصير: للخبر والشرقية" },
   { day: "14", title: "صفحة أسئلة حجز مصغرة", channel: "Website", goal: "تقليل رسائل متكررة", ownerCue: "إجابة وقت الحضور والعربون" },
-  { day: "15", title: "Album refresh", channel: "Highlights", goal: "إظهار جودة حديثة", ownerCue: "أفضل 8 لقطات فقط" },
+  { day: "15", title: "تحديث الألبوم", channel: "Highlights", goal: "إظهار جودة حديثة", ownerCue: "أفضل 8 لقطات فقط" },
   { day: "16", title: "كاروسيل الزفة فقط", channel: "Instagram", goal: "حجز الميزانية الصغيرة", ownerCue: "شرح بكج 600" },
   { day: "17", title: "ريل الخطوبة", channel: "TikTok + Reels", goal: "التقاط الملكة والخطوبة", ownerCue: "ذكر بكج الخطوبة" },
   { day: "18", title: "منشور Google ثان", channel: "Google", goal: "استمرارية محلية", ownerCue: "أضف صورة تفاصيل عامة من العمل" },
@@ -577,7 +577,7 @@ export const liveOperatingSystem = [
   { icon: MonitorSmartphone, label: "رابط العروس", text: "اختيار الباقة والتاريخ والمدينة في خطوات قصيرة." },
   { icon: Workflow, label: "طلب مرتب", text: "التفاصيل تصل بطريقة تسهل المتابعة بدون أسئلة مكررة." },
   { icon: Camera, label: "هايلايت واضح", text: "الألبوم، الباقات، والتفاصيل تظهر قبل قرار التواصل." },
-  { icon: Zap, label: "محتوى مستمر", text: "نشر محلي يذكر العروس بالخدمة في الوقت المناسب." },
+  { icon: Zap, label: "تذكير واضح", text: "الصفحات والهايلايت تساعد العروس على تذكر الباقة المناسبة." },
   { icon: CheckCircle2, label: "اختيار أهدأ", text: "كل باقة مربوطة بلحظات اليوم لا بالسعر فقط." },
   { icon: Clock, label: "رد أسرع", text: "المحادثة تبدأ من معلومات جاهزة لا من سؤال عام." }
 ];

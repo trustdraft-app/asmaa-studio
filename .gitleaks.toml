@@ -1,0 +1,12 @@
+title = "Asmaa Studio gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Generated local build artifacts"
+paths = [
+  '''^\.next/''',
+  '''^out/''',
+  '''^node_modules/'''
+]
