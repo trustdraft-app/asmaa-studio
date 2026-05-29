@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, CheckCircle2, MessageCircle } from "lucide-react";
+import { JsonLd } from "../../components/JsonLd";
 import { bookingFaqs, whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
@@ -62,14 +63,8 @@ const breadcrumbJsonLd = {
 export default function FaqPage() {
   return (
     <main className="page-shell">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <JsonLd data={faqJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
 
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">

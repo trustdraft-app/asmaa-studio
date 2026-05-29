@@ -12,11 +12,12 @@ const port = Number(process.env.PORT || 4177);
 const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
+const adminPanelEnabled = process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED === "true";
+const verifyAdminOnly = process.env.VERIFY_ADMIN_ONLY === "true";
 
 const requiredFiles = [
   "index.html",
   "reserve.html",
-  "admin.html",
   "faq.html",
   "portfolio.html",
   "guides.html",
@@ -29,6 +30,10 @@ const requiredFiles = [
   "favicon.ico",
   "CNAME"
 ];
+
+if (adminPanelEnabled) {
+  requiredFiles.push("admin.html");
+}
 
 const guideSlugs = [
   "wedding-videography-al-ahsa",
@@ -152,6 +157,33 @@ function verifyStaticOutput() {
     else fail(`missing ${file}`);
   }
 
+  if (!adminPanelEnabled) {
+    const adminHtmlPath = join(outDir, "admin.html");
+    const homepageHtml = readOutFile("index.html");
+    if (!homepageHtml.includes('href="/admin"') && !homepageHtml.includes("admin-login")) {
+      pass("public homepage does not expose an admin link");
+    } else {
+      fail("public homepage must not expose /admin or admin login affordances");
+    }
+
+    if (!existsSync(adminHtmlPath)) {
+      pass("admin route is absent from public launch build");
+    } else {
+      const adminHtml = readFileSync(adminHtmlPath, "utf8");
+      if (adminHtml.includes('id="__next_error__"') && !adminHtml.includes("admin-login")) {
+        pass("admin route renders a 404 artifact in public launch build");
+      } else {
+        fail("admin route must render 404 unless NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true");
+      }
+    }
+  } else {
+    const adminHtml = readOutFile("admin.html");
+    if (adminHtml.includes("admin-login")) pass("admin login screen is present when explicitly enabled");
+    else fail("admin login screen is missing when NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true");
+    if (adminHtml.includes('name="robots" content="noindex, nofollow"')) pass("admin page is noindex when enabled");
+    else fail("admin page must stay noindex when enabled");
+  }
+
   for (const slug of guideSlugs) {
     const file = `guides/${slug}.html`;
     if (existsSync(join(outDir, file))) pass(`built ${file}`);
@@ -208,7 +240,11 @@ function verifyStaticOutput() {
 
 async function verifyBrowserOutput() {
   const server = await serveOut();
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({
+    headless: true,
+    executablePath: chromium.executablePath(),
+    args: ["--disable-dev-shm-usage"]
+  });
 
   try {
     const contexts = [
@@ -232,19 +268,23 @@ async function verifyBrowserOutput() {
       });
       const page = await context.newPage();
 
-      for (const route of [
-        "/",
-        "/reserve",
-        "/admin",
-        "/faq",
-        "/portfolio",
-        "/guides",
-        "/guides/wedding-videography-al-ahsa",
-        "/guides/female-wedding-photographer-eastern-province",
-        "/alahsa",
-        "/dammam",
-        "/khobar"
-      ]) {
+      const browserRoutes = verifyAdminOnly
+        ? ["/admin"]
+        : [
+            "/",
+            "/reserve",
+            "/faq",
+            "/portfolio",
+            "/guides",
+            "/guides/wedding-videography-al-ahsa",
+            "/guides/female-wedding-photographer-eastern-province",
+            "/alahsa",
+            "/dammam",
+            "/khobar"
+          ];
+      if (adminPanelEnabled && !verifyAdminOnly) browserRoutes.push("/admin");
+
+      for (const route of browserRoutes) {
         await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
 
         const layout = await page.evaluate(() => ({
@@ -262,6 +302,24 @@ async function verifyBrowserOutput() {
         for (const phrase of bannedPhrases) {
           if (layout.bodyText.includes(phrase)) fail(`${config.name} ${route} renders banned wording: ${phrase}`);
         }
+
+        if (route === "/admin" && adminPanelEnabled) {
+          if (layout.bodyText.includes("دخول فريق الاستوديو")) pass(`${config.name} admin shows only the login gate`);
+          else fail(`${config.name} admin login gate is missing`);
+          if (layout.bodyText.includes("كل طلب حجز")) fail(`${config.name} admin exposes dashboard content before auth`);
+          else pass(`${config.name} admin dashboard content is hidden before auth`);
+        }
+
+        if (route === "/" && !adminPanelEnabled) {
+          const publicAdminLinks = await page.locator('a[href="/admin"]').count();
+          if (publicAdminLinks === 0) pass(`${config.name} homepage hides the admin link`);
+          else fail(`${config.name} homepage exposes ${publicAdminLinks} admin link(s)`);
+        }
+      }
+
+      if (verifyAdminOnly) {
+        await context.close();
+        continue;
       }
 
       await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });

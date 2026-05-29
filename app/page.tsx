@@ -17,6 +17,7 @@ import {
   Sparkles,
   Video
 } from "lucide-react";
+import { JsonLd } from "../components/JsonLd";
 import {
   areaStrategy,
   assetPath,
@@ -91,10 +92,7 @@ const testimonialQuotes = [
 export default function HomePage() {
   return (
     <main className="page-shell">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       <section className="hero hero-20x" id="top">
         <Image
@@ -120,7 +118,6 @@ export default function HomePage() {
             <Link href="/portfolio">الألبوم</Link>
             <a href="#social-assets">المحتوى</a>
             <Link href="/reserve">رابط العروس</Link>
-            <Link href="/admin">المواعيد</Link>
           </div>
           <div className="nav-actions" aria-label="خيارات سريعة">
             <span className="language-pill">

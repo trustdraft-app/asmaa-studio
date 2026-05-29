@@ -139,3 +139,13 @@
 - Rejected the first generated concept asset after visual review because it embedded fake website UI; replaced it with a no-text cinematic still and changed the asset path to avoid stale image caching.
 - Fixed mobile hero wrapping by separating Arabic and English headline spans, adding grid min-width constraints, and making the horizontal scrubber keyboard-focusable.
 - Verification passed: lint, typecheck, GitHub Pages export build, launch verifier, and mobile/desktop Playwright screenshot checks with no horizontal overflow.
+
+## 2026-05-29 21:23 +03
+
+- Hardened the public GitHub Pages build so `/admin` renders a static 404 artifact by default and the homepage no longer exposes any `/admin` link.
+- Added explicit admin readiness verification: with `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`, `/admin` builds, stays `noindex`, shows only the Supabase login gate, and hides dashboard content before auth.
+- Added launch verification checks that fail if the public homepage exposes `/admin` or if the public admin route stops rendering as a 404 artifact.
+- Centralized JSON-LD rendering through an escaping `JsonLd` component after Semgrep flagged direct `dangerouslySetInnerHTML` usage.
+- Hardened the GitHub Pages workflow with SHA-pinned actions, job-scoped Pages permissions, and non-persistent checkout credentials.
+- Documented the `asmaavideo.com` production blocker: both apex and `www` resolve to Namecheap forwarding IP `162.255.119.149`, so HTTPS times out until DNS moves to a first-class HTTPS host such as Vercel or Cloudflare.
+- Verification passed: `git diff --check`, lint, typecheck, production dependency audit, OSV lockfile scan, gitleaks history/staged scans, Semgrep auto scan, Trivy high/critical scan, actionlint, zizmor, `npm run verify:launch`, and `npm run verify:admin`.

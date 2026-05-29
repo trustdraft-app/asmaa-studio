@@ -3,7 +3,7 @@
 ## What Changed
 
 - `/reserve` is the bride-facing link that replaces sending the PDF package file in WhatsApp.
-- `/admin` is the owner dashboard for upcoming reservations, lead status, and WhatsApp follow-up.
+- `/admin` is the owner dashboard for upcoming reservations, lead status, and WhatsApp follow-up when explicitly enabled.
 - The site keeps a WhatsApp fallback when the secure backend endpoint is not configured yet.
 - Real persistence is designed for Supabase Edge Functions, not direct anonymous browser database writes.
 
@@ -20,6 +20,7 @@ The production write boundary is:
 5. Edge Function validates and normalizes the payload.
 6. Edge Function writes with service role.
 7. Admin reads and updates reservations only after Supabase Auth and `reservation_admins` allowlist.
+8. The public GitHub Pages build returns a static 404 artifact for `/admin` unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`.
 
 ## Files
 
@@ -60,7 +61,10 @@ supabase secrets set RESERVATION_ALLOWED_ORIGINS="https://asmaa.video,https://ww
 NEXT_PUBLIC_SUPABASE_URL=https://PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=PUBLIC_ANON_KEY
 NEXT_PUBLIC_RESERVATION_ENDPOINT=https://PROJECT_REF.supabase.co/functions/v1/submit-reservation
+NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true
 ```
+
+Do not set `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true` until the Supabase project, Auth email links, and `reservation_admins` allowlist are active. Without that flag, `/admin` returns the static 404 artifact instead of the admin login or dashboard.
 
 7. Rebuild and redeploy the website.
 
@@ -68,6 +72,6 @@ NEXT_PUBLIC_RESERVATION_ENDPOINT=https://PROJECT_REF.supabase.co/functions/v1/su
 
 1. Send `https://asmaa.video/reserve` to the bride instead of sending the PDF.
 2. Bride fills the short guided flow.
-3. If Supabase is active, the reservation appears in `/admin`.
+3. If Supabase and `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true` are active, the reservation appears in `/admin`.
 4. If Supabase is not active, the page opens WhatsApp with the full structured message.
 5. Owner uses `/admin` to mark each lead as new, contacted, confirmed, deposit paid, shot, delivered, or cancelled.

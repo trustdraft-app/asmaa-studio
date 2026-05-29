@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "lucide-react";
+import { JsonLd } from "../../components/JsonLd";
 import { packages, serviceAreas, whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
@@ -76,14 +77,8 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <main className="page-shell city-page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(cityJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+      <JsonLd data={cityJsonLd} />
+      <JsonLd data={faqJsonLd} />
 
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">

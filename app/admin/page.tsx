@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { AdminDashboard } from "../../components/AdminDashboard";
 
 export const metadata: Metadata = {
@@ -11,5 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPage() {
+  if (process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED !== "true") {
+    notFound();
+  }
+
   return <AdminDashboard />;
 }

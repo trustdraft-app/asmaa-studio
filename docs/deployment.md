@@ -7,15 +7,24 @@
 - Primary domain: `asmaa.video`
 - Redirect/support domain: `asmaavideo.com`
 
+## Current Domain Reality
+
+- `asmaa.video` and `www.asmaa.video` are live on GitHub Pages with HTTPS enforced.
+- `asmaavideo.com` and `www.asmaavideo.com` are separate public hostnames, not just marketing aliases.
+- As of 2026-05-29 21:00 +03, both `asmaavideo.com` hostnames resolve to Namecheap forwarding IP `162.255.119.149`.
+- HTTP forwarding reaches `https://asmaa.video/`, but HTTPS on `asmaavideo.com` times out because Namecheap URL forwarding is not a first-class HTTPS host with a certificate for this domain.
+
+The required fix is DNS/hosting migration for `asmaavideo.com`; code changes alone cannot issue a TLS certificate for a domain that still points at Namecheap forwarding.
+
 ## Live GitHub Pages Deployment
 
 - GitHub repo: https://github.com/trustdraft-app/asmaa-studio
-- Canonical live URL: http://asmaa.video
+- Canonical live URL: https://asmaa.video
 - Temporary GitHub Pages URL: https://trustdraft-app.github.io/asmaa-studio/
 - Deployment workflow: `.github/workflows/deploy-pages.yml`
-- Build mode: static export with `GITHUB_PAGES=true`, `GITHUB_PAGES_CUSTOM_DOMAIN=true`, and empty `NEXT_PUBLIC_BASE_PATH`
+- Build mode: `npm run build:pages`, which sets `GITHUB_PAGES=true`, `GITHUB_PAGES_CUSTOM_DOMAIN=true`, and makes `/admin` render a static 404 artifact unless the admin flag is explicitly enabled.
 - Custom domain: `asmaa.video`
-- Support domain: `asmaavideo.com` redirects to `http://asmaa.video` until the GitHub Pages certificate is issued
+- Support domain: `asmaavideo.com` must move away from Namecheap URL forwarding before HTTPS can work.
 
 This is live now because GitHub authentication was available. Vercel and Cloudflare CLI sessions were not authenticated in this environment.
 
@@ -33,7 +42,7 @@ This is live now because GitHub authentication was available. Vercel and Cloudfl
 
 ## DNS Plan
 
-After the Vercel project exists:
+After the Vercel project exists and DNS access is available:
 
 1. Add `asmaa.video` as the production domain.
 2. Add `www.asmaa.video` and redirect it to apex if desired.
@@ -67,14 +76,26 @@ Set these under Namecheap Advanced DNS for `asmaa.video`:
 www  CNAME  trustdraft-app.github.io
 ```
 
-For `asmaavideo.com`, use Namecheap URL Redirect Record to:
+Do not leave `asmaavideo.com` on Namecheap URL Redirect for production HTTPS. The current records are only a temporary HTTP bridge:
 
 ```text
 @    URL Redirect  http://asmaa.video
 www  URL Redirect  http://asmaa.video
 ```
 
-If URL Redirect is unavailable, point `asmaavideo.com` to the same GitHub Pages records only after creating a separate redirect host. GitHub Pages supports one primary custom domain for this repo, so the clean support-domain behavior is redirecting `asmaavideo.com` to `asmaa.video`.
+To fix `https://asmaavideo.com`, change the DNS at Namecheap to a real HTTPS host:
+
+```text
+# Preferred Vercel shape after adding both domains to the Vercel project
+@    A      76.76.21.21
+www  CNAME  cname.vercel-dns.com
+```
+
+Then configure Vercel to redirect both `asmaavideo.com` and `www.asmaavideo.com` to `https://asmaa.video`.
+
+If Cloudflare becomes authoritative DNS, move nameservers to Cloudflare, create proxied DNS records for both hostnames, and use a Redirect Rule or Worker to return a 301 to `https://asmaa.video$request_uri`.
+
+If GitHub Pages remains the only available host, use a separate redirect host for `asmaavideo.com`; do not point it at this same repo because GitHub Pages supports one primary custom domain per Pages site.
 
 As of 2026-05-28 05:27 +03, both `asmaavideo.com` and `www.asmaavideo.com` return `302` redirects to `http://asmaa.video` through Namecheap URL Forwarding.
 
@@ -90,7 +111,7 @@ The live deploy now includes the 20x conversion/SEO upgrade: motion-led homepage
 
 - `/reserve` has a WhatsApp fallback when no backend endpoint is configured.
 - Live reservation persistence must use the Supabase Edge Function in `supabase/functions/submit-reservation`; do not enable direct anonymous table inserts from the browser.
-- `/admin` is noindex and requires Supabase Auth plus the `reservation_admins` allowlist when Supabase is configured.
+- `/admin` renders a 404 in the public GitHub Pages build unless `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true`; when enabled, it is noindex and requires Supabase Auth plus the `reservation_admins` allowlist before reservation data is visible.
 - Security headers are configured in `vercel.json`.
 - The Edge Function applies origin checks, body limits, rate limits, no-store responses, and server-side validation before persistence.
 

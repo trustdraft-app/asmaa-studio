@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, CalendarDays, MapPin, Search } from "lucide-react";
+import { JsonLd } from "../../components/JsonLd";
 import { packages, serviceAreas } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { seoGuidePages } from "../../lib/seo-pages";
@@ -45,7 +46,7 @@ export default function GuidesPage() {
 
   return (
     <main className="page-shell guide-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
 
       <section className="section city-hero-20x guide-index-hero">
         <div className="section-inner city-hero-grid">

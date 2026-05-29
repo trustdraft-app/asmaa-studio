@@ -8,6 +8,7 @@ import {
   MapPin,
   MessageCircle
 } from "lucide-react";
+import { JsonLd } from "../../components/JsonLd";
 import {
   bookingSteps,
   packages,
@@ -78,14 +79,8 @@ const breadcrumbJsonLd = {
 export default function PortfolioPage() {
   return (
     <main className="page-shell portfolio-page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <JsonLd data={collectionJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
 
       <section className="section city-hero-20x portfolio-hero">
         <div className="section-inner city-hero-grid">

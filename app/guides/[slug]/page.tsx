@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "lucide-react";
+import { JsonLd } from "../../../components/JsonLd";
 import { packages, serviceAreas, whatsappLink } from "../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../lib/metadata";
 import { seoGuidePageBySlug, seoGuidePages } from "../../../lib/seo-pages";
@@ -108,8 +109,8 @@ export default async function GuidePage({ params }: Props) {
 
   return (
     <main className="page-shell guide-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
 
       <section className="section city-hero-20x guide-article-hero">
         <div className="section-inner city-hero-grid">

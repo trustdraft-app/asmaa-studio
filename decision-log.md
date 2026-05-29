@@ -119,3 +119,15 @@
 **Decision:** Implement wave 15 as a dedicated `/portfolio` album page, add homepage/internal links to it, refresh the Album highlight asset, and include the route in sitemap, `llms.txt`, and launch verification.
 **Reasoning:** The next highest-impact safe improvement was conversion-focused proof: a search-indexable album page that explains the eight moments brides actually compare before booking, without inventing client testimonials or unsupported claims.
 **Source:** 20-wave plan in `lib/content.ts`, live project files, professional judgment.
+
+## 2026-05-29 21:22 +03 — Asmaa Studio
+**Question:** How should the site handle the admin dashboard while `asmaavideo.com` is down on HTTPS?
+**Decision:** Ship GitHub Pages with `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false`, remove the public `/admin` navigation link, make `/admin` render a static 404 artifact unless explicitly enabled, and document `asmaavideo.com` as a DNS/hosting migration blocker because it still points to Namecheap forwarding IP `162.255.119.149` without first-class TLS.
+**Reasoning:** Customers should not see an admin affordance at all, while the admin login/dashboard can still be verified safely in an explicit build mode; code cannot issue a certificate for a domain still hosted by URL forwarding.
+**Source:** Live DNS/cURL checks, GitHub Pages build workflow, Supabase admin/RLS design, Semgrep/zizmor/security verification, professional judgment.
+
+## 2026-05-29 21:23 +03 — Asmaa Studio
+**Question:** How should scanner findings be resolved before launch deployment?
+**Decision:** Centralize JSON-LD script injection in an escaping `JsonLd` component and harden the Pages workflow with SHA-pinned actions, job-scoped permissions, and `persist-credentials: false` on checkout.
+**Reasoning:** These fixes remove concrete Semgrep and zizmor findings without widening scope or weakening the static export model.
+**Source:** Semgrep auto scan, zizmor workflow audit, actionlint, professional judgment.
