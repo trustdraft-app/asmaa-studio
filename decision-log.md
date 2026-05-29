@@ -131,3 +131,9 @@
 **Decision:** Centralize JSON-LD script injection in an escaping `JsonLd` component and harden the Pages workflow with SHA-pinned actions, job-scoped permissions, and `persist-credentials: false` on checkout.
 **Reasoning:** These fixes remove concrete Semgrep and zizmor findings without widening scope or weakening the static export model.
 **Source:** Semgrep auto scan, zizmor workflow audit, actionlint, professional judgment.
+
+## 2026-05-29 21:44 +03 — Asmaa Studio
+**Question:** How should the homepage meet a world-class agency UI/UX/content bar without inventing claims or exposing internal operations?
+**Decision:** Remove internal SEO/social/hashtag/board-ops language from the public homepage, replace testimonial-looking copy with experience standards, reframe city and booking sections around bride decision clarity, remove the unsupported equipment claim, and enforce internal-term bans in launch verification.
+**Reasoning:** Premium conversion needs truthful specificity and customer confidence, not operational artifacts, fake-feeling social proof, or claims a later auditor cannot verify.
+**Source:** User directive, project context, live visual review, Figma QA page, local security/launch verification, professional judgment.

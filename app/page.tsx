@@ -22,20 +22,13 @@ import {
   areaStrategy,
   assetPath,
   boardScore,
-  boardLevers,
   bookingSteps,
-  channelActions,
   cinematicMoments,
-  contentPillars,
   conversionFlow,
-  hashtagSets,
   highlights,
   instagramUrl,
   liveOperatingSystem,
   packages,
-  profileAssets,
-  seoFocus,
-  seoLaunchWaves,
   serviceAreas,
   services,
   tiktokUrl,
@@ -82,11 +75,37 @@ const heroDock = [
   { icon: Heart, label: "Pre-wedding", ar: "خطوبة وملكة" }
 ];
 
-const testimonialQuotes = [
-  { quote: "كل شيء كان مرتب وواضح من أول رسالة.", meta: "عروس من الأحساء" },
-  { quote: "التفاصيل طلعت ناعمة والفيلم إحساسه هادئ.", meta: "خطوبة في الدمام" },
-  { quote: "اختيار الباقة كان سهل لأن كل لحظة مشروحة.", meta: "زواج في الخبر" },
-  { quote: "الأسلوب راق وما حسينا بأي إزعاج أثناء اليوم.", meta: "تغطية عائلية" }
+const experienceStandards = [
+  { quote: "كل خطوة يجب أن تقلل سؤالا لا تزيده.", meta: "وضوح الحجز" },
+  { quote: "اللقطة الجميلة لا تكفي إذا لم تحفظ إحساس اليوم.", meta: "لغة الفيلم" },
+  { quote: "الباقة الجيدة تشرح ما سيظهر في الفيلم قبل السعر.", meta: "اختيار البكج" },
+  { quote: "التصوير الهادئ يجعل العروس والضيوف أكثر راحة.", meta: "أدب الحضور" }
+];
+
+const bookingAssurance = [
+  {
+    title: "قبل الحجز",
+    detail: "تعرفين الفرق بين الزفة، التفاصيل، First Look، واليوم الكامل بدون ملف طويل أو أسئلة متفرقة."
+  },
+  {
+    title: "قبل المناسبة",
+    detail: "الرسالة تجمع المدينة، التاريخ، الباقة، واللحظات المهمة حتى تبدأ المتابعة من معلومات واضحة."
+  },
+  {
+    title: "يوم التصوير",
+    detail: "الأولوية للهدوء، ترتيب اللقطات، واحترام إيقاع العائلة حتى لا يتحول التصوير إلى إرباك."
+  },
+  {
+    title: "بعد المناسبة",
+    detail: "القصة ترتب من اللقطات الواسعة إلى التفاصيل القريبة حتى يبدو الفيلم متماسكا لا مجرد مقاطع متفرقة."
+  }
+];
+
+const decisionAssurance = [
+  { title: "لا وعود مبالغ فيها", detail: "الموقع يشرح نطاق الخدمة والباقات بوضوح بدل استخدام عبارات عامة لا يمكن قياسها." },
+  { title: "لا إخفاء للتكلفة", detail: "السعر، المدة، وأهم اللقطات تظهر قبل واتساب حتى يكون السؤال التالي أكثر دقة." },
+  { title: "لا إرباك في الطريق", detail: "كل مسار مهم ينتهي برابط العروس أو واتساب مباشر، ولا يظهر للعميلة أي رابط إداري." },
+  { title: "لا محتوى زائد", detail: "الصفحات الطويلة تخدم القرار: الأسلوب، المدينة، الباقة، الأسئلة، والألبوم." }
 ];
 
 export default function HomePage() {
@@ -112,11 +131,11 @@ export default function HomePage() {
           </a>
           <div className="nav-links">
             <a href="#packages">الباقات</a>
-            <a href="#seo-wave">المدن</a>
+            <a href="#cities">المدن</a>
             <Link href="/guides">الدليل</Link>
-            <Link href="/faq">الأسئلة</Link>
             <Link href="/portfolio">الألبوم</Link>
-            <a href="#social-assets">المحتوى</a>
+            <Link href="/faq">الأسئلة</Link>
+            <a href="#booking-path">طريقة الحجز</a>
             <Link href="/reserve">رابط العروس</Link>
           </div>
           <div className="nav-actions" aria-label="خيارات سريعة">
@@ -135,12 +154,12 @@ export default function HomePage() {
           <div className="hero-copy-stack">
             <span className="eyebrow">Wedding films for Saudi brides</span>
             <h1>
-              <span className="hero-title-ar">نخلد أجمل القصص في أطر سينمائية خالدة.</span>
-              <span className="hero-title-en">Timeless stories in cinematic frames.</span>
+              <span className="hero-title-ar">فيلم زفاف هادئ يلاحظ ما لا تراه العيون في الزحمة.</span>
+              <span className="hero-title-en">Quiet wedding films for the moments that feel personal.</span>
             </h1>
             <p className="hero-copy">
               Asmaa Studio توثق الزفة، الخطوبة، وتفاصيل العروس بلغة ناعمة تناسب زواجات الأحساء
-              والدمام والخبر. الرابط يشرح الباقات بسرعة حتى تختارين بهدوء قبل أول رسالة واتساب.
+              والدمام والخبر. تبدأين من رابط واضح: المدينة، التاريخ، الباقة، واللحظات التي لا تريدين نسيانها.
             </p>
             <div className="button-row">
               <Link className="cta" href="/reserve">
@@ -383,9 +402,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="testimonial-marquee-section" aria-label="انطباعات العميلات">
+      <section className="testimonial-marquee-section" aria-label="معايير تجربة Asmaa Studio">
         <div className="testimonial-marquee">
-          {[...testimonialQuotes, ...testimonialQuotes].map((item, index) => (
+          {[...experienceStandards, ...experienceStandards].map((item, index) => (
             <article key={`${item.meta}-${index}`}>
               <Sparkles size={20} strokeWidth={1.6} />
               <p>{item.quote}</p>
@@ -395,7 +414,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section conversion-section">
+      <section className="section conversion-section" id="booking-path">
         <div className="section-inner">
           <span className="eyebrow">من الإعجاب إلى الموعد</span>
           <h2 className="section-title">القرار يصبح أخف عندما ترى العروس الصورة كاملة.</h2>
@@ -421,108 +440,75 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section seo-command" id="seo-wave">
+      <section className="section seo-command" id="cities">
         <div className="section-inner">
-          <span className="eyebrow">الأحساء أولا، ثم الدمام والخبر</span>
-          <h2 className="section-title">صفحات محلية مكتوبة بالطريقة التي تبحث بها العروس فعلا.</h2>
+          <span className="eyebrow">قريبة من مناسبتك</span>
+          <h2 className="section-title">اختاري المدينة أولا حتى تكون الباقة والكلام مناسبين لمكان يومك.</h2>
           <div className="seo-grid seo-grid-20x">
             <div className="seo-keywords-panel">
               <Search size={28} />
-              <h3>كلمات قريبة من قرار الحجز</h3>
+              <h3>القرار المحلي أوضح</h3>
               <p>
-                عندما تبحث العروس عن مصورة زواج أو تصوير خطوبة في مدينتها، تحتاج صفحة مباشرة
-                تعرض الأسلوب والباقات والخطوة التالية بدون دوران.
+                الأحساء والدمام والخبر ليست نفس نوع القاعات ولا نفس طريقة السؤال. لذلك لكل مدينة صفحة
+                مختصرة توضح الأسلوب، الباقات، والخطوة التالية بدون تشتت.
               </p>
               <div className="keyword-cloud">
-                {seoFocus.map((keyword) => (
-                  <span key={keyword}>{keyword}</span>
+                {serviceAreas.map((city) => (
+                  <Link href={`/${city.slug}`} key={city.slug}>{city.ar}</Link>
                 ))}
               </div>
             </div>
-            <div className="wave-board wave-board-full" tabIndex={0} aria-label="خطة النشر اليومية">
-              {seoLaunchWaves.map((wave) => (
-                <article className="wave-card" key={wave.day}>
-                  <span>Day {wave.day}</span>
-                  <strong>{wave.title}</strong>
-                  <p>{wave.channel}</p>
-                  <em>{wave.goal}</em>
-                </article>
-              ))}
+            <div className="area-strategy-grid area-strategy-grid-20x">
+              {areaStrategy.map((area, index) => {
+                const Icon = area.icon;
+                const city = serviceAreas[index];
+                return (
+                  <article className="area-card" key={area.city}>
+                    <Icon size={26} strokeWidth={1.6} />
+                    <span>{area.angle}</span>
+                    <h3>{area.city}</h3>
+                    <p>{area.detail}</p>
+                    <div className="mini-keywords">
+                      {city.keywordCluster.slice(0, 3).map((keyword) => (
+                        <em key={keyword}>{keyword}</em>
+                      ))}
+                    </div>
+                    <Link href={`/${city.slug}`}>
+                      افتحي صفحة {area.city} <ArrowLeft size={15} />
+                    </Link>
+                  </article>
+                );
+              })}
             </div>
           </div>
           <div className="button-row wave-actions">
-            <Link className="cta" href="/alahsa">
-              افتحي صفحة الأحساء <ArrowLeft size={18} />
-            </Link>
-            <Link className="ghost-cta" href="/faq">
-              أسئلة الحجز <Search size={18} />
-            </Link>
-          </div>
-          <div className="button-row wave-actions">
-            <Link className="ghost-cta" href="/reserve">
+            <Link className="cta" href="/reserve">
               رابط العروس الآن <CalendarDays size={18} />
+            </Link>
+            <Link className="ghost-cta" href="/portfolio">
+              شاهدي الألبوم <ArrowLeft size={18} />
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="section live-findings" id="social-assets">
+      <section className="section live-findings">
         <div className="section-inner">
-          <span className="eyebrow">نسخة جاهزة للحسابات</span>
-          <h2 className="section-title">كل قناة تقول نفس الوعد: تصوير أنيق، اختيار واضح، وتواصل سهل.</h2>
+          <span className="eyebrow">ما يحدث فعلا</span>
+          <h2 className="section-title">التجربة مصممة حول راحة العروس، لا حول كثرة الكلام.</h2>
           <p className="section-copy">
-            انستقرام وتيك توك وواتساب يجب أن تقود إلى إحساس واحد. هذه النصوص تحفظ نبرة
-            Asmaa Studio وتعيد العميلة إلى الرابط بدل إرسال ملف طويل.
+            أفضل موقع حجز ليس الذي يعرض كل شيء؛ بل الذي يجعل القرار آمنا وواضحا: ماذا سيصور،
+            متى يبدأ التواصل، وكيف تصل التفاصيل بدون ضياع في المحادثة.
           </p>
 
           <div className="profile-grid">
-            {profileAssets.map((asset) => (
-              <article className="profile-card" key={asset.channel}>
-                <span>{asset.channel}</span>
-                <h3>{asset.title}</h3>
+            {bookingAssurance.map((item) => (
+              <article className="profile-card" key={item.title}>
+                <span>{item.title}</span>
+                <h3>{item.title}</h3>
                 <div className="copy-lines">
-                  {asset.lines.map((line) => (
-                    <p key={line}>{line}</p>
-                  ))}
+                  <p>{item.detail}</p>
                 </div>
-                <em>{asset.action}</em>
-              </article>
-            ))}
-          </div>
-
-          <div className="channel-grid">
-            {channelActions.map((item) => (
-              <article className="channel-card" key={item.label}>
-                <span>{item.status}</span>
-                <h3>{item.label}</h3>
-                <p>{item.task}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section hashtag-command">
-        <div className="section-inner">
-          <span className="eyebrow">محتوى يجذب العروس المناسبة</span>
-          <h2 className="section-title">كل مدينة لها كلماتها، وكل أسبوع له زاوية تلامس قرار الحجز.</h2>
-          <div className="hashtag-grid">
-            {hashtagSets.map((set) => (
-              <article className="hashtag-card" key={set.city}>
-                <h3>{set.city}</h3>
-                <div>
-                  {set.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="pillar-grid">
-            {contentPillars.map((pillar) => (
-              <article className="pillar-card" key={pillar.title}>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.detail}</p>
               </article>
             ))}
           </div>
@@ -531,10 +517,10 @@ export default function HomePage() {
 
       <section className="section board-live">
         <div className="section-inner">
-          <span className="eyebrow">ما يجعل الحجز أسهل</span>
-          <h2 className="section-title">التحسينات المهمة ظاهرة للعميلة: وعد واضح، باقات مفهومة، وخطوة تالية سهلة.</h2>
+          <span className="eyebrow">معايير الوضوح</span>
+          <h2 className="section-title">كل قرار في الصفحة يجب أن يحمي ثقة العميلة قبل أن يطلب منها التواصل.</h2>
           <div className="board-lever-grid">
-            {boardLevers.map((lever) => (
+            {decisionAssurance.map((lever) => (
               <article className="board-lever-card" key={lever.title}>
                 <h3>{lever.title}</h3>
                 <p>{lever.detail}</p>
@@ -571,35 +557,6 @@ export default function HomePage() {
             <Link className="ghost-cta" href="/reserve">
               رابط العروس <CalendarDays size={18} />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section local-domination">
-        <div className="section-inner">
-          <span className="eyebrow">قريبة من مناسبتك</span>
-          <h2 className="section-title">لكل مدينة صفحة تشبه بحث العميلة وسؤالها قبل الحجز.</h2>
-          <div className="area-strategy-grid area-strategy-grid-20x">
-            {areaStrategy.map((area, index) => {
-              const Icon = area.icon;
-              const city = serviceAreas[index];
-              return (
-                <article className="area-card" key={area.city}>
-                  <Icon size={26} strokeWidth={1.6} />
-                  <span>{area.angle}</span>
-                  <h3>{area.city}</h3>
-                  <p>{area.detail}</p>
-                  <div className="mini-keywords">
-                    {city.keywordCluster.slice(0, 3).map((keyword) => (
-                      <em key={keyword}>{keyword}</em>
-                    ))}
-                  </div>
-                  <Link href={`/${city.slug}`}>
-                    افتحي صفحة {area.city} <ArrowLeft size={15} />
-                  </Link>
-                </article>
-              );
-            })}
           </div>
         </div>
       </section>

@@ -294,6 +294,7 @@
 }
 
 .keyword-cloud span,
+.keyword-cloud a,
 .mini-keywords em,
 .city-command-card em {
   padding: 7px 10px;
@@ -302,6 +303,7 @@
   color: rgba(255, 246, 223, 0.82);
   font-size: 0.78rem;
   font-style: normal;
+  text-decoration: none;
 }
 
 .wave-board {
@@ -361,7 +363,7 @@
 }
 
 .profile-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-bottom: 16px;
 }
 
@@ -376,7 +378,7 @@
 
 .pillar-grid,
 .board-lever-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .profile-card,

@@ -61,7 +61,12 @@ const bannedPhrases = [
   "أخت العروس",
   "privacy",
   "Privacy",
-  "خصوصية"
+  "خصوصية",
+  "خطة النشر اليومية",
+  "نسخة جاهزة للحسابات",
+  "هاشتاق",
+  "SEO",
+  "مصادر الحجز"
 ];
 
 const marketingRoutes = [

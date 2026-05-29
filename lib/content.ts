@@ -234,7 +234,7 @@ export const packages = [
     bestFor: "عروس تريد ذكرى واضحة للحظة الدخول بدون تغطية تفاصيل اليوم.",
     deliverable: "فيلم زفة مختصر",
     sequence: ["حضور قبل الزفة", "تجهيز الإضاءة", "تصوير الزفة", "مونتاج سريع"],
-    bullets: ["الحضور قبل الزفة بربع ساعة", "تصوير سينمائي بأحدث المعدات", "مناسب للحجز السريع"]
+    bullets: ["الحضور قبل الزفة بربع ساعة", "تصوير سينمائي بإضاءة وترتيب واضح", "مناسب للحجز السريع"]
   },
   {
     id: "02",
@@ -487,7 +487,7 @@ export const areaStrategy: { icon: LucideIcon; city: string; angle: string; deta
 
 export const highlights = [
   { label: "Album", file: "album.svg", text: "ألبوم مختصر لأفضل اللقطات" },
-  { label: "Feedback", file: "feedback.svg", text: "آراء العميلات بدون اقتباسات مزيفة" },
+  { label: "Care", file: "feedback.svg", text: "اطمئنان قبل الحجز بدون وعود مبالغ فيها" },
   { label: "Packages", file: "packages.svg", text: "اختيار البكج حسب لحظات اليوم" },
   { label: "Bride details", file: "bride-details.svg", text: "تفاصيل العروس والإكسسوارات" },
   { label: "Video details", file: "video-details.svg", text: "أسلوب الفيديو والمونتاج" },

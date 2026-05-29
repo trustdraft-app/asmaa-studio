@@ -149,3 +149,13 @@
 - Hardened the GitHub Pages workflow with SHA-pinned actions, job-scoped Pages permissions, and non-persistent checkout credentials.
 - Documented the `asmaavideo.com` production blocker: both apex and `www` resolve to Namecheap forwarding IP `162.255.119.149`, so HTTPS times out until DNS moves to a first-class HTTPS host such as Vercel or Cloudflare.
 - Verification passed: `git diff --check`, lint, typecheck, production dependency audit, OSV lockfile scan, gitleaks history/staged scans, Semgrep auto scan, Trivy high/critical scan, actionlint, zizmor, `npm run verify:launch`, and `npm run verify:admin`.
+
+## 2026-05-29 21:44 +03
+
+- Ran a world-class agency-style UI/UX/content audit on the public Asmaa homepage and applied the findings directly to the live-bound source.
+- Removed customer-visible internal marketing operations language around SEO waves, hashtags, channels, content pillars, and board levers.
+- Replaced testimonial-looking marquee copy with experience standards, tightened the hero around the bride decision path, and reframed city/booking sections around clear package and date decisions.
+- Removed the unsupported “latest equipment” package claim and changed the copy to verifiable execution quality.
+- Added launch-verifier bans for internal terms so future audits fail if operational copy leaks back onto public pages.
+- Added a Figma audit page, `Agency QA / Live Applied 2026-05-29`, to the existing Asmaa design file with the applied findings and verification criteria.
+- Verification passed before deployment: lint, typecheck, launch verifier, admin verifier, Semgrep, gitleaks, actionlint, zizmor, npm audit, OSV scanner, Trivy high/critical, and desktop/mobile visual smoke checks.
