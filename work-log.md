@@ -159,3 +159,9 @@
 - Added launch-verifier bans for internal terms so future audits fail if operational copy leaks back onto public pages.
 - Added a Figma audit page, `Agency QA / Live Applied 2026-05-29`, to the existing Asmaa design file with the applied findings and verification criteria.
 - Verification passed before deployment: lint, typecheck, launch verifier, admin verifier, Semgrep, gitleaks, actionlint, zizmor, npm audit, OSV scanner, Trivy high/critical, and desktop/mobile visual smoke checks.
+
+## 2026-05-29 21:52 +03
+
+- Treated the successful Pages deploy annotations as an audit issue instead of ignoring them.
+- Updated the pinned GitHub Pages workflow actions to official Node 24 releases: `actions/checkout@v6.0.2`, `actions/setup-node@v6.4.0`, `actions/upload-pages-artifact@v5.0.0`, and `actions/deploy-pages@v5.0.0` by SHA.
+- Removed the temporary `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24` override because the workflow now uses native Node 24 action metadata.

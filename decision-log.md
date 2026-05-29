@@ -137,3 +137,9 @@
 **Decision:** Remove internal SEO/social/hashtag/board-ops language from the public homepage, replace testimonial-looking copy with experience standards, reframe city and booking sections around bride decision clarity, remove the unsupported equipment claim, and enforce internal-term bans in launch verification.
 **Reasoning:** Premium conversion needs truthful specificity and customer confidence, not operational artifacts, fake-feeling social proof, or claims a later auditor cannot verify.
 **Source:** User directive, project context, live visual review, Figma QA page, local security/launch verification, professional judgment.
+
+## 2026-05-29 21:52 +03 — Asmaa Studio
+**Question:** Should a successful GitHub Pages deploy with Node 20 action deprecation annotations be accepted after the agency pass?
+**Decision:** No; update the Pages workflow to official Node 24 action releases with pinned SHAs and remove the forced Node override.
+**Reasoning:** A 10/10 launch audit should not leave known workflow deprecation warnings when official Node 24 action releases are available.
+**Source:** GitHub Actions run `26655722828`, official action metadata from GitHub repositories, professional judgment.
