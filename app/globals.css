@@ -3304,3 +3304,279 @@ textarea {
     width: 100%;
   }
 }
+
+/* ==========================================================================
+   AsmaaStudio — Phase 1 brand-truth polish
+   Hero credentials · Add-ons block · Payment terms · Trust pairs
+   Aligns visual identity with the PDF (black marble + gold) the studio uses.
+   ========================================================================== */
+
+.hero-credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 6px;
+}
+
+.credential-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(200, 160, 96, 0.08);
+  border: 1px solid rgba(200, 160, 96, 0.35);
+  color: #f5e9d3;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  white-space: nowrap;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.credential-pill svg {
+  color: #c8a060;
+  flex-shrink: 0;
+}
+
+.credential-pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(200, 160, 96, 0.6);
+  background: rgba(200, 160, 96, 0.12);
+}
+
+.credential-pill-primary {
+  background: linear-gradient(135deg, rgba(200, 160, 96, 0.22), rgba(200, 160, 96, 0.08));
+  border-color: rgba(200, 160, 96, 0.55);
+  color: #fff8e8;
+  font-weight: 600;
+}
+
+.credential-pill-primary svg {
+  color: #e8c87d;
+}
+
+.addons-block {
+  margin-top: 56px;
+  padding: 36px 32px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(200, 160, 96, 0.04), rgba(0, 0, 0, 0.2));
+  border: 1px solid rgba(200, 160, 96, 0.18);
+}
+
+.addons-title {
+  font-size: 1.4rem;
+  margin: 8px 0 6px;
+  color: #f5e9d3;
+}
+
+.addons-copy {
+  color: rgba(245, 233, 211, 0.7);
+  max-width: 56ch;
+  margin: 0 0 24px;
+  line-height: 1.7;
+}
+
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.addon-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(200, 160, 96, 0.22);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.addon-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 160, 96, 0.5);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.addon-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(200, 160, 96, 0.12);
+  color: #e8c87d;
+  border: 1px solid rgba(200, 160, 96, 0.3);
+}
+
+.addon-body h4 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  color: #f5e9d3;
+}
+
+.addon-en {
+  display: block;
+  font-size: 0.72rem;
+  color: rgba(200, 160, 96, 0.7);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.addon-body p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: rgba(245, 233, 211, 0.72);
+}
+
+.addon-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: #e8c87d;
+}
+
+.addon-price strong {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.addon-price em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: rgba(200, 160, 96, 0.8);
+}
+
+.addon-included {
+  font-size: 0.78rem;
+  color: #c8a060;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(200, 160, 96, 0.1);
+  border: 1px dashed rgba(200, 160, 96, 0.4);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.payment-terms-section {
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.4), rgba(0, 0, 0, 0.7));
+}
+
+.payment-terms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.payment-term {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(200, 160, 96, 0.22);
+  transition: border-color 0.25s ease;
+}
+
+.payment-term:hover {
+  border-color: rgba(200, 160, 96, 0.45);
+}
+
+.payment-step {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #c8a060, #b8924d);
+  color: #0a0a0a;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.payment-term p {
+  margin: 6px 0 0;
+  line-height: 1.75;
+  color: rgba(245, 233, 211, 0.88);
+  font-size: 0.95rem;
+}
+
+.payment-trust-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(200, 160, 96, 0.15);
+}
+
+.payment-trust {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(200, 160, 96, 0.1), rgba(0, 0, 0, 0.3));
+  border: 1px solid rgba(200, 160, 96, 0.35);
+}
+
+.payment-trust svg {
+  color: #e8c87d;
+  flex-shrink: 0;
+}
+
+.payment-trust strong {
+  display: block;
+  color: #f5e9d3;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.payment-trust span {
+  display: block;
+  color: rgba(245, 233, 211, 0.55);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 768px) {
+  .hero-credentials {
+    gap: 8px;
+  }
+  .credential-pill {
+    font-size: 0.76rem;
+    padding: 7px 11px;
+    white-space: normal;
+  }
+  .addons-block {
+    padding: 26px 18px;
+    margin-top: 40px;
+  }
+  .addon-card {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+  .addon-price {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+  .payment-term {
+    padding: 18px 20px;
+  }
+  .payment-trust {
+    padding: 16px 18px;
+  }
+}

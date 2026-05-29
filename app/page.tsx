@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import {
   ArrowLeft,
+  BadgeCheck,
   CalendarDays,
   Check,
   Clapperboard,
@@ -12,7 +13,9 @@ import {
   Languages,
   MessageCircle,
   Play,
+  Plus,
   Search,
+  ShieldCheck,
   Sparkles,
   Video
 } from "lucide-react";
@@ -24,10 +27,13 @@ import {
   bookingSteps,
   cinematicMoments,
   conversionFlow,
+  credentials,
   highlights,
   instagramUrl,
   liveOperatingSystem,
+  packageAddOns,
   packages,
+  paymentTerms,
   serviceAreas,
   services,
   tiktokUrl,
@@ -230,6 +236,21 @@ export default function HomePage() {
               Asmaa Studio توثق الزفة، الخطوبة، وتفاصيل العروس بلغة ناعمة تناسب زواجات الأحساء
               والدمام والخبر. تبدأين من رابط واضح: المدينة، التاريخ، الباقة، واللحظات التي لا تريدين نسيانها.
             </p>
+
+            <div className="hero-credentials" aria-label="ضمانات Asmaa Studio">
+              <span className="credential-pill credential-pill-primary">
+                <BadgeCheck size={15} strokeWidth={1.8} />
+                {credentials.womenOnlyAr}
+              </span>
+              <span className="credential-pill">
+                <BadgeCheck size={15} strokeWidth={1.8} />
+                {credentials.ministryAr}
+              </span>
+              <span className="credential-pill">
+                <Sparkles size={15} strokeWidth={1.8} />
+                {credentials.equipmentAr}
+              </span>
+            </div>
             <div className="button-row">
               <Link className="cta" href="/reserve">
                 افتحي رابط العروس <ArrowLeft size={18} />
@@ -432,6 +453,72 @@ export default function HomePage() {
                 </footer>
               </article>
             ))}
+          </div>
+
+          <div className="addons-block" id="addons">
+            <span className="eyebrow">إضافات اختيارية</span>
+            <h3 className="addons-title">ارفعي مستوى الفيلم بأي إضافة تناسب يومك.</h3>
+            <p className="addons-copy">
+              تُضاف الإضافات لأي باقة عند الحجز. الأسعار ثابتة وواضحة قبل أول رسالة.
+            </p>
+            <div className="addons-grid">
+              {packageAddOns.map((addon) => (
+                <article className="addon-card" key={addon.id}>
+                  <div className="addon-icon" aria-hidden="true">
+                    <Plus size={22} strokeWidth={1.7} />
+                  </div>
+                  <div className="addon-body">
+                    <h4>{addon.name}</h4>
+                    <span className="addon-en">{addon.nameEn}</span>
+                    <p>{addon.description}</p>
+                  </div>
+                  <div className="addon-price">
+                    {addon.price === "مشمولة في بكج 01" ? (
+                      <span className="addon-included">{addon.price}</span>
+                    ) : (
+                      <>
+                        <strong>{addon.price}</strong>
+                        <em>ريال</em>
+                      </>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section payment-terms-section" id="booking-terms">
+        <div className="section-inner">
+          <span className="eyebrow">ملاحظات الحجز</span>
+          <h2 className="section-title">طريقة تثبيت الموعد والدفع شفافة قبل أول رسالة.</h2>
+          <p className="section-copy">
+            خطوات الحجز والدفع موحدة لكل العميلات حتى تكون الصورة واضحة من البداية، ولا تحتاج العروس لطلب الملف لمعرفة الشروط.
+          </p>
+          <div className="payment-terms-grid">
+            {paymentTerms.map((term) => (
+              <article className="payment-term" key={term.step}>
+                <span className="payment-step">{term.step}</span>
+                <p>{term.text}</p>
+              </article>
+            ))}
+          </div>
+          <div className="payment-trust-row">
+            <article className="payment-trust">
+              <ShieldCheck size={22} strokeWidth={1.7} />
+              <div>
+                <strong>{credentials.womenOnlyAr}</strong>
+                <span>{credentials.womenOnlyEn}</span>
+              </div>
+            </article>
+            <article className="payment-trust">
+              <BadgeCheck size={22} strokeWidth={1.7} />
+              <div>
+                <strong>مرخّصة من وزارة الموارد البشرية والتنمية الاجتماعية</strong>
+                <span>{credentials.ministryEn}</span>
+              </div>
+            </article>
           </div>
         </div>
       </section>
