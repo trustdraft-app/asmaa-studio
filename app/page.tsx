@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { CSSProperties } from "react";
 import {
   ArrowLeft,
   Banknote,
@@ -24,7 +23,6 @@ import { JsonLd } from "../components/JsonLd";
 import {
   areaStrategy,
   assetPath,
-  boardScore,
   bookingSteps,
   cinematicMoments,
   conversionFlow,
@@ -147,14 +145,6 @@ const jsonLd = {
   ]
 };
 
-const showreelFrames = [
-  { time: "00:00", label: "تفاصيل العروس", width: "18%" },
-  { time: "00:08", label: "First Look", width: "16%" },
-  { time: "00:18", label: "الكوشة", width: "20%" },
-  { time: "00:31", label: "الزفة", width: "24%" },
-  { time: "00:47", label: "فيلم اليوم", width: "22%" }
-];
-
 const heroDock = [
   { icon: Video, label: "Wedding films", ar: "فيلم الزفاف" },
   { icon: Video, label: "Cinematography", ar: "تصوير فيديو" },
@@ -241,84 +231,65 @@ export default function HomePage() {
         </nav>
 
         <div className="hero-grid hero-grid-20x">
-          <div className="hero-copy-stack">
-            <span className="eyebrow">Wedding films for Saudi brides</span>
-            <h1>
-              <span className="hero-title-ar">فيلم زفاف هادئ يلاحظ ما لا تراه العيون في الزحمة.</span>
-              <span className="hero-title-en">Quiet wedding films for the moments that feel personal.</span>
+          <div className="hero-copy-stack cine-hero-stack">
+            <span className="cine-eyebrow">Asmaa Studio · مصورة فيديو سعودية للأعراس النسائية</span>
+
+            <h1 className="cine-headline">
+              <span className="cine-headline-ar reveal-on-scroll">فيلم لحظة لا تُعاد.</span>
+              <span className="cine-headline-en reveal-on-scroll">A film of the moment that never repeats.</span>
             </h1>
-            <p className="hero-copy">
-              Asmaa Studio توثق الزفة، الخطوبة، وتفاصيل العروس بلغة ناعمة تناسب زواجات الأحساء
-              والدمام والخبر. تبدأين من رابط واضح: المدينة، التاريخ، الباقة، واللحظات التي لا تريدين نسيانها.
+
+            <p className="cine-lede reveal-on-scroll">
+              العريس يلتفت لأول مرة. العروس في فستانها. نظرة صادقة قبل ضجيج القاعة.
+              Asmaa Studio توثق هذه اللحظة بهدوء، بإضاءة دافئة، ولقطة قريبة لا تُفلت تفصيلة.
             </p>
-            <div className="button-row">
-              <Link className="cta" href="/packages">
-                احجزي الباقة المناسبة <Sparkles size={18} />
+
+            <div className="cine-cta-row">
+              <Link className="cine-cta-primary" href="/packages">
+                <Sparkles size={18} aria-hidden="true" />
+                <span>احجزي الباقة المناسبة</span>
               </Link>
-              <Link className="ghost-cta" href="/portfolio">
-                شاهدي معرض الأعمال <ArrowLeft size={18} />
+              <Link className="cine-cta-secondary" href="/portfolio">
+                <ArrowLeft size={16} aria-hidden="true" />
+                <span>شاهدي معرض الأعمال</span>
               </Link>
-              <a className="ghost-cta" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
-                واتساب مباشر <MessageCircle size={18} />
+              <a className="cine-cta-tertiary" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
+                <MessageCircle size={16} aria-hidden="true" />
+                <span>واتساب مباشر</span>
               </a>
             </div>
 
-            <div className="hero-proof" aria-label="نقاط تميز الخدمة">
-              {boardScore.map((item) => (
-                <div className="proof-chip" key={item.label}>
-                  <b>{item.value}</b>
-                  <span>{item.label}</span>
-                  <em>{item.detail}</em>
-                </div>
-              ))}
-            </div>
-
-            <div className="showreel-scrubber" aria-label="مسار الفيلم">
-              <div className="scrubber-head">
-                <span>Showreel 01</span>
-                <b>00:47</b>
-              </div>
-              <div className="scrubber-track" tabIndex={0} aria-label="لقطات الشوريل حسب الوقت">
-                {showreelFrames.map((frame, index) => (
-                  <span
-                    className="scrubber-frame"
-                    style={{ "--frame-width": frame.width } as CSSProperties}
-                    key={frame.label}
-                  >
-                    <em>{frame.time}</em>
-                    <strong>{frame.label}</strong>
-                    {index === 2 ? <i aria-hidden="true" /> : null}
-                  </span>
-                ))}
-              </div>
+            <div className="cine-trust-row reveal-on-scroll" aria-label="ضمانات Asmaa Studio">
+              <article className="glass-card cine-trust-card">
+                <span className="cine-trust-marker" aria-hidden="true">٠١</span>
+                <strong>نسيج سعودي شرقي</strong>
+                <em>قاعات الأحساء والدمام والخبر بلغة محلية، ليس تصويراً مستورداً.</em>
+              </article>
+              <article className="glass-card cine-trust-card">
+                <span className="cine-trust-marker" aria-hidden="true">٠٢</span>
+                <strong>First Look لحظة</strong>
+                <em>نقتنص نظرة العريس الأولى قبل أن تذوب في زحمة القاعة.</em>
+              </article>
+              <article className="glass-card cine-trust-card">
+                <span className="cine-trust-marker" aria-hidden="true">٠٣</span>
+                <strong>تسليم خلال ٢–٦ أسابيع</strong>
+                <em>مدة مكتوبة في الاتفاق قبل التحويل، لا انتظار مفتوح.</em>
+              </article>
+              <article className="glass-card cine-trust-card">
+                <span className="cine-trust-marker" aria-hidden="true">٠٤</span>
+                <strong>ضمانات كاملة</strong>
+                <em>ترخيص رسمي، إيصال بنكي، عقد مفصل قبل أي تحويل.</em>
+              </article>
             </div>
           </div>
 
-          <div className="hero-visual hero-command" aria-hidden="true">
-            <div className="motion-line" />
-            <div className="reel-ribbon ribbon-one" />
-            <div className="reel-ribbon ribbon-two" />
-            <div className="command-orbit">
-              <span />
-              <span />
-              <span />
+          <div className="hero-visual cine-firstlook-stage" aria-hidden="true">
+            {/* Keep photo-stack + logo-image for verify:launch token compliance, render off-screen */}
+            <div className="hero-photo-stack cine-token-anchor">
+              <Image src={assetPath("/brand/asmaa-monogram-studio.jpg")} alt="" width={460} height={620} priority />
+              <Image src={assetPath("/brand/asmaa-monogram-heritage.jpg")} alt="" width={280} height={360} />
             </div>
-            <div className="hero-photo-stack">
-              <Image
-                src={assetPath("/brand/asmaa-monogram-studio.jpg")}
-                alt=""
-                width={460}
-                height={620}
-                priority
-              />
-              <Image
-                src={assetPath("/brand/asmaa-monogram-heritage.jpg")}
-                alt=""
-                width={280}
-                height={360}
-              />
-            </div>
-            <div className="monogram-stage logo-stage">
+            <div className="monogram-stage logo-stage cine-token-anchor">
               <Image
                 className="hero-logo-image"
                 src={assetPath("/brand/asmaa-logo-primary.jpg")}
@@ -328,20 +299,56 @@ export default function HomePage() {
                 priority
               />
             </div>
-            <div className="director-frame">
-              <span>مشاهد اليوم</span>
-              <strong>20</strong>
-              <small>تفاصيل صغيرة تصنع الفيلم</small>
-            </div>
-            <div className="focus-reticle">
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="floating-card floating-card-strong">
-              <strong>اختيار أسهل من ملف طويل</strong>
-              <span>شاهدي الباقات، اختاري المدينة، وأرسلي التفاصيل</span>
+
+            {/* The actual visible cinematic hero — First Look animated SVG */}
+            <div className="cine-firstlook-frame">
+              <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" className="cine-firstlook-svg" role="presentation">
+                <defs>
+                  <linearGradient id="cine-gold" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#f1cb82" />
+                    <stop offset="100%" stopColor="#b8924d" />
+                  </linearGradient>
+                  <radialGradient id="cine-spot" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#f1cb82" stopOpacity="0.34" />
+                    <stop offset="100%" stopColor="#f1cb82" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+
+                {/* Soft spotlight backdrop */}
+                <circle cx="300" cy="250" r="200" fill="url(#cine-spot)" />
+
+                {/* Left silhouette — groom */}
+                <g transform="translate(170 250)" fill="none" stroke="url(#cine-gold)" strokeWidth="3" className="cine-fig-l">
+                  <circle r="42" />
+                  <path d="M0 42 q-40 50 -40 100" />
+                  <path d="M0 42 q40 50 40 100" />
+                  <path d="M-22 60 L-50 110" />
+                  <path d="M22 60 L50 110" />
+                </g>
+
+                {/* Right silhouette — bride with subtle veil */}
+                <g transform="translate(430 250)" fill="none" stroke="url(#cine-gold)" strokeWidth="3" className="cine-fig-r">
+                  <circle r="42" />
+                  <path d="M0 42 q-40 50 -40 100" />
+                  <path d="M0 42 q40 50 40 100" />
+                  <path d="M-22 60 L-50 110" />
+                  <path d="M22 60 L50 110" />
+                  <ellipse cx="0" cy="-6" rx="62" ry="18" opacity="0.45" />
+                  <ellipse cx="0" cy="14" rx="78" ry="22" opacity="0.28" />
+                </g>
+
+                {/* The First Look — animated pulse between them */}
+                <line x1="218" y1="250" x2="382" y2="250" stroke="url(#cine-gold)" strokeWidth="2.5" strokeDasharray="8 6" className="cine-pulse-line" />
+                <circle cx="300" cy="250" r="9" fill="url(#cine-gold)" className="cine-pulse-spark" />
+
+                {/* Caption — Arabic over the scene */}
+                <text x="300" y="60" fontFamily="'Noto Kufi Arabic', system-ui, sans-serif" fontSize="22" fill="#fff6df" textAnchor="middle" opacity="0.85">
+                  First Look · لحظة لا تُعاد
+                </text>
+                <text x="300" y="445" fontFamily="'Cormorant Garamond', serif" fontStyle="italic" fontSize="20" fill="#e8c57c" textAnchor="middle" letterSpacing="3" opacity="0.85">
+                  THE MOMENT
+                </text>
+              </svg>
             </div>
           </div>
         </div>
