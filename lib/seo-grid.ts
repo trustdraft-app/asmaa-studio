@@ -8,7 +8,7 @@ export type SeoCity = {
   slug: string;
   ar: string;
   en: string;
-  governorate: "alahsa" | "easternProvince";
+  governorate: "alahsa" | "easternProvince" | "crossSaudi";
   populationHint: string;
   neighborhoodSignals: string[];
   postalArea: string;
@@ -52,7 +52,17 @@ export const seoCities: SeoCity[] = [
   { slug: "hala", ar: "الهلا", en: "Al Hala", governorate: "alahsa", populationHint: "قرية من قرى الأحساء", neighborhoodSignals: ["الهلا", "حي الواحة الشرقية", "حي السلام", "حي الأمل", "حي النور"], postalArea: "36432" },
   { slug: "qara", ar: "القارة", en: "Al Qara", governorate: "alahsa", populationHint: "جبل القارة التراثي", neighborhoodSignals: ["القارة", "حي الجبل", "حي العين", "حي الفيصلية", "حي الواحة"], postalArea: "36442" },
   { slug: "jaaberiyah", ar: "الجعبيرية", en: "Al Jaaberiyah", governorate: "alahsa", populationHint: "من قرى الأحساء", neighborhoodSignals: ["الجعبيرية", "حي الحزم", "حي المروج", "حي الفجر", "حي الواحة"], postalArea: "36412" },
-  { slug: "aiouni", ar: "العيوني", en: "Al Aiouni", governorate: "alahsa", populationHint: "قرية في محافظة الأحساء", neighborhoodSignals: ["العيوني", "حي السلام", "حي الواحة", "حي الفيصلية", "حي النخيل"], postalArea: "36422" }
+  { slug: "aiouni", ar: "العيوني", en: "Al Aiouni", governorate: "alahsa", populationHint: "قرية في محافظة الأحساء", neighborhoodSignals: ["العيوني", "حي السلام", "حي الواحة", "حي الفيصلية", "حي النخيل"], postalArea: "36422" },
+  { slug: "dhahran", ar: "الظهران", en: "Dhahran", governorate: "easternProvince", populationHint: "مدينة الجامعات والشركات", neighborhoodSignals: ["الظهران", "حي الجامعة", "حي الدوحة", "حي البحيرة", "حي الراكة"], postalArea: "31942" },
+  { slug: "ras-tanura", ar: "رأس تنورة", en: "Ras Tanura", governorate: "easternProvince", populationHint: "ميناء على الخليج العربي", neighborhoodSignals: ["رأس تنورة", "حي الزيتون", "حي اللؤلؤة", "حي الميناء", "حي الكورنيش"], postalArea: "31941" },
+  { slug: "safwa", ar: "صفوى", en: "Safwa", governorate: "easternProvince", populationHint: "مدينة قطيفية ساحلية", neighborhoodSignals: ["صفوى وسط", "حي الزهور", "حي البحري", "حي الإسكان", "العنك"], postalArea: "31921" },
+  { slug: "awamiyah", ar: "العوامية", en: "Al Awamiyah", governorate: "easternProvince", populationHint: "من بلدات القطيف", neighborhoodSignals: ["العوامية", "حي القلعة", "حي الزور", "حي الوسط", "حي الواحة"], postalArea: "31931" },
+  { slug: "khafji", ar: "الخفجي", en: "Al Khafji", governorate: "easternProvince", populationHint: "مدينة شمال الشرقية", neighborhoodSignals: ["الخفجي وسط", "حي العزيزية", "حي الصفا", "حي المروة", "حي الحدود"], postalArea: "31971" },
+  { slug: "riyadh", ar: "الرياض", en: "Riyadh", governorate: "crossSaudi", populationHint: "عاصمة المملكة (تغطية للبحث العام)", neighborhoodSignals: ["العليا", "النخيل", "الملقا", "الياسمين", "الديرة"], postalArea: "11564" },
+  { slug: "jeddah", ar: "جدة", en: "Jeddah", governorate: "crossSaudi", populationHint: "عروس البحر الأحمر (تغطية للبحث العام)", neighborhoodSignals: ["الكورنيش", "الحمراء", "الزهراء", "الروضة", "الصفا"], postalArea: "21421" },
+  { slug: "mecca", ar: "مكة المكرمة", en: "Mecca", governorate: "crossSaudi", populationHint: "أم القرى (تغطية للبحث العام)", neighborhoodSignals: ["العزيزية", "الششة", "الزاهر", "العوالي", "النوارية"], postalArea: "21931" },
+  { slug: "medina", ar: "المدينة المنورة", en: "Medina", governorate: "crossSaudi", populationHint: "طيبة الطيبة (تغطية للبحث العام)", neighborhoodSignals: ["قباء", "العوالي", "العنبرية", "الجامعة", "السلام"], postalArea: "42311" },
+  { slug: "taif", ar: "الطائف", en: "Taif", governorate: "crossSaudi", populationHint: "مصيف الحجاز (تغطية للبحث العام)", neighborhoodSignals: ["الشفا", "الهدا", "العزيزية", "الفيصلية", "الورود"], postalArea: "21944" }
 ];
 
 export const seoServices: SeoService[] = [

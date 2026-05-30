@@ -67,29 +67,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.84
     })),
-    // Programmatic SEO grid — 12 cities × 8 services = 96 pages
+    // Programmatic SEO grid — 30 cities × 8 services = 240 pages
     ...allCityServicePairs().map(({ city, service }) => ({
       url: `${base}/ar/${city.slug}/${service.slug}`,
       changeFrequency: "monthly" as const,
-      priority: city.governorate === "alahsa" ? 0.85 : 0.7
+      priority: city.governorate === "alahsa" ? 0.85 : city.governorate === "easternProvince" ? 0.7 : 0.5
     })),
-    // Programmatic SEO grid — 20 × 8 × 14 = 2,240 pages
+    // Programmatic SEO grid — 30 × 8 × 14 = 3,360 pages
     ...allCityServiceModifierTriples().map(({ city, service, modifier }) => ({
       url: `${base}/ar/${city.slug}/${service.slug}/${modifier.slug}`,
       changeFrequency: "monthly" as const,
-      priority: city.governorate === "alahsa" ? 0.68 : 0.55
+      priority: city.governorate === "alahsa" ? 0.68 : city.governorate === "easternProvince" ? 0.55 : 0.4
     })),
-    // EN mirrors — 20 × 8 = 160 city/service pages
+    // EN mirrors — 30 × 8 = 240 city/service pages
     ...allEnCityServicePairs().map(({ city, service }) => ({
       url: `${base}/en/${city.slug}/${service.slug}`,
       changeFrequency: "monthly" as const,
-      priority: city.governorate === "alahsa" ? 0.6 : 0.5
+      priority: city.governorate === "alahsa" ? 0.6 : city.governorate === "easternProvince" ? 0.5 : 0.4
     })),
-    // EN deep — 20 × 8 × 8 = 1,280 pages
+    // EN deep — 30 × 8 × 14 = 3,360 pages
     ...allEnCityServiceModifierTriples().map(({ city, service, modifier }) => ({
       url: `${base}/en/${city.slug}/${service.slug}/${modifier.slug}`,
       changeFrequency: "monthly" as const,
-      priority: city.governorate === "alahsa" ? 0.55 : 0.45
+      priority: city.governorate === "alahsa" ? 0.55 : city.governorate === "easternProvince" ? 0.45 : 0.35
     })),
     // Seasonal — 12 × 8 = 96 pages
     ...allSeasonalPairs().map(({ slug }) => ({
