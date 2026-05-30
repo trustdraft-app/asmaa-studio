@@ -112,9 +112,7 @@ export default function ZaffaPage() {
       <section className="section city-hero-20x portfolio-hero">
         <div className="section-inner city-hero-grid">
           <div>
-            <Link className="ghost-cta" href="/">
-              العودة للرئيسية
-            </Link>
+            <Link className="back-pill" href="/"><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
             <span className="eyebrow">Wave 16 / نية الزفة</span>
             <h1 className="section-title">بكج الزفة للعروس التي تريد حفظ لحظة الدخول بدون مسار طويل.</h1>
             <p className="section-copy">

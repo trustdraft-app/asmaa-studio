@@ -102,8 +102,8 @@ export default async function ServicePage({ params }: Props) {
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">
           <div>
-            <Link className="ghost-cta" href="/">
-              العودة للرئيسية
+            <Link className="back-pill" href="/">
+              <ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span>
             </Link>
             <span className="eyebrow">{page.en}</span>
             <h1 className="section-title">{page.h1}</h1>
