@@ -185,8 +185,8 @@ export const seoWeddingTypes = [
   { slug: "destination", ar: "زواج وجهة", en: "Destination Wedding", note: "تصوير في قاعات بعيدة أو خاصة" }
 ];
 
-// English modifiers (subset of 8 — for /en/ deep route)
-export const seoModifiersEn: SeoModifier[] = seoModifiers.slice(0, 8);
+// English modifiers — full 14 set to match AR for ~5,000 total URLs
+export const seoModifiersEn: SeoModifier[] = seoModifiers;
 
 // Hash function for deterministic-but-varied phrase selection per combination
 export function pickPhrase(seed: string, bank: string[]): string {
