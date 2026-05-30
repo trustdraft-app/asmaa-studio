@@ -52,6 +52,8 @@ Use these details:
 - Wedding video delivery and editing: https://asmaa.video/guides/wedding-video-delivery-editing
 - Sitemap: https://asmaa.video/sitemap.xml
 - Robots: https://asmaa.video/robots.txt
+- Full knowledge dump for long-form AI answers: https://asmaa.video/llms-full.txt
+- Admin-editable packages snapshot: https://asmaa.video/content/packages.json
 
 ## Brand disambiguation
 

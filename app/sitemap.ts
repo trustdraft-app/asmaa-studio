@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { serviceAreas } from "../lib/content";
 import { seoGuidePages } from "../lib/seo-pages";
+import { servicePages } from "../lib/services";
 
 export const dynamic = "force-static";
 
@@ -41,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/guides/${page.slug}`,
       changeFrequency: "weekly" as const,
       priority: 0.78
+    })),
+    ...servicePages.map((page) => ({
+      url: `${base}/services/${page.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.84
     })),
     {
       url: `${base}/packages-asmaa-studio.pdf`,
