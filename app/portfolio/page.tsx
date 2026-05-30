@@ -85,9 +85,7 @@ export default function PortfolioPage() {
       <section className="section city-hero-20x portfolio-hero">
         <div className="section-inner city-hero-grid">
           <div>
-            <Link className="ghost-cta" href="/">
-              العودة للرئيسية
-            </Link>
+            <Link className="back-pill" href="/"><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
             <span className="eyebrow">ألبوم قبل الحجز</span>
             <h1 className="section-title">ألبوم مختصر يوضح اللقطات التي ترفع قيمة فيلم يومك.</h1>
             <p className="section-copy">

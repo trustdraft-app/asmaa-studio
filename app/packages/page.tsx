@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, CalendarDays, Check, Crown, Download, MessageCircle, Phone, Sparkles } from "lucide-react";
+import { ArrowLeft, CalendarDays, Check, Crown, Download, MessageCircle, Sparkles } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
 import { packages, whatsappLink, whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
@@ -45,13 +45,6 @@ const compareFeatures = [
   { ar: "تغطية الصالون", inc: [false, false, false, true, false] },
   { ar: "زفتان", inc: [false, false, false, true, false] },
   { ar: "مونتاج احترافي", inc: [true, true, true, true, true] }
-];
-
-const trustNumbers = [
-  { num: "9", label: "مدن مغطّاة في الشرقية" },
-  { num: "5", label: "باقات شفافة من ٦٠٠ ريال" },
-  { num: "٢-٦", label: "أسابيع تسليم الفيلم" },
-  { num: "١٠٠٪", label: "فريق نسائي مرخّص" }
 ];
 
 const cardBullets: Record<string, string[]> = {
@@ -256,18 +249,6 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      {/* Trust strip — animated CSS counter */}
-      <section className="pkg-trust-section" aria-label="أرقام Asmaa Studio">
-        <div className="section-inner pkg-trust-inner">
-          {trustNumbers.map((t) => (
-            <div className="pkg-trust-cell" key={t.label}>
-              <strong className="pkg-trust-num">{t.num}</strong>
-              <span className="pkg-trust-label">{t.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Final CTA stack */}
       <section className="pkg-final-cta">
         <div className="section-inner pkg-final-inner">
@@ -280,16 +261,10 @@ export default function PackagesPage() {
             <Link className="ghost-cta pkg-final-secondary" href="/reserve">
               <CalendarDays size={18} /> افتحي رابط العروس المنظّم
             </Link>
-            <a className="ghost-cta pkg-final-secondary" href={`tel:+${whatsappNumber}`}>
-              <Phone size={18} /> اتصلي مباشرة
-            </a>
             <a className="ghost-cta pkg-final-secondary" href="/packages-asmaa-studio.pdf" download="Asmaa-Studio-Packages.pdf">
               <Download size={18} /> تنزيل الـ PDF
             </a>
           </div>
-          <p className="pkg-final-note">
-            لا تسجيل، لا حقول إلزامية، لا بريد إلكتروني. كل التواصل عبر واتساب على رقم Asmaa Studio فقط.
-          </p>
         </div>
       </section>
 

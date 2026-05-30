@@ -105,7 +105,7 @@ export default function HighlightsPage() {
           </ol>
           <p className="pkg-final-note">جميع الأيقونات بألوان وخطوط Asmaa Studio الرسمية (ذهبي فاتح على فحمي). نفس المنظومة لكل قنوات التواصل.</p>
           <div className="button-row" style={{ marginTop: 18, justifyContent: "center" }}>
-            <Link className="ghost-cta" href="/">العودة للرئيسية <ArrowLeft size={16} /></Link>
+            <Link className="back-pill" href="/"><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
             <Link className="ghost-cta" href="/packages">الباقات التفاعلية <ArrowLeft size={16} /></Link>
           </div>
         </div>

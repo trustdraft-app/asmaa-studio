@@ -99,9 +99,7 @@ export default async function CityPage({ params }: Props) {
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">
           <div>
-            <Link className="ghost-cta" href="/">
-              العودة للرئيسية
-            </Link>
+            <Link className="back-pill" href="/"><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
             <span className="eyebrow">{area.priority} / {area.en}</span>
             <h1 className="section-title">{area.headline}</h1>
             <p className="section-copy">{area.heroLine}</p>
