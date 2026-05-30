@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 480)">
+<rect x="-180" y="-30" width="360" height="240" rx="14" fill="none" stroke="url(#g)" stroke-width="4"/><rect x="-180" y="-30" width="360" height="240" rx="14" fill="url(#g)" opacity="0.08"/>
+<rect x="-22" y="-30" width="44" height="240" fill="url(#g)"/>
+<path d="M-22 -30 q-60 -60 -90 -20 q-20 30 25 50 z M22 -30 q60 -60 90 -20 q20 30 -25 50 z" fill="url(#g)"/>
+<text x="-110" y="155" font-family="Cormorant Garamond, serif" font-size="38" fill="#f1cb82">01 — 05</text>
+<text x="110" y="155" font-family="Cormorant Garamond, serif" font-size="32" fill="#f1cb82" text-anchor="end">SAR</text>
+</g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="84" font-weight="700" fill="#fff6df" text-anchor="middle">الباقات</text>
+<text x="540" y="910" font-family="Cormorant Garamond, serif" font-style="italic" font-size="46" fill="#e8c57c" text-anchor="middle" letter-spacing="6">PACKAGES</text>
+</svg>

@@ -121,6 +121,9 @@ export default async function CityPage({ params }: Props) {
               <a className="cta" href={whatsappLink(area.slug)} target="_blank" rel="noreferrer">
                 اسألي عن توفر {area.ar} <MessageCircle size={18} />
               </a>
+              <Link className="ghost-cta" href="/packages">
+                الباقات التفاعلية <CalendarDays size={18} />
+              </Link>
               <Link className="ghost-cta" href={`/reserve?city=${area.slug}`}>
                 رابط العروس <CalendarDays size={18} />
               </Link>

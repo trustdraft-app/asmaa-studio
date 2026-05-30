@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img">
+<defs>
+<radialGradient id="bg1" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient>
+<linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient>
+</defs>
+<rect width="1080" height="1080" fill="url(#bg1)"/>
+<rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g1)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 460)">
+<circle r="135" fill="none" stroke="url(#g1)" stroke-width="6"/>
+<circle r="135" fill="url(#g1)" opacity="0.12"/>
+<g fill="url(#g1)">
+<circle cx="0" cy="-135" r="8"/><circle cx="135" cy="0" r="8"/><circle cx="0" cy="135" r="8"/><circle cx="-135" cy="0" r="8"/>
+<circle cx="95" cy="-95" r="6"/><circle cx="95" cy="95" r="6"/><circle cx="-95" cy="95" r="6"/><circle cx="-95" cy="-95" r="6"/>
+</g>
+<g stroke="url(#g1)" stroke-width="2.5" fill="none" opacity="0.7">
+<line x1="-90" y1="-90" x2="90" y2="90"/><line x1="90" y1="-90" x2="-90" y2="90"/><line x1="0" y1="-110" x2="0" y2="110"/><line x1="-110" y1="0" x2="110" y2="0"/>
+</g>
+</g>
+<g transform="translate(380 660)" fill="url(#g1)"><ellipse cx="0" cy="20" rx="22" ry="40"/><circle cx="0" cy="-20" r="14"/></g>
+<g transform="translate(540 670)" fill="url(#g1)"><ellipse cx="0" cy="22" rx="26" ry="46"/><circle cx="0" cy="-26" r="16"/></g>
+<g transform="translate(700 660)" fill="url(#g1)"><ellipse cx="0" cy="20" rx="22" ry="40"/><circle cx="0" cy="-20" r="14"/></g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="84" font-weight="700" fill="#fff6df" text-anchor="middle">الزفّة</text>
+<text x="540" y="910" font-family="Cormorant Garamond, serif" font-style="italic" font-size="46" fill="#e8c57c" text-anchor="middle" letter-spacing="6">ZAFFA</text>
+</svg>

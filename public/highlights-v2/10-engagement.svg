@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient><radialGradient id="d" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff6df" stop-opacity="0.95"/><stop offset="100%" stop-color="#b8924d" stop-opacity="0"/></radialGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 480)">
+<ellipse cx="0" cy="90" rx="160" ry="42" fill="none" stroke="url(#g)" stroke-width="14"/>
+<ellipse cx="0" cy="90" rx="160" ry="42" fill="none" stroke="#1a1410" stroke-width="3"/>
+<path d="M-40 -40 L-32 -10 M40 -40 L32 -10 M-15 -65 L-8 -25 M15 -65 L8 -25" stroke="url(#g)" stroke-width="4" fill="none"/>
+<polygon points="0,-130 48,-60 0,55 -48,-60" fill="url(#d)" stroke="url(#g)" stroke-width="3"/>
+<polygon points="-48,-60 48,-60 0,-130" fill="none" stroke="url(#g)" stroke-width="2"/>
+<line x1="-48" y1="-60" x2="0" y2="55" stroke="url(#g)" stroke-width="1.5"/><line x1="48" y1="-60" x2="0" y2="55" stroke="url(#g)" stroke-width="1.5"/>
+<g fill="#f1cb82" opacity="0.85"><circle cx="-180" cy="-100" r="5"/><circle cx="180" cy="-70" r="6"/><circle cx="-130" cy="-180" r="4"/><circle cx="130" cy="-200" r="4"/></g>
+</g>
+<text x="540" y="820" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="84" font-weight="700" fill="#fff6df" text-anchor="middle">خطوبة</text>
+<text x="540" y="900" font-family="Cormorant Garamond, serif" font-style="italic" font-size="46" fill="#e8c57c" text-anchor="middle" letter-spacing="6">ENGAGEMENT</text>
+</svg>
