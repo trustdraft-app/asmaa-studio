@@ -6,6 +6,7 @@ import {
   CalendarDays,
   Check,
   Clapperboard,
+  Download,
   ExternalLink,
   Gem,
   Heart,
@@ -396,6 +397,17 @@ export default function HomePage() {
           <p className="section-copy">
             زفة فقط، تفاصيل القاعة، First Look، أو يوم كامل من الصالون إلى القاعة. كل باقة
             تشرح ماذا ستوثق، لمن تناسب، وكيف سيبدو القرار قبل التواصل.
+          </p>
+          <p className="packages-pdf-cta">
+            <a
+              href={assetPath("/packages-asmaa-studio.pdf")}
+              target="_blank"
+              rel="noreferrer"
+              download="Asmaa-Studio-Packages.pdf"
+              aria-label="تحميل دليل الباقات الكامل بصيغة PDF"
+            >
+              <Download size={16} aria-hidden="true" /> تحميل دليل الباقات الكامل (PDF)
+            </a>
           </p>
           <div className="packages-grid packages-grid-20x">
             {packages.map((item, index) => (

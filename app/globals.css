@@ -3304,3 +3304,36 @@ textarea {
     width: 100%;
   }
 }
+
+/* Packages PDF download CTA — 2026-05-30 brand-truth round 2 */
+.packages-pdf-cta {
+  display: flex;
+  justify-content: center;
+  margin: 18px auto 28px;
+  padding: 0;
+}
+.packages-pdf-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c8a060 0%, #b8924d 100%);
+  color: #1a1410;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(200, 160, 96, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.packages-pdf-cta a:hover,
+.packages-pdf-cta a:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(200, 160, 96, 0.28);
+  outline: none;
+}
+.packages-pdf-cta a:active { transform: translateY(0); }
+@media (max-width: 768px) {
+  .packages-pdf-cta a { font-size: 0.88rem; padding: 11px 18px; }
+}
