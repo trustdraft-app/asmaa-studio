@@ -239,7 +239,7 @@ export const packages = [
   {
     id: "02",
     name: "بكج الزفة المطور",
-    price: "900",
+    price: "1200",
     duration: "ساعة",
     summary: "تصوير الزفة مع تفاصيل الكوشة والكيك ولقطات القاعة الأساسية قبل لحظة الدخول.",
     bestFor: "عروس تريد الزفة مع لمسات المكان المهمة بدون تغطية يوم كامل.",
@@ -249,7 +249,7 @@ export const packages = [
   },
   {
     id: "03",
-    name: "Royal Event",
+    name: "Half Day",
     price: "1700",
     duration: "3 ساعات",
     summary: "First Look وتفاصيل العروس والكوشة وكواليس التصوير وزفة واحدة في فيلم متوازن.",
@@ -335,7 +335,7 @@ export const portfolioScenes = [
     id: "02",
     title: "First Look",
     summary: "لحظة قصيرة لكنها من أكثر اللقطات طلبًا عندما تريد العروس رد فعل صادقًا ومقربًا.",
-    packageHint: "Royal Event أو Full Day",
+    packageHint: "Half Day أو Full Day",
     cityHint: "يظهر كثيرًا في حفلات الخبر والشرقية",
     keywords: ["First Look", "مشاعر اليوم", "لقطة قريبة"]
   },
@@ -343,7 +343,7 @@ export const portfolioScenes = [
     id: "03",
     title: "تفاصيل العروس",
     summary: "المجوهرات، المسكة، العطر، الكعب، والفستان ضمن إيقاع ناعم يجعل التفاصيل جزءًا من القصة.",
-    packageHint: "Royal Event وما فوق",
+    packageHint: "Half Day وما فوق",
     cityHint: "مهم للعروس التي تريد ألبومًا أنيقًا",
     keywords: ["تفاصيل العروس", "مجوهرات", "مسكة"]
   },
@@ -375,7 +375,7 @@ export const portfolioScenes = [
     id: "07",
     title: "كواليس الفوتوشوت",
     summary: "لقطات بسيطة أثناء الترتيب أو التنقل تمنح الفيلم حياة بدون أن تزعج العروس أو توقف اليوم.",
-    packageHint: "Royal Event أو Full Day",
+    packageHint: "Half Day أو Full Day",
     cityHint: "مفيد للعروس التي تريد فيلمًا حيًا",
     keywords: ["BTS", "كواليس", "حركة اليوم"]
   },
@@ -464,7 +464,7 @@ export const channelActions = [
 export const contentPillars = [
   { title: "تفاصيل العروس", detail: "الفستان، الخواتم، المسكة، العطر، الكوشة، وتفاصيل القاعة." },
   { title: "لحظات الإحساس", detail: "First Look، الدخول، وفرحة اليوم بصياغة هادئة." },
-  { title: "اختيار البكج", detail: "شرح الفرق بين الزفة، Royal Event، Full Day، وبكج الخطوبة." },
+  { title: "اختيار البكج", detail: "شرح الفرق بين الزفة، Half Day، Full Day، وبكج الخطوبة." },
   { title: "تجهيز اليوم", detail: "ماذا تجهز العروس قبل التصوير وكيف تختصر وقت الأسئلة." },
   { title: "نية محلية", detail: "الأحساء، الدمام، الخبر، والموسم بدون ادعاء ارتباط بأي قاعة." }
 ];
@@ -508,7 +508,7 @@ export const seoLaunchWaves: { day: string; title: string; channel: string; goal
   { day: "04", title: "هايلايت Packages الجديد", channel: "Instagram Highlights", goal: "تقليل طلب الملف", ownerCue: "رفع غلاف Packages" },
   { day: "05", title: "صفحة الخبر + First Look", channel: "Website + TikTok", goal: "طلب راق عالي القيمة", ownerCue: "ريل 7 ثواني قبل/بعد" },
   { day: "06", title: "FAQ: راحة العروس يوم المناسبة", channel: "Website + WhatsApp", goal: "إزالة تردد العميلة", ownerCue: "إجابة مختصرة في الحالة" },
-  { day: "07", title: "مقارنة Royal Event وFull Day", channel: "Instagram Carousel", goal: "رفع متوسط البكج", ownerCue: "CTA: اكتبي Royal" },
+  { day: "07", title: "مقارنة Half Day وFull Day", channel: "Instagram Carousel", goal: "رفع متوسط البكج", ownerCue: "CTA: اكتبي Half Day" },
   { day: "08", title: "محتوى تفاصيل العروس", channel: "TikTok + Reels", goal: "جذب العروس نفسها", ownerCue: "لقطات مجوهرات ومسكة" },
   { day: "09", title: "Google Business Profile منشور", channel: "Google", goal: "إشارة محلية", ownerCue: "نشر خدمة تصوير زواجات" },
   { day: "10", title: "هايلايت Bride Details", channel: "Instagram Highlights", goal: "إثبات الذوق", ownerCue: "تحديث الغلاف والمقاطع" },
