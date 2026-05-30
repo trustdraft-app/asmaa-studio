@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient><radialGradient id="m" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff6df" stop-opacity="0.95"/><stop offset="100%" stop-color="#b8924d" stop-opacity="0"/></radialGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 500)" fill="url(#g)">
+<path d="M-200 60 L-130 -60 L-60 30 L0 -110 L60 30 L130 -60 L200 60 Z"/>
+<rect x="-210" y="68" width="420" height="18" rx="5"/>
+<circle cx="-130" cy="-75" r="14" fill="url(#m)" stroke="url(#g)" stroke-width="2"/>
+<circle cx="0" cy="-130" r="20" fill="url(#m)" stroke="url(#g)" stroke-width="2"/>
+<circle cx="130" cy="-75" r="14" fill="url(#m)" stroke="url(#g)" stroke-width="2"/>
+<circle cx="-65" cy="0" r="8"/><circle cx="65" cy="0" r="8"/>
+<g opacity="0.45"><ellipse cx="0" cy="160" rx="220" ry="28" fill="url(#g)"/><ellipse cx="0" cy="200" rx="280" ry="22" fill="url(#g)"/></g>
+<g fill="#fff6df" opacity="0.9"><circle cx="-240" cy="-130" r="3"/><circle cx="240" cy="-150" r="4"/><circle cx="-180" cy="-220" r="3"/><circle cx="200" cy="-200" r="3"/></g>
+</g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="84" font-weight="700" fill="#fff6df" text-anchor="middle">العروس</text>
+<text x="540" y="910" font-family="Cormorant Garamond, serif" font-style="italic" font-size="46" fill="#e8c57c" text-anchor="middle" letter-spacing="6">THE BRIDE</text>
+</svg>

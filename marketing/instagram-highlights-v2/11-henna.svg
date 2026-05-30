@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 480)" fill="none" stroke="url(#g)" stroke-width="3" stroke-linecap="round">
+<circle r="180" opacity="0.35"/><circle r="140" opacity="0.55"/><circle r="100" opacity="0.75"/><circle r="60" opacity="0.95"/>
+<g><path d="M0 -180 L0 -100 M0 180 L0 100 M-180 0 L-100 0 M180 0 L100 0"/><path d="M-127 -127 L-71 -71 M127 -127 L71 -71 M-127 127 L-71 71 M127 127 L71 71"/></g>
+<g fill="url(#g)" stroke="none"><circle r="20"/><circle cx="0" cy="-180" r="9"/><circle cx="0" cy="180" r="9"/><circle cx="-180" cy="0" r="9"/><circle cx="180" cy="0" r="9"/><circle cx="-127" cy="-127" r="7"/><circle cx="127" cy="-127" r="7"/><circle cx="-127" cy="127" r="7"/><circle cx="127" cy="127" r="7"/></g>
+<g opacity="0.85"><path d="M0 -100 Q -30 -130 0 -160 Q 30 -130 0 -100" fill="url(#g)" stroke="none"/><path d="M0 100 Q -30 130 0 160 Q 30 130 0 100" fill="url(#g)" stroke="none"/><path d="M-100 0 Q -130 -30 -160 0 Q -130 30 -100 0" fill="url(#g)" stroke="none"/><path d="M100 0 Q 130 -30 160 0 Q 130 30 100 0" fill="url(#g)" stroke="none"/></g>
+</g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="68" font-weight="700" fill="#fff6df" text-anchor="middle">ليلة الحناء</text>
+<text x="540" y="900" font-family="Cormorant Garamond, serif" font-style="italic" font-size="44" fill="#e8c57c" text-anchor="middle" letter-spacing="6">HENNA NIGHT</text>
+</svg>

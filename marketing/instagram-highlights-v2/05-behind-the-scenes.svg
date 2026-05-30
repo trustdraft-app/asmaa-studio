@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 470)">
+<rect x="-200" y="-30" width="400" height="210" rx="14" fill="none" stroke="url(#g)" stroke-width="4"/>
+<rect x="-200" y="-30" width="400" height="210" rx="14" fill="url(#g)" opacity="0.06"/>
+<g transform="translate(0 -75)"><rect x="-210" y="0" width="420" height="55" rx="6" fill="url(#g)"/>
+<g fill="#1a1410"><polygon points="-180,0 -130,0 -105,55 -155,55"/><polygon points="-60,0 -10,0 15,55 -35,55"/><polygon points="60,0 110,0 135,55 85,55"/><polygon points="180,0 230,0 210,55 160,55"/></g></g>
+<text x="0" y="125" font-family="Cormorant Garamond, serif" font-size="60" fill="#f1cb82" text-anchor="middle" font-weight="700">BTS</text>
+</g>
+<g transform="translate(840 320)" fill="url(#g)"><polygon points="0,-30 9,-9 32,-9 12,8 20,32 0,18 -20,32 -12,8 -32,-9 -9,-9"/><polygon points="0,-12 4,-4 14,-4 5,4 8,14 0,7 -8,14 -5,4 -14,-4 -4,-4" transform="translate(0 60)"/></g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="68" font-weight="700" fill="#fff6df" text-anchor="middle">خلف الكواليس</text>
+<text x="540" y="900" font-family="Cormorant Garamond, serif" font-style="italic" font-size="36" fill="#e8c57c" text-anchor="middle" letter-spacing="5">BEHIND THE SCENES</text>
+</svg>

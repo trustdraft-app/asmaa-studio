@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 470)">
+<circle r="180" fill="none" stroke="url(#g)" stroke-width="3" opacity="0.55"/><circle r="140" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g fill="url(#g)"><polygon points="0,-160 22,0 0,160 -22,0"/><polygon points="-160,0 0,-22 160,0 0,22"/><polygon points="-115,-115 22,-22 115,115 -22,22" opacity="0.62"/><polygon points="115,-115 22,22 -115,115 -22,-22" opacity="0.62"/></g>
+<circle r="22" fill="url(#g)"/><circle r="8" fill="#1a1410"/>
+<g font-family="Cormorant Garamond, serif" font-size="22" fill="url(#g)" font-weight="700" text-anchor="middle"><text x="0" y="-185">N</text><text x="185" y="6">E</text><text x="0" y="200">S</text><text x="-185" y="6">W</text></g>
+</g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="84" font-weight="700" fill="#fff6df" text-anchor="middle">الدمام</text>
+<text x="540" y="910" font-family="Cormorant Garamond, serif" font-style="italic" font-size="46" fill="#e8c57c" text-anchor="middle" letter-spacing="6">DAMMAM</text>
+</svg>

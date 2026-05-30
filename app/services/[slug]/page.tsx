@@ -126,11 +126,14 @@ export default async function ServicePage({ params }: Props) {
               <a className="cta" href={whatsappLink(`service-${page.slug}`)} target="_blank" rel="noreferrer">
                 اسألي عن {page.ar} <MessageCircle size={18} />
               </a>
+              <Link className="ghost-cta" href="/packages">
+                الباقات التفاعلية <CalendarDays size={18} />
+              </Link>
               <Link className="ghost-cta" href={pkg ? `/reserve?package=${pkg.id}` : "/reserve"}>
                 رابط العروس <CalendarDays size={18} />
               </Link>
               <a className="ghost-cta" href="/packages-asmaa-studio.pdf" download="Asmaa-Studio-Packages.pdf">
-                تنزيل دليل الباقات (PDF) <ArrowLeft size={18} />
+                PDF <ArrowLeft size={18} />
               </a>
             </div>
           </div>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 350)" fill="url(#g)">
+<path d="M-100 60 L-90 -10 L-30 25 L0 -85 L30 25 L90 -10 L100 60 Z"/><rect x="-110" y="68" width="220" height="12" rx="3"/>
+<circle cx="-90" cy="-20" r="9"/><circle cx="0" cy="-95" r="11"/><circle cx="90" cy="-20" r="9"/>
+</g>
+<g transform="translate(540 580)" fill="url(#g)">
+<path d="M-180 -50 q-30 0 -30 50 v60 h60 v-50 h-20 q0 -28 30 -28 z" opacity="0.92"/>
+<path d="M-60 -50 q-30 0 -30 50 v60 h60 v-50 h-20 q0 -28 30 -28 z" opacity="0.92"/>
+<path d="M60 -50 q-30 0 -30 50 v60 h60 v-50 h-20 q0 -28 30 -28 z" opacity="0.92"/>
+<path d="M180 -50 q-30 0 -30 50 v60 h60 v-50 h-20 q0 -28 30 -28 z" opacity="0.92"/>
+</g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="64" font-weight="700" fill="#fff6df" text-anchor="middle">آراء العرايس</text>
+<text x="540" y="900" font-family="Cormorant Garamond, serif" font-style="italic" font-size="42" fill="#e8c57c" text-anchor="middle" letter-spacing="6">BRIDE REVIEWS</text>
+</svg>

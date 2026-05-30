@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<defs><radialGradient id="b" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#1a1410"/><stop offset="100%" stop-color="#08060a"/></radialGradient><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f1cb82"/><stop offset="100%" stop-color="#b8924d"/></linearGradient></defs>
+<rect width="1080" height="1080" fill="url(#b)"/><rect x="60" y="60" width="960" height="960" rx="56" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.45"/>
+<g transform="translate(540 530)">
+<path d="M -360 80 Q -260 50 -200 70 Q -140 90 -80 60 Q -20 30 40 60 Q 100 90 160 65 Q 220 40 280 70 Q 340 100 360 80" fill="none" stroke="url(#g)" stroke-width="3" opacity="0.65"/>
+<path d="M -360 110 Q -260 80 -200 100 Q -140 120 -80 90 Q -20 60 40 90 Q 100 120 160 95 Q 220 70 280 100 Q 340 130 360 110" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.4"/>
+<g fill="url(#g)">
+<rect x="-220" y="-160" width="50" height="230" rx="4"/>
+<rect x="-160" y="-100" width="40" height="170" rx="4" opacity="0.85"/>
+<rect x="-105" y="-200" width="60" height="270" rx="4"/>
+<rect x="-30" y="-130" width="45" height="200" rx="4" opacity="0.85"/>
+<rect x="35" y="-220" width="55" height="290" rx="4"/>
+<rect x="110" y="-110" width="40" height="180" rx="4" opacity="0.85"/>
+<rect x="170" y="-180" width="50" height="250" rx="4"/>
+<circle cx="-195" cy="-200" r="9"/><circle cx="65" cy="-260" r="11"/>
+</g>
+<g fill="url(#g)" opacity="0.5"><circle cx="-280" cy="-220" r="20"/></g>
+</g>
+<text x="540" y="830" font-family="Noto Kufi Arabic, system-ui, sans-serif" font-size="84" font-weight="700" fill="#fff6df" text-anchor="middle">الخبر</text>
+<text x="540" y="910" font-family="Cormorant Garamond, serif" font-style="italic" font-size="46" fill="#e8c57c" text-anchor="middle" letter-spacing="6">KHOBAR</text>
+</svg>
