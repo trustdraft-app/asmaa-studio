@@ -1,0 +1,19 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Zaffa highlight cover</title>
+  <desc id="desc">Premium black and champagne gold wedding entrance video highlight cover.</desc>
+  <rect width="1080" height="1080" rx="140" fill="#080808"/>
+  <circle cx="540" cy="380" r="214" fill="url(#glow)" opacity="0.22"/>
+  <path d="M322 632C322 511.602 419.602 414 540 414C660.398 414 758 511.602 758 632" stroke="#C8A96A" stroke-width="30" stroke-linecap="round"/>
+  <path d="M420 632C420 565.726 473.726 512 540 512C606.274 512 660 565.726 660 632" stroke="#FFF1C2" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="540" cy="430" r="34" fill="#FFF1C2"/>
+  <path d="M540 350L558 394H606L568 421L582 466L540 439L498 466L512 421L474 394H522L540 350Z" fill="#C8A96A"/>
+  <path d="M270 760H810" stroke="#4F4124" stroke-width="8" stroke-linecap="round"/>
+  <text x="540" y="844" fill="#FFF1C2" text-anchor="middle" font-family="Arial, sans-serif" font-size="62" font-weight="700">ZAFFA</text>
+  <text x="540" y="900" fill="#C8A96A" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="600">لحظة الدخول</text>
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(540 380) rotate(90) scale(214)">
+      <stop stop-color="#FFF1C2"/>
+      <stop offset="1" stop-color="#FFF1C2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

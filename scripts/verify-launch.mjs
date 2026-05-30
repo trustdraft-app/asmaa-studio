@@ -20,6 +20,7 @@ const requiredFiles = [
   "reserve.html",
   "faq.html",
   "portfolio.html",
+  "zaffa.html",
   "guides.html",
   "alahsa.html",
   "dammam.html",
@@ -83,6 +84,7 @@ const marketingRoutes = [
   "khobar.html",
   "faq.html",
   "portfolio.html",
+  "zaffa.html",
   "guides.html",
   "404.html",
   ...guideSlugs.map((slug) => `guides/${slug}.html`)

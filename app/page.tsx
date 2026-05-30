@@ -201,6 +201,7 @@ export default function HomePage() {
           <div className="nav-links">
             <a href="#packages">الباقات</a>
             <a href="#cities">المدن</a>
+            <Link href="/zaffa">بكج الزفة</Link>
             <Link href="/guides">الدليل</Link>
             <Link href="/portfolio">الألبوم</Link>
             <Link href="/faq">الأسئلة</Link>
@@ -233,6 +234,9 @@ export default function HomePage() {
             <div className="button-row">
               <Link className="cta" href="/reserve">
                 افتحي رابط العروس <ArrowLeft size={18} />
+              </Link>
+              <Link className="ghost-cta" href="/zaffa">
+                بكج الزفة <Sparkles size={18} />
               </Link>
               <a className="ghost-cta" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
                 واتساب مباشر <MessageCircle size={18} />

@@ -125,6 +125,9 @@ export default function FaqPage() {
             <Link className="cta" href="/reserve">
               رابط العروس <ArrowLeft size={18} />
             </Link>
+            <Link className="ghost-cta" href="/zaffa">
+              بكج الزفة <CalendarDays size={18} />
+            </Link>
             <Link className="ghost-cta" href="/alahsa">
               صفحة الأحساء <CheckCircle2 size={18} />
             </Link>

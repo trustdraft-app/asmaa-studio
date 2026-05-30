@@ -185,3 +185,9 @@
 **Decision:** No; log it as unrelated because the gate failed only on existing Fattourh API-route findings outside `/Users/mohammedsa/Documents/AsmaaVideo`, while Asmaa-specific gates passed.
 **Reasoning:** Sweeping unrelated Fattourh security work into an Asmaa domain/UI/SEO escalation would violate surgical-change and dirty-worktree discipline.
 **Source:** `ai-empire-anti-rot-gate.mjs` output, AGENTS.md anti-rot rule, professional judgment.
+
+## 2026-05-30 09:18 +03 — Asmaa Studio
+**Question:** Which remaining 20-wave item should become the next live website improvement after the FAQ, portfolio, and GEO/schema passes?
+**Decision:** Convert wave 16 into a dedicated `/zaffa` package landing page, add direct homepage/internal links, ship a matching highlight cover asset, and index the route in sitemap and `llms.txt`.
+**Reasoning:** The next safe high-impact gain is a dedicated low-friction package path for the strongest budget-intent search and conversion query already present in the content model, rather than waiting on off-site Instagram execution.
+**Source:** `lib/content.ts` 20-wave plan, existing package/guides model, live site structure, professional judgment.

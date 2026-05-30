@@ -489,6 +489,7 @@ export const highlights = [
   { label: "Album", file: "album.svg", text: "ألبوم مختصر لأفضل اللقطات" },
   { label: "Care", file: "feedback.svg", text: "اطمئنان قبل الحجز بدون وعود مبالغ فيها" },
   { label: "Packages", file: "packages.svg", text: "اختيار البكج حسب لحظات اليوم" },
+  { label: "Zaffa", file: "zaffa.svg", text: "بكج الزفة للحجز السريع" },
   { label: "Bride details", file: "bride-details.svg", text: "تفاصيل العروس والإكسسوارات" },
   { label: "Video details", file: "video-details.svg", text: "أسلوب الفيديو والمونتاج" },
   { label: "First Look", file: "first-look.svg", text: "لحظة الظهور الأولى" },

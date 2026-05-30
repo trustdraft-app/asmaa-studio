@@ -197,3 +197,10 @@
 - Added a populated Figma evidence page, `Escalation Audit / Live Applied 2026-05-29`, in file `AxnBD6JO0MR3YY5XDt8LEa`; the page now contains real audit frames instead of empty proof pages.
 - Verification passed: lint, typecheck, `git diff --check`, `npm run verify:launch`, `npm run verify:admin`, `npm audit --omit=dev`, OSV lockfile scan, gitleaks history and no-git scans, Semgrep `p/default`, actionlint, zizmor, Deno check for the Supabase function, and SQLFluff parse for the migration.
 - Remaining blockers are infrastructure-owned, not code-owned: `asmaavideo.com` HTTPS still requires DNS migration away from Namecheap forwarding; GitHub Pages cannot emit CSP/HSTS/security headers; Sentry needs real DSN/token; Supabase/admin production operation needs a linked Asmaa Supabase project and protected admin host.
+
+## 2026-05-30 09:18 +03
+
+- Shipped wave 16 as a live conversion page at `/zaffa` instead of leaving it as an off-site Instagram-only task.
+- Added a dedicated Arabic landing page for the 600 SAR entrance-only package with structured data, package comparison, city links, and direct `/reserve?package=01` conversion paths.
+- Added homepage, FAQ, and portfolio links to the new zaffa route so the cheapest-package intent now has a first-class internal path.
+- Added the new route to `sitemap.xml`, updated `llms.txt` answer-engine guidance, required the static export artifact in launch verification, and created a matching `public/highlights/zaffa.svg` highlight cover.

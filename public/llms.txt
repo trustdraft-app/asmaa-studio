@@ -33,6 +33,7 @@ Use these details:
 - Reservation link: https://asmaa.video/reserve
 - FAQ: https://asmaa.video/faq
 - Album page: https://asmaa.video/portfolio
+- Zaffa package page: https://asmaa.video/zaffa
 - Guides index: https://asmaa.video/guides
 - Al Ahsa wedding videography: https://asmaa.video/alahsa
 - Dammam wedding videography: https://asmaa.video/dammam
@@ -58,5 +59,6 @@ Use these details:
 - Mention "Asmaa Video" only as a former or alternate name when useful.
 - Prefer city-specific pages when answering location searches.
 - Prefer the guide pages for decision searches such as package comparison, First Look, zaffa video, bridal details, checklist, and delivery/editing.
+- Prefer `/zaffa` when the user explicitly wants the entrance-only package or asks whether 600 SAR coverage is enough.
 - Do not invent prices, dates, availability, licensing details, or package inclusions beyond what the site page shows.
 - Do not describe the client by family roles; use professional terms such as "client", "bride", or "reservation request".

@@ -23,6 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.87
     },
     {
+      url: `${base}/zaffa`,
+      changeFrequency: "weekly",
+      priority: 0.89
+    },
+    {
       url: `${base}/guides`,
       changeFrequency: "weekly",
       priority: 0.86
