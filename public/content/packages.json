@@ -1,0 +1,87 @@
+{
+  "$schema": "asmaa-studio/packages.v1",
+  "$version": "2026-05-30",
+  "$source": "lib/content.ts is canonical at build time; this JSON is the future admin-editable mirror once /admin auth is wired (see docs/ADMIN_BLUEPRINT.md). Do NOT diverge from lib/content.ts without bumping schema.",
+  "currency": "SAR",
+  "deposit": {
+    "percent": 50,
+    "refundable": false,
+    "tenor_days_until_cancel": 2
+  },
+  "addons": [
+    { "id": "extra-hour", "name_ar": "الساعة الإضافية", "name_en": "Extra hour", "price": 200, "unit": "hour" },
+    { "id": "mannequin", "name_ar": "منيكان لتصوير فستان العروس", "name_en": "Bridal dress mannequin", "price": 150, "unit": "session" },
+    { "id": "color-grade", "name_ar": "التلوين السينمائي وتنعيم البشرة", "name_en": "Cinematic color grade + skin softening", "price": 350, "unit": "film" },
+    { "id": "moonlight", "name_ar": "إضاءة المون لايت وقت الزفة", "name_en": "Moonlight bridal entrance lighting", "price": 0, "included_in": ["01"] }
+  ],
+  "packages": [
+    {
+      "id": "01",
+      "name_ar": "بكج الزفة",
+      "name_en": "Zaffa",
+      "price": 600,
+      "duration_minutes": 20,
+      "duration_label_ar": "20 دقيقة",
+      "summary_ar": "توثيق لحظة الدخول بإضاءة جميلة ومونتاج مختصر لمن تريد حفظ الزفة فقط.",
+      "deliverable_ar": "فيلم زفة مختصر",
+      "best_for_ar": "عروس تريد ذكرى واضحة للحظة الدخول بدون تغطية تفاصيل اليوم.",
+      "sequence_ar": ["حضور قبل الزفة", "تجهيز الإضاءة", "تصوير الزفة", "مونتاج سريع"],
+      "bullets_ar": ["الحضور قبل الزفة بربع ساعة", "تصوير سينمائي بإضاءة وترتيب واضح", "مناسب للحجز السريع"]
+    },
+    {
+      "id": "02",
+      "name_ar": "بكج الزفة المطور",
+      "name_en": "Zaffa Plus",
+      "price": 1200,
+      "duration_minutes": 60,
+      "duration_label_ar": "ساعة",
+      "summary_ar": "تصوير الزفة مع تفاصيل الكوشة والكيك ولقطات القاعة الأساسية قبل لحظة الدخول.",
+      "deliverable_ar": "فيلم زفة وتفاصيل",
+      "best_for_ar": "عروس تريد الزفة مع لمسات المكان المهمة بدون تغطية يوم كامل.",
+      "sequence_ar": ["لقطات القاعة", "الكوشة والكيك", "الزفة", "مونتاج منسق"],
+      "bullets_ar": ["تفاصيل القاعة والكوشة", "لقطات قريبة للكعكة والديكور", "تغطية عملية وواضحة"]
+    },
+    {
+      "id": "03",
+      "name_ar": "Half Day",
+      "name_en": "Half Day",
+      "price": 1700,
+      "duration_minutes": 180,
+      "duration_label_ar": "3 ساعات",
+      "summary_ar": "First Look وتفاصيل العروس والكوشة وكواليس التصوير وزفة واحدة في فيلم متوازن.",
+      "deliverable_ar": "فيلم عروس متكامل",
+      "best_for_ar": "العروس التي تريد قصة أنيقة لا تكتفي بلقطة الدخول.",
+      "sequence_ar": ["تفاصيل العروس", "First Look", "كواليس الفوتو", "الزفة"],
+      "bullets_ar": ["تفاصيل المجوهرات والمسكة والكعب والعطر", "لقطات مشاعر عفوية", "البكج الأنسب لتغطية متوازنة"],
+      "spotlight_ar": "الأكثر قابلية للتحويل"
+    },
+    {
+      "id": "04",
+      "name_ar": "Full Day",
+      "name_en": "Full Day",
+      "price": 2500,
+      "duration_minutes": 360,
+      "duration_label_ar": "6 ساعات",
+      "summary_ar": "تغطية كاملة من الصالون إلى القاعة مع First Look وتفاصيل العروس والكوشة وزفتين.",
+      "deliverable_ar": "فيلم يوم كامل",
+      "best_for_ar": "العروس التي تريد قصة اليوم كاملة من البداية إلى النهاية.",
+      "sequence_ar": ["الصالون", "تفاصيل المكياج", "القاعة", "زفتين"],
+      "bullets_ar": ["تفاصيل المكياج والشعر", "تفاصيل القاعة والكوشة", "مونتاج احترافي شامل"],
+      "featured": true,
+      "spotlight_ar": "أعلى قيمة بصرية"
+    },
+    {
+      "id": "05",
+      "name_ar": "بكج الخطوبة",
+      "name_en": "Engagement",
+      "price": 1500,
+      "duration_minutes": 150,
+      "duration_label_ar": "ساعتان ونصف",
+      "summary_ar": "تفاصيل العروس والكوشة والشبكة والتلبيس والكيك والزفة في فيلم خطوبة مرتب.",
+      "deliverable_ar": "فيلم خطوبة",
+      "best_for_ar": "خطوبة أو ملكة تحتاج حفظ التفاصيل واللحظات العائلية بنعومة.",
+      "sequence_ar": ["الشبكة", "التلبيس", "الكيك", "الزفة"],
+      "bullets_ar": ["مصمم للخطوبة والملكة", "تغطية لحظات التلبيس والشبكة", "أسلوب راق وهادئ"]
+    }
+  ]
+}
