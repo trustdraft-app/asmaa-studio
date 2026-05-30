@@ -75,7 +75,8 @@ const jsonLd = {
       "@type": "Organization",
       "@id": "https://asmaa.video/#organization",
       name: "Asmaa Studio",
-      alternateName: "Asmaa Video",
+      legalName: "Asmaa Studio (asmaa.video)",
+      alternateName: ["Asmaa Video", "أسماء ستوديو"],
       url: "https://asmaa.video/",
       logo: "https://asmaa.video/brand/asmaa-logo-square.png",
       image: [
@@ -83,7 +84,17 @@ const jsonLd = {
         "https://asmaa.video/highlights/bride-details.svg"
       ],
       telephone: `+${whatsappNumber}`,
+      priceRange: "SAR 600–2500",
       availableLanguage: ["ar-SA", "en"],
+      description:
+        "تصوير فيديو للأعراس والخطوبة في الأحساء والدمام والخبر مع باقات واضحة من ٦٠٠ إلى ٢٥٠٠ ريال.",
+      disambiguatingDescription:
+        "Asmaa Studio (asmaa.video) is a Saudi female wedding videography studio in the Eastern Province (Al Ahsa, Dammam, Khobar). Not affiliated with asmaa-studio.com (UAE) or any Instagram account other than @asmaa.video.",
+      identifier: {
+        "@type": "PropertyValue",
+        name: "canonical-domain",
+        value: "asmaa.video"
+      },
       contactPoint: {
         "@type": "ContactPoint",
         telephone: `+${whatsappNumber}`,
@@ -98,6 +109,7 @@ const jsonLd = {
       "@id": "https://asmaa.video/#wedding-videography-service",
       name: "تصوير فيديو زواجات وخطوبة نسائي في الشرقية",
       serviceType: "Female wedding videography",
+      inLanguage: ["ar-SA", "en"],
       provider: {
         "@id": "https://asmaa.video/#organization"
       },

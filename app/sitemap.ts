@@ -41,6 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/guides/${page.slug}`,
       changeFrequency: "weekly" as const,
       priority: 0.78
-    }))
+    })),
+    {
+      url: `${base}/packages-asmaa-studio.pdf`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7
+    }
   ];
 }
