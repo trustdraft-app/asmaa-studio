@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, Check, Download, MessageCircle, Phone } from "lucide-react";
 import { JsonLd } from "../../../../components/JsonLd";
+import { ServiceMotion } from "../../../../components/ServiceMotion";
 import { instagramUrl, tiktokUrl, whatsappLink, whatsappNumber } from "../../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../../lib/metadata";
 import {
@@ -115,13 +116,16 @@ export default async function SeoCityServicePage({ params }: Props) {
     <main className="page-shell">
       <JsonLd data={serviceJsonLd} />
 
-      <section className="section city-hero-20x">
+      <section className="section city-hero-20x reveal-on-scroll">
         <div className="section-inner city-hero-grid">
           <div>
             <Link className="back-pill" href="/"><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
             <span className="eyebrow">{city.governorate === "alahsa" ? "محافظة الأحساء" : "المنطقة الشرقية"} / {city.en}</span>
             <h1 className="section-title">{h1}</h1>
             <p className="section-copy">{intro}</p>
+            <div className="service-motion-wrap reveal-on-scroll" style={{ margin: "24px 0", display: "flex", justifyContent: "center" }}>
+              <ServiceMotion serviceSlug={service.slug} ariaLabel={`Asmaa Studio illustration: ${service.ar} في ${city.ar}`} />
+            </div>
 
             <div className="city-intent">
               <article>

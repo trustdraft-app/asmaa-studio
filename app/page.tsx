@@ -252,11 +252,11 @@ export default function HomePage() {
               والدمام والخبر. تبدأين من رابط واضح: المدينة، التاريخ، الباقة، واللحظات التي لا تريدين نسيانها.
             </p>
             <div className="button-row">
-              <Link className="cta" href="/reserve">
-                افتحي رابط العروس <ArrowLeft size={18} />
+              <Link className="cta" href="/packages">
+                احجزي الباقة المناسبة <Sparkles size={18} />
               </Link>
-              <Link className="ghost-cta" href="/zaffa">
-                بكج الزفة <Sparkles size={18} />
+              <Link className="ghost-cta" href="/portfolio">
+                شاهدي معرض الأعمال <ArrowLeft size={18} />
               </Link>
               <a className="ghost-cta" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
                 واتساب مباشر <MessageCircle size={18} />
