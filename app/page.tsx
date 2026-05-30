@@ -211,11 +211,10 @@ export default function HomePage() {
             <Link href="/packages">الباقات التفاعلية</Link>
             <a href="#cities">المدن</a>
             <Link href="/services/full-day-wedding">الخدمات</Link>
-            <Link href="/zaffa">بكج الزفة</Link>
-            <Link href="/guides">الدليل</Link>
             <Link href="/portfolio">الألبوم</Link>
+            <Link href="/reviews">آراء العرايس</Link>
+            <Link href="/about">عن الاستوديو</Link>
             <Link href="/faq">الأسئلة</Link>
-            <a href="#booking-path">طريقة الحجز</a>
             <Link href="/reserve">رابط العروس</Link>
           </div>
           <div className="nav-actions" aria-label="خيارات سريعة">

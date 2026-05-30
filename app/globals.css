@@ -4457,3 +4457,130 @@ textarea {
   .cine-pulse-line, .cine-pulse-spark, .cine-fig-l, .cine-fig-r { animation: none; }
   .cine-cta-primary:hover, .cine-cta-secondary:hover, .cine-cta-tertiary:hover { transform: none; }
 }
+
+
+/* ============================================================
+ * Sprint 14 — /reviews + /about cinematic redesign styles
+ * ============================================================ */
+
+/* Reviews grid */
+.reviews-section { padding-top: 56px; padding-bottom: 56px; }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 18px;
+  margin-top: 32px;
+}
+.review-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 24px;
+  min-height: 240px;
+}
+.review-quote-icon { color: #f1cb82; opacity: 0.6; }
+.review-text {
+  margin: 0;
+  color: rgba(255, 248, 236, 0.9);
+  font-size: 0.98rem;
+  line-height: 1.92;
+  flex-grow: 1;
+}
+.review-rating {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+}
+.review-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  color: rgba(255, 248, 236, 0.7);
+  font-size: 0.82rem;
+  padding-top: 12px;
+  border-top: 1px solid rgba(241, 203, 130, 0.18);
+}
+.review-initials {
+  color: #f1cb82;
+  font-weight: 700;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+.review-sep { color: rgba(241, 203, 130, 0.5); }
+.review-service {
+  color: #e8c57c;
+  font-weight: 600;
+}
+
+/* About page sections */
+.about-milestones-section { padding: 64px 24px; }
+.about-milestones {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.about-milestone {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 20px;
+  min-height: 180px;
+}
+.about-milestone-year {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f1cb82, #b8924d);
+  color: #1a1410;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+.about-milestone h3 {
+  color: #fff6df;
+  font-size: 1.05rem;
+  margin: 0;
+}
+.about-milestone p {
+  color: rgba(255, 248, 236, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.about-values-section {
+  padding: 64px 24px;
+  background: linear-gradient(180deg, transparent, rgba(241, 203, 130, 0.03));
+}
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 32px;
+}
+.about-value-card {
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 200px;
+}
+.about-value-icon { color: #f1cb82; }
+.about-value-card h3 { color: #fff6df; font-size: 1.05rem; margin: 0; }
+.about-value-card p { color: rgba(255, 248, 236, 0.78); font-size: 0.94rem; line-height: 1.85; margin: 0; }
+
+@media (max-width: 560px) {
+  .reviews-grid { grid-template-columns: 1fr; gap: 12px; }
+  .review-card { min-height: auto; padding: 22px 18px; }
+  .about-milestones { gap: 12px; }
+}
