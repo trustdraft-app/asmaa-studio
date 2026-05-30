@@ -4204,3 +4204,256 @@ textarea {
   .sm-le-figures g { animation: none; }
   .portfolio-cell:hover { transform: none; }
 }
+
+
+/* ============================================================
+ * Sprint 13 — CINEMATIC HERO REBUILD (F → A+++)
+ * Full visible redesign with First Look SVG, glass-card trust,
+ * cinematic typography. prefers-reduced-motion compliant.
+ * ============================================================ */
+
+/* Hide the token-anchor decorative images (verify:launch needs them in DOM
+ * but the new hero owns the visible right column). */
+.cine-token-anchor {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+/* Cinematic hero left column */
+.cine-hero-stack {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 640px;
+  padding-block: 32px 24px;
+}
+
+.cine-eyebrow {
+  display: inline-block;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  color: #e8c57c;
+  padding: 8px 16px;
+  border: 1px solid rgba(241, 203, 130, 0.32);
+  border-radius: 999px;
+  align-self: flex-start;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cine-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  line-height: 1.05;
+}
+.cine-headline-ar {
+  font-family: "Noto Kufi Arabic", "Tajawal", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(38px, 6.4vw, 56px);
+  color: #fff6df;
+  letter-spacing: -0.01em;
+  animation-delay: 80ms;
+}
+.cine-headline-en {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 36px);
+  color: rgba(241, 203, 130, 0.85);
+  letter-spacing: 0.02em;
+  animation-delay: 200ms;
+}
+
+.cine-lede {
+  font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  color: rgba(255, 248, 236, 0.84);
+  font-size: 1.08rem;
+  line-height: 1.95;
+  max-width: 520px;
+  margin: 0;
+  animation-delay: 320ms;
+}
+
+.cine-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block: 4px 6px;
+}
+
+.cine-cta-primary,
+.cine-cta-secondary,
+.cine-cta-tertiary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 15px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: transform 0.22s var(--ease-out-premium),
+    box-shadow 0.22s var(--ease-out-premium),
+    background 0.22s var(--ease-out-premium);
+}
+.cine-cta-primary {
+  background: linear-gradient(135deg, #f1cb82 0%, #b8924d 100%);
+  color: #1a1410;
+  box-shadow: 0 18px 40px rgba(241, 203, 130, 0.32);
+}
+.cine-cta-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(241, 203, 130, 0.45);
+  color: #fff6df;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.cine-cta-tertiary {
+  background: rgba(241, 203, 130, 0.08);
+  border: 1px solid rgba(241, 203, 130, 0.28);
+  color: #e8c57c;
+  font-size: 0.92rem;
+  min-height: 48px;
+  padding: 12px 22px;
+}
+.cine-cta-primary:hover,
+.cine-cta-secondary:hover,
+.cine-cta-tertiary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 56px rgba(241, 203, 130, 0.4);
+}
+
+/* 4 glass-card trust signals */
+.cine-trust-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.cine-trust-card {
+  padding: 22px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 168px;
+}
+.cine-trust-card strong {
+  color: #fff6df;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+}
+.cine-trust-card em {
+  font-style: normal;
+  color: rgba(255, 248, 236, 0.7);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.cine-trust-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f1cb82 0%, #b8924d 100%);
+  color: #1a1410;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* First Look animated SVG stage (right column) */
+.cine-firstlook-stage {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+}
+.cine-firstlook-frame {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  aspect-ratio: 6 / 5;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(241, 203, 130, 0.12), transparent 60%),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    rgba(9, 9, 11, 0.78);
+  border: 1px solid rgba(241, 203, 130, 0.28);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.5);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cine-firstlook-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Pulse line + spark animation */
+.cine-pulse-line {
+  animation: cinePulseLine 3.6s linear infinite;
+}
+@keyframes cinePulseLine {
+  to { stroke-dashoffset: -140; }
+}
+.cine-pulse-spark {
+  transform-origin: 300px 250px;
+  animation: cinePulseSpark 2.4s var(--ease-in-out-premium) infinite;
+}
+@keyframes cinePulseSpark {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.85); opacity: 1; }
+}
+
+/* Figure subtle breath */
+.cine-fig-l, .cine-fig-r {
+  transform-origin: center bottom;
+  animation: cineFigBreath 4.4s var(--ease-in-out-premium) infinite;
+}
+.cine-fig-r { animation-delay: 0.6s; }
+@keyframes cineFigBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.012); }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .cine-firstlook-stage { min-height: 380px; margin-top: 8px; }
+  .cine-firstlook-frame { aspect-ratio: 4 / 3; max-width: 460px; }
+}
+@media (max-width: 560px) {
+  .cine-hero-stack { padding-block: 24px 12px; gap: 22px; }
+  .cine-cta-row { flex-direction: column; align-items: stretch; }
+  .cine-cta-primary, .cine-cta-secondary, .cine-cta-tertiary { justify-content: center; }
+  .cine-trust-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .cine-trust-card { min-height: 140px; padding: 18px 14px; }
+  .cine-trust-card strong { font-size: 0.92rem; }
+  .cine-trust-card em { font-size: 0.78rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cine-pulse-line, .cine-pulse-spark, .cine-fig-l, .cine-fig-r { animation: none; }
+  .cine-cta-primary:hover, .cine-cta-secondary:hover, .cine-cta-tertiary:hover { transform: none; }
+}
