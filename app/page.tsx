@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import {
   ArrowLeft,
+  Banknote,
   CalendarDays,
   Check,
   Clapperboard,
@@ -12,8 +13,10 @@ import {
   Heart,
   Languages,
   MessageCircle,
+  Plus,
   Play,
   Search,
+  ShieldCheck,
   Sparkles,
   Video
 } from "lucide-react";
@@ -25,10 +28,13 @@ import {
   bookingSteps,
   cinematicMoments,
   conversionFlow,
+  credentials,
   highlights,
   instagramUrl,
   liveOperatingSystem,
+  packageAddOns,
   packages,
+  paymentTerms,
   serviceAreas,
   services,
   tiktokUrl,
@@ -452,6 +458,54 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section payment-terms-section" id="payment-terms">
+        <div className="section-inner">
+          <span className="eyebrow">طريقة الحجز خطوة بخطوة</span>
+          <h2 className="section-title">خطوات الحجز واضحة من الموقع إلى يوم المناسبة.</h2>
+          <p className="section-copy">
+            اختياركِ للبكج، تحويل العربون، وتسليم المبلغ المتبقي يوم المناسبة — كل خطوة مرتبة حتى لا تختلط
+            التفاصيل ولا تتأخر المتابعة.
+          </p>
+          <ol className="payment-terms-grid" aria-label="خطوات الحجز">
+            {paymentTerms.map((term) => (
+              <li className="payment-step" key={term.step}>
+                <b aria-hidden="true">{term.step}</b>
+                <p>{term.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="button-row wave-actions">
+            <Link className="cta" href="/reserve">
+              ابدئي رابط العروس <CalendarDays size={18} />
+            </Link>
+            <a className="ghost-cta" href={whatsappLink("payment-terms")} target="_blank" rel="noreferrer">
+              اسألي عن العربون <MessageCircle size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="section addons-section" id="addons">
+        <div className="section-inner">
+          <span className="eyebrow">إضافات اختيارية</span>
+          <h2 className="section-title">إضافات تكمل الفيلم حسب حاجة يومكِ.</h2>
+          <p className="section-copy">
+            يمكن إضافة هذه العناصر إلى أي باقة قبل تأكيد الحجز حتى يصل الطلب جاهزا للمتابعة بدون أسئلة إضافية.
+          </p>
+          <div className="addons-grid">
+            {packageAddOns.map((addon) => (
+              <article className="addon-card" key={addon.id}>
+                <Plus size={20} strokeWidth={1.7} aria-hidden="true" />
+                <h3>{addon.name}</h3>
+                <p className="addon-price">{addon.price}</p>
+                <p className="addon-desc">{addon.description}</p>
+                <em>{addon.nameEn}</em>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section services-band" id="experience">
         <div className="section-inner">
           <span className="eyebrow">ما تحتاجه العروس فعلا</span>
@@ -692,6 +746,26 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <footer className="payment-trust-row" aria-label="ضمانات Asmaa Studio">
+        <div className="payment-trust-inner">
+          <div className="trust-credential">
+            <ShieldCheck size={20} strokeWidth={1.7} aria-hidden="true" />
+            <span>{credentials.ministryAr}</span>
+            <em>{credentials.ministryEn}</em>
+          </div>
+          <div className="trust-credential">
+            <Banknote size={20} strokeWidth={1.7} aria-hidden="true" />
+            <span>عربون نصف الفاتورة لتثبيت التاريخ، والمتبقي يوم المناسبة.</span>
+            <em>50% deposit reserves the date — balance on event day.</em>
+          </div>
+          <div className="trust-credential">
+            <Sparkles size={20} strokeWidth={1.7} aria-hidden="true" />
+            <span>{credentials.equipmentAr}</span>
+            <em>{credentials.equipmentEn}</em>
+          </div>
+        </div>
+      </footer>
 
       <a className="floating-whatsapp" href={whatsappLink("floating-whatsapp")} target="_blank" rel="noreferrer">
         <MessageCircle size={24} />
