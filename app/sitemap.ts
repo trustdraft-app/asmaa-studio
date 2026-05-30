@@ -33,6 +33,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5
     },
     {
+      url: `${base}/about`,
+      changeFrequency: "monthly",
+      priority: 0.78
+    },
+    {
+      url: `${base}/reviews`,
+      changeFrequency: "weekly",
+      priority: 0.85
+    },
+    {
       url: `${base}/faq`,
       changeFrequency: "weekly",
       priority: 0.88
