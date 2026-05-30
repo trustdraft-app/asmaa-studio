@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const canonical = `https://asmaa.video/ar/${slug.join("/")}`;
   return {
-    title: "تحويل إلى الصفحة الصحيحة | Asmaa Studio",
+    title: { absolute: "تحويل إلى الصفحة الصحيحة" },
     description: "يتم تحويلك تلقائياً إلى صفحة Asmaa Studio الصحيحة.",
     alternates: { canonical },
     robots: { index: false, follow: true },
