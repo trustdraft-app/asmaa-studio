@@ -3343,3 +3343,184 @@ textarea {
     min-height: 48px;
   }
 }
+
+
+/* ----------------------------------------------------------------------
+ * Brand-truth Phase 2 — payment terms, add-ons, credentials footer
+ * Ported from studio/phase1-brand-truth (women-only badge intentionally
+ * omitted per Mohammed: stating the obvious insults the audience).
+ * 2026-05-30
+ * ---------------------------------------------------------------------- */
+
+.payment-terms-section .section-inner {
+  position: relative;
+}
+
+.payment-terms-grid {
+  list-style: none;
+  margin: 28px 0 22px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  counter-reset: payment-step;
+}
+
+.payment-step {
+  position: relative;
+  padding: 22px 22px 22px 70px;
+  border: 1px solid rgba(232, 197, 124, 0.22);
+  border-radius: 10px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(9, 9, 11, 0.74);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.22);
+  min-height: 132px;
+}
+
+.payment-step b {
+  position: absolute;
+  inset-block-start: 18px;
+  inset-inline-start: 18px;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  font-size: 1.25rem;
+  color: #1a1410;
+  background: linear-gradient(135deg, #f1cb82, #c99953);
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(201, 153, 83, 0.34);
+}
+
+.payment-step p {
+  margin: 0;
+  color: #fff6df;
+  font-size: 0.97rem;
+  line-height: 1.78;
+}
+
+.addons-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.addon-card {
+  padding: 22px 20px;
+  border: 1px solid rgba(232, 197, 124, 0.22);
+  border-radius: 10px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    rgba(9, 9, 11, 0.74);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 200px;
+}
+
+.addon-card svg { color: #e8c57c; }
+
+.addon-card h3 {
+  color: #fff6df;
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.addon-price {
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  color: #f1cb82;
+  font-size: 1.18rem;
+  margin: 0;
+}
+
+.addon-desc {
+  margin: 0;
+  color: rgba(255, 248, 236, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.addon-card em {
+  margin-top: auto;
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(241, 203, 130, 0.66);
+}
+
+/* Payment trust footer */
+.payment-trust-row {
+  margin-top: 48px;
+  padding: 28px 24px 36px;
+  border-top: 1px solid rgba(232, 197, 124, 0.18);
+  background: linear-gradient(180deg, rgba(9, 9, 11, 0.0), rgba(9, 9, 11, 0.55));
+}
+
+.payment-trust-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.trust-credential {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid rgba(232, 197, 124, 0.18);
+  border-radius: 10px;
+  background: rgba(9, 9, 11, 0.55);
+  min-height: 124px;
+}
+
+.trust-credential svg { color: #e8c57c; }
+
+.trust-credential span {
+  color: #fff6df;
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.trust-credential em {
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 248, 236, 0.6);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Mobile collapse */
+@media (max-width: 900px) {
+  .payment-terms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .addons-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .payment-trust-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .payment-terms-grid {
+    grid-template-columns: 1fr;
+  }
+  .addons-grid {
+    grid-template-columns: 1fr;
+  }
+  .payment-step {
+    min-height: auto;
+    padding: 20px 18px 20px 64px;
+  }
+  .payment-step p { font-size: 0.94rem; }
+}

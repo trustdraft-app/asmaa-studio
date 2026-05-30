@@ -33,7 +33,11 @@ export const metadata: Metadata = {
   description:
     "Asmaa Studio تقدم تصوير فيديو للأعراس والخطوبة في الأحساء والدمام والخبر مع باقات واضحة، مونتاج احترافي، وتواصل مباشر عبر واتساب.",
   alternates: {
-    canonical: "https://asmaa.video/"
+    canonical: "https://asmaa.video/",
+    languages: {
+      "ar-SA": "https://asmaa.video/",
+      "x-default": "https://asmaa.video/"
+    }
   },
   icons: {
     icon: "/favicon.png",

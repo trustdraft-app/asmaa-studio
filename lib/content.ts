@@ -39,15 +39,25 @@ const citySourceLabels: Record<string, string> = {
 
 function readableWhatsappSource(source: string) {
   if (source === "home-hero") return "الصفحة الرئيسية";
+  if (source === "home-nav") return "الصفحة الرئيسية - الشريط العلوي";
+  if (source === "floating-whatsapp") return "زر واتساب السريع";
   if (source === "reserve-nav") return "رابط العروس";
   if (source === "admin-dashboard") return "لوحة المواعيد";
   if (source === "faq-page") return "صفحة الأسئلة";
   if (source === "portfolio-page") return "صفحة الألبوم";
-  if (source.startsWith("guide-")) return "دليل التصوير";
+  if (source === "zaffa-page") return "صفحة بكج الزفة";
   if (citySourceLabels[source]) return citySourceLabels[source];
 
   const packageMatch = source.match(/^package-(\d+)$/);
   if (packageMatch) return `باقة ${packageMatch[1]}`;
+
+  const zaffaPackageMatch = source.match(/^zaffa-page-package-(\d+)$/);
+  if (zaffaPackageMatch) return `صفحة الزفة - باقة ${zaffaPackageMatch[1]}`;
+
+  const guidePackageMatch = source.match(/^guide-(.+)-package-(\d+)$/);
+  if (guidePackageMatch) return `دليل ${guidePackageMatch[1]} - باقة ${guidePackageMatch[2]}`;
+
+  if (source.startsWith("guide-")) return `دليل ${source.replace(/^guide-/, "")}`;
 
   const cityPackageMatch = source.match(/^(alahsa|dammam|khobar)-package-(\d+)$/);
   if (cityPackageMatch) return `${citySourceLabels[cityPackageMatch[1]]} - باقة ${cityPackageMatch[2]}`;
@@ -525,11 +535,59 @@ export const seoLaunchWaves: { day: string; title: string; channel: string; goal
 ];
 
 export const trustSignals: { icon: LucideIcon; title: string; detail: string }[] = [
-  { icon: Sparkles, title: "ذوق قبل الاستعراض", detail: "العرض البصري يبقى راقيا ومناسبا لطبيعة زواجات المنطقة." },
-  { icon: BadgeCheck, title: "باقات مفهومة", detail: "السعر والمدة واللقطات الأساسية ظاهرة قبل المحادثة." },
+  { icon: BadgeCheck, title: "مرخّصة رسميًا", detail: "خدمة تصوير مصرّح بها من وزارة الموارد البشرية والتنمية الاجتماعية." },
+  { icon: Sparkles, title: "أحدث المعدات", detail: "كاميرات وعدسات وإضاءة سينمائية حديثة لكل تفصيلة من فيلم اليوم." },
   { icon: CalendarCheck, title: "حجز منظم", detail: "كل طلب يأتي بتاريخ ومدينة وبكج لتقليل ضياع الرسائل." },
   { icon: Search, title: "ظهور محلي", detail: "محتوى محلي يبدأ من الأحساء ثم الدمام والخبر." }
 ];
+
+export const packageAddOns: { id: string; name: string; nameEn: string; price: string; description: string }[] = [
+  {
+    id: "extra-hour",
+    name: "الساعة الإضافية",
+    nameEn: "Extra hour",
+    price: "200 ريال",
+    description: "تمديد وقت التصوير بأي باقة بسعر ثابت لكل ساعة إضافية."
+  },
+  {
+    id: "mannequin",
+    name: "منيكان لتصوير فستان العروس",
+    nameEn: "Bridal dress mannequin",
+    price: "150 ريال",
+    description: "إعداد فستان العروس على منيكان لتصويره بإضاءة سينمائية كقطة مستقلة."
+  },
+  {
+    id: "color-grade",
+    name: "التلوين السينمائي وتنعيم البشرة",
+    nameEn: "Cinematic color grading + skin softening",
+    price: "350 ريال",
+    description: "مرحلة Color Grade سينمائية لكامل الفيلم مع تنعيم بشرة العروس بطبقة احترافية."
+  },
+  {
+    id: "moonlight",
+    name: "إضاءة المون لايت وقت الزفة",
+    nameEn: "Moonlight bridal entrance lighting",
+    price: "مشمولة في بكج الزفة",
+    description: "إضاءة محترفة تسلط على العروس وقت الزفة لإبراز اللحظة في الإضاءة المعتمة."
+  }
+];
+
+export const paymentTerms: { step: string; text: string }[] = [
+  { step: "1", text: "تختارين البكج من الموقع ويصلنا الطلب بتاريخ ومدينة وباقة واضحة." },
+  { step: "2", text: "يتم تأكيد الحجز عبر تحويل عربون بنصف قيمة الفاتورة (العربون لا يُرد عند إلغاء الحجز)." },
+  { step: "3", text: "التحويل يتم على أحد حساباتنا البنكية ثم تُرسل صورة الإيصال عبر واتساب." },
+  { step: "4", text: "مدة الحجز يومان فقط؛ في حال عدم تحويل العربون يعتبر الحجز ملغيا." },
+  { step: "5", text: "أي ساعة تصوير إضافية تُحسب بسعر ثابت 200 ريال." },
+  { step: "6", text: "يتم تسليم المبلغ المتبقي يوم المناسبة قبل بداية التصوير." }
+];
+
+export const credentials = {
+  ministryAr: "مرخّصة من وزارة الموارد البشرية والتنمية الاجتماعية",
+  ministryEn: "Licensed by the Saudi Ministry of Human Resources & Social Development",
+  whatsappOfficialLink: "https://wa.me/message/RUHGT5HZCULJF1",
+  equipmentAr: "أحدث المعدات السينمائية للتصوير والإضاءة",
+  equipmentEn: "Latest cinematic equipment for filming and lighting"
+} as const;
 
 export const bookingFaqs: BookingFaq[] = [
   {
