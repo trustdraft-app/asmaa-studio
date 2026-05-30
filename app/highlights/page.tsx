@@ -100,7 +100,7 @@ export default function HighlightsPage() {
           <h2 className="section-title">٣ خطوات سريعة من جوّالك</h2>
           <ol className="payment-terms-grid">
             <li className="payment-step"><b>1</b><p>حمّلي الأيقونة بصيغة PNG على جوّالك (تظهر في معرض الصور أو ملف Files).</p></li>
-            <li className="payment-step"><b>2</b><p>افتحي حسابك على Instagram، اضغطي على أحد الهايلايت، ثم "تعديل الغلاف" → "اختاري من المعرض".</p></li>
+            <li className="payment-step"><b>2</b><p>افتحي حسابك على Instagram، اضغطي على أحد الهايلايت، ثم «تعديل الغلاف» ← «اختاري من المعرض».</p></li>
             <li className="payment-step"><b>3</b><p>اختاري الأيقونة المناسبة، احفظي، وانتقلي للهايلايت التالي.</p></li>
           </ol>
           <p className="pkg-final-note">جميع الأيقونات بألوان وخطوط Asmaa Studio الرسمية (ذهبي فاتح على فحمي). نفس المنظومة لكل قنوات التواصل.</p>
