@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = parse(slug);
   if (!p) return { title: "Asmaa Studio" };
   const title = `${p.service.ar} في ${p.month.ar} — موسم ٢٠٢٦ | Asmaa Studio`;
-  const desc = `${p.service.ar} في شهر ${p.month.ar}: ${p.month.note}. السعر من ${p.service.price} ريال — Asmaa Studio بفريق نسائي مرخص.`;
+  const desc = `${p.service.ar} في شهر ${p.month.ar} — ${p.month.note}. السعر من ${p.service.price} ريال — Asmaa Studio بفريق نسائي مرخص.`;
   return {
     title: { absolute: title }, description: desc,
     alternates: { canonical: `https://asmaa.video/ar/seasonal/${slug}`, languages: { "ar-SA": `https://asmaa.video/ar/seasonal/${slug}`, "x-default": `https://asmaa.video/ar/seasonal/${slug}` } },
