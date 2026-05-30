@@ -1,0 +1,137 @@
+name: SEO Wave Deploy
+
+# Mohammed mandate: stagger AsmaaVideo waves from Fattourh's Mon+Thu cadence.
+# AsmaaVideo: Tuesday + Friday 07:00 UTC (10:00 AST).
+on:
+  workflow_dispatch:
+    inputs:
+      wave:
+        description: "Wave number to deploy (1-5). If 'auto', the workflow picks the next pending wave from seo-waves/state.json."
+        required: false
+        default: "auto"
+      force:
+        description: "Skip the GSC indexation gate (use carefully — Google may penalize too-fast ramp)."
+        type: boolean
+        default: false
+  schedule:
+    # Tue + Fri 07:00 UTC = 10:00 AST (Saudi)
+    - cron: "0 7 * * 2,5"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: seo-wave-deploy
+  cancel-in-progress: false
+
+jobs:
+  wave-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Resolve wave number
+        id: resolve
+        env:
+          INPUT_WAVE: ${{ github.event.inputs.wave || 'auto' }}
+        run: |
+          set -e
+          if [ "$INPUT_WAVE" = "auto" ] || [ -z "$INPUT_WAVE" ]; then
+            WAVE=$(node -e "const s=require('./seo-waves/state.json');console.log(s.nextWave||1)")
+          else
+            WAVE="$INPUT_WAVE"
+          fi
+          echo "wave=$WAVE" >> "$GITHUB_OUTPUT"
+          if [ ! -f "seo-waves/wave-$WAVE.json" ]; then
+            echo "No manifest for wave $WAVE — exiting cleanly."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: GSC indexation gate
+        if: steps.resolve.outputs.skip != 'true' && github.event.inputs.force != 'true'
+        id: gate
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$GSC_SERVICE_ACCOUNT_JSON" ]; then
+            echo "GSC_SERVICE_ACCOUNT_JSON not set — gate is a no-op (allow)."
+            echo "allow=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          node scripts/gsc-indexation-gate.mjs --wave "${{ steps.resolve.outputs.wave }}" || {
+            echo "Indexation gate FAILED — skipping this wave."
+            echo "allow=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          }
+          echo "allow=true" >> "$GITHUB_OUTPUT"
+
+      - name: Run wave generator (DeepSeek-cached)
+        if: steps.resolve.outputs.skip != 'true' && (steps.gate.outputs.allow == 'true' || github.event.inputs.force == 'true')
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          WAVE: ${{ steps.resolve.outputs.wave }}
+        run: |
+          set -e
+          if [ -z "$DEEPSEEK_API_KEY" ]; then
+            echo "DEEPSEEK_API_KEY not set — pages will use template phrase bank only."
+          fi
+          node scripts/wave-deploy.mjs --wave "$WAVE"
+
+      - name: Open PR
+        if: steps.resolve.outputs.skip != 'true' && (steps.gate.outputs.allow == 'true' || github.event.inputs.force == 'true')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WAVE: ${{ steps.resolve.outputs.wave }}
+        run: |
+          BRANCH="seo/wave-$WAVE-$(date +%Y-%m-%d)"
+          git config user.name "Asmaa SEO Bot"
+          git config user.email "seo-bot@asmaa.video"
+          git checkout -b "$BRANCH"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes — wave produced empty diff. Exiting."
+            exit 0
+          fi
+          git commit -m "feat(seo): Wave $WAVE — programmatic SEO deploy"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "feat(seo): Wave $WAVE deploy" \
+            --body "Automated wave deployment. DeepSeek-seeded content. GSC indexation-gated." \
+            --base main --head "$BRANCH"
+          gh pr merge --squash --auto --delete-branch "$BRANCH"
+
+      - name: Bump state to next wave
+        if: steps.resolve.outputs.skip != 'true' && (steps.gate.outputs.allow == 'true' || github.event.inputs.force == 'true')
+        env:
+          WAVE: ${{ steps.resolve.outputs.wave }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NEXT=$((WAVE + 1))
+          node -e "const fs=require('fs');const s=JSON.parse(fs.readFileSync('seo-waves/state.json','utf8'));s.nextWave=$NEXT;s.lastDeploy={wave:$WAVE,deployedAt:new Date().toISOString()};fs.writeFileSync('seo-waves/state.json',JSON.stringify(s,null,2));"
+
+      - name: Slack notification
+        if: always() && steps.resolve.outputs.skip != 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          WAVE: ${{ steps.resolve.outputs.wave }}
+          STATUS: ${{ job.status }}
+        run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "No Slack webhook configured — skipping notification."
+            exit 0
+          fi
+          curl -sS -X POST -H 'Content-Type: application/json' \
+            --data "{\"text\":\"Asmaa Studio SEO Wave $WAVE — status: $STATUS — see workflow run for details.\"}" \
+            "$SLACK_WEBHOOK_URL" || true

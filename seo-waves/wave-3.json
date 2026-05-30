@@ -1,0 +1,26 @@
+{
+  "wave": 3,
+  "name": "Seasonal + budget-tier programmatic expansion (per-city)",
+  "scheduledFor": "2026-06-13",
+  "status": "pending",
+  "method": "deepseek-cached",
+  "deepseekBudgetUsd": 1.20,
+  "newRouteFamilies": [
+    {
+      "family": "ar/seasonal/per-city",
+      "pattern": "/ar/{city}/seasonal/{month}",
+      "count": 360
+    },
+    {
+      "family": "ar/budget/per-city",
+      "pattern": "/ar/{city}/budget/{tier}",
+      "count": 90
+    },
+    {
+      "family": "en/seasonal",
+      "pattern": "/en/seasonal/{month}-{service}",
+      "count": 96
+    }
+  ],
+  "indexationGate": { "thresholdPercent": 40, "windowDays": 7, "minimumIndexedCount": 1200 }
+}

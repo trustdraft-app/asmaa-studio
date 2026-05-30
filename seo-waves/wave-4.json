@@ -1,0 +1,22 @@
+{
+  "wave": 4,
+  "name": "Voice-search + AEO Q&A programmatic",
+  "scheduledFor": "2026-06-20",
+  "status": "pending",
+  "method": "deepseek-cached",
+  "deepseekBudgetUsd": 1.20,
+  "newRouteFamilies": [
+    {
+      "family": "ar/aeo-q",
+      "pattern": "/ar/aeo/{question-slug}-{city}",
+      "count": 900,
+      "intent": "answer-engine direct-answer pages with FAQPage + Speakable schema"
+    },
+    {
+      "family": "en/aeo-q",
+      "pattern": "/en/aeo/{question-slug}-{city}",
+      "count": 900
+    }
+  ],
+  "schemaAdditions": ["FAQPage", "Speakable", "VideoObject (placeholder)"]
+}
