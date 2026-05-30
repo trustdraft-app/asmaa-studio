@@ -220,6 +220,7 @@ export default function HomePage() {
           <div className="nav-links">
             <a href="#packages">الباقات</a>
             <a href="#cities">المدن</a>
+            <Link href="/services/full-day-wedding">الخدمات</Link>
             <Link href="/zaffa">بكج الزفة</Link>
             <Link href="/guides">الدليل</Link>
             <Link href="/portfolio">الألبوم</Link>
