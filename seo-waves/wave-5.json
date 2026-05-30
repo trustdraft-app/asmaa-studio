@@ -1,0 +1,21 @@
+{
+  "wave": 5,
+  "name": "Final GEO saturation + llms-full.txt expansion",
+  "scheduledFor": "2026-06-27",
+  "status": "pending",
+  "method": "deepseek-cached",
+  "deepseekBudgetUsd": 1.40,
+  "newRouteFamilies": [
+    {
+      "family": "ar/faq-x-city-x-service",
+      "pattern": "/ar/faq/{question}-{city}-{service}",
+      "count": 12000,
+      "note": "50 questions × 30 cities × 8 services = 12K final saturation"
+    }
+  ],
+  "aeoExpansions": {
+    "llmsFullTxtTargetLines": 5000,
+    "schemaCompletion": ["AggregateRating (when first review consented)", "Article (guides)", "HowTo (guides)"]
+  },
+  "notes": "Final wave. Total site URL count target: 50K. Wave gating still active."
+}

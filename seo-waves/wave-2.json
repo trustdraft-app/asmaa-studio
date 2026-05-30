@@ -1,0 +1,38 @@
+{
+  "wave": 2,
+  "name": "DeepSeek-seeded unique-content waves for top-30 cities",
+  "scheduledFor": "2026-06-06",
+  "status": "pending",
+  "method": "deepseek-cached",
+  "deepseekBudgetUsd": 1.20,
+  "newRouteFamilies": [
+    {
+      "family": "ar/faq-near-me",
+      "pattern": "/ar/{city}/{service}/near-me",
+      "count": 240,
+      "intent": "voice-search and near-me bride intent"
+    },
+    {
+      "family": "ar/bride-checklist",
+      "pattern": "/ar/{city}/bride-checklist",
+      "count": 30,
+      "intent": "long-tail bride-prep keyword"
+    },
+    {
+      "family": "ar/venue-coverage/{venue}-{service}",
+      "pattern": "/ar/venue-coverage/{venue}-{service}",
+      "count": 480,
+      "intent": "venue-specific bride-search (60 known EP venues × 8 services)"
+    }
+  ],
+  "deepseekTasksPerPage": 3,
+  "totalDeepseekTasks": 2250,
+  "totalDeepseekTokensEstimate": 1575000,
+  "indexationGate": {
+    "method": "GSC API",
+    "thresholdPercent": 40,
+    "windowDays": 7,
+    "minimumIndexedCount": 800
+  },
+  "notes": "Pending; cron-fires Tue or Fri at 07:00 UTC if Wave 1 indexation gate passes."
+}

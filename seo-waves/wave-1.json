@@ -1,0 +1,14 @@
+{
+  "wave": 1,
+  "name": "EP saturation + cross-Saudi general intent",
+  "scheduledFor": "2026-05-30",
+  "status": "deployed",
+  "method": "template-only (no DeepSeek)",
+  "deepseekBudgetUsd": 0,
+  "cities": ["alahsa", "hofuf", "mubarraz", "alomran", "altarafiyya", "battaliyah", "mutairfi", "markaz", "salasil", "hala", "qara", "jaaberiyah", "aiouni", "dammam", "khobar", "qatif", "jubail", "saihat", "tarout", "buqayq", "dhahran", "ras-tanura", "safwa", "awamiyah", "khafji", "riyadh", "jeddah", "mecca", "medina", "taif"],
+  "services": ["zaffa-tasweer", "zaffa-plus-tasweer", "half-day-tasweer", "full-day-tasweer", "khotuba-tasweer", "henna-tasweer", "bride-session", "ladies-event"],
+  "modifiers": ["asaar", "baqat", "musawira", "2026", "bidoun-rijal", "ehtirafi", "afdal", "moqareeb", "jodah-aliah", "tarkhees-rasmi", "ajl", "baqat-shamela", "khosomat", "istisharat-majaniyah"],
+  "expectedPageDelta": 7400,
+  "deployedPageDelta": 3904,
+  "notes": "Wave 1 shipped via Sprints 6-9 directly (programmatic grid + EN mirrors + seasonal/budget/wedding-types + 30-city expansion). Final live count after all Sprint 9 deploys: ~7,400 (eventual)."
+}
