@@ -81,9 +81,20 @@ export default async function CityPage({ params }: Props) {
     }))
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+      { "@type": "ListItem", position: 2, name: "المدن", item: "https://asmaa.video/#cities" },
+      { "@type": "ListItem", position: 3, name: area.ar, item: `https://asmaa.video/${area.slug}` }
+    ]
+  };
+
   return (
     <main className="page-shell city-page">
       <JsonLd data={cityJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
 
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">

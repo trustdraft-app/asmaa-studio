@@ -1,0 +1,142 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$brand": "Asmaa Studio",
+  "$version": "2026.05.30",
+  "$import": "import this file into Figma via the Tokens Studio plugin; also exportable as Tailwind theme via scripts/tokens-to-tailwind.mjs (not yet committed)",
+  "color": {
+    "ink": {
+      "$value": "#0c0c0d",
+      "$description": "Primary background, near-black with warm undertone"
+    },
+    "ink-soft": {
+      "$value": "#171514",
+      "$description": "Secondary background, card fills on dark sections"
+    },
+    "ivory": {
+      "$value": "#fff8ec",
+      "$description": "Primary text on dark"
+    },
+    "ivory-muted": {
+      "$value": "rgba(255, 248, 236, 0.72)",
+      "$description": "Secondary text on dark"
+    },
+    "sand": {
+      "$value": "#d8c7a5",
+      "$description": "Warm neutral, accents and dividers"
+    },
+    "champagne": {
+      "$value": "#c99953",
+      "$description": "Deep gold, button gradients and structural lines"
+    },
+    "gold": {
+      "$value": "#f1cb82",
+      "$description": "Primary accent, links, icon strokes"
+    },
+    "gold-soft": {
+      "$value": "#e8c57c",
+      "$description": "Hover state, secondary accent"
+    },
+    "rose": {
+      "$value": "#d58a86",
+      "$description": "Warm tertiary, reserved for special moments"
+    },
+    "sage": {
+      "$value": "#829176",
+      "$description": "Cool tertiary, reserved for badges (do NOT use for women-only context per brand rule)"
+    },
+    "line": {
+      "$value": "rgba(241, 203, 130, 0.22)",
+      "$description": "Gold line at 22% — section dividers, card borders"
+    }
+  },
+  "gradient": {
+    "gold-button": {
+      "$value": "linear-gradient(135deg, #c8a060 0%, #b8924d 100%)",
+      "$description": "Primary CTA button background"
+    },
+    "gold-icon": {
+      "$value": "linear-gradient(180deg, #f1cb82 0%, #b8924d 100%)",
+      "$description": "Icon fill gradient — top to bottom"
+    },
+    "ink-radial": {
+      "$value": "radial-gradient(circle at 50% 38%, #1a1410 0%, #08060a 100%)",
+      "$description": "Hero and section background"
+    }
+  },
+  "font": {
+    "display-ar": {
+      "$value": "Noto Kufi Arabic",
+      "$weights": [700],
+      "$description": "Arabic display + headings"
+    },
+    "ui-ar": {
+      "$value": "IBM Plex Sans Arabic",
+      "$weights": [400, 700],
+      "$description": "Arabic body + UI"
+    },
+    "display-latin": {
+      "$value": "Cormorant Garamond",
+      "$weights": [700],
+      "$styles": ["italic"],
+      "$description": "Latin display, italicized for romantic feel"
+    }
+  },
+  "size": {
+    "h1-mobile": { "$value": "44px", "$rule": "verify:launch enforces max 58px" },
+    "h1-desktop": { "$value": "72px" },
+    "h2": { "$value": "32px" },
+    "body": { "$value": "16px" },
+    "small": { "$value": "13px" }
+  },
+  "spacing": {
+    "tap-target-min": {
+      "$value": "44px",
+      "$description": "WCAG 2.5.5 minimum; verify:launch enforces 44×44px on all <a> and <button>"
+    },
+    "tap-target-comfort": {
+      "$value": "48px",
+      "$description": "Preferred minimum for thumb-first mobile UX"
+    },
+    "section-gap": { "$value": "96px" },
+    "card-padding": { "$value": "22px" }
+  },
+  "radius": {
+    "card": { "$value": "10px" },
+    "pill": { "$value": "999px" },
+    "icon-frame": { "$value": "56px", "$description": "Instagram highlight icon corner radius" }
+  },
+  "shadow": {
+    "card": {
+      "$value": "0 14px 38px rgba(0, 0, 0, 0.22)"
+    },
+    "card-strong": {
+      "$value": "0 18px 60px rgba(0, 0, 0, 0.28)"
+    },
+    "button-gold": {
+      "$value": "0 8px 24px rgba(200, 160, 96, 0.18)"
+    }
+  },
+  "motion": {
+    "ease-out-premium": {
+      "$value": "cubic-bezier(0.23, 1, 0.32, 1)"
+    },
+    "ease-in-out-premium": {
+      "$value": "cubic-bezier(0.77, 0, 0.175, 1)"
+    },
+    "duration-fast": { "$value": "180ms" },
+    "duration-base": { "$value": "240ms" },
+    "duration-slow": { "$value": "420ms" }
+  },
+  "breakpoint": {
+    "mobile-min": { "$value": "390px", "$device": "iPhone 14 / 15 standard" },
+    "mobile-large": { "$value": "414px", "$device": "iPhone Plus / Pro Max" },
+    "tablet": { "$value": "768px" },
+    "desktop": { "$value": "1024px" },
+    "desktop-wide": { "$value": "1440px" }
+  },
+  "rtl": {
+    "default-direction": { "$value": "rtl" },
+    "html-lang": { "$value": "ar" },
+    "fallback-direction": { "$value": "ltr", "$description": "Used inside English-only blocks via <bdi>" }
+  }
+}
