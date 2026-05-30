@@ -14,6 +14,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1
     },
     {
+      url: `${base}/packages`,
+      changeFrequency: "weekly",
+      priority: 0.95
+    },
+    {
       url: `${base}/faq`,
       changeFrequency: "weekly",
       priority: 0.88

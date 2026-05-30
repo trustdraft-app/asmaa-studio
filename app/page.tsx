@@ -218,7 +218,7 @@ export default function HomePage() {
             <strong>Asmaa Studio</strong>
           </a>
           <div className="nav-links">
-            <a href="#packages">الباقات</a>
+            <Link href="/packages">الباقات التفاعلية</Link>
             <a href="#cities">المدن</a>
             <Link href="/services/full-day-wedding">الخدمات</Link>
             <Link href="/zaffa">بكج الزفة</Link>
@@ -417,7 +417,10 @@ export default function HomePage() {
             زفة فقط، تفاصيل القاعة، First Look، أو يوم كامل من الصالون إلى القاعة. كل باقة
             تشرح ماذا ستوثق، لمن تناسب، وكيف سيبدو القرار قبل التواصل.
           </p>
-          <p className="packages-pdf-cta">
+          <p className="packages-pdf-cta" style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
+            <Link href="/packages" aria-label="افتحي الباقات التفاعلية مع حاسبة الإضافات">
+              <Sparkles size={16} aria-hidden="true" /> الباقات التفاعلية + حاسبة الإضافات
+            </Link>
             <a
               href={assetPath("/packages-asmaa-studio.pdf")}
               target="_blank"
@@ -425,7 +428,7 @@ export default function HomePage() {
               download="Asmaa-Studio-Packages.pdf"
               aria-label="تحميل دليل الباقات الكامل بصيغة PDF"
             >
-              <Download size={16} aria-hidden="true" /> تحميل دليل الباقات الكامل (PDF)
+              <Download size={16} aria-hidden="true" /> تحميل دليل الباقات (PDF)
             </a>
           </p>
           <div className="packages-grid packages-grid-20x">

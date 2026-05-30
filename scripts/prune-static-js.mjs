@@ -21,12 +21,12 @@ if (!adminPanelEnabled) {
   rmSync(join(outDir, "admin"), { force: true, recursive: true });
 }
 
-const keepClientRoutes = new Set(["reserve.html"]);
+const keepClientRoutes = new Set(["reserve.html", "packages.html"]);
 if (adminPanelEnabled) keepClientRoutes.add("admin.html");
 
 for (const file of walkHtmlFiles(outDir)) {
   const route = relative(outDir, file);
-  if (keepClientRoutes.has(route) || route.startsWith("reserve/") || route.startsWith("admin/")) continue;
+  if (keepClientRoutes.has(route) || route.startsWith("reserve/") || route.startsWith("admin/") || route.startsWith("packages/")) continue;
   if (!statSync(file).isFile()) continue;
 
   const original = readFileSync(file, "utf8");
