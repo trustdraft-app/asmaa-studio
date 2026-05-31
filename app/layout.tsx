@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next/font/google";
 import { socialPreviewImages, twitterMetadata } from "../lib/metadata";
+import { LocalBusinessJsonLd } from "../components/seo/LocalBusinessJsonLd";
 import "./globals.css";
 
 const arabicUi = IBM_Plex_Sans_Arabic({
@@ -63,7 +64,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl" className={`${arabicUi.variable} ${arabicDisplay.variable} ${latinDisplay.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LocalBusinessJsonLd />
+        {children}
+      </body>
     </html>
   );
 }
