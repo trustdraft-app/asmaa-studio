@@ -3,6 +3,7 @@ import { Cormorant_Garamond, IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next
 import { socialPreviewImages, twitterMetadata } from "../lib/metadata";
 import { LocalBusinessJsonLd } from "../components/seo/LocalBusinessJsonLd";
 import { SpeakableJsonLd } from "../components/seo/SpeakableJsonLd";
+import { ContactPointJsonLd } from "../components/seo/ContactPointJsonLd";
 import "./globals.css";
 
 const arabicUi = IBM_Plex_Sans_Arabic({
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LocalBusinessJsonLd />
         <SpeakableJsonLd />
+        <ContactPointJsonLd />
         {children}
       </body>
     </html>
