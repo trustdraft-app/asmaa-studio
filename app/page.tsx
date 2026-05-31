@@ -226,7 +226,8 @@ export default function HomePage() {
             <a href="#cities">المدن</a>
             <Link href="/services/full-day-wedding">الخدمات</Link>
             <Link href="/portfolio">الألبوم</Link>
-            <Link href="/reviews">الاطمئنان قبل الحجز</Link>
+            <Link href="/reviews">آراء العرايس</Link>
+            <Link href="/process">كيف نعمل</Link>
             <Link href="/about">عن الاستوديو</Link>
             <Link href="/faq">الأسئلة</Link>
             <Link href="/contact">تواصلي معنا</Link>

@@ -28,14 +28,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95
     },
     {
-      url: `${base}/highlights`,
-      changeFrequency: "monthly",
-      priority: 0.5
-    },
-    {
       url: `${base}/about`,
       changeFrequency: "monthly",
       priority: 0.78
+    },
+    {
+      url: `${base}/process`,
+      changeFrequency: "monthly",
+      priority: 0.77
     },
     {
       url: `${base}/reviews`,
@@ -71,6 +71,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/guides`,
       changeFrequency: "weekly",
       priority: 0.86
+    },
+    {
+      url: `${base}/highlights`,
+      changeFrequency: "monthly",
+      priority: 0.5
     },
     ...serviceAreas.map((area) => ({
       url: `${base}/${area.slug}`,

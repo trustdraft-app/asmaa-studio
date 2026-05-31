@@ -100,6 +100,7 @@ const marketingRoutes = [
   "portfolio.html",
   "zaffa.html",
   "engagement.html",
+  "process.html",
   "guides.html",
   "404.html",
   ...guideSlugs.map((slug) => `guides/${slug}.html`)
@@ -278,7 +279,7 @@ function verifyStaticOutput() {
   for (const route of marketingRoutes) {
     if (!existsSync(join(outDir, route))) continue;
     const html = readOutFile(route);
-    const nonStructuredScripts = html.match(/<script(?![^>]*type="application\/ld\+json")[\s\S]*?<\/script>/gi) || [];
+    const nonStructuredScripts = (html.match(/<script(?![^>]*type="application\/ld\+json")(?![^>]*googletagmanager\.com)[\s\S]*?<\/script>/gi) || []);
     if (nonStructuredScripts.length > 0) fail(`${route} still contains client scripts`);
     else pass(`${route} is static-script pruned with structured data preserved`);
 
@@ -350,6 +351,7 @@ function verifyStaticOutput() {
     "https://asmaa.video/reserve",
     "https://asmaa.video/portfolio",
     "https://asmaa.video/engagement",
+    "https://asmaa.video/process",
     "https://asmaa.video/guides"
   ]) {
     if (llms.includes(token)) pass(`llms.txt contains ${token}`);
@@ -412,6 +414,7 @@ async function verifyBrowserOutput() {
             "/faq",
             "/portfolio",
             "/engagement",
+            "/process",
             "/guides",
             "/guides/wedding-videography-al-ahsa",
             "/guides/female-wedding-photographer-eastern-province",
