@@ -191,3 +191,9 @@
 **Decision:** Convert wave 16 into a dedicated `/zaffa` package landing page, add direct homepage/internal links, ship a matching highlight cover asset, and index the route in sitemap and `llms.txt`.
 **Reasoning:** The next safe high-impact gain is a dedicated low-friction package path for the strongest budget-intent search and conversion query already present in the content model, rather than waiting on off-site Instagram execution.
 **Source:** `lib/content.ts` 20-wave plan, existing package/guides model, live site structure, professional judgment.
+
+## 2026-05-31 09:19 +03 — Asmaa Studio
+**Question:** What is the next highest-impact daily growth wave after the live zaffa route?
+**Decision:** Convert wave 17 into a dedicated `/engagement` landing page for الخطوبة والملكة, wire it into internal discovery, sitemap, `llms.txt`, and launch verification, and treat GitHub Pages CI as the deployment verifier because local Next 16 builds are hanging in compile before export completes.
+**Reasoning:** The engagement intent already exists in packages and guides, but a first-class landing route gives it the same direct search and conversion surface as `/zaffa`; the build hang is an environment/runtime issue, not a content-strategy reason to skip the wave.
+**Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, existing `app/zaffa/page.tsx` pattern, project files, professional judgment.

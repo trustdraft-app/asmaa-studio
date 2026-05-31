@@ -52,6 +52,7 @@ function readableWhatsappSource(source: string) {
   if (source === "faq-page") return "صفحة الأسئلة";
   if (source === "portfolio-page") return "صفحة الألبوم";
   if (source === "zaffa-page") return "صفحة بكج الزفة";
+  if (source === "engagement-page") return "صفحة بكج الخطوبة";
   if (citySourceLabels[source]) return citySourceLabels[source];
 
   const packageMatch = source.match(/^package-(\d+)$/);
@@ -59,6 +60,9 @@ function readableWhatsappSource(source: string) {
 
   const zaffaPackageMatch = source.match(/^zaffa-page-package-(\d+)$/);
   if (zaffaPackageMatch) return `صفحة الزفة - باقة ${zaffaPackageMatch[1]}`;
+
+  const engagementPackageMatch = source.match(/^engagement-page-package-(\d+)$/);
+  if (engagementPackageMatch) return `صفحة الخطوبة - باقة ${engagementPackageMatch[1]}`;
 
   const guidePackageMatch = source.match(/^guide-(.+)-package-(\d+)$/);
   if (guidePackageMatch) return `دليل ${guidePackageMatch[1]} - باقة ${guidePackageMatch[2]}`;

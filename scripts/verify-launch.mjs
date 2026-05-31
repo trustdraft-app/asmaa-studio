@@ -21,6 +21,7 @@ const requiredFiles = [
   "faq.html",
   "portfolio.html",
   "zaffa.html",
+  "engagement.html",
   "guides.html",
   "alahsa.html",
   "dammam.html",
@@ -85,6 +86,7 @@ const marketingRoutes = [
   "faq.html",
   "portfolio.html",
   "zaffa.html",
+  "engagement.html",
   "guides.html",
   "404.html",
   ...guideSlugs.map((slug) => `guides/${slug}.html`)
@@ -295,6 +297,7 @@ function verifyStaticOutput() {
     "Khobar",
     "https://asmaa.video/reserve",
     "https://asmaa.video/portfolio",
+    "https://asmaa.video/engagement",
     "https://asmaa.video/guides"
   ]) {
     if (llms.includes(token)) pass(`llms.txt contains ${token}`);
@@ -344,6 +347,7 @@ async function verifyBrowserOutput() {
             "/reserve",
             "/faq",
             "/portfolio",
+            "/engagement",
             "/guides",
             "/guides/wedding-videography-al-ahsa",
             "/guides/female-wedding-photographer-eastern-province",

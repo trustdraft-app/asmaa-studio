@@ -58,6 +58,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.89
     },
     {
+      url: `${base}/engagement`,
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
+    {
       url: `${base}/guides`,
       changeFrequency: "weekly",
       priority: 0.86

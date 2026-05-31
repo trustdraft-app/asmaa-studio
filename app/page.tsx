@@ -715,8 +715,8 @@ export default function HomePage() {
             <Link className="cta" href="/guides">
               كل صفحات الدليل <Search size={18} />
             </Link>
-            <Link className="ghost-cta" href="/reserve">
-              رابط العروس <CalendarDays size={18} />
+            <Link className="ghost-cta" href="/engagement">
+              صفحة الخطوبة والملكة <CalendarDays size={18} />
             </Link>
           </div>
         </div>

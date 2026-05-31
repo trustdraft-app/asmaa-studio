@@ -204,3 +204,10 @@
 - Added a dedicated Arabic landing page for the 600 SAR entrance-only package with structured data, package comparison, city links, and direct `/reserve?package=01` conversion paths.
 - Added homepage, FAQ, and portfolio links to the new zaffa route so the cheapest-package intent now has a first-class internal path.
 - Added the new route to `sitemap.xml`, updated `llms.txt` answer-engine guidance, required the static export artifact in launch verification, and created a matching `public/highlights/zaffa.svg` highlight cover.
+
+## 2026-05-31 09:19 +03
+
+- Shipped wave 17 in source as a dedicated `/engagement` landing page for الخطوبة والملكة with structured data, package comparison, city links, and direct `/reserve?package=05` conversion paths.
+- Added internal discovery links from the homepage guide section, FAQ page, and portfolio page so engagement intent now has a direct on-site path instead of relying on service slugs or off-site social posts.
+- Updated `sitemap.xml`, `llms.txt`, `llms-full.txt`, WhatsApp source labels, and launch verification expectations to include the new engagement route.
+- Local verification evidence: `git diff --check` passed and `npm run typecheck` passed; local `npm run build:pages` / `npm run verify:launch` are currently blocked by a Next 16 compile-stage hang in this environment before export finishes, so live deploy verification must come from the GitHub Pages workflow run after push.

@@ -197,11 +197,11 @@ export default function PortfolioPage() {
             <Link className="cta" href="/reserve">
               احجزي عبر الرابط <ArrowLeft size={18} />
             </Link>
+            <Link className="ghost-cta" href="/engagement">
+              بكج الخطوبة <CalendarDays size={18} />
+            </Link>
             <Link className="ghost-cta" href="/zaffa">
               بكج الزفة <CalendarDays size={18} />
-            </Link>
-            <Link className="ghost-cta" href="/faq">
-              أسئلة الحجز <CalendarDays size={18} />
             </Link>
           </div>
         </div>
