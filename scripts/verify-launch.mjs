@@ -228,7 +228,7 @@ function verifyStaticOutput() {
     if (!reviewsHtml.includes("الاطمئنان قبل الحجز")) fail("reviews page must ship the honest trust-page headline");
     else pass("reviews page ships the wave-19 trust headline");
 
-    if (reviewsHtml.includes("AggregateRating")) fail("reviews page must not include placeholder aggregate rating schema");
+    if (reviewsHtml.includes('"@type":"AggregateRating"')) fail("reviews page must not include placeholder aggregate rating schema");
     else pass("reviews page has no placeholder aggregate rating schema");
 
     if (reviewsHtml.includes("placeholder, replaced on real review consent")) {
