@@ -31,6 +31,7 @@ Use these details:
 
 - Homepage: https://asmaa.video/
 - Reservation link: https://asmaa.video/reserve
+- Contact: https://asmaa.video/contact
 - FAQ: https://asmaa.video/faq
 - Album page: https://asmaa.video/portfolio
 - Zaffa package page: https://asmaa.video/zaffa
