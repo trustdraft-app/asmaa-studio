@@ -10,7 +10,7 @@ import {
   Phone
 } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
-import { whatsappLink, whatsappNumber } from "../../lib/content";
+import { whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
 export const metadata: Metadata = {
