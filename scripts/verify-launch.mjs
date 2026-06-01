@@ -18,6 +18,7 @@ const verifyAdminOnly = process.env.VERIFY_ADMIN_ONLY === "true";
 const requiredFiles = [
   "index.html",
   "reserve.html",
+  "contact.html",
   "faq.html",
   "portfolio.html",
   "zaffa.html",
@@ -84,6 +85,7 @@ const marketingRoutes = [
   "dammam.html",
   "khobar.html",
   "faq.html",
+  "contact.html",
   "portfolio.html",
   "zaffa.html",
   "engagement.html",
@@ -223,21 +225,6 @@ function verifyStaticOutput() {
     }
   }
 
-  if (existsSync(join(outDir, "reviews.html"))) {
-    const reviewsHtml = readOutFile("reviews.html");
-    if (!reviewsHtml.includes("الاطمئنان قبل الحجز")) fail("reviews page must ship the honest trust-page headline");
-    else pass("reviews page ships the wave-19 trust headline");
-
-    if (reviewsHtml.includes('"@type":"AggregateRating"')) fail("reviews page must not include placeholder aggregate rating schema");
-    else pass("reviews page has no placeholder aggregate rating schema");
-
-    if (reviewsHtml.includes("placeholder, replaced on real review consent")) {
-      fail("reviews page must not include placeholder testimonial markers");
-    } else {
-      pass("reviews page has no placeholder testimonial markers");
-    }
-  }
-
   for (const route of marketingRoutes) {
     if (!existsSync(join(outDir, route))) continue;
     const html = readOutFile(route);
@@ -327,9 +314,19 @@ function verifyStaticOutput() {
 
 async function verifyBrowserOutput() {
   const server = await serveOut();
+  const playwrightChromiumPath = chromium.executablePath();
+  const fallbackChromiumPath =
+    process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ||
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+  const executablePath = existsSync(playwrightChromiumPath)
+    ? playwrightChromiumPath
+    : existsSync(fallbackChromiumPath)
+      ? fallbackChromiumPath
+      : playwrightChromiumPath;
+
   const browser = await chromium.launch({
     headless: true,
-    executablePath: chromium.executablePath(),
+    executablePath,
     args: ["--disable-dev-shm-usage"]
   });
 

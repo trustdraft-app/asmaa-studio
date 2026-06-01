@@ -4584,3 +4584,111 @@ textarea {
   .review-card { min-height: auto; padding: 22px 18px; }
   .about-milestones { gap: 12px; }
 }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.contact-info-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  border: 1px solid rgba(232,197,124,0.18);
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)), rgba(9,9,11,0.72);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+a.contact-card:hover { border-color: rgba(232,197,124,0.45); background: rgba(232,197,124,0.06); }
+.contact-card-icon { color: #e8c57c; flex-shrink: 0; margin-top: 2px; }
+.contact-card-body { display: flex; flex-direction: column; gap: 4px; }
+.contact-card-label { color: rgba(255,246,223,0.55); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.contact-card-value { color: #fff6df; font-size: 1rem; font-weight: 700; }
+.contact-card-hint { color: rgba(255,246,223,0.55); font-size: 0.85rem; }
+.contact-locations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.contact-location-card {
+  padding: 18px;
+  border: 1px solid rgba(232,197,124,0.18);
+  background: rgba(9,9,11,0.72);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.contact-location-card strong { color: #fff6df; font-size: 0.97rem; }
+.contact-location-card span { color: rgba(255,246,223,0.6); font-size: 0.85rem; }
+.contact-map-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(232,197,124,0.2);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  aspect-ratio: 4/3;
+  background: rgba(9,9,11,0.8);
+}
+.contact-map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+  filter: grayscale(0.3) brightness(0.9);
+}
+.contact-hours-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border: 1px solid rgba(232,197,124,0.18);
+  background: rgba(9,9,11,0.72);
+  border-radius: 8px;
+  color: rgba(255,246,223,0.8);
+  font-size: 0.95rem;
+}
+.contact-hours-row svg { color: #e8c57c; flex-shrink: 0; }
+
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  justify-content: center;
+}
+.site-footer-links a {
+  align-items: center;
+  color: rgba(255,246,223,0.65);
+  display: inline-flex;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.18s;
+  padding: 4px 0;
+}
+.site-footer-links a:hover { color: #e8c57c; }
+.site-footer-copy {
+  color: rgba(255,246,223,0.3);
+  font-size: 0.78rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-locations-grid { grid-template-columns: 1fr; }
+  .faq-question { padding: 16px 18px; font-size: 0.93rem; }
+  .faq-answer { padding: 0 18px 16px; }
+}
+@media (max-width: 560px) {
+  .site-footer-links { gap: 6px 14px; font-size: 0.85rem; }
+}
