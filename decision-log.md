@@ -84,6 +84,12 @@
 **Reasoning:** The site already shipped the broad homepage/social/city work, and the highest-impact remaining code-owned gap was reducing repeated pre-booking questions with an indexable conversion page.
 **Source:** 20-wave plan in `lib/content.ts`, live project files, professional judgment.
 
+## 2026-06-01 09:08 +03 — Asmaa Studio
+**Question:** Which daily growth wave should ship next from the live site repo when wave 18 is an off-site Google post and `/reviews` currently contains invented placeholder testimonials?
+**Decision:** Treat wave 19 as the highest-impact safe repo-owned fix: replace the fake-review `/reviews` surface with an honest pre-booking trust page, remove placeholder aggregate-rating schema, and add verification guards so fake testimonial markers cannot return.
+**Reasoning:** Shipping fabricated reviews would weaken launch integrity and conversion trust; an honest trust/process page raises quality immediately without waiting on off-site Google access or real-client consent assets.
+**Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, live `app/reviews/page.tsx`, project work log, professional judgment.
+
 ## 2026-05-28 14:44 +03 — Asmaa Studio
 **Question:** Which reusable patterns from the existing AI Empire repos should be applied to Asmaa now?
 **Decision:** Import the useful operating patterns only: Fattourh-style answer-engine indexing, ScanAbility-style Playwright/axe checks, and HalalCrypto-style static/deploy proof.

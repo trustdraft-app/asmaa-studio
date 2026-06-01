@@ -53,6 +53,8 @@ function readableWhatsappSource(source: string) {
   if (source === "portfolio-page") return "صفحة الألبوم";
   if (source === "zaffa-page") return "صفحة بكج الزفة";
   if (source === "engagement-page") return "صفحة بكج الخطوبة";
+  if (source === "reviews-page") return "صفحة الاطمئنان قبل الحجز";
+  if (source === "about-page") return "صفحة عن الاستوديو";
   if (citySourceLabels[source]) return citySourceLabels[source];
 
   const packageMatch = source.match(/^package-(\d+)$/);

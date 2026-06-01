@@ -101,7 +101,7 @@ export default function AboutPage() {
           <h2 className="section-title">جربي Asmaa Studio لزفافك</h2>
           <div className="button-row">
             <Link className="cine-cta-primary" href="/packages"><span>الباقات التفاعلية</span></Link>
-            <Link className="cine-cta-secondary" href="/reviews"><ArrowLeft size={16} aria-hidden="true" /><span>اقرئي آراء العرايس</span></Link>
+            <Link className="cine-cta-secondary" href="/reviews"><ArrowLeft size={16} aria-hidden="true" /><span>اقرئي ما يطمئنك قبل الحجز</span></Link>
             <a className="cine-cta-tertiary" href={whatsappLink("about-page")} target="_blank" rel="noreferrer">
               <MessageCircle size={16} aria-hidden="true" /><span>واتساب مباشر</span>
             </a>

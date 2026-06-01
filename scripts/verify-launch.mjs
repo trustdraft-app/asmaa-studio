@@ -223,6 +223,21 @@ function verifyStaticOutput() {
     }
   }
 
+  if (existsSync(join(outDir, "reviews.html"))) {
+    const reviewsHtml = readOutFile("reviews.html");
+    if (!reviewsHtml.includes("الاطمئنان قبل الحجز")) fail("reviews page must ship the honest trust-page headline");
+    else pass("reviews page ships the wave-19 trust headline");
+
+    if (reviewsHtml.includes("AggregateRating")) fail("reviews page must not include placeholder aggregate rating schema");
+    else pass("reviews page has no placeholder aggregate rating schema");
+
+    if (reviewsHtml.includes("placeholder, replaced on real review consent")) {
+      fail("reviews page must not include placeholder testimonial markers");
+    } else {
+      pass("reviews page has no placeholder testimonial markers");
+    }
+  }
+
   for (const route of marketingRoutes) {
     if (!existsSync(join(outDir, route))) continue;
     const html = readOutFile(route);

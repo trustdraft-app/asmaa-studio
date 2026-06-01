@@ -1,5 +1,12 @@
 # Asmaa Studio Work Log
 
+## 2026-06-01 09:08 +03
+
+- Shipped wave 19 as a live trust/conversion correction on `/reviews`: removed invented placeholder testimonials and placeholder aggregate-rating schema, then rebuilt the route into an honest "الاطمئنان قبل الحجز" page.
+- Added clear pre-booking trust content: what can be verified on-site now, what the bride should send in the first message, and the consent rule for any future published feedback or clips.
+- Updated homepage/about labels and WhatsApp source naming so the route promise matches the new content, and extended launch verification to fail if placeholder review markers or aggregate-rating schema return.
+- Local `npm run typecheck` passed; local `npm run lint` and `npm run build:pages` reproduced the existing long-running/hanging behavior already noted in prior memory, so GitHub Actions remains the deployment verifier for this wave.
+
 ## 2026-05-29 09:11 +03
 
 - Shipped wave 15 as a live `/portfolio` album page focused on the eight wedding and engagement moments brides compare before booking: entrance, First Look, bridal details, hall styling, engagement moments, detail tables, BTS, and the closing shot.
