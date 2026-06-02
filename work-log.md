@@ -1,5 +1,12 @@
 # Asmaa Studio Work Log
 
+## 2026-06-02 09:09 +03
+
+- Shipped wave 20 as a live booking-source measurement pass across the real reservation flow and admin dashboard instead of leaving attribution hidden inside raw WhatsApp text.
+- Added source inference for `/reserve` from internal referrers and query intent, preserved the source in Supabase reservation submits and WhatsApp fallback messages, and surfaced the current source to the bride before sending.
+- Added an admin-side source report showing top booking paths plus per-reservation source labels so the studio can see which pages and package intents are producing real conversations.
+- Verification passed locally with `git diff --check`, `npm run typecheck`, and `npm run lint` (warnings only, pre-existing). `npm run build:pages` still hangs at the known local Next 16 compile stage in this environment, so deployment verification must come from the GitHub Pages workflow after push.
+
 ## 2026-06-01 09:08 +03
 
 - Shipped wave 19 as a live trust/conversion correction on `/reviews`: removed invented placeholder testimonials and placeholder aggregate-rating schema, then rebuilt the route into an honest "الاطمئنان قبل الحجز" page.

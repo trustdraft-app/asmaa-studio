@@ -1,5 +1,11 @@
 # Asmaa Studio Decision Log
 
+## 2026-06-02 09:09 +03 — Asmaa Studio
+**Question:** Which remaining 20-wave item should ship next on the live site after the engagement and trust waves?
+**Decision:** Implement wave 20 as end-to-end booking-source attribution in `/reserve` and `/admin`, capturing source intent from internal referrers and query state, preserving it in the WhatsApp fallback and reservation submit payload, and surfacing a simple top-sources report in the admin dashboard.
+**Reasoning:** Wave 18 is mostly off-site Google Business Profile work, while wave 20 can be turned into a real on-site conversion measurement improvement that helps the studio see which live pages and package paths create actual conversations.
+**Source:** AGENTS.md, `lib/content.ts` 20-wave plan, reservation/admin project files, professional judgment.
+
 ## 2026-05-28 03:17 +03 — Asmaa Studio
 **Question:** How should the bride reservation link and owner admin dashboard work on the current static GitHub Pages deployment?
 **Decision:** Implement `/reserve` and `/admin` as Supabase-ready client pages, require Supabase Edge Function persistence for live writes, and keep a structured WhatsApp fallback when backend variables are missing.

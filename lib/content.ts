@@ -43,11 +43,24 @@ const citySourceLabels: Record<string, string> = {
   jubail: "صفحة الجبيل"
 };
 
-function readableWhatsappSource(source: string) {
+export function readableWhatsappSource(source: string) {
+  const intentSourceLabels: Record<string, string> = {
+    "home-hero": "الصفحة الرئيسية",
+    "faq-page": "صفحة الأسئلة",
+    "portfolio-page": "صفحة الألبوم",
+    "zaffa-page": "صفحة بكج الزفة",
+    "engagement-page": "صفحة بكج الخطوبة",
+    "reviews-page": "صفحة الاطمئنان قبل الحجز",
+    "about-page": "صفحة عن الاستوديو",
+    "packages-hero": "صفحة الباقات"
+  };
+
   if (source === "home-hero") return "الصفحة الرئيسية";
   if (source === "home-nav") return "الصفحة الرئيسية - الشريط العلوي";
   if (source === "floating-whatsapp") return "زر واتساب السريع";
   if (source === "reserve-nav") return "رابط العروس";
+  if (source === "reserve-page") return "رابط العروس - النموذج";
+  if (source === "reserve-direct") return "رابط العروس - دخول مباشر";
   if (source === "admin-dashboard") return "لوحة المواعيد";
   if (source === "faq-page") return "صفحة الأسئلة";
   if (source === "portfolio-page") return "صفحة الألبوم";
@@ -55,10 +68,27 @@ function readableWhatsappSource(source: string) {
   if (source === "engagement-page") return "صفحة بكج الخطوبة";
   if (source === "reviews-page") return "صفحة الاطمئنان قبل الحجز";
   if (source === "about-page") return "صفحة عن الاستوديو";
+  if (source === "packages-hero") return "صفحة الباقات";
+  if (source === "packages-final-wa") return "صفحة الباقات - الخاتمة";
+  if (source === "packages-floating") return "صفحة الباقات - زر واتساب";
+  if (source === "calculator") return "حاسبة الباقات";
   if (citySourceLabels[source]) return citySourceLabels[source];
 
   const packageMatch = source.match(/^package-(\d+)$/);
   if (packageMatch) return `باقة ${packageMatch[1]}`;
+
+  const reservePackageMatch = source.match(/^reserve-page-package-(\d+)$/);
+  if (reservePackageMatch) return `رابط العروس - باقة ${reservePackageMatch[1]}`;
+
+  const reserveCityPackageMatch = source.match(
+    /^reserve-page-(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail)-package-(\d+)$/
+  );
+  if (reserveCityPackageMatch) {
+    return `${citySourceLabels[reserveCityPackageMatch[1]]} - رابط العروس - باقة ${reserveCityPackageMatch[2]}`;
+  }
+
+  const reserveCityMatch = source.match(/^reserve-page-(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail)$/);
+  if (reserveCityMatch) return `${citySourceLabels[reserveCityMatch[1]]} - رابط العروس`;
 
   const zaffaPackageMatch = source.match(/^zaffa-page-package-(\d+)$/);
   if (zaffaPackageMatch) return `صفحة الزفة - باقة ${zaffaPackageMatch[1]}`;
@@ -73,6 +103,20 @@ function readableWhatsappSource(source: string) {
 
   const cityPackageMatch = source.match(/^(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail)-package-(\d+)$/);
   if (cityPackageMatch) return `${citySourceLabels[cityPackageMatch[1]]} - باقة ${cityPackageMatch[2]}`;
+
+  const packagesCardMatch = source.match(/^packages-card-(\d+)$/);
+  if (packagesCardMatch) return `صفحة الباقات - باقة ${packagesCardMatch[1]}`;
+
+  const pageIntentMatch = source.match(
+    /^(home-hero|faq-page|portfolio-page|zaffa-page|engagement-page|reviews-page|about-page|packages-hero)(?:-(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail))?(?:-package-(\d+))?$/
+  );
+  if (pageIntentMatch) {
+    const [, pageKey, citySlug, packageId] = pageIntentMatch;
+    const parts = [intentSourceLabels[pageKey]];
+    if (citySlug) parts.push(citySourceLabels[citySlug]);
+    if (packageId) parts.push(`باقة ${packageId}`);
+    return parts.join(" - ");
+  }
 
   return "الموقع";
 }

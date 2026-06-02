@@ -2801,6 +2801,68 @@ textarea {
   font-weight: 800;
 }
 
+.reserve-source-note {
+  color: rgba(255, 248, 236, 0.7);
+  margin: 14px 0 0;
+}
+
+.source-report {
+  margin: 0 auto;
+  max-width: 1240px;
+  padding: 0 clamp(18px, 5vw, 72px) 18px;
+}
+
+.source-report-head {
+  align-items: end;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.source-report-head h2 {
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  margin: 6px 0 0;
+}
+
+.source-report-head p {
+  color: rgba(255, 248, 236, 0.68);
+  line-height: 1.8;
+  margin: 0;
+  max-width: 480px;
+}
+
+.source-chip-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.source-chip-card {
+  background: rgba(12, 12, 13, 0.42);
+  border: 1px solid rgba(241, 203, 130, 0.16);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.source-chip-card strong {
+  color: var(--gold);
+  display: block;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.source-chip-card span,
+.reservation-source {
+  color: rgba(255, 248, 236, 0.72);
+}
+
+.source-empty {
+  min-height: 0;
+}
+
 .admin-board {
   margin: 0 auto;
   max-width: 1240px;
@@ -2988,7 +3050,8 @@ textarea {
   .portfolio-flow-grid,
   .area-strategy-grid,
   .reserve-infographic,
-  .metric-grid {
+  .metric-grid,
+  .source-chip-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3073,7 +3136,8 @@ textarea {
   .summary-panel,
   .stepper,
   .reserve-infographic,
-  .metric-grid {
+  .metric-grid,
+  .source-chip-grid {
     grid-template-columns: 1fr;
   }
 
@@ -3292,6 +3356,7 @@ textarea {
 
   .form-actions,
   .admin-hero,
+  .source-report-head,
   .reserve-nav {
     align-items: stretch;
     flex-direction: column;
