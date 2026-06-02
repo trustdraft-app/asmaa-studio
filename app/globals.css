@@ -3403,6 +3403,55 @@ textarea {
   box-shadow: 0 12px 32px rgba(200, 160, 96, 0.28);
   outline: none;
 }
+
+.site-footer-nav {
+  border-top: 1px solid rgba(241, 203, 130, 0.16);
+  margin-top: 56px;
+  padding: 32px 20px;
+}
+
+.site-footer-nav-inner {
+  display: grid;
+  gap: 18px;
+  margin: 0 auto;
+  max-width: 1240px;
+}
+
+.site-footer-brand {
+  display: grid;
+  gap: 5px;
+}
+
+.site-footer-brand strong {
+  color: var(--ivory);
+  font-family: var(--font-latin-display), var(--font-display), serif;
+  font-size: 1.1rem;
+}
+
+.site-footer-brand span,
+.site-footer-copy {
+  color: var(--muted);
+}
+
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.site-footer-links a {
+  align-items: center;
+  border: 1px solid rgba(241, 203, 130, 0.16);
+  border-radius: 999px;
+  color: rgba(255, 248, 236, 0.82);
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 14px;
+}
 .packages-pdf-cta a:active { transform: translateY(0); }
 @media (max-width: 768px) {
   .packages-pdf-cta a {
