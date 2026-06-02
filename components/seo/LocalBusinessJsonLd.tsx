@@ -3,10 +3,7 @@
  *
  * Why: AEO/GEO breakthrough — Google + ChatGPT + Perplexity prefer answering
  * questions about local businesses when there's structured data. This single
- * schema covers WHO we are, WHAT services we offer, and where we serve.
- *
- * NOTE: aggregateRating intentionally omitted — no verified public reviews yet.
- * Add it only when real Google Business Profile ratings are confirmed.
+ * schema covers WHO we are, WHAT services we offer, area served, and contact.
  *
  * Renders inside <body>; safe to inline on every page via layout.tsx.
  */
@@ -26,7 +23,7 @@ const localBusinessSchema = {
   logo: `${SITE}/favicon.png`,
   priceRange: "600-2500 SAR",
   currenciesAccepted: "SAR",
-  paymentAccepted: ["Cash", "Bank Transfer", "Mada", "Apple Pay"],
+  paymentAccepted: ["Bank Transfer"],
   address: {
     "@type": "PostalAddress",
     addressCountry: "SA",

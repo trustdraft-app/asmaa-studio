@@ -1100,6 +1100,8 @@ textarea {
   font-size: 0.92rem;
   font-weight: 700;
   min-height: 44px;
+  min-width: 44px;
+  justify-content: center;
 }
 
 .hero-grid {
@@ -1423,7 +1425,8 @@ textarea {
   font-size: 0.8rem;
   font-weight: 900;
   gap: 7px;
-  min-height: 42px;
+  min-height: 44px;
+  min-width: 44px;
   padding: 0.54rem 0.85rem;
 }
 
@@ -3998,6 +4001,10 @@ textarea {
   border-radius: 14px;
   border: 1px solid rgba(241,203,130,0.18);
 }
+.pkg-compare-wrap:focus-visible {
+  outline: 2px solid rgba(241,203,130,0.72);
+  outline-offset: 4px;
+}
 .pkg-compare-table {
   width: 100%;
   min-width: 720px;
@@ -4300,19 +4307,14 @@ textarea {
   padding-block: 32px 24px;
 }
 
-.cine-eyebrow {
-  display: inline-block;
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 0.92rem;
-  letter-spacing: 0.12em;
+.cine-brand-line {
   color: #e8c57c;
-  padding: 8px 16px;
-  border: 1px solid rgba(241, 203, 130, 0.32);
-  border-radius: 999px;
-  align-self: flex-start;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-latin-display), var(--font-display), serif;
+  font-size: clamp(1.05rem, 2vw, 1.42rem);
+  font-style: italic;
+  letter-spacing: 0;
+  margin: 0;
+  text-transform: none;
 }
 
 .cine-headline {
@@ -4440,7 +4442,7 @@ textarea {
   font-size: 0.9rem;
 }
 
-/* First Look animated SVG stage (right column) */
+/* Image-led first viewport stage */
 .cine-firstlook-stage {
   position: relative;
   z-index: 4;
@@ -4449,63 +4451,93 @@ textarea {
   justify-content: center;
   min-height: 500px;
 }
-.cine-firstlook-frame {
+
+.cine-photo-frame {
   position: relative;
   width: 100%;
   max-width: 620px;
-  aspect-ratio: 6 / 5;
-  border-radius: 32px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(241, 203, 130, 0.12), transparent 60%),
-    linear-gradient(150deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
-    rgba(9, 9, 11, 0.78);
+  aspect-ratio: 1.03;
+  border-radius: 8px;
+  background: #0b0a09;
   border: 1px solid rgba(241, 203, 130, 0.28);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
   box-shadow: 0 32px 90px rgba(0, 0, 0, 0.5);
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
-.cine-firstlook-svg {
+
+.cine-photo-frame::before {
+  border: 1px solid rgba(241, 203, 130, 0.48);
+  content: "";
+  inset: 18px;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.cine-photo-frame::after {
+  background:
+    linear-gradient(90deg, transparent 0 48%, rgba(8, 8, 9, 0.38) 86%),
+    linear-gradient(0deg, rgba(8, 8, 9, 0.62), transparent 46%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.cine-photo-image {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: 28% center;
+  transform: scale(1.01);
 }
 
-/* Pulse line + spark animation */
-.cine-pulse-line {
-  animation: cinePulseLine 3.6s linear infinite;
-}
-@keyframes cinePulseLine {
-  to { stroke-dashoffset: -140; }
-}
-.cine-pulse-spark {
-  transform-origin: 300px 250px;
-  animation: cinePulseSpark 2.4s var(--ease-in-out-premium) infinite;
-}
-@keyframes cinePulseSpark {
-  0%, 100% { transform: scale(1); opacity: 0.85; }
-  50% { transform: scale(1.85); opacity: 1; }
+.cine-photo-monogram {
+  bottom: 28px;
+  color: #f1cb82;
+  display: grid;
+  gap: 2px;
+  left: 28px;
+  position: absolute;
+  text-align: left;
+  z-index: 3;
 }
 
-/* Figure subtle breath */
-.cine-fig-l, .cine-fig-r {
-  transform-origin: center bottom;
-  animation: cineFigBreath 4.4s var(--ease-in-out-premium) infinite;
+.cine-photo-monogram span {
+  font-family: var(--font-latin-display), serif;
+  font-size: clamp(3.2rem, 7vw, 5rem);
+  font-style: italic;
+  line-height: 0.85;
 }
-.cine-fig-r { animation-delay: 0.6s; }
-@keyframes cineFigBreath {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.012); }
+
+.cine-photo-monogram em {
+  color: rgba(255, 248, 236, 0.72);
+  font-size: 0.78rem;
+  font-style: normal;
+  letter-spacing: 0.16em;
+}
+
+.cine-play-note {
+  align-items: center;
+  background: rgba(12, 12, 13, 0.76);
+  border: 1px solid rgba(241, 203, 130, 0.38);
+  border-radius: 999px;
+  color: #fff6df;
+  display: inline-flex;
+  gap: 10px;
+  min-height: 52px;
+  padding: 10px 16px;
+  position: absolute;
+  right: 28px;
+  top: 28px;
+  z-index: 3;
 }
 
 /* Mobile */
 @media (max-width: 900px) {
   .cine-firstlook-stage { min-height: 380px; margin-top: 8px; }
-  .cine-firstlook-frame { aspect-ratio: 4 / 3; max-width: 460px; }
+  .cine-photo-frame { aspect-ratio: 4 / 3; max-width: 460px; }
 }
 @media (max-width: 560px) {
   .cine-hero-stack { padding-block: 24px 12px; gap: 22px; }
@@ -4515,11 +4547,13 @@ textarea {
   .cine-trust-card { min-height: 140px; padding: 18px 14px; }
   .cine-trust-card strong { font-size: 0.92rem; }
   .cine-trust-card em { font-size: 0.78rem; }
+  .cine-photo-frame::before { inset: 12px; }
+  .cine-play-note { display: none; }
+  .cine-photo-monogram { bottom: 20px; left: 20px; }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .cine-pulse-line, .cine-pulse-spark, .cine-fig-l, .cine-fig-r { animation: none; }
   .cine-cta-primary:hover, .cine-cta-secondary:hover, .cine-cta-tertiary:hover { transform: none; }
 }
 
@@ -4649,7 +4683,55 @@ textarea {
   .review-card { min-height: auto; padding: 22px 18px; }
   .about-milestones { gap: 12px; }
 }
+/* ── FAQ Accordion (collapsible details/summary) ── */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 32px;
+}
+.faq-item {
+  border: 1px solid rgba(232, 197, 124, 0.18);
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)), rgba(9,9,11,0.72);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.faq-item[open] {
+  border-color: rgba(232, 197, 124, 0.38);
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  list-style: none;
+  color: #fff6df;
+  font-size: 1rem;
+  font-weight: 700;
+  user-select: none;
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-question span:first-child { flex: 1; }
+.faq-chevron {
+  color: #e8c57c;
+  font-size: 1.1rem;
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+.faq-answer {
+  padding: 0 24px 20px;
+  margin: 0;
+  color: rgba(255,246,223,0.72);
+  line-height: 1.85;
+  font-size: 0.95rem;
+}
 
+/* ── Contact Page ── */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -4722,7 +4804,163 @@ a.contact-card:hover { border-color: rgba(232,197,124,0.45); background: rgba(23
   font-size: 0.95rem;
 }
 .contact-hours-row svg { color: #e8c57c; flex-shrink: 0; }
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-locations-grid { grid-template-columns: 1fr; }
+  .faq-question { padding: 16px 18px; font-size: 0.93rem; }
+  .faq-answer { padding: 0 18px 16px; }
+}
 
+
+/* =============================================================
+ * packages pricing optimization — feat/asmaa-packages-pricing-optimized
+ * Added: urgency chip, popular badge, trust icons, payment WA CTA,
+ *        compare popular chip, card payment note
+ * 2026-05-31
+ * ============================================================= */
+
+/* ── Urgency chip (inside pkg-hero) ──────────────────────── */
+.pkg-urgency-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 18px 0 22px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(213, 138, 134, 0.14);
+  border: 1px solid rgba(213, 138, 134, 0.38);
+  color: #f7c4c0;
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  animation: urgencyPulse 3.2s ease-in-out infinite;
+}
+.pkg-urgency-chip svg { flex-shrink: 0; }
+@keyframes urgencyPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(213,138,134,0.0); }
+  50%       { box-shadow: 0 0 0 6px rgba(213,138,134,0.0); border-color: rgba(213,138,134,0.62); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pkg-urgency-chip { animation: none; }
+}
+
+/* ── Most Popular badge (on card front) ───────────────────── */
+.pkg-popular-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f1cb82 0%, #c99953 100%);
+  color: #1a1410;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  align-self: flex-start;
+  box-shadow: 0 4px 14px rgba(241, 203, 130, 0.38);
+}
+
+.pkg-card-popular .pkg-card-front {
+  border-color: rgba(241, 203, 130, 0.62);
+  background:
+    linear-gradient(150deg, rgba(241, 203, 130, 0.14), rgba(184, 146, 77, 0.04)),
+    rgba(9, 9, 11, 0.78);
+  box-shadow: 0 0 0 1px rgba(241, 203, 130, 0.28), 0 18px 60px rgba(0, 0, 0, 0.28);
+}
+
+/* ── Trust section icon ───────────────────────────────────── */
+.pkg-trust-icon {
+  color: #e8c57c;
+  margin-bottom: 8px;
+}
+.pkg-trust-sub {
+  color: rgba(255, 248, 236, 0.45);
+  font-size: 0.76rem;
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+/* ── Card back payment note ───────────────────────────────── */
+.pkg-card-payment-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 10px;
+  color: rgba(241, 203, 130, 0.72);
+  font-size: 0.78rem;
+}
+.pkg-card-payment-note svg { flex-shrink: 0; }
+
+/* ── Payment section WA CTA ──────────────────────────────── */
+.pkg-payment-wa-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f1cb82 0%, #b8924d 100%);
+  color: #1a1410;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(241, 203, 130, 0.26);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.pkg-payment-wa-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(241,203,130,0.34); }
+
+/* ── Compare table popular chip ──────────────────────────── */
+.pkg-compare-popular-chip {
+  display: block;
+  margin: 0 auto 6px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f1cb82 0%, #c99953 100%);
+  color: #1a1410;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
+/* ── Final note (payment + urgency summary) ──────────────── */
+.pkg-final-note {
+  margin-top: 22px;
+  color: rgba(255, 248, 236, 0.55);
+  font-size: 0.86rem;
+  letter-spacing: 0.01em;
+}
+
+/* ── Site Footer Nav ── */
+.site-footer-nav {
+  border-top: 1px solid rgba(232,197,124,0.12);
+  background: rgba(9,9,11,0.92);
+  padding: 40px 24px 32px;
+}
+.site-footer-nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+}
+.site-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.site-footer-brand strong {
+  color: #fff6df;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+.site-footer-brand span {
+  color: rgba(255,246,223,0.45);
+  font-size: 0.82rem;
+}
 .site-footer-links {
   display: flex;
   flex-wrap: wrap;
@@ -4746,13 +4984,6 @@ a.contact-card:hover { border-color: rgba(232,197,124,0.45); background: rgba(23
   color: rgba(255,246,223,0.3);
   font-size: 0.78rem;
   margin: 0;
-}
-
-@media (max-width: 768px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-locations-grid { grid-template-columns: 1fr; }
-  .faq-question { padding: 16px 18px; font-size: 0.93rem; }
-  .faq-answer { padding: 0 18px 16px; }
 }
 @media (max-width: 560px) {
   .site-footer-links { gap: 6px 14px; font-size: 0.85rem; }

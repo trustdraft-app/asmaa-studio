@@ -12,7 +12,6 @@ const args = Object.fromEntries(
 );
 
 const wave = Number(args.wave || 1);
-const state = JSON.parse(readFileSync("seo-waves/state.json", "utf8"));
 const priorWave = wave - 1;
 if (priorWave < 1) {
   console.log("First wave — no gate to check. Allowing.");
