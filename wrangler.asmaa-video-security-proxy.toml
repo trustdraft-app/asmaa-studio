@@ -1,0 +1,5 @@
+name = "asmaa-video-security-proxy"
+main = "cloudflare/asmaa-video-security-proxy.js"
+compatibility_date = "2026-06-02"
+account_id = "4724f11465f7fac1f8d8ba623e0e8853"
+workers_dev = true
