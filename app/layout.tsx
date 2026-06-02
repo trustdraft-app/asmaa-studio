@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { socialPreviewImages, twitterMetadata } from "../lib/metadata";
 import { LocalBusinessJsonLd } from "../components/seo/LocalBusinessJsonLd";
 import { SpeakableJsonLd } from "../components/seo/SpeakableJsonLd";
@@ -64,6 +65,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
   return (
     <html lang="ar" dir="rtl" className={`${arabicUi.variable} ${arabicDisplay.variable} ${latinDisplay.variable}`}>
       <body>
@@ -72,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ContactPointJsonLd />
         {children}
       </body>
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

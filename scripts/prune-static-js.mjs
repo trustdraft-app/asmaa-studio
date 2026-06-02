@@ -33,7 +33,8 @@ for (const file of walkHtmlFiles(outDir)) {
   const original = readFileSync(file, "utf8");
   const pruned = original
     .replace(/<link rel="preload" as="script"[^>]*>/g, "")
-    .replace(/<script(?![^>]*type="application\/ld\+json")[\s\S]*?<\/script>/g, "");
+    // Keep JSON-LD structured data and GA4 (googletagmanager) — strip all other client JS
+    .replace(/<script(?![^>]*type="application\/ld\+json")(?![^>]*googletagmanager\.com)[\s\S]*?<\/script>/g, "");
 
   if (pruned !== original) {
     writeFileSync(file, pruned);

@@ -1,33 +1,77 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeft, Clock3, MessageCircle } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
+import { whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
 export const metadata: Metadata = {
   title: "كيف نصوّر — رحلة العميلة معنا",
   description:
     "خطوات الحجز، يوم التصوير، التسليم — كل خطوة موضّحة. شفافية كاملة من اللحظة الأولى.",
-  alternates: { canonical: "https://asmaa.video/process" },
+  alternates: {
+    canonical: "https://asmaa.video/process",
+    languages: {
+      "ar-SA": "https://asmaa.video/process",
+      "x-default": "https://asmaa.video/process"
+    }
+  },
   openGraph: {
     title: "كيف نصوّر مع Asmaa Studio",
-    description: "خطوات واضحة من الحجز للتسليم.",
+    description: "٧ خطوات واضحة من الحجز إلى التسليم. شفافية كاملة.",
     url: "https://asmaa.video/process",
     siteName: "Asmaa Studio",
     images: socialPreviewImages,
     type: "website",
-    locale: "ar_SA",
+    locale: "ar_SA"
   },
-  twitter: twitterMetadata("كيف نصوّر مع Asmaa Studio", "شفافية كاملة من الحجز للتسليم."),
+  twitter: twitterMetadata("كيف نصوّر مع Asmaa Studio", "٧ خطوات واضحة من الحجز إلى التسليم."),
+  robots: { index: true, follow: true }
 };
 
 const steps = [
-  { n: 1, title: "التواصل الأول", desc: "تتواصلين معنا عبر واتساب أو نموذج الحجز. نسألك ٤ أسئلة فقط: التاريخ، المدينة، نوع الحفل، الباقة المبدئية.", duration: "في نفس اليوم" },
-  { n: 2, title: "تأكيد التوفّر", desc: "نراجع التاريخ ونردّ خلال ٢٤ ساعة بتأكيد التوفر أو اقتراح بدائل قريبة.", duration: "خلال ٢٤ ساعة" },
-  { n: 3, title: "الباقة وعقد الحجز", desc: "نوضح الباقة بالتفصيل، نتفق على الإضافات، وترسلين العربون (٣٠٪) لتثبيت التاريخ. عقد رقمي موثّق.", duration: "خلال ٤٨ ساعة من تأكيد التوفر" },
-  { n: 4, title: "ما قبل التصوير", desc: "نتواصل معك قبل التصوير بأسبوع لمراجعة جدول اليوم، نوع الإضاءة، التوقعات الخاصة، وقائمة اللحظات المهمة.", duration: "أسبوع قبل التصوير" },
-  { n: 5, title: "يوم التصوير", desc: "نصل قبل الموعد بساعة. الطاقم نسائي كامل. نلتقط القاعة، تفاصيل العروس، اللحظات العائلية، الرقصات.", duration: "حسب الباقة (٤–١٢ ساعة)" },
-  { n: 6, title: "المونتاج", desc: "نسلّم النسخة الأولى خلال ٣ أسابيع. تراجعينها وتطلبين تعديلات (مجانية، حتى مرتين).", duration: "٣ أسابيع للنسخة الأولى" },
-  { n: 7, title: "التسليم النهائي", desc: "ملفات نهائية بصيغ متعددة (4K للأرشيف، 1080p للمشاركة، نسخة قصيرة للسوشيال).", duration: "خلال أسبوع من تأكيد المراجعة" },
+  {
+    n: 1,
+    title: "التواصل الأول",
+    desc: "تتواصلين معنا عبر واتساب أو نموذج الحجز. نسألك ٤ أسئلة فقط: التاريخ، المدينة، نوع الحفل، الباقة المبدئية.",
+    duration: "في نفس اليوم"
+  },
+  {
+    n: 2,
+    title: "تأكيد التوفّر",
+    desc: "نراجع التاريخ ونردّ خلال ٢٤ ساعة بتأكيد التوفر أو اقتراح بدائل قريبة.",
+    duration: "خلال ٢٤ ساعة"
+  },
+  {
+    n: 3,
+    title: "الباقة وعقد الحجز",
+    desc: "نوضح الباقة بالتفصيل، نتفق على الإضافات، وترسلين العربون (٥٠٪) لتثبيت التاريخ. عقد رقمي موثّق.",
+    duration: "خلال ٤٨ ساعة من تأكيد التوفر"
+  },
+  {
+    n: 4,
+    title: "ما قبل التصوير",
+    desc: "نتواصل معك قبل التصوير بأسبوع لمراجعة جدول اليوم، نوع الإضاءة، التوقعات الخاصة، وقائمة اللحظات المهمة.",
+    duration: "أسبوع قبل التصوير"
+  },
+  {
+    n: 5,
+    title: "يوم التصوير",
+    desc: "نصل قبل الموعد بساعة. الطاقم نسائي كامل. نلتقط القاعة، تفاصيل العروس، اللحظات العائلية، الرقصات.",
+    duration: "حسب الباقة"
+  },
+  {
+    n: 6,
+    title: "المونتاج",
+    desc: "نسلّم النسخة الأولى خلال ٣ أسابيع. تراجعينها وتطلبين تعديلات (مجانية، حتى مرتين).",
+    duration: "٣ أسابيع للنسخة الأولى"
+  },
+  {
+    n: 7,
+    title: "التسليم النهائي",
+    desc: "ملفات نهائية بصيغ متعددة: 4K للأرشيف، 1080p للمشاركة، نسخة قصيرة للسوشيال.",
+    duration: "خلال أسبوع من تأكيد المراجعة"
+  }
 ];
 
 const howToJsonLd = {
@@ -41,50 +85,62 @@ const howToJsonLd = {
     "@type": "HowToStep",
     position: s.n,
     name: s.title,
-    text: s.desc,
-  })),
+    text: s.desc
+  }))
 };
 
 export default function ProcessPage() {
   return (
-    <main className="page-shell" dir="rtl" lang="ar">
+    <main className="page-shell">
       <JsonLd data={howToJsonLd} />
-      <section className="section">
+
+      <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
+        <div className="pkg-hero-inner">
+          <Link className="back-pill" href="/" style={{ marginBottom: 24 }}>
+            <ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span>
+          </Link>
+          <span className="cine-eyebrow">رحلة العميلة معنا</span>
+          <h1 className="cine-headline" style={{ marginTop: 16 }}>
+            <span className="cine-headline-ar">من الحجز إلى التسليم — كل خطوة موضّحة.</span>
+            <span className="cine-headline-en">From booking to delivery — nothing hidden.</span>
+          </h1>
+          <p className="cine-lede">
+            لا مفاجآت ولا غموض. كل خطوة لها مدة معروفة وشيء تنتظرينه منّا.
+          </p>
+        </div>
+      </section>
+
+      <section className="section" id="steps">
         <div className="section-inner">
-          <header className="mb-12 max-w-3xl">
-            <span className="metal-kicker">رحلة العميلة معنا</span>
-            <h1 className="mt-4 text-display-xl" data-speakable>
-              من الحجز إلى التسليم — كل خطوة موضّحة
-            </h1>
-            <p className="mt-5 text-body-lg leading-relaxed text-muted-foreground">
-              لا مفاجآت ولا غموض. كل خطوة لها مدة معروفة وشيء تنتظرينه منّا.
-            </p>
-          </header>
-          <ol className="space-y-6">
+          <ol className="process-steps" aria-label="خطوات العمل">
             {steps.map((s) => (
-              <li key={s.n} className="rounded-3xl border border-border bg-card/40 p-8 backdrop-blur">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold-400 text-2xl font-semibold text-neutral-950">
-                    {s.n}
-                  </div>
-                  <div className="flex-1">
-                    <h2 className="text-2xl font-semibold text-foreground">{s.title}</h2>
-                    <p className="mt-2 text-base leading-relaxed text-muted-foreground">{s.desc}</p>
-                    <p className="mt-3 inline-flex rounded-full bg-gold-400/10 px-3 py-1 text-sm text-gold-300">
-                      المدة المتوقعة: {s.duration}
-                    </p>
-                  </div>
+              <li key={s.n} className="glass-card process-step-card">
+                <div className="process-step-number" aria-hidden="true">{s.n}</div>
+                <div className="process-step-body">
+                  <h2 className="process-step-title">{s.title}</h2>
+                  <p className="process-step-desc">{s.desc}</p>
+                  <span className="process-step-duration">
+                    <Clock3 size={14} aria-hidden="true" />
+                    {s.duration}
+                  </span>
                 </div>
               </li>
             ))}
           </ol>
-          <div className="mt-16 rounded-3xl border border-border bg-card/30 p-8 text-center backdrop-blur">
-            <h2 className="text-3xl font-semibold text-foreground">جاهزة تحجزين موعدك؟</h2>
-            <p className="mt-3 text-muted-foreground">ابدئي بالتواصل عبر واتساب أو اطلعي على الباقات أولاً.</p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link href="/packages" className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-base font-semibold text-background hover:opacity-90">
-                تصفّحي الباقات
+
+          <div className="process-cta-block glass-card" style={{ marginTop: 48, textAlign: "center" }}>
+            <h2 className="section-title">جاهزة تحجزين موعدك؟</h2>
+            <p className="section-copy" style={{ maxWidth: 520, margin: "12px auto 28px" }}>
+              ابدئي بالتواصل عبر واتساب أو اطلعي على الباقات أولاً.
+            </p>
+            <div className="button-row" style={{ justifyContent: "center" }}>
+              <Link className="cta" href="/reserve">
+                رابط العروس
               </Link>
+              <a className="ghost-cta" href={whatsappLink("process-page")} target="_blank" rel="noreferrer">
+                <MessageCircle size={16} aria-hidden="true" />
+                واتساب
+              </a>
             </div>
           </div>
         </div>
