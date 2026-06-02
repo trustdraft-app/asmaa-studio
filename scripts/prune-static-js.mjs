@@ -27,6 +27,7 @@ if (adminPanelEnabled) keepClientRoutes.add("admin.html");
 for (const file of walkHtmlFiles(outDir)) {
   const route = relative(outDir, file);
   if (keepClientRoutes.has(route) || route.startsWith("reserve/") || route.startsWith("admin/") || route.startsWith("packages/")) continue;
+  if (!existsSync(file)) continue;
   if (!statSync(file).isFile()) continue;
 
   const original = readFileSync(file, "utf8");

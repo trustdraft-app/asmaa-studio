@@ -4988,3 +4988,320 @@ a.contact-card:hover { border-color: rgba(232,197,124,0.45); background: rgba(23
 @media (max-width: 560px) {
   .site-footer-links { gap: 6px 14px; font-size: 0.85rem; }
 }
+
+/* Sprint 15 — full cinematic homepage escalation */
+.cine-premiere-strip {
+  align-items: stretch;
+  background:
+    linear-gradient(90deg, rgba(241, 203, 130, 0.14), rgba(213, 138, 134, 0.1), rgba(130, 145, 118, 0.12)),
+    rgba(8, 8, 9, 0.58);
+  border: 1px solid rgba(241, 203, 130, 0.22);
+  border-radius: 8px;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 640px;
+  overflow: hidden;
+}
+
+.cine-premiere-strip span {
+  align-items: center;
+  color: rgba(255, 248, 236, 0.82);
+  display: flex;
+  font-size: 0.82rem;
+  font-weight: 800;
+  gap: 10px;
+  min-height: 54px;
+  padding: 12px 14px;
+  position: relative;
+}
+
+.cine-premiere-strip span:not(:last-child) {
+  border-inline-end: 1px solid rgba(255, 248, 236, 0.08);
+}
+
+.cine-premiere-strip b {
+  color: #f1cb82;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.cine-frame-caption {
+  align-items: center;
+  background: rgba(8, 8, 9, 0.82);
+  border: 1px solid rgba(241, 203, 130, 0.32);
+  border-radius: 8px;
+  bottom: 26px;
+  color: #fff6df;
+  display: flex;
+  gap: 12px;
+  min-height: 46px;
+  padding: 10px 14px;
+  position: absolute;
+  right: 28px;
+  z-index: 3;
+}
+
+.cine-frame-caption span {
+  color: rgba(255, 248, 236, 0.62);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.cine-frame-caption strong {
+  color: #f1cb82;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.city-wave-list a {
+  align-items: center;
+  display: inline-flex;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.ghost-cta.compact {
+  min-height: 48px;
+}
+
+.signature-film-section {
+  background:
+    linear-gradient(180deg, rgba(8, 8, 9, 0.94), rgba(22, 18, 20, 0.96)),
+    linear-gradient(90deg, rgba(130, 145, 118, 0.18), transparent 42%, rgba(213, 138, 134, 0.16));
+  border-block: 1px solid rgba(241, 203, 130, 0.14);
+  padding-block: 70px;
+}
+
+.signature-film-inner {
+  align-items: center;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+}
+
+.signature-film-copy .section-title,
+.director-board-heading .section-title {
+  max-width: 760px;
+}
+
+.signature-film-reel {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  position: relative;
+}
+
+.signature-film-reel::before {
+  background: linear-gradient(90deg, rgba(241, 203, 130, 0.12), rgba(213, 138, 134, 0.26), rgba(130, 145, 118, 0.16));
+  content: "";
+  height: 2px;
+  inset-inline: 24px;
+  position: absolute;
+  top: 38px;
+}
+
+.signature-film-reel article {
+  background: rgba(255, 248, 236, 0.06);
+  border: 1px solid rgba(255, 248, 236, 0.12);
+  border-radius: 8px;
+  min-height: 230px;
+  padding: 24px 18px 20px;
+  position: relative;
+}
+
+.signature-film-reel span,
+.director-board-grid article > span {
+  align-items: center;
+  background: rgba(241, 203, 130, 0.15);
+  border: 1px solid rgba(241, 203, 130, 0.38);
+  border-radius: 999px;
+  color: #f1cb82;
+  display: inline-flex;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  justify-content: center;
+  line-height: 1;
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.signature-film-reel h3,
+.director-board-grid h3 {
+  color: #fff6df;
+  font-size: 1rem;
+  margin: 22px 0 10px;
+}
+
+.signature-film-reel p,
+.director-board-grid p {
+  color: rgba(255, 248, 236, 0.68);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.director-board-section {
+  background:
+    linear-gradient(135deg, rgba(241, 203, 130, 0.09), rgba(130, 145, 118, 0.08) 38%, rgba(213, 138, 134, 0.1)),
+    rgba(12, 12, 13, 0.95);
+  border-block: 1px solid rgba(241, 203, 130, 0.12);
+}
+
+.director-board-inner {
+  display: grid;
+  gap: 34px;
+}
+
+.director-board-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.director-board-grid article {
+  background: rgba(8, 8, 9, 0.48);
+  border: 1px solid rgba(255, 248, 236, 0.12);
+  border-radius: 8px;
+  min-height: 220px;
+  padding: 22px;
+  position: relative;
+}
+
+.director-board-grid small {
+  color: rgba(255, 248, 236, 0.5);
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  margin-top: 18px;
+}
+
+.package-card-20x {
+  overflow: hidden;
+  position: relative;
+}
+
+.package-rank {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.package-rank span {
+  color: rgba(241, 203, 130, 0.9);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.package-rank em {
+  background: rgba(241, 203, 130, 0.1);
+  border: 1px solid rgba(241, 203, 130, 0.24);
+  border-radius: 999px;
+  color: rgba(255, 248, 236, 0.66);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0;
+  padding: 7px 10px;
+}
+
+.package-card-20x.featured {
+  background:
+    linear-gradient(180deg, rgba(241, 203, 130, 0.14), rgba(213, 138, 134, 0.08)),
+    rgba(255, 248, 236, 0.06);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+}
+
+.testimonial-marquee-section {
+  box-shadow: inset 0 1px 0 rgba(255, 248, 236, 0.08), inset 0 -1px 0 rgba(255, 248, 236, 0.06);
+}
+
+.final-cta {
+  background:
+    linear-gradient(90deg, rgba(8, 8, 9, 0.88), rgba(8, 8, 9, 0.48), rgba(8, 8, 9, 0.9)),
+    url("/brand/asmaa-cinematic-bridal-still.webp") center / cover;
+  min-height: 520px;
+  place-content: center;
+}
+
+.final-cta .section-inner {
+  margin-inline: 0 auto;
+  max-width: 720px;
+}
+
+@media (max-width: 960px) {
+  .signature-film-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .signature-film-reel,
+  .director-board-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cine-premiere-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-grid-20x {
+    gap: 20px;
+  }
+
+  .cine-firstlook-stage {
+    margin-top: 8px;
+    min-height: 330px;
+    order: -1;
+  }
+
+  .cine-photo-frame {
+    aspect-ratio: 4 / 5;
+    max-width: 310px;
+  }
+
+  .cine-photo-image {
+    object-position: center;
+  }
+
+  .cine-hero-stack {
+    align-items: center;
+    text-align: center;
+  }
+
+  .signature-film-section {
+    padding-block: 46px;
+  }
+
+  .signature-film-reel,
+  .director-board-grid,
+  .cine-premiere-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .signature-film-reel::before {
+    display: none;
+  }
+
+  .signature-film-reel article,
+  .director-board-grid article {
+    min-height: auto;
+  }
+
+  .cine-frame-caption {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .final-cta {
+    min-height: 460px;
+  }
+}
