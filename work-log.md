@@ -258,3 +258,11 @@
 - Repaired local Playwright launch verification by using isolated browser cache `/Users/mohammedsa/.cache/ai-empire-playwright-asmaa`.
 - Verification passed: `npm run verify:launch` with `PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.cache/ai-empire-playwright-asmaa` completed with `178` PASS checks and no failures.
 - Live check: `https://asmaa.video/reviews` returned HTTP `200` and did not contain the banned wording; local `out/reviews.html` also did not contain it after the fix.
+
+## 2026-06-02 23:14 +03
+
+- Shipped the Sprint 16 route-theatre redesign pass in source: packages, portfolio, reviews, about, FAQ, contact, reserve, and process now share image-led cinematic hero treatment, premium card surfaces, balanced headings, stronger route rhythm, and repaired contact/review hit areas.
+- Added portfolio class hooks so the existing inline portfolio route can be styled consistently without rewriting the page structure.
+- Optimized `scripts/prune-static-js.mjs` and `scripts/verify-launch.mjs` with bounded async file reads/writes so the 9k+ HTML export can be pruned and verified without multi-minute sequential filesystem stalls.
+- Verification passed: `git diff --check`, `npm run typecheck --silent`, `npm run lint --silent`, `npm run build:pages` (`587s` final run), `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/verify-launch.mjs` (`58s` final run), and Playwright route screenshot QA across 9 routes x desktop/mobile with zero overflow, route-hero, console, network, or tap-target failures.
+- Visual evidence: screenshots saved under `/tmp/asmaa-sprint16-route-qa/`; generated design reference saved under `/Users/mohammedsa/.codex/generated_images/019e86ff-88ac-7991-8c04-d331426399b5/`.

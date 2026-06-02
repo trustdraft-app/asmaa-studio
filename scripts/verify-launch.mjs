@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { createServer } from "node:http";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { extname, join, normalize } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -140,6 +141,19 @@ function walkFiles(dir) {
   });
 }
 
+async function mapLimit(items, limit, fn) {
+  let index = 0;
+  const workerCount = Math.min(limit, items.length);
+  const workers = Array.from({ length: workerCount }, async () => {
+    while (index < items.length) {
+      const item = items[index];
+      index += 1;
+      await fn(item);
+    }
+  });
+  await Promise.all(workers);
+}
+
 function verifyDeployHeaderArtifacts() {
   const headersPath = join(outDir, "_headers");
   if (!existsSync(headersPath)) {
@@ -213,7 +227,7 @@ function serveOut() {
   });
 }
 
-function verifyStaticOutput() {
+async function verifyStaticOutput() {
   if (!existsSync(outDir)) {
     fail("out/ is missing; run npm run build first.");
     return;
@@ -264,17 +278,18 @@ function verifyStaticOutput() {
   verifyDeployHeaderArtifacts();
 
   const allHtml = walkFiles(outDir).filter((file) => file.endsWith(".html"));
-  for (const filePath of allHtml) {
-    const html = readFileSync(filePath, "utf8");
+  const scanConcurrency = Number(process.env.VERIFY_HTML_CONCURRENCY || 16);
+  await mapLimit(allHtml, scanConcurrency, async (filePath) => {
+    const html = await readFile(filePath, "utf8");
     const relative = filePath.replace(`${outDir}/`, "");
-	  for (const phrase of bannedPhrases) {
+    for (const phrase of bannedPhrases) {
       if (html.includes(phrase)) fail(`${relative} contains banned wording: ${phrase}`);
     }
 
     if (/<title>[^<]*Asmaa Studio\s*\|\s*Asmaa Studio[^<]*<\/title>/.test(html)) {
       fail(`${relative} has a duplicated Asmaa Studio title`);
     }
-  }
+  });
 
   for (const route of marketingRoutes) {
     if (!existsSync(join(outDir, route))) continue;
@@ -548,7 +563,7 @@ async function verifyBrowserOutput() {
   }
 }
 
-verifyStaticOutput();
+await verifyStaticOutput();
 
 if (!process.exitCode) {
   await verifyBrowserOutput();

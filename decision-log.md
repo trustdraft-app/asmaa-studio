@@ -227,3 +227,10 @@
 **Decision:** Replace the banned wording with consent-first sharing-boundary copy in `app/reviews/page.tsx` and keep the verifier strict.
 **Reasoning:** The launch invariant is to avoid unsupported privacy/marketing claims while still explaining consent-first review handling clearly.
 **Source:** `scripts/verify-launch.mjs`, `app/reviews/page.tsx`, local launch verification.
+
+## 2026-06-02 23:14 +03 — Asmaa Studio
+
+**Question:** How should the full-authority redesign order be applied after the homepage cinematic pass was already live?
+**Decision:** Apply a route-wide theatre system instead of another homepage-only change: shared image-led heroes, darker premium proof surfaces, portfolio styling hooks, contact/review hit-area hardening, and faster export verification.
+**Reasoning:** End-to-end launch polish requires the supporting user journeys to feel as deliberate as the homepage, and the verifier/pruner bottleneck had become a real launch-execution drag on the 11k-page static export.
+**Source:** User directive, generated design reference, `app/globals.css`, `app/portfolio/page.tsx`, `scripts/prune-static-js.mjs`, `scripts/verify-launch.mjs`, Playwright screenshot QA.
