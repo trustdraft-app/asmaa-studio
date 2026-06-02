@@ -1,5 +1,14 @@
 # Asmaa Studio Work Log
 
+## 2026-06-02 20:14 +03
+
+- Verified the Asmaa code-owned launch surface end to end: `npm run typecheck`, `npm run lint`, `npm run build:pages`, and `TMPDIR=/tmp npm run verify:launch` passed.
+- Live probes passed for `https://asmaa.video`, `/reserve`, `/portfolio`, `/process`, robots, sitemap, `llms.txt`, and `asmaavideo.com` redirects to `https://asmaa.video`.
+- Confirmed `asmaa.vodeo` does not resolve; kept `asmaa.video` as canonical per project memory and current DNS/live routing.
+- Noted public `/admin` is currently 404 on the live static deployment while local export includes `/admin`; public robots disallow `/admin`, and owner Supabase activation remains the secure path for live admin persistence.
+- Cleared the remaining launch PR queue: closed #24 and #25 as 0-diff superseded PRs, rebased #23 onto `main`, fixed the verifier-discovered mobile footer tap targets, passed local `npm run lint`, `npm run typecheck`, and `PLAYWRIGHT_BROWSERS_PATH=/tmp/asmaa-pr23-playwright TMPDIR=/tmp npm run verify:launch`, then merged #23 after GitHub CI passed `lint`, `typecheck`, `npm audit --omit=dev`, `verify:launch`, and `verify:admin`.
+- Final Asmaa PR evidence: #23 merged at `3ca49efb7e0da28c540951ece8fff76eae91f24a`; no open PRs remain.
+
 ## 2026-06-02 09:09 +03
 
 - Shipped wave 20 as a live booking-source measurement pass across the real reservation flow and admin dashboard instead of leaving attribution hidden inside raw WhatsApp text.

@@ -1,5 +1,17 @@
 # Asmaa Studio Decision Log
 
+## 2026-06-02 20:52 +03 — Asmaa Studio
+**Question:** How should Codex handle the remaining Asmaa launch PRs after live readiness verification?
+**Decision:** Close PR #24 and #25 because both had 0 changed files after branch updates, then rebase/fix/verify/merge PR #23 as the only remaining code-bearing launch PR.
+**Reasoning:** Empty PRs add queue noise, while PR #23 had real process-discovery changes and one verifier-discovered footer tap-target issue that could be fixed and proven before merge.
+**Source:** GitHub PR state, `npm run verify:launch`, professional judgment.
+
+## 2026-06-02 20:14 +03 — Asmaa Studio
+**Question:** Should `asmaa.vodeo` be treated as the launch domain or a typo/variant?
+**Decision:** Treat `asmaa.video` as canonical because project memory, CNAME, sitemap, redirects, and live HTTP probes all point there; record `asmaa.vodeo` as unresolved/non-resolving and not code-owned.
+**Reasoning:** Changing or buying a typo-domain is a brand/money decision, while the code-owned `asmaa.video` launch surface is live and verified.
+**Source:** `.agent/README.md`, `public/CNAME`, live HTTP probes, `npm run verify:launch`.
+
 ## 2026-06-02 09:09 +03 — Asmaa Studio
 **Question:** Which remaining 20-wave item should ship next on the live site after the engagement and trust waves?
 **Decision:** Implement wave 20 as end-to-end booking-source attribution in `/reserve` and `/admin`, capturing source intent from internal referrers and query state, preserving it in the WhatsApp fallback and reservation submit payload, and surfacing a simple top-sources report in the admin dashboard.
