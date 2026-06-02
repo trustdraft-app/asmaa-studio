@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, Check, Crown, Download, MessageCircle, Sparkles } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
-import { packages, whatsappLink, whatsappNumber } from "../../lib/content";
+import { packages, whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import PackageCalculator from "./PackageCalculator";
 
@@ -218,7 +218,7 @@ export default function PackagesPage() {
         <div className="section-inner">
           <span className="eyebrow">مقارنة الباقات</span>
           <h2 className="section-title">ما الذي يميّز كل باقة عن الأخرى</h2>
-          <div className="pkg-compare-wrap" role="region" aria-label="جدول مقارنة الباقات">
+          <div className="pkg-compare-wrap" role="region" aria-label="جدول مقارنة الباقات" tabIndex={0}>
             <table className="pkg-compare-table">
               <thead>
                 <tr>

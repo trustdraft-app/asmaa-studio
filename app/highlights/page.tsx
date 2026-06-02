@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
@@ -60,12 +61,11 @@ export default function HighlightsPage() {
           <div className="addons-grid" style={{ gap: 18 }}>
             {icons.map((icon) => (
               <article className="addon-card" key={icon.file} style={{ alignItems: "center", textAlign: "center", padding: 18 }}>
-                <img
+                <Image
                   src={`/highlights-v2/${icon.file}.png`}
                   alt={`أيقونة هايلايت ${icon.ar}`}
                   width={260}
                   height={260}
-                  loading="lazy"
                   style={{ width: "100%", maxWidth: 260, height: "auto", borderRadius: 14 }}
                 />
                 <h3 style={{ marginTop: 12 }}>{icon.ar}</h3>

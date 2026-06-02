@@ -1,5 +1,11 @@
 # Asmaa Studio Decision Log
 
+## 2026-06-02 09:09 +03 — Asmaa Studio
+**Question:** Which remaining 20-wave item should ship next on the live site after the engagement and trust waves?
+**Decision:** Implement wave 20 as end-to-end booking-source attribution in `/reserve` and `/admin`, capturing source intent from internal referrers and query state, preserving it in the WhatsApp fallback and reservation submit payload, and surfacing a simple top-sources report in the admin dashboard.
+**Reasoning:** Wave 18 is mostly off-site Google Business Profile work, while wave 20 can be turned into a real on-site conversion measurement improvement that helps the studio see which live pages and package paths create actual conversations.
+**Source:** AGENTS.md, `lib/content.ts` 20-wave plan, reservation/admin project files, professional judgment.
+
 ## 2026-05-28 03:17 +03 — Asmaa Studio
 **Question:** How should the bride reservation link and owner admin dashboard work on the current static GitHub Pages deployment?
 **Decision:** Implement `/reserve` and `/admin` as Supabase-ready client pages, require Supabase Edge Function persistence for live writes, and keep a structured WhatsApp fallback when backend variables are missing.
@@ -83,6 +89,12 @@
 **Decision:** Implement wave 14 as a dedicated `/faq` booking questions page with Arabic answers, FAQ structured data, breadcrumb structured data, homepage links, and sitemap coverage.
 **Reasoning:** The site already shipped the broad homepage/social/city work, and the highest-impact remaining code-owned gap was reducing repeated pre-booking questions with an indexable conversion page.
 **Source:** 20-wave plan in `lib/content.ts`, live project files, professional judgment.
+
+## 2026-06-01 09:08 +03 — Asmaa Studio
+**Question:** Which daily growth wave should ship next from the live site repo when wave 18 is an off-site Google post and `/reviews` currently contains invented placeholder testimonials?
+**Decision:** Treat wave 19 as the highest-impact safe repo-owned fix: replace the fake-review `/reviews` surface with an honest pre-booking trust page, remove placeholder aggregate-rating schema, and add verification guards so fake testimonial markers cannot return.
+**Reasoning:** Shipping fabricated reviews would weaken launch integrity and conversion trust; an honest trust/process page raises quality immediately without waiting on off-site Google access or real-client consent assets.
+**Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, live `app/reviews/page.tsx`, project work log, professional judgment.
 
 ## 2026-05-28 14:44 +03 — Asmaa Studio
 **Question:** Which reusable patterns from the existing AI Empire repos should be applied to Asmaa now?
@@ -197,3 +209,9 @@
 **Decision:** Convert wave 17 into a dedicated `/engagement` landing page for الخطوبة والملكة, wire it into internal discovery, sitemap, `llms.txt`, and launch verification, and treat GitHub Pages CI as the deployment verifier because local Next 16 builds are hanging in compile before export completes.
 **Reasoning:** The engagement intent already exists in packages and guides, but a first-class landing route gives it the same direct search and conversion surface as `/zaffa`; the build hang is an environment/runtime issue, not a content-strategy reason to skip the wave.
 **Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, existing `app/zaffa/page.tsx` pattern, project files, professional judgment.
+## 2026-06-02 12:50 +03
+
+**Question:** How should the current branch handle reviews-page wording that fails the launch verifier?
+**Decision:** Replace the banned wording with consent-first sharing-boundary copy in `app/reviews/page.tsx` and keep the verifier strict.
+**Reasoning:** The launch invariant is to avoid unsupported privacy/marketing claims while still explaining consent-first review handling clearly.
+**Source:** `scripts/verify-launch.mjs`, `app/reviews/page.tsx`, local launch verification.
