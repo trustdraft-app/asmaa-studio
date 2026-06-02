@@ -212,9 +212,10 @@ export default function HomePage() {
             <a href="#cities">المدن</a>
             <Link href="/services/full-day-wedding">الخدمات</Link>
             <Link href="/portfolio">الألبوم</Link>
-            <Link href="/reviews">آراء العرايس</Link>
+            <Link href="/reviews">الاطمئنان قبل الحجز</Link>
             <Link href="/about">عن الاستوديو</Link>
             <Link href="/faq">الأسئلة</Link>
+            <Link href="/contact">تواصلي معنا</Link>
             <Link href="/reserve">رابط العروس</Link>
           </div>
           <div className="nav-actions" aria-label="خيارات سريعة">
@@ -231,14 +232,14 @@ export default function HomePage() {
 
         <div className="hero-grid hero-grid-20x">
           <div className="hero-copy-stack cine-hero-stack">
-            <span className="cine-eyebrow">Asmaa Studio · مصورة فيديو سعودية للأعراس النسائية</span>
+            <p className="cine-brand-line">Asmaa Studio</p>
 
             <h1 className="cine-headline">
-              <span className="cine-headline-ar reveal-on-scroll">فيلم لحظة لا تُعاد.</span>
-              <span className="cine-headline-en reveal-on-scroll">A film of the moment that never repeats.</span>
+              <span className="cine-headline-ar">فيلم لحظة لا تُعاد. </span>
+              <span className="cine-headline-en">A film of the moment that never repeats.</span>
             </h1>
 
-            <p className="cine-lede reveal-on-scroll">
+            <p className="cine-lede">
               العريس يلتفت لأول مرة. العروس في فستانها. نظرة صادقة قبل ضجيج القاعة.
               Asmaa Studio توثق هذه اللحظة بهدوء، بإضاءة دافئة، ولقطة قريبة لا تُفلت تفصيلة.
             </p>
@@ -299,55 +300,23 @@ export default function HomePage() {
               />
             </div>
 
-            {/* The actual visible cinematic hero — First Look animated SVG */}
-            <div className="cine-firstlook-frame">
-              <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" className="cine-firstlook-svg" role="presentation">
-                <defs>
-                  <linearGradient id="cine-gold" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#f1cb82" />
-                    <stop offset="100%" stopColor="#b8924d" />
-                  </linearGradient>
-                  <radialGradient id="cine-spot" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#f1cb82" stopOpacity="0.34" />
-                    <stop offset="100%" stopColor="#f1cb82" stopOpacity="0" />
-                  </radialGradient>
-                </defs>
-
-                {/* Soft spotlight backdrop */}
-                <circle cx="300" cy="250" r="200" fill="url(#cine-spot)" />
-
-                {/* Left silhouette — groom */}
-                <g transform="translate(170 250)" fill="none" stroke="url(#cine-gold)" strokeWidth="3" className="cine-fig-l">
-                  <circle r="42" />
-                  <path d="M0 42 q-40 50 -40 100" />
-                  <path d="M0 42 q40 50 40 100" />
-                  <path d="M-22 60 L-50 110" />
-                  <path d="M22 60 L50 110" />
-                </g>
-
-                {/* Right silhouette — bride with subtle veil */}
-                <g transform="translate(430 250)" fill="none" stroke="url(#cine-gold)" strokeWidth="3" className="cine-fig-r">
-                  <circle r="42" />
-                  <path d="M0 42 q-40 50 -40 100" />
-                  <path d="M0 42 q40 50 40 100" />
-                  <path d="M-22 60 L-50 110" />
-                  <path d="M22 60 L50 110" />
-                  <ellipse cx="0" cy="-6" rx="62" ry="18" opacity="0.45" />
-                  <ellipse cx="0" cy="14" rx="78" ry="22" opacity="0.28" />
-                </g>
-
-                {/* The First Look — animated pulse between them */}
-                <line x1="218" y1="250" x2="382" y2="250" stroke="url(#cine-gold)" strokeWidth="2.5" strokeDasharray="8 6" className="cine-pulse-line" />
-                <circle cx="300" cy="250" r="9" fill="url(#cine-gold)" className="cine-pulse-spark" />
-
-                {/* Caption — Arabic over the scene */}
-                <text x="300" y="60" fontFamily="'Noto Kufi Arabic', system-ui, sans-serif" fontSize="22" fill="#fff6df" textAnchor="middle" opacity="0.85">
-                  First Look · لحظة لا تُعاد
-                </text>
-                <text x="300" y="445" fontFamily="'Cormorant Garamond', serif" fontStyle="italic" fontSize="20" fill="#e8c57c" textAnchor="middle" letterSpacing="3" opacity="0.85">
-                  THE MOMENT
-                </text>
-              </svg>
+            <div className="cine-photo-frame">
+              <Image
+                className="cine-photo-image"
+                src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
+                alt=""
+                width={860}
+                height={560}
+                priority
+              />
+              <div className="cine-photo-monogram">
+                <span>AS</span>
+                <em>ASMAA STUDIO</em>
+              </div>
+              <div className="cine-play-note">
+                <Play size={20} aria-hidden="true" />
+                <span>شاهدي أحدث فيلم</span>
+              </div>
             </div>
           </div>
         </div>
@@ -769,7 +738,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="payment-trust-row" aria-label="ضمانات Asmaa Studio">
+      {/* ── Site Footer Nav ── */}
+      <footer className="site-footer-nav" aria-label="روابط الموقع">
+        <div className="site-footer-nav-inner">
+          <div className="site-footer-brand">
+            <strong>Asmaa Studio</strong>
+            <span>تصوير فيديو زواجات نسائي · المنطقة الشرقية</span>
+          </div>
+          <nav className="site-footer-links" aria-label="روابط التنقل">
+            <Link href="/packages">الباقات</Link>
+            <Link href="/portfolio">الألبوم</Link>
+            <Link href="/reviews">آراء العرايس</Link>
+            <Link href="/about">عن الاستوديو</Link>
+            <Link href="/faq">الأسئلة الشائعة</Link>
+            <Link href="/contact">تواصلي معنا</Link>
+            <Link href="/reserve">رابط العروس</Link>
+          </nav>
+          <p className="site-footer-copy">
+            © {new Date().getFullYear()} Asmaa Studio · جميع الحقوق محفوظة
+          </p>
+        </div>
+      </footer>
+
+            <footer className="payment-trust-row" aria-label="ضمانات Asmaa Studio">
         <div className="payment-trust-inner">
           <div className="trust-credential">
             <ShieldCheck size={20} strokeWidth={1.7} aria-hidden="true" />

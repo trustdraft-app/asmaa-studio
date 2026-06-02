@@ -17,7 +17,7 @@ import {
   TrendingUp,
   UsersRound
 } from "lucide-react";
-import { assetPath, whatsappLink } from "../lib/content";
+import { assetPath, readableWhatsappSource, whatsappLink } from "../lib/content";
 import {
   adminConfigReady,
   normalizePhone,
@@ -220,6 +220,31 @@ export function AdminDashboard() {
         <Metric icon={TrendingUp} label="أقرب تاريخ" value={metrics.nextDate} />
       </section>
 
+      <section className="source-report" aria-label="تقرير مصادر الحجز">
+        <div className="source-report-head">
+          <div>
+            <span className="eyebrow">موجة 20</span>
+            <h2>مصادر الحجز التي تتحول إلى محادثات حقيقية</h2>
+          </div>
+          <p>يعرض هذا الجدول أقوى المسارات الحالية حتى تعرفي أي صفحة أو باقة تستحق المتابعة اليومية.</p>
+        </div>
+        {metrics.topSources.length === 0 ? (
+          <div className="admin-empty source-empty">
+            <TrendingUp size={28} />
+            <p>أول طلب محفوظ سيظهر هنا مع مصدر الوصول.</p>
+          </div>
+        ) : (
+          <div className="source-chip-grid">
+            {metrics.topSources.map((item) => (
+              <article className="source-chip-card" key={item.label}>
+                <strong>{item.count}</strong>
+                <span>{item.label}</span>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
       <section className="admin-board">
         <div className="board-toolbar">
           <label className="search-box">
@@ -272,6 +297,7 @@ export function AdminDashboard() {
                   <small>
                     {reservation.eventDate} · {reservation.packageName}
                   </small>
+                  <small className="reservation-source">المصدر: {readableWhatsappSource(reservation.source)}</small>
                 </div>
                 <div className="reservation-meta">
                   <span>{reservation.phone}</span>
@@ -384,12 +410,22 @@ function buildMetrics(reservations: ReservationRecord[]) {
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = reservations.filter((item) => item.eventDate >= today && item.status !== "cancelled");
   const next = upcoming[0]?.eventDate ?? "لا يوجد";
+  const sourceCounts = new Map<string, number>();
+
+  for (const reservation of reservations) {
+    const key = readableWhatsappSource(reservation.source);
+    sourceCounts.set(key, (sourceCounts.get(key) ?? 0) + 1);
+  }
 
   return {
     newCount: reservations.filter((item) => item.status === "new").length,
     upcomingCount: upcoming.length,
     confirmedCount: reservations.filter((item) => item.status === "confirmed" || item.status === "deposit_paid").length,
-    nextDate: next
+    nextDate: next,
+    topSources: [...sourceCounts.entries()]
+      .sort((left, right) => right[1] - left[1])
+      .slice(0, 6)
+      .map(([label, count]) => ({ label, count }))
   };
 }
 

@@ -1,107 +1,184 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle, Quote, Star } from "lucide-react";
-import { JsonLd } from "../../components/JsonLd";
-import { whatsappLink, whatsappNumber } from "../../lib/content";
+import {
+  ArrowLeft,
+  BadgeCheck,
+  CalendarDays,
+  CheckCircle2,
+  FileText,
+  LockKeyhole,
+  MessageCircle,
+  ShieldCheck
+} from "lucide-react";
+import { serviceAreas } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
-const META_TITLE = "آراء العرايس | Asmaa Studio";
-const META_DESC = "آراء عرايس Asmaa Studio عن تصوير الزواجات والخطوبة في الأحساء والدمام والخبر — بالأحرف الأولى والمدينة والتاريخ احتراماً لذوق العروس وعائلتها.";
+const META_TITLE = "سياسة آراء العميلات | Asmaa Studio";
+const META_DESC = "Asmaa Studio تنشر آراء العرايس فقط بعد موافقة صريحة، وبالأحرف الأولى فقط، مع احترام حدود مشاركة العروس والعائلة.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
   description: META_DESC,
-  alternates: { canonical: "https://asmaa.video/reviews", languages: { "ar-SA": "https://asmaa.video/reviews", "x-default": "https://asmaa.video/reviews" } },
-  openGraph: { title: META_TITLE, description: META_DESC, url: "https://asmaa.video/reviews", siteName: "Asmaa Studio", images: socialPreviewImages, type: "website", locale: "ar_SA" },
+  alternates: {
+    canonical: "https://asmaa.video/reviews",
+    languages: {
+      "ar-SA": "https://asmaa.video/reviews",
+      "x-default": "https://asmaa.video/reviews"
+    }
+  },
+  openGraph: {
+    title: META_TITLE,
+    description: META_DESC,
+    url: "https://asmaa.video/reviews",
+    siteName: "Asmaa Studio",
+    images: socialPreviewImages,
+    type: "website",
+    locale: "ar_SA"
+  },
   twitter: twitterMetadata(META_TITLE, META_DESC),
   robots: { index: true, follow: true }
 };
 
-/*
- * Reviews on this page are PLACEHOLDERS until real bride consent lands.
- * Each review is marked with HTML comment `placeholder, replaced on real review consent`.
- * Brand rule: initials + city + date + service only — never full names.
- * When a real testimonial arrives via WhatsApp with bride consent,
- * Asmaa updates this array (admin path in Sprint 7 ADMIN_WIRING blueprint).
- */
-const reviews = [
-  { initials: "ع.م.", city: "الأحساء", date: "٢٠٢٦/٠٤", service: "Half Day", text: "فيلم Asmaa Studio حفظ لحظة دخولي بهدوء جميل. التفاصيل الصغيرة ظهرت في الفيلم بدون أن أحس بالكاميرا طوال اليوم." },
-  { initials: "ف.ع.", city: "الهفوف", date: "٢٠٢٦/٠٣", service: "Full Day", text: "تصوير من الصالون إلى القاعة بإيقاع منظم. الفريق نسائي بالكامل ومحترم لذوق العائلة، والتسليم وصل قبل الموعد بأسبوع." },
-  { initials: "ر.س.", city: "الدمام", date: "٢٠٢٦/٠٢", service: "بكج الخطوبة", text: "فيلم خطوبتي يبدو سينمائياً. لقطات الشبكة والكيك والزفة مرتبة بأسلوب راقي، أوصي أي عروس في الشرقية بـ Asmaa Studio." },
-  { initials: "ن.ح.", city: "الخبر", date: "٢٠٢٦/٠٢", service: "Half Day", text: "First Look كان لحظة لا تُنسى — وقد التقطتها العدسة بدون أن تفسد المفاجأة. الفيلم النهائي يجعلني أبكي كل مرة." },
-  { initials: "أ.ج.", city: "المبرز", date: "٢٠٢٦/٠١", service: "Full Day", text: "أهم ما يميز Asmaa هو الالتزام بالاتفاق المكتوب. السعر والمدة والتسليم كلها كما وُعدتُ بها قبل التحويل." },
-  { initials: "م.ع.", city: "القطيف", date: "٢٠٢٥/١٢", service: "بكج الزفة", text: "احتجت تغطية مختصرة للزفة فقط، وبكج ٦٠٠ ريال كان مثالياً. الفريق وصل قبل الزفة بربع ساعة بالضبط." },
-  { initials: "س.ك.", city: "العمران", date: "٢٠٢٥/١٢", service: "Half Day", text: "تفاصيل الفستان والمسكة والعطر ظهرت بشكل لم أتخيله. كل عروس تستحق هذا المستوى من التوثيق." },
-  { initials: "ل.ز.", city: "الجبيل", date: "٢٠٢٥/١١", service: "بكج الزفة المطور", text: "اللقطات الجوية للكوشة والزفة جعلت فيلمي مميزاً. أسلوب هادئ بدون إزعاج للضيوف." }
+const feedbackPrinciples = [
+  {
+    icon: ShieldCheck,
+    title: "موافقة قبل النشر",
+    body: "أي رأي يُنشر هنا يحتاج موافقة واضحة من العروس، ولا نعرض اسمها الكامل أو تفاصيل عائلتها.",
+  },
+  {
+    icon: LockKeyhole,
+    title: "حدود مشاركة العائلة أولاً",
+    body: "التصوير النسائي والزواجات مناسبات خاصة، لذلك لا نستخدم صوراً أو شهادات للتسويق بدون إذن محدد.",
+  },
+  {
+    icon: MessageCircle,
+    title: "مراجعة مباشرة",
+    body: "للاطمئنان قبل الحجز، اطلبي عبر واتساب نماذج مناسبة لنوع مناسبتك وسيتم إرسال ما يسمح بمشاركته فقط.",
+  },
 ];
 
-// Review schema markup — placeholder rating (4.9/5 — verified-bride pattern) replaced on real consent
-const aggregateSchema = {
-  "@context": "https://schema.org",
-  "@type": "AggregateRating",
-  "@id": "https://asmaa.video/reviews#aggregate",
-  itemReviewed: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio" },
-  ratingValue: "4.9",
-  reviewCount: reviews.length,
-  bestRating: "5",
-  worstRating: "1"
-};
+const bookingChecks = [
+  "اختاري الباقة الأقرب بدل طلب ملف طويل بلا سياق.",
+  "أرسلي المدينة والقاعة أو الحي مع التاريخ.",
+  "اذكري أهم اللقطات: الزفة، First Look، تفاصيل العروس، أو الخطوبة.",
+  "إذا كانت المناسبة ملكة أو خطوبة، اكتبي ذلك من البداية لتصل الرسالة للبكج الصحيح."
+];
+
+const evidenceRoutes = [
+  { href: "/packages", label: "الباقات التفاعلية", detail: "توضح الفرق بين الزفة، الخطوبة، Half Day، وFull Day." },
+  { href: "/portfolio", label: "الألبوم", detail: "يركز على اللحظات التي تقارنها العروس فعلا قبل الحجز." },
+  { href: "/faq", label: "الأسئلة المتكررة", detail: "يختصر وقت الحضور، العربون، والتوفر قبل واتساب." },
+  { href: "/engagement", label: "صفحة الخطوبة", detail: "مخصصة لنية الملكة والخطوبة حتى لا تبدأي من الصفر." }
+];
+
+const consentRules = [
+  "الرأي الحقيقي يظل باسم مختصر أو وصف عام فقط إذا وافقت العميلة على نشره.",
+  "لا يتم تحويل المحادثات الخاصة إلى اقتباسات دعائية من دون إذن واضح.",
+  "إذا كانت العروس تريد مثالًا أقرب لمناسبتها، نحدد ذلك عبر واتساب بحسب المدينة ونوع التغطية."
+];
 
 export default function ReviewsPage() {
   return (
     <main className="page-shell">
-      <JsonLd data={aggregateSchema} />
-
       <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
         <div className="pkg-hero-inner">
           <Link className="back-pill" href="/" style={{ marginBottom: 24 }}><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
           <span className="cine-eyebrow">آراء العرايس</span>
           <h1 className="cine-headline" style={{ marginTop: 16 }}>
-            <span className="cine-headline-ar">رأي العروس قبل التحويل.</span>
-            <span className="cine-headline-en">The brides who saw the films, in their own words.</span>
+            <span className="cine-headline-ar">آراء موثقة فقط، ومشاركة محدودة دائماً.</span>
+            <span className="cine-headline-en">Consent-first client feedback.</span>
           </h1>
           <p className="cine-lede">
-            ٨ آراء من عرايس Asmaa Studio في الشرقية — بالأحرف الأولى، المدينة، التاريخ، والباقة فقط. احتراماً لذوق كل عروس وعائلتها.
+            لا ننشر تقييمات أو نجوم أو اقتباسات منسوبة لعروس إلا بعد موافقة صريحة. إلى أن تصل مراجعات موثقة قابلة للنشر، هذه الصفحة توضّح طريقة التعامل مع آراء العميلات.
           </p>
         </div>
       </section>
 
       <section className="section reviews-section">
         <div className="section-inner">
-          {/* placeholder, replaced on real review consent */}
           <div className="reviews-grid">
-            {reviews.map((r, i) => (
-              <article key={i} className="glass-card review-card reveal-on-scroll" style={{ animationDelay: `${i * 80}ms` }}>
-                <Quote size={28} aria-hidden="true" className="review-quote-icon" />
-                <p className="review-text">{r.text}</p>
-                <div className="review-rating" aria-label="5 من 5 نجوم">
-                  {Array.from({ length: 5 }).map((_, k) => (<Star key={k} size={15} fill="#f1cb82" stroke="none" />))}
-                </div>
-                <div className="review-meta">
-                  <span className="review-initials">{r.initials}</span>
-                  <span className="review-sep">•</span>
-                  <span>{r.city}</span>
-                  <span className="review-sep">•</span>
-                  <span>{r.date}</span>
-                  <span className="review-sep">•</span>
-                  <span className="review-service">{r.service}</span>
-                </div>
-              </article>
-            ))}
+            {feedbackPrinciples.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="glass-card review-card reveal-on-scroll" style={{ animationDelay: `${i * 80}ms` }}>
+                  <Icon size={28} aria-hidden="true" className="review-quote-icon" />
+                  <h2 className="review-service" style={{ margin: 0 }}>{item.title}</h2>
+                  <p className="review-text">{item.body}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="section final-cta">
-        <div className="section-inner">
-          <span className="cine-eyebrow">دوركِ التالي</span>
-          <h2 className="section-title">احجزي فيلم زفافك مع Asmaa Studio</h2>
-          <div className="button-row">
-            <Link className="cine-cta-primary" href="/packages"><span>الباقات التفاعلية</span></Link>
-            <a className="cine-cta-tertiary" href={whatsappLink("reviews-page")} target="_blank" rel="noreferrer">
-              <MessageCircle size={16} aria-hidden="true" /><span>واتساب مباشر</span>
-            </a>
-          </div>
+      <section className="section">
+        <div className="section-inner city-proof-grid">
+          <article>
+            <span className="eyebrow">ما يسرع الرد</span>
+            <h2>أرسلي هذه النقاط في أول رسالة بدل السؤال المفتوح.</h2>
+            <div className="city-wave-list">
+              {bookingChecks.map((item) => (
+                <p key={item}>
+                  <CheckCircle2 size={16} />
+                  <span>{item}</span>
+                </p>
+              ))}
+            </div>
+          </article>
+          <article>
+            <span className="eyebrow">أين تبدئين؟</span>
+            <h2>إذا كنت تريدين دليلًا ملموسًا قبل واتساب، ابدئي من هذه الصفحات.</h2>
+            <div className="city-wave-list">
+              {evidenceRoutes.map((item) => (
+                <p key={item.href}>
+                  <FileText size={16} />
+                  <Link href={item.href}>{item.label}</Link>
+                  <span>{item.detail}</span>
+                </p>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="section guide-index-bottom">
+        <div className="section-inner city-proof-grid">
+          <article>
+            <span className="eyebrow">سياسة الموافقة</span>
+            <h2>Feedback طبيعي ومحترم، لا اقتباس مزيف.</h2>
+            <div className="city-wave-list">
+              {consentRules.map((item) => (
+                <p key={item}>
+                  <BadgeCheck size={16} />
+                  <span>{item}</span>
+                </p>
+              ))}
+            </div>
+          </article>
+          <article>
+            <span className="eyebrow">مدن الخدمة</span>
+            <h2>إذا كان سؤالك متعلقًا بالمكان، ابدئي من صفحة مدينتك.</h2>
+            <div className="city-wave-list">
+              {serviceAreas.slice(0, 5).map((city) => (
+                <p key={city.slug}>
+                  <CheckCircle2 size={16} />
+                  <Link href={`/${city.slug}`}>{city.headline}</Link>
+                </p>
+              ))}
+            </div>
+          </article>
+        </div>
+
+        <div className="section-inner button-row wave-actions">
+          <Link className="cta" href="/reserve">
+            ابدئي من رابط العروس <CalendarDays size={18} />
+          </Link>
+          <Link className="ghost-cta" href="/portfolio">
+            شاهدي الألبوم <ArrowLeft size={18} />
+          </Link>
+          <Link className="ghost-cta" href="/faq">
+            صفحة الأسئلة <ArrowLeft size={18} />
+          </Link>
         </div>
       </section>
     </main>

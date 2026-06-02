@@ -19,13 +19,14 @@ export function ContactPointJsonLd() {
         contactType: "customer service",
         availableLanguage: ["Arabic", "English"],
         areaServed: ["SA"],
-        contactOption: "TollFree",
+        url: "https://asmaa.video/contact",
       },
       {
         "@type": "ContactPoint",
         contactType: "booking",
         availableLanguage: ["Arabic"],
         areaServed: ["SA"],
+        url: "https://asmaa.video/reserve",
       },
     ],
   };

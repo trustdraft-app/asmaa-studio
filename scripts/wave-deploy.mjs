@@ -3,7 +3,6 @@
 // commits to a branch. Run from CI workflow (.github/workflows/seo-wave-deploy.yml).
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((acc, a, i, arr) => {

@@ -1,4 +1,4 @@
-import { packages, whatsappNumber } from "./content";
+import { packages, readableWhatsappSource, whatsappNumber } from "./content";
 
 export type ReservationStatus =
   | "new"
@@ -101,13 +101,14 @@ export function validateReservation(input: ReservationInput) {
   return errors;
 }
 
-export function reservationWhatsappMessage(input: ReservationInput) {
+export function reservationWhatsappMessage(input: ReservationInput, source = "reserve-page") {
   const selectedPackage = reservationPackage(input.packageId);
   const firstLook = input.needsFirstLook ? "نعم، مهم" : "غير ضروري";
 
   return [
     "السلام عليكم، أرسلت تفاصيل الحجز من رابط Asmaa Studio:",
     "",
+    `مصدر الحجز: ${readableWhatsappSource(source)}`,
     `اسم العروس: ${input.brideName || "-"}`,
     `الجوال: ${input.phone || "-"}`,
     `نوع المناسبة: ${input.eventType}`,
@@ -124,8 +125,8 @@ export function reservationWhatsappMessage(input: ReservationInput) {
   ].join("\n");
 }
 
-export function reservationWhatsappUrl(input: ReservationInput) {
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(reservationWhatsappMessage(input))}`;
+export function reservationWhatsappUrl(input: ReservationInput, source = "reserve-page") {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(reservationWhatsappMessage(input, source))}`;
 }
 
 export function reservationEndpoint() {

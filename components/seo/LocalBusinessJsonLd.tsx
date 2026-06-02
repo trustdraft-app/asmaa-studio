@@ -1,10 +1,9 @@
 /**
- * Site-wide LocalBusiness + Service + AggregateRating JSON-LD for asmaa.video
+ * Site-wide LocalBusiness + Service JSON-LD for asmaa.video
  *
  * Why: AEO/GEO breakthrough — Google + ChatGPT + Perplexity prefer answering
  * questions about local businesses when there's structured data. This single
- * schema covers WHO we are, WHAT services we offer, and proof signals
- * (rating, area served, contact).
+ * schema covers WHO we are, WHAT services we offer, area served, and contact.
  *
  * Renders inside <body>; safe to inline on every page via layout.tsx.
  */
@@ -24,7 +23,7 @@ const localBusinessSchema = {
   logo: `${SITE}/favicon.png`,
   priceRange: "600-2500 SAR",
   currenciesAccepted: "SAR",
-  paymentAccepted: ["Cash", "Bank Transfer", "Mada", "Apple Pay"],
+  paymentAccepted: ["Bank Transfer"],
   address: {
     "@type": "PostalAddress",
     addressCountry: "SA",
@@ -40,58 +39,52 @@ const localBusinessSchema = {
   ],
   knowsLanguage: ["Arabic", "English"],
   serviceType: ["Wedding Videography", "Engagement Videography", "Event Videography"],
+  // Canonical package names + prices — must stay in sync with lib/content.ts
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Wedding & Engagement Videography Packages",
+    name: "باقات تصوير الأعراس والخطوبة",
     itemListElement: [
       {
         "@type": "Offer",
-        name: "Engagement Package",
-        description: "تصوير حفل الخطوبة",
+        name: "بكج الزفة",
+        description: "توثيق لحظة الدخول بإضاءة جميلة ومونتاج مختصر.",
         price: "600",
         priceCurrency: "SAR",
         availability: "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
-        name: "Wedding Essentials",
-        description: "باقة الأساس لحفل الزفاف",
+        name: "بكج الزفة المطور",
+        description: "تصوير الزفة مع تفاصيل الكوشة والكيك ولقطات القاعة الأساسية.",
         price: "1200",
         priceCurrency: "SAR",
         availability: "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
-        name: "Wedding Premium",
-        description: "باقة الزفاف المتميزة",
+        name: "Half Day",
+        description: "First Look وتفاصيل العروس والكوشة وكواليس التصوير وزفة واحدة.",
         price: "1700",
         priceCurrency: "SAR",
         availability: "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
-        name: "Wedding Cinematic",
-        description: "باقة الزفاف السينمائية الكاملة",
+        name: "Full Day",
+        description: "تغطية كاملة من الصالون إلى القاعة مع زفتين.",
         price: "2500",
         priceCurrency: "SAR",
         availability: "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
-        name: "Half-Day Coverage",
-        description: "تغطية نصف يوم",
+        name: "بكج الخطوبة",
+        description: "فيلم خطوبة يشمل الشبكة والتلبيس والكيك والزفة.",
         price: "1500",
         priceCurrency: "SAR",
         availability: "https://schema.org/InStock"
       }
     ]
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "47",
-    bestRating: "5",
-    worstRating: "1"
   },
   sameAs: ["https://www.instagram.com/asmaa.video", "https://www.tiktok.com/@asmaa.video"]
 };

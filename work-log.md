@@ -1,5 +1,19 @@
 # Asmaa Studio Work Log
 
+## 2026-06-02 09:09 +03
+
+- Shipped wave 20 as a live booking-source measurement pass across the real reservation flow and admin dashboard instead of leaving attribution hidden inside raw WhatsApp text.
+- Added source inference for `/reserve` from internal referrers and query intent, preserved the source in Supabase reservation submits and WhatsApp fallback messages, and surfaced the current source to the bride before sending.
+- Added an admin-side source report showing top booking paths plus per-reservation source labels so the studio can see which pages and package intents are producing real conversations.
+- Verification passed locally with `git diff --check`, `npm run typecheck`, and `npm run lint` (warnings only, pre-existing). `npm run build:pages` still hangs at the known local Next 16 compile stage in this environment, so deployment verification must come from the GitHub Pages workflow after push.
+
+## 2026-06-01 09:08 +03
+
+- Shipped wave 19 as a live trust/conversion correction on `/reviews`: removed invented placeholder testimonials and placeholder aggregate-rating schema, then rebuilt the route into an honest "الاطمئنان قبل الحجز" page.
+- Added clear pre-booking trust content: what can be verified on-site now, what the bride should send in the first message, and the consent rule for any future published feedback or clips.
+- Updated homepage/about labels and WhatsApp source naming so the route promise matches the new content, and extended launch verification to fail if placeholder review markers or aggregate-rating schema return.
+- Local `npm run typecheck` passed; local `npm run lint` and `npm run build:pages` reproduced the existing long-running/hanging behavior already noted in prior memory, so GitHub Actions remains the deployment verifier for this wave.
+
 ## 2026-05-29 09:11 +03
 
 - Shipped wave 15 as a live `/portfolio` album page focused on the eight wedding and engagement moments brides compare before booking: entrance, First Look, bridal details, hall styling, engagement moments, detail tables, BTS, and the closing shot.
@@ -211,3 +225,27 @@
 - Added internal discovery links from the homepage guide section, FAQ page, and portfolio page so engagement intent now has a direct on-site path instead of relying on service slugs or off-site social posts.
 - Updated `sitemap.xml`, `llms.txt`, `llms-full.txt`, WhatsApp source labels, and launch verification expectations to include the new engagement route.
 - Local verification evidence: `git diff --check` passed and `npm run typecheck` passed; local `npm run build:pages` / `npm run verify:launch` are currently blocked by a Next 16 compile-stage hang in this environment before export finishes, so live deploy verification must come from the GitHub Pages workflow run after push.
+
+## 2026-06-01 15:41 +03
+
+- Closed the Claude launch-audit blockers around `/faq`, `/contact`, `sitemap.xml`, `llms.txt`, and the static launch verifier.
+- Resolved the `app/globals.css` merge conflict by preserving the FAQ accordion, contact page, package-pricing, and footer navigation styles.
+- Removed deprecated FAQPage structured data from `/faq` so the launch verifier and current rich-result policy stay aligned.
+- Added `/contact` to the sitemap, `llms.txt`, static artifact requirements, and marketing-route verification; kept `/reserve` out of the sitemap because it is intentionally `noindex`.
+- Hardened `scripts/verify-launch.mjs` so browser verification falls back to the installed macOS Chrome when the Playwright cache executable is unavailable.
+- Fixed homepage mobile footer tap targets to meet the 44px height and width verifier requirement.
+- Verification passed: `npm run typecheck`, `npm run build:pages`, `node scripts/verify-launch.mjs`, and `git diff --check` for touched files. The final launch verifier passed all static, SEO, llms, mobile, desktop, imagery, reserve intent, and axe checks.
+
+## 2026-06-01 21:49 +03
+
+- Shipped the `/contact` production fix through PR #26 from a clean `origin/main` branch instead of merging the unrelated portfolio-gallery feature branch.
+- PR and `main` CI passed: `npm ci`, `npm run lint`, `npm run typecheck`, `npm audit --omit=dev`, `npm run verify:launch`, `npm run verify:admin`, and `npm run build:pages`.
+- GitHub Pages deploy run `26774808909` completed successfully.
+- Live probes now pass: `https://asmaa.video/contact`, `https://asmaa.video/sitemap.xml`, and `https://asmaa.video/llms.txt` all return HTTP 200.
+
+## 2026-06-02 12:50 +03
+
+- Fixed the current branch reviews-page launch failure by replacing banned wording in `app/reviews/page.tsx` metadata, principle title, and hero headline with consent-first sharing-boundary copy.
+- Repaired local Playwright launch verification by using isolated browser cache `/Users/mohammedsa/.cache/ai-empire-playwright-asmaa`.
+- Verification passed: `npm run verify:launch` with `PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.cache/ai-empire-playwright-asmaa` completed with `178` PASS checks and no failures.
+- Live check: `https://asmaa.video/reviews` returned HTTP `200` and did not contain the banned wording; local `out/reviews.html` also did not contain it after the fix.

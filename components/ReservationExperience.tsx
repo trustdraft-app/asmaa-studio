@@ -14,7 +14,7 @@ import {
   Sparkles,
   Video
 } from "lucide-react";
-import { assetPath, packages, whatsappLink } from "../lib/content";
+import { assetPath, packages, readableWhatsappSource, whatsappLink } from "../lib/content";
 import {
   cityOptions,
   defaultReservation,
@@ -51,6 +51,7 @@ export function ReservationExperience() {
   const [touched, setTouched] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
+  const [source, setSource] = useState("reserve-direct");
   const selectedPackage = useMemo(() => reservationPackage(form.packageId), [form.packageId]);
   const minEventDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
   const errors = validateReservation(form);
@@ -61,9 +62,10 @@ export function ReservationExperience() {
     const query = new URLSearchParams(window.location.search);
     const requestedCity = query.get("city");
     const requestedPackage = query.get("package");
+    const requestedSource = query.get("source") || query.get("src");
     const city = requestedCity ? cityFromQuery[requestedCity] : "";
     const packageId = requestedPackage && packageIds.has(requestedPackage) ? requestedPackage : "";
-    if (!city && !packageId) return;
+    const sourceLabel = requestedSource || inferReservationSource(document.referrer, requestedCity, packageId);
 
     const timeout = window.setTimeout(() => {
       setForm((current) => ({
@@ -71,6 +73,7 @@ export function ReservationExperience() {
         city: city || current.city,
         packageId: packageId || current.packageId
       }));
+      setSource(sourceLabel);
     }, 0);
 
     return () => window.clearTimeout(timeout);
@@ -98,7 +101,7 @@ export function ReservationExperience() {
 
     if (!endpoint) {
       setSubmitState("fallback");
-      window.open(reservationWhatsappUrl(form), "_blank", "noopener,noreferrer");
+      window.open(reservationWhatsappUrl(form, source), "_blank", "noopener,noreferrer");
       setMessage("جهزنا لك رسالة واتساب مرتبة بالتفاصيل. أرسليها ونكمل معك تأكيد التوفر والخطوة التالية.");
       return;
     }
@@ -108,7 +111,7 @@ export function ReservationExperience() {
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...form, source: "reserve-page" })
+        body: JSON.stringify({ ...form, source })
       });
 
       if (!response.ok) {
@@ -119,7 +122,7 @@ export function ReservationExperience() {
       setMessage("وصل الطلب بنجاح. ستصلك رسالة واتساب لتأكيد التوفر والخطوة التالية.");
     } catch {
       setSubmitState("fallback");
-      window.open(reservationWhatsappUrl(form), "_blank", "noopener,noreferrer");
+      window.open(reservationWhatsappUrl(form, source), "_blank", "noopener,noreferrer");
       setMessage("جهزنا لك رسالة واتساب مرتبة بالتفاصيل. أرسليها ونكمل معك تأكيد التوفر والخطوة التالية.");
     }
   };
@@ -161,6 +164,7 @@ export function ReservationExperience() {
               <HeartHandshake size={18} /> متابعة واتساب
             </span>
           </div>
+          <p className="reserve-source-note">مصدر الطلب الحالي: {readableWhatsappSource(source)}</p>
         </div>
 
         <div className="reserve-card" aria-label="نموذج حجز العروس">
@@ -271,6 +275,11 @@ export function ReservationExperience() {
                   </small>
                 </div>
                 <div>
+                  <span>مصدر الوصول</span>
+                  <strong>{readableWhatsappSource(source)}</strong>
+                  <small>سيظهر مع الطلب داخل المتابعة وداخل رسالة واتساب.</small>
+                </div>
+                <div>
                   <span>الموقع</span>
                   <strong>{form.venue || "لم يكتب بعد"}</strong>
                   <small>{form.brideName || "اسم العروس"}</small>
@@ -377,4 +386,39 @@ function Field({
       {error && <em>{error}</em>}
     </label>
   );
+}
+
+function inferReservationSource(referrer: string, requestedCity: string | null, packageId: string) {
+  const citySlug = requestedCity && cityFromQuery[requestedCity] ? requestedCity : "";
+
+  const withIntent = (base: string) => {
+    if (citySlug && packageId) return `${base}-${citySlug}-package-${packageId}`;
+    if (citySlug) return `${base}-${citySlug}`;
+    if (packageId) return `${base}-package-${packageId}`;
+    return base;
+  };
+
+  if (!referrer) return withIntent("reserve-page");
+
+  try {
+    const url = new URL(referrer);
+    if (url.hostname !== window.location.hostname) return withIntent("reserve-page");
+
+    const pathname = url.pathname.replace(/\/$/, "") || "/";
+    if (pathname === "/") return withIntent("home-hero");
+    if (pathname === "/faq") return withIntent("faq-page");
+    if (pathname === "/portfolio") return withIntent("portfolio-page");
+    if (pathname === "/zaffa") return withIntent("zaffa-page");
+    if (pathname === "/engagement") return withIntent("engagement-page");
+    if (pathname === "/reviews") return withIntent("reviews-page");
+    if (pathname === "/about") return withIntent("about-page");
+    if (pathname === "/packages") return withIntent("packages-hero");
+
+    const cityRoute = pathname.slice(1);
+    if (cityRoute in cityFromQuery) return withIntent(cityRoute);
+  } catch {
+    return withIntent("reserve-page");
+  }
+
+  return withIntent("reserve-page");
 }
