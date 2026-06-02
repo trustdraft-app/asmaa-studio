@@ -198,6 +198,23 @@ export const seoWeddingTypes = [
 // English modifiers — full 14 set to match AR for ~5,000 total URLs
 export const seoModifiersEn: SeoModifier[] = seoModifiers;
 
+const fullSeoExport = process.env.ASMAA_FULL_SEO_EXPORT === "true";
+const launchCitySlugs = new Set(["alahsa", "dammam", "khobar"]);
+const launchServiceSlugs = new Set(["zaffa-tasweer", "zaffa-plus-tasweer", "half-day-tasweer", "full-day-tasweer"]);
+const launchModifierSlugs = new Set(["asaar", "baqat", "musawira", "ehtirafi"]);
+
+function launchCities() {
+  return fullSeoExport ? seoCities : seoCities.filter((city) => launchCitySlugs.has(city.slug));
+}
+
+function launchServices() {
+  return fullSeoExport ? seoServices : seoServices.filter((service) => launchServiceSlugs.has(service.slug));
+}
+
+function launchModifiers(modifiers: SeoModifier[] = seoModifiers) {
+  return fullSeoExport ? modifiers : modifiers.filter((modifier) => launchModifierSlugs.has(modifier.slug));
+}
+
 // Hash function for deterministic-but-varied phrase selection per combination
 export function pickPhrase(seed: string, bank: string[]): string {
   let hash = 0;
@@ -211,8 +228,8 @@ export function pickPhrase(seed: string, bank: string[]): string {
 // Generate all (city, service) pairs — 12 × 8 = 96
 export function allCityServicePairs() {
   const out: { city: SeoCity; service: SeoService }[] = [];
-  for (const city of seoCities) {
-    for (const service of seoServices) out.push({ city, service });
+  for (const city of launchCities()) {
+    for (const service of launchServices()) out.push({ city, service });
   }
   return out;
 }
@@ -220,9 +237,9 @@ export function allCityServicePairs() {
 // Generate all (city, service, modifier) triples — 20 × 8 × 14 = 2,240
 export function allCityServiceModifierTriples() {
   const out: { city: SeoCity; service: SeoService; modifier: SeoModifier }[] = [];
-  for (const city of seoCities) {
-    for (const service of seoServices) {
-      for (const modifier of seoModifiers) out.push({ city, service, modifier });
+  for (const city of launchCities()) {
+    for (const service of launchServices()) {
+      for (const modifier of launchModifiers()) out.push({ city, service, modifier });
     }
   }
   return out;
@@ -232,7 +249,7 @@ export function allCityServiceModifierTriples() {
 export function allSeasonalPairs() {
   const out: { month: typeof seoSeasonalMonths[number]; service: SeoService; slug: string }[] = [];
   for (const month of seoSeasonalMonths) {
-    for (const service of seoServices) {
+    for (const service of launchServices()) {
       out.push({ month, service, slug: `${month.slug}-${service.slug}` });
     }
   }
@@ -243,7 +260,7 @@ export function allSeasonalPairs() {
 export function allBudgetPairs() {
   const out: { tier: typeof seoBudgetTiers[number]; service: SeoService; slug: string }[] = [];
   for (const tier of seoBudgetTiers) {
-    for (const service of seoServices) {
+    for (const service of launchServices()) {
       out.push({ tier, service, slug: `${tier.slug}-${service.slug}` });
     }
   }
@@ -254,7 +271,7 @@ export function allBudgetPairs() {
 export function allWeddingTypePairs() {
   const out: { type: typeof seoWeddingTypes[number]; service: SeoService; slug: string }[] = [];
   for (const type of seoWeddingTypes) {
-    for (const service of seoServices) {
+    for (const service of launchServices()) {
       out.push({ type, service, slug: `${type.slug}-${service.slug}` });
     }
   }
@@ -264,17 +281,17 @@ export function allWeddingTypePairs() {
 // EN mirrors — 20 cities × 8 services = 160 pair pages, 20 × 8 × 8 = 1,280 triple pages
 export function allEnCityServicePairs() {
   const out: { city: SeoCity; service: SeoService }[] = [];
-  for (const city of seoCities) {
-    for (const service of seoServices) out.push({ city, service });
+  for (const city of launchCities()) {
+    for (const service of launchServices()) out.push({ city, service });
   }
   return out;
 }
 
 export function allEnCityServiceModifierTriples() {
   const out: { city: SeoCity; service: SeoService; modifier: SeoModifier }[] = [];
-  for (const city of seoCities) {
-    for (const service of seoServices) {
-      for (const modifier of seoModifiersEn) out.push({ city, service, modifier });
+  for (const city of launchCities()) {
+    for (const service of launchServices()) {
+      for (const modifier of launchModifiers(seoModifiersEn)) out.push({ city, service, modifier });
     }
   }
   return out;

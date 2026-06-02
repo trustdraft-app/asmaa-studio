@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/prune-static-js.mjs",
-    "build:pages": "GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false next build && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/prune-static-js.mjs",
-    "build:admin-check": "GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co NEXT_PUBLIC_SUPABASE_ANON_KEY=admin-readiness-check next build && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true node scripts/prune-static-js.mjs",
+    "build": "node scripts/clean-static-export.mjs && next build && node scripts/prune-static-js.mjs && node scripts/verify-static-export-size.mjs",
+    "build:pages": "node scripts/clean-static-export.mjs && GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false next build && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/prune-static-js.mjs && node scripts/verify-static-export-size.mjs",
+    "build:admin-check": "node scripts/clean-static-export.mjs && GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co NEXT_PUBLIC_SUPABASE_ANON_KEY=admin-readiness-check next build && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true node scripts/prune-static-js.mjs && node scripts/verify-static-export-size.mjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
