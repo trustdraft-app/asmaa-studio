@@ -153,6 +153,20 @@ const heroDock = [
   { icon: Heart, label: "Pre-wedding", ar: "خطوبة وملكة" }
 ];
 
+const signatureFrames = [
+  { marker: "01", title: "اللقطة الأولى", detail: "افتتاح هادئ يضع العروس في قلب الفيلم، لا في زاوية المشهد." },
+  { marker: "02", title: "تفاصيل الفستان", detail: "حركة القماش، الخاتم، العطر، والإضاءة التي تجعل التفاصيل تعيش." },
+  { marker: "03", title: "نبض القاعة", detail: "لقطات واسعة وناعمة تحفظ هيبة المكان بدون ضجيج بصري." },
+  { marker: "04", title: "الخاتمة", detail: "مونتاج يربط الزفة، النظرات، والأهل في نهاية تشعرين أنها مكتوبة ليومك." }
+];
+
+const directorBoard = [
+  { label: "Opening", ar: "بداية ناعمة", detail: "لقطة تأسيسية تضع جو المناسبة قبل دخول التفاصيل." },
+  { label: "First Look", ar: "النظرة الأولى", detail: "لحظة قصيرة تتحول إلى قلب الفيلم بدل أن تضيع بين المقاطع." },
+  { label: "Family", ar: "حضور الأهل", detail: "نظرات وابتسامات تحفظ قيمة اليوم بدون تدخل مزعج." },
+  { label: "Final Cut", ar: "المونتاج", detail: "إيقاع هادئ، ألوان دافئة، وتسليم واضح حسب الباقة." }
+];
+
 const experienceStandards = [
   { quote: "كل خطوة يجب أن تقلل سؤالا لا تزيده.", meta: "وضوح الحجز" },
   { quote: "اللقطة الجميلة لا تكفي إذا لم تحفظ إحساس اليوم.", meta: "لغة الفيلم" },
@@ -244,6 +258,15 @@ export default function HomePage() {
               Asmaa Studio توثق هذه اللحظة بهدوء، بإضاءة دافئة، ولقطة قريبة لا تُفلت تفصيلة.
             </p>
 
+            <div className="cine-premiere-strip" aria-label="مسار الفيلم">
+              {signatureFrames.map((frame) => (
+                <span key={frame.marker}>
+                  <b>{frame.marker}</b>
+                  {frame.title}
+                </span>
+              ))}
+            </div>
+
             <div className="cine-cta-row">
               <Link className="cine-cta-primary" href="/packages">
                 <Sparkles size={18} aria-hidden="true" />
@@ -317,6 +340,10 @@ export default function HomePage() {
                 <Play size={20} aria-hidden="true" />
                 <span>شاهدي أحدث فيلم</span>
               </div>
+              <div className="cine-frame-caption">
+                <span>FIRST LOOK</span>
+                <strong>00:12</strong>
+              </div>
             </div>
           </div>
         </div>
@@ -337,6 +364,28 @@ export default function HomePage() {
             <span>Book your date</span>
             <em>احجزي موعدك</em>
           </Link>
+        </div>
+      </section>
+
+      <section className="section signature-film-section" aria-label="تجربة الفيلم">
+        <div className="section-inner signature-film-inner">
+          <div className="signature-film-copy">
+            <span className="eyebrow">تصميم التجربة</span>
+            <h2 className="section-title">الصفحة لا تبيع بكج فقط؛ تعرض للعروس كيف سيبدو فيلم يومها.</h2>
+            <p className="section-copy">
+              كل حركة في الصفحة تقود من الإحساس إلى القرار: صورة كبيرة، خط زمني واضح،
+              باقات مفهومة، ثم رابط حجز لا يطلب من العروس إعادة شرح كل شيء.
+            </p>
+          </div>
+          <div className="signature-film-reel">
+            {signatureFrames.map((frame) => (
+              <article key={frame.marker}>
+                <span>{frame.marker}</span>
+                <h3>{frame.title}</h3>
+                <p>{frame.detail}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -384,6 +433,25 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section director-board-section" aria-label="لوحة إخراج الفيلم">
+        <div className="section-inner director-board-inner">
+          <div className="director-board-heading">
+            <span className="eyebrow">لوحة المخرجة</span>
+            <h2 className="section-title">من أول لقطة إلى آخر تسليم، كل مشهد له وظيفة.</h2>
+          </div>
+          <div className="director-board-grid">
+            {directorBoard.map((item, index) => (
+              <article key={item.label}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <small>{item.label}</small>
+                <h3>{item.ar}</h3>
+                <p>{item.detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section package-decision" id="packages">
         <div className="section-inner">
           <span className="eyebrow">اختاري حسب شكل يومك</span>
@@ -409,6 +477,10 @@ export default function HomePage() {
           <div className="packages-grid packages-grid-20x">
             {packages.map((item, index) => (
               <article className={`package-card package-card-20x ${item.featured ? "featured" : ""}`} key={item.id}>
+                <div className="package-rank" aria-hidden="true">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <em>{index === 0 ? "ENTRY" : index === packages.length - 1 ? "FULL STORY" : "SIGNATURE"}</em>
+                </div>
                 <div className="package-motion-meter" aria-hidden="true">
                   {Array.from({ length: 5 }, (_, meterIndex) => (
                     <span className={meterIndex <= index ? "active" : ""} key={`${item.id}-${meterIndex}`} />
