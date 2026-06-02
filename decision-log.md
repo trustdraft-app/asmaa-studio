@@ -209,3 +209,9 @@
 **Decision:** Convert wave 17 into a dedicated `/engagement` landing page for الخطوبة والملكة, wire it into internal discovery, sitemap, `llms.txt`, and launch verification, and treat GitHub Pages CI as the deployment verifier because local Next 16 builds are hanging in compile before export completes.
 **Reasoning:** The engagement intent already exists in packages and guides, but a first-class landing route gives it the same direct search and conversion surface as `/zaffa`; the build hang is an environment/runtime issue, not a content-strategy reason to skip the wave.
 **Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, existing `app/zaffa/page.tsx` pattern, project files, professional judgment.
+## 2026-06-02 12:50 +03
+
+**Question:** How should the current branch handle reviews-page wording that fails the launch verifier?
+**Decision:** Replace the banned wording with consent-first sharing-boundary copy in `app/reviews/page.tsx` and keep the verifier strict.
+**Reasoning:** The launch invariant is to avoid unsupported privacy/marketing claims while still explaining consent-first review handling clearly.
+**Source:** `scripts/verify-launch.mjs`, `app/reviews/page.tsx`, local launch verification.

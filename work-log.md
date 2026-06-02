@@ -225,3 +225,27 @@
 - Added internal discovery links from the homepage guide section, FAQ page, and portfolio page so engagement intent now has a direct on-site path instead of relying on service slugs or off-site social posts.
 - Updated `sitemap.xml`, `llms.txt`, `llms-full.txt`, WhatsApp source labels, and launch verification expectations to include the new engagement route.
 - Local verification evidence: `git diff --check` passed and `npm run typecheck` passed; local `npm run build:pages` / `npm run verify:launch` are currently blocked by a Next 16 compile-stage hang in this environment before export finishes, so live deploy verification must come from the GitHub Pages workflow run after push.
+
+## 2026-06-01 15:41 +03
+
+- Closed the Claude launch-audit blockers around `/faq`, `/contact`, `sitemap.xml`, `llms.txt`, and the static launch verifier.
+- Resolved the `app/globals.css` merge conflict by preserving the FAQ accordion, contact page, package-pricing, and footer navigation styles.
+- Removed deprecated FAQPage structured data from `/faq` so the launch verifier and current rich-result policy stay aligned.
+- Added `/contact` to the sitemap, `llms.txt`, static artifact requirements, and marketing-route verification; kept `/reserve` out of the sitemap because it is intentionally `noindex`.
+- Hardened `scripts/verify-launch.mjs` so browser verification falls back to the installed macOS Chrome when the Playwright cache executable is unavailable.
+- Fixed homepage mobile footer tap targets to meet the 44px height and width verifier requirement.
+- Verification passed: `npm run typecheck`, `npm run build:pages`, `node scripts/verify-launch.mjs`, and `git diff --check` for touched files. The final launch verifier passed all static, SEO, llms, mobile, desktop, imagery, reserve intent, and axe checks.
+
+## 2026-06-01 21:49 +03
+
+- Shipped the `/contact` production fix through PR #26 from a clean `origin/main` branch instead of merging the unrelated portfolio-gallery feature branch.
+- PR and `main` CI passed: `npm ci`, `npm run lint`, `npm run typecheck`, `npm audit --omit=dev`, `npm run verify:launch`, `npm run verify:admin`, and `npm run build:pages`.
+- GitHub Pages deploy run `26774808909` completed successfully.
+- Live probes now pass: `https://asmaa.video/contact`, `https://asmaa.video/sitemap.xml`, and `https://asmaa.video/llms.txt` all return HTTP 200.
+
+## 2026-06-02 12:50 +03
+
+- Fixed the current branch reviews-page launch failure by replacing banned wording in `app/reviews/page.tsx` metadata, principle title, and hero headline with consent-first sharing-boundary copy.
+- Repaired local Playwright launch verification by using isolated browser cache `/Users/mohammedsa/.cache/ai-empire-playwright-asmaa`.
+- Verification passed: `npm run verify:launch` with `PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.cache/ai-empire-playwright-asmaa` completed with `178` PASS checks and no failures.
+- Live check: `https://asmaa.video/reviews` returned HTTP `200` and did not contain the banned wording; local `out/reviews.html` also did not contain it after the fix.

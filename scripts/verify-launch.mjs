@@ -31,7 +31,18 @@ const requiredFiles = [
   "robots.txt",
   "llms.txt",
   "favicon.ico",
-  "CNAME"
+  "CNAME",
+  "_headers"
+];
+
+const requiredHeaderArtifactLines = [
+  ["Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload"],
+  ["Content-Security-Policy", "default-src 'self'"],
+  ["Content-Security-Policy", "frame-ancestors 'none'"],
+  ["X-Frame-Options", "DENY"],
+  ["X-Content-Type-Options", "nosniff"],
+  ["Referrer-Policy", "strict-origin-when-cross-origin"],
+  ["Permissions-Policy", "camera=(), microphone=(), geolocation=()"]
 ];
 
 if (adminPanelEnabled) {
@@ -128,6 +139,43 @@ function walkFiles(dir) {
   });
 }
 
+function verifyDeployHeaderArtifacts() {
+  const headersPath = join(outDir, "_headers");
+  if (!existsSync(headersPath)) {
+    fail("out/_headers is missing; header-capable hosts will not receive launch security headers");
+    return;
+  }
+
+  const headers = readFileSync(headersPath, "utf8");
+  if (/^\s*\/\*/m.test(headers)) pass("Netlify/Cloudflare _headers artifact defines a global route");
+  else fail("out/_headers must define a global /* route");
+
+  for (const [name, value] of requiredHeaderArtifactLines) {
+    if (headers.includes(`${name}:`) && headers.includes(value)) pass(`_headers contains ${name}`);
+    else fail(`_headers missing ${name}: ${value}`);
+  }
+
+  const vercelConfigPath = join(root, "vercel.json");
+  if (!existsSync(vercelConfigPath)) {
+    fail("vercel.json is missing; Vercel deploys would not inherit the launch header policy");
+    return;
+  }
+
+  const vercelConfig = JSON.parse(readFileSync(vercelConfigPath, "utf8"));
+  const vercelHeaders = new Map(
+    (vercelConfig.headers || []).flatMap((rule) =>
+      (rule.headers || []).map((header) => [header.key, String(header.value || "")])
+    )
+  );
+  for (const [name, value] of requiredHeaderArtifactLines) {
+    if (vercelHeaders.get(name)?.includes(value)) {
+      pass(`vercel.json contains ${name}`);
+    } else {
+      fail(`vercel.json missing ${name}: ${value}`);
+    }
+  }
+}
+
 function staticPathForUrl(url) {
   const parsed = new URL(url, baseUrl);
   const cleanPath = decodeURIComponent(parsed.pathname).replace(/^\/+/, "");
@@ -211,6 +259,8 @@ function verifyStaticOutput() {
   const cname = existsSync(join(outDir, "CNAME")) ? readOutFile("CNAME").trim() : "";
   if (cname === "asmaa.video") pass("CNAME points to asmaa.video");
   else fail(`CNAME should be asmaa.video, got "${cname}"`);
+
+  verifyDeployHeaderArtifacts();
 
   const allHtml = walkFiles(outDir).filter((file) => file.endsWith(".html"));
   for (const filePath of allHtml) {
@@ -319,7 +369,9 @@ async function verifyBrowserOutput() {
     process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ||
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
   const executablePath = existsSync(playwrightChromiumPath)
-    ? playwrightChromiumPath
+    ? existsSync(fallbackChromiumPath)
+      ? fallbackChromiumPath
+      : playwrightChromiumPath
     : existsSync(fallbackChromiumPath)
       ? fallbackChromiumPath
       : playwrightChromiumPath;

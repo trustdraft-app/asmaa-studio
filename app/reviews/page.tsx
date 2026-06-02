@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, BadgeCheck, CalendarDays, CheckCircle2, FileText, MessageCircle, ShieldCheck } from "lucide-react";
-import { JsonLd } from "../../components/JsonLd";
-import { serviceAreas, whatsappLink } from "../../lib/content";
+import {
+  ArrowLeft,
+  BadgeCheck,
+  CalendarDays,
+  CheckCircle2,
+  FileText,
+  LockKeyhole,
+  MessageCircle,
+  ShieldCheck
+} from "lucide-react";
+import { serviceAreas } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
-const META_TITLE = "الاطمئنان قبل الحجز | Asmaa Studio";
-const META_DESC =
-  "صفحة Asmaa Studio التي تشرح كيف تطمئن العروس قبل الحجز: ما الذي يظهر في الموقع، ماذا ترسل في أول رسالة، وكيف يتم اعتماد أي رأي أو لقطة للنشر بعد موافقة العميلة.";
+const META_TITLE = "سياسة آراء العميلات | Asmaa Studio";
+const META_DESC = "Asmaa Studio تنشر آراء العرايس فقط بعد موافقة صريحة، وبالأحرف الأولى فقط، مع احترام حدود مشاركة العروس والعائلة.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
@@ -32,51 +39,22 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true }
 };
 
-const pageSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://asmaa.video/reviews#webpage",
-      url: "https://asmaa.video/reviews",
-      name: META_TITLE,
-      description: META_DESC,
-      inLanguage: "ar-SA"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://asmaa.video/reviews#breadcrumb",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "الرئيسية",
-          item: "https://asmaa.video/"
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "الاطمئنان قبل الحجز",
-          item: "https://asmaa.video/reviews"
-        }
-      ]
-    }
-  ]
-};
-
-const trustPillars = [
+const feedbackPrinciples = [
   {
-    title: "وضوح الباقة قبل واتساب",
-    detail: "السعر، المدة، وما الذي سيظهر داخل الفيلم مكتوب بوضوح قبل أن تبدأي المحادثة."
+    icon: ShieldCheck,
+    title: "موافقة قبل النشر",
+    body: "أي رأي يُنشر هنا يحتاج موافقة واضحة من العروس، ولا نعرض اسمها الكامل أو تفاصيل عائلتها.",
   },
   {
-    title: "الخطوة التالية محددة",
-    detail: "رابط العروس يختصر المدينة والتاريخ والبكج حتى تصل الرسالة الأولى مرتبة بدل سؤال عام."
+    icon: LockKeyhole,
+    title: "حدود مشاركة العائلة أولاً",
+    body: "التصوير النسائي والزواجات مناسبات خاصة، لذلك لا نستخدم صوراً أو شهادات للتسويق بدون إذن محدد.",
   },
   {
-    title: "لا ننشر رأيًا ولا لقطة بلا موافقة",
-    detail: "أي لقطة أو رأي من عميلة لا يتحول إلى مادة منشورة إلا بعد موافقة واضحة منها."
-  }
+    icon: MessageCircle,
+    title: "مراجعة مباشرة",
+    body: "للاطمئنان قبل الحجز، اطلبي عبر واتساب نماذج مناسبة لنوع مناسبتك وسيتم إرسال ما يسمح بمشاركته فقط.",
+  },
 ];
 
 const bookingChecks = [
@@ -102,55 +80,33 @@ const consentRules = [
 export default function ReviewsPage() {
   return (
     <main className="page-shell">
-      <JsonLd data={pageSchema} />
-
-      <section className="section city-hero-20x portfolio-hero">
-        <div className="section-inner city-hero-grid">
-          <div>
-            <Link className="back-pill" href="/">
-              <ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span>
-            </Link>
-            <span className="eyebrow">Wave 19 / اطمئنان طبيعي قبل الحجز</span>
-            <h1 className="section-title">الاطمئنان قبل الحجز يبدأ من الوضوح، لا من اقتباسات مبالغ فيها.</h1>
-            <p className="section-copy">
-              هذه الصفحة مخصصة للعروس التي تريد أن تعرف لماذا يبدو قرار الحجز أوضح هنا:
-              باقات مكتوبة، مسار حجز مرتب، وعدم تحويل آراء العميلات أو لقطاتهن إلى عرض عام إلا بموافقتهن.
-            </p>
-            <div className="button-row" style={{ marginTop: 28 }}>
-              <Link className="cta" href="/packages">
-                شاهدي الباقات <CalendarDays size={18} />
-              </Link>
-              <a className="ghost-cta" href={whatsappLink("reviews-page")} target="_blank" rel="noreferrer">
-                اسألي عن التوفر <MessageCircle size={18} />
-              </a>
-            </div>
-          </div>
-
-          <aside className="city-command-card portfolio-command-card">
-            <span>ما الذي يطمئن العروس؟</span>
-            <h2>٣ قواعد واضحة</h2>
-            <div>
-              <em>سعر ومدة مكتوبان</em>
-              <em>خطوة حجز محددة</em>
-              <em>موافقة قبل أي نشر</em>
-              <em>واتساب مباشر عند الحاجة</em>
-            </div>
-          </aside>
+      <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
+        <div className="pkg-hero-inner">
+          <Link className="back-pill" href="/" style={{ marginBottom: 24 }}><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
+          <span className="cine-eyebrow">آراء العرايس</span>
+          <h1 className="cine-headline" style={{ marginTop: 16 }}>
+            <span className="cine-headline-ar">آراء موثقة فقط، ومشاركة محدودة دائماً.</span>
+            <span className="cine-headline-en">Consent-first client feedback.</span>
+          </h1>
+          <p className="cine-lede">
+            لا ننشر تقييمات أو نجوم أو اقتباسات منسوبة لعروس إلا بعد موافقة صريحة. إلى أن تصل مراجعات موثقة قابلة للنشر، هذه الصفحة توضّح طريقة التعامل مع آراء العميلات.
+          </p>
         </div>
       </section>
 
       <section className="section reviews-section">
         <div className="section-inner">
-          <span className="eyebrow">قبل التحويل</span>
-          <h2 className="section-title">هذه هي عناصر الثقة التي يمكن التحقق منها الآن على الموقع.</h2>
-          <div className="board-lever-grid">
-            {trustPillars.map((item) => (
-              <article key={item.title} className="board-lever-card">
-                <ShieldCheck size={22} />
-                <h3>{item.title}</h3>
-                <p>{item.detail}</p>
-              </article>
-            ))}
+          <div className="reviews-grid">
+            {feedbackPrinciples.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="glass-card review-card reveal-on-scroll" style={{ animationDelay: `${i * 80}ms` }}>
+                  <Icon size={28} aria-hidden="true" className="review-quote-icon" />
+                  <h2 className="review-service" style={{ margin: 0 }}>{item.title}</h2>
+                  <p className="review-text">{item.body}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
