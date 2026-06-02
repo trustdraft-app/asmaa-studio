@@ -104,6 +104,7 @@ export default function PortfolioPage() {
 
   return (
     <main
+      className="portfolio-page route-theatre-page"
       dir="rtl"
       style={{
         background: "var(--ink)",
@@ -114,6 +115,7 @@ export default function PortfolioPage() {
     >
       {/* ── Hero ── */}
       <section
+        className="portfolio-hero theatre-hero"
         style={{
           padding: "80px 24px 48px",
           textAlign: "center",
@@ -149,6 +151,7 @@ export default function PortfolioPage() {
 
       {/* ── Filter Tabs ── */}
       <div
+        className="portfolio-filter-tabs"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -186,6 +189,7 @@ export default function PortfolioPage() {
 
       {/* ── Grid ── */}
       <section
+        className="portfolio-showcase-grid"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -202,6 +206,7 @@ export default function PortfolioPage() {
 
       {/* ── CTA ── */}
       <section
+        className="portfolio-cta-section"
         style={{
           textAlign: "center",
           padding: "60px 24px 100px",
