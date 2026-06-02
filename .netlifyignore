@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.vercel/
+.wrangler/
+coverage/
+test-results/
+playwright-report/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.env
+.env.*
+!.env.example
