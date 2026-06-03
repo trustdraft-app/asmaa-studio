@@ -541,7 +541,9 @@ async function verifyBrowserOutput() {
       if (reservePrefill.selectValues.includes("الدمام")) pass(`${config.name} reserve preselects city from query`);
       else fail(`${config.name} reserve failed to preselect city from query`);
 
-      await page.locator(".stepper button").nth(1).click();
+      const packageStepButton = page.locator(".stepper button").nth(1);
+      await packageStepButton.scrollIntoViewIfNeeded();
+      await packageStepButton.click({ force: true });
       await page.waitForSelector('.package-picker button[aria-pressed="true"]');
       const selectedPackage = await page.locator('.package-picker button[aria-pressed="true"]').textContent();
       if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
