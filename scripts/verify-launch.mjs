@@ -10,7 +10,7 @@ import { chromium } from "playwright";
 const root = process.cwd();
 const outDir = join(root, "out");
 const port = Number(process.env.PORT || 4177);
-const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
+let activeBaseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const adminPanelEnabled = process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED === "true";
@@ -192,7 +192,7 @@ function verifyDeployHeaderArtifacts() {
 }
 
 function staticPathForUrl(url) {
-  const parsed = new URL(url, baseUrl);
+  const parsed = new URL(url, activeBaseUrl);
   const cleanPath = decodeURIComponent(parsed.pathname).replace(/^\/+/, "");
   const candidates = cleanPath
     ? [cleanPath, `${cleanPath}.html`, join(cleanPath, "index.html")]
@@ -222,8 +222,18 @@ function serveOut() {
     response.end(readFileSync(filePath));
   });
 
-  return new Promise((resolveServer) => {
-    server.listen(port, "127.0.0.1", () => resolveServer(server));
+  return new Promise((resolveServer, rejectServer) => {
+    const onListenError = (error) => rejectServer(error);
+    server.once("error", onListenError);
+    server.listen(port, "127.0.0.1", () => {
+      server.off("error", onListenError);
+      const address = server.address();
+      const boundPort = typeof address === "object" && address ? address.port : port;
+      if (!process.env.BASE_URL) {
+        activeBaseUrl = `http://127.0.0.1:${boundPort}`;
+      }
+      resolveServer(server);
+    });
   });
 }
 
@@ -440,7 +450,7 @@ async function verifyBrowserOutput() {
       if (adminPanelEnabled && !verifyAdminOnly) browserRoutes.push("/admin");
 
       for (const route of browserRoutes) {
-        await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
+        await page.goto(`${activeBaseUrl}${route}`, { waitUntil: "networkidle" });
 
         const layout = await page.evaluate(() => ({
           overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -510,7 +520,7 @@ async function verifyBrowserOutput() {
         continue;
       }
 
-      await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+      await page.goto(`${activeBaseUrl}/`, { waitUntil: "networkidle" });
       await page.waitForSelector(".home-redesign-hero", { timeout: 60000 });
       const homeCounts = await page.evaluate(() => ({
         heroImages: document.querySelectorAll(".hero-photo-stack img").length,
@@ -531,7 +541,7 @@ async function verifyBrowserOutput() {
 	      if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
       else fail(`${config.name} homepage missing story moment cards`);
 
-      await page.goto(`${baseUrl}/reserve?city=dammam&package=02`, { waitUntil: "networkidle" });
+      await page.goto(`${activeBaseUrl}/reserve?city=dammam&package=02`, { waitUntil: "networkidle" });
       await page.waitForFunction(() =>
         Array.from(document.querySelectorAll("select")).some((select) => select.value === "الدمام")
       );
@@ -549,7 +559,7 @@ async function verifyBrowserOutput() {
       if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
       else fail(`${config.name} reserve failed to preselect package from query`);
 
-      await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+      await page.goto(`${activeBaseUrl}/`, { waitUntil: "networkidle" });
       await page.waitForSelector(".home-redesign-hero", { timeout: 60000 });
       await page.addScriptTag({ content: axeSource });
       const axe = await page.evaluate(async () => {
