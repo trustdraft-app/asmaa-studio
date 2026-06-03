@@ -511,6 +511,7 @@ async function verifyBrowserOutput() {
       }
 
       await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+      await page.waitForSelector(".home-redesign-hero", { timeout: 60000 });
       const homeCounts = await page.evaluate(() => ({
         heroImages: document.querySelectorAll(".hero-photo-stack img").length,
         realLogoImages: document.querySelectorAll(".brand-mark img, .hero-logo-image").length,
@@ -547,6 +548,7 @@ async function verifyBrowserOutput() {
       else fail(`${config.name} reserve failed to preselect package from query`);
 
       await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+      await page.waitForSelector(".home-redesign-hero", { timeout: 60000 });
       await page.addScriptTag({ content: axeSource });
       const axe = await page.evaluate(async () => {
         return window.axe.run(document, {
