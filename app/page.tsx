@@ -205,7 +205,7 @@ export default function HomePage() {
     <main className="page-shell">
       <JsonLd data={jsonLd} />
 
-      <section className="hero hero-20x" id="top">
+      <section className="hero hero-20x home-redesign-hero" id="top">
         <Image
           className="hero-cinematic-backdrop"
           src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
@@ -245,21 +245,24 @@ export default function HomePage() {
           </div>
         </nav>
 
-        <div className="hero-grid hero-grid-20x">
+        <div className="hero-grid hero-grid-20x home-redesign-grid">
           <div className="hero-copy-stack cine-hero-stack">
-            <p className="cine-brand-line">Asmaa Studio</p>
+            <p className="cine-brand-line home-redesign-kicker">
+              <span>Asmaa Studio</span>
+              <em>Eastern Province wedding cinema</em>
+            </p>
 
             <h1 className="cine-headline">
-              <span className="cine-headline-ar">فيلم لحظة لا تُعاد. </span>
-              <span className="cine-headline-en">A film of the moment that never repeats.</span>
+              <span className="cine-headline-ar">فيلم زفاف يوقف الوقت عند لحظتك الأولى.</span>
+              <span className="cine-headline-en">Saudi wedding cinema composed like a memory.</span>
             </h1>
 
             <p className="cine-lede">
-              العريس يلتفت لأول مرة. العروس في فستانها. نظرة صادقة قبل ضجيج القاعة.
-              Asmaa Studio توثق هذه اللحظة بهدوء، بإضاءة دافئة، ولقطة قريبة لا تُفلت تفصيلة.
+              من أول نفس قبل الدخول إلى آخر لقطة في الزفة، نصمم الفيلم كقصة هادئة تعرف متى تقترب،
+              متى تترك المسافة، ومتى تحفظ التفاصيل التي لا تعاد.
             </p>
 
-            <div className="cine-premiere-strip" aria-label="مسار الفيلم">
+            <div className="cine-premiere-strip home-film-sequence" aria-label="مسار الفيلم">
               {signatureFrames.map((frame) => (
                 <span key={frame.marker}>
                   <b>{frame.marker}</b>
@@ -271,11 +274,11 @@ export default function HomePage() {
             <div className="cine-cta-row">
               <Link className="cine-cta-primary" href="/packages">
                 <Sparkles size={18} aria-hidden="true" />
-                <span>احجزي الباقة المناسبة</span>
+                <span>اختاري فيلم يومك</span>
               </Link>
               <Link className="cine-cta-secondary" href="/portfolio">
                 <ArrowLeft size={16} aria-hidden="true" />
-                <span>شاهدي معرض الأعمال</span>
+                <span>شاهدي لغة التصوير</span>
               </Link>
               <a className="cine-cta-tertiary" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
                 <MessageCircle size={16} aria-hidden="true" />
@@ -301,19 +304,18 @@ export default function HomePage() {
               </article>
               <article className="glass-card cine-trust-card">
                 <span className="cine-trust-marker" aria-hidden="true">٠٤</span>
-                <strong>ضمانات كاملة</strong>
-                <em>ترخيص رسمي، إيصال بنكي، عقد مفصل قبل أي تحويل.</em>
+                <strong>وضوح قبل التحويل</strong>
+                <em>اتفاق مكتوب، إيصال بنكي، وتفاصيل تسليم واضحة قبل أي تحويل.</em>
               </article>
             </div>
           </div>
 
-          <div className="hero-visual cine-firstlook-stage" aria-hidden="true">
-            {/* Keep photo-stack + logo-image for verify:launch token compliance, render off-screen */}
-            <div className="hero-photo-stack cine-token-anchor">
+          <div className="hero-visual cine-firstlook-stage home-director-stage" aria-hidden="true">
+            <div className="hero-photo-stack home-visible-photo-stack">
               <Image src={assetPath("/brand/asmaa-monogram-studio.jpg")} alt="" width={460} height={620} priority />
               <Image src={assetPath("/brand/asmaa-monogram-heritage.jpg")} alt="" width={280} height={360} />
             </div>
-            <div className="monogram-stage logo-stage cine-token-anchor">
+            <div className="monogram-stage logo-stage home-logo-slate">
               <Image
                 className="hero-logo-image"
                 src={assetPath("/brand/asmaa-logo-primary.jpg")}
@@ -324,7 +326,7 @@ export default function HomePage() {
               />
             </div>
 
-            <div className="cine-photo-frame">
+            <div className="cine-photo-frame home-cinema-poster">
               <Image
                 className="cine-photo-image"
                 src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
@@ -346,10 +348,19 @@ export default function HomePage() {
                 <strong>00:12</strong>
               </div>
             </div>
+
+            <div className="home-shot-list">
+              {directorBoard.slice(0, 3).map((item, index) => (
+                <span key={item.label}>
+                  <b>{String(index + 1).padStart(2, "0")}</b>
+                  <em>{item.ar}</em>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="cinematic-dock" aria-label="خدمات Asmaa Studio">
+        <div className="cinematic-dock home-service-dock" aria-label="خدمات Asmaa Studio">
           {heroDock.map((item) => {
             const Icon = item.icon;
             return (
