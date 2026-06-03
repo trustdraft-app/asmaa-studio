@@ -234,3 +234,10 @@
 **Decision:** Apply a route-wide theatre system instead of another homepage-only change: shared image-led heroes, darker premium proof surfaces, portfolio styling hooks, contact/review hit-area hardening, and faster export verification.
 **Reasoning:** End-to-end launch polish requires the supporting user journeys to feel as deliberate as the homepage, and the verifier/pruner bottleneck had become a real launch-execution drag on the 11k-page static export.
 **Source:** User directive, generated design reference, `app/globals.css`, `app/portfolio/page.tsx`, `scripts/prune-static-js.mjs`, `scripts/verify-launch.mjs`, Playwright screenshot QA.
+
+## 2026-06-03 00:50 +03 — Asmaa Studio
+
+**Question:** How should Asmaa.video close the public endpoint security-header blocker when the canonical domain is on GitHub Pages?
+**Decision:** Treat Netlify/Cloudflare as the code-ready header-capable edge path, keep the existing `_headers`/`netlify.toml` configuration, fix the Cloudflare Worker export, and record DNS migration from GitHub Pages as the remaining operational blocker.
+**Reasoning:** GitHub Pages cannot apply `_headers`; the existing Netlify host already proves the header policy works, while changing Namecheap DNS cannot be completed through the repo.
+**Source:** Live header probes, `docs/deployment.md`, `netlify.toml`, `public/_headers`, `cloudflare/asmaa-video-security-proxy.js`, professional judgment.

@@ -266,3 +266,12 @@
 - Optimized `scripts/prune-static-js.mjs` and `scripts/verify-launch.mjs` with bounded async file reads/writes so the 9k+ HTML export can be pruned and verified without multi-minute sequential filesystem stalls.
 - Verification passed: `git diff --check`, `npm run typecheck --silent`, `npm run lint --silent`, `npm run build:pages` (`587s` final run), `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/verify-launch.mjs` (`58s` final run), and Playwright route screenshot QA across 9 routes x desktop/mobile with zero overflow, route-hero, console, network, or tap-target failures.
 - Visual evidence: screenshots saved under `/tmp/asmaa-sprint16-route-qa/`; generated design reference saved under `/Users/mohammedsa/.codex/generated_images/019e86ff-88ac-7991-8c04-d331426399b5/`.
+
+## 2026-06-03 00:50 +03
+
+- Audited Asmaa.video live launch headers, DNS, static export, Netlify edge target, and local launch verification.
+- Confirmed canonical `https://asmaa.video` is still served by GitHub Pages/Namecheap DNS and fails required security headers because GitHub Pages ignores `_headers`.
+- Confirmed existing header-capable Netlify target `https://asmaa-video.netlify.app` passes `scripts/verify-live-security-headers.mjs` and returns HSTS, CSP, frame denial, nosniff, referrer policy, and permissions policy.
+- Fixed `cloudflare/asmaa-video-security-proxy.js` to use a named default export for lint-safe Worker deployment readiness.
+- Verification passed: `npm run lint`, `npm run build:pages`, `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/verify-launch.mjs`, `node --check cloudflare/asmaa-video-security-proxy.js`, and `git diff --check`.
+- Netlify MCP deploy to the existing site ID was attempted twice but the connector wedged during project upload; no deploy was completed from this local session.

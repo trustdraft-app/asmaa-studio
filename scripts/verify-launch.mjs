@@ -531,6 +531,9 @@ async function verifyBrowserOutput() {
       else fail(`${config.name} homepage missing story moment cards`);
 
       await page.goto(`${baseUrl}/reserve?city=dammam&package=02`, { waitUntil: "networkidle" });
+      await page.waitForFunction(() =>
+        Array.from(document.querySelectorAll("select")).some((select) => select.value === "الدمام")
+      );
       const reservePrefill = await page.evaluate(() => ({
         selectValues: Array.from(document.querySelectorAll("select")).map((select) => select.value)
       }));
@@ -538,6 +541,7 @@ async function verifyBrowserOutput() {
       else fail(`${config.name} reserve failed to preselect city from query`);
 
       await page.locator(".stepper button").nth(1).click();
+      await page.waitForSelector('.package-picker button[aria-pressed="true"]');
       const selectedPackage = await page.locator('.package-picker button[aria-pressed="true"]').textContent();
       if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
       else fail(`${config.name} reserve failed to preselect package from query`);

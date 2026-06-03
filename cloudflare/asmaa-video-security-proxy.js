@@ -31,7 +31,7 @@ function originRequest(request) {
   return new Request(inputUrl, request);
 }
 
-export default {
+class SecurityProxy {
   async fetch(request) {
     const inputUrl = new URL(request.url);
     if (inputUrl.hostname === "www.asmaa.video") {
@@ -43,5 +43,9 @@ export default {
       cf: { resolveOverride: ORIGIN_RESOLVE_HOST },
     });
     return addSecurityHeaders(response);
-  },
-};
+  }
+}
+
+const securityProxy = new SecurityProxy();
+
+export { securityProxy as default };
