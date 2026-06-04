@@ -13,6 +13,12 @@
   --ease-in-out-premium: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+.font-runtime-stacks {
+  --font-sans: "IBM Plex Sans Arabic", "Geeza Pro", "Tahoma", "Arial", system-ui, sans-serif;
+  --font-display: "Noto Kufi Arabic", "Avenir Next", "Geeza Pro", "Tahoma", system-ui, sans-serif;
+  --font-latin-display: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+}
+
 .hero-20x {
   min-height: 94vh;
 }

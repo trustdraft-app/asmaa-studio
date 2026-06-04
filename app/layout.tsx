@@ -1,32 +1,10 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { socialPreviewImages, twitterMetadata } from "../lib/metadata";
 import { LocalBusinessJsonLd } from "../components/seo/LocalBusinessJsonLd";
 import { SpeakableJsonLd } from "../components/seo/SpeakableJsonLd";
 import { ContactPointJsonLd } from "../components/seo/ContactPointJsonLd";
 import "./globals.css";
-
-const arabicUi = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  variable: "--font-sans",
-  display: "swap",
-  weight: ["400", "700"]
-});
-
-const arabicDisplay = Noto_Kufi_Arabic({
-  subsets: ["arabic"],
-  variable: "--font-display",
-  display: "swap",
-  weight: ["700"]
-});
-
-const latinDisplay = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-latin-display",
-  display: "swap",
-  weight: ["700"]
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://asmaa.video"),
@@ -67,7 +45,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   return (
-    <html lang="ar" dir="rtl" className={`${arabicUi.variable} ${arabicDisplay.variable} ${latinDisplay.variable}`}>
+    <html lang="ar" dir="rtl" className="font-runtime-stacks">
       <body>
         <LocalBusinessJsonLd />
         <SpeakableJsonLd />
