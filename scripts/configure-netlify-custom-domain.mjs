@@ -19,6 +19,10 @@ export function siteHasCustomDomain(site, domain = DEFAULT_DOMAIN) {
     || (Array.isArray(site?.domains) && site.domains.some((entry) => domainEntryMatches(entry, domain)));
 }
 
+export function domainVerificationSucceeded(response, domain = DEFAULT_DOMAIN) {
+  return Boolean(response?.ok && siteHasCustomDomain(response.json, domain));
+}
+
 async function netlifyRequest(token, path, options = {}) {
   const response = await fetch(`https://api.netlify.com/api/v1${path}`, {
     method: options.method || "GET",
@@ -108,12 +112,28 @@ async function configure() {
     method: "PATCH",
     body: { custom_domain: domain },
   });
+  if (!updated.ok) {
+    return {
+      ok: false,
+      stage: "patch-site-custom-domain",
+      siteId,
+      domain,
+      status: updated.status,
+      errors: updated.errors,
+      secretValuesPrinted: false,
+    };
+  }
+
+  const verified = domainVerificationSucceeded(updated, domain)
+    ? updated
+    : await netlifyRequest(token, `/sites/${siteId}`);
   return {
-    ok: updated.ok && (siteHasCustomDomain(updated.json, domain) || updated.status === 200),
+    ok: domainVerificationSucceeded(verified, domain),
     stage: "patch-site-custom-domain",
     siteId,
     domain,
     status: updated.status,
+    verifyStatus: verified.status,
     errors: updated.errors,
     secretValuesPrinted: false,
   };
@@ -125,6 +145,9 @@ function runSelfTest() {
     siteHasCustomDomain({ domain_aliases: [{ name: DEFAULT_DOMAIN }] }),
     siteHasCustomDomain({ domains: [DEFAULT_DOMAIN] }),
     !siteHasCustomDomain({ custom_domain: "example.com", domain_aliases: [] }),
+    domainVerificationSucceeded({ ok: true, json: { custom_domain: DEFAULT_DOMAIN } }),
+    !domainVerificationSucceeded({ ok: true, status: 200, json: { custom_domain: "example.com" } }),
+    !domainVerificationSucceeded({ ok: false, json: { custom_domain: DEFAULT_DOMAIN } }),
   ];
   const ok = cases.every(Boolean);
   console.log(JSON.stringify({ ok, checksPassed: cases.filter(Boolean).length, checksTotal: cases.length }, null, 2));
