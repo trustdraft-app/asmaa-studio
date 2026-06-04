@@ -31,5 +31,6 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm audit --omit=dev
+      - run: node scripts/verify-live-security-headers.mjs --self-test
       - run: npm run verify:launch
       - run: npm run verify:admin
