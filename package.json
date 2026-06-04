@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "verify:launch": "npm run build:pages && playwright install chromium && node scripts/verify-launch.mjs",
     "verify:admin": "npm run build:admin-check && playwright install chromium && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true VERIFY_ADMIN_ONLY=true node scripts/verify-launch.mjs",
-    "verify:live-security-headers": "node scripts/verify-live-security-headers.mjs"
+    "verify:live-security-headers": "node scripts/verify-live-security-headers.mjs",
+    "netlify:configure-domain": "node scripts/configure-netlify-custom-domain.mjs"
   },
   "dependencies": {
     "@next/third-parties": "16.2.6",

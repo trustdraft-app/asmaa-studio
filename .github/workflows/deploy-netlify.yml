@@ -56,5 +56,12 @@ jobs:
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
         run: npx --yes netlify-cli deploy --prod --dir=out --site="$NETLIFY_SITE_ID" --auth="$NETLIFY_AUTH_TOKEN"
 
+      - name: Configure Netlify custom domain
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+          NETLIFY_CUSTOM_DOMAIN: asmaa.video
+        run: npm run netlify:configure-domain -- --json
+
       - name: Verify Netlify security headers
         run: npm run verify:live-security-headers -- https://asmaa-video.netlify.app
