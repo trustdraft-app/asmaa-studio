@@ -63,5 +63,8 @@ jobs:
           NETLIFY_CUSTOM_DOMAIN: asmaa.video
         run: npm run netlify:configure-domain -- --json
 
-      - name: Verify Netlify security headers
-        run: npm run verify:live-security-headers -- https://asmaa-video.netlify.app
+      - name: Verify Netlify app security headers
+        run: npm run verify:live-security-headers -- https://asmaa-video.netlify.app https://asmaa-video.netlify.app/contact
+
+      - name: Verify canonical security headers
+        run: npm run verify:live-security-headers -- https://asmaa.video https://asmaa.video/contact
