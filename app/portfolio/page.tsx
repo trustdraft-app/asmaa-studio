@@ -407,6 +407,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
         <button
           style={{
             width: "100%",
+            minHeight: 48,
             padding: "11px 0",
             borderRadius: 10,
             border: `1px solid ${item.accent}44`,
