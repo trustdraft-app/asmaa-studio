@@ -1,5 +1,12 @@
 # Asmaa Studio Work Log
 
+## 2026-06-04 17:36 +03
+
+- Shipped the next live growth wave as the first real Wave 2 slice: a city-specific `/ar/{city}/bride-checklist` route family covering all SEO cities in the existing programmatic grid.
+- Added checklist-page metadata and JSON-LD, linked the new route from each main city page, added the family to `sitemap.xml`, and taught `llms.txt` / `llms-full.txt` to route answer engines to these pre-booking pages.
+- Extended `scripts/verify-launch.mjs` so launch verification now requires sample bride-checklist artifacts and their sitemap/LLM entries.
+- Local verification command evidence remains mixed in this environment: `npm run build:pages` reproduced the known Next compile-stage stall before export, and direct local `typecheck` / `lint` commands did not return usable output here, so deployment verification must come from the GitHub Pages / CI workflows after push.
+
 ## 2026-06-02 20:14 +03
 
 - Verified the Asmaa code-owned launch surface end to end: `npm run typecheck`, `npm run lint`, `npm run build:pages`, and `TMPDIR=/tmp npm run verify:launch` passed.

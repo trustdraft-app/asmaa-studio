@@ -1,5 +1,11 @@
 # Asmaa Studio Decision Log
 
+## 2026-06-04 17:36 +03 — Asmaa Studio
+**Question:** What is the next highest-impact safe daily growth wave now that the 20-wave contact pass is already shipped and the 50k-URL system shows Wave 2 pending?
+**Decision:** Ship the first real Wave 2 route family as city-specific `/ar/{city}/bride-checklist` pages for all SEO cities, wire them into sitemap, answer-engine files, city discovery, and launch verification, and leave the rest of Wave 2 pending for later route families.
+**Reasoning:** This is the safest repo-owned Wave 2 slice: it creates real new search/conversion surfaces around pre-booking intent without inventing venue data or depending on DeepSeek, GSC, or off-site access.
+**Source:** `AGENTS.md`, `seo-waves/state.json`, `seo-waves/wave-2.json`, existing `app/ar/*` route patterns, professional judgment.
+
 ## 2026-06-02 20:52 +03 — Asmaa Studio
 **Question:** How should Codex handle the remaining Asmaa launch PRs after live readiness verification?
 **Decision:** Close PR #24 and #25 because both had 0 changed files after branch updates, then rebase/fix/verify/merge PR #23 as the only remaining code-bearing launch PR.

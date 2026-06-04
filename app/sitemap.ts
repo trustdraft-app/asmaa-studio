@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { serviceAreas } from "../lib/content";
+import { seoCities } from "../lib/seo-grid";
 import { seoGuidePages } from "../lib/seo-pages";
 import { servicePages } from "../lib/services";
 import {
@@ -97,6 +98,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/ar/${city.slug}/${service.slug}`,
       changeFrequency: "monthly" as const,
       priority: city.governorate === "alahsa" ? 0.85 : city.governorate === "easternProvince" ? 0.7 : 0.5
+    })),
+    ...seoCities.map((city) => ({
+      url: `${base}/ar/${city.slug}/bride-checklist`,
+      changeFrequency: "monthly" as const,
+      priority: city.governorate === "alahsa" ? 0.8 : city.governorate === "easternProvince" ? 0.65 : 0.45
     })),
     // Programmatic SEO grid — 30 × 8 × 14 = 3,360 pages
     ...allCityServiceModifierTriples().map(({ city, service, modifier }) => ({

@@ -28,6 +28,9 @@ const requiredFiles = [
   "alahsa.html",
   "dammam.html",
   "khobar.html",
+  "ar/alahsa/bride-checklist.html",
+  "ar/dammam/bride-checklist.html",
+  "ar/khobar/bride-checklist.html",
   "sitemap.xml",
   "robots.txt",
   "llms.txt",
@@ -356,6 +359,13 @@ async function verifyStaticOutput() {
   } else {
     fail("sitemap must not include the noindex reserve page");
   }
+  for (const citySlug of ["alahsa", "dammam", "khobar"]) {
+    if (sitemap.includes(`<loc>https://asmaa.video/ar/${citySlug}/bride-checklist</loc>`)) {
+      pass(`sitemap contains bride checklist for ${citySlug}`);
+    } else {
+      fail(`sitemap missing bride checklist for ${citySlug}`);
+    }
+  }
   for (const slug of guideSlugs) {
     if (sitemap.includes(`https://asmaa.video/guides/${slug}`)) pass(`sitemap contains ${slug}`);
     else fail(`sitemap missing ${slug}`);
@@ -377,7 +387,8 @@ async function verifyStaticOutput() {
     "https://asmaa.video/portfolio",
     "https://asmaa.video/engagement",
     "https://asmaa.video/process",
-    "https://asmaa.video/guides"
+    "https://asmaa.video/guides",
+    "https://asmaa.video/ar/alahsa/bride-checklist"
   ]) {
     if (llms.includes(token)) pass(`llms.txt contains ${token}`);
     else fail(`llms.txt missing ${token}`);

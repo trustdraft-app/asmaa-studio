@@ -206,6 +206,18 @@ export default async function CityPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <section className="section">
+        <div className="section-inner">
+          <span className="eyebrow">قبل أول رسالة</span>
+          <h2 className="section-title">افتحي قائمة تجهيز العروس الخاصة بـ {area.ar}.</h2>
+          <div className="button-row wave-actions">
+            <Link className="ghost-cta" href={`/ar/${area.slug}/bride-checklist`}>
+              تجهيز العروس قبل التصوير <ArrowLeft size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
