@@ -30,13 +30,13 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm audit --omit=dev
-      - run: npm run verify:launch
-      - run: npm run verify:admin
       - run: npm run build:pages
         env:
           GITHUB_PAGES: "true"
           GITHUB_PAGES_CUSTOM_DOMAIN: "true"
           NEXT_PUBLIC_BASE_PATH: ""
+      - run: npm run verify:launch
+      - run: npm run verify:admin
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: out
