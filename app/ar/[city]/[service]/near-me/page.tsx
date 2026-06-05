@@ -148,7 +148,7 @@ export default async function SeoNearMePage({ params }: Props) {
             <span className="eyebrow">Near Me / {city.ar} / {service.ar}</span>
             <h1 className="section-title">{service.ar} قريب مني في {city.ar}</h1>
             <p className="section-copy">
-              هذه الصفحة مخصصة للعروس التي تبحث بصيغة "قريب مني" وتريد جواباً واضحاً: هل الخدمة مناسبة داخل {city.ar}، ما الباقة الأقرب، وما الذي يجعل رسالة الحجز أسرع؟
+              هذه الصفحة مخصصة للعروس التي تبحث بصيغة &quot;قريب مني&quot; وتريد جواباً واضحاً: هل الخدمة مناسبة داخل {city.ar}، ما الباقة الأقرب، وما الذي يجعل رسالة الحجز أسرع؟
             </p>
 
             <div className="city-intent">
@@ -181,7 +181,7 @@ export default async function SeoNearMePage({ params }: Props) {
 
           <aside className="city-command-card">
             <span>الجواب المختصر</span>
-            <h2>ماذا يعني "قريب مني" هنا؟</h2>
+            <h2>ماذا يعني &quot;قريب مني&quot; هنا؟</h2>
             <div className="city-wave-list">
               {answerBullets.map((item) => (
                 <p key={item}>
