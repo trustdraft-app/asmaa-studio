@@ -31,7 +31,7 @@ const requiredFiles = [
   "ar/dammam/bride-checklist.html",
   "ar/khobar/bride-checklist.html",
   "ar/alahsa/zaffa-tasweer/near-me.html",
-  "ar/dammam/khotuba-tasweer/near-me.html",
+  "ar/dammam/zaffa-tasweer/near-me.html",
   "ar/khobar/full-day-tasweer/near-me.html",
   "sitemap.xml",
   "robots.txt",
@@ -309,7 +309,7 @@ function verifyStaticOutput() {
   }
   for (const route of [
     "https://asmaa.video/ar/alahsa/zaffa-tasweer/near-me",
-    "https://asmaa.video/ar/dammam/khotuba-tasweer/near-me",
+    "https://asmaa.video/ar/dammam/zaffa-tasweer/near-me",
     "https://asmaa.video/ar/khobar/full-day-tasweer/near-me"
   ]) {
     if (sitemap.includes(`<loc>${route}</loc>`)) pass(`sitemap contains ${route}`);

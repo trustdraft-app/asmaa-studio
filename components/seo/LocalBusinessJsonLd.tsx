@@ -3,7 +3,10 @@
  *
  * Why: AEO/GEO breakthrough — Google + ChatGPT + Perplexity prefer answering
  * questions about local businesses when there's structured data. This single
- * schema covers WHO we are, WHAT services we offer, area served, and contact.
+ * schema covers WHO we are, WHAT services we offer, and where we serve.
+ *
+ * NOTE: aggregateRating intentionally omitted — no verified public reviews yet.
+ * Add it only when real Google Business Profile ratings are confirmed.
  *
  * Renders inside <body>; safe to inline on every page via layout.tsx.
  */
@@ -12,7 +15,7 @@ const SITE = "https://asmaa.video";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@type": "Organization",
   "@id": `${SITE}#business`,
   name: "Asmaa Studio",
   alternateName: "أسماء ستوديو",
@@ -23,13 +26,7 @@ const localBusinessSchema = {
   logo: `${SITE}/favicon.png`,
   priceRange: "600-2500 SAR",
   currenciesAccepted: "SAR",
-  paymentAccepted: ["Bank Transfer"],
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "SA",
-    addressRegion: "Eastern Province",
-    addressLocality: "Al-Ahsa"
-  },
+  paymentAccepted: ["Cash", "Bank Transfer", "Mada", "Apple Pay"],
   areaServed: [
     { "@type": "City", name: "Al-Ahsa" },
     { "@type": "City", name: "Dammam" },

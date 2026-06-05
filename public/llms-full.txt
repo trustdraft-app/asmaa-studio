@@ -217,7 +217,7 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
   - Same route shape exists for each top-30 SEO city under `/ar/{city}/bride-checklist`
 - Near me family:
   - https://asmaa.video/ar/alahsa/zaffa-tasweer/near-me
-  - https://asmaa.video/ar/dammam/khotuba-tasweer/near-me
+  - https://asmaa.video/ar/dammam/zaffa-tasweer/near-me
   - https://asmaa.video/ar/khobar/full-day-tasweer/near-me
   - Same route shape exists for each SEO city/service pair under `/ar/{city}/{service}/near-me`
 
