@@ -47,22 +47,26 @@ const breadcrumbJsonLd = {
 
 const contactJsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "Organization",
   name: "Asmaa Studio",
   url: "https://asmaa.video",
   telephone: `+${whatsappNumber}`,
   email: "info@asmaa.video",
-  openingHours: "Su-Th 09:00-21:00",
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "booking",
+      telephone: `+${whatsappNumber}`,
+      email: "info@asmaa.video",
+      availableLanguage: ["ar", "en"],
+      areaServed: "SA"
+    }
+  ],
   areaServed: [
     { "@type": "City", name: "Al Ahsa" },
     { "@type": "City", name: "Dammam" },
     { "@type": "City", name: "Khobar" }
-  ],
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: "Eastern Province",
-    addressCountry: "SA"
-  }
+  ]
 };
 
 const locations = [
@@ -123,9 +127,11 @@ export default function ContactPage() {
             <h2>نحن هنا</h2>
             <p>واتساب للرد السريع — هاتف وإيميل أيضًا متاحان في أوقات العمل.</p>
             <div>
+              <em>قبل أول رسالة</em>
               <em>الأحساء</em>
               <em>الدمام</em>
               <em>الخبر</em>
+              <em>صفحات محلية لكل مدينة رئيسية</em>
               <em>الأحد–الخميس</em>
             </div>
           </aside>
@@ -137,6 +143,10 @@ export default function ContactPage() {
         <div className="section-inner">
           <span className="eyebrow">طرق التواصل</span>
           <h2 className="section-title">اختاري الطريقة الأنسب لك.</h2>
+          <p className="section-copy" style={{ marginTop: 12 }}>
+            قبل أول رسالة، جهزي التاريخ والمدينة ونوع التغطية. صفحات محلية لكل مدينة رئيسية
+            تساعدك على اختيار الباقة المناسبة للأحساء أو الدمام أو الخبر.
+          </p>
 
           <div className="contact-grid" style={{ marginTop: 32 }}>
             {/* Left: contact cards */}
