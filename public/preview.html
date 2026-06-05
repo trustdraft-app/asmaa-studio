@@ -5,646 +5,537 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asmaa Studio | سينما الأعراس السعودية</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
-</style>
-<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
 :root {
   --black: #080808;
-  --black-2: #111111;
-  --black-3: #1a1a1a;
+  --black-2: #0f0f0f;
+  --black-3: #181818;
   --gold: #C9A86C;
   --gold-light: #E2C78A;
-  --gold-dark: #A07840;
+  --gold-pale: #F0E0C0;
+  --gold-dark: #9A7840;
   --pearl: #F5F0E8;
   --rose: #E8D5C4;
-  --rose-dark: #C8A898;
-  --white: #FDFAF6;
-  --text-muted: rgba(245,240,232,0.45);
-  --text-dim: rgba(245,240,232,0.7);
-  --border: rgba(201,168,108,0.18);
-  --border-bright: rgba(201,168,108,0.45);
-  --grain-opacity: 0.04;
-  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --transition-slow: cubic-bezier(0.16, 1, 0.3, 1);
+  --dim: rgba(245,240,232,0.5);
+  --dim2: rgba(245,240,232,0.7);
+  --border: rgba(201,168,108,0.15);
+  --border2: rgba(201,168,108,0.35);
+  --ease: cubic-bezier(0.25,0.46,0.45,0.94);
+  --spring: cubic-bezier(0.16,1,0.3,1);
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--pearl);font-family:'Cairo',system-ui,sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--gold-dark)}
 
-html { scroll-behavior: smooth; font-size: 16px; }
+/* ─── GRAIN ─── */
+body::before{
+  content:'';position:fixed;inset:-100px;width:calc(100% + 200px);height:calc(100% + 200px);
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.03;pointer-events:none;z-index:9997;animation:grain 0.4s steps(2) infinite;
+}
+@keyframes grain{0%,100%{transform:translate(0,0)}25%{transform:translate(-2px,-3px)}50%{transform:translate(3px,1px)}75%{transform:translate(-1px,3px)}}
 
-body {
-  background: var(--black);
-  color: var(--pearl);
-  font-family: 'Cairo', sans-serif;
-  overflow-x: hidden;
-  cursor: none;
-}
-
-/* ─── CUSTOM CURSOR ─── */
-.cursor {
-  width: 10px; height: 10px;
-  background: var(--gold);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform 0.1s, background 0.2s;
-  mix-blend-mode: normal;
-}
-.cursor-ring {
-  width: 36px; height: 36px;
-  border: 1px solid rgba(201,168,108,0.5);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: transform 0.3s var(--transition), width 0.3s, height 0.3s, border-color 0.2s;
-}
-.cursor-ring.expand { width: 56px; height: 56px; border-color: var(--gold); }
-
-/* ─── GRAIN OVERLAY ─── */
-.grain {
-  position: fixed; inset: -50%;
-  width: 200%; height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: var(--grain-opacity);
-  pointer-events: none; z-index: 9997;
-  animation: grain 0.5s steps(2) infinite;
-}
-@keyframes grain {
-  0%,100%{transform:translate(0,0)} 10%{transform:translate(-2%,-3%)} 20%{transform:translate(3%,1%)} 30%{transform:translate(-1%,4%)} 40%{transform:translate(4%,-2%)} 50%{transform:translate(-3%,2%)} 60%{transform:translate(1%,-4%)} 70%{transform:translate(-4%,3%)} 80%{transform:translate(2%,1%)} 90%{transform:translate(-1%,-2%)}
-}
-
-/* ─── SCROLLBAR ─── */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--black); }
-::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+/* ─── LOGO SVG ─── */
+.logo-mark{display:inline-block;filter:drop-shadow(0 0 12px rgba(201,168,108,0.4))}
+.logo-mark path{fill:url(#goldGrad)}
 
 /* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 1.5rem 3rem;
-  display: flex; align-items: center; justify-content: space-between;
-  transition: all 0.4s var(--transition);
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.4s var(--ease);
 }
-nav.scrolled {
-  background: rgba(8,8,8,0.92);
-  backdrop-filter: blur(20px);
-  padding: 1rem 3rem;
-  border-bottom: 1px solid var(--border);
+nav.scrolled{
+  background:rgba(8,8,8,0.93);backdrop-filter:blur(24px);
+  padding:0.9rem 3rem;border-bottom:1px solid var(--border);
 }
-.nav-logo {
-  display: flex; flex-direction: column; align-items: flex-end; gap: 0;
-  text-decoration: none;
+.nav-logo{text-decoration:none;display:flex;align-items:center;gap:0.8rem}
+.nav-logo-text{display:flex;flex-direction:column;align-items:flex-end}
+.nav-logo-ar{
+  font-size:1.4rem;font-weight:700;line-height:1;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
-.nav-logo-ar {
-  font-size: 1.6rem; font-weight: 700;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  line-height: 1.1;
+.nav-logo-en{
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:0.55rem;
+  letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.65;
 }
-.nav-logo-en {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--gold); opacity: 0.7; font-weight: 300;
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{
+  color:var(--dim);text-decoration:none;font-size:0.82rem;font-weight:400;
+  letter-spacing:0.02em;transition:color 0.3s;position:relative;
 }
-.nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
-.nav-links a {
-  color: var(--text-dim); text-decoration: none; font-size: 0.85rem; font-weight: 400;
-  letter-spacing: 0.02em; transition: color 0.3s;
-  position: relative;
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;right:0;left:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transition:transform 0.3s var(--ease);transform-origin:right;
 }
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -3px; right: 0; left: 0;
-  height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s var(--transition);
-  transform-origin: right;
+.nav-links a:hover{color:var(--pearl)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{
+  background:transparent;border:1px solid var(--gold);color:var(--gold);
+  padding:0.55rem 1.3rem;border-radius:2px;font-family:'Cairo',sans-serif;
+  font-size:0.8rem;font-weight:600;text-decoration:none;
+  transition:all 0.3s var(--ease);letter-spacing:0.03em;
 }
-.nav-links a:hover { color: var(--pearl); }
-.nav-links a:hover::after { transform: scaleX(1); }
-.nav-cta {
-  background: transparent; border: 1px solid var(--gold);
-  color: var(--gold); padding: 0.6rem 1.4rem; border-radius: 2px;
-  font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 600;
-  cursor: none; text-decoration: none;
-  transition: all 0.3s var(--transition);
-  letter-spacing: 0.03em;
-}
-.nav-cta:hover { background: var(--gold); color: var(--black); }
+.nav-cta:hover{background:var(--gold);color:var(--black)}
 
 /* ─── HERO ─── */
-#hero {
-  position: relative; height: 100vh; min-height: 700px;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
 }
-#hero-canvas {
-  position: absolute; inset: 0; width: 100%; height: 100%;
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 40%,transparent 15%,rgba(8,8,8,0.65) 60%,rgba(8,8,8,0.97) 100%);
 }
-.hero-vignette {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, transparent 20%, rgba(8,8,8,0.7) 70%, rgba(8,8,8,0.95) 100%);
+.hero-content{
+  position:relative;z-index:2;text-align:center;padding:2rem 1.5rem;
+  max-width:860px;
 }
-.hero-content {
-  position: relative; z-index: 2; text-align: center; padding: 2rem;
-  max-width: 900px;
+
+/* Hero elements — pure CSS animation, no JS dependency */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%,100%{opacity:0.4}50%{opacity:1}}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  border:1px solid var(--border2);padding:0.4rem 1.3rem;border-radius:100px;
+  font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);
+  background:rgba(201,168,108,0.05);margin-bottom:2.5rem;
+  animation:fadeUp 0.9s var(--spring) 0.2s both;
 }
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  border: 1px solid var(--border-bright);
-  padding: 0.4rem 1.2rem; border-radius: 100px;
-  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 2.5rem;
-  background: rgba(201,168,108,0.06);
-  opacity: 0; transform: translateY(20px);
+.hero-tag::before{
+  content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);
+  animation:shimmer 2s infinite;
 }
-.hero-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
-.hero-title-ar {
-  font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.05;
-  color: var(--pearl); margin-bottom: 0.4rem;
-  opacity: 0;
+.hero-logo-display{
+  width:110px;height:110px;margin:0 auto 2rem;
+  animation:fadeIn 1.2s ease 0.3s both;
+  filter:drop-shadow(0 0 30px rgba(201,168,108,0.35));
 }
-.hero-title-ar span {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+.hero-title-ar{
+  font-size:clamp(3rem,8.5vw,7rem);font-weight:900;line-height:1.03;
+  margin-bottom:0.3rem;
+  animation:fadeUp 1s var(--spring) 0.4s both;
 }
-.hero-title-en {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: clamp(1rem, 2.5vw, 1.6rem); font-weight: 300;
-  color: var(--text-dim); letter-spacing: 0.08em;
-  margin-bottom: 2rem; opacity: 0;
+.hero-title-ar .gold{
+  background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 50%,var(--gold-dark) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
-.hero-subtitle {
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem); font-weight: 400; line-height: 1.8;
-  color: var(--text-dim); max-width: 560px; margin: 0 auto 3rem;
-  opacity: 0;
+.hero-sub-en{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:clamp(0.95rem,2.5vw,1.5rem);font-weight:300;
+  color:var(--dim);letter-spacing:0.08em;margin-bottom:1.8rem;
+  animation:fadeUp 1s var(--spring) 0.55s both;
 }
-.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; }
-.btn-primary {
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: var(--black); padding: 1rem 2.5rem; border-radius: 2px;
-  font-family: 'Cairo', sans-serif; font-size: 0.9rem; font-weight: 700;
-  text-decoration: none; letter-spacing: 0.03em;
-  transition: all 0.3s var(--transition); cursor: none;
-  box-shadow: 0 8px 32px rgba(201,168,108,0.25);
+.hero-desc{
+  font-size:clamp(0.85rem,1.5vw,1rem);line-height:1.9;color:var(--dim);
+  max-width:520px;margin:0 auto 2.8rem;font-weight:400;
+  animation:fadeUp 1s var(--spring) 0.7s both;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(201,168,108,0.4); }
-.btn-ghost {
-  border: 1px solid var(--border-bright); color: var(--pearl);
-  padding: 1rem 2.5rem; border-radius: 2px;
-  font-family: 'Cairo', sans-serif; font-size: 0.9rem; font-weight: 500;
-  text-decoration: none; letter-spacing: 0.03em;
-  transition: all 0.3s var(--transition); cursor: none;
-  background: rgba(245,240,232,0.03);
+.hero-ctas{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 1s var(--spring) 0.85s both;
 }
-.btn-ghost:hover { background: rgba(245,240,232,0.08); border-color: var(--pearl); }
-.hero-scroll {
-  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
-  opacity: 0;
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));
+  color:var(--black);padding:1rem 2.4rem;border-radius:2px;text-decoration:none;
+  font-family:'Cairo',sans-serif;font-size:0.88rem;font-weight:700;
+  letter-spacing:0.03em;transition:all 0.3s var(--ease);
+  box-shadow:0 8px 32px rgba(201,168,108,0.22);
 }
-.hero-scroll-text { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
-.hero-scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollLine 2s ease-in-out infinite; }
-@keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 50px rgba(201,168,108,0.38)}
+.btn-ghost{
+  border:1px solid var(--border2);color:var(--pearl);padding:1rem 2.4rem;border-radius:2px;
+  text-decoration:none;font-family:'Cairo',sans-serif;font-size:0.88rem;font-weight:500;
+  transition:all 0.3s var(--ease);background:rgba(245,240,232,0.02);
+}
+.btn-ghost:hover{background:rgba(245,240,232,0.07);border-color:rgba(245,240,232,0.5)}
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  animation:fadeIn 1s ease 1.5s both;
+}
+.hero-scroll span{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--dim)}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 2s ease-in-out infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ─── SECTION BASE ─── */
-section { position: relative; overflow: hidden; }
-.section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-.section-label {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 1rem; display: block;
-  opacity: 0; transform: translateY(15px);
+.sec{padding:7rem 0;position:relative;overflow:hidden}
+.sec-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
+.sec-head{text-align:center;margin-bottom:4.5rem}
+.label{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);
+  display:block;margin-bottom:0.8rem;
 }
-.section-title {
-  font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15;
-  margin-bottom: 1.5rem;
-  opacity: 0; transform: translateY(20px);
-}
-.section-body {
-  font-size: 1rem; line-height: 1.9; color: var(--text-dim);
-  max-width: 600px;
-  opacity: 0; transform: translateY(15px);
-}
-.gold-text {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.divider {
-  width: 60px; height: 1px;
-  background: linear-gradient(to left, transparent, var(--gold), transparent);
-  margin: 2rem auto;
-}
+.title{font-size:clamp(1.9rem,4vw,3.2rem);font-weight:700;line-height:1.12;margin-bottom:1.2rem}
+.body-text{font-size:0.95rem;line-height:1.9;color:var(--dim);max-width:580px;margin:0 auto}
+.gold-t{background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-/* ─── PHILOSOPHY STRIP ─── */
-#philosophy { padding: 6rem 0; background: var(--black-2); }
-#philosophy::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 1px; background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
-}
-#philosophy::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 1px; background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
-}
-.philosophy-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-  margin-top: 3rem;
-}
-.philosophy-card {
-  padding: 3rem 2rem; border-right: 1px solid var(--border); text-align: center;
-  position: relative; overflow: hidden;
-  opacity: 0; transform: translateY(30px);
-  transition: background 0.4s var(--transition);
-}
-.philosophy-card:last-child { border-right: none; }
-.philosophy-card::before {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-  transform: scaleX(0); transition: transform 0.4s var(--transition);
-}
-.philosophy-card:hover::before { transform: scaleX(1); }
-.philosophy-card:hover { background: rgba(201,168,108,0.04); }
-.philosophy-icon {
-  width: 56px; height: 56px; margin: 0 auto 1.5rem;
-  background: rgba(201,168,108,0.08); border: 1px solid var(--border);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s;
-}
-.philosophy-card:hover .philosophy-icon { background: rgba(201,168,108,0.15); border-color: var(--gold); }
-.philosophy-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--gold); stroke-width: 1.5; }
-.philosophy-num { font-family: 'Cormorant Garamond', serif; font-size: 0.65rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 0.5rem; display: block; }
-.philosophy-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--pearl); }
-.philosophy-body { font-size: 0.83rem; line-height: 1.8; color: var(--text-dim); }
+/* Line decorators */
+.sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,108,0.12),transparent)}
 
-/* ─── JOURNEY TIMELINE ─── */
-#journey { padding: 8rem 0; background: var(--black); }
-.journey-header { text-align: center; margin-bottom: 5rem; }
-.journey-timeline {
-  position: relative; display: flex; justify-content: space-between; align-items: flex-start;
-  gap: 1rem; padding: 0 2rem;
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity 0.75s var(--spring),transform 0.75s var(--spring)}
+.rv.on{opacity:1;transform:translateY(0)}
+.rv.from-left{transform:translateX(-24px)}
+.rv.from-left.on{transform:translateX(0)}
+.rv.scale{transform:scale(0.94)}
+.rv.scale.on{transform:scale(1)}
+.d1{transition-delay:0.08s}.d2{transition-delay:0.16s}.d3{transition-delay:0.24s}.d4{transition-delay:0.32s}.d5{transition-delay:0.4s}
+
+/* ─── PHILOSOPHY ─── */
+#philosophy{background:var(--black-2)}
+.phi-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border)}
+.phi-card{
+  padding:2.8rem 2rem;border-right:1px solid var(--border);text-align:center;
+  position:relative;overflow:hidden;transition:background 0.4s;
 }
-.journey-timeline::before {
-  content: ''; position: absolute; top: 40px; right: 2rem; left: 2rem;
-  height: 1px; background: linear-gradient(to left, transparent, var(--gold-dark) 20%, var(--gold) 50%, var(--gold-dark) 80%, transparent);
+.phi-card:last-child{border-right:none}
+.phi-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform 0.4s var(--spring);
 }
-.journey-step {
-  flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;
-  opacity: 0; transform: translateY(30px);
+.phi-card:hover{background:rgba(201,168,108,0.03)}
+.phi-card:hover::after{transform:scaleX(1)}
+.phi-icon{
+  width:52px;height:52px;margin:0 auto 1.4rem;border-radius:50%;
+  background:rgba(201,168,108,0.07);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;transition:all 0.3s;
 }
-.journey-dot {
-  width: 80px; height: 80px; border-radius: 50%;
-  background: var(--black-3); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; z-index: 1; transition: all 0.4s var(--transition);
-  cursor: none;
+.phi-card:hover .phi-icon{background:rgba(201,168,108,0.14);border-color:var(--gold)}
+.phi-icon svg{width:22px;height:22px;stroke:var(--gold);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.phi-n{font-family:'Cormorant Garamond',serif;font-size:0.62rem;letter-spacing:0.3em;color:var(--gold);display:block;margin-bottom:0.4rem}
+.phi-t{font-size:0.95rem;font-weight:700;margin-bottom:0.6rem}
+.phi-b{font-size:0.8rem;line-height:1.8;color:var(--dim)}
+
+/* ─── TIMELINE ─── */
+#journey{background:var(--black)}
+.tl-track{
+  position:relative;display:flex;justify-content:space-between;align-items:flex-start;
+  gap:0.5rem;padding:0 1rem;margin-top:4rem;
 }
-.journey-dot::before {
-  content: ''; position: absolute; inset: -4px; border-radius: 50%;
-  border: 1px solid transparent; transition: border-color 0.4s;
+.tl-track::before{
+  content:'';position:absolute;top:39px;right:1rem;left:1rem;height:1px;
+  background:linear-gradient(to left,transparent,var(--gold-dark) 20%,var(--gold) 50%,var(--gold-dark) 80%,transparent);
 }
-.journey-step:hover .journey-dot { background: rgba(201,168,108,0.1); border-color: var(--gold); box-shadow: 0 0 30px rgba(201,168,108,0.2); }
-.journey-step:hover .journey-dot::before { border-color: rgba(201,168,108,0.3); }
-.journey-dot svg { width: 28px; height: 28px; stroke: var(--gold); stroke-width: 1.5; fill: none; }
-.journey-step-num { font-family: 'Cormorant Garamond', serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gold); }
-.journey-step-title { font-size: 0.88rem; font-weight: 700; color: var(--pearl); }
-.journey-step-body { font-size: 0.75rem; line-height: 1.7; color: var(--text-dim); }
-.journey-step-time { font-size: 0.68rem; color: var(--gold); letter-spacing: 0.1em; font-weight: 600; }
+.tl-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.8rem}
+.tl-dot{
+  width:78px;height:78px;border-radius:50%;background:var(--black-3);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;transition:all 0.4s var(--spring);
+}
+.tl-dot::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:1px solid transparent;transition:border-color 0.4s}
+.tl-step:hover .tl-dot{background:rgba(201,168,108,0.08);border-color:var(--gold);box-shadow:0 0 32px rgba(201,168,108,0.18)}
+.tl-step:hover .tl-dot::before{border-color:rgba(201,168,108,0.25)}
+.tl-dot svg{width:26px;height:26px;stroke:var(--gold);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tl-n{font-family:'Cormorant Garamond',serif;font-size:0.6rem;letter-spacing:0.28em;color:var(--gold)}
+.tl-t{font-size:0.82rem;font-weight:700}
+.tl-b{font-size:0.72rem;line-height:1.65;color:var(--dim)}
+.tl-tag{font-size:0.65rem;color:var(--gold);letter-spacing:0.08em;font-weight:600;border:1px solid var(--border);padding:0.15rem 0.5rem;border-radius:100px}
 
 /* ─── PACKAGES ─── */
-#packages { padding: 8rem 0; background: var(--black-2); }
-.packages-header { text-align: center; margin-bottom: 4rem; }
-.pkg-filters {
-  display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap;
+#packages{background:var(--black-2)}
+.pkg-filters{display:flex;justify-content:center;gap:0.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.pf{
+  padding:0.5rem 1.5rem;border:1px solid var(--border);border-radius:100px;
+  font-family:'Cairo',sans-serif;font-size:0.78rem;font-weight:500;
+  color:var(--dim);background:transparent;cursor:pointer;transition:all 0.3s;
 }
-.pkg-filter {
-  padding: 0.55rem 1.6rem; border: 1px solid var(--border); border-radius: 100px;
-  font-family: 'Cairo', sans-serif; font-size: 0.8rem; font-weight: 500;
-  color: var(--text-dim); background: transparent; cursor: none;
-  transition: all 0.3s var(--transition);
+.pf:hover,.pf.on{background:rgba(201,168,108,0.08);border-color:var(--gold);color:var(--gold)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.pkg-card{
+  background:var(--black-3);border:1px solid var(--border);border-radius:4px;
+  padding:2.2rem;position:relative;overflow:hidden;
+  transition:transform 0.4s var(--spring),border-color 0.3s,box-shadow 0.4s;
 }
-.pkg-filter:hover, .pkg-filter.active { background: rgba(201,168,108,0.1); border-color: var(--gold); color: var(--gold); }
-.packages-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-  margin-top: 1rem;
+.pkg-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform 0.4s var(--ease);
 }
-.pkg-card {
-  background: var(--black-3); border: 1px solid var(--border); border-radius: 4px;
-  padding: 2.5rem; position: relative; overflow: hidden;
-  transition: all 0.4s var(--transition); cursor: none;
-  opacity: 0; transform: translateY(30px);
+.pkg-card:hover{transform:translateY(-5px);border-color:var(--border2);box-shadow:0 24px 60px rgba(0,0,0,0.55)}
+.pkg-card:hover::before{transform:scaleX(1)}
+.pkg-card.feat{border-color:rgba(201,168,108,0.3);background:rgba(201,168,108,0.03)}
+.pkg-card.feat::before{transform:scaleX(1)}
+.pkg-badge{
+  position:absolute;top:1rem;left:1rem;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));
+  color:var(--black);font-size:0.58rem;font-weight:700;
+  padding:0.25rem 0.7rem;border-radius:100px;letter-spacing:0.1em;
 }
-.pkg-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-  transform: scaleX(0); transition: transform 0.4s var(--transition);
+.pkg-num{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;color:rgba(201,168,108,0.12);line-height:1;margin-bottom:0.3rem}
+.pkg-type{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem}
+.pkg-name{font-size:1.3rem;font-weight:700;margin-bottom:0.5rem}
+.pkg-desc{font-size:0.8rem;line-height:1.75;color:var(--dim);margin-bottom:1.6rem}
+.pkg-price{display:flex;align-items:baseline;gap:0.3rem;margin-bottom:0.2rem}
+.pkg-amount{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pkg-unit{font-size:0.78rem;color:var(--dim)}
+.pkg-dur{font-size:0.72rem;color:var(--dim);margin-bottom:1.6rem;letter-spacing:0.04em}
+.pkg-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.pkg-tag{padding:0.22rem 0.65rem;border:1px solid var(--border);border-radius:100px;font-size:0.65rem;color:var(--dim);transition:all 0.3s}
+.pkg-card:hover .pkg-tag{border-color:rgba(201,168,108,0.22);color:var(--pearl)}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.8rem}
+.pkg-feats li{font-size:0.8rem;color:var(--dim);display:flex;gap:0.5rem;align-items:flex-start;line-height:1.5}
+.pkg-feats li::before{content:'◈';color:var(--gold);font-size:0.58rem;margin-top:0.22rem;flex-shrink:0}
+.pkg-btn{
+  display:block;text-align:center;padding:0.8rem;border-radius:2px;text-decoration:none;
+  font-size:0.8rem;font-weight:600;letter-spacing:0.04em;
+  border:1px solid var(--border2);color:var(--gold);transition:all 0.3s var(--ease);
 }
-.pkg-card:hover { border-color: var(--border-bright); transform: translateY(-6px); box-shadow: 0 24px 64px rgba(0,0,0,0.6); }
-.pkg-card:hover::before { transform: scaleX(1); }
-.pkg-card.featured { border-color: rgba(201,168,108,0.35); background: rgba(201,168,108,0.04); }
-.pkg-card.featured::before { transform: scaleX(1); }
-.pkg-badge {
-  position: absolute; top: 1.2rem; left: 1.2rem;
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: var(--black); font-size: 0.6rem; font-weight: 700;
-  padding: 0.3rem 0.8rem; border-radius: 100px; letter-spacing: 0.1em;
-  display: none;
-}
-.pkg-card.featured .pkg-badge { display: block; }
-.pkg-num {
-  font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300;
-  color: rgba(201,168,108,0.15); line-height: 1; margin-bottom: 0.5rem;
-}
-.pkg-type { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
-.pkg-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-.pkg-desc { font-size: 0.83rem; line-height: 1.7; color: var(--text-dim); margin-bottom: 2rem; }
-.pkg-price {
-  display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.3rem;
-}
-.pkg-price-num {
-  font-size: 2.4rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.pkg-price-unit { font-size: 0.8rem; color: var(--text-muted); }
-.pkg-duration { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 2rem; letter-spacing: 0.05em; }
-.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
-.pkg-features li {
-  display: flex; align-items: flex-start; gap: 0.6rem;
-  font-size: 0.82rem; line-height: 1.5; color: var(--text-dim);
-}
-.pkg-features li::before { content: '◈'; color: var(--gold); font-size: 0.6rem; margin-top: 0.25rem; flex-shrink: 0; }
-.pkg-visual {
-  display: flex; gap: 0.4rem; margin-bottom: 2rem; flex-wrap: wrap;
-}
-.pkg-moment {
-  padding: 0.3rem 0.7rem; border: 1px solid var(--border);
-  border-radius: 100px; font-size: 0.68rem; color: var(--text-dim); transition: all 0.3s;
-}
-.pkg-card:hover .pkg-moment { border-color: rgba(201,168,108,0.25); color: var(--pearl); }
-.pkg-cta {
-  display: block; text-align: center;
-  border: 1px solid var(--border-bright); color: var(--gold);
-  padding: 0.85rem; border-radius: 2px; text-decoration: none;
-  font-size: 0.83rem; font-weight: 600; letter-spacing: 0.05em;
-  transition: all 0.3s var(--transition);
-}
-.pkg-card.featured .pkg-cta { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); border: none; }
-.pkg-cta:hover { background: var(--gold); color: var(--black); }
-.pkg-card.featured .pkg-cta:hover { opacity: 0.9; }
-.pkg-hidden { display: none; }
+.pkg-btn:hover{background:var(--gold);color:var(--black)}
+.pkg-card.feat .pkg-btn{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);border:none}
+.pkg-card.feat .pkg-btn:hover{opacity:0.88}
 
 /* ─── PROCESS ─── */
-#process { padding: 8rem 0; background: var(--black); }
-.process-header { text-align: center; margin-bottom: 5rem; }
-.process-steps { display: flex; flex-direction: column; gap: 0; max-width: 760px; margin: 0 auto; }
-.process-step {
-  display: flex; gap: 2.5rem; align-items: flex-start; padding: 2.5rem 0;
-  border-bottom: 1px solid var(--border); position: relative;
-  opacity: 0; transform: translateX(30px);
+#process{background:var(--black)}
+.proc-list{max-width:740px;margin:0 auto}
+.proc-step{
+  display:flex;gap:2.5rem;padding:2.2rem 0;border-bottom:1px solid var(--border);
+  align-items:flex-start;
 }
-.process-step:last-child { border-bottom: none; }
-.process-step-left { flex-shrink: 0; width: 80px; text-align: center; }
-.process-step-num {
-  font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300;
-  line-height: 1; color: rgba(201,168,108,0.2); display: block;
-  transition: color 0.3s;
+.proc-step:last-child{border-bottom:none}
+.proc-left{flex-shrink:0;width:72px;text-align:center}
+.proc-num{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:300;line-height:1;color:rgba(201,168,108,0.18);display:block;transition:color 0.3s}
+.proc-step:hover .proc-num{color:rgba(201,168,108,0.45)}
+.proc-ico{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;margin:0 auto;
+  background:var(--black-2);transition:all 0.3s;
 }
-.process-step:hover .process-step-num { color: rgba(201,168,108,0.5); }
-.process-step-icon {
-  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center; margin: 0 auto;
-  background: var(--black-2); transition: all 0.3s;
-}
-.process-step:hover .process-step-icon { border-color: var(--gold); background: rgba(201,168,108,0.08); }
-.process-step-icon svg { width: 18px; height: 18px; stroke: var(--gold); stroke-width: 1.5; fill: none; }
-.process-step-right { flex: 1; padding-top: 0.5rem; }
-.process-step-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
-.process-step-body { font-size: 0.85rem; line-height: 1.8; color: var(--text-dim); }
+.proc-step:hover .proc-ico{border-color:var(--gold);background:rgba(201,168,108,0.07)}
+.proc-ico svg{width:16px;height:16px;stroke:var(--gold);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.proc-right{flex:1;padding-top:0.4rem}
+.proc-t{font-size:1.05rem;font-weight:700;margin-bottom:0.5rem}
+.proc-b{font-size:0.83rem;line-height:1.85;color:var(--dim)}
 
 /* ─── ADDONS ─── */
-#addons { padding: 7rem 0; background: var(--black-2); }
-.addons-header { text-align: center; margin-bottom: 4rem; }
-.addons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-.addon-card {
-  padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: 4px;
-  background: var(--black-3); text-align: center;
-  transition: all 0.3s var(--transition); cursor: none;
-  opacity: 0; transform: translateY(20px);
+#addons{background:var(--black-2)}
+.add-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.add-card{
+  padding:2rem 1.5rem;border:1px solid var(--border);border-radius:4px;
+  background:var(--black-3);text-align:center;
+  transition:all 0.3s var(--spring);
 }
-.addon-card:hover { border-color: var(--border-bright); background: rgba(201,168,108,0.04); transform: translateY(-4px); }
-.addon-icon { width: 48px; height: 48px; margin: 0 auto 1.2rem; stroke: var(--gold); fill: none; stroke-width: 1.5; }
-.addon-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.4rem; }
-.addon-en { font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.05em; font-family: 'Cormorant Garamond', serif; font-style: italic; margin-bottom: 1rem; }
-.addon-price { font-size: 1.5rem; font-weight: 900; color: var(--gold); }
-.addon-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem; }
+.add-card:hover{border-color:var(--border2);background:rgba(201,168,108,0.03);transform:translateY(-4px)}
+.add-ico{width:44px;height:44px;margin:0 auto 1.1rem;stroke:var(--gold);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.add-name{font-size:0.85rem;font-weight:700;margin-bottom:0.3rem}
+.add-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.68rem;color:rgba(245,240,232,0.35);margin-bottom:0.9rem;letter-spacing:0.04em}
+.add-price{font-size:1.5rem;font-weight:900;color:var(--gold)}
+.add-note{font-size:0.68rem;color:var(--dim);margin-top:0.2rem}
 
 /* ─── CITIES ─── */
-#cities { padding: 8rem 0; background: var(--black); }
-.cities-header { text-align: center; margin-bottom: 4rem; }
-.cities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.city-card {
-  position: relative; border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
-  padding: 2.5rem 2rem; background: var(--black-3); cursor: none;
-  transition: all 0.4s var(--transition); group: true;
-  opacity: 0; transform: scale(0.95);
+#cities{background:var(--black)}
+.city-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.city-card{
+  padding:2.2rem 2rem;border:1px solid var(--border);border-radius:4px;
+  background:var(--black-3);position:relative;overflow:hidden;
+  transition:all 0.4s var(--spring);
 }
-.city-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, rgba(201,168,108,0.08) 0%, transparent 70%);
-  opacity: 0; transition: opacity 0.4s;
+.city-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(201,168,108,0.07) 0%,transparent 70%);
+  opacity:0;transition:opacity 0.4s;
 }
-.city-card:hover::before { opacity: 1; }
-.city-card:hover { border-color: var(--border-bright); transform: translateY(-4px) scale(1); }
-.city-num { font-family: 'Cormorant Garamond', serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 0.8rem; display: block; }
-.city-name-ar { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.2rem; }
-.city-name-en { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.2rem; }
-.city-desc { font-size: 0.8rem; line-height: 1.7; color: var(--text-dim); margin-bottom: 1.5rem; }
-.city-link {
-  font-size: 0.75rem; color: var(--gold); text-decoration: none; letter-spacing: 0.08em;
-  display: flex; align-items: center; gap: 0.4rem;
-  transition: gap 0.3s;
-}
-.city-card:hover .city-link { gap: 0.7rem; }
-.city-link::after { content: '←'; font-size: 0.8rem; }
+.city-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.city-card:hover::before{opacity:1}
+.city-n{font-family:'Cormorant Garamond',serif;font-size:0.6rem;letter-spacing:0.28em;color:var(--gold);margin-bottom:0.7rem;display:block}
+.city-ar{font-size:1.4rem;font-weight:700;margin-bottom:0.2rem}
+.city-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:var(--dim);margin-bottom:1.1rem}
+.city-b{font-size:0.78rem;line-height:1.72;color:var(--dim);margin-bottom:1.4rem}
+.city-lnk{font-size:0.73rem;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:0.35rem;transition:gap 0.3s}
+.city-card:hover .city-lnk{gap:0.65rem}
+.city-lnk::after{content:'←'}
 
 /* ─── TRUST ─── */
-#trust { padding: 8rem 0; background: var(--black-2); position: relative; }
-#trust::before, #trust::after {
-  content: ''; position: absolute; left: 0; right: 0; height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+#trust{background:var(--black-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-item{padding:3rem 2rem;border-right:1px solid var(--border);text-align:center}
+.trust-item:last-child{border-right:none}
+.trust-num{
+  font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;line-height:1;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;margin-bottom:0.3rem;
 }
-#trust::before { top: 0; }
-#trust::after { bottom: 0; }
-.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-.trust-item {
-  padding: 3rem 2rem; border-right: 1px solid var(--border); text-align: center;
-  opacity: 0; transform: translateY(20px);
-}
-.trust-item:last-child { border-right: none; }
-.trust-num {
-  font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  display: block; line-height: 1; margin-bottom: 0.4rem;
-}
-.trust-label { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.3rem; }
-.trust-sub { font-size: 0.75rem; color: var(--text-muted); }
+.trust-lbl{font-size:0.85rem;font-weight:700;margin-bottom:0.2rem}
+.trust-sub{font-size:0.72rem;color:var(--dim)}
 
 /* ─── FUNNEL ─── */
-#funnel { padding: 8rem 0; background: var(--black); }
-.funnel-header { text-align: center; margin-bottom: 5rem; }
-.funnel-steps {
-  display: flex; gap: 1px; max-width: 900px; margin: 0 auto;
-  position: relative;
+#funnel{background:var(--black)}
+.funnel-steps{display:flex;gap:2px;max-width:860px;margin:0 auto}
+.fn-step{
+  flex:1;padding:2.5rem 1.2rem;text-align:center;background:var(--black-3);
+  border:1px solid var(--border);position:relative;
+  clip-path:polygon(0 0,85% 0,100% 50%,85% 100%,0 100%,15% 50%);
+  transition:background 0.3s;
 }
-.funnel-step {
-  flex: 1; padding: 3rem 1.5rem; text-align: center; position: relative;
-  background: var(--black-3); border: 1px solid var(--border);
-  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%, 15% 50%);
-  transition: all 0.3s; cursor: none;
-  opacity: 0; transform: translateX(-20px);
-}
-.funnel-step:first-child { clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%); }
-.funnel-step:last-child { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15% 50%); }
-.funnel-step:hover { background: rgba(201,168,108,0.06); }
-.funnel-num {
-  font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300;
-  color: rgba(201,168,108,0.3); display: block; line-height: 1;
-}
-.funnel-title { font-size: 0.9rem; font-weight: 700; margin: 0.5rem 0 0.4rem; }
-.funnel-body { font-size: 0.72rem; color: var(--text-dim); line-height: 1.6; }
+.fn-step:first-child{clip-path:polygon(0 0,85% 0,100% 50%,85% 100%,0 100%)}
+.fn-step:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,15% 50%)}
+.fn-step:hover{background:rgba(201,168,108,0.05)}
+.fn-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:rgba(201,168,108,0.28);display:block;line-height:1}
+.fn-t{font-size:0.85rem;font-weight:700;margin:0.4rem 0 0.3rem}
+.fn-b{font-size:0.7rem;color:var(--dim);line-height:1.6}
 
 /* ─── FAQ ─── */
-#faq { padding: 8rem 0; background: var(--black-2); }
-.faq-header { text-align: center; margin-bottom: 4rem; }
-.faq-list { max-width: 760px; margin: 0 auto; }
-.faq-item {
-  border-bottom: 1px solid var(--border); overflow: hidden;
-  opacity: 0; transform: translateY(15px);
+#faq{background:var(--black-2)}
+.faq-list{max-width:740px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{
+  width:100%;background:none;border:none;color:var(--pearl);
+  font-family:'Cairo',sans-serif;font-size:0.97rem;font-weight:600;
+  padding:1.4rem 0;cursor:pointer;text-align:right;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  transition:color 0.3s;
 }
-.faq-question {
-  width: 100%; background: none; border: none; color: var(--pearl);
-  font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 600;
-  padding: 1.5rem 0; cursor: none; text-align: right;
-  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-  transition: color 0.3s;
+.faq-q:hover{color:var(--gold-light)}
+.faq-ico{
+  width:24px;height:24px;border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-size:0.85rem;color:var(--gold);transition:all 0.3s;
 }
-.faq-question:hover { color: var(--gold-light); }
-.faq-icon {
-  width: 24px; height: 24px; border: 1px solid var(--border); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: all 0.3s; font-size: 0.9rem; color: var(--gold);
+.faq-item.open .faq-ico{background:var(--gold);color:var(--black);border-color:var(--gold);transform:rotate(45deg)}
+.faq-a{
+  font-size:0.85rem;line-height:1.9;color:var(--dim);
+  max-height:0;overflow:hidden;transition:max-height 0.4s var(--ease),padding 0.3s;
 }
-.faq-item.open .faq-icon { background: var(--gold); color: var(--black); border-color: var(--gold); transform: rotate(45deg); }
-.faq-answer {
-  font-size: 0.88rem; line-height: 1.9; color: var(--text-dim);
-  max-height: 0; overflow: hidden; transition: max-height 0.4s var(--transition), padding 0.3s;
-  padding-bottom: 0;
+.faq-item.open .faq-a{max-height:300px;padding-bottom:1.4rem}
+
+/* ─── LOGO SECTION ─── */
+#logo-sec{
+  padding:6rem 0;background:var(--black);text-align:center;
+  position:relative;overflow:hidden;
 }
-.faq-item.open .faq-answer { max-height: 300px; padding-bottom: 1.5rem; }
+#logo-sec::before{
+  content:'AS';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:35vw;font-weight:900;color:rgba(201,168,108,0.02);
+  pointer-events:none;font-family:'Cairo',sans-serif;letter-spacing:-0.05em;
+  white-space:nowrap;line-height:1;
+}
+.logo-display{
+  width:180px;height:180px;margin:0 auto 2rem;
+  filter:drop-shadow(0 0 60px rgba(201,168,108,0.3));
+  animation:logoFloat 6s ease-in-out infinite;
+}
+@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-8px) rotate(0.5deg)}66%{transform:translateY(-4px) rotate(-0.3deg)}}
 
 /* ─── CTA FINAL ─── */
-#cta-final {
-  padding: 10rem 0; background: var(--black); position: relative; overflow: hidden;
-  text-align: center;
+#cta-final{
+  padding:10rem 0;background:var(--black);position:relative;overflow:hidden;text-align:center;
 }
-#cta-final::before {
-  content: 'أسماء';
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  font-size: 25vw; font-weight: 900; color: rgba(201,168,108,0.03);
-  pointer-events: none; white-space: nowrap; line-height: 1;
+#cta-final::before{
+  content:'أسماء';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:28vw;font-weight:900;color:rgba(201,168,108,0.025);pointer-events:none;
+  white-space:nowrap;line-height:1;
 }
-.cta-final-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.5rem; display: block; }
-.cta-final-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; margin-bottom: 1.5rem; line-height: 1.1; opacity: 0; transform: translateY(30px); }
-.cta-final-body { font-size: 1rem; line-height: 1.9; color: var(--text-dim); max-width: 520px; margin: 0 auto 3rem; opacity: 0; }
-.cta-final-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; }
-.wa-btn {
-  display: flex; align-items: center; gap: 0.7rem;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  color: white; padding: 1rem 2.5rem; border-radius: 2px; text-decoration: none;
-  font-family: 'Cairo', sans-serif; font-size: 0.9rem; font-weight: 700;
-  transition: all 0.3s; cursor: none; box-shadow: 0 8px 32px rgba(37,211,102,0.2);
+.cta-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.8rem;letter-spacing:0.2em;color:var(--gold);display:block;margin-bottom:1.2rem}
+.cta-title{font-size:clamp(2.4rem,5.5vw,4.5rem);font-weight:700;margin-bottom:1.4rem;line-height:1.08}
+.cta-body{font-size:0.97rem;line-height:1.9;color:var(--dim);max-width:500px;margin:0 auto 2.8rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.wa-btn{
+  display:flex;align-items:center;gap:0.7rem;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:white;padding:1rem 2.4rem;border-radius:2px;text-decoration:none;
+  font-family:'Cairo',sans-serif;font-size:0.88rem;font-weight:700;
+  transition:all 0.3s;box-shadow:0 8px 32px rgba(37,211,102,0.18);
 }
-.wa-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(37,211,102,0.35); }
-.wa-btn svg { width: 20px; height: 20px; fill: white; }
+.wa-btn:hover{transform:translateY(-3px);box-shadow:0 18px 50px rgba(37,211,102,0.32)}
+.wa-btn svg{width:20px;height:20px;fill:white;flex-shrink:0}
 
 /* ─── FOOTER ─── */
-footer {
-  background: var(--black-2); border-top: 1px solid var(--border);
-  padding: 4rem 0 2rem;
-}
-.footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-.footer-top {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 3rem; gap: 3rem; flex-wrap: wrap;
-}
-.footer-brand { flex: 1; min-width: 200px; }
-.footer-logo-ar { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.footer-logo-en { font-family: 'Cormorant Garamond', serif; font-size: 0.65rem; letter-spacing: 0.3em; color: var(--gold); opacity: 0.6; display: block; margin-bottom: 0.8rem; }
-.footer-tagline { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; }
-.footer-links { display: flex; gap: 3rem; flex-wrap: wrap; }
-.footer-col h4 { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.footer-col a { font-size: 0.82rem; color: var(--text-dim); text-decoration: none; transition: color 0.3s; }
-.footer-col a:hover { color: var(--pearl); }
-.footer-bottom {
-  border-top: 1px solid var(--border); padding-top: 1.5rem;
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-}
-.footer-copy { font-size: 0.75rem; color: var(--text-muted); }
-.footer-social { display: flex; gap: 1rem; align-items: center; }
-.footer-social a { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; text-decoration: none; }
-.footer-social a:hover { border-color: var(--gold); background: rgba(201,168,108,0.08); }
-.footer-social svg { width: 16px; height: 16px; fill: var(--text-dim); transition: fill 0.3s; }
-.footer-social a:hover svg { fill: var(--gold); }
-.footer-license { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 1rem; }
-
-/* ─── REVEAL ANIMATIONS ─── */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--transition-slow), transform 0.7s var(--transition-slow); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+footer{background:var(--black-2);border-top:1px solid var(--border);padding:4rem 0 2rem}
+.ft-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3rem;gap:3rem;flex-wrap:wrap}
+.ft-brand{flex:1;min-width:180px}
+.ft-logo-mark{width:48px;height:48px;margin-bottom:0.8rem;filter:drop-shadow(0 0 10px rgba(201,168,108,0.25))}
+.ft-name{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ft-name-en{font-family:'Cormorant Garamond',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--gold);opacity:0.6;display:block;margin-bottom:0.7rem}
+.ft-tag{font-size:0.78rem;color:var(--dim);line-height:1.65}
+.ft-links{display:flex;gap:3rem;flex-wrap:wrap}
+.ft-col h4{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:0.55rem}
+.ft-col a{font-size:0.8rem;color:var(--dim);text-decoration:none;transition:color 0.3s}
+.ft-col a:hover{color:var(--pearl)}
+.ft-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-copy{font-size:0.72rem;color:var(--dim)}
+.ft-social{display:flex;gap:0.8rem}
+.ft-social a{width:34px;height:34px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none}
+.ft-social a:hover{border-color:var(--gold);background:rgba(201,168,108,0.08)}
+.ft-social svg{width:15px;height:15px;fill:var(--dim);transition:fill 0.3s}
+.ft-social a:hover svg{fill:var(--gold)}
+.ft-lic{font-size:0.66rem;color:var(--dim);text-align:center;margin-top:1rem;opacity:0.6}
 
 /* ─── MOBILE ─── */
-@media (max-width: 900px) {
-  nav { padding: 1.2rem 1.5rem; }
-  nav.scrolled { padding: 0.8rem 1.5rem; }
-  .nav-links { display: none; }
-  .philosophy-grid { grid-template-columns: repeat(2, 1fr); }
-  .philosophy-card { border-bottom: 1px solid var(--border); }
-  .philosophy-card:nth-child(odd) { border-right: 1px solid var(--border); }
-  .philosophy-card:nth-child(even) { border-right: none; }
-  .packages-grid { grid-template-columns: 1fr; }
-  .addons-grid { grid-template-columns: repeat(2, 1fr); }
-  .cities-grid { grid-template-columns: repeat(2, 1fr); }
-  .trust-grid { grid-template-columns: repeat(2, 1fr); }
-  .trust-item:nth-child(odd) { border-right: 1px solid var(--border); }
-  .trust-item:nth-child(even) { border-right: none; }
-  .trust-item { border-bottom: 1px solid var(--border); }
-  .funnel-steps { flex-direction: column; }
-  .funnel-step { clip-path: none !important; }
-  .journey-timeline { flex-direction: column; align-items: flex-end; }
-  .journey-timeline::before { display: none; }
+@media(max-width:960px){
+  nav{padding:1.1rem 1.5rem}
+  nav.scrolled{padding:0.7rem 1.5rem}
+  .nav-links{display:none}
+  .phi-grid{grid-template-columns:repeat(2,1fr)}
+  .phi-card:nth-child(2){border-right:none}
+  .phi-card{border-bottom:1px solid var(--border)}
+  .pkg-grid{grid-template-columns:1fr}
+  .add-grid{grid-template-columns:repeat(2,1fr)}
+  .city-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-item:nth-child(odd){border-right:1px solid var(--border)}
+  .trust-item:nth-child(even){border-right:none}
+  .trust-item{border-bottom:1px solid var(--border)}
+  .funnel-steps{flex-direction:column;gap:0}
+  .fn-step{clip-path:none!important;border-bottom:1px solid var(--border)}
+  .tl-track{flex-direction:column;align-items:flex-end;gap:0}
+  .tl-track::before{display:none}
+  .tl-step{flex-direction:row;text-align:right;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);width:100%}
+  .tl-dot{flex-shrink:0;width:60px;height:60px}
+  .ft-top{flex-direction:column}
 }
-@media (max-width: 600px) {
-  .addons-grid, .cities-grid, .philosophy-grid { grid-template-columns: 1fr; }
-  .philosophy-card { border-right: none !important; }
+@media(max-width:600px){
+  .add-grid,.city-grid,.phi-grid{grid-template-columns:1fr}
+  .phi-card:nth-child(odd){border-right:none}
+  .hero-title-ar{font-size:clamp(2.5rem,12vw,4rem)}
+  .hero-logo-display{width:80px;height:80px}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
-<div class="grain"></div>
+<!-- SVG gradient definitions (hidden) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2C78A"/>
+      <stop offset="50%" stop-color="#C9A86C"/>
+      <stop offset="100%" stop-color="#9A7840"/>
+    </linearGradient>
+    <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0E0C0"/>
+      <stop offset="50%" stop-color="#C9A86C"/>
+      <stop offset="100%" stop-color="#8B6420"/>
+    </linearGradient>
+  </defs>
+</svg>
 
 <!-- ─── NAV ─── -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <span class="nav-logo-ar">أسماء</span>
-    <span class="nav-logo-en">ASMAA STUDIO</span>
+    <svg class="logo-mark" width="36" height="36" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 8 L82 95 M50 8 L18 95 M30 60 L70 60 M22 80 L50 8 L78 80" stroke="url(#goldGrad2)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M10 95 L50 8 L90 95" stroke="url(#goldGrad2)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.4"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-ar">أسماء</span>
+      <span class="nav-logo-en">ASMAA STUDIO</span>
+    </div>
   </a>
   <ul class="nav-links">
     <li><a href="#journey">اللحظات</a></li>
@@ -661,771 +552,400 @@ footer {
   <canvas id="hero-canvas"></canvas>
   <div class="hero-vignette"></div>
   <div class="hero-content">
-    <div class="hero-tag" id="hero-tag">سينما الأعراس السعودية · Eastern Province</div>
-    <h1 class="hero-title-ar" id="hero-title-ar">فيلم يوقف<br><span>الوقت.</span></h1>
-    <p class="hero-title-en" id="hero-title-en">Saudi wedding cinema composed like a memory</p>
-    <p class="hero-subtitle" id="hero-subtitle">من أول نفس قبل الدخول إلى آخر لقطة في الزفة، نصمم الفيلم كقصة هادئة تعرف متى تقترب، ومتى تحفظ التفاصيل التي لا تعاد.</p>
-    <div class="hero-ctas" id="hero-ctas">
-      <a href="#packages" class="btn-primary">شاهدي الباقات</a>
+    <div class="hero-tag">سينما الأعراس السعودية · Eastern Province</div>
+
+    <!-- Real logo as SVG monogram -->
+    <svg class="hero-logo-display" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hg1" x1="0" y1="0" x2="200" y2="220" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#F0E0C0"/>
+          <stop offset="35%" stop-color="#E2C78A"/>
+          <stop offset="65%" stop-color="#C9A86C"/>
+          <stop offset="100%" stop-color="#8B6420"/>
+        </linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- Main monogram: interlocking A/diamond shape -->
+      <g filter="url(#glow)" stroke="url(#hg1)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Left A -->
+        <polyline points="20,200 100,20 180,200" stroke-width="11"/>
+        <!-- Inner crossbar -->
+        <line x1="52" y1="130" x2="148" y2="130" stroke-width="9"/>
+        <!-- Second overlapping A (offset) -->
+        <polyline points="10,200 100,10 190,200" stroke-width="7" opacity="0.45"/>
+        <!-- Diamond center highlight -->
+        <polyline points="100,20 148,130 100,200 52,130 100,20" stroke-width="6" opacity="0.55"/>
+      </g>
+    </svg>
+
+    <h1 class="hero-title-ar">فيلم يوقف<br><span class="gold">الوقت.</span></h1>
+    <p class="hero-sub-en">Saudi wedding cinema composed like a memory</p>
+    <p class="hero-desc">من أول نفس قبل الدخول إلى آخر لقطة في الزفة، نصمم الفيلم كقصة هادئة تعرف متى تقترب، ومتى تحفظ التفاصيل التي لا تعاد.</p>
+    <div class="hero-ctas">
+      <a href="#packages" class="btn-gold">شاهدي الباقات</a>
       <a href="https://asmaa.video/portfolio" class="btn-ghost">الألبوم السينمائي</a>
     </div>
   </div>
-  <div class="hero-scroll" id="hero-scroll">
-    <span class="hero-scroll-text">اكتشفي</span>
+  <div class="hero-scroll">
+    <span>اكتشفي</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
 
+<!-- ─── LOGO FEATURE ─── -->
+<section id="logo-sec">
+  <svg class="logo-display" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="lg1" x1="0" y1="0" x2="200" y2="220" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#F0E0C0"/>
+        <stop offset="40%" stop-color="#E2C78A"/>
+        <stop offset="70%" stop-color="#C9A86C"/>
+        <stop offset="100%" stop-color="#7A5420"/>
+      </linearGradient>
+      <filter id="bigGlow"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g filter="url(#bigGlow)" stroke="url(#lg1)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <polyline points="20,200 100,20 180,200" stroke-width="11"/>
+      <line x1="52" y1="130" x2="148" y2="130" stroke-width="9"/>
+      <polyline points="10,200 100,10 190,200" stroke-width="7" opacity="0.4"/>
+      <polyline points="100,20 148,130 100,200 52,130 100,20" stroke-width="6" opacity="0.5"/>
+    </g>
+  </svg>
+  <p class="rv" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--dim);letter-spacing:0.12em">ASMAA STUDIO</p>
+  <p class="rv d1" style="font-size:0.72rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-top:0.5rem;opacity:0.7">Eastern Province · Saudi Wedding Cinema</p>
+</section>
+
 <!-- ─── PHILOSOPHY ─── -->
-<section id="philosophy">
-  <div class="section-inner">
-    <div style="text-align:center;margin-bottom:1rem">
-      <span class="section-label reveal">ما يميّزنا</span>
-      <h2 class="section-title reveal">أربعة مبادئ<br>تصنع الفيلم الحقيقي</h2>
+<section class="sec" id="philosophy" style="background:var(--black-2)">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">ما يميّزنا</span>
+      <h2 class="title rv d1">أربعة مبادئ<br>تصنع الفيلم الحقيقي</h2>
     </div>
-    <div class="philosophy-grid">
-      <div class="philosophy-card">
-        <div class="philosophy-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        </div>
-        <span class="philosophy-num">٠١</span>
-        <h3 class="philosophy-title">نسيج سعودي شرقي</h3>
-        <p class="philosophy-body">قاعات الأحساء والدمام والخبر بلغة محلية، ليس تصويراً مستورداً.</p>
-      </div>
-      <div class="philosophy-card">
-        <div class="philosophy-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-        </div>
-        <span class="philosophy-num">٠٢</span>
-        <h3 class="philosophy-title">لحظة First Look</h3>
-        <p class="philosophy-body">نقتنص نظرة العريس الأولى قبل أن تذوب في زحمة القاعة.</p>
-      </div>
-      <div class="philosophy-card">
-        <div class="philosophy-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <span class="philosophy-num">٠٣</span>
-        <h3 class="philosophy-title">تسليم ٢–٦ أسابيع</h3>
-        <p class="philosophy-body">مدة مكتوبة في الاتفاق قبل التحويل، لا انتظار مفتوح.</p>
-      </div>
-      <div class="philosophy-card">
-        <div class="philosophy-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        </div>
-        <span class="philosophy-num">٠٤</span>
-        <h3 class="philosophy-title">وضوح قبل التحويل</h3>
-        <p class="philosophy-body">اتفاق مكتوب، إيصال بنكي، وتفاصيل تسليم واضحة قبل أي تحويل.</p>
-      </div>
+    <div class="phi-grid">
+      <div class="phi-card rv"><div class="phi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10"/><path d="m9 12 2 2 4-4"/></svg></div><span class="phi-n">٠١</span><h3 class="phi-t">نسيج سعودي شرقي</h3><p class="phi-b">قاعات الأحساء والدمام والخبر بلغة محلية، ليس تصويراً مستورداً.</p></div>
+      <div class="phi-card rv d1"><div class="phi-icon"><svg viewBox="0 0 24 24"><path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0zM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0zM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003z"/></svg></div><span class="phi-n">٠٢</span><h3 class="phi-t">لحظة First Look</h3><p class="phi-b">نقتنص نظرة العريس الأولى قبل أن تذوب في زحمة القاعة.</p></div>
+      <div class="phi-card rv d2"><div class="phi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span class="phi-n">٠٣</span><h3 class="phi-t">تسليم ٢–٦ أسابيع</h3><p class="phi-b">مدة مكتوبة في الاتفاق قبل التحويل، لا انتظار مفتوح.</p></div>
+      <div class="phi-card rv d3"><div class="phi-icon"><svg viewBox="0 0 24 24"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div><span class="phi-n">٠٤</span><h3 class="phi-t">وضوح قبل التحويل</h3><p class="phi-b">اتفاق مكتوب، إيصال بنكي، وتفاصيل تسليم واضحة قبل أي تحويل.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ─── JOURNEY TIMELINE ─── -->
-<section id="journey">
-  <div class="section-inner">
-    <div class="journey-header">
-      <span class="section-label reveal">رحلة يوم واحد</span>
-      <h2 class="section-title reveal">من الصالون إلى <span class="gold-text">آخر لقطة</span></h2>
-      <p class="section-body reveal" style="margin:0 auto">كل لحظة في يومك لها وظيفة بصرية — نعرف متى ندخل، ومتى نترك المسافة.</p>
+<!-- ─── TIMELINE ─── -->
+<section class="sec" id="journey">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">رحلة يوم واحد</span>
+      <h2 class="title rv d1">من الصالون إلى <span class="gold-t">آخر لقطة</span></h2>
+      <p class="body-text rv d2">كل لحظة في يومك لها وظيفة بصرية — نعرف متى ندخل، ومتى نترك المسافة.</p>
     </div>
-    <div class="journey-timeline">
-      <div class="journey-step">
-        <div class="journey-dot">
-          <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-        </div>
-        <span class="journey-step-num">٠١</span>
-        <span class="journey-step-title">الصالون</span>
-        <span class="journey-step-body">تفاصيل المكياج والشعر</span>
-        <span class="journey-step-time">Full Day فقط</span>
-      </div>
-      <div class="journey-step">
-        <div class="journey-dot">
-          <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-        </div>
-        <span class="journey-step-num">٠٢</span>
-        <span class="journey-step-title">First Look</span>
-        <span class="journey-step-body">اللقاء الأول الهادئ</span>
-        <span class="journey-step-time">Half Day+</span>
-      </div>
-      <div class="journey-step">
-        <div class="journey-dot">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-        </div>
-        <span class="journey-step-num">٠٣</span>
-        <span class="journey-step-title">التفاصيل</span>
-        <span class="journey-step-body">مجوهرات، مسكة، عطر</span>
-        <span class="journey-step-time">Half Day+</span>
-      </div>
-      <div class="journey-step">
-        <div class="journey-dot">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <span class="journey-step-num">٠٤</span>
-        <span class="journey-step-title">القاعة</span>
-        <span class="journey-step-body">الكوشة والديكور</span>
-        <span class="journey-step-time">بكج 02+</span>
-      </div>
-      <div class="journey-step">
-        <div class="journey-dot">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <span class="journey-step-num">٠٥</span>
-        <span class="journey-step-title">الزفة</span>
-        <span class="journey-step-body">لحظة الدخول الكبرى</span>
-        <span class="journey-step-time">كل الباقات</span>
-      </div>
-      <div class="journey-step">
-        <div class="journey-dot">
-          <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-        </div>
-        <span class="journey-step-num">٠٦</span>
-        <span class="journey-step-title">الفيلم</span>
-        <span class="journey-step-body">تسليم في ٢–٦ أسابيع</span>
-        <span class="journey-step-time">مكفول في العقد</span>
-      </div>
+    <div class="tl-track">
+      <div class="tl-step rv"><div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div><span class="tl-n">٠١</span><span class="tl-t">الصالون</span><span class="tl-b">مكياج وشعر</span><span class="tl-tag">Full Day</span></div>
+      <div class="tl-step rv d1"><div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></div><span class="tl-n">٠٢</span><span class="tl-t">First Look</span><span class="tl-b">اللقاء الأول</span><span class="tl-tag">Half Day+</span></div>
+      <div class="tl-step rv d2"><div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0z"/></svg></div><span class="tl-n">٠٣</span><span class="tl-t">التفاصيل</span><span class="tl-b">مجوهرات وعطر</span><span class="tl-tag">Half Day+</span></div>
+      <div class="tl-step rv d3"><div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg></div><span class="tl-n">٠٤</span><span class="tl-t">القاعة</span><span class="tl-b">كوشة وديكور</span><span class="tl-tag">بكج 02+</span></div>
+      <div class="tl-step rv d4"><div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5z"/></svg></div><span class="tl-n">٠٥</span><span class="tl-t">الزفة</span><span class="tl-b">لحظة الدخول</span><span class="tl-tag">كل الباقات</span></div>
+      <div class="tl-step rv d5"><div class="tl-dot"><svg viewBox="0 0 24 24"><path d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25z"/></svg></div><span class="tl-n">٠٦</span><span class="tl-t">الفيلم</span><span class="tl-b">٢–٦ أسابيع</span><span class="tl-tag">مكفول</span></div>
     </div>
   </div>
 </section>
 
 <!-- ─── PACKAGES ─── -->
-<section id="packages">
-  <div class="section-inner">
-    <div class="packages-header">
-      <span class="section-label reveal">الباقات التفاعلية</span>
-      <h2 class="section-title reveal">اختاري <span class="gold-text">فيلم يومك</span></h2>
-      <p class="section-body reveal" style="margin:0 auto;max-width:540px">كل باقة مصممة حول لحظات محددة — اختاري ما يشبه يومك، لا ما يناسب الميزانية فقط.</p>
+<section class="sec" id="packages" style="background:var(--black-2)">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">الباقات التفاعلية</span>
+      <h2 class="title rv d1">اختاري <span class="gold-t">فيلم يومك</span></h2>
+      <p class="body-text rv d2">كل باقة مصممة حول لحظات محددة — اختاري ما يشبه يومك.</p>
     </div>
     <div class="pkg-filters">
-      <button class="pkg-filter active" data-filter="all">الكل</button>
-      <button class="pkg-filter" data-filter="zaffa">زفة</button>
-      <button class="pkg-filter" data-filter="half">Half Day</button>
-      <button class="pkg-filter" data-filter="full">Full Day</button>
-      <button class="pkg-filter" data-filter="engagement">خطوبة</button>
+      <button class="pf on" data-f="all">الكل</button>
+      <button class="pf" data-f="zaffa">زفة</button>
+      <button class="pf" data-f="half">Half Day</button>
+      <button class="pf" data-f="full">Full Day</button>
+      <button class="pf" data-f="eng">خطوبة</button>
     </div>
-    <div class="packages-grid">
+    <div class="pkg-grid">
+      <div class="pkg-card rv" data-p="zaffa"><div class="pkg-num">01</div><div class="pkg-type">ENTRY · ZAFFA</div><h3 class="pkg-name">بكج الزفة</h3><p class="pkg-desc">توثيق لحظة الدخول بإضاءة جميلة ومونتاج مختصر.</p><div class="pkg-price"><span class="pkg-amount">600</span><span class="pkg-unit">ريال</span></div><div class="pkg-dur">⏱ 20 دقيقة</div><div class="pkg-tags"><span class="pkg-tag">🎬 الزفة</span><span class="pkg-tag">💡 مون لايت</span><span class="pkg-tag">🎞 مونتاج</span></div><ul class="pkg-feats"><li>حضور قبل الزفة بربع ساعة</li><li>تصوير سينمائي بإضاءة احترافية</li><li>إضاءة مون لايت مشمولة</li></ul><a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج الزفة 600 ريال" class="pkg-btn">اسألي عن التوفر</a></div>
 
-      <div class="pkg-card" data-pkg="zaffa">
-        <div class="pkg-num">01</div>
-        <div class="pkg-type">ENTRY · ZAFFA</div>
-        <h3 class="pkg-name">بكج الزفة</h3>
-        <p class="pkg-desc">توثيق لحظة الدخول بإضاءة جميلة ومونتاج مختصر. لمن تريد ذكرى واضحة للزفة فقط.</p>
-        <div class="pkg-price">
-          <span class="pkg-price-num">600</span>
-          <span class="pkg-price-unit">ريال</span>
-        </div>
-        <div class="pkg-duration">⏱ 20 دقيقة تصوير</div>
-        <div class="pkg-visual">
-          <span class="pkg-moment">🎬 الزفة</span>
-          <span class="pkg-moment">💡 الإضاءة</span>
-          <span class="pkg-moment">🎞 مونتاج</span>
-        </div>
-        <ul class="pkg-features">
-          <li>حضور قبل الزفة بربع ساعة</li>
-          <li>تصوير سينمائي بإضاءة وترتيب واضح</li>
-          <li>إضاءة مون لايت مشمولة</li>
-          <li>مونتاج مختصر واضح</li>
-        </ul>
-        <a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج الزفة 600 ريال" class="pkg-cta">اسألي عن التوفر</a>
+      <div class="pkg-card rv d1" data-p="zaffa"><div class="pkg-num">02</div><div class="pkg-type">SIGNATURE · ZAFFA+</div><h3 class="pkg-name">بكج الزفة المطور</h3><p class="pkg-desc">الزفة مع تفاصيل الكوشة والكيك ولقطات القاعة.</p><div class="pkg-price"><span class="pkg-amount">1,200</span><span class="pkg-unit">ريال</span></div><div class="pkg-dur">⏱ ساعة كاملة</div><div class="pkg-tags"><span class="pkg-tag">🏛 القاعة</span><span class="pkg-tag">🎂 الكيك</span><span class="pkg-tag">✨ الكوشة</span><span class="pkg-tag">🎬 الزفة</span></div><ul class="pkg-feats"><li>تفاصيل القاعة والكوشة قبل الدخول</li><li>لقطات قريبة للكعكة والديكور</li><li>مونتاج منسق ومرتب</li></ul><a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج الزفة المطور 1200 ريال" class="pkg-btn">اسألي عن التوفر</a></div>
+
+      <div class="pkg-card feat rv d2" data-p="half"><div class="pkg-badge">⭐ الأكثر طلبًا</div><div class="pkg-num">03</div><div class="pkg-type">SIGNATURE · HALF DAY</div><h3 class="pkg-name">Half Day</h3><p class="pkg-desc">First Look + تفاصيل العروس + الكوشة + كواليس + زفة.</p><div class="pkg-price"><span class="pkg-amount">1,700</span><span class="pkg-unit">ريال</span></div><div class="pkg-dur">⏱ 3 ساعات</div><div class="pkg-tags"><span class="pkg-tag">👁 First Look</span><span class="pkg-tag">💎 التفاصيل</span><span class="pkg-tag">📸 كواليس</span><span class="pkg-tag">🎬 الزفة</span></div><ul class="pkg-feats"><li>تفاصيل المجوهرات والمسكة والعطر</li><li>لقطات مشاعر عفوية مع الأهل</li><li>First Look كاملة + كواليس الفوتو</li></ul><a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج Half Day 1700 ريال" class="pkg-btn">اسألي عن التوفر</a></div>
+
+      <div class="pkg-card rv" data-p="full" style="border-color:rgba(201,168,108,0.2)"><div class="pkg-badge" style="background:linear-gradient(135deg,#C9A86C,#8B6420)">أعلى قيمة</div><div class="pkg-num">04</div><div class="pkg-type">FULL STORY · ALL DAY</div><h3 class="pkg-name">Full Day</h3><p class="pkg-desc">من الصالون إلى القاعة — التغطية الكاملة مع زفتين.</p><div class="pkg-price"><span class="pkg-amount">2,500</span><span class="pkg-unit">ريال</span></div><div class="pkg-dur">⏱ 6 ساعات</div><div class="pkg-tags"><span class="pkg-tag">💄 الصالون</span><span class="pkg-tag">👁 First Look</span><span class="pkg-tag">🏛 القاعة</span><span class="pkg-tag">🎬 زفتان</span></div><ul class="pkg-feats"><li>من تفاصيل المكياج حتى نهاية الزفة</li><li>تفاصيل القاعة والكوشة كاملة</li><li>مونتاج سينمائي مطول</li></ul><a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج Full Day 2500 ريال" class="pkg-btn">اسألي عن التوفر</a></div>
+
+      <div class="pkg-card rv d1" data-p="eng"><div class="pkg-num">05</div><div class="pkg-type">ENGAGEMENT · خطوبة وملكة</div><h3 class="pkg-name">بكج الخطوبة</h3><p class="pkg-desc">تفاصيل العروس والكوشة والشبكة والتلبيس والكيك والزفة.</p><div class="pkg-price"><span class="pkg-amount">1,500</span><span class="pkg-unit">ريال</span></div><div class="pkg-dur">⏱ ساعتان ونصف</div><div class="pkg-tags"><span class="pkg-tag">💍 الشبكة</span><span class="pkg-tag">👗 التلبيس</span><span class="pkg-tag">🎂 الكيك</span><span class="pkg-tag">🎬 الزفة</span></div><ul class="pkg-feats"><li>مصمم للخطوبة والملكة</li><li>تغطية لحظات التلبيس والشبكة</li><li>مونتاج خاص بجو الخطوبة</li></ul><a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج الخطوبة 1500 ريال" class="pkg-btn">اسألي عن التوفر</a></div>
+
+      <div class="pkg-card rv d2" data-p="all" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-style:dashed;background:transparent">
+        <div style="font-size:1.8rem;opacity:0.3;margin-bottom:0.8rem">+</div>
+        <h3 style="font-size:0.95rem;font-weight:600;margin-bottom:0.5rem;color:var(--dim)">ساعة إضافية</h3>
+        <div style="font-size:1.9rem;font-weight:900;color:var(--gold)">200</div>
+        <div style="font-size:0.72rem;color:var(--dim);margin-bottom:1.2rem">ريال / ساعة لأي باقة</div>
+        <p style="font-size:0.77rem;color:var(--dim);line-height:1.7">بسعر ثابت — يُضاف قبل الحجز.</p>
       </div>
-
-      <div class="pkg-card" data-pkg="zaffa">
-        <div class="pkg-num">02</div>
-        <div class="pkg-type">SIGNATURE · ZAFFA+</div>
-        <h3 class="pkg-name">بكج الزفة المطور</h3>
-        <p class="pkg-desc">الزفة مع تفاصيل الكوشة والكيك ولقطات القاعة. للعروس التي تريد أكثر من لقطة الدخول فقط.</p>
-        <div class="pkg-price">
-          <span class="pkg-price-num">1,200</span>
-          <span class="pkg-price-unit">ريال</span>
-        </div>
-        <div class="pkg-duration">⏱ ساعة كاملة</div>
-        <div class="pkg-visual">
-          <span class="pkg-moment">🏛 القاعة</span>
-          <span class="pkg-moment">🎂 الكيك</span>
-          <span class="pkg-moment">✨ الكوشة</span>
-          <span class="pkg-moment">🎬 الزفة</span>
-        </div>
-        <ul class="pkg-features">
-          <li>تفاصيل القاعة والكوشة قبل الدخول</li>
-          <li>لقطات قريبة للكعكة والديكور</li>
-          <li>تصوير الزفة كاملة</li>
-          <li>مونتاج منسق ومرتب</li>
-        </ul>
-        <a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج الزفة المطور 1200 ريال" class="pkg-cta">اسألي عن التوفر</a>
-      </div>
-
-      <div class="pkg-card featured" data-pkg="half">
-        <div class="pkg-badge">⭐ الأكثر طلبًا</div>
-        <div class="pkg-num">03</div>
-        <div class="pkg-type">SIGNATURE · HALF DAY</div>
-        <h3 class="pkg-name">Half Day</h3>
-        <p class="pkg-desc">First Look + تفاصيل العروس + الكوشة + كواليس الفوتو + زفة — القصة الكاملة بدون يوم كامل.</p>
-        <div class="pkg-price">
-          <span class="pkg-price-num">1,700</span>
-          <span class="pkg-price-unit">ريال</span>
-        </div>
-        <div class="pkg-duration">⏱ 3 ساعات تصوير</div>
-        <div class="pkg-visual">
-          <span class="pkg-moment">👁 First Look</span>
-          <span class="pkg-moment">💎 التفاصيل</span>
-          <span class="pkg-moment">📸 كواليس</span>
-          <span class="pkg-moment">🎬 الزفة</span>
-        </div>
-        <ul class="pkg-features">
-          <li>تفاصيل المجوهرات والمسكة والكعب والعطر</li>
-          <li>لقطات مشاعر عفوية مع الأهل</li>
-          <li>First Look كاملة</li>
-          <li>كواليس جلسة التصوير</li>
-          <li>الزفة بإضاءة مون لايت</li>
-        </ul>
-        <a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج Half Day 1700 ريال" class="pkg-cta">اسألي عن التوفر</a>
-      </div>
-
-      <div class="pkg-card" data-pkg="full">
-        <div class="pkg-badge" style="display:block;background:linear-gradient(135deg,#C9A86C,#8B6914)">أعلى قيمة</div>
-        <div class="pkg-num">04</div>
-        <div class="pkg-type">FULL STORY · ALL DAY</div>
-        <h3 class="pkg-name">Full Day</h3>
-        <p class="pkg-desc">من الصالون إلى القاعة — تغطية كاملة مع First Look وتفاصيل العروس والكوشة وزفتين.</p>
-        <div class="pkg-price">
-          <span class="pkg-price-num">2,500</span>
-          <span class="pkg-price-unit">ريال</span>
-        </div>
-        <div class="pkg-duration">⏱ 6 ساعات تصوير</div>
-        <div class="pkg-visual">
-          <span class="pkg-moment">💄 الصالون</span>
-          <span class="pkg-moment">👁 First Look</span>
-          <span class="pkg-moment">🏛 القاعة</span>
-          <span class="pkg-moment">🎬 زفتان</span>
-        </div>
-        <ul class="pkg-features">
-          <li>تفاصيل المكياج والشعر في الصالون</li>
-          <li>تفاصيل القاعة والكوشة كاملة</li>
-          <li>First Look + مشاعر الأهل</li>
-          <li>تغطية زفتين كاملتين</li>
-          <li>مونتاج سينمائي مطول</li>
-        </ul>
-        <a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج Full Day 2500 ريال" class="pkg-cta">اسألي عن التوفر</a>
-      </div>
-
-      <div class="pkg-card" data-pkg="engagement">
-        <div class="pkg-num">05</div>
-        <div class="pkg-type">ENGAGEMENT · خطوبة وملكة</div>
-        <h3 class="pkg-name">بكج الخطوبة</h3>
-        <p class="pkg-desc">تفاصيل العروس والكوشة والشبكة والتلبيس والكيك والزفة في فيلم خطوبة مرتب وأنيق.</p>
-        <div class="pkg-price">
-          <span class="pkg-price-num">1,500</span>
-          <span class="pkg-price-unit">ريال</span>
-        </div>
-        <div class="pkg-duration">⏱ ساعتان ونصف</div>
-        <div class="pkg-visual">
-          <span class="pkg-moment">💍 الشبكة</span>
-          <span class="pkg-moment">👗 التلبيس</span>
-          <span class="pkg-moment">🎂 الكيك</span>
-          <span class="pkg-moment">🎬 الزفة</span>
-        </div>
-        <ul class="pkg-features">
-          <li>مصمم للخطوبة والملكة</li>
-          <li>تغطية لحظات التلبيس والشبكة</li>
-          <li>تفاصيل الكيك والكوشة</li>
-          <li>مونتاج خاص بجو الخطوبة</li>
-        </ul>
-        <a href="https://wa.me/966551606334?text=السلام عليكم، أرغب بالاستفسار عن بكج الخطوبة 1500 ريال" class="pkg-cta">اسألي عن التوفر</a>
-      </div>
-
-      <div class="pkg-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-style:dashed;background:transparent" data-pkg="all">
-        <div style="font-size:2rem;margin-bottom:1rem;opacity:0.4">+</div>
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.6rem;color:var(--text-dim)">ساعة إضافية</h3>
-        <div style="font-size:2rem;font-weight:900;color:var(--gold)">200</div>
-        <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1.5rem">ريال / ساعة لأي باقة</div>
-        <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.7">تمديد وقت التصوير بسعر ثابت — يُضاف لأي باقة قبل الحجز.</p>
-      </div>
-
     </div>
   </div>
 </section>
 
 <!-- ─── PROCESS ─── -->
-<section id="process">
-  <div class="section-inner">
-    <div class="process-header">
-      <span class="section-label reveal">خطوة بخطوة</span>
-      <h2 class="section-title reveal">الحجز <span class="gold-text">بدون تشتت</span></h2>
-      <p class="section-body reveal" style="margin:0 auto">كل خطوة واضحة من الموقع إلى يوم المناسبة — لا أسئلة مكررة، لا انتظار مفتوح.</p>
+<section class="sec" id="process">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">خطوة بخطوة</span>
+      <h2 class="title rv d1">الحجز <span class="gold-t">بدون تشتت</span></h2>
+      <p class="body-text rv d2">كل خطوة واضحة من الموقع إلى يوم المناسبة.</p>
     </div>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="process-step-left">
-          <span class="process-step-num">01</span>
-          <div class="process-step-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          </div>
-        </div>
-        <div class="process-step-right">
-          <h3 class="process-step-title">اختاري الباقة</h3>
-          <p class="process-step-body">تختارين الباقة من الموقع ويصلنا الطلب بتاريخ ومدينة وباقة واضحة.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-step-left">
-          <span class="process-step-num">02</span>
-          <div class="process-step-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-          </div>
-        </div>
-        <div class="process-step-right">
-          <h3 class="process-step-title">تأكيد العربون (50%)</h3>
-          <p class="process-step-body">تحويل نصف قيمة الفاتورة لتثبيت التاريخ (العربون لا يُرد عند الإلغاء).</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-step-left">
-          <span class="process-step-num">03</span>
-          <div class="process-step-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          </div>
-        </div>
-        <div class="process-step-right">
-          <h3 class="process-step-title">إيصال واتساب</h3>
-          <p class="process-step-body">ترسلين صورة الإيصال البنكي عبر واتساب ويصلك التأكيد فوراً.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-step-left">
-          <span class="process-step-num">04</span>
-          <div class="process-step-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-        </div>
-        <div class="process-step-right">
-          <h3 class="process-step-title">يومان للتأكيد</h3>
-          <p class="process-step-body">مدة الحجز يومان فقط — في حال عدم تحويل العربون يعتبر الحجز ملغياً.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-step-left">
-          <span class="process-step-num">05</span>
-          <div class="process-step-icon">
-            <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-          </div>
-        </div>
-        <div class="process-step-right">
-          <h3 class="process-step-title">يوم المناسبة</h3>
-          <p class="process-step-body">تسليم المبلغ المتبقي يوم المناسبة قبل بداية التصوير.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-step-left">
-          <span class="process-step-num">06</span>
-          <div class="process-step-icon">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-          </div>
-        </div>
-        <div class="process-step-right">
-          <h3 class="process-step-title">تسليم الفيلم</h3>
-          <p class="process-step-body">فيلمك يصل خلال ٢–٦ أسابيع حسب الباقة — المدة مكتوبة في الاتفاق.</p>
-        </div>
-      </div>
+    <div class="proc-list">
+      <div class="proc-step rv"><div class="proc-left"><span class="proc-num">01</span><div class="proc-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div></div><div class="proc-right"><h3 class="proc-t">اختاري الباقة</h3><p class="proc-b">تختارين الباقة من الموقع ويصلنا الطلب بتاريخ ومدينة وباقة واضحة.</p></div></div>
+      <div class="proc-step rv d1"><div class="proc-left"><span class="proc-num">02</span><div class="proc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div></div><div class="proc-right"><h3 class="proc-t">تحويل العربون (50%)</h3><p class="proc-b">تحويل نصف قيمة الفاتورة لتثبيت التاريخ — العربون لا يُرد عند الإلغاء.</p></div></div>
+      <div class="proc-step rv d2"><div class="proc-left"><span class="proc-num">03</span><div class="proc-ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div></div><div class="proc-right"><h3 class="proc-t">إيصال واتساب</h3><p class="proc-b">ترسلين صورة الإيصال عبر واتساب ويصلك التأكيد فوراً.</p></div></div>
+      <div class="proc-step rv d3"><div class="proc-left"><span class="proc-num">04</span><div class="proc-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div><div class="proc-right"><h3 class="proc-t">يومان للتأكيد</h3><p class="proc-b">مدة الحجز يومان — في حال عدم التحويل يُلغى الحجز تلقائياً.</p></div></div>
+      <div class="proc-step rv d4"><div class="proc-left"><span class="proc-num">05</span><div class="proc-ico"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div></div><div class="proc-right"><h3 class="proc-t">يوم المناسبة</h3><p class="proc-b">تسليم المبلغ المتبقي يوم المناسبة قبل بداية التصوير.</p></div></div>
+      <div class="proc-step rv d5"><div class="proc-left"><span class="proc-num">06</span><div class="proc-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div></div><div class="proc-right"><h3 class="proc-t">تسليم الفيلم</h3><p class="proc-b">فيلمك يصل خلال ٢–٦ أسابيع — المدة مكتوبة في الاتفاق.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ─── ADD-ONS ─── -->
-<section id="addons">
-  <div class="section-inner">
-    <div class="addons-header">
-      <span class="section-label reveal">إضافات اختيارية</span>
-      <h2 class="section-title reveal">أكملي <span class="gold-text">القصة</span></h2>
+<!-- ─── ADDONS ─── -->
+<section class="sec" id="addons" style="background:var(--black-2)">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">إضافات اختيارية</span>
+      <h2 class="title rv d1">أكملي <span class="gold-t">القصة</span></h2>
     </div>
-    <div class="addons-grid">
-      <div class="addon-card">
-        <svg class="addon-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        <div class="addon-name">ساعة إضافية</div>
-        <div class="addon-en">Extra Hour</div>
-        <div class="addon-price">200 <small style="font-size:0.7rem;color:var(--text-muted)">ريال</small></div>
-        <div class="addon-note">لكل ساعة إضافية بأي باقة</div>
-      </div>
-      <div class="addon-card">
-        <svg class="addon-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-        <div class="addon-name">منيكان الفستان</div>
-        <div class="addon-en">Dress Mannequin</div>
-        <div class="addon-price">150 <small style="font-size:0.7rem;color:var(--text-muted)">ريال</small></div>
-        <div class="addon-note">تصوير سينمائي للفستان مستقل</div>
-      </div>
-      <div class="addon-card">
-        <svg class="addon-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-        <div class="addon-name">Color Grade سينمائي</div>
-        <div class="addon-en">Cinematic Grade</div>
-        <div class="addon-price">350 <small style="font-size:0.7rem;color:var(--text-muted)">ريال</small></div>
-        <div class="addon-note">تلوين + تنعيم بشرة العروس</div>
-      </div>
-      <div class="addon-card">
-        <svg class="addon-icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4"/></svg>
-        <div class="addon-name">إضاءة المون لايت</div>
-        <div class="addon-en">Moonlight Lighting</div>
-        <div class="addon-price" style="font-size:1rem;padding-top:0.3rem">مشمولة</div>
-        <div class="addon-note">في بكج الزفة — مجاناً</div>
-      </div>
+    <div class="add-grid">
+      <div class="add-card rv"><svg class="add-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg><div class="add-name">ساعة إضافية</div><div class="add-en">Extra Hour</div><div class="add-price">200 <small style="font-size:0.7rem;color:var(--dim)">ريال</small></div><div class="add-note">لكل ساعة بأي باقة</div></div>
+      <div class="add-card rv d1"><svg class="add-ico" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><div class="add-name">منيكان الفستان</div><div class="add-en">Dress Mannequin</div><div class="add-price">150 <small style="font-size:0.7rem;color:var(--dim)">ريال</small></div><div class="add-note">تصوير سينمائي مستقل</div></div>
+      <div class="add-card rv d2"><svg class="add-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg><div class="add-name">Color Grade سينمائي</div><div class="add-en">Cinematic Grade</div><div class="add-price">350 <small style="font-size:0.7rem;color:var(--dim)">ريال</small></div><div class="add-note">تلوين + تنعيم بشرة</div></div>
+      <div class="add-card rv d3"><svg class="add-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div class="add-name">إضاءة المون لايت</div><div class="add-en">Moonlight Lighting</div><div class="add-price" style="font-size:1rem;padding-top:0.3rem">مشمولة</div><div class="add-note">في بكج الزفة — مجاناً</div></div>
     </div>
   </div>
 </section>
 
 <!-- ─── CITIES ─── -->
-<section id="cities">
-  <div class="section-inner">
-    <div class="cities-header">
-      <span class="section-label reveal">تغطية المنطقة الشرقية</span>
-      <h2 class="section-title reveal">قريبة من <span class="gold-text">مناسبتك</span></h2>
-      <p class="section-body reveal" style="margin:0 auto">لكل مدينة صفحة مخصصة — اختاري مدينتك للحصول على تفاصيل أدق وأقرب لك.</p>
+<section class="sec" id="cities">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">تغطية المنطقة الشرقية</span>
+      <h2 class="title rv d1">قريبة من <span class="gold-t">مناسبتك</span></h2>
     </div>
-    <div class="cities-grid">
-      <div class="city-card"><span class="city-num">٠١</span><div class="city-name-ar">الأحساء</div><div class="city-name-en">Al-Ahsa</div><p class="city-desc">قلب التغطية — خبرة عميقة في قاعات الأحساء وأسلوب مناسب لطبيعة المناسبات المحلية.</p><a href="https://asmaa.video/alahsa" class="city-link">فتح الصفحة</a></div>
-      <div class="city-card"><span class="city-num">٠٢</span><div class="city-name-ar">الدمام</div><div class="city-name-en">Dammam</div><p class="city-desc">تغطية أنيقة للزفة والخطوبة وتفاصيل القاعة في الدمام.</p><a href="https://asmaa.video/dammam" class="city-link">فتح الصفحة</a></div>
-      <div class="city-card"><span class="city-num">٠٣</span><div class="city-name-ar">الخبر</div><div class="city-name-en">Khobar</div><p class="city-desc">أسلوب راقٍ يناسب قاعات الخبر مع تفاصيل العروس والكوشة والزفة.</p><a href="https://asmaa.video/khobar" class="city-link">فتح الصفحة</a></div>
-      <div class="city-card"><span class="city-num">٠٤</span><div class="city-name-ar">الهفوف</div><div class="city-name-en">Hofuf</div><p class="city-desc">قلب الأحساء — باقات تناسب طبيعة قاعات الهفوف ووقت المناسبة.</p><a href="https://asmaa.video/hofuf" class="city-link">فتح الصفحة</a></div>
-      <div class="city-card"><span class="city-num">٠٥</span><div class="city-name-ar">المبرز</div><div class="city-name-en">Mubarraz</div><p class="city-desc">تغطية أنيقة للزفة وتفاصيل العروس في المبرز.</p><a href="https://asmaa.video/mubarraz" class="city-link">فتح الصفحة</a></div>
-      <div class="city-card"><span class="city-num">٠٦</span><div class="city-name-ar">القطيف · الجبيل</div><div class="city-name-en">Qatif · Jubail</div><p class="city-desc">تغطية مرتبة لقاعات القطيف والجبيل مع رابط حجز يختصر الاختيار.</p><a href="https://asmaa.video/qatif" class="city-link">فتح الصفحة</a></div>
+    <div class="city-grid">
+      <div class="city-card rv"><span class="city-n">٠١</span><div class="city-ar">الأحساء</div><div class="city-en">Al-Ahsa</div><p class="city-b">قلب التغطية — خبرة عميقة في قاعات الأحساء وأسلوب مناسب للمناسبات المحلية.</p><a href="https://asmaa.video/alahsa" class="city-lnk">فتح الصفحة</a></div>
+      <div class="city-card rv d1"><span class="city-n">٠٢</span><div class="city-ar">الدمام</div><div class="city-en">Dammam</div><p class="city-b">تغطية أنيقة للزفة والخطوبة وتفاصيل القاعة.</p><a href="https://asmaa.video/dammam" class="city-lnk">فتح الصفحة</a></div>
+      <div class="city-card rv d2"><span class="city-n">٠٣</span><div class="city-ar">الخبر</div><div class="city-en">Khobar</div><p class="city-b">أسلوب راقٍ يناسب قاعات الخبر مع تفاصيل العروس كاملة.</p><a href="https://asmaa.video/khobar" class="city-lnk">فتح الصفحة</a></div>
+      <div class="city-card rv d3"><span class="city-n">٠٤</span><div class="city-ar">الهفوف</div><div class="city-en">Hofuf</div><p class="city-b">باقات تناسب طبيعة قاعات الهفوف في قلب الأحساء.</p><a href="https://asmaa.video/hofuf" class="city-lnk">فتح الصفحة</a></div>
+      <div class="city-card rv d4"><span class="city-n">٠٥</span><div class="city-ar">المبرز</div><div class="city-en">Mubarraz</div><p class="city-b">تغطية أنيقة للزفة وتفاصيل العروس في المبرز.</p><a href="https://asmaa.video/mubarraz" class="city-lnk">فتح الصفحة</a></div>
+      <div class="city-card rv d5"><span class="city-n">٠٦</span><div class="city-ar">القطيف · الجبيل</div><div class="city-en">Qatif · Jubail</div><p class="city-b">تغطية مرتبة لقاعات القطيف والجبيل في الشرقية.</p><a href="https://asmaa.video/qatif" class="city-lnk">فتح الصفحة</a></div>
     </div>
   </div>
 </section>
 
 <!-- ─── TRUST ─── -->
 <section id="trust">
-  <div class="section-inner">
-    <div style="text-align:center;margin-bottom:3rem">
-      <span class="section-label reveal">لماذا أسماء</span>
-      <h2 class="section-title reveal">أرقام <span class="gold-text">تتكلم</span></h2>
+  <div class="sec-inner" style="padding:5rem 2rem">
+    <div class="sec-head" style="margin-bottom:3rem">
+      <span class="label rv">لماذا أسماء</span>
+      <h2 class="title rv d1">أرقام <span class="gold-t">تتكلم</span></h2>
     </div>
     <div class="trust-grid">
-      <div class="trust-item">
-        <span class="trust-num" data-target="9">0</span>
-        <span class="trust-label">مدن في المنطقة الشرقية</span>
-        <span class="trust-sub">تغطية شاملة محلية</span>
-      </div>
-      <div class="trust-item">
-        <span class="trust-num">6</span>
-        <span class="trust-label">أسابيع أقصى تسليم</span>
-        <span class="trust-sub">مكفول في الاتفاق المكتوب</span>
-      </div>
-      <div class="trust-item">
-        <span class="trust-num">5</span>
-        <span class="trust-label">باقات مصممة بدقة</span>
-        <span class="trust-sub">لكل لحظة وميزانية</span>
-      </div>
-      <div class="trust-item">
-        <span class="trust-num">✓</span>
-        <span class="trust-label">مرخّصة رسمياً</span>
-        <span class="trust-sub">وزارة الموارد البشرية</span>
-      </div>
+      <div class="trust-item rv"><span class="trust-num" data-target="9">0</span><div class="trust-lbl">مدن في المنطقة الشرقية</div><div class="trust-sub">تغطية شاملة محلية</div></div>
+      <div class="trust-item rv d1"><span class="trust-num">٦</span><div class="trust-lbl">أسابيع أقصى تسليم</div><div class="trust-sub">مكفول في الاتفاق</div></div>
+      <div class="trust-item rv d2"><span class="trust-num">٥</span><div class="trust-lbl">باقات مصممة بدقة</div><div class="trust-sub">لكل لحظة وميزانية</div></div>
+      <div class="trust-item rv d3"><span class="trust-num">✓</span><div class="trust-lbl">مرخّصة رسمياً</div><div class="trust-sub">وزارة الموارد البشرية</div></div>
     </div>
   </div>
 </section>
 
 <!-- ─── FUNNEL ─── -->
-<section id="funnel" style="padding:8rem 0">
-  <div class="section-inner">
-    <div class="funnel-header">
-      <span class="section-label reveal">رحلة العميلة</span>
-      <h2 class="section-title reveal">من الإعجاب <span class="gold-text">إلى الموعد</span></h2>
+<section class="sec" id="funnel">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">رحلة العميلة</span>
+      <h2 class="title rv d1">من الإعجاب <span class="gold-t">إلى الموعد</span></h2>
     </div>
     <div class="funnel-steps">
-      <div class="funnel-step"><span class="funnel-num">١</span><div class="funnel-title">إعجاب</div><p class="funnel-body">ريل قصير أو لقطة زفة تلفت الانتباه</p></div>
-      <div class="funnel-step"><span class="funnel-num">٢</span><div class="funnel-title">اطمئنان</div><p class="funnel-body">أسلوب هادئ وباقات واضحة بدون ضغط</p></div>
-      <div class="funnel-step"><span class="funnel-num">٣</span><div class="funnel-title">اختيار</div><p class="funnel-body">مقارنة الباقات حسب لحظات اليوم</p></div>
-      <div class="funnel-step"><span class="funnel-num">٤</span><div class="funnel-title">حجز</div><p class="funnel-body">رسالة واتساب جاهزة من رابط العروس</p></div>
+      <div class="fn-step rv"><span class="fn-num">١</span><div class="fn-t">إعجاب</div><p class="fn-b">ريل قصير يلفت الانتباه</p></div>
+      <div class="fn-step rv d1"><span class="fn-num">٢</span><div class="fn-t">اطمئنان</div><p class="fn-b">أسلوب هادئ وباقات واضحة</p></div>
+      <div class="fn-step rv d2"><span class="fn-num">٣</span><div class="fn-t">اختيار</div><p class="fn-b">مقارنة الباقات بوضوح</p></div>
+      <div class="fn-step rv d3"><span class="fn-num">٤</span><div class="fn-t">حجز</div><p class="fn-b">رسالة واتساب جاهزة</p></div>
     </div>
   </div>
 </section>
 
 <!-- ─── FAQ ─── -->
-<section id="faq">
-  <div class="section-inner">
-    <div class="faq-header">
-      <span class="section-label reveal">أسئلة شائعة</span>
-      <h2 class="section-title reveal">كل ما تحتاجينه <span class="gold-text">قبل الحجز</span></h2>
+<section class="sec" id="faq" style="background:var(--black-2)">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="label rv">أسئلة شائعة</span>
+      <h2 class="title rv d1">كل ما تحتاجينه <span class="gold-t">قبل الحجز</span></h2>
     </div>
     <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-question">كيف يختلف Half Day عن Full Day؟ <span class="faq-icon">+</span></button>
-        <div class="faq-answer">Half Day يبدأ من تفاصيل العروس قبل القاعة وينتهي بالزفة (3 ساعات). Full Day يبدأ من الصالون ويشمل زفتين والتغطية الكاملة من الصباح (6 ساعات). إذا كان صالونك قريباً من القاعة وتريدين أكثر من الزفة — Half Day هو الأنسب في معظم الحالات.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">هل الإضاءة مشمولة في كل الباقات؟ <span class="faq-icon">+</span></button>
-        <div class="faq-answer">إضاءة المون لايت مشمولة في بكج الزفة وما فوقه. هذه الإضاءة تُسلّط على العروس وقت الزفة لإبراز اللحظة في الإضاءة المعتمة وهي جزء أساسي من الجودة البصرية لا إضافة منفصلة.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">ما طريقة الدفع وكيف يتم تأكيد الحجز؟ <span class="faq-icon">+</span></button>
-        <div class="faq-answer">تحويل بنكي بنصف قيمة الفاتورة (العربون) لتثبيت التاريخ. ترسلين صورة الإيصال عبر واتساب. مدة الحجز يومان فقط — إذا لم يصل التحويل خلالها يعتبر الحجز ملغياً. المبلغ المتبقي يُسلّم يوم المناسبة قبل بداية التصوير.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">متى يصلني الفيلم؟ <span class="faq-icon">+</span></button>
-        <div class="faq-answer">المدة مكتوبة في الاتفاق قبل الحجز — لا انتظار مفتوح. الباقات القصيرة تُسلَّم في وقت أقرب. عادةً بين ٢ إلى ٦ أسابيع حسب الباقة وتفاصيل المونتاج المطلوب.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">هل تتوفر الخدمة في مدن غير الأحساء والدمام؟ <span class="faq-icon">+</span></button>
-        <div class="faq-answer">نعم — التغطية تشمل الأحساء (الهفوف، المبرز، العمران، الطرفية)، الدمام، الخبر، القطيف، والجبيل. كل مدينة لها صفحة مخصصة تجدينها في قسم المدن أعلاه.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">هل يمكن إضافة خدمات بعد تأكيد الحجز؟ <span class="faq-icon">+</span></button>
-        <div class="faq-answer">الإضافات (ساعة إضافية، منيكان الفستان، Color Grade) يُفضَّل تأكيدها قبل تحويل العربون حتى تُذكر في الاتفاق المكتوب. في بعض الحالات يمكن إضافتها لاحقاً — تواصلي معنا للاستفسار.</div>
-      </div>
+      <div class="faq-item rv"><button class="faq-q">كيف يختلف Half Day عن Full Day؟ <span class="faq-ico">+</span></button><div class="faq-a">Half Day يبدأ من تفاصيل العروس قبل القاعة وينتهي بالزفة (3 ساعات). Full Day يبدأ من الصالون ويشمل زفتين والتغطية الكاملة (6 ساعات).</div></div>
+      <div class="faq-item rv d1"><button class="faq-q">هل الإضاءة مشمولة في كل الباقات؟ <span class="faq-ico">+</span></button><div class="faq-a">إضاءة المون لايت مشمولة في بكج الزفة وما فوقه تلقائياً — هي جزء أساسي من الجودة البصرية.</div></div>
+      <div class="faq-item rv d2"><button class="faq-q">ما طريقة الدفع وكيف يتم تأكيد الحجز؟ <span class="faq-ico">+</span></button><div class="faq-a">تحويل بنكي بنصف قيمة الفاتورة لتثبيت التاريخ. ترسلين صورة الإيصال عبر واتساب. مدة الحجز يومان. المبلغ المتبقي يُسلَّم يوم المناسبة.</div></div>
+      <div class="faq-item rv d3"><button class="faq-q">متى يصلني الفيلم؟ <span class="faq-ico">+</span></button><div class="faq-a">المدة مكتوبة في الاتفاق قبل الحجز — عادةً بين ٢ إلى ٦ أسابيع حسب الباقة وتفاصيل المونتاج.</div></div>
+      <div class="faq-item rv d4"><button class="faq-q">هل تتوفر الخدمة خارج الأحساء والدمام؟ <span class="faq-ico">+</span></button><div class="faq-a">نعم — التغطية تشمل الأحساء بكل مناطقها، الدمام، الخبر، القطيف، والجبيل.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ─── CTA FINAL ─── -->
+<!-- ─── FINAL CTA ─── -->
 <section id="cta-final">
-  <div class="section-inner" style="position:relative;z-index:1">
-    <span class="cta-final-tag reveal">الخطوة التالية</span>
-    <h2 class="cta-final-title">يومك يستحق<br><span class="gold-text">فيلماً لا تنسينه.</span></h2>
-    <p class="cta-final-body reveal">اختاري الباقة التي تشبه يومك، أرسلي التفاصيل برسالة واحدة، ونبدأ.</p>
-    <div class="cta-final-btns">
+  <div class="sec-inner" style="position:relative;z-index:1">
+    <span class="cta-tag rv">الخطوة التالية</span>
+    <h2 class="cta-title rv d1">يومك يستحق<br><span class="gold-t">فيلماً لا تنسينه.</span></h2>
+    <p class="cta-body rv d2">اختاري الباقة التي تشبه يومك، أرسلي التفاصيل برسالة واحدة، ونبدأ.</p>
+    <div class="cta-btns rv d3">
       <a href="https://wa.me/966551606334?text=السلام عليكم، وصلتكم من الموقع وأرغب بمعرفة التوفر واختيار الباقة المناسبة" class="wa-btn">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.928.543 3.73 1.487 5.256L2 22l5.345-1.469A9.455 9.455 0 0011.5 21c5.238 0 9.5-4.262 9.5-9.5S16.738 2 11.5 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.5 2C6.262 2 2 6.262 2 11.5c0 1.928.543 3.73 1.487 5.256L2 22l5.345-1.469A9.455 9.455 0 0011.5 21c5.238 0 9.5-4.262 9.5-9.5S16.738 2 11.5 2z"/></svg>
         تواصلي عبر واتساب
       </a>
-      <a href="https://asmaa.video/reserve" class="btn-primary">رابط العروس ← احجزي الآن</a>
-      <a href="https://asmaa.video/portfolio" class="btn-ghost">شاهدي الألبوم</a>
+      <a href="https://asmaa.video/reserve" class="btn-gold">رابط العروس ← احجزي</a>
+      <a href="https://asmaa.video/portfolio" class="btn-ghost">الألبوم</a>
     </div>
   </div>
 </section>
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo-ar">أسماء</div>
-        <span class="footer-logo-en">ASMAA STUDIO</span>
-        <p class="footer-tagline">سينما الأعراس النسائية في المنطقة الشرقية.<br>تصوير بأسلوب هادئ، تفاصيل حقيقية، وفيلم تحتفظين به للأبد.</p>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <svg class="ft-logo-mark" viewBox="0 0 200 220" fill="none">
+          <g stroke="url(#goldGrad)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <polyline points="20,200 100,20 180,200" stroke-width="11"/>
+            <line x1="52" y1="130" x2="148" y2="130" stroke-width="9"/>
+            <polyline points="10,200 100,10 190,200" stroke-width="7" opacity="0.4"/>
+            <polyline points="100,20 148,130 100,200 52,130 100,20" stroke-width="6" opacity="0.5"/>
+          </g>
+        </svg>
+        <div class="ft-name">أسماء</div>
+        <span class="ft-name-en">ASMAA STUDIO</span>
+        <p class="ft-tag">سينما الأعراس النسائية في المنطقة الشرقية.<br>تصوير هادئ، تفاصيل حقيقية، فيلم تحتفظين به للأبد.</p>
       </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>الباقات</h4>
-          <ul>
-            <li><a href="#packages">بكج الزفة — 600 ريال</a></li>
-            <li><a href="#packages">بكج الزفة المطور — 1200</a></li>
-            <li><a href="#packages">Half Day — 1700 ريال</a></li>
-            <li><a href="#packages">Full Day — 2500 ريال</a></li>
-            <li><a href="#packages">الخطوبة — 1500 ريال</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>المدن</h4>
-          <ul>
-            <li><a href="https://asmaa.video/alahsa">الأحساء</a></li>
-            <li><a href="https://asmaa.video/dammam">الدمام</a></li>
-            <li><a href="https://asmaa.video/khobar">الخبر</a></li>
-            <li><a href="https://asmaa.video/hofuf">الهفوف</a></li>
-            <li><a href="https://asmaa.video/qatif">القطيف</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>روابط</h4>
-          <ul>
-            <li><a href="https://asmaa.video/portfolio">الألبوم</a></li>
-            <li><a href="https://asmaa.video/reviews">آراء العرايس</a></li>
-            <li><a href="https://asmaa.video/about">عن الاستوديو</a></li>
-            <li><a href="https://asmaa.video/reserve">رابط العروس</a></li>
-            <li><a href="https://asmaa.video/contact">تواصلي معنا</a></li>
-          </ul>
-        </div>
+      <div class="ft-links">
+        <div class="ft-col"><h4>الباقات</h4><ul><li><a href="#packages">بكج الزفة — 600 ريال</a></li><li><a href="#packages">الزفة المطور — 1200</a></li><li><a href="#packages">Half Day — 1700</a></li><li><a href="#packages">Full Day — 2500</a></li><li><a href="#packages">الخطوبة — 1500</a></li></ul></div>
+        <div class="ft-col"><h4>المدن</h4><ul><li><a href="https://asmaa.video/alahsa">الأحساء</a></li><li><a href="https://asmaa.video/dammam">الدمام</a></li><li><a href="https://asmaa.video/khobar">الخبر</a></li><li><a href="https://asmaa.video/hofuf">الهفوف</a></li><li><a href="https://asmaa.video/qatif">القطيف</a></li></ul></div>
+        <div class="ft-col"><h4>روابط</h4><ul><li><a href="https://asmaa.video/portfolio">الألبوم</a></li><li><a href="https://asmaa.video/reviews">آراء العرايس</a></li><li><a href="https://asmaa.video/about">عن الاستوديو</a></li><li><a href="https://asmaa.video/reserve">رابط العروس</a></li><li><a href="https://asmaa.video/contact">تواصلي</a></li></ul></div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Asmaa Studio · جميع الحقوق محفوظة</span>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/asmaa.video/" target="_blank" title="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    <div class="ft-bottom">
+      <span class="ft-copy">© 2026 Asmaa Studio · جميع الحقوق محفوظة</span>
+      <div class="ft-social">
+        <a href="https://www.instagram.com/asmaa.video/" target="_blank">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
-        <a href="https://wa.me/966551606334" target="_blank" title="WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9 8.94 8.94 0 01-4.6-1.26L3 21l1.3-4.2A8.94 8.94 0 013 12a9 9 0 019-9 9 9 0 019 9z"/></svg>
+        <a href="https://wa.me/966551606334" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-9 9 8.94 8.94 0 0 1-4.6-1.26L3 21l1.3-4.2A8.94 8.94 0 0 1 3 12a9 9 0 0 1 9-9 9 9 0 0 1 9 9z"/></svg>
         </a>
       </div>
     </div>
-    <p class="footer-license">مرخّصة من وزارة الموارد البشرية والتنمية الاجتماعية · Licensed by the Saudi Ministry of Human Resources & Social Development</p>
+    <p class="ft-lic">مرخّصة من وزارة الموارد البشرية والتنمية الاجتماعية · Licensed by the Saudi Ministry of Human Resources</p>
   </div>
 </footer>
 
 <script>
-// ─── CURSOR ───
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-function animateRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animateRing); }
-animateRing();
-document.querySelectorAll('a,button,[data-cursor]').forEach(el => {
-  el.addEventListener('mouseenter', () => ring.classList.add('expand'));
-  el.addEventListener('mouseleave', () => ring.classList.remove('expand'));
-});
+// ─── NAV ───
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
 
-// ─── NAV SCROLL ───
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
-
-// ─── HERO CANVAS PARTICLES ───
-const canvas = document.getElementById('hero-canvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles = [];
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+// ─── CANVAS PARTICLES ───
+const canvas=document.getElementById('hero-canvas');
+const ctx=canvas.getContext('2d');
+let W,H;
+function resize(){W=canvas.width=innerWidth;H=canvas.height=canvas.parentElement.offsetHeight}
 resize();
-window.addEventListener('resize', resize);
+window.addEventListener('resize',resize,{passive:true});
 
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random()*W; this.y = Math.random()*H;
-    this.size = Math.random()*2.5+0.5;
-    this.speedX = (Math.random()-0.5)*0.3;
-    this.speedY = (Math.random()-0.5)*0.3;
-    this.opacity = Math.random()*0.6+0.1;
-    this.color = Math.random()>0.7 ? '#C9A86C' : '#F5F0E8';
-    this.life = 0; this.maxLife = Math.random()*300+200;
+const P=[];const B=[];
+class Particle{
+  constructor(){this.reset()}
+  reset(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.size=Math.random()*2+0.4;
+    this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;
+    this.alpha=Math.random()*.55+.1;
+    this.color=Math.random()>.65?'#C9A86C':'#F5F0E8';
+    this.life=0;this.max=Math.random()*280+180;
   }
-  update() {
-    this.x += this.speedX; this.y += this.speedY; this.life++;
-    if(this.x<0||this.x>W||this.y<0||this.y>H||this.life>this.maxLife) this.reset();
+  tick(){
+    this.x+=this.vx;this.y+=this.vy;this.life++;
+    if(this.x<0||this.x>W||this.y<0||this.y>H||this.life>this.max)this.reset();
   }
-  draw() {
-    ctx.save();
-    ctx.globalAlpha = this.opacity * (1-this.life/this.maxLife);
-    ctx.fillStyle = this.color;
-    ctx.shadowBlur = 6; ctx.shadowColor = this.color;
-    ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();
-    ctx.restore();
+  draw(){
+    ctx.save();ctx.globalAlpha=this.alpha*(1-this.life/this.max);
+    ctx.fillStyle=this.color;ctx.shadowBlur=5;ctx.shadowColor=this.color;
+    ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.restore();
   }
 }
-
-// Bokeh circles
-class Bokeh {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random()*W; this.y = Math.random()*H;
-    this.r = Math.random()*60+20;
-    this.opacity = Math.random()*0.06+0.01;
-    this.speedX = (Math.random()-0.5)*0.15;
-    this.speedY = (Math.random()-0.5)*0.1;
-    this.life = 0; this.maxLife = Math.random()*400+300;
+class Bokeh{
+  constructor(){this.reset()}
+  reset(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.r=Math.random()*70+25;this.alpha=Math.random()*.05+.01;
+    this.vx=(Math.random()-.5)*.12;this.vy=(Math.random()-.5)*.08;
+    this.life=0;this.max=Math.random()*500+300;
   }
-  update() { this.x+=this.speedX; this.y+=this.speedY; this.life++; if(this.life>this.maxLife)this.reset(); }
-  draw() {
-    ctx.save();
-    ctx.globalAlpha = this.opacity*(1-this.life/this.maxLife);
-    const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r);
-    g.addColorStop(0,'rgba(201,168,108,0.3)'); g.addColorStop(1,'transparent');
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fill();
-    ctx.restore();
+  tick(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.life>this.max)this.reset()}
+  draw(){
+    ctx.save();ctx.globalAlpha=this.alpha*(1-this.life/this.max);
+    const g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r);
+    g.addColorStop(0,'rgba(201,168,108,.28)');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();
   }
 }
+for(let i=0;i<100;i++)P.push(new Particle());
+for(let i=0;i<12;i++)B.push(new Bokeh());
+(function loop(){ctx.clearRect(0,0,W,H);B.forEach(b=>{b.tick();b.draw()});P.forEach(p=>{p.tick();p.draw()});requestAnimationFrame(loop)})();
 
-for(let i=0;i<120;i++) particles.push(new Particle());
-const bokeh = []; for(let i=0;i<15;i++) bokeh.push(new Bokeh());
-
-function animateCanvas() {
-  ctx.clearRect(0,0,W,H);
-  bokeh.forEach(b=>{b.update();b.draw();});
-  particles.forEach(p=>{p.update();p.draw();});
-  requestAnimationFrame(animateCanvas);
-}
-animateCanvas();
-
-// ─── HERO ENTRANCE ───
-setTimeout(() => {
-  const tag = document.getElementById('hero-tag');
-  const titleAr = document.getElementById('hero-title-ar');
-  const titleEn = document.getElementById('hero-title-en');
-  const sub = document.getElementById('hero-subtitle');
-  const ctas = document.getElementById('hero-ctas');
-  const scroll = document.getElementById('hero-scroll');
-
-  function animate(el, delay, y=20) {
-    setTimeout(()=>{ el.style.transition='opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1)'; el.style.opacity='1'; el.style.transform='translateY(0)'; }, delay);
-  }
-  animate(tag,200);
-  animate(titleAr,400);
-  animate(titleEn,600);
-  animate(sub,800);
-  animate(ctas,1000);
-  animate(scroll,1400);
-}, 300);
+// ─── PARALLAX ───
+window.addEventListener('scroll',()=>{
+  const hc=document.querySelector('.hero-content');
+  if(hc&&scrollY<H)hc.style.transform=`translateY(${scrollY*.22}px)`;
+},{passive:true});
 
 // ─── SCROLL REVEAL ───
-const revealEls = document.querySelectorAll('.philosophy-card,.journey-step,.pkg-card,.process-step,.addon-card,.city-card,.trust-item,.funnel-step,.faq-item,.section-label,.section-title,.section-body,.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e,i) => {
-    if(e.isIntersecting) {
-      const el = e.target;
-      const siblings = [...el.parentElement.children];
-      const idx = siblings.indexOf(el);
-      setTimeout(() => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0) translateX(0) scale(1)';
-      }, idx * 80);
-      observer.unobserve(el);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-revealEls.forEach(el => {
-  el.style.transition = 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
-  observer.observe(el);
-});
-
-// ─── PACKAGE FILTERS ───
-document.querySelectorAll('.pkg-filter').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.pkg-filter').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-    const filter = this.dataset.filter;
-    document.querySelectorAll('.pkg-card').forEach(card => {
-      const pkg = card.dataset.pkg;
-      const show = filter==='all' || pkg===filter || pkg==='all';
-      card.style.display = show ? '' : 'none';
+// ─── PKG FILTER ───
+document.querySelectorAll('.pf').forEach(b=>{
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.pf').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on');
+    const f=this.dataset.f;
+    document.querySelectorAll('.pkg-card').forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.p===f||c.dataset.p==='all')?'':'none';
     });
   });
 });
 
-// ─── FAQ ACCORDION ───
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const item = this.parentElement;
-    const wasOpen = item.classList.contains('open');
+// ─── FAQ ───
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',function(){
+    const item=this.parentElement;const was=item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!wasOpen) item.classList.add('open');
+    if(!was)item.classList.add('open');
   });
 });
 
-// ─── COUNTER ANIMATION ───
-function animateCounter(el, target, duration=1500) {
-  if(isNaN(target)) return;
-  let start = 0, startTime = null;
-  function step(timestamp) {
-    if(!startTime) startTime = timestamp;
-    const progress = Math.min((timestamp-startTime)/duration, 1);
-    const eased = 1-Math.pow(1-progress, 3);
-    el.textContent = Math.round(eased*target);
-    if(progress<1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-const counterObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      const target = parseInt(e.target.dataset.target);
-      if(target) animateCounter(e.target, target);
-      counterObs.unobserve(e.target);
+// ─── COUNTER ───
+const cio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const t=parseInt(e.target.dataset.target);
+      if(!isNaN(t)){
+        let s=0,st=null;
+        function step(ts){if(!st)st=ts;const p=Math.min((ts-st)/1400,1);e.target.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(step)}
+        requestAnimationFrame(step);
+      }
+      cio.unobserve(e.target);
     }
   });
-}, {threshold:0.5});
-document.querySelectorAll('[data-target]').forEach(el=>counterObs.observe(el));
-
-// ─── SMOOTH PARALLAX HERO TEXT ───
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  const heroContent = document.querySelector('.hero-content');
-  if(heroContent) heroContent.style.transform = `translateY(${y*0.25}px)`;
-});
+},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cio.observe(el));
 </script>
 </body>
 </html>
