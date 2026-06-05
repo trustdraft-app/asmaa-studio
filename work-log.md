@@ -245,3 +245,109 @@
 - Added internal discovery links from the homepage guide section, FAQ page, and portfolio page so engagement intent now has a direct on-site path instead of relying on service slugs or off-site social posts.
 - Updated `sitemap.xml`, `llms.txt`, `llms-full.txt`, WhatsApp source labels, and launch verification expectations to include the new engagement route.
 - Local verification evidence: `git diff --check` passed and `npm run typecheck` passed; local `npm run build:pages` / `npm run verify:launch` are currently blocked by a Next 16 compile-stage hang in this environment before export finishes, so live deploy verification must come from the GitHub Pages workflow run after push.
+
+## 2026-06-01 15:41 +03
+
+- Closed the Claude launch-audit blockers around `/faq`, `/contact`, `sitemap.xml`, `llms.txt`, and the static launch verifier.
+- Resolved the `app/globals.css` merge conflict by preserving the FAQ accordion, contact page, package-pricing, and footer navigation styles.
+- Removed deprecated FAQPage structured data from `/faq` so the launch verifier and current rich-result policy stay aligned.
+- Added `/contact` to the sitemap, `llms.txt`, static artifact requirements, and marketing-route verification; kept `/reserve` out of the sitemap because it is intentionally `noindex`.
+- Hardened `scripts/verify-launch.mjs` so browser verification falls back to the installed macOS Chrome when the Playwright cache executable is unavailable.
+- Fixed homepage mobile footer tap targets to meet the 44px height and width verifier requirement.
+- Verification passed: `npm run typecheck`, `npm run build:pages`, `node scripts/verify-launch.mjs`, and `git diff --check` for touched files. The final launch verifier passed all static, SEO, llms, mobile, desktop, imagery, reserve intent, and axe checks.
+
+## 2026-06-01 21:49 +03
+
+- Shipped the `/contact` production fix through PR #26 from a clean `origin/main` branch instead of merging the unrelated portfolio-gallery feature branch.
+- PR and `main` CI passed: `npm ci`, `npm run lint`, `npm run typecheck`, `npm audit --omit=dev`, `npm run verify:launch`, `npm run verify:admin`, and `npm run build:pages`.
+- GitHub Pages deploy run `26774808909` completed successfully.
+- Live probes now pass: `https://asmaa.video/contact`, `https://asmaa.video/sitemap.xml`, and `https://asmaa.video/llms.txt` all return HTTP 200.
+
+## 2026-06-02 12:50 +03
+
+- Fixed the current branch reviews-page launch failure by replacing banned wording in `app/reviews/page.tsx` metadata, principle title, and hero headline with consent-first sharing-boundary copy.
+- Repaired local Playwright launch verification by using isolated browser cache `/Users/mohammedsa/.cache/ai-empire-playwright-asmaa`.
+- Verification passed: `npm run verify:launch` with `PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.cache/ai-empire-playwright-asmaa` completed with `178` PASS checks and no failures.
+- Live check: `https://asmaa.video/reviews` returned HTTP `200` and did not contain the banned wording; local `out/reviews.html` also did not contain it after the fix.
+
+## 2026-06-02 23:14 +03
+
+- Shipped the Sprint 16 route-theatre redesign pass in source: packages, portfolio, reviews, about, FAQ, contact, reserve, and process now share image-led cinematic hero treatment, premium card surfaces, balanced headings, stronger route rhythm, and repaired contact/review hit areas.
+- Added portfolio class hooks so the existing inline portfolio route can be styled consistently without rewriting the page structure.
+- Optimized `scripts/prune-static-js.mjs` and `scripts/verify-launch.mjs` with bounded async file reads/writes so the 9k+ HTML export can be pruned and verified without multi-minute sequential filesystem stalls.
+- Verification passed: `git diff --check`, `npm run typecheck --silent`, `npm run lint --silent`, `npm run build:pages` (`587s` final run), `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/verify-launch.mjs` (`58s` final run), and Playwright route screenshot QA across 9 routes x desktop/mobile with zero overflow, route-hero, console, network, or tap-target failures.
+- Visual evidence: screenshots saved under `/tmp/asmaa-sprint16-route-qa/`; generated design reference saved under `/Users/mohammedsa/.codex/generated_images/019e86ff-88ac-7991-8c04-d331426399b5/`.
+
+## 2026-06-03 00:50 +03
+
+- Audited Asmaa.video live launch headers, DNS, static export, Netlify edge target, and local launch verification.
+- Confirmed canonical `https://asmaa.video` is still served by GitHub Pages/Namecheap DNS and fails required security headers because GitHub Pages ignores `_headers`.
+- Confirmed existing header-capable Netlify target `https://asmaa-video.netlify.app` passes `scripts/verify-live-security-headers.mjs` and returns HSTS, CSP, frame denial, nosniff, referrer policy, and permissions policy.
+- Fixed `cloudflare/asmaa-video-security-proxy.js` to use a named default export for lint-safe Worker deployment readiness.
+- Verification passed: `npm run lint`, `npm run build:pages`, `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/verify-launch.mjs`, `node --check cloudflare/asmaa-video-security-proxy.js`, and `git diff --check`.
+- Netlify MCP deploy to the existing site ID was attempted twice but the connector wedged during project upload; no deploy was completed from this local session.
+
+## 2026-06-03 06:57 +03
+
+- Rechecked Asmaa.video during the portfolio 10-of-10 hard-audit push.
+- Confirmed the header-capable target is already live at `https://asmaa-video.netlify.app/` with CSP, HSTS, X-Frame-Options, X-Content-Type-Options, and Referrer-Policy.
+- Confirmed the canonical domain still points to GitHub Pages through Namecheap nameservers and GitHub Pages A records, so `https://asmaa.video/` and `/contact` still fail the required public endpoint security-header gate.
+- Ran the activation self-test and dry-run; the prepared Namecheap cutover would preserve existing records and move `@`/`www` to Netlify, but all required Namecheap API credentials are absent from environment, Keychain, and approved local secret files.
+- Confirmed `NETLIFY_SITE_ID` remains set to `6853b4e5-bc6b-42af-bd59-5a5a2eb12cbb`; no deploy workflow was triggered in this pass.
+## 2026-06-03T09:54:25+0300 — Asmaa.video / homepage redesign
+
+- Rebuilt the Asmaa.video homepage first viewport around a cinema-first visual system: full-bleed bridal still, stronger Arabic/English headline, visible director-stage composition, booking CTAs, trust cards, and a service dock.
+- Preserved launch verifier contracts: `hero-photo-stack`, `hero-logo-image`, `package-motion-meter`, `moment-card`, `guide-card`, structured data, static export pruning, and mobile no-overflow checks.
+- Verification passed: `npm run typecheck`, `npm run lint`, `npm run build:pages`, and `node scripts/verify-launch.mjs`.
+- Visual evidence saved under `audits/visual-redesign-2026-06-03/`: `desktop-v2.png` and `mobile-v2.png` are the accepted final captures.
+- Process cleanup passed: no local static server or stale Asmaa verifier process remained after the checks.
+- Committed and pushed code as `c574481` (`feat: redesign asmaa homepage hero`); GitHub Pages deploy run `26869255797` completed successfully and `https://asmaa.video/` now contains the redesign marker and new hero headline.
+- Attempted header-capable Netlify deployment twice through the authenticated Netlify MCP uploader; both failed during upload with `TypeError: fetch failed`.
+- Dispatched GitHub Netlify production workflow `26869403042`; it failed in preflight because `NETLIFY_AUTH_TOKEN` is not configured, while `NETLIFY_SITE_ID=6853b4e5-bc6b-42af-bd59-5a5a2eb12cbb` is present.
+- Current live boundary: Asmaa.video design is live; Netlify/security-header production path remains blocked until a real Netlify auth token is installed in GitHub secrets or another header-capable edge authority is available.
+
+## 2026-06-05T05:55:09+0300 — Netlify activation preflight narrowed
+
+- Fast-forwarded local main to include `40b4123` and `8ff246b`, bringing in the DNS playbook, Netlify credential aliasing, and hardened live security-header verifier.
+- Added and merged PR #42: `https://github.com/trustdraft-app/asmaa-studio/pull/42`.
+  - Merge commit: `b90efd4b0992a1b4648c58b4adb0d0f3e83f4548`.
+  - `scripts/configure-netlify-custom-domain.mjs` now reads non-secret `NETLIFY_SITE_ID` and `NETLIFY_CUSTOM_DOMAIN` from GitHub repository variables.
+  - `NETLIFY_AUTH_TOKEN` remains excluded from GitHub variable sources and must come from a secret-capable source.
+- Verification passed:
+  - PR #42 GitHub `Verify` check;
+  - `node --check scripts/configure-netlify-custom-domain.mjs`;
+  - `node scripts/configure-netlify-custom-domain.mjs --self-test` (`13/13`);
+  - `node scripts/configure-netlify-custom-domain.mjs --verify-only --json`;
+  - `npm run verify:launch`;
+  - `npm run lint`;
+  - `npm run verify:live-security-headers -- https://asmaa-video.netlify.app https://asmaa-video.netlify.app/contact`.
+- Current launch boundary: local Netlify activation now reports only `NETLIFY_AUTH_TOKEN` missing, while canonical `https://asmaa.video` still resolves to GitHub Pages and fails required HTTP security headers until a real Netlify token or DNS/edge authority completes the cutover.
+
+## 2026-06-05T06:13:14+0300 — Netlify CLI token-source activation hardening
+
+- Added and merged PR #43: `https://github.com/trustdraft-app/asmaa-studio/pull/43`.
+  - Merge commit: `7bf2ce8764ceaf4a8e7b3e811ab3742b7dbe97b1`.
+  - `scripts/configure-netlify-custom-domain.mjs` now accepts standard Netlify CLI config files as a local secret-capable source for `NETLIFY_AUTH_TOKEN`.
+  - GitHub repository variables remain excluded for `NETLIFY_AUTH_TOKEN`; they are still only used for non-secret site/domain values.
+- Verification passed:
+  - PR #43 GitHub `Verify` check;
+  - `node --check scripts/configure-netlify-custom-domain.mjs`;
+  - `node scripts/configure-netlify-custom-domain.mjs --self-test` (`17/17`);
+  - `node scripts/configure-netlify-custom-domain.mjs --verify-only --json`;
+  - `npm run lint`;
+  - `npm run verify:launch`.
+- Current launch boundary remains explicit: no `NETLIFY_AUTH_TOKEN` exists in env, Keychain, approved local files, GitHub secret, or Netlify CLI config, so canonical header cutover still cannot be completed honestly.
+
+## 2026-06-05T09:40:57+0300 — Contact launch verifier repair
+
+- Fast-forwarded local `main` to the failing GitHub Pages deploy source `bf1d39b` while preserving existing local log entries append-only.
+- Fixed the `/contact` launch verifier failure by changing page JSON-LD from addressless `LocalBusiness` to address-safe `Organization` with `ContactPoint` and adding the required pre-message/local-city copy tokens.
+- Verification passed: `/Users/mohammedsa/bin/ai-heavy-run 'npm run verify:launch'`.
+- The verifier now passes the exact previously failing checks: contact page avoids `LocalBusiness`, contains `Organization`, contains `ContactPoint`, contains `قبل أول رسالة`, and contains `صفحات محلية لكل مدينة رئيسية`.
+
+## 2026-06-05T09:57:29+0300 — Dynamic verifier port repair
+
+- Fixed `scripts/verify-launch.mjs` so `PORT=0` now uses the actual OS-assigned listener port for browser verification instead of sending Playwright to unsafe `http://127.0.0.1:0/`.
+- This unblocks the portfolio customer judge's `asmaa-launch-verify` command without weakening any static, mobile, desktop, or axe checks.
+- Verification passed: `node --check scripts/verify-launch.mjs`.
+- Verification passed: `PORT=0 PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.ai-empire-playwright-browsers npm run verify:launch`, including static export, contact schema/copy checks, mobile and desktop no-overflow checks, reserve prefill checks, and axe checks.

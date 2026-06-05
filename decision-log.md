@@ -227,3 +227,65 @@
 **Decision:** Convert wave 17 into a dedicated `/engagement` landing page for الخطوبة والملكة, wire it into internal discovery, sitemap, `llms.txt`, and launch verification, and treat GitHub Pages CI as the deployment verifier because local Next 16 builds are hanging in compile before export completes.
 **Reasoning:** The engagement intent already exists in packages and guides, but a first-class landing route gives it the same direct search and conversion surface as `/zaffa`; the build hang is an environment/runtime issue, not a content-strategy reason to skip the wave.
 **Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, existing `app/zaffa/page.tsx` pattern, project files, professional judgment.
+## 2026-06-02 12:50 +03
+
+**Question:** How should the current branch handle reviews-page wording that fails the launch verifier?
+**Decision:** Replace the banned wording with consent-first sharing-boundary copy in `app/reviews/page.tsx` and keep the verifier strict.
+**Reasoning:** The launch invariant is to avoid unsupported privacy/marketing claims while still explaining consent-first review handling clearly.
+**Source:** `scripts/verify-launch.mjs`, `app/reviews/page.tsx`, local launch verification.
+
+## 2026-06-02 23:14 +03 — Asmaa Studio
+
+**Question:** How should the full-authority redesign order be applied after the homepage cinematic pass was already live?
+**Decision:** Apply a route-wide theatre system instead of another homepage-only change: shared image-led heroes, darker premium proof surfaces, portfolio styling hooks, contact/review hit-area hardening, and faster export verification.
+**Reasoning:** End-to-end launch polish requires the supporting user journeys to feel as deliberate as the homepage, and the verifier/pruner bottleneck had become a real launch-execution drag on the 11k-page static export.
+**Source:** User directive, generated design reference, `app/globals.css`, `app/portfolio/page.tsx`, `scripts/prune-static-js.mjs`, `scripts/verify-launch.mjs`, Playwright screenshot QA.
+
+## 2026-06-03 00:50 +03 — Asmaa Studio
+
+**Question:** How should Asmaa.video close the public endpoint security-header blocker when the canonical domain is on GitHub Pages?
+**Decision:** Treat Netlify/Cloudflare as the code-ready header-capable edge path, keep the existing `_headers`/`netlify.toml` configuration, fix the Cloudflare Worker export, and record DNS migration from GitHub Pages as the remaining operational blocker.
+**Reasoning:** GitHub Pages cannot apply `_headers`; the existing Netlify host already proves the header policy works, while changing Namecheap DNS cannot be completed through the repo.
+**Source:** Live header probes, `docs/deployment.md`, `netlify.toml`, `public/_headers`, `cloudflare/asmaa-video-security-proxy.js`, professional judgment.
+
+## 2026-06-03 06:57 +03 — Asmaa Studio
+
+**Question:** Can Codex force Asmaa.video to pass canonical public security headers without registrar/DNS authority?
+**Decision:** No; keep the Netlify header path ready and block canonical launch readiness until Namecheap credentials or Cloudflare delegation authority is available.
+**Reasoning:** The only failing surface is the canonical DNS target, which still resolves to GitHub Pages; in-repo `_headers`, Worker code, and Netlify config cannot change headers on GitHub Pages responses.
+**Source:** `ai-empire-10of10-activation-apply.mjs --self-test`, activation dry-run, live `curl -sSI` probes for `https://asmaa.video/` and `https://asmaa-video.netlify.app/`, DNS `NS`/`A` evidence.
+## 2026-06-03T09:54:25+0300 — Asmaa.video / Homepage Redesign
+**Question:** How should Codex respond to Mohammed's judgment that Asmaa.video design is weak and must use the maximum of Claude-style design?
+**Decision:** Replace the homepage first viewport with a code-native cinema-first redesign in `app/page.tsx` and `app/globals.css`, using the existing bridal still and Asmaa brand assets rather than adding generic decoration or fake claims.
+**Reasoning:** The project design system calls for premium Arabic-first wedding cinema, the live blocker is design quality, and the safest high-impact fix is to strengthen the actual first user impression while preserving static export, SEO, accessibility, and launch-verifier contracts.
+**Source:** `docs/DESIGN_SYSTEM.md`, `docs/figma-brief.md`, `app/page.tsx`, `app/globals.css`, `npm run typecheck`, `npm run lint`, `npm run build:pages`, `node scripts/verify-launch.mjs`, `audits/visual-redesign-2026-06-03/desktop-v2.png`, `audits/visual-redesign-2026-06-03/mobile-v2.png`, professional judgment.
+
+## 2026-06-03T09:54:25+0300 — Asmaa.video / Live Design Deploy Boundary
+**Question:** Can Codex make the redesigned Asmaa.video live and header-capable in the same pass?
+**Decision:** Make the redesign live through the configured GitHub Pages push/deploy path, but keep Netlify/header-capable production fail-closed because the authenticated MCP uploader failed twice and the GitHub Netlify workflow lacks `NETLIFY_AUTH_TOKEN`.
+**Reasoning:** GitHub Pages successfully deployed commit `c574481` and live `https://asmaa.video/` contains the redesign marker, but security headers cannot be honestly claimed until a real Netlify token or equivalent edge authority is present.
+**Source:** GitHub Pages run `26869255797`, live marker probe for `https://asmaa.video/`, Netlify MCP deploy attempts, GitHub Netlify workflow `26869403042`, professional judgment.
+
+## 2026-06-05T05:55:09+0300 — Asmaa.video / Netlify activation source boundary
+**Question:** Should local Netlify activation keep reporting `NETLIFY_SITE_ID` as missing when the value exists as a GitHub repository variable?
+**Decision:** No. Allow non-secret Netlify site/domain values to resolve from GitHub repository variables, but keep `NETLIFY_AUTH_TOKEN` limited to env, approved local secret files, Keychain, or GitHub secrets in CI.
+**Reasoning:** `NETLIFY_SITE_ID` is not a secret and already exists in the repo variable surface, while the auth token is a credential; the activation preflight should expose the real blocker without weakening credential handling.
+**Source:** PR #42 (`https://github.com/trustdraft-app/asmaa-studio/pull/42`), merge commit `b90efd4b0992a1b4648c58b4adb0d0f3e83f4548`, `scripts/configure-netlify-custom-domain.mjs`, PR `Verify` check, `node scripts/configure-netlify-custom-domain.mjs --self-test` `13/13`, merged preflight reporting only `NETLIFY_AUTH_TOKEN` missing, Netlify live security-header check passing.
+
+## 2026-06-05T06:13:14+0300 — Asmaa.video / Netlify CLI token source
+**Question:** Should `scripts/configure-netlify-custom-domain.mjs` accept `NETLIFY_AUTH_TOKEN` from standard Netlify CLI config files?
+**Decision:** Yes. Add Netlify CLI config as a local secret-capable token source while continuing to reject GitHub repository variables for `NETLIFY_AUTH_TOKEN`.
+**Reasoning:** Local Netlify CLI login is a legitimate secret-bearing activation surface, and matching the portfolio activation gate reduces operational friction without printing or fabricating credentials.
+**Source:** PR #43 (`https://github.com/trustdraft-app/asmaa-studio/pull/43`), merge commit `7bf2ce8764ceaf4a8e7b3e811ab3742b7dbe97b1`, `scripts/configure-netlify-custom-domain.mjs`, PR `Verify` check, `node scripts/configure-netlify-custom-domain.mjs --self-test` `17/17`, `npm run lint`, `npm run verify:launch`.
+
+## 2026-06-05T09:40:57+0300 — Asmaa.video / Contact launch schema repair
+**Question:** How should Codex fix the Asmaa GitHub Pages launch verifier failure on contact-page `LocalBusiness` schema and missing copy tokens?
+**Decision:** Keep the contact page address-safe by publishing `Organization` plus `ContactPoint` JSON-LD, and add the verifier-required pre-message/local-city copy directly to the page.
+**Reasoning:** Asmaa has no verified public address in the repo, so `LocalBusiness` would be an unsupported schema claim; `Organization`/`ContactPoint` preserves booking discoverability without fabricating address evidence.
+**Source:** GitHub Actions run `26998999543`, `app/contact/page.tsx`, `scripts/verify-launch.mjs`, `/Users/mohammedsa/bin/ai-heavy-run 'npm run verify:launch'`.
+
+## 2026-06-05T09:57:29+0300 — Asmaa.video / Dynamic verifier port ownership
+**Question:** Should the portfolio customer judge remove `PORT=0`, or should Asmaa's verifier support dynamic local ports correctly?
+**Decision:** Fix `scripts/verify-launch.mjs` to derive the actual listener port after `server.listen(0)` while preserving default port `4177` and `BASE_URL` overrides.
+**Reasoning:** `PORT=0` is the robust way to avoid verifier port collisions; the bug was that the verifier built `baseUrl` before the OS assigned the real port.
+**Source:** `AI_EMPIRE_CUSTOMER_10OF10_JUDGE_CURRENT.json`, `scripts/verify-launch.mjs`, `PORT=0 PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.ai-empire-playwright-browsers npm run verify:launch`.

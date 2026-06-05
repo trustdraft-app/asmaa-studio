@@ -9,7 +9,8 @@ import { chromium } from "playwright";
 const root = process.cwd();
 const outDir = join(root, "out");
 const port = Number(process.env.PORT || 4177);
-const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
+const configuredBaseUrl = process.env.BASE_URL || "";
+let baseUrl = configuredBaseUrl || `http://127.0.0.1:${port || 4177}`;
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const adminPanelEnabled = process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED === "true";
@@ -166,7 +167,13 @@ function serveOut() {
   });
 
   return new Promise((resolveServer) => {
-    server.listen(port, "127.0.0.1", () => resolveServer(server));
+    server.listen(port, "127.0.0.1", () => {
+      const address = server.address();
+      if (!configuredBaseUrl && address && typeof address === "object") {
+        baseUrl = `http://127.0.0.1:${address.port}`;
+      }
+      resolveServer(server);
+    });
   });
 }
 
