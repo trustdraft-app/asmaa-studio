@@ -27,7 +27,5 @@ function run(command, args) {
   }
 }
 
-const npxCommand = process.platform === "win32" ? "npx.cmd" : "npx";
-
-run(npxCommand, ["playwright", "install", "chromium"]);
+run(process.execPath, ["scripts/ensure-playwright-chromium.mjs"]);
 run(process.execPath, ["scripts/verify-launch.mjs"]);
