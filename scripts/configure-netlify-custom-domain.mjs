@@ -8,6 +8,11 @@ const localSecretFiles = [
   `${homedir()}/.config/ai-empire/secrets.env`,
   `${homedir()}/.asmaa-studio/secrets.env`
 ];
+const netlifyCliConfigFiles = [
+  `${homedir()}/.netlify/config.json`,
+  `${homedir()}/.config/netlify/config.json`,
+  `${homedir()}/Library/Preferences/netlify/config.json`
+];
 
 const credentialAliases = {
   NETLIFY_AUTH_TOKEN: [
@@ -108,6 +113,32 @@ function repoVariableValue(name) {
   }
 }
 
+function netlifyTokenFromConfig(config) {
+  const candidates = [
+    config?.access_token,
+    config?.accessToken,
+    config?.token,
+    config?.auth?.token,
+    config?.auth?.access_token,
+    config?.auth?.accessToken,
+    config?.user?.access_token,
+    config?.user?.accessToken
+  ];
+  return candidates.find((value) => typeof value === "string" && value.trim())?.trim() || "";
+}
+
+function netlifyCliConfigValue() {
+  for (const path of netlifyCliConfigFiles) {
+    try {
+      const token = netlifyTokenFromConfig(JSON.parse(readFileSync(path, "utf8")));
+      if (token) return { sourceName: path, value: token };
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
 function localSecretFileValue(name) {
   const pattern = new RegExp(`^(?:export\\s+)?${name}=([^\\r\\n]*)`, "m");
   for (const path of localSecretFiles) {
@@ -142,6 +173,16 @@ function credentialValues(name) {
     const value = repoVariableValue(repoVariable);
     if (value) values.push({ source: "githubVariable", sourceName: repoVariable, value });
   }
+  if (name === "NETLIFY_AUTH_TOKEN") {
+    const netlifyCliConfig = netlifyCliConfigValue();
+    if (netlifyCliConfig) {
+      values.push({
+        source: "netlifyCliConfig",
+        sourceName: netlifyCliConfig.sourceName,
+        value: netlifyCliConfig.value
+      });
+    }
+  }
   return values;
 }
 
@@ -154,7 +195,8 @@ function credentialSourceHint(name) {
     environmentVariables: acceptedCredentialNames(name),
     keychainServices: keychainServiceNames(name),
     githubVariables: repoVariableNames(name),
-    localSecretFiles
+    localSecretFiles,
+    netlifyCliConfigFiles: name === "NETLIFY_AUTH_TOKEN" ? netlifyCliConfigFiles : []
   };
 }
 
@@ -349,6 +391,10 @@ function runSelfTest() {
     credentialSourceHint("NETLIFY_SITE_ID").keychainServices.includes("asmaa-video-netlify-site-id"),
     credentialSourceHint("NETLIFY_SITE_ID").githubVariables.includes("NETLIFY_SITE_ID"),
     credentialSourceHint("NETLIFY_AUTH_TOKEN").githubVariables.length === 0,
+    credentialSourceHint("NETLIFY_AUTH_TOKEN").netlifyCliConfigFiles.some((path) => path.endsWith(".netlify/config.json")),
+    netlifyTokenFromConfig({ auth: { token: "netlify-config-token" } }) === "netlify-config-token",
+    netlifyTokenFromConfig({ user: { accessToken: "netlify-user-token" } }) === "netlify-user-token",
+    netlifyTokenFromConfig({}) === "",
     aliasCredential?.source === "environment" && aliasCredential.sourceName === "ASMAA_NETLIFY_AUTH_TOKEN",
   ];
   const ok = cases.every(Boolean);
