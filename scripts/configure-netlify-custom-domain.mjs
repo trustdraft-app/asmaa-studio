@@ -49,6 +49,17 @@ const keychainAliases = {
   ]
 };
 
+const repoVariableAliases = {
+  NETLIFY_SITE_ID: [
+    "NETLIFY_SITE_ID",
+    "ASMAA_NETLIFY_SITE_ID"
+  ],
+  NETLIFY_CUSTOM_DOMAIN: [
+    "NETLIFY_CUSTOM_DOMAIN",
+    "ASMAA_NETLIFY_CUSTOM_DOMAIN"
+  ]
+};
+
 function hasArg(name) {
   return process.argv.includes(name);
 }
@@ -61,9 +72,34 @@ function keychainServiceNames(name) {
   return keychainAliases[name] || acceptedCredentialNames(name);
 }
 
+function repoVariableNames(name) {
+  return repoVariableAliases[name] || [];
+}
+
 function keychainValue(service) {
   try {
     return execFileSync("security", ["find-generic-password", "-s", service, "-w"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"]
+    }).trim();
+  } catch {
+    return "";
+  }
+}
+
+function repoVariableValue(name) {
+  try {
+    return execFileSync("gh", [
+      "variable",
+      "get",
+      name,
+      "-R",
+      "trustdraft-app/asmaa-studio",
+      "--json",
+      "value",
+      "--jq",
+      ".value"
+    ], {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"]
     }).trim();
@@ -102,6 +138,10 @@ function credentialValues(name) {
     const keychain = keychainValue(service);
     if (keychain) values.push({ source: "keychain", sourceName: service, value: keychain });
   }
+  for (const repoVariable of repoVariableNames(name)) {
+    const value = repoVariableValue(repoVariable);
+    if (value) values.push({ source: "githubVariable", sourceName: repoVariable, value });
+  }
   return values;
 }
 
@@ -113,6 +153,7 @@ function credentialSourceHint(name) {
   return {
     environmentVariables: acceptedCredentialNames(name),
     keychainServices: keychainServiceNames(name),
+    githubVariables: repoVariableNames(name),
     localSecretFiles
   };
 }
@@ -306,6 +347,8 @@ function runSelfTest() {
     acceptedCredentialNames("NETLIFY_AUTH_TOKEN").includes("ASMAA_NETLIFY_AUTH_TOKEN"),
     keychainServiceNames("NETLIFY_AUTH_TOKEN").includes("ai-empire-netlify-auth-token"),
     credentialSourceHint("NETLIFY_SITE_ID").keychainServices.includes("asmaa-video-netlify-site-id"),
+    credentialSourceHint("NETLIFY_SITE_ID").githubVariables.includes("NETLIFY_SITE_ID"),
+    credentialSourceHint("NETLIFY_AUTH_TOKEN").githubVariables.length === 0,
     aliasCredential?.source === "environment" && aliasCredential.sourceName === "ASMAA_NETLIFY_AUTH_TOKEN",
   ];
   const ok = cases.every(Boolean);
