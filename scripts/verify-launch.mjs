@@ -177,6 +177,32 @@ function serveOut() {
   });
 }
 
+async function launchChromiumForAudit() {
+  const playwrightChromiumPath = chromium.executablePath();
+  const fallbackChromiumPath =
+    process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ||
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+  const candidates = [playwrightChromiumPath, fallbackChromiumPath]
+    .filter((candidate) => candidate && existsSync(candidate))
+    .filter((candidate, index, all) => all.indexOf(candidate) === index);
+  const launchErrors = [];
+
+  for (const executablePath of candidates) {
+    try {
+      return await chromium.launch({
+        headless: true,
+        executablePath,
+        args: ["--disable-dev-shm-usage"]
+      });
+    } catch (error) {
+      launchErrors.push(`${executablePath}: ${error.message.split("\n")[0]}`);
+      console.error(`WARN Chromium launch failed for ${executablePath}`);
+    }
+  }
+
+  throw new Error(`No launchable Chromium available. ${launchErrors.join(" | ")}`);
+}
+
 function verifyStaticOutput() {
   if (!existsSync(outDir)) {
     fail("out/ is missing; run npm run build first.");
@@ -358,23 +384,10 @@ function verifyStaticOutput() {
 
 async function verifyBrowserOutput() {
   const server = await serveOut();
-  const playwrightChromiumPath = chromium.executablePath();
-  const fallbackChromiumPath =
-    process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ||
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-  const executablePath = existsSync(playwrightChromiumPath)
-    ? playwrightChromiumPath
-    : existsSync(fallbackChromiumPath)
-      ? fallbackChromiumPath
-      : playwrightChromiumPath;
-
-  const browser = await chromium.launch({
-    headless: true,
-    executablePath,
-    args: ["--disable-dev-shm-usage"]
-  });
+  let browser;
 
   try {
+    browser = await launchChromiumForAudit();
     const contexts = [
       {
         name: "mobile",
@@ -532,7 +545,7 @@ async function verifyBrowserOutput() {
       await context.close();
     }
   } finally {
-    await browser.close();
+    if (browser) await browser.close();
     await new Promise((resolveClose) => server.close(resolveClose));
   }
 }
@@ -540,7 +553,11 @@ async function verifyBrowserOutput() {
 verifyStaticOutput();
 
 if (!process.exitCode) {
-  await verifyBrowserOutput();
+  try {
+    await verifyBrowserOutput();
+  } catch (error) {
+    fail(`browser verification crashed: ${error.message.split("\n")[0]}`);
+  }
 }
 
 if (process.exitCode) {
