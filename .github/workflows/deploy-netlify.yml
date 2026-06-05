@@ -28,15 +28,15 @@ jobs:
 
       - name: Preflight Netlify credentials
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN || secrets.ASMAA_NETLIFY_AUTH_TOKEN || secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID || vars.ASMAA_NETLIFY_SITE_ID }}
         run: |
           test -n "$NETLIFY_AUTH_TOKEN" || {
-            echo "::error::NETLIFY_AUTH_TOKEN GitHub secret is required for production Netlify deploy."
+            echo "::error::A Netlify token GitHub secret is required for production Netlify deploy. Accepted names: NETLIFY_AUTH_TOKEN, ASMAA_NETLIFY_AUTH_TOKEN, NETLIFY_TOKEN."
             exit 1
           }
           test -n "$NETLIFY_SITE_ID" || {
-            echo "::error::NETLIFY_SITE_ID GitHub variable is required for production Netlify deploy."
+            echo "::error::A Netlify site ID GitHub variable is required for production Netlify deploy. Accepted names: NETLIFY_SITE_ID, ASMAA_NETLIFY_SITE_ID."
             exit 1
           }
 
@@ -52,15 +52,15 @@ jobs:
 
       - name: Deploy static export to Netlify
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN || secrets.ASMAA_NETLIFY_AUTH_TOKEN || secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID || vars.ASMAA_NETLIFY_SITE_ID }}
         run: npx --yes netlify-cli deploy --prod --dir=out --site="$NETLIFY_SITE_ID" --auth="$NETLIFY_AUTH_TOKEN"
 
       - name: Configure Netlify custom domain
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
-          NETLIFY_CUSTOM_DOMAIN: asmaa.video
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN || secrets.ASMAA_NETLIFY_AUTH_TOKEN || secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID || vars.ASMAA_NETLIFY_SITE_ID }}
+          NETLIFY_CUSTOM_DOMAIN: ${{ vars.NETLIFY_CUSTOM_DOMAIN || vars.ASMAA_NETLIFY_CUSTOM_DOMAIN || 'asmaa.video' }}
         run: npm run netlify:configure-domain -- --json
 
       - name: Verify Netlify app security headers
