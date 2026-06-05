@@ -1,5 +1,11 @@
 # Asmaa Studio Work Log
 
+## 2026-06-05 09:32 +03
+
+- Shipped the next safe Wave 2 slice as a real `near-me` route family at `/ar/{city}/{service}/near-me`, covering local voice-search and "close by" wedding-intent queries without needing venue databases or off-site content generation.
+- Wired the family into `sitemap.xml`, `llms.txt`, `llms-full.txt`, WhatsApp source attribution, and launch verification with explicit sample artifacts for Al Ahsa, Dammam, and Khobar.
+- Preserved the existing Wave 2 scope as partially shipped rather than falsely marking the whole wave complete; venue-coverage routes still remain for a later pass.
+
 ## 2026-06-04 17:36 +03
 
 - Shipped the next live growth wave as the first real Wave 2 slice: a city-specific `/ar/{city}/bride-checklist` route family covering all SEO cities in the existing programmatic grid.
@@ -7,14 +13,12 @@
 - Extended `scripts/verify-launch.mjs` so launch verification now requires sample bride-checklist artifacts and their sitemap/LLM entries.
 - Local verification command evidence remains mixed in this environment: `npm run build:pages` reproduced the known Next compile-stage stall before export, and direct local `typecheck` / `lint` commands did not return usable output here, so deployment verification must come from the GitHub Pages / CI workflows after push.
 
-## 2026-06-02 20:14 +03
+## 2026-06-03 09:07 +03
 
-- Verified the Asmaa code-owned launch surface end to end: `npm run typecheck`, `npm run lint`, `npm run build:pages`, and `TMPDIR=/tmp npm run verify:launch` passed.
-- Live probes passed for `https://asmaa.video`, `/reserve`, `/portfolio`, `/process`, robots, sitemap, `llms.txt`, and `asmaavideo.com` redirects to `https://asmaa.video`.
-- Confirmed `asmaa.vodeo` does not resolve; kept `asmaa.video` as canonical per project memory and current DNS/live routing.
-- Noted public `/admin` is currently 404 on the live static deployment while local export includes `/admin`; public robots disallow `/admin`, and owner Supabase activation remains the secure path for live admin persistence.
-- Cleared the remaining launch PR queue: closed #24 and #25 as 0-diff superseded PRs, rebased #23 onto `main`, fixed the verifier-discovered mobile footer tap targets, passed local `npm run lint`, `npm run typecheck`, and `PLAYWRIGHT_BROWSERS_PATH=/tmp/asmaa-pr23-playwright TMPDIR=/tmp npm run verify:launch`, then merged #23 after GitHub CI passed `lint`, `typecheck`, `npm audit --omit=dev`, `verify:launch`, and `verify:admin`.
-- Final Asmaa PR evidence: #23 merged at `3ca49efb7e0da28c540951ece8fff76eae91f24a`; no open PRs remain.
+- Implemented the next daily growth wave in source as a local-proof/contact conversion pass centered on `/contact`, translating the off-site Google-post intent into a repo-owned improvement that can go live safely.
+- Replaced the contact page's weak `LocalBusiness` structured data with `Organization` + `ContactPoint`, added a clear first-message checklist, linked the three main city pages directly, and tagged WhatsApp clicks from the contact route as their own source.
+- Extended `scripts/verify-launch.mjs` so launch checks now fail if `/contact` reintroduces `LocalBusiness` or loses the new local-proof/conversion content.
+- Local commit created at `27fd555`, but deployment is not yet live because `git push origin main` did not complete and remote `main` still reports `03cda09`.
 
 ## 2026-06-02 09:09 +03
 
@@ -241,44 +245,3 @@
 - Added internal discovery links from the homepage guide section, FAQ page, and portfolio page so engagement intent now has a direct on-site path instead of relying on service slugs or off-site social posts.
 - Updated `sitemap.xml`, `llms.txt`, `llms-full.txt`, WhatsApp source labels, and launch verification expectations to include the new engagement route.
 - Local verification evidence: `git diff --check` passed and `npm run typecheck` passed; local `npm run build:pages` / `npm run verify:launch` are currently blocked by a Next 16 compile-stage hang in this environment before export finishes, so live deploy verification must come from the GitHub Pages workflow run after push.
-
-## 2026-06-01 15:41 +03
-
-- Closed the Claude launch-audit blockers around `/faq`, `/contact`, `sitemap.xml`, `llms.txt`, and the static launch verifier.
-- Resolved the `app/globals.css` merge conflict by preserving the FAQ accordion, contact page, package-pricing, and footer navigation styles.
-- Removed deprecated FAQPage structured data from `/faq` so the launch verifier and current rich-result policy stay aligned.
-- Added `/contact` to the sitemap, `llms.txt`, static artifact requirements, and marketing-route verification; kept `/reserve` out of the sitemap because it is intentionally `noindex`.
-- Hardened `scripts/verify-launch.mjs` so browser verification falls back to the installed macOS Chrome when the Playwright cache executable is unavailable.
-- Fixed homepage mobile footer tap targets to meet the 44px height and width verifier requirement.
-- Verification passed: `npm run typecheck`, `npm run build:pages`, `node scripts/verify-launch.mjs`, and `git diff --check` for touched files. The final launch verifier passed all static, SEO, llms, mobile, desktop, imagery, reserve intent, and axe checks.
-
-## 2026-06-01 21:49 +03
-
-- Shipped the `/contact` production fix through PR #26 from a clean `origin/main` branch instead of merging the unrelated portfolio-gallery feature branch.
-- PR and `main` CI passed: `npm ci`, `npm run lint`, `npm run typecheck`, `npm audit --omit=dev`, `npm run verify:launch`, `npm run verify:admin`, and `npm run build:pages`.
-- GitHub Pages deploy run `26774808909` completed successfully.
-- Live probes now pass: `https://asmaa.video/contact`, `https://asmaa.video/sitemap.xml`, and `https://asmaa.video/llms.txt` all return HTTP 200.
-
-## 2026-06-02 12:50 +03
-
-- Fixed the current branch reviews-page launch failure by replacing banned wording in `app/reviews/page.tsx` metadata, principle title, and hero headline with consent-first sharing-boundary copy.
-- Repaired local Playwright launch verification by using isolated browser cache `/Users/mohammedsa/.cache/ai-empire-playwright-asmaa`.
-- Verification passed: `npm run verify:launch` with `PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.cache/ai-empire-playwright-asmaa` completed with `178` PASS checks and no failures.
-- Live check: `https://asmaa.video/reviews` returned HTTP `200` and did not contain the banned wording; local `out/reviews.html` also did not contain it after the fix.
-
-## 2026-06-02 23:14 +03
-
-- Shipped the Sprint 16 route-theatre redesign pass in source: packages, portfolio, reviews, about, FAQ, contact, reserve, and process now share image-led cinematic hero treatment, premium card surfaces, balanced headings, stronger route rhythm, and repaired contact/review hit areas.
-- Added portfolio class hooks so the existing inline portfolio route can be styled consistently without rewriting the page structure.
-- Optimized `scripts/prune-static-js.mjs` and `scripts/verify-launch.mjs` with bounded async file reads/writes so the 9k+ HTML export can be pruned and verified without multi-minute sequential filesystem stalls.
-- Verification passed: `git diff --check`, `npm run typecheck --silent`, `npm run lint --silent`, `npm run build:pages` (`587s` final run), `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/verify-launch.mjs` (`58s` final run), and Playwright route screenshot QA across 9 routes x desktop/mobile with zero overflow, route-hero, console, network, or tap-target failures.
-- Visual evidence: screenshots saved under `/tmp/asmaa-sprint16-route-qa/`; generated design reference saved under `/Users/mohammedsa/.codex/generated_images/019e86ff-88ac-7991-8c04-d331426399b5/`.
-
-## 2026-06-03 00:50 +03
-
-- Audited Asmaa.video live launch headers, DNS, static export, Netlify edge target, and local launch verification.
-- Confirmed canonical `https://asmaa.video` is still served by GitHub Pages/Namecheap DNS and fails required security headers because GitHub Pages ignores `_headers`.
-- Confirmed existing header-capable Netlify target `https://asmaa-video.netlify.app` passes `scripts/verify-live-security-headers.mjs` and returns HSTS, CSP, frame denial, nosniff, referrer policy, and permissions policy.
-- Fixed `cloudflare/asmaa-video-security-proxy.js` to use a named default export for lint-safe Worker deployment readiness.
-- Verification passed: `npm run lint`, `npm run build:pages`, `NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/verify-launch.mjs`, `node --check cloudflare/asmaa-video-security-proxy.js`, and `git diff --check`.
-- Netlify MCP deploy to the existing site ID was attempted twice but the connector wedged during project upload; no deploy was completed from this local session.

@@ -158,7 +158,6 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
 - FAQ: https://asmaa.video/faq
 - Portfolio: https://asmaa.video/portfolio
 - Engagement package page: https://asmaa.video/engagement
-- Client journey (7-step process, inquiry to delivery): https://asmaa.video/process
 - Packages PDF: https://asmaa.video/packages-asmaa-studio.pdf (963 KB)
 
 ### City pages (9 — Al-Ahsa governorate leads)
@@ -216,6 +215,11 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
   - https://asmaa.video/ar/dammam/bride-checklist
   - https://asmaa.video/ar/khobar/bride-checklist
   - Same route shape exists for each top-30 SEO city under `/ar/{city}/bride-checklist`
+- Near me family:
+  - https://asmaa.video/ar/alahsa/zaffa-tasweer/near-me
+  - https://asmaa.video/ar/dammam/khotuba-tasweer/near-me
+  - https://asmaa.video/ar/khobar/full-day-tasweer/near-me
+  - Same route shape exists for each SEO city/service pair under `/ar/{city}/{service}/near-me`
 
 ## Brand voice anchors
 - Tone: elegant, calm, professional, Arabic-first, easy to understand

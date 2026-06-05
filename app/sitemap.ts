@@ -29,14 +29,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95
     },
     {
+      url: `${base}/highlights`,
+      changeFrequency: "monthly",
+      priority: 0.5
+    },
+    {
       url: `${base}/about`,
       changeFrequency: "monthly",
       priority: 0.78
-    },
-    {
-      url: `${base}/process`,
-      changeFrequency: "monthly",
-      priority: 0.77
     },
     {
       url: `${base}/reviews`,
@@ -73,11 +73,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.86
     },
-    {
-      url: `${base}/highlights`,
-      changeFrequency: "monthly",
-      priority: 0.5
-    },
     ...serviceAreas.map((area) => ({
       url: `${base}/${area.slug}`,
       changeFrequency: "weekly" as const,
@@ -103,6 +98,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/ar/${city.slug}/bride-checklist`,
       changeFrequency: "monthly" as const,
       priority: city.governorate === "alahsa" ? 0.8 : city.governorate === "easternProvince" ? 0.65 : 0.45
+    })),
+    ...allCityServicePairs().map(({ city, service }) => ({
+      url: `${base}/ar/${city.slug}/${service.slug}/near-me`,
+      changeFrequency: "monthly" as const,
+      priority: city.governorate === "alahsa" ? 0.76 : city.governorate === "easternProvince" ? 0.62 : 0.42
     })),
     // Programmatic SEO grid — 30 × 8 × 14 = 3,360 pages
     ...allCityServiceModifierTriples().map(({ city, service, modifier }) => ({

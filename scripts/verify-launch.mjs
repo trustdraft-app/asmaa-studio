@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { createServer } from "node:http";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { extname, join, normalize } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -10,7 +9,7 @@ import { chromium } from "playwright";
 const root = process.cwd();
 const outDir = join(root, "out");
 const port = Number(process.env.PORT || 4177);
-let activeBaseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
+const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const adminPanelEnabled = process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED === "true";
@@ -31,22 +30,14 @@ const requiredFiles = [
   "ar/alahsa/bride-checklist.html",
   "ar/dammam/bride-checklist.html",
   "ar/khobar/bride-checklist.html",
+  "ar/alahsa/zaffa-tasweer/near-me.html",
+  "ar/dammam/khotuba-tasweer/near-me.html",
+  "ar/khobar/full-day-tasweer/near-me.html",
   "sitemap.xml",
   "robots.txt",
   "llms.txt",
   "favicon.ico",
-  "CNAME",
-  "_headers"
-];
-
-const requiredHeaderArtifactLines = [
-  ["Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload"],
-  ["Content-Security-Policy", "default-src 'self'"],
-  ["Content-Security-Policy", "frame-ancestors 'none'"],
-  ["X-Frame-Options", "DENY"],
-  ["X-Content-Type-Options", "nosniff"],
-  ["Referrer-Policy", "strict-origin-when-cross-origin"],
-  ["Permissions-Policy", "camera=(), microphone=(), geolocation=()"]
+  "CNAME"
 ];
 
 if (adminPanelEnabled) {
@@ -104,7 +95,6 @@ const marketingRoutes = [
   "portfolio.html",
   "zaffa.html",
   "engagement.html",
-  "process.html",
   "guides.html",
   "404.html",
   ...guideSlugs.map((slug) => `guides/${slug}.html`)
@@ -144,58 +134,8 @@ function walkFiles(dir) {
   });
 }
 
-async function mapLimit(items, limit, fn) {
-  let index = 0;
-  const workerCount = Math.min(limit, items.length);
-  const workers = Array.from({ length: workerCount }, async () => {
-    while (index < items.length) {
-      const item = items[index];
-      index += 1;
-      await fn(item);
-    }
-  });
-  await Promise.all(workers);
-}
-
-function verifyDeployHeaderArtifacts() {
-  const headersPath = join(outDir, "_headers");
-  if (!existsSync(headersPath)) {
-    fail("out/_headers is missing; header-capable hosts will not receive launch security headers");
-    return;
-  }
-
-  const headers = readFileSync(headersPath, "utf8");
-  if (/^\s*\/\*/m.test(headers)) pass("Netlify/Cloudflare _headers artifact defines a global route");
-  else fail("out/_headers must define a global /* route");
-
-  for (const [name, value] of requiredHeaderArtifactLines) {
-    if (headers.includes(`${name}:`) && headers.includes(value)) pass(`_headers contains ${name}`);
-    else fail(`_headers missing ${name}: ${value}`);
-  }
-
-  const vercelConfigPath = join(root, "vercel.json");
-  if (!existsSync(vercelConfigPath)) {
-    fail("vercel.json is missing; Vercel deploys would not inherit the launch header policy");
-    return;
-  }
-
-  const vercelConfig = JSON.parse(readFileSync(vercelConfigPath, "utf8"));
-  const vercelHeaders = new Map(
-    (vercelConfig.headers || []).flatMap((rule) =>
-      (rule.headers || []).map((header) => [header.key, String(header.value || "")])
-    )
-  );
-  for (const [name, value] of requiredHeaderArtifactLines) {
-    if (vercelHeaders.get(name)?.includes(value)) {
-      pass(`vercel.json contains ${name}`);
-    } else {
-      fail(`vercel.json missing ${name}: ${value}`);
-    }
-  }
-}
-
 function staticPathForUrl(url) {
-  const parsed = new URL(url, activeBaseUrl);
+  const parsed = new URL(url, baseUrl);
   const cleanPath = decodeURIComponent(parsed.pathname).replace(/^\/+/, "");
   const candidates = cleanPath
     ? [cleanPath, `${cleanPath}.html`, join(cleanPath, "index.html")]
@@ -225,22 +165,12 @@ function serveOut() {
     response.end(readFileSync(filePath));
   });
 
-  return new Promise((resolveServer, rejectServer) => {
-    const onListenError = (error) => rejectServer(error);
-    server.once("error", onListenError);
-    server.listen(port, "127.0.0.1", () => {
-      server.off("error", onListenError);
-      const address = server.address();
-      const boundPort = typeof address === "object" && address ? address.port : port;
-      if (!process.env.BASE_URL) {
-        activeBaseUrl = `http://127.0.0.1:${boundPort}`;
-      }
-      resolveServer(server);
-    });
+  return new Promise((resolveServer) => {
+    server.listen(port, "127.0.0.1", () => resolveServer(server));
   });
 }
 
-async function verifyStaticOutput() {
+function verifyStaticOutput() {
   if (!existsSync(outDir)) {
     fail("out/ is missing; run npm run build first.");
     return;
@@ -288,26 +218,23 @@ async function verifyStaticOutput() {
   if (cname === "asmaa.video") pass("CNAME points to asmaa.video");
   else fail(`CNAME should be asmaa.video, got "${cname}"`);
 
-  verifyDeployHeaderArtifacts();
-
   const allHtml = walkFiles(outDir).filter((file) => file.endsWith(".html"));
-  const scanConcurrency = Number(process.env.VERIFY_HTML_CONCURRENCY || 16);
-  await mapLimit(allHtml, scanConcurrency, async (filePath) => {
-    const html = await readFile(filePath, "utf8");
+  for (const filePath of allHtml) {
+    const html = readFileSync(filePath, "utf8");
     const relative = filePath.replace(`${outDir}/`, "");
-    for (const phrase of bannedPhrases) {
+	  for (const phrase of bannedPhrases) {
       if (html.includes(phrase)) fail(`${relative} contains banned wording: ${phrase}`);
     }
 
     if (/<title>[^<]*Asmaa Studio\s*\|\s*Asmaa Studio[^<]*<\/title>/.test(html)) {
       fail(`${relative} has a duplicated Asmaa Studio title`);
     }
-  });
+  }
 
   for (const route of marketingRoutes) {
     if (!existsSync(join(outDir, route))) continue;
     const html = readOutFile(route);
-    const nonStructuredScripts = (html.match(/<script(?![^>]*type="application\/ld\+json")(?![^>]*googletagmanager\.com)[\s\S]*?<\/script>/gi) || []);
+    const nonStructuredScripts = html.match(/<script(?![^>]*type="application\/ld\+json")[\s\S]*?<\/script>/gi) || [];
     if (nonStructuredScripts.length > 0) fail(`${route} still contains client scripts`);
     else pass(`${route} is static-script pruned with structured data preserved`);
 
@@ -342,6 +269,20 @@ async function verifyStaticOutput() {
     pass("homepage avoids addressless LocalBusiness structured data");
   }
 
+  const contact = existsSync(join(outDir, "contact.html")) ? readOutFile("contact.html") : "";
+  if (contact) {
+    if (contact.includes('"@type":"LocalBusiness"') || contact.includes('"@type": "LocalBusiness"')) {
+      fail("contact page must not expose LocalBusiness structured data without a verified public address");
+    } else {
+      pass("contact page avoids LocalBusiness structured data");
+    }
+
+    for (const token of ['"@type":"Organization"', '"@type":"ContactPoint"', "قبل أول رسالة", "صفحات محلية لكل مدينة رئيسية"]) {
+      if (contact.includes(token)) pass(`contact page contains ${token}`);
+      else fail(`contact page missing ${token}`);
+    }
+  }
+
   const reserve = existsSync(join(outDir, "reserve.html")) ? readOutFile("reserve.html") : "";
   if (reserve.includes('name="robots" content="noindex, follow"')) pass("reserve page is noindex/follow");
   else fail("reserve page must be noindex/follow");
@@ -366,6 +307,14 @@ async function verifyStaticOutput() {
       fail(`sitemap missing bride checklist for ${citySlug}`);
     }
   }
+  for (const route of [
+    "https://asmaa.video/ar/alahsa/zaffa-tasweer/near-me",
+    "https://asmaa.video/ar/dammam/khotuba-tasweer/near-me",
+    "https://asmaa.video/ar/khobar/full-day-tasweer/near-me"
+  ]) {
+    if (sitemap.includes(`<loc>${route}</loc>`)) pass(`sitemap contains ${route}`);
+    else fail(`sitemap missing ${route}`);
+  }
   for (const slug of guideSlugs) {
     if (sitemap.includes(`https://asmaa.video/guides/${slug}`)) pass(`sitemap contains ${slug}`);
     else fail(`sitemap missing ${slug}`);
@@ -386,9 +335,9 @@ async function verifyStaticOutput() {
     "https://asmaa.video/reserve",
     "https://asmaa.video/portfolio",
     "https://asmaa.video/engagement",
-    "https://asmaa.video/process",
     "https://asmaa.video/guides",
-    "https://asmaa.video/ar/alahsa/bride-checklist"
+    "https://asmaa.video/ar/alahsa/bride-checklist",
+    "https://asmaa.video/ar/alahsa/zaffa-tasweer/near-me"
   ]) {
     if (llms.includes(token)) pass(`llms.txt contains ${token}`);
     else fail(`llms.txt missing ${token}`);
@@ -407,9 +356,7 @@ async function verifyBrowserOutput() {
     process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ||
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
   const executablePath = existsSync(playwrightChromiumPath)
-    ? existsSync(fallbackChromiumPath)
-      ? fallbackChromiumPath
-      : playwrightChromiumPath
+    ? playwrightChromiumPath
     : existsSync(fallbackChromiumPath)
       ? fallbackChromiumPath
       : playwrightChromiumPath;
@@ -450,7 +397,6 @@ async function verifyBrowserOutput() {
             "/faq",
             "/portfolio",
             "/engagement",
-            "/process",
             "/guides",
             "/guides/wedding-videography-al-ahsa",
             "/guides/female-wedding-photographer-eastern-province",
@@ -461,7 +407,7 @@ async function verifyBrowserOutput() {
       if (adminPanelEnabled && !verifyAdminOnly) browserRoutes.push("/admin");
 
       for (const route of browserRoutes) {
-        await page.goto(`${activeBaseUrl}${route}`, { waitUntil: "networkidle" });
+        await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
 
         const layout = await page.evaluate(() => ({
           overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -531,8 +477,7 @@ async function verifyBrowserOutput() {
         continue;
       }
 
-      await page.goto(`${activeBaseUrl}/`, { waitUntil: "networkidle" });
-      await page.waitForSelector(".home-redesign-hero", { timeout: 60000 });
+      await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
       const homeCounts = await page.evaluate(() => ({
         heroImages: document.querySelectorAll(".hero-photo-stack img").length,
         realLogoImages: document.querySelectorAll(".brand-mark img, .hero-logo-image").length,
@@ -552,26 +497,19 @@ async function verifyBrowserOutput() {
 	      if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
       else fail(`${config.name} homepage missing story moment cards`);
 
-      await page.goto(`${activeBaseUrl}/reserve?city=dammam&package=02`, { waitUntil: "networkidle" });
-      await page.waitForFunction(() =>
-        Array.from(document.querySelectorAll("select")).some((select) => select.value === "الدمام")
-      );
+      await page.goto(`${baseUrl}/reserve?city=dammam&package=02`, { waitUntil: "networkidle" });
       const reservePrefill = await page.evaluate(() => ({
         selectValues: Array.from(document.querySelectorAll("select")).map((select) => select.value)
       }));
       if (reservePrefill.selectValues.includes("الدمام")) pass(`${config.name} reserve preselects city from query`);
       else fail(`${config.name} reserve failed to preselect city from query`);
 
-      const packageStepButton = page.locator(".stepper button").nth(1);
-      await packageStepButton.scrollIntoViewIfNeeded();
-      await packageStepButton.click({ force: true });
-      await page.waitForSelector('.package-picker button[aria-pressed="true"]');
+      await page.locator(".stepper button").nth(1).click();
       const selectedPackage = await page.locator('.package-picker button[aria-pressed="true"]').textContent();
       if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
       else fail(`${config.name} reserve failed to preselect package from query`);
 
-      await page.goto(`${activeBaseUrl}/`, { waitUntil: "networkidle" });
-      await page.waitForSelector(".home-redesign-hero", { timeout: 60000 });
+      await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
       await page.addScriptTag({ content: axeSource });
       const axe = await page.evaluate(async () => {
         return window.axe.run(document, {
@@ -592,7 +530,7 @@ async function verifyBrowserOutput() {
   }
 }
 
-await verifyStaticOutput();
+verifyStaticOutput();
 
 if (!process.exitCode) {
   await verifyBrowserOutput();

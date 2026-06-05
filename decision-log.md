@@ -1,22 +1,22 @@
 # Asmaa Studio Decision Log
 
+## 2026-06-05 09:32 +03 — Asmaa Studio
+**Question:** What is the next highest-impact safe Wave 2 slice after yesterday's `/ar/{city}/bride-checklist` launch?
+**Decision:** Ship the `near-me` route family at `/ar/{city}/{service}/near-me`, then wire it into sitemap, llms discovery, attribution, and launch verification while leaving venue-coverage for a later run.
+**Reasoning:** This captures high-intent voice/local queries using existing city and service data, without inventing venue-specific facts or depending on DeepSeek/off-site systems.
+**Source:** `AGENTS.md`, `seo-waves/wave-2.json`, `app/ar/[city]/[service]/page.tsx`, `lib/seo-grid.ts`, professional judgment.
+
 ## 2026-06-04 17:36 +03 — Asmaa Studio
 **Question:** What is the next highest-impact safe daily growth wave now that the 20-wave contact pass is already shipped and the 50k-URL system shows Wave 2 pending?
 **Decision:** Ship the first real Wave 2 route family as city-specific `/ar/{city}/bride-checklist` pages for all SEO cities, wire them into sitemap, answer-engine files, city discovery, and launch verification, and leave the rest of Wave 2 pending for later route families.
 **Reasoning:** This is the safest repo-owned Wave 2 slice: it creates real new search/conversion surfaces around pre-booking intent without inventing venue data or depending on DeepSeek, GSC, or off-site access.
 **Source:** `AGENTS.md`, `seo-waves/state.json`, `seo-waves/wave-2.json`, existing `app/ar/*` route patterns, professional judgment.
 
-## 2026-06-02 20:52 +03 — Asmaa Studio
-**Question:** How should Codex handle the remaining Asmaa launch PRs after live readiness verification?
-**Decision:** Close PR #24 and #25 because both had 0 changed files after branch updates, then rebase/fix/verify/merge PR #23 as the only remaining code-bearing launch PR.
-**Reasoning:** Empty PRs add queue noise, while PR #23 had real process-discovery changes and one verifier-discovered footer tap-target issue that could be fixed and proven before merge.
-**Source:** GitHub PR state, `npm run verify:launch`, professional judgment.
-
-## 2026-06-02 20:14 +03 — Asmaa Studio
-**Question:** Should `asmaa.vodeo` be treated as the launch domain or a typo/variant?
-**Decision:** Treat `asmaa.video` as canonical because project memory, CNAME, sitemap, redirects, and live HTTP probes all point there; record `asmaa.vodeo` as unresolved/non-resolving and not code-owned.
-**Reasoning:** Changing or buying a typo-domain is a brand/money decision, while the code-owned `asmaa.video` launch surface is live and verified.
-**Source:** `.agent/README.md`, `public/CNAME`, live HTTP probes, `npm run verify:launch`.
+## 2026-06-03 09:07 +03 — Asmaa Studio
+**Question:** What is the next highest-impact safe live-site wave after the booking-source attribution pass, given that wave 18 is off-site Google posting work?
+**Decision:** Translate wave 18 into a local-proof conversion upgrade on `/contact`: remove the weak `LocalBusiness` schema, replace it with `Organization` + `ContactPoint`, add a first-message checklist and direct city-page links, and gate the route in launch verification.
+**Reasoning:** This preserves the wave’s local-discovery intent while shipping a repo-owned improvement that strengthens SEO integrity and helps support-domain or Google visitors convert faster.
+**Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, `app/contact/page.tsx`, prior schema decisions, professional judgment.
 
 ## 2026-06-02 09:09 +03 — Asmaa Studio
 **Question:** Which remaining 20-wave item should ship next on the live site after the engagement and trust waves?
@@ -227,23 +227,3 @@
 **Decision:** Convert wave 17 into a dedicated `/engagement` landing page for الخطوبة والملكة, wire it into internal discovery, sitemap, `llms.txt`, and launch verification, and treat GitHub Pages CI as the deployment verifier because local Next 16 builds are hanging in compile before export completes.
 **Reasoning:** The engagement intent already exists in packages and guides, but a first-class landing route gives it the same direct search and conversion surface as `/zaffa`; the build hang is an environment/runtime issue, not a content-strategy reason to skip the wave.
 **Source:** `AGENTS.md`, `lib/content.ts` 20-wave plan, existing `app/zaffa/page.tsx` pattern, project files, professional judgment.
-## 2026-06-02 12:50 +03
-
-**Question:** How should the current branch handle reviews-page wording that fails the launch verifier?
-**Decision:** Replace the banned wording with consent-first sharing-boundary copy in `app/reviews/page.tsx` and keep the verifier strict.
-**Reasoning:** The launch invariant is to avoid unsupported privacy/marketing claims while still explaining consent-first review handling clearly.
-**Source:** `scripts/verify-launch.mjs`, `app/reviews/page.tsx`, local launch verification.
-
-## 2026-06-02 23:14 +03 — Asmaa Studio
-
-**Question:** How should the full-authority redesign order be applied after the homepage cinematic pass was already live?
-**Decision:** Apply a route-wide theatre system instead of another homepage-only change: shared image-led heroes, darker premium proof surfaces, portfolio styling hooks, contact/review hit-area hardening, and faster export verification.
-**Reasoning:** End-to-end launch polish requires the supporting user journeys to feel as deliberate as the homepage, and the verifier/pruner bottleneck had become a real launch-execution drag on the 11k-page static export.
-**Source:** User directive, generated design reference, `app/globals.css`, `app/portfolio/page.tsx`, `scripts/prune-static-js.mjs`, `scripts/verify-launch.mjs`, Playwright screenshot QA.
-
-## 2026-06-03 00:50 +03 — Asmaa Studio
-
-**Question:** How should Asmaa.video close the public endpoint security-header blocker when the canonical domain is on GitHub Pages?
-**Decision:** Treat Netlify/Cloudflare as the code-ready header-capable edge path, keep the existing `_headers`/`netlify.toml` configuration, fix the Cloudflare Worker export, and record DNS migration from GitHub Pages as the remaining operational blocker.
-**Reasoning:** GitHub Pages cannot apply `_headers`; the existing Netlify host already proves the header policy works, while changing Namecheap DNS cannot be completed through the repo.
-**Source:** Live header probes, `docs/deployment.md`, `netlify.toml`, `public/_headers`, `cloudflare/asmaa-video-security-proxy.js`, professional judgment.

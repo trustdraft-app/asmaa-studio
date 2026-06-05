@@ -52,6 +52,7 @@ export function readableWhatsappSource(source: string) {
     "engagement-page": "صفحة بكج الخطوبة",
     "reviews-page": "صفحة الاطمئنان قبل الحجز",
     "about-page": "صفحة عن الاستوديو",
+    "contact-page": "صفحة التواصل",
     "packages-hero": "صفحة الباقات"
   };
 
@@ -68,6 +69,7 @@ export function readableWhatsappSource(source: string) {
   if (source === "engagement-page") return "صفحة بكج الخطوبة";
   if (source === "reviews-page") return "صفحة الاطمئنان قبل الحجز";
   if (source === "about-page") return "صفحة عن الاستوديو";
+  if (source === "contact-page") return "صفحة التواصل";
   if (source === "packages-hero") return "صفحة الباقات";
   if (source === "packages-final-wa") return "صفحة الباقات - الخاتمة";
   if (source === "packages-floating") return "صفحة الباقات - زر واتساب";
@@ -101,6 +103,14 @@ export function readableWhatsappSource(source: string) {
 
   if (source.startsWith("guide-")) return `دليل ${source.replace(/^guide-/, "")}`;
 
+  const nearMeMatch = source.match(
+    /^near-me-(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail|saihat|tarout|buqayq|battaliyah|mutairfi|markaz|salasil|hala|qara|jaaberiyah|aiouni|dhahran|ras-tanura|safwa|awamiyah|khafji|riyadh|jeddah|mecca|medina|taif)-(.+?)(?:-final)?$/
+  );
+  if (nearMeMatch) {
+    const [, citySlug, serviceSlug] = nearMeMatch;
+    return `صفحة قريب مني - ${citySourceLabels[citySlug] ?? citySlug} - ${serviceSlug}`;
+  }
+
   const cityPackageMatch = source.match(/^(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail)-package-(\d+)$/);
   if (cityPackageMatch) return `${citySourceLabels[cityPackageMatch[1]]} - باقة ${cityPackageMatch[2]}`;
 
@@ -108,7 +118,7 @@ export function readableWhatsappSource(source: string) {
   if (packagesCardMatch) return `صفحة الباقات - باقة ${packagesCardMatch[1]}`;
 
   const pageIntentMatch = source.match(
-    /^(home-hero|faq-page|portfolio-page|zaffa-page|engagement-page|reviews-page|about-page|packages-hero)(?:-(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail))?(?:-package-(\d+))?$/
+    /^(home-hero|faq-page|portfolio-page|zaffa-page|engagement-page|reviews-page|about-page|contact-page|packages-hero)(?:-(alahsa|hofuf|mubarraz|alomran|altarafiyya|dammam|khobar|qatif|jubail))?(?:-package-(\d+))?$/
   );
   if (pageIntentMatch) {
     const [, pageKey, citySlug, packageId] = pageIntentMatch;
