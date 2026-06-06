@@ -351,3 +351,10 @@
 - This unblocks the portfolio customer judge's `asmaa-launch-verify` command without weakening any static, mobile, desktop, or axe checks.
 - Verification passed: `node --check scripts/verify-launch.mjs`.
 - Verification passed: `PORT=0 PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.ai-empire-playwright-browsers npm run verify:launch`, including static export, contact schema/copy checks, mobile and desktop no-overflow checks, reserve prefill checks, and axe checks.
+
+## 2026-06-06T16:50:00+0300 — Asmaa.video A+++ audit pass (assets, SEO, privacy)
+
+- Confirmed the security-header blocker is RESOLVED: canonical `https://asmaa.video` resolves to Netlify (75.2.60.5 / 99.83.231.61) and serves the full A+ header set; `node scripts/verify-live-security-headers.mjs https://asmaa.video https://asmaa.video/contact` passes.
+- Established that fresh CONTENT deploys are owner-gated: Netlify GitHub App is not connected (no netlify commit checks) and no `NETLIFY_AUTH_TOKEN` exists in env, Keychain (all aliases), Netlify CLI config, or GitHub secrets. The live Netlify deploy is a stale one-off `netlify deploy`. Documented the exact owner action in `.agent/TODO.md` (one-off token workflow, or connect Netlify auto-deploy).
+- PR #46 (`codex/asmaa-aplusplus-assets-seo-20260606`): removed ~11MB of dead weight (9 duplicate PDFs + 1.97MB hero PNG), added a correct 1200×630 OG image (100KB) wired into OpenGraph/Twitter/JSON-LD, shrank favicon.ico 370KB→15KB and logo/app-icon 220KB→59KB, broadened the launch verifier route coverage, and added a factual Arabic `/privacy` page (footer + sitemap).
+- Verification: `npm run typecheck` and `npm run lint` clean; `npm run build:pages` exits 0 with privacy exported and in sitemap; CI `Verify` on PR #46 PASSED (full `verify:launch` incl. axe a11y + expanded mobile/desktop route checks + `verify:admin`) on ubuntu. Local Playwright runs are SIGKILL'd by the Mac mem-pressure watchdog, so CI is the authoritative gate.
