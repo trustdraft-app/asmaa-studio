@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/clean-static-export.mjs && next build && node scripts/prune-static-js.mjs && node scripts/verify-static-export-size.mjs",
-    "build:pages": "node scripts/clean-static-export.mjs && GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false next build && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/prune-static-js.mjs && node scripts/verify-static-export-size.mjs && node scripts/verify-static-launch-artifacts.mjs",
+    "build": "npm run build:pages",
+    "build:pages": "node scripts/with-launch-lock.mjs -- npm run build:pages:unlocked",
+    "build:pages:unlocked": "node scripts/clean-static-export.mjs && GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false next build && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=false node scripts/prune-static-js.mjs && node scripts/verify-static-export-size.mjs && node scripts/verify-static-launch-artifacts.mjs",
     "build:admin-check": "node scripts/clean-static-export.mjs && GITHUB_PAGES=true GITHUB_PAGES_CUSTOM_DOMAIN=true NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co NEXT_PUBLIC_SUPABASE_ANON_KEY=admin-readiness-check next build && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true node scripts/prune-static-js.mjs && node scripts/verify-static-export-size.mjs && node scripts/verify-static-launch-artifacts.mjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "verify:launch": "npm run build:pages && node scripts/run-launch-verifier.mjs",
+    "verify:launch": "node scripts/with-launch-lock.mjs -- npm run verify:launch:unlocked",
+    "verify:launch:unlocked": "npm run build:pages:unlocked && node scripts/run-launch-verifier.mjs",
     "verify:admin": "npm run build:admin-check && NEXT_PUBLIC_ADMIN_PANEL_ENABLED=true VERIFY_ADMIN_ONLY=true node scripts/run-launch-verifier.mjs",
     "verify:live-security-headers": "node scripts/verify-live-security-headers.mjs",
     "netlify:configure-domain": "node scripts/configure-netlify-custom-domain.mjs"
