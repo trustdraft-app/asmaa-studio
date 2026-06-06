@@ -358,3 +358,19 @@
 - Established that fresh CONTENT deploys are owner-gated: Netlify GitHub App is not connected (no netlify commit checks) and no `NETLIFY_AUTH_TOKEN` exists in env, Keychain (all aliases), Netlify CLI config, or GitHub secrets. The live Netlify deploy is a stale one-off `netlify deploy`. Documented the exact owner action in `.agent/TODO.md` (one-off token workflow, or connect Netlify auto-deploy).
 - PR #46 (`codex/asmaa-aplusplus-assets-seo-20260606`): removed ~11MB of dead weight (9 duplicate PDFs + 1.97MB hero PNG), added a correct 1200×630 OG image (100KB) wired into OpenGraph/Twitter/JSON-LD, shrank favicon.ico 370KB→15KB and logo/app-icon 220KB→59KB, broadened the launch verifier route coverage, and added a factual Arabic `/privacy` page (footer + sitemap).
 - Verification: `npm run typecheck` and `npm run lint` clean; `npm run build:pages` exits 0 with privacy exported and in sitemap; CI `Verify` on PR #46 PASSED (full `verify:launch` incl. axe a11y + expanded mobile/desktop route checks + `verify:admin`) on ubuntu. Local Playwright runs are SIGKILL'd by the Mac mem-pressure watchdog, so CI is the authoritative gate.
+
+## 2026-06-06 — Online booking + payment rail (book & pay)
+- Added a Moyasar hosted payment-link rail to the existing `/reserve` funnel (no backend; static-export safe).
+  `lib/reservations.ts`: `reservationPaymentLink()` reads `NEXT_PUBLIC_PAYMENT_LINKS` (JSON map packageId→link)
+  or `NEXT_PUBLIC_PAYMENT_LINK` catch-all; `depositAmount()` computes 50% deposit. Malformed config falls back, never breaks.
+- `components/ReservationExperience.tsx`: confirm step now shows a deposit panel — deposit amount + either the live
+  online "ادفعي العربون الآن (مدى/بطاقة)" button (when a link is configured) or the bank-transfer + WhatsApp receipt
+  path (live default). WhatsApp submit unchanged.
+- Added `app/success/page.tsx` — Arabic noindex confirmation page, Moyasar redirect-after-payment target, WhatsApp follow-up.
+- `lib/content.ts`: added `success-page` WhatsApp source label. `app/globals.css`: `.reserve-deposit` styling (brand palette).
+- `scripts/verify-launch.mjs`: added `/success` to browser a11y/overflow route coverage.
+- Verified: `npm run typecheck` clean, `npm run lint` clean, `npm run build:pages` exits 0 (`/success` prerendered static,
+  excluded from sitemap, noindex confirmed; deposit panel + pay button present in shipped reserve JS). Full Playwright
+  `verify:launch` is authoritative on CI (local runs SIGKILL'd by mem-pressure watchdog).
+- Boundary respected: did NOT create a Moyasar merchant account (money/legal/brand = owner). Activation is one env var.
+  Two owner actions remain for a fully-live book+pay: (1) Netlify deploy of fresh content, (2) optional Moyasar links.

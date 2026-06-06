@@ -2431,6 +2431,71 @@ textarea {
   z-index: 1;
 }
 
+.reserve-deposit {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid rgba(241, 203, 130, 0.32);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(241, 203, 130, 0.12), rgba(255, 248, 236, 0.04));
+  display: grid;
+  gap: 12px;
+}
+
+.reserve-deposit-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.reserve-deposit-head strong {
+  font-size: 1.02rem;
+  color: var(--ivory);
+}
+
+.reserve-deposit-amount {
+  display: grid;
+  justify-items: end;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.reserve-deposit-amount em {
+  font-size: 0.72rem;
+  font-weight: 500;
+  font-style: normal;
+  color: rgba(255, 248, 236, 0.7);
+}
+
+.reserve-deposit .deposit-pay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.reserve-deposit-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: rgba(255, 248, 236, 0.78);
+}
+
+.reserve-deposit-note svg {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--gold);
+}
+
 .stepper {
   display: grid;
   gap: 8px;

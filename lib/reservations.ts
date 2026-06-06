@@ -129,6 +129,32 @@ export function reservationWhatsappUrl(input: ReservationInput, source = "reserv
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(reservationWhatsappMessage(input, source))}`;
 }
 
+export function depositAmount(packageId: string) {
+  const selected = reservationPackage(packageId);
+  const price = Number.parseInt(selected.price, 10);
+  if (!Number.isFinite(price) || price <= 0) return "";
+  return String(Math.round(price / 2));
+}
+
+// Owner enables online card/mada deposit by setting NEXT_PUBLIC_PAYMENT_LINKS to a
+// JSON map of packageId -> Moyasar hosted payment link, e.g. {"04":"https://..."}.
+// A single NEXT_PUBLIC_PAYMENT_LINK acts as a catch-all. Until configured the flow
+// falls back to the live bank-transfer + WhatsApp deposit path.
+export function reservationPaymentLink(packageId: string) {
+  const raw = process.env.NEXT_PUBLIC_PAYMENT_LINKS;
+  if (raw) {
+    try {
+      const map = JSON.parse(raw) as Record<string, string>;
+      const link = map[packageId];
+      if (typeof link === "string" && link.startsWith("https://")) return link;
+    } catch {
+      // Malformed build-time config: fall back rather than break the page.
+    }
+  }
+  const fallback = process.env.NEXT_PUBLIC_PAYMENT_LINK;
+  return typeof fallback === "string" && fallback.startsWith("https://") ? fallback : "";
+}
+
 export function reservationEndpoint() {
   const explicit = process.env.NEXT_PUBLIC_RESERVATION_ENDPOINT;
   if (explicit) return explicit;

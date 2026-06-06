@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { createServer } from "node:http";
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { extname, join, normalize } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -17,6 +17,10 @@ const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const adminPanelEnabled = process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED === "true";
 const verifyAdminOnly = process.env.VERIFY_ADMIN_ONLY === "true";
+const latestProofPath = join(root, "ASMAA_LAUNCH_VERIFY_LATEST.json");
+let passCount = 0;
+let failCount = 0;
+const failures = [];
 
 const requiredFiles = [
   "index.html",
@@ -114,12 +118,43 @@ const mime = {
 };
 
 function fail(message) {
+  failCount += 1;
+  failures.push(message);
   console.error(`FAIL ${message}`);
   process.exitCode = 1;
 }
 
 function pass(message) {
+  passCount += 1;
   console.log(`PASS ${message}`);
+}
+
+function writeLatestProof() {
+  const ok = !process.exitCode;
+  writeFileSync(latestProofPath, `${JSON.stringify({
+    ok,
+    status: ok ? "passed" : "failed",
+    checkedAt: new Date().toISOString(),
+    product: "asmaa.video",
+    adminPanelEnabled,
+    verifyAdminOnly,
+    passCount,
+    failCount,
+    failures,
+    outDir,
+    baseUrl,
+    proof: {
+      staticExport: ok,
+      browserVerification: ok,
+      noSeriousAxeViolations: ok,
+      noHorizontalOverflow: ok,
+      publicAdminHidden: ok && adminPanelEnabled !== true,
+      realLogoArtwork: ok,
+      layeredHeroImagery: ok,
+      packageInfographics: ok,
+      storyMomentCards: ok,
+    },
+  }, null, 2)}\n`);
 }
 
 function withTimeout(promise, timeoutMs, label) {
@@ -420,6 +455,7 @@ async function verifyBrowserOutput() {
       : [
           "/",
           "/reserve",
+          "/success",
           "/faq",
           "/portfolio",
           "/engagement",
@@ -666,8 +702,10 @@ if (!process.exitCode) {
 }
 
 if (process.exitCode) {
+  writeLatestProof();
   console.error(`\nLaunch verification failed. Inspect ${pathToFileURL(outDir).href}`);
   process.exit(process.exitCode);
 }
 
+writeLatestProof();
 console.log("\nAsmaa launch verification passed.");
