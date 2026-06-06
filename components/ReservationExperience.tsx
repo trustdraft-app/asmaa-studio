@@ -7,7 +7,9 @@ import {
   ArrowLeft,
   CalendarDays,
   CheckCircle2,
+  CreditCard,
   HeartHandshake,
+  Landmark,
   Loader2,
   MapPin,
   MessageCircle,
@@ -18,9 +20,11 @@ import { assetPath, packages, readableWhatsappSource, whatsappLink } from "../li
 import {
   cityOptions,
   defaultReservation,
+  depositAmount,
   eventTypes,
   reservationEndpoint,
   reservationPackage,
+  reservationPaymentLink,
   reservationWhatsappUrl,
   validateReservation,
   type ReservationInput
@@ -57,6 +61,8 @@ export function ReservationExperience() {
   const errors = validateReservation(form);
   const hasErrors = Object.keys(errors).length > 0;
   const endpoint = reservationEndpoint();
+  const deposit = useMemo(() => depositAmount(form.packageId), [form.packageId]);
+  const paymentLink = useMemo(() => reservationPaymentLink(form.packageId), [form.packageId]);
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -321,6 +327,35 @@ export function ReservationExperience() {
                   placeholder="أي تفاصيل مهمة: مدخل القاعة، وقت معين، لقطة لا تريدين أن تفوت، أو سؤال عن إضافة."
                 />
               </Field>
+
+              <div className="reserve-deposit" aria-label="تأكيد الحجز ودفع العربون">
+                <div className="reserve-deposit-head">
+                  <strong>تثبيت التاريخ بعربون التأكيد</strong>
+                  {deposit && (
+                    <span className="reserve-deposit-amount">
+                      {deposit} ريال
+                      <em>نصف قيمة الباقة · المتبقي يوم المناسبة</em>
+                    </span>
+                  )}
+                </div>
+                {paymentLink ? (
+                  <>
+                    <a className="cta deposit-pay" href={paymentLink} target="_blank" rel="noreferrer">
+                      <CreditCard size={18} />
+                      ادفعي العربون الآن (مدى / بطاقة)
+                    </a>
+                    <p className="reserve-deposit-note">
+                      دفع آمن عبر بوابة الدفع. بعد إتمام الدفع تصلك صفحة تأكيد، ونتواصل معك خلال ساعتين لترتيب التفاصيل.
+                    </p>
+                  </>
+                ) : (
+                  <p className="reserve-deposit-note">
+                    <Landmark size={16} />
+                    بعد إرسال التفاصيل نراجع التوفر، ثم نزوّدك برقم الحساب لتحويل العربون، وتُرسلين صورة الإيصال عبر واتساب لتثبيت
+                    التاريخ.
+                  </p>
+                )}
+              </div>
             </div>
           )}
 

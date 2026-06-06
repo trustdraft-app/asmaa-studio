@@ -12,6 +12,18 @@
 - /process page fixed (CSS system rewrite + WhatsApp/reserve CTAs + hreflang + robots).
 - /process added to sitemap, nav, llms.txt, llms-full.txt, verify-launch checks.
 
+## 💳 Activate online card/mada deposit (Moyasar) — owner action required
+The booking funnel now has a payment rail built in. It activates with ONE config value, no code change:
+1. Create a Moyasar merchant account (moyasar.com) — KYC + Saudi bank account. (Money/legal = owner only.)
+2. In the Moyasar dashboard create a hosted **payment link** for each package's 50% deposit, e.g.:
+   - Full Day deposit 1250 SAR, Half Day 850 SAR, Engagement 750 SAR, Zaffa+ 600 SAR, Zaffa 300 SAR.
+   - Set each link's "redirect after payment" URL to: https://asmaa.video/success
+3. Set the build/deploy env var `NEXT_PUBLIC_PAYMENT_LINKS` to a JSON map of packageId → link, e.g.:
+   `{"01":"https://...","02":"https://...","03":"https://...","04":"https://...","05":"https://..."}`
+   (Or set a single `NEXT_PUBLIC_PAYMENT_LINK` catch-all.) Set it in Netlify site env vars (or GitHub Actions Variables) — same place as NEXT_PUBLIC_GA_ID.
+4. Re-deploy. The reserve confirm step then shows "ادفعي العربون الآن (مدى/بطاقة)".
+Until configured, the live, working path is bank-transfer deposit + WhatsApp receipt (already shown to brides).
+
 ## 🔑 Push fresh CONTENT to the live Netlify site — owner action required
 The canonical domain already serves correct security headers, but the live Netlify deploy is
 STALE (a one-off manual `netlify deploy`). Netlify's GitHub App is not connected and there is no

@@ -70,6 +70,7 @@ export function readableWhatsappSource(source: string) {
   if (source === "reviews-page") return "صفحة الاطمئنان قبل الحجز";
   if (source === "about-page") return "صفحة عن الاستوديو";
   if (source === "contact-page") return "صفحة التواصل";
+  if (source === "success-page") return "صفحة تأكيد الحجز";
   if (source === "packages-hero") return "صفحة الباقات";
   if (source === "packages-final-wa") return "صفحة الباقات - الخاتمة";
   if (source === "packages-floating") return "صفحة الباقات - زر واتساب";
