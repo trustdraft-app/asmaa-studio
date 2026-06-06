@@ -39,6 +39,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.78
     },
     {
+      url: `${base}/privacy`,
+      changeFrequency: "yearly",
+      priority: 0.3
+    },
+    {
       url: `${base}/reviews`,
       changeFrequency: "weekly",
       priority: 0.85
