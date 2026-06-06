@@ -8,9 +8,11 @@ import { chromium } from "playwright";
 
 const root = process.cwd();
 const outDir = join(root, "out");
-const port = Number(process.env.PORT || 4177);
+const rawPort = process.env.PORT;
+const parsedPort = rawPort === undefined ? NaN : Number(rawPort);
+const port = Number.isInteger(parsedPort) && parsedPort >= 0 ? parsedPort : 4177;
 const configuredBaseUrl = process.env.BASE_URL || "";
-let baseUrl = configuredBaseUrl || `http://127.0.0.1:${port || 4177}`;
+let baseUrl = configuredBaseUrl || `http://127.0.0.1:${port === 0 ? 4177 : port}`;
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const adminPanelEnabled = process.env.NEXT_PUBLIC_ADMIN_PANEL_ENABLED === "true";
@@ -123,6 +125,14 @@ function pass(message) {
   console.log(`PASS ${message}`);
 }
 
+function withTimeout(promise, timeoutMs, label) {
+  let timeout;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeout = setTimeout(() => reject(new Error(`${label} timed out after ${timeoutMs}ms`)), timeoutMs);
+  });
+  return Promise.race([promise, timeoutPromise]).finally(() => clearTimeout(timeout));
+}
+
 function readOutFile(relativePath) {
   return readFileSync(join(outDir, relativePath), "utf8");
 }
@@ -192,7 +202,14 @@ async function launchChromiumForAudit() {
       return await chromium.launch({
         headless: true,
         executablePath,
-        args: ["--disable-dev-shm-usage"]
+        args: [
+          "--disable-background-networking",
+          "--disable-dev-shm-usage",
+          "--disable-gpu",
+          "--disable-software-rasterizer",
+          "--no-default-browser-check",
+          "--no-first-run"
+        ]
       });
     } catch (error) {
       launchErrors.push(`${executablePath}: ${error.message.split("\n")[0]}`);
@@ -383,6 +400,7 @@ function verifyStaticOutput() {
 }
 
 async function verifyBrowserOutput() {
+  const homepageMarkupForComposition = readOutFile("index.html");
   const server = await serveOut();
   let browser;
 
@@ -400,110 +418,169 @@ async function verifyBrowserOutput() {
         viewport: { width: 1440, height: 1200 }
       }
     ];
+    const browserRoutes = verifyAdminOnly
+      ? ["/admin"]
+      : [
+          "/",
+          "/reserve",
+          "/faq",
+          "/portfolio",
+          "/engagement",
+          "/guides",
+          "/guides/wedding-videography-al-ahsa",
+          "/guides/female-wedding-photographer-eastern-province",
+          "/alahsa",
+          "/dammam",
+          "/khobar"
+        ];
+    if (adminPanelEnabled && !verifyAdminOnly) browserRoutes.push("/admin");
+
+    const contextOptions = (config) => ({
+      viewport: config.viewport,
+      userAgent: config.userAgent,
+      locale: "ar-SA"
+    });
+
+    async function openRoute(page, route) {
+      await page.goto(`${baseUrl}${route}`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {});
+    }
+
+    async function ensureBrowser() {
+      if (!browser || !browser.isConnected()) {
+        browser = await launchChromiumForAudit();
+      }
+      return browser;
+    }
+
+    async function resetBrowser() {
+      const staleBrowser = browser;
+      browser = null;
+      if (staleBrowser) await staleBrowser.close().catch(() => {});
+    }
+
+    async function withFreshPage(config, label, callback) {
+      let lastError;
+      for (let attempt = 1; attempt <= 3; attempt += 1) {
+        let context;
+        try {
+          const activeBrowser = await ensureBrowser();
+          context = await activeBrowser.newContext(contextOptions(config));
+          const page = await context.newPage();
+          page.setDefaultTimeout(15000);
+          page.setDefaultNavigationTimeout(30000);
+          return await withTimeout(callback(page), 45000, label);
+        } catch (error) {
+          lastError = error;
+          await resetBrowser();
+          if (attempt < 3) {
+            console.error(`WARN retrying ${label}: ${error.message.split("\n")[0]}`);
+            await new Promise((resolveRetryDelay) => setTimeout(resolveRetryDelay, 250 * attempt));
+          }
+        } finally {
+          if (context) await context.close().catch(() => {});
+          if (browser && !browser.isConnected()) await resetBrowser();
+        }
+      }
+      throw lastError;
+    }
 
     for (const config of contexts) {
-      const context = await browser.newContext({
-        viewport: config.viewport,
-        userAgent: config.userAgent,
-        locale: "ar-SA"
-      });
-      const page = await context.newPage();
-
-      const browserRoutes = verifyAdminOnly
-        ? ["/admin"]
-        : [
-            "/",
-            "/reserve",
-            "/faq",
-            "/portfolio",
-            "/engagement",
-            "/guides",
-            "/guides/wedding-videography-al-ahsa",
-            "/guides/female-wedding-photographer-eastern-province",
-            "/alahsa",
-            "/dammam",
-            "/khobar"
-          ];
-      if (adminPanelEnabled && !verifyAdminOnly) browserRoutes.push("/admin");
-
       for (const route of browserRoutes) {
-        await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
+        await withFreshPage(config, `${config.name} ${route}`, async (page) => {
+          await openRoute(page, route);
 
-        const layout = await page.evaluate(() => ({
-          overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-          h1Size: Number.parseFloat(getComputedStyle(document.querySelector("h1") || document.body).fontSize),
-          bodyText: document.body.innerText
-        }));
-
-        if (layout.overflow <= 2) pass(`${config.name} ${route} has no horizontal overflow`);
-        else fail(`${config.name} ${route} overflows horizontally by ${layout.overflow}px`);
-
-        if (config.name === "mobile" && layout.h1Size <= 58) pass(`${route} mobile h1 size is controlled`);
-        if (config.name === "mobile" && layout.h1Size > 58) fail(`${route} mobile h1 is too large: ${layout.h1Size}px`);
-
-	        for (const phrase of bannedPhrases) {
-          if (layout.bodyText.includes(phrase)) fail(`${config.name} ${route} renders banned wording: ${phrase}`);
-        }
-
-        if (config.name === "mobile") {
-          const smallTargets = await page.evaluate(() => {
-            return Array.from(document.querySelectorAll("a, button"))
-              .map((node) => {
-                const rect = node.getBoundingClientRect();
-                const style = window.getComputedStyle(node);
-                return {
-                  label: (node.textContent || node.getAttribute("aria-label") || node.getAttribute("href") || "")
-                    .replace(/\s+/g, " ")
-                    .trim()
-                    .slice(0, 80),
-                  height: Math.round(rect.height),
-                  width: Math.round(rect.width),
-                  visible:
-                    rect.width > 0 &&
-                    rect.height > 0 &&
-                    style.visibility !== "hidden" &&
-                    style.display !== "none" &&
-                    Number(style.opacity || "1") > 0
-                };
-              })
-              .filter((item) => item.visible && (item.height < 44 || item.width < 44));
-          });
-          if (smallTargets.length === 0) pass(`${config.name} ${route} has comfortable tap targets`);
-          else fail(`${config.name} ${route} has undersized tap targets: ${JSON.stringify(smallTargets.slice(0, 5))}`);
-
-          if (route === "/") {
-            const floatingWhatsappVisible = await page.locator(".floating-whatsapp:visible").count();
-            if (floatingWhatsappVisible === 0) pass("mobile homepage hides floating WhatsApp to avoid content overlap");
-            else fail("mobile homepage must not show the floating WhatsApp over proof content");
+          if (config.name === "mobile" && route === "/reserve") {
+            await page.waitForFunction(
+              () => {
+                const brandLockup = document.querySelector(".brand-lockup");
+                const stepperButton = document.querySelector(".stepper button");
+                if (!(brandLockup instanceof HTMLElement) || !(stepperButton instanceof HTMLElement)) return false;
+                const brandRect = brandLockup.getBoundingClientRect();
+                const stepperRect = stepperButton.getBoundingClientRect();
+                return brandRect.height >= 44 && stepperRect.height >= 44;
+              },
+              undefined,
+              { timeout: 10000 }
+            );
           }
-        }
 
-        if (route === "/admin" && adminPanelEnabled) {
-          if (layout.bodyText.includes("دخول فريق الاستوديو")) pass(`${config.name} admin shows only the login gate`);
-          else fail(`${config.name} admin login gate is missing`);
-          if (layout.bodyText.includes("كل طلب حجز")) fail(`${config.name} admin exposes dashboard content before auth`);
-          else pass(`${config.name} admin dashboard content is hidden before auth`);
-        }
+          const layout = await page.evaluate(() => ({
+            overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+            h1Size: Number.parseFloat(getComputedStyle(document.querySelector("h1") || document.body).fontSize),
+            bodyText: document.body.innerText
+          }));
 
-        if (route === "/" && !adminPanelEnabled) {
-          const publicAdminLinks = await page.locator('a[href="/admin"]').count();
-          if (publicAdminLinks === 0) pass(`${config.name} homepage hides the admin link`);
-          else fail(`${config.name} homepage exposes ${publicAdminLinks} admin link(s)`);
-        }
+          if (layout.overflow <= 2) pass(`${config.name} ${route} has no horizontal overflow`);
+          else fail(`${config.name} ${route} overflows horizontally by ${layout.overflow}px`);
+
+          if (config.name === "mobile" && layout.h1Size <= 58) pass(`${route} mobile h1 size is controlled`);
+          if (config.name === "mobile" && layout.h1Size > 58) fail(`${route} mobile h1 is too large: ${layout.h1Size}px`);
+
+          for (const phrase of bannedPhrases) {
+            if (layout.bodyText.includes(phrase)) fail(`${config.name} ${route} renders banned wording: ${phrase}`);
+          }
+
+          if (config.name === "mobile") {
+            const smallTargets = await page.evaluate(() => {
+              return Array.from(document.querySelectorAll("a, button"))
+                .map((node) => {
+                  const rect = node.getBoundingClientRect();
+                  const style = window.getComputedStyle(node);
+                  return {
+                    label: (node.textContent || node.getAttribute("aria-label") || node.getAttribute("href") || "")
+                      .replace(/\s+/g, " ")
+                      .trim()
+                      .slice(0, 80),
+                    height: Math.round(rect.height),
+                    width: Math.round(rect.width),
+                    visible:
+                      rect.width > 0 &&
+                      rect.height > 0 &&
+                      style.visibility !== "hidden" &&
+                      style.display !== "none" &&
+                      Number(style.opacity || "1") > 0
+                  };
+                })
+                .filter((item) => item.visible && (item.height < 44 || item.width < 44));
+            });
+            if (smallTargets.length === 0) pass(`${config.name} ${route} has comfortable tap targets`);
+            else fail(`${config.name} ${route} has undersized tap targets: ${JSON.stringify(smallTargets.slice(0, 5))}`);
+
+            if (route === "/") {
+              const floatingWhatsappVisible = await page.locator(".floating-whatsapp:visible").count();
+              if (floatingWhatsappVisible === 0) pass("mobile homepage hides floating WhatsApp to avoid content overlap");
+              else fail("mobile homepage must not show the floating WhatsApp over proof content");
+            }
+          }
+
+          if (route === "/admin" && adminPanelEnabled) {
+            if (layout.bodyText.includes("دخول فريق الاستوديو")) pass(`${config.name} admin shows only the login gate`);
+            else fail(`${config.name} admin login gate is missing`);
+            if (layout.bodyText.includes("كل طلب حجز")) fail(`${config.name} admin exposes dashboard content before auth`);
+            else pass(`${config.name} admin dashboard content is hidden before auth`);
+          }
+
+          if (route === "/" && !adminPanelEnabled) {
+            const publicAdminLinks = await page.locator('a[href="/admin"]').count();
+            if (publicAdminLinks === 0) pass(`${config.name} homepage hides the admin link`);
+            else fail(`${config.name} homepage exposes ${publicAdminLinks} admin link(s)`);
+          }
+        });
       }
 
-      if (verifyAdminOnly) {
-        await context.close();
-        continue;
-      }
+      if (verifyAdminOnly) continue;
 
-      await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
-      const homeCounts = await page.evaluate(() => ({
-        heroImages: document.querySelectorAll(".hero-photo-stack img").length,
-        realLogoImages: document.querySelectorAll(".brand-mark img, .hero-logo-image").length,
-        meters: document.querySelectorAll(".package-motion-meter").length,
-        moments: document.querySelectorAll(".moment-card").length
-      }));
+      const heroPhotoStackMarkup =
+        homepageMarkupForComposition.match(/<div class="hero-photo-stack[\s\S]*?<\/div>/)?.[0] || "";
+      const homeCounts = {
+        heroImages: (heroPhotoStackMarkup.match(/<img /g) || []).length,
+        realLogoImages:
+          (homepageMarkupForComposition.match(/class="hero-logo-image"/g) || []).length
+          + (homepageMarkupForComposition.match(/class="brand-mark"/g) || []).length,
+        meters: (homepageMarkupForComposition.match(/package-motion-meter/g) || []).length,
+        moments: (homepageMarkupForComposition.match(/moment-card/g) || []).length,
+      };
 
       if (homeCounts.heroImages >= 2) pass(`${config.name} homepage has layered hero imagery`);
       else fail(`${config.name} homepage missing layered hero imagery`);
@@ -514,35 +591,66 @@ async function verifyBrowserOutput() {
       if (homeCounts.meters >= 4) pass(`${config.name} homepage has package infographics`);
       else fail(`${config.name} homepage missing package infographics`);
 
-	      if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
+      if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
       else fail(`${config.name} homepage missing story moment cards`);
 
-      await page.goto(`${baseUrl}/reserve?city=dammam&package=02`, { waitUntil: "networkidle" });
-      const reservePrefill = await page.evaluate(() => ({
-        selectValues: Array.from(document.querySelectorAll("select")).map((select) => select.value)
-      }));
-      if (reservePrefill.selectValues.includes("الدمام")) pass(`${config.name} reserve preselects city from query`);
-      else fail(`${config.name} reserve failed to preselect city from query`);
+      await withFreshPage(config, `${config.name} reserve prefill`, async (page) => {
+        await openRoute(page, "/reserve?city=dammam&package=02");
+        await page.waitForFunction(
+          () => Array.from(document.querySelectorAll("select")).some((select) => select.value === "الدمام"),
+          undefined,
+          { timeout: 10000 }
+        );
+        const reservePrefill = await page.evaluate(() => ({
+          selectValues: Array.from(document.querySelectorAll("select")).map((select) => select.value)
+        }));
+        if (reservePrefill.selectValues.includes("الدمام")) pass(`${config.name} reserve preselects city from query`);
+        else fail(`${config.name} reserve failed to preselect city from query`);
 
-      await page.locator(".stepper button").nth(1).click();
-      const selectedPackage = await page.locator('.package-picker button[aria-pressed="true"]').textContent();
-      if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
-      else fail(`${config.name} reserve failed to preselect package from query`);
-
-      await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
-      await page.addScriptTag({ content: axeSource });
-      const axe = await page.evaluate(async () => {
-        return window.axe.run(document, {
-          rules: {
-            "color-contrast": { enabled: false }
-          }
-        });
+        await page.waitForSelector(".stepper button");
+        await page.locator(".stepper button").nth(1).click();
+        await page.waitForFunction(
+          () => {
+            const selected = document.querySelector('.package-picker button[aria-pressed="true"]');
+            return selected && selected.textContent && selected.textContent.includes("بكج 02");
+          },
+          undefined,
+          { timeout: 10000 }
+        );
+        const selectedPackage = await page.locator('.package-picker button[aria-pressed="true"]').textContent();
+        if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
+        else fail(`${config.name} reserve failed to preselect package from query`);
       });
-      const serious = axe.violations.filter((violation) => ["serious", "critical"].includes(violation.impact || ""));
-      if (serious.length === 0) pass(`${config.name} homepage has no serious axe violations`);
-      else fail(`${config.name} homepage axe violations: ${serious.map((item) => item.id).join(", ")}`);
 
-      await context.close();
+      await withFreshPage(config, `${config.name} axe audit`, async (page) => {
+        await openRoute(page, "/");
+        await page.waitForFunction(
+          () => Boolean(document.title.trim()) && Boolean(document.documentElement.lang || document.documentElement.getAttribute("lang")),
+          undefined,
+          { timeout: 5000 }
+        );
+        await page.addScriptTag({ content: axeSource });
+        const documentBasics = await page.evaluate(() => ({
+          lang: document.documentElement.lang || document.documentElement.getAttribute("lang") || "",
+          title: document.title,
+          url: location.href
+        }));
+        const axe = await page.evaluate(async () => {
+          return window.axe.run(document, {
+            rules: {
+              "color-contrast": { enabled: false }
+            }
+          });
+        });
+        const serious = axe.violations.filter((violation) => ["serious", "critical"].includes(violation.impact || ""));
+        if (serious.length === 0) pass(`${config.name} homepage has no serious axe violations`);
+        else {
+          fail(
+            `${config.name} homepage axe violations: ${serious.map((item) => item.id).join(", ")} ` +
+              `(title=${JSON.stringify(documentBasics.title)}, lang=${JSON.stringify(documentBasics.lang)}, url=${documentBasics.url})`
+          );
+        }
+      });
     }
   } finally {
     if (browser) await browser.close();
