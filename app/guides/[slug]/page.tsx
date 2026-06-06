@@ -68,7 +68,7 @@ export default async function GuidePage({ params }: Props) {
     description: page.metaDescription,
     inLanguage: "ar-SA",
     mainEntityOfPage: `https://asmaa.video/guides/${page.slug}`,
-    image: "https://asmaa.video/brand/asmaa-cinematic-bridal-still.png",
+    image: "https://asmaa.video/brand/asmaa-og.jpg",
     datePublished: "2026-05-28",
     dateModified: "2026-05-29",
     author: {

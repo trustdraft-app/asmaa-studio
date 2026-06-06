@@ -289,3 +289,15 @@
 **Decision:** Fix `scripts/verify-launch.mjs` to derive the actual listener port after `server.listen(0)` while preserving default port `4177` and `BASE_URL` overrides.
 **Reasoning:** `PORT=0` is the robust way to avoid verifier port collisions; the bug was that the verifier built `baseUrl` before the OS assigned the real port.
 **Source:** `AI_EMPIRE_CUSTOMER_10OF10_JUDGE_CURRENT.json`, `scripts/verify-launch.mjs`, `PORT=0 PLAYWRIGHT_BROWSERS_PATH=/Users/mohammedsa/.ai-empire-playwright-browsers npm run verify:launch`.
+
+## 2026-06-06T16:35:00+0300 — Asmaa.video / Live header blocker already resolved; content-deploy is owner-gated
+**Question:** The standing mandate assumes asmaa.video is on GitHub Pages without security headers — is that still the blocker, and how should the remaining gaps be closed?
+**Decision:** Treat the security-header blocker as RESOLVED. Live `asmaa.video` already resolves to Netlify (75.2.60.5 / 99.83.231.61) and serves the full header set; `node scripts/verify-live-security-headers.mjs https://asmaa.video https://asmaa.video/contact` passes. Ship the remaining A+++ codebase improvements (asset/OG/SEO optimization) via PR #46 and document the one-time owner action needed to push fresh CONTENT to the live Netlify deploy.
+**Reasoning:** A prior manual `netlify deploy` + DNS cutover already made the canonical domain header-capable; the only remaining live gap is that the Netlify deploy is stale and there is no `NETLIFY_AUTH_TOKEN` in any sanctioned source (env, Keychain across all aliases, Netlify CLI config, GitHub secrets), and Netlify's GitHub App is not connected (no netlify commit checks). Content updates therefore require an owner credential/connection, which is account-gated, not a code problem.
+**Source:** Live header probe + `verify-live-security-headers.mjs` (pass), `dig asmaa.video`, `gh api .../commits/main/check-runs` (only github-actions), `scripts/configure-netlify-custom-domain.mjs --verify-only` (NETLIFY_AUTH_TOKEN missing), professional judgment.
+
+## 2026-06-06T16:50:00+0300 — Asmaa.video / Add factual privacy policy page
+**Question:** Should Claude add a privacy policy when none existed, given the legal-decision boundary?
+**Decision:** Yes — publish a conservative, factual Arabic privacy page at /privacy describing the real data flows (WhatsApp messages, reservation form → Supabase, Google Analytics when enabled), stating data is never sold, with WhatsApp/contact for requests. Deliberately avoid jurisdictional/statutory/regulatory compliance claims and flag those for owner legal review.
+**Reasoning:** A privacy notice is a standard launch necessity for a site that runs GA4 and collects reservation data; factual disclosure of actual practices is engineering hygiene, not a legal position, while specific compliance commitments remain an owner/legal decision.
+**Source:** Mandate A+++ dimension "Privacy Policy: exists, accessible"; AI Empire "Only Ask Mohammed For: legal" boundary; app/privacy/page.tsx; professional judgment.

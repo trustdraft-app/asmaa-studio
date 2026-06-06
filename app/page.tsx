@@ -78,7 +78,7 @@ const jsonLd = {
       url: "https://asmaa.video/",
       logo: "https://asmaa.video/brand/asmaa-logo-square.png",
       image: [
-        "https://asmaa.video/brand/asmaa-cinematic-bridal-still.png",
+        "https://asmaa.video/brand/asmaa-og.jpg",
         "https://asmaa.video/highlights/bride-details.svg"
       ],
       telephone: `+${whatsappNumber}`,
@@ -837,6 +837,7 @@ export default function HomePage() {
             <Link href="/faq">الأسئلة الشائعة</Link>
             <Link href="/contact">تواصلي معنا</Link>
             <Link href="/reserve">رابط العروس</Link>
+            <Link href="/privacy">سياسة الخصوصية</Link>
           </nav>
           <p className="site-footer-copy">
             © {new Date().getFullYear()} Asmaa Studio · جميع الحقوق محفوظة

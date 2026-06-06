@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const socialPreviewImage = {
-  url: "/brand/asmaa-cinematic-bridal-still.png",
-  width: 1572,
-  height: 1001,
+  url: "/brand/asmaa-og.jpg",
+  width: 1200,
+  height: 630,
   alt: "Asmaa Studio bridal videography preview"
 };
 
