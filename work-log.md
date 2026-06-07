@@ -403,3 +403,22 @@
   with `wa.me` + number present. Shipped as PR #49 (rebased onto main, MERGEABLE).
 - Owner/infra activation (needs Supabase + Meta creds): set edge secrets, `supabase functions deploy
   submit-reservation`, set `NEXT_PUBLIC_RESERVATION_ENDPOINT`. Until then the deep-link path is live and works.
+
+## 2026-06-07 — Homepage cinematic editorial overhaul (award-craft)
+- Loaded the real luxury fonts the CSS already referenced but never loaded: added Google Fonts `<link>`
+  (Cormorant Garamond, Playfair Display, Noto Kufi Arabic, IBM Plex Sans Arabic, Noto Naskh Arabic) in
+  `app/layout.tsx` root `<head>` → instantly elevates typography across every page. Single biggest lift.
+- Appended a fenced "EDITORIAL OVERHAUL 2026-06-07" block to `app/globals.css` (+263 lines), ALL pure-CSS
+  motion because the static-export pipeline (`prune-static-js.mjs`) strips client JS from every page except
+  /reserve, /packages, /admin. Effects: film-grain + vignette overlay, true scroll-driven reveals via
+  `animation-timeline: view()` (zero JS) gated by `@supports`, hero Ken-Burns drift, per-word Arabic headline
+  rise (per-word to preserve Arabic letter joining), animated gold rule, CTA sheen sweep, card lift+gold-glow,
+  featured-package halo, editorial pull-quote band, mobile scroll-snap service rail. Full
+  prefers-reduced-motion fallbacks (content always visible).
+- `app/page.tsx`: per-word hero headline, `ed-stagger` on 15 card grids, new `.ed-statement` editorial band
+  (honest brand copy, no fabricated claims). All existing content/links/SEO/footer/WhatsApp preserved.
+- Verified: `npm run typecheck` clean; `npm run lint` (1 benign no-page-custom-font warning — it's the root
+  layout so fonts load site-wide); `npm run build:pages` passes incl. static-export size + launch-artifact
+  verifiers (files=3654, ~50MB); exported HTML confirmed to retain font links + animations and contain NO
+  client JS (prune-safe). Browser preview confirmed all 5 fonts load, view-timeline supported, hero +
+  statement + packages (desktop & mobile RTL) render award-level, zero console errors.

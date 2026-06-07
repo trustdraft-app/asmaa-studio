@@ -313,3 +313,15 @@
 **Decision:** Yes — publish a conservative, factual Arabic privacy page at /privacy describing the real data flows (WhatsApp messages, reservation form → Supabase, Google Analytics when enabled), stating data is never sold, with WhatsApp/contact for requests. Deliberately avoid jurisdictional/statutory/regulatory compliance claims and flag those for owner legal review.
 **Reasoning:** A privacy notice is a standard launch necessity for a site that runs GA4 and collects reservation data; factual disclosure of actual practices is engineering hygiene, not a legal position, while specific compliance commitments remain an owner/legal decision.
 **Source:** Mandate A+++ dimension "Privacy Policy: exists, accessible"; AI Empire "Only Ask Mohammed For: legal" boundary; app/privacy/page.tsx; professional judgment.
+
+## 2026-06-07 — Asmaa Studio
+**Question:** The "maximum design" brief requested fabricated stats (200+ sessions, 50+ brides, 5 years experience, 100% satisfaction) and 3 named Saudi-bride testimonials.
+**Decision:** Did NOT add fabricated counts or fake named testimonials. Kept the existing honest qualitative trust signals / experience-principle marquee; delivered the award-level craft through typography, motion, and editorial composition instead.
+**Reasoning:** Asmaa Studio is a greenfield launch (per .agent/README.md), so specific experience/volume claims and named customer reviews would be unverifiable false claims — a brand-integrity non-negotiable.
+**Source:** .agent/README.md (greenfield) + Non-Negotiables (no unverifiable claims) + professional judgment.
+
+## 2026-06-07 — Asmaa Studio
+**Question:** How to deliver scroll-triggered/animated motion on the homepage when the static-export build prunes all client JS from non-reserve/packages/admin pages?
+**Decision:** Implemented all homepage motion in pure CSS — scroll-driven `animation-timeline: view()` reveals, Ken Burns, per-word rise, sheen, hover — gated behind `@supports`/`prefers-reduced-motion`; loaded fonts via `<link>` (survives prune) rather than a client font loader.
+**Reasoning:** `scripts/prune-static-js.mjs` strips `<script>` from the homepage, so IntersectionObserver/framer-motion would be silently removed; CSS-only motion is the only reliable, performant path and degrades gracefully.
+**Source:** scripts/prune-static-js.mjs + build:pages pipeline + professional judgment.

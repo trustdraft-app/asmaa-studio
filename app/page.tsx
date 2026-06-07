@@ -281,7 +281,18 @@ export default function HomePage() {
             </p>
 
             <h1 className="cine-headline">
-              <span className="cine-headline-ar">فيلم زفاف يوقف الوقت عند لحظتك الأولى.</span>
+              <span className="cine-headline-ar">
+                {"فيلم زفاف يوقف الوقت عند لحظتك الأولى.".split(" ").map((word, index) => (
+                  <span
+                    className="ed-word"
+                    key={`${word}-${index}`}
+                    style={{ animationDelay: `${120 + index * 90}ms` }}
+                  >
+                    {word}
+                    {index < 6 ? " " : ""}
+                  </span>
+                ))}
+              </span>
               <span className="cine-headline-en">Saudi wedding cinema composed like a memory.</span>
             </h1>
 
@@ -407,6 +418,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="ed-statement ed-reveal" aria-label="فلسفة Asmaa Studio">
+        <div className="ed-statement-inner">
+          <span className="ed-statement-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>
+            كل لحظة في يومكِ تستحق أن تُروى <b>بهدوءٍ يليق بها</b> — لا أن تُجمع كمقاطع متفرقة.
+          </blockquote>
+          <cite>Every moment of your day, told with the calm it deserves.</cite>
+        </div>
+      </section>
+
       <section className="section signature-film-section" aria-label="تجربة الفيلم">
         <div className="section-inner signature-film-inner">
           <div className="signature-film-copy">
@@ -417,7 +438,7 @@ export default function HomePage() {
               باقات مفهومة، ثم رابط حجز لا يطلب من العروس إعادة شرح كل شيء.
             </p>
           </div>
-          <div className="signature-film-reel">
+          <div className="signature-film-reel ed-stagger">
             {signatureFrames.map((frame) => (
               <article key={frame.marker}>
                 <span>{frame.marker}</span>
@@ -433,7 +454,7 @@ export default function HomePage() {
         <div className="section-inner">
           <span className="eyebrow">من أول نظرة إلى طلب الحجز</span>
           <h2 className="section-title">الصفحة تقود العروس بهدوء: تشاهد الأسلوب، تفهم الباقة، ثم ترسل التفاصيل.</h2>
-          <div className="operating-grid">
+          <div className="operating-grid ed-stagger">
             {liveOperatingSystem.map((item) => {
               const Icon = item.icon;
               return (
@@ -458,7 +479,7 @@ export default function HomePage() {
               التجربة تعرض المشاهد كقصة متكاملة، ثم تجعل اختيار الباقة واضحا وخفيفا.
             </p>
           </div>
-          <div className="moment-grid">
+          <div className="moment-grid ed-stagger">
             {cinematicMoments.map((moment) => {
               const Icon = moment.icon;
               return (
@@ -479,7 +500,7 @@ export default function HomePage() {
             <span className="eyebrow">لوحة المخرجة</span>
             <h2 className="section-title">من أول لقطة إلى آخر تسليم، كل مشهد له وظيفة.</h2>
           </div>
-          <div className="director-board-grid">
+          <div className="director-board-grid ed-stagger">
             {directorBoard.map((item, index) => (
               <article key={item.label}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -514,7 +535,7 @@ export default function HomePage() {
               <Download size={16} aria-hidden="true" /> تحميل دليل الباقات (PDF)
             </a>
           </p>
-          <div className="packages-grid packages-grid-20x">
+          <div className="packages-grid packages-grid-20x ed-stagger">
             {packages.map((item, index) => (
               <article className={`package-card package-card-20x ${item.featured ? "featured" : ""}`} key={item.id}>
                 <div className="package-rank" aria-hidden="true">
@@ -569,7 +590,7 @@ export default function HomePage() {
             اختياركِ للبكج، تحويل العربون، وتسليم المبلغ المتبقي يوم المناسبة — كل خطوة مرتبة حتى لا تختلط
             التفاصيل ولا تتأخر المتابعة.
           </p>
-          <ol className="payment-terms-grid" aria-label="خطوات الحجز">
+          <ol className="payment-terms-grid ed-stagger" aria-label="خطوات الحجز">
             {paymentTerms.map((term) => (
               <li className="payment-step" key={term.step}>
                 <b aria-hidden="true">{term.step}</b>
@@ -595,7 +616,7 @@ export default function HomePage() {
           <p className="section-copy">
             يمكن إضافة هذه العناصر إلى أي باقة قبل تأكيد الحجز حتى يصل الطلب جاهزا للمتابعة بدون أسئلة إضافية.
           </p>
-          <div className="addons-grid">
+          <div className="addons-grid ed-stagger">
             {packageAddOns.map((addon) => (
               <article className="addon-card" key={addon.id}>
                 <Plus size={20} strokeWidth={1.7} aria-hidden="true" />
@@ -617,7 +638,7 @@ export default function HomePage() {
             القرار يبدأ من ذوق العروس وراحة العميلة في فهم التفاصيل. لذلك المحتوى مكتوب بلغة
             مباشرة: ماذا يغطي التصوير، ما الباقة الأنسب، وكيف تبدأ المتابعة.
           </p>
-          <div className="service-grid service-grid-20x">
+          <div className="service-grid service-grid-20x ed-stagger">
             {services.map((service) => {
               const Icon = service.icon;
               return (
@@ -660,7 +681,7 @@ export default function HomePage() {
         <div className="section-inner">
           <span className="eyebrow">من الإعجاب إلى الموعد</span>
           <h2 className="section-title">القرار يصبح أخف عندما ترى العروس الصورة كاملة.</h2>
-          <div className="conversion-grid-20x">
+          <div className="conversion-grid-20x ed-stagger">
             {conversionFlow.map((item, index) => (
               <article className="conversion-step" key={item.label}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -670,7 +691,7 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-          <div className="timeline-grid timeline-grid-20x">
+          <div className="timeline-grid timeline-grid-20x ed-stagger">
             {bookingSteps.map((step) => (
               <article className="timeline-item" key={step.number}>
                 <b>{step.number}</b>
@@ -700,7 +721,7 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="area-strategy-grid area-strategy-grid-20x">
+            <div className="area-strategy-grid area-strategy-grid-20x ed-stagger">
               {areaStrategy.map((area, index) => {
                 const Icon = area.icon;
                 const city = serviceAreas[index];
@@ -743,7 +764,7 @@ export default function HomePage() {
             متى يبدأ التواصل، وكيف تصل التفاصيل بدون ضياع في المحادثة.
           </p>
 
-          <div className="profile-grid">
+          <div className="profile-grid ed-stagger">
             {bookingAssurance.map((item) => (
               <article className="profile-card" key={item.title}>
                 <span>{item.title}</span>
@@ -761,7 +782,7 @@ export default function HomePage() {
         <div className="section-inner">
           <span className="eyebrow">معايير الوضوح</span>
           <h2 className="section-title">كل قرار في الصفحة يجب أن يحمي ثقة العميلة قبل أن يطلب منها التواصل.</h2>
-          <div className="board-lever-grid">
+          <div className="board-lever-grid ed-stagger">
             {decisionAssurance.map((lever) => (
               <article className="board-lever-card" key={lever.title}>
                 <h3>{lever.title}</h3>
@@ -780,7 +801,7 @@ export default function HomePage() {
             بدلا من انتظار محادثة طويلة، يستطيع كل زائر فتح الصفحة الأقرب لسؤاله: المدينة،
             الزفة، الخطوبة، تفاصيل العروس، أو طريقة اختيار الباقة.
           </p>
-          <div className="guide-card-grid home-guide-grid">
+          <div className="guide-card-grid home-guide-grid ed-stagger">
             {seoGuidePages.slice(0, 6).map((page, index) => (
               <article className="guide-card" key={page.slug}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -807,7 +828,7 @@ export default function HomePage() {
         <div className="section-inner">
           <span className="eyebrow">هايلايت انستقرام</span>
           <h2 className="section-title">الهايلايت يصبح دليلا صغيرا: ألبوم، باقات، تفاصيل، وطريقة حجز.</h2>
-          <div className="highlight-grid highlight-grid-20x">
+          <div className="highlight-grid highlight-grid-20x ed-stagger">
             {highlights.map((item) => (
               <article className="highlight-card" key={item.label}>
                 <Image
