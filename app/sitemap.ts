@@ -64,6 +64,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.87
     },
     {
+      url: `${base}/process`,
+      changeFrequency: "monthly",
+      priority: 0.74
+    },
+    {
       url: `${base}/zaffa`,
       changeFrequency: "weekly",
       priority: 0.89

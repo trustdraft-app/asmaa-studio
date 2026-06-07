@@ -28,11 +28,14 @@ const localBusinessSchema = {
   currenciesAccepted: "SAR",
   paymentAccepted: ["Cash", "Bank Transfer", "Mada", "Apple Pay"],
   areaServed: [
+    { "@type": "Country", name: "Saudi Arabia" },
+    { "@type": "AdministrativeArea", name: "Eastern Province", containedInPlace: { "@type": "Country", name: "Saudi Arabia" } },
     { "@type": "City", name: "Al-Ahsa" },
     { "@type": "City", name: "Dammam" },
     { "@type": "City", name: "Khobar" },
     { "@type": "City", name: "Dhahran" },
-    { "@type": "City", name: "Jubail" }
+    { "@type": "City", name: "Jubail" },
+    { "@type": "City", name: "Qatif" }
   ],
   knowsLanguage: ["Arabic", "English"],
   serviceType: ["Wedding Videography", "Engagement Videography", "Event Videography"],

@@ -1,5 +1,14 @@
 # Asmaa Studio Work Log
 
+## 2026-06-07 18:40 +03
+
+- Portfolio (`app/portfolio/page.tsx`) rebuilt as an on-brand women's-wedding showcase: asymmetric masonry (tall/standard spans), richer layered cinematic gradient art with light-bloom + film-grain + vignette, real-service-city overlay text (الأحساء/الدمام/الخبر/القطيف/الجبيل — not the brief's Riyadh/Jeddah, which aren't the service area), per-card play button, and IntersectionObserver lazy reveal. Honest CTA: no public film links exist yet, so play/"watch" opens a consent-first WhatsApp sample request rather than fake video links.
+- Booking deposit (`components/ReservationExperience.tsx`): kept the existing Moyasar online card/mada rail untouched; upgraded the no-key fallback into a structured 3-step bank-transfer deposit card with deposit amount and an "أرسلي إيصال التحويل عبر واتساب" button (prefilled message with package/deposit/bride/date). IBAN intentionally gated behind WhatsApp, not printed live (avoids misdirected transfers).
+- Floating WhatsApp (`components/SiteFooter.tsx` + `globals.css`): recolored to WhatsApp green #25D366, prefilled message retained, animated "عادةً يرد خلال ساعتين" bubble added, pulse kept; remains `display:none` on mobile to satisfy the launch verifier (header WhatsApp covers mobile).
+- SEO/perf: `LocalBusinessJsonLd` `areaServed` broadened to Country (Saudi Arabia) + Eastern Province + Qatif while keeping `@type:Organization` (verifier forbids addressless LocalBusiness); `/process` added to `sitemap.ts`; indexed hero backdrop given descriptive Arabic alt.
+- Mission 4 (fabricated named testimonials) deliberately NOT shipped — conflicts with the documented consent-first policy, the launch verifier's banned-marketing guards, and no-fabrication non-negotiables. See decision-log 2026-06-07.
+- Verified: `tsc --noEmit` clean, `eslint .` clean, `npm run build:pages` (3654 files) + static-export/launch-artifact checks pass, and the full browser `run-launch-verifier.mjs` reports "Asmaa launch verification passed".
+
 ## 2026-06-05 09:32 +03
 
 - Shipped the next safe Wave 2 slice as a real `near-me` route family at `/ar/{city}/{service}/near-me`, covering local voice-search and "close by" wedding-intent queries without needing venue databases or off-site content generation.
@@ -374,3 +383,23 @@
   `verify:launch` is authoritative on CI (local runs SIGKILL'd by mem-pressure watchdog).
 - Boundary respected: did NOT create a Moyasar merchant account (money/legal/brand = owner). Activation is one env var.
   Two owner actions remain for a fully-live book+pay: (1) Netlify deploy of fresh content, (2) optional Moyasar links.
+
+## 2026-06-07 — WhatsApp booking notification (server push + deep-link audit)
+- Audited existing WhatsApp handling: already complete and LIVE. `whatsappNumber = "966551606334"`.
+  Reserve flow (`components/ReservationExperience.tsx`) is a 3-step wizard with full fields, validation,
+  loading state, success message. Primary path POSTs to Supabase edge function when configured; fallback
+  opens a fully-detailed `wa.me` deep link (`lib/reservations.ts:reservationWhatsappUrl`). Deposit rail:
+  Moyasar link via `NEXT_PUBLIC_PAYMENT_LINKS`, else bank-transfer + WhatsApp-receipt fallback. Floating
+  WhatsApp button site-wide.
+- Architecture constraint: site is a static export (`output: export`, Netlify `out/`). A Next
+  `app/api/book/route.ts` cannot run and would duplicate the reservation owner (anti-rot). Did NOT build it.
+  No `WHATSAPP_ACCESS_TOKEN` in env. Honored brief's "no server WhatsApp API unless token present".
+- Gap closed: extended the canonical `supabase/functions/submit-reservation/index.ts` to send the owner an
+  instant WhatsApp Cloud API push after the durable insert — token-gated (`WHATSAPP_ACCESS_TOKEN` +
+  `WHATSAPP_PHONE_NUMBER_ID`), recipient default `966551606334` (`RESERVATION_NOTIFY_WHATSAPP` override),
+  best-effort (never fails the reservation). So the configured-endpoint path now also notifies, matching the
+  always-working deep-link path.
+- Verified: `deno check` on the function passes; `npm run typecheck` clean; live `asmaa.video/reserve` HTTP 200
+  with `wa.me` + number present. Shipped as PR #49 (rebased onto main, MERGEABLE).
+- Owner/infra activation (needs Supabase + Meta creds): set edge secrets, `supabase functions deploy
+  submit-reservation`, set `NEXT_PUBLIC_RESERVATION_ENDPOINT`. Until then the deep-link path is live and works.
