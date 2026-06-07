@@ -13,10 +13,12 @@ import {
   Loader2,
   MapPin,
   MessageCircle,
+  ShieldCheck,
   Sparkles,
+  Upload,
   Video
 } from "lucide-react";
-import { assetPath, packages, readableWhatsappSource, whatsappLink } from "../lib/content";
+import { assetPath, packages, readableWhatsappSource, whatsappLink, whatsappNumber } from "../lib/content";
 import { SiteFooter } from "./SiteFooter";
 import {
   cityOptions,
@@ -64,6 +66,10 @@ export function ReservationExperience() {
   const endpoint = reservationEndpoint();
   const deposit = useMemo(() => depositAmount(form.packageId), [form.packageId]);
   const paymentLink = useMemo(() => reservationPaymentLink(form.packageId), [form.packageId]);
+  const receiptWhatsappUrl = useMemo(
+    () => depositReceiptUrl(form, deposit, selectedPackage.name, source),
+    [form, deposit, selectedPackage.name, source]
+  );
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -350,11 +356,40 @@ export function ReservationExperience() {
                     </p>
                   </>
                 ) : (
-                  <p className="reserve-deposit-note">
-                    <Landmark size={16} />
-                    بعد إرسال التفاصيل نراجع التوفر، ثم نزوّدك برقم الحساب لتحويل العربون، وتُرسلين صورة الإيصال عبر واتساب لتثبيت
-                    التاريخ.
-                  </p>
+                  <div className="bank-transfer-deposit">
+                    <p className="reserve-deposit-note">
+                      <Landmark size={16} />
+                      احجزي بدفع عربون عبر تحويل بنكي — الطريقة المعتمدة لتثبيت التاريخ.
+                    </p>
+                    <ol className="bank-transfer-steps" aria-label="خطوات دفع العربون بالتحويل البنكي">
+                      <li>
+                        <span className="bank-step-num">1</span>
+                        <span>أرسلي التفاصيل أدناه ونؤكد لكِ توفّر التاريخ خلال ساعتين.</span>
+                      </li>
+                      <li>
+                        <span className="bank-step-num">2</span>
+                        <span>
+                          نزوّدك برقم حساب الاستوديو (IBAN) عبر واتساب فور تأكيد التوفر — لحماية مبلغك لا نعرض الرقم
+                          علناً على الموقع.
+                        </span>
+                      </li>
+                      <li>
+                        <span className="bank-step-num">3</span>
+                        <span>
+                          حوّلي العربون{deposit ? ` (${deposit} ريال — نصف قيمة الباقة)` : ""} ثم أرسلي صورة الإيصال
+                          عبر واتساب لتثبيت الموعد نهائياً.
+                        </span>
+                      </li>
+                    </ol>
+                    <a className="cta deposit-pay" href={receiptWhatsappUrl} target="_blank" rel="noreferrer">
+                      <Upload size={18} />
+                      أرسلي إيصال التحويل عبر واتساب
+                    </a>
+                    <p className="reserve-deposit-note bank-transfer-trust">
+                      <ShieldCheck size={15} />
+                      العربون لا يُرد عند الإلغاء · المتبقي يُسلَّم يوم المناسبة قبل التصوير.
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
@@ -423,6 +458,28 @@ function Field({
       {error && <em>{error}</em>}
     </label>
   );
+}
+
+function depositReceiptUrl(
+  form: ReservationInput,
+  deposit: string,
+  packageName: string,
+  source: string
+) {
+  const lines = [
+    "السلام عليكم أسماء ستوديو، أرغب بتثبيت الحجز بدفع العربون عبر تحويل بنكي:",
+    "",
+    `مصدر الطلب: ${readableWhatsappSource(source)}`,
+    `اسم العروس: ${form.brideName || "-"}`,
+    `الجوال: ${form.phone || "-"}`,
+    `الباقة: ${packageName}`,
+    deposit ? `قيمة العربون: ${deposit} ريال` : "",
+    `التاريخ: ${form.eventDate || "-"}`,
+    `المدينة: ${form.city || "-"}`,
+    "",
+    "أرجو تزويدي برقم الحساب (IBAN) لإتمام التحويل، وسأرفق صورة الإيصال هنا لتثبيت الموعد."
+  ].filter(Boolean);
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
 
 function inferReservationSource(referrer: string, requestedCity: string | null, packageId: string) {

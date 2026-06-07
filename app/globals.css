@@ -1697,29 +1697,70 @@ textarea {
 
 .floating-whatsapp {
   align-items: center;
-  background: linear-gradient(135deg, #d8e3c4, #829176 62%, #f1cb82);
-  border: 1px solid rgba(255, 248, 236, 0.36);
+  background: linear-gradient(135deg, #25d366, #1da851);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
   bottom: 22px;
-  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.34), 0 0 0 0 rgba(216, 227, 196, 0.32);
-  color: #0c0c0d;
+  box-shadow: 0 16px 50px rgba(18, 140, 80, 0.42), 0 0 0 0 rgba(37, 211, 102, 0.4);
+  color: #ffffff;
   display: inline-flex;
-  font-weight: 950;
+  font-weight: 800;
   gap: 8px;
   min-height: 58px;
-  padding: 0 18px;
+  padding: 0 20px;
   position: fixed;
   right: 22px;
   z-index: 20;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.floating-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(18, 140, 80, 0.55);
 }
 
 .floating-whatsapp::before {
   animation: whatsappPulse 1.8s ease-out infinite;
-  border: 1px solid rgba(216, 227, 196, 0.56);
+  border: 2px solid rgba(37, 211, 102, 0.6);
   border-radius: inherit;
   content: "";
   inset: -7px;
   position: absolute;
+}
+
+.floating-whatsapp-bubble {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  white-space: nowrap;
+  background: #ffffff;
+  color: #0c3d23;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  animation: whatsappBubbleIn 0.5s ease-out 0.6s both;
+}
+
+.floating-whatsapp-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 22px;
+  border: 6px solid transparent;
+  border-top-color: #ffffff;
+}
+
+@keyframes whatsappBubbleIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes playhead {
@@ -2494,6 +2535,60 @@ textarea {
   flex: 0 0 auto;
   margin-top: 3px;
   color: var(--gold);
+}
+
+.bank-transfer-deposit {
+  display: grid;
+  gap: 12px;
+}
+
+.bank-transfer-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.bank-transfer-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(255, 248, 236, 0.84);
+}
+
+.bank-step-num {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--champagne), var(--gold));
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-top: 1px;
+}
+
+.bank-transfer-deposit .deposit-pay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.bank-transfer-trust {
+  font-size: 0.8rem;
+  color: rgba(255, 248, 236, 0.66);
+}
+
+.bank-transfer-trust svg {
+  color: var(--sage, #a9c2a0);
 }
 
 .stepper {

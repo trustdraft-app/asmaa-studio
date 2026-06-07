@@ -1,5 +1,17 @@
 # Asmaa Studio Decision Log
 
+## 2026-06-07 18:40 +03 — Asmaa Studio
+**Question:** A "super beast mode" brief asked to (1) make the portfolio stunning, (2) add booking payment, (3) upgrade the floating WhatsApp, (4) add 3 named Saudi-women 5-star testimonials, and (5) push SEO. Which of these can ship safely as-is?
+**Decision:** Shipped 1, 2, 3, 5 in full. Declined 4 (fabricated named testimonials). Specifics: portfolio rebuilt as on-brand women's-wedding asymmetric masonry with cinematic real-city overlays, play→consent-first WhatsApp sample request, and IntersectionObserver lazy reveal; reserve fallback gained a structured 3-step bank-transfer deposit card + "أرسلي إيصال التحويل" WhatsApp button (Moyasar online rail already present and untouched); floating WhatsApp recolored to brand green #25D366 with prefilled message, pulse, and a "عادةً يرد خلال ساعتين" bubble (kept hidden on mobile per the launch-verifier rule); `areaServed` broadened to Country/Eastern-Province + Qatif, `/process` added to sitemap, indexed hero backdrop given Arabic alt.
+**Reasoning:** Items 1–3 and 5 are repo-owned quality/SEO upgrades that pass the strict launch verifier. Item 4 directly contradicts the documented consent-first policy (wave-19 decision and the reviews-page wording fix), is actively blocked by the launch verifier's banned-marketing guards, and fabricating named customer reviews for a real Saudi business is deceptive (fake-review/consumer-protection exposure). Honesty + the existing decision win.
+**Source:** brief, `app/portfolio/page.tsx`, `components/ReservationExperience.tsx`, `components/SiteFooter.tsx`, `components/seo/LocalBusinessJsonLd.tsx`, `app/sitemap.ts`, `scripts/verify-launch.mjs`, prior consent-first decisions, AI Empire non-negotiables (no fabrication), professional judgment.
+
+## 2026-06-07 18:40 +03 — Asmaa Studio
+**Question:** Should the booking flow print a placeholder IBAN (SA…) on the live site as the brief suggested?
+**Decision:** No. The bank-transfer card explains the deposit flow and routes the real IBAN through WhatsApp after availability is confirmed, rather than printing a placeholder account number publicly.
+**Reasoning:** A non-real IBAN shown live on a real business site risks misdirected customer transfers (real money loss) and is the opposite of the Saudi-standard "confirm date → send account → send receipt" flow. Gating the IBAN behind WhatsApp is both safer and the genuine local practice. Real account publication is a money decision for the owner.
+**Source:** brief Mission 2, `lib/content.ts` `paymentTerms`, `components/ReservationExperience.tsx`, AI Empire money-decision boundary, professional judgment.
+
 ## 2026-06-05 09:32 +03 — Asmaa Studio
 **Question:** What is the next highest-impact safe Wave 2 slice after yesterday's `/ar/{city}/bride-checklist` launch?
 **Decision:** Ship the `near-me` route family at `/ar/{city}/{service}/near-me`, then wire it into sitemap, llms discovery, attribution, and launch verification while leaving venue-coverage for a later run.

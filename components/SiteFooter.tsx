@@ -93,7 +93,9 @@ export function SiteFooter() {
         href={whatsappLink("floating-whatsapp")}
         target="_blank"
         rel="noreferrer"
+        aria-label="تواصلي عبر واتساب — عادةً يرد خلال ساعتين"
       >
+        <span className="floating-whatsapp-bubble" aria-hidden="true">عادةً يرد خلال ساعتين</span>
         <MessageCircle size={24} aria-hidden="true" />
         <span>واتساب</span>
       </a>

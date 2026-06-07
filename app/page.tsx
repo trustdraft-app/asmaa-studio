@@ -210,7 +210,7 @@ export default function HomePage() {
         <Image
           className="hero-cinematic-backdrop"
           src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
-          alt=""
+          alt="تصوير فيديو زواجات نسائي سينمائي في الأحساء والدمام والخبر — Asmaa Studio"
           fill
           priority
           sizes="100vw"
