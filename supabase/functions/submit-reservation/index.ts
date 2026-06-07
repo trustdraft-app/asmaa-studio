@@ -10,6 +10,15 @@ const allowedOrigins = new Set(
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+
+// Owner WhatsApp notification (Option A). Only active when both Cloud API
+// secrets are present; otherwise the on-page wa.me deep-link fallback stays the
+// notification path. Recipient defaults to the studio owner number.
+const whatsappToken = Deno.env.get("WHATSAPP_ACCESS_TOKEN") ?? "";
+const whatsappPhoneNumberId = Deno.env.get("WHATSAPP_PHONE_NUMBER_ID") ?? "";
+const whatsappNotifyTo = Deno.env.get("RESERVATION_NOTIFY_WHATSAPP") ?? "966551606334";
+const whatsappGraphVersion = Deno.env.get("WHATSAPP_GRAPH_VERSION") ?? "v21.0";
+
 const supabase =
   supabaseUrl && serviceRoleKey
     ? createClient(supabaseUrl, serviceRoleKey, {
@@ -80,8 +89,61 @@ Deno.serve(async (request) => {
     return json({ error: "reservation_insert_failed" }, 500, origin);
   }
 
+  // Best-effort owner push. The reservation is already durable, so a failed
+  // WhatsApp send must never fail the request — the bride keeps the on-page
+  // confirmation and the wa.me fallback regardless.
+  if (whatsappToken && whatsappPhoneNumberId) {
+    await notifyOwnerWhatsapp(validated.value).catch(() => {});
+  }
+
   return json({ ok: true, id: data.id }, 201, origin);
 });
+
+async function notifyOwnerWhatsapp(reservation: {
+  bride_name: string;
+  phone: string;
+  event_type: string;
+  event_date: string;
+  city: string;
+  venue: string;
+  package_name: string;
+  guest_count: string | null;
+  ceremony_time: string | null;
+  needs_first_look: boolean;
+  notes: string | null;
+  source: string;
+}) {
+  const text = [
+    "🎉 حجز جديد على Asmaa Studio",
+    `👤 العروس: ${reservation.bride_name}`,
+    `📱 الجوال: ${reservation.phone}`,
+    `📦 الباقة: ${reservation.package_name}`,
+    `🗓️ التاريخ: ${reservation.event_date}`,
+    `💍 المناسبة: ${reservation.event_type}`,
+    `📍 المدينة/القاعة: ${reservation.city} - ${reservation.venue}`,
+    `👥 الحضور: ${reservation.guest_count ?? "-"}`,
+    `⏰ وقت الزفة: ${reservation.ceremony_time ?? "-"}`,
+    `📸 First Look: ${reservation.needs_first_look ? "نعم" : "لا"}`,
+    `💬 ملاحظات: ${reservation.notes ?? "لا يوجد"}`,
+    `🔗 المصدر: ${reservation.source}`
+  ].join("\n");
+
+  // Note: free-form text reaches the owner number when a WhatsApp session is
+  // open; for guaranteed business-initiated delivery use an approved template.
+  await fetch(`https://graph.facebook.com/${whatsappGraphVersion}/${whatsappPhoneNumberId}/messages`, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${whatsappToken}`,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      messaging_product: "whatsapp",
+      to: whatsappNotifyTo,
+      type: "text",
+      text: { body: text }
+    })
+  });
+}
 
 function corsHeaders(origin: string) {
   return {
