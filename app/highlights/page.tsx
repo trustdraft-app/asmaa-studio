@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const TITLE = "أيقونات هايلايت انستقرام لـ Asmaa Studio";
 const DESC = "حمّلي مجموعة أيقونات هايلايت Asmaa Studio لانستقرام وتيك توك — 12 أيقونة جاهزة بصيغة PNG و SVG.";
@@ -42,6 +44,7 @@ const icons = [
 export default function HighlightsPage() {
   return (
     <main className="page-shell" style={{ paddingBottom: 96 }}>
+      <SiteHeader />
       <section className="pkg-hero" style={{ paddingTop: 80, paddingBottom: 48 }}>
         <div className="pkg-hero-inner">
           <span className="eyebrow pkg-eyebrow">أيقونات Asmaa Studio لـ Instagram و TikTok</span>
@@ -110,6 +113,7 @@ export default function HighlightsPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

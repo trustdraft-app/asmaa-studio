@@ -4,6 +4,8 @@ import { ArrowLeft, CalendarDays, CheckCircle2, Clock3, MapPin, MessageCircle, S
 import { JsonLd } from "../../components/JsonLd";
 import { packages, serviceAreas, whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const engagementPackage = packages.find((item) => item.id === "05");
 const halfDayPackage = packages.find((item) => item.id === "03");
@@ -107,6 +109,7 @@ export default function EngagementPage() {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={serviceJsonLd} />
 
       <section className="section city-hero-20x portfolio-hero">
@@ -248,6 +251,7 @@ export default function EngagementPage() {
           </Link>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

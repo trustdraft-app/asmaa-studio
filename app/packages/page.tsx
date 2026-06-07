@@ -5,6 +5,8 @@ import { JsonLd } from "../../components/JsonLd";
 import { packages, whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import PackageCalculator from "./PackageCalculator";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const META_TITLE = "باقات Asmaa Studio التفاعلية | اختاري واحجزي خلال ثوانٍ";
 const META_DESC =
@@ -95,6 +97,7 @@ const jsonLd = {
 export default function PackagesPage() {
   return (
     <main className="page-shell packages-page">
+      <SiteHeader />
       <JsonLd data={jsonLd} />
 
       {/* Hero */}
@@ -268,13 +271,9 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <a className="floating-whatsapp" href={whatsappLink("packages-floating")} target="_blank" rel="noreferrer">
-        <MessageCircle size={24} />
-        <span>واتساب</span>
-      </a>
-
       {/* Hidden flag for analytics + AEO crumb */}
       <Sparkles aria-hidden="true" style={{ display: "none" }} />
+      <SiteFooter />
     </main>
   );
 }

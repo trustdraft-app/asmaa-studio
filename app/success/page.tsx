@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Clock, MessageCircle } from "lucide-react";
 import { whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const META_TITLE = "تم استلام حجزك | Asmaa Studio";
 const META_DESC =
@@ -34,6 +36,7 @@ const nextSteps = [
 export default function SuccessPage() {
   return (
     <main className="page-shell">
+      <SiteHeader />
       <section className="pkg-hero" style={{ paddingTop: 112, paddingBottom: 64 }}>
         <div className="pkg-hero-inner" style={{ textAlign: "center" }}>
           <CheckCircle2 size={56} strokeWidth={1.6} aria-hidden="true" className="about-value-icon" />
@@ -83,6 +86,7 @@ export default function SuccessPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

@@ -11,6 +11,7 @@ import {
   Gem,
   Heart,
   Languages,
+  Menu,
   MessageCircle,
   Plus,
   Play,
@@ -242,6 +243,33 @@ export default function HomePage() {
               <MessageCircle size={17} />
               احجزي الآن
             </a>
+            <details className="site-header-menu home-nav-menu">
+              <summary aria-label="القائمة">
+                <Menu size={22} aria-hidden="true" />
+              </summary>
+              <nav className="site-header-drawer" aria-label="قائمة الجوال">
+                <Link href="/packages">الباقات</Link>
+                <Link href="/portfolio">الألبوم</Link>
+                <Link href="/services/full-day-wedding">الخدمات</Link>
+                <Link href="/reviews">آراء العرايس</Link>
+                <Link href="/process">كيف نعمل</Link>
+                <Link href="/about">عن الاستوديو</Link>
+                <Link href="/faq">الأسئلة</Link>
+                <Link href="/contact">تواصلي معنا</Link>
+                <Link href="/reserve" className="site-header-drawer-cta">
+                  رابط العروس
+                </Link>
+                <a
+                  className="site-header-drawer-wa"
+                  href={whatsappLink("home-nav-drawer")}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MessageCircle size={16} aria-hidden="true" />
+                  واتساب مباشر
+                </a>
+              </nav>
+            </details>
           </div>
         </nav>
 

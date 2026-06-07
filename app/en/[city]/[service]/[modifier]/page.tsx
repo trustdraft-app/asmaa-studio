@@ -6,6 +6,8 @@ import { JsonLd } from "../../../../../components/JsonLd";
 import { whatsappLink, whatsappNumber } from "../../../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../../../lib/metadata";
 import { allEnCityServiceModifierTriples, seoCities, seoModifiers, seoServices } from "../../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ city: string; service: string; modifier: string }> };
 export function generateStaticParams() { return allEnCityServiceModifierTriples().map(({ city, service, modifier }) => ({ city: city.slug, service: service.slug, modifier: modifier.slug })); }
@@ -34,6 +36,7 @@ export default async function EnDeepPage({ params }: Props) {
   if (!city || !service || !modifier) notFound();
   return (
     <main className="page-shell" lang="en" dir="ltr">
+      <SiteHeader />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [
         { "@type": "Service", "@id": `https://asmaa.video/en/${city.slug}/${service.slug}/${modifier.slug}#service`, name: `${modifier.en} ${service.en} in ${city.en}`, serviceType: `${service.en} (${modifier.en})`, inLanguage: ["en", "ar-SA"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio", telephone: `+${whatsappNumber}` }, areaServed: { "@type": "City", name: city.en, alternateName: city.ar, containedInPlace: { "@type": "AdministrativeArea", name: "Eastern Province, Saudi Arabia" } }, offers: { "@type": "Offer", price: service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
         { "@type": "BreadcrumbList", itemListElement: [
@@ -55,6 +58,7 @@ export default async function EnDeepPage({ params }: Props) {
           <Link className="ghost-cta" href={`/ar/${city.slug}/${service.slug}/${modifier.slug}`}>العربية</Link>
         </div>
       </div></div></section>
+    <SiteFooter />
     </main>
   );
 }

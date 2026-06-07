@@ -4,6 +4,8 @@ import { ArrowLeft, MessageCircle, ShieldCheck } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
 import { whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const META_TITLE = "سياسة الخصوصية | Asmaa Studio";
 const META_DESC =
@@ -86,6 +88,7 @@ const privacySchema = {
 export default function PrivacyPage() {
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={privacySchema} />
 
       <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
@@ -141,6 +144,7 @@ export default function PrivacyPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

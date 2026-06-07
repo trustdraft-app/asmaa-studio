@@ -14,6 +14,8 @@ import {
   seoModifiers,
   seoServices
 } from "../../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ city: string; service: string; modifier: string }> };
 
@@ -125,6 +127,7 @@ export default async function SeoCityServiceModifierPage({ params }: Props) {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={serviceJsonLd} />
 
       <section className="section city-hero-20x">
@@ -210,6 +213,7 @@ export default async function SeoCityServiceModifierPage({ params }: Props) {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

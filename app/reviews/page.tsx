@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { serviceAreas } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const META_TITLE = "سياسة آراء العميلات | Asmaa Studio";
 const META_DESC = "Asmaa Studio تنشر آراء العرايس فقط بعد موافقة صريحة، وبالأحرف الأولى فقط، مع احترام حدود مشاركة العروس والعائلة.";
@@ -80,6 +82,7 @@ const consentRules = [
 export default function ReviewsPage() {
   return (
     <main className="page-shell">
+      <SiteHeader />
       <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
         <div className="pkg-hero-inner">
           <Link className="back-pill" href="/" style={{ marginBottom: 24 }}><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
@@ -181,6 +184,7 @@ export default function ReviewsPage() {
           </Link>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

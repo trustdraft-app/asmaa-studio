@@ -6,6 +6,8 @@ import { JsonLd } from "../../../components/JsonLd";
 import { packages, serviceAreas, whatsappLink } from "../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../lib/metadata";
 import { seoGuidePageBySlug, seoGuidePages } from "../../../lib/seo-pages";
+import { SiteHeader } from "../../../components/SiteHeader";
+import { SiteFooter } from "../../../components/SiteFooter";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -119,6 +121,7 @@ export default async function GuidePage({ params }: Props) {
 
   return (
     <main className="page-shell guide-page">
+      <SiteHeader />
       <JsonLd data={articleJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
 
@@ -285,6 +288,7 @@ export default async function GuidePage({ params }: Props) {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

@@ -17,6 +17,7 @@ import {
   Video
 } from "lucide-react";
 import { assetPath, packages, readableWhatsappSource, whatsappLink } from "../lib/content";
+import { SiteFooter } from "./SiteFooter";
 import {
   cityOptions,
   defaultReservation,
@@ -401,6 +402,7 @@ export function ReservationExperience() {
           <p>تصل الرسالة وفيها الباقة والتاريخ والموقع، فتبدأ المحادثة من نقطة واضحة.</p>
         </article>
       </section>
+      <SiteFooter />
     </main>
   );
 }

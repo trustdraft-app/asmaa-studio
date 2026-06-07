@@ -4,6 +4,8 @@ import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "l
 import { JsonLd } from "../../components/JsonLd";
 import { instagramUrl, packages, serviceAreas, tiktokUrl, whatsappLink, whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -93,6 +95,7 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <main className="page-shell city-page">
+      <SiteHeader />
       <JsonLd data={cityJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
 
@@ -218,6 +221,7 @@ export default async function CityPage({ params }: Props) {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

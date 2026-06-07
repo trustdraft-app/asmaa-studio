@@ -6,6 +6,8 @@ import { JsonLd } from "../../../../../components/JsonLd";
 import { instagramUrl, tiktokUrl, whatsappLink, whatsappNumber } from "../../../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../../../lib/metadata";
 import { allCityServicePairs, seoCities, seoServices } from "../../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ city: string; service: string }> };
 
@@ -137,6 +139,7 @@ export default async function SeoNearMePage({ params }: Props) {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={articleJsonLd} />
 
       <section className="section city-hero-20x">
@@ -260,6 +263,7 @@ export default async function SeoNearMePage({ params }: Props) {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

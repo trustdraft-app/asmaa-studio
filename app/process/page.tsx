@@ -4,6 +4,8 @@ import { ArrowLeft, Clock3, MessageCircle } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
 import { whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "كيف نصوّر — رحلة العميلة معنا",
@@ -92,6 +94,7 @@ const howToJsonLd = {
 export default function ProcessPage() {
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={howToJsonLd} />
 
       <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
@@ -145,6 +148,7 @@ export default function ProcessPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }
