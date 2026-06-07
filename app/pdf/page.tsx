@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const PDF_URL = "/packages-asmaa-studio.pdf";
 
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
 export default function PdfRedirectPage() {
   return (
     <main className="page-shell" style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 48 }}>
+      <SiteHeader />
       <section style={{ maxWidth: 540, textAlign: "center" }}>
         <h1 style={{ fontFamily: '"Noto Kufi Arabic", system-ui, sans-serif', fontSize: 32, marginBottom: 16, color: "#fff6df" }}>
           دليل باقات Asmaa Studio
@@ -49,6 +52,7 @@ export default function PdfRedirectPage() {
           </Link>
         </p>
       </section>
+    <SiteFooter />
     </main>
   );
 }

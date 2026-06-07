@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { CalendarDays, Play } from "lucide-react";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 /* ─── Data ──────────────────────────────────────────────────────── */
 
@@ -113,6 +115,7 @@ export default function PortfolioPage() {
         fontFamily: "var(--font-sans, sans-serif)",
       }}
     >
+      <SiteHeader />
       {/* ── Hero ── */}
       <section
         className="portfolio-hero theatre-hero"
@@ -272,6 +275,7 @@ export default function PortfolioPage() {
           احجزي جلستكِ
         </Link>
       </section>
+      <SiteFooter />
     </main>
   );
 }

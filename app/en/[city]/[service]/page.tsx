@@ -6,6 +6,8 @@ import { JsonLd } from "../../../../components/JsonLd";
 import { whatsappLink, whatsappNumber } from "../../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../../lib/metadata";
 import { allEnCityServicePairs, seoCities, seoServices } from "../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ city: string; service: string }> };
 export function generateStaticParams() { return allEnCityServicePairs().map(({ city, service }) => ({ city: city.slug, service: service.slug })); }
@@ -32,6 +34,7 @@ export default async function EnCityServicePage({ params }: Props) {
   if (!city || !service) notFound();
   return (
     <main className="page-shell" lang="en" dir="ltr">
+      <SiteHeader />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [
         { "@type": "Service", "@id": `https://asmaa.video/en/${city.slug}/${service.slug}#service`, name: `${service.en} in ${city.en}`, serviceType: service.en, inLanguage: ["en", "ar-SA"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio", telephone: `+${whatsappNumber}` }, areaServed: { "@type": "City", name: city.en, alternateName: city.ar, containedInPlace: { "@type": "AdministrativeArea", name: "Eastern Province, Saudi Arabia" } }, offers: { "@type": "Offer", price: service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
         { "@type": "BreadcrumbList", itemListElement: [
@@ -61,6 +64,7 @@ export default async function EnCityServicePage({ params }: Props) {
           ))}
         </div>
       </div></section>
+    <SiteFooter />
     </main>
   );
 }

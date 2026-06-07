@@ -5,6 +5,8 @@ import { JsonLd } from "../../components/JsonLd";
 import { packages, serviceAreas } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { seoGuidePages } from "../../lib/seo-pages";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "دليل تصوير الزواجات والخطوبة",
@@ -78,6 +80,7 @@ export default function GuidesPage() {
 
   return (
     <main className="page-shell guide-page">
+      <SiteHeader />
       <JsonLd data={jsonLd} />
 
       <section className="section city-hero-20x guide-index-hero">
@@ -167,6 +170,7 @@ export default function GuidesPage() {
           </article>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

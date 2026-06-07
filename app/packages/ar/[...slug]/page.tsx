@@ -4,6 +4,8 @@ import {
   allCityServiceModifierTriples,
   allCityServicePairs
 } from "../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ slug: string[] }> };
 
@@ -43,6 +45,7 @@ export default async function PackagesArRedirect({ params }: Props) {
   const realUrl = `/ar/${slug.join("/")}`;
   return (
     <main className="page-shell" style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 48, textAlign: "center" }}>
+      <SiteHeader />
       <section>
         <h1 style={{ color: "#fff6df", fontSize: 28, marginBottom: 16 }}>التحويل جارٍ…</h1>
         <p style={{ color: "rgba(255, 248, 236, 0.78)", marginBottom: 24 }}>
@@ -52,6 +55,7 @@ export default async function PackagesArRedirect({ params }: Props) {
           فتح الصفحة الصحيحة
         </Link>
       </section>
+    <SiteFooter />
     </main>
   );
 }

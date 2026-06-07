@@ -14,6 +14,8 @@ import {
   seoModifierPhraseBank,
   seoServices
 } from "../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ city: string; service: string }> };
 
@@ -114,6 +116,7 @@ export default async function SeoCityServicePage({ params }: Props) {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={serviceJsonLd} />
 
       <section className="section city-hero-20x reveal-on-scroll">
@@ -223,6 +226,7 @@ export default async function SeoCityServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

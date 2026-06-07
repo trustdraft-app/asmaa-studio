@@ -6,6 +6,8 @@ import { JsonLd } from "../../../components/JsonLd";
 import { instagramUrl, packages, tiktokUrl, whatsappLink, whatsappNumber } from "../../../lib/content";
 import { servicePageBySlug, servicePages } from "../../../lib/services";
 import { socialPreviewImages, twitterMetadata } from "../../../lib/metadata";
+import { SiteHeader } from "../../../components/SiteHeader";
+import { SiteFooter } from "../../../components/SiteFooter";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -96,6 +98,7 @@ export default async function ServicePage({ params }: Props) {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={serviceJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
 
@@ -185,6 +188,7 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

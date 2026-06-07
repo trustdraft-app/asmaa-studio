@@ -4,6 +4,8 @@ import { ArrowLeft, CalendarDays, MessageCircle, MapPin } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
 import { whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "الأسئلة الشائعة",
@@ -83,6 +85,7 @@ const faqs = [
 export default function FaqPage() {
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={breadcrumbJsonLd} />
 
       {/* Hero */}
@@ -173,6 +176,7 @@ export default function FaqPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

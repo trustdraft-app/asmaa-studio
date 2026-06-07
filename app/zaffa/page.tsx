@@ -4,6 +4,8 @@ import { ArrowLeft, CalendarDays, CheckCircle2, Clock3, MapPin, MessageCircle, S
 import { JsonLd } from "../../components/JsonLd";
 import { packages, serviceAreas, whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const zaffaPackage = packages.find((item) => item.id === "01");
 const enhancedZaffaPackage = packages.find((item) => item.id === "02");
@@ -107,6 +109,7 @@ export default function ZaffaPage() {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={serviceJsonLd} />
 
       <section className="section city-hero-20x portfolio-hero">
@@ -240,6 +243,7 @@ export default function ZaffaPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

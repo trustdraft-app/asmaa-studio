@@ -12,6 +12,8 @@ import {
 import { JsonLd } from "../../components/JsonLd";
 import { whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "تواصلي معنا",
@@ -96,6 +98,7 @@ export default function ContactPage() {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={breadcrumbJsonLd} />
       <JsonLd data={contactJsonLd} />
 
@@ -275,6 +278,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

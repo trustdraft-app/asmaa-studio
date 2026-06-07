@@ -6,6 +6,8 @@ import { JsonLd } from "../../../../components/JsonLd";
 import { whatsappLink, whatsappNumber } from "../../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../../lib/metadata";
 import { allBudgetPairs, seoServices, seoBudgetTiers } from "../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() { return allBudgetPairs().map((p) => ({ slug: p.slug })); }
@@ -41,6 +43,7 @@ export default async function BudgetPage({ params }: Props) {
   if (!p) notFound();
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [
         { "@type": "Service", "@id": `https://asmaa.video/ar/budget/${slug}#service`, name: `${p.service.ar} - ${p.tier.ar}`, serviceType: `${p.service.en} budget tier ${p.tier.en}`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
         { "@type": "BreadcrumbList", itemListElement: [
@@ -69,6 +72,7 @@ export default async function BudgetPage({ params }: Props) {
           ))}
         </div>
       </div></section>
+    <SiteFooter />
     </main>
   );
 }

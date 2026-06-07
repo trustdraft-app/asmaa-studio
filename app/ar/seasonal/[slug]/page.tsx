@@ -6,6 +6,8 @@ import { JsonLd } from "../../../../components/JsonLd";
 import { whatsappLink, whatsappNumber } from "../../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../../lib/metadata";
 import { allSeasonalPairs, pickPhrase, seoServices, seoIntroBank, seoSeasonalMonths } from "../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -47,6 +49,7 @@ export default async function SeasonalPage({ params }: Props) {
   const intro = pickPhrase(seed, seoIntroBank).replace(/\{city\}/g, `موسم ${p.month.ar}`).replace(/\{service\}/g, p.service.ar);
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [
         { "@type": "Service", "@id": `https://asmaa.video/ar/seasonal/${slug}#service`, name: `${p.service.ar} موسم ${p.month.ar}`, serviceType: `${p.service.en} (${p.month.en} season)`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio", url: "https://asmaa.video/", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
         { "@type": "BreadcrumbList", itemListElement: [
@@ -74,6 +77,7 @@ export default async function SeasonalPage({ params }: Props) {
           ))}
         </div>
       </div></section>
+    <SiteFooter />
     </main>
   );
 }

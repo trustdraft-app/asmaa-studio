@@ -4,6 +4,8 @@ import { ArrowLeft, BadgeCheck, Heart, MapPin, MessageCircle, Sparkles } from "l
 import { JsonLd } from "../../components/JsonLd";
 import { whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
+import { SiteHeader } from "../../components/SiteHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const META_TITLE = "عن Asmaa Studio | قصة استوديو سعودي نسائي";
 const META_DESC = "قصة Asmaa Studio: استوديو تصوير فيديو سعودي نسائي في المنطقة الشرقية. الترخيص الرسمي، الفلسفة، وأهم محطات الفريق.";
@@ -44,6 +46,7 @@ const aboutSchema = {
 export default function AboutPage() {
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={aboutSchema} />
 
       <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
@@ -108,6 +111,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

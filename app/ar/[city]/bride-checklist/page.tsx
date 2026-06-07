@@ -6,6 +6,8 @@ import { JsonLd } from "../../../../components/JsonLd";
 import { packages, whatsappLink } from "../../../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../../../lib/metadata";
 import { seoCities, seoServices } from "../../../../lib/seo-grid";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { SiteFooter } from "../../../../components/SiteFooter";
 
 type Props = { params: Promise<{ city: string }> };
 
@@ -113,6 +115,7 @@ export default async function BrideChecklistPage({ params }: Props) {
 
   return (
     <main className="page-shell">
+      <SiteHeader />
       <JsonLd data={articleJsonLd} />
 
       <section className="section city-hero-20x">
@@ -217,6 +220,7 @@ export default async function BrideChecklistPage({ params }: Props) {
           </div>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }
