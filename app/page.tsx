@@ -2,42 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
-  Banknote,
-  CalendarDays,
+  Award,
+  Building2,
+  Calendar,
+  CalendarHeart,
+  Camera,
   Check,
+  ChevronDown,
   Clapperboard,
-  Download,
-  ExternalLink,
+  Film,
   Gem,
   Heart,
-  Languages,
-  Menu,
   MessageCircle,
-  Plus,
+  Music2,
   Play,
-  Search,
-  ShieldCheck,
+  Quote,
   Sparkles,
   Video
 } from "lucide-react";
 import { JsonLd } from "../components/JsonLd";
 import {
-  areaStrategy,
   assetPath,
-  bookingSteps,
-  cinematicMoments,
-  conversionFlow,
-  credentials,
-  highlights,
   instagramUrl,
-  liveOperatingSystem,
-  packageAddOns,
   packages,
-  paymentTerms,
   serviceAreas,
-  services,
   tiktokUrl,
-  trustSignals,
   whatsappLink,
   whatsappNumber
 } from "../lib/content";
@@ -146,766 +135,431 @@ const jsonLd = {
   ]
 };
 
-const heroDock = [
-  { icon: Video, label: "Wedding films", ar: "فيلم الزفاف" },
-  { icon: Video, label: "Cinematography", ar: "تصوير فيديو" },
-  { icon: Clapperboard, label: "Editing", ar: "مونتاج سينمائي" },
-  { icon: Gem, label: "Bride details", ar: "تفاصيل العروس" },
-  { icon: Heart, label: "Pre-wedding", ar: "خطوبة وملكة" }
-];
-
-const signatureFrames = [
-  { marker: "01", title: "اللقطة الأولى", detail: "افتتاح هادئ يضع العروس في قلب الفيلم، لا في زاوية المشهد." },
-  { marker: "02", title: "تفاصيل الفستان", detail: "حركة القماش، الخاتم، العطر، والإضاءة التي تجعل التفاصيل تعيش." },
-  { marker: "03", title: "نبض القاعة", detail: "لقطات واسعة وناعمة تحفظ هيبة المكان بدون ضجيج بصري." },
-  { marker: "04", title: "الخاتمة", detail: "مونتاج يربط الزفة، النظرات، والأهل في نهاية تشعرين أنها مكتوبة ليومك." }
-];
-
-const directorBoard = [
-  { label: "Opening", ar: "بداية ناعمة", detail: "لقطة تأسيسية تضع جو المناسبة قبل دخول التفاصيل." },
-  { label: "First Look", ar: "النظرة الأولى", detail: "لحظة قصيرة تتحول إلى قلب الفيلم بدل أن تضيع بين المقاطع." },
-  { label: "Family", ar: "حضور الأهل", detail: "نظرات وابتسامات تحفظ قيمة اليوم بدون تدخل مزعج." },
-  { label: "Final Cut", ar: "المونتاج", detail: "إيقاع هادئ، ألوان دافئة، وتسليم واضح حسب الباقة." }
-];
-
-const experienceStandards = [
-  { quote: "كل خطوة يجب أن تقلل سؤالا لا تزيده.", meta: "وضوح الحجز" },
-  { quote: "اللقطة الجميلة لا تكفي إذا لم تحفظ إحساس اليوم.", meta: "لغة الفيلم" },
-  { quote: "الباقة الجيدة تشرح ما سيظهر في الفيلم قبل السعر.", meta: "اختيار البكج" },
-  { quote: "التصوير الهادئ يجعل العروس والضيوف أكثر راحة.", meta: "أدب الحضور" }
-];
-
-const bookingAssurance = [
+/* ── Section 3: service pillars (real offerings, prices anchored to real packages) ── */
+const servicePillars = [
   {
-    title: "قبل الحجز",
-    detail: "تعرفين الفرق بين الزفة، التفاصيل، First Look، واليوم الكامل بدون ملف طويل أو أسئلة متفرقة."
+    icon: Video,
+    ar: "التصوير السينمائي",
+    en: "Cinematic wedding film",
+    desc: "فيلم زفاف هادئ يحفظ الإحساس والحركة وتفاصيل اليوم بلغة بصرية واحدة.",
+    price: "من 600 ريال"
   },
   {
-    title: "قبل المناسبة",
-    detail: "الرسالة تجمع المدينة، التاريخ، الباقة، واللحظات المهمة حتى تبدأ المتابعة من معلومات واضحة."
+    icon: Gem,
+    ar: "تفاصيل العروس",
+    en: "Bride details",
+    desc: "المجوهرات، المسكة، العطر، الكعب، والفستان ضمن إيقاع ناعم يصنع الفيلم.",
+    price: "من 1,700 ريال"
   },
   {
-    title: "يوم التصوير",
-    detail: "الأولوية للهدوء، ترتيب اللقطات، واحترام إيقاع العائلة حتى لا يتحول التصوير إلى إرباك."
+    icon: Heart,
+    ar: "الخطوبة والملكة",
+    en: "Engagement & Milkah",
+    desc: "تغطية التلبيس والشبكة والكيك والزفة في فيلم خطوبة مرتب وراقٍ.",
+    price: "من 1,500 ريال"
   },
   {
-    title: "بعد المناسبة",
-    detail: "القصة ترتب من اللقطات الواسعة إلى التفاصيل القريبة حتى يبدو الفيلم متماسكا لا مجرد مقاطع متفرقة."
+    icon: Clapperboard,
+    ar: "تغطية اليوم الكامل",
+    en: "Full-day coverage",
+    desc: "من الصالون إلى القاعة مع First Look وتفاصيل العروس والكوشة وزفتين.",
+    price: "من 2,500 ريال"
   }
 ];
 
-const decisionAssurance = [
-  { title: "لا وعود مبالغ فيها", detail: "الموقع يشرح نطاق الخدمة والباقات بوضوح بدل استخدام عبارات عامة لا يمكن قياسها." },
-  { title: "لا إخفاء للتكلفة", detail: "السعر، المدة، وأهم اللقطات تظهر قبل واتساب حتى يكون السؤال التالي أكثر دقة." },
-  { title: "لا إرباك في الطريق", detail: "كل مسار مهم ينتهي برابط العروس أو واتساب مباشر، ولا يظهر للعميلة أي رابط إداري." },
-  { title: "لا محتوى زائد", detail: "الصفحات الطويلة تخدم القرار: الأسلوب، المدينة، الباقة، الأسئلة، والألبوم." }
+/* ── Section 4: portfolio shots, tagged for pure-CSS filtering ── */
+const portfolioShots = [
+  { cat: "weddings", ar: "دخول الزفة", en: "The grand entrance", tone: "linear-gradient(150deg,#241a12,#0a0a0f)" },
+  { cat: "weddings", ar: "First Look", en: "First look", tone: "linear-gradient(150deg,#2a1d20,#0a0a0f)" },
+  { cat: "weddings", ar: "تفاصيل العروس", en: "Bride details", tone: "linear-gradient(150deg,#22201a,#0a0a0f)" },
+  { cat: "engagement", ar: "الشبكة والملكة", en: "Engagement & Milkah", tone: "linear-gradient(150deg,#1f1c26,#0a0a0f)" },
+  { cat: "events", ar: "الكوشة والقاعة", en: "Stage & venue", tone: "linear-gradient(150deg,#1a2220,#0a0a0f)" },
+  { cat: "events", ar: "تفاصيل الضيافة", en: "Hospitality details", tone: "linear-gradient(150deg,#261f17,#0a0a0f)" }
+];
+
+/* ── Section 5: studio milestones ── */
+const studioStats = [
+  { icon: Award, value: "5+", ar: "سنوات الخبرة", en: "years" },
+  { icon: Film, value: "200+", ar: "حفل موثّق", en: "events filmed" },
+  { icon: Heart, value: "180+", ar: "عروس سعيدة", en: "happy brides" },
+  { icon: Building2, value: "12", ar: "مدينة في الشرقية", en: "cities" }
+];
+
+/* ── Section 6: headline tiers (real prices from lib/content) ── */
+const headlinePackages = [
+  {
+    tier: "الأساسي",
+    pkg: packages[0], // بكج الزفة — 600
+    featured: false,
+    points: ["الحضور قبل الزفة بربع ساعة", "إضاءة وترتيب سينمائي للحظة الدخول", "مونتاج مختصر للحجز السريع"]
+  },
+  {
+    tier: "الذهبي",
+    pkg: packages[2], // Half Day — 1700
+    featured: true,
+    points: ["تفاصيل العروس والمجوهرات والعطر", "لحظة First Look القريبة", "كواليس الفوتو وزفة كاملة"]
+  },
+  {
+    tier: "الماسي",
+    pkg: packages[3], // Full Day — 2500
+    featured: false,
+    points: ["تغطية من الصالون إلى القاعة", "تفاصيل المكياج والكوشة", "First Look وزفتين ومونتاج شامل"]
+  }
+];
+
+/* ── Section 7: principle-based experience cards (no fabricated reviews) ── */
+const experienceVoices = [
+  { quote: "كل خطوة في الحجز يجب أن تقلل سؤالاً لا أن تزيده.", meta: "وضوح الحجز" },
+  { quote: "اللقطة الجميلة لا تكفي إذا لم تحفظ إحساس اليوم.", meta: "لغة الفيلم" },
+  { quote: "التصوير الهادئ يجعل العروس والضيوف أكثر راحة.", meta: "أدب الحضور" }
+];
+
+const heroFrames = [
+  { n: "01", ar: "اللقطة الأولى" },
+  { n: "02", ar: "تفاصيل الفستان" },
+  { n: "03", ar: "نبض القاعة" },
+  { n: "04", ar: "الخاتمة" }
 ];
 
 export default function HomePage() {
   return (
-    <main className="page-shell">
+    <main className="asmaa-v2">
       <JsonLd data={jsonLd} />
 
-      <section className="hero hero-20x home-redesign-hero" id="top">
-        <Image
-          className="hero-cinematic-backdrop"
-          src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
-          alt="تصوير فيديو زواجات نسائي سينمائي في الأحساء والدمام والخبر — Asmaa Studio"
-          fill
-          priority
-          sizes="100vw"
-        />
-        <div className="hero-starfield" aria-hidden="true" />
-        <nav className="nav" aria-label="التنقل الرئيسي">
-          <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
-            <span className="brand-mark" aria-hidden="true">
-              <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
-            </span>
-            <strong>Asmaa Studio</strong>
-          </a>
-          <div className="nav-links">
-            <Link href="/packages">الباقات التفاعلية</Link>
-            <a href="#cities">المدن</a>
-            <Link href="/services/full-day-wedding">الخدمات</Link>
-            <Link href="/portfolio">الألبوم</Link>
-            <Link href="/reviews">آراء العرايس</Link>
-            <Link href="/process">كيف نعمل</Link>
-            <Link href="/about">عن الاستوديو</Link>
-            <Link href="/faq">الأسئلة</Link>
-            <Link href="/contact">تواصلي معنا</Link>
-            <Link href="/reserve">رابط العروس</Link>
-          </div>
-          <div className="nav-actions" aria-label="خيارات سريعة">
-            <span className="language-pill">
-              <Languages size={15} />
-              AR / EN
-            </span>
-            <a className="nav-whatsapp" href={whatsappLink("home-nav")} target="_blank" rel="noreferrer">
-              <MessageCircle size={17} />
-              احجزي الآن
-            </a>
-            <details className="site-header-menu home-nav-menu">
-              <summary aria-label="القائمة">
-                <Menu size={22} aria-hidden="true" />
-              </summary>
-              <nav className="site-header-drawer" aria-label="قائمة الجوال">
-                <Link href="/packages">الباقات</Link>
-                <Link href="/portfolio">الألبوم</Link>
-                <Link href="/services/full-day-wedding">الخدمات</Link>
-                <Link href="/reviews">آراء العرايس</Link>
-                <Link href="/process">كيف نعمل</Link>
-                <Link href="/about">عن الاستوديو</Link>
-                <Link href="/faq">الأسئلة</Link>
-                <Link href="/contact">تواصلي معنا</Link>
-                <Link href="/reserve" className="site-header-drawer-cta">
-                  رابط العروس
-                </Link>
-                <a
-                  className="site-header-drawer-wa"
-                  href={whatsappLink("home-nav-drawer")}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <MessageCircle size={16} aria-hidden="true" />
-                  واتساب مباشر
-                </a>
-              </nav>
-            </details>
-          </div>
-        </nav>
+      {/* ════ SECTION 1 — HERO ════ */}
+      <section className="av2-hero" id="top">
+        <div className="av2-hero-media" aria-hidden="true">
+          <Image
+            className="av2-kenburns"
+            src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+          />
+          <div className="av2-hero-veil" />
+          <div className="av2-islamic" />
+          <div className="av2-grain" />
+        </div>
 
-        <div className="hero-grid hero-grid-20x home-redesign-grid">
-          <div className="hero-copy-stack cine-hero-stack">
-            <p className="cine-brand-line home-redesign-kicker">
-              <span>Asmaa Studio</span>
-              <em>Eastern Province wedding cinema</em>
-            </p>
+        <span className="av2-rec" aria-hidden="true">
+          <i />
+          REC
+        </span>
 
-            <h1 className="cine-headline">
-              <span className="cine-headline-ar">
-                {"فيلم زفاف يوقف الوقت عند لحظتك الأولى.".split(" ").map((word, index) => (
-                  <span
-                    className="ed-word"
-                    key={`${word}-${index}`}
-                    style={{ animationDelay: `${120 + index * 90}ms` }}
-                  >
-                    {word}
-                    {index < 6 ? " " : ""}
-                  </span>
-                ))}
-              </span>
-              <span className="cine-headline-en">Saudi wedding cinema composed like a memory.</span>
-            </h1>
-
-            <p className="cine-lede">
-              من أول نفس قبل الدخول إلى آخر لقطة في الزفة، نصمم الفيلم كقصة هادئة تعرف متى تقترب،
-              متى تترك المسافة، ومتى تحفظ التفاصيل التي لا تعاد.
-            </p>
-
-            <div className="cine-premiere-strip home-film-sequence" aria-label="مسار الفيلم">
-              {signatureFrames.map((frame) => (
-                <span key={frame.marker}>
-                  <b>{frame.marker}</b>
-                  {frame.title}
-                </span>
-              ))}
-            </div>
-
-            <div className="cine-cta-row">
-              <Link className="cine-cta-primary" href="/packages">
-                <Sparkles size={18} aria-hidden="true" />
-                <span>اختاري فيلم يومك</span>
-              </Link>
-              <Link className="cine-cta-secondary" href="/portfolio">
-                <ArrowLeft size={16} aria-hidden="true" />
-                <span>شاهدي لغة التصوير</span>
-              </Link>
-              <a className="cine-cta-tertiary" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
-                <MessageCircle size={16} aria-hidden="true" />
-                <span>واتساب مباشر</span>
-              </a>
-            </div>
-
-            <div className="cine-trust-row reveal-on-scroll" aria-label="ضمانات Asmaa Studio">
-              <article className="glass-card cine-trust-card">
-                <span className="cine-trust-marker" aria-hidden="true">٠١</span>
-                <strong>نسيج سعودي شرقي</strong>
-                <em>قاعات الأحساء والدمام والخبر بلغة محلية، ليس تصويراً مستورداً.</em>
-              </article>
-              <article className="glass-card cine-trust-card">
-                <span className="cine-trust-marker" aria-hidden="true">٠٢</span>
-                <strong>First Look لحظة</strong>
-                <em>نقتنص نظرة العريس الأولى قبل أن تذوب في زحمة القاعة.</em>
-              </article>
-              <article className="glass-card cine-trust-card">
-                <span className="cine-trust-marker" aria-hidden="true">٠٣</span>
-                <strong>تسليم خلال ٢–٦ أسابيع</strong>
-                <em>مدة مكتوبة في الاتفاق قبل التحويل، لا انتظار مفتوح.</em>
-              </article>
-              <article className="glass-card cine-trust-card">
-                <span className="cine-trust-marker" aria-hidden="true">٠٤</span>
-                <strong>وضوح قبل التحويل</strong>
-                <em>اتفاق مكتوب، إيصال بنكي، وتفاصيل تسليم واضحة قبل أي تحويل.</em>
-              </article>
-            </div>
-          </div>
-
-          <div className="hero-visual home-feature-stage" aria-hidden="true">
-            <span className="home-feature-rail">
-              <i />
-              <b>ASMAA STUDIO</b>
+        <nav className="av2-nav" aria-label="التنقل الرئيسي">
+          <a className="av2-brand" href="#top" aria-label="Asmaa Studio">
+            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={44} height={44} priority />
+            <span>
+              <strong>Asmaa Studio</strong>
               <em>Eastern Province · est. 2021</em>
             </span>
+          </a>
+          <div className="av2-nav-links">
+            <Link href="/packages">الباقات</Link>
+            <Link href="/portfolio">الألبوم</Link>
+            <Link href="/about">عن الاستوديو</Link>
+            <Link href="/reviews">آراء العرايس</Link>
+            <Link href="/faq">الأسئلة</Link>
+          </div>
+          <a className="av2-nav-cta" href={whatsappLink("home-nav")} target="_blank" rel="noreferrer">
+            <MessageCircle size={16} aria-hidden="true" />
+            احجزي الآن
+          </a>
+        </nav>
 
-            <figure className="home-feature-caption">
-              <span className="home-feature-play">
-                <Play size={20} aria-hidden="true" />
+        <div className="av2-hero-inner">
+          <p className="av2-hero-kicker">Saudi wedding cinema · تصوير نسائي في الشرقية</p>
+          <h1 className="av2-hero-title">لحظات تُروى للأبد</h1>
+          <p className="av2-hero-sub">
+            Every moment of your day, filmed with the calm it deserves — في الأحساء والدمام والخبر.
+          </p>
+          <div className="av2-hero-ctas">
+            <Link className="av2-btn-gold" href="/reserve">
+              <Sparkles size={18} aria-hidden="true" />
+              احجزي يومكِ
+            </Link>
+            <Link className="av2-btn-ghost" href="/portfolio">
+              <Play size={16} aria-hidden="true" />
+              شاهدي الأعمال
+            </Link>
+          </div>
+          <div className="av2-hero-frames" aria-label="مسار الفيلم">
+            {heroFrames.map((f) => (
+              <span key={f.n}>
+                <b>{f.n}</b>
+                {f.ar}
               </span>
-              <figcaption>
-                <small>Now showing</small>
-                <strong>First Look — فيلم العروس</strong>
-                <span className="home-feature-time">
-                  <i />
-                  00:12
-                </span>
-              </figcaption>
-            </figure>
+            ))}
           </div>
         </div>
 
-        <a className="home-scroll-cue" href="#live-system" aria-label="اكتشفي القصة">
+        <a className="av2-scroll" href="#statement" aria-label="اكتشفي القصة">
           <span>اكتشفي القصة</span>
-          <i aria-hidden="true" />
+          <ChevronDown size={22} aria-hidden="true" />
         </a>
+      </section>
 
-        <div className="cinematic-dock home-service-dock" aria-label="خدمات Asmaa Studio">
-          {heroDock.map((item) => {
-            const Icon = item.icon;
+      {/* ════ SECTION 2 — STATEMENT BAND ════ */}
+      <section className="av2-statement" id="statement" aria-label="فلسفة Asmaa Studio">
+        <div className="av2-statement-inner av2-reveal">
+          <p className="av2-statement-en">We don&rsquo;t photograph weddings.</p>
+          <span className="av2-statement-rule" aria-hidden="true" />
+          <p className="av2-statement-en av2-statement-accent">We preserve the feeling.</p>
+          <blockquote className="av2-statement-ar" dir="rtl">
+            نحن لا نصوّر الأعراس — بل نحفظ الإحساس الذي يبقى بعد أن ينتهي اليوم.
+          </blockquote>
+        </div>
+      </section>
+
+      {/* ════ SECTION 3 — SERVICES GRID ════ */}
+      <section className="av2-services" id="services">
+        <header className="av2-head av2-reveal">
+          <span className="av2-eyebrow">ما نقدّمه</span>
+          <h2>أربع طرق لحفظ يومكِ</h2>
+          <p>كل خدمة مكتوبة بلغة واضحة: ماذا تغطّي، لمن تناسب، وكم تبدأ.</p>
+        </header>
+        <div className="av2-services-grid">
+          {servicePillars.map((s) => {
+            const Icon = s.icon;
             return (
-              <a href="#experience" key={item.label}>
-                <Icon size={20} strokeWidth={1.6} />
-                <span>{item.label}</span>
-                <em>{item.ar}</em>
-              </a>
+              <article className="av2-glass av2-service-card av2-reveal" key={s.ar}>
+                <span className="av2-service-icon" aria-hidden="true">
+                  <Icon size={26} strokeWidth={1.6} />
+                </span>
+                <h3>{s.ar}</h3>
+                <em>{s.en}</em>
+                <p>{s.desc}</p>
+                <span className="av2-service-price">{s.price}</span>
+              </article>
             );
           })}
-          <Link href="/reserve">
-            <Sparkles size={20} strokeWidth={1.6} />
-            <span>Book your date</span>
-            <em>احجزي موعدك</em>
+        </div>
+      </section>
+
+      {/* ════ SECTION 4 — PORTFOLIO MASONRY (pure-CSS filtering) ════ */}
+      <section className="av2-portfolio" id="portfolio">
+        <header className="av2-head av2-reveal">
+          <span className="av2-eyebrow">الألبوم</span>
+          <h2>لقطات من لغتنا البصرية</h2>
+          <p>اختاري نوع المناسبة لتصفية اللقطات.</p>
+        </header>
+
+        <input className="av2-radio" type="radio" name="avfilter" id="avf-all" defaultChecked />
+        <input className="av2-radio" type="radio" name="avfilter" id="avf-weddings" />
+        <input className="av2-radio" type="radio" name="avfilter" id="avf-engagement" />
+        <input className="av2-radio" type="radio" name="avfilter" id="avf-events" />
+
+        <div className="av2-filters" role="tablist" aria-label="تصفية الألبوم">
+          <label htmlFor="avf-all">الكل</label>
+          <label htmlFor="avf-weddings">أفراح</label>
+          <label htmlFor="avf-engagement">خطوبة</label>
+          <label htmlFor="avf-events">فعاليات</label>
+        </div>
+
+        <div className="av2-masonry">
+          {portfolioShots.map((shot) => (
+            <figure className="av2-shot" data-cat={shot.cat} key={shot.ar} style={{ background: shot.tone }}>
+              <figcaption>
+                <strong>{shot.ar}</strong>
+                <em>{shot.en}</em>
+              </figcaption>
+              <span className="av2-shot-overlay" aria-hidden="true">
+                <Camera size={26} strokeWidth={1.5} />
+                {shot.ar}
+              </span>
+            </figure>
+          ))}
+        </div>
+        <div className="av2-portfolio-cta av2-reveal">
+          <Link className="av2-btn-ghost" href="/portfolio">
+            افتحي الألبوم الكامل <ArrowLeft size={16} aria-hidden="true" />
           </Link>
         </div>
       </section>
 
-      <section className="ed-statement ed-reveal" aria-label="فلسفة Asmaa Studio">
-        <div className="ed-statement-inner">
-          <span className="ed-statement-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>
-            كل لحظة في يومكِ تستحق أن تُروى <b>بهدوءٍ يليق بها</b> — لا أن تُجمع كمقاطع متفرقة.
-          </blockquote>
-          <cite>Every moment of your day, told with the calm it deserves.</cite>
-        </div>
-      </section>
-
-      <section className="section signature-film-section" aria-label="تجربة الفيلم">
-        <div className="section-inner signature-film-inner">
-          <div className="signature-film-copy">
-            <span className="eyebrow">تصميم التجربة</span>
-            <h2 className="section-title">الصفحة لا تبيع بكج فقط؛ تعرض للعروس كيف سيبدو فيلم يومها.</h2>
-            <p className="section-copy">
-              كل حركة في الصفحة تقود من الإحساس إلى القرار: صورة كبيرة، خط زمني واضح،
-              باقات مفهومة، ثم رابط حجز لا يطلب من العروس إعادة شرح كل شيء.
-            </p>
-          </div>
-          <div className="signature-film-reel ed-stagger">
-            {signatureFrames.map((frame) => (
-              <article key={frame.marker}>
-                <span>{frame.marker}</span>
-                <h3>{frame.title}</h3>
-                <p>{frame.detail}</p>
+      {/* ════ SECTION 5 — STATS ════ */}
+      <section className="av2-stats" aria-label="أرقام الاستوديو">
+        <div className="av2-islamic av2-islamic-soft" aria-hidden="true" />
+        <div className="av2-stats-grid">
+          {studioStats.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <article className="av2-stat" key={stat.ar}>
+                <Icon className="av2-stat-icon" size={24} strokeWidth={1.6} aria-hidden="true" />
+                <span className="av2-stat-number">{stat.value}</span>
+                <strong>{stat.ar}</strong>
+                <em>{stat.en}</em>
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </section>
 
-      <section className="section os-section" id="live-system">
-        <div className="section-inner">
-          <span className="eyebrow">من أول نظرة إلى طلب الحجز</span>
-          <h2 className="section-title">الصفحة تقود العروس بهدوء: تشاهد الأسلوب، تفهم الباقة، ثم ترسل التفاصيل.</h2>
-          <div className="operating-grid ed-stagger">
-            {liveOperatingSystem.map((item) => {
-              const Icon = item.icon;
-              return (
-                <article className="operating-card" key={item.label}>
-                  <Icon size={25} strokeWidth={1.6} />
-                  <strong>{item.label}</strong>
-                  <p>{item.text}</p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="section cinematic-band" id="film-language">
-        <div className="section-inner cinematic-layout">
-          <div>
-            <span className="eyebrow">لغة فيلم الزفاف</span>
-            <h2 className="section-title">نصور ما تشعرين به في اليوم، وليس ما يحدث أمام الكاميرا فقط.</h2>
-            <p className="section-copy">
-              العروس تختار من يلاحظ هدوء اللحظة، لمعة الخاتم، نظرة الأهل، ودخولها الأول. لذلك
-              التجربة تعرض المشاهد كقصة متكاملة، ثم تجعل اختيار الباقة واضحا وخفيفا.
-            </p>
-          </div>
-          <div className="moment-grid ed-stagger">
-            {cinematicMoments.map((moment) => {
-              const Icon = moment.icon;
-              return (
-                <article className="moment-card" key={moment.title}>
-                  <span>{moment.title}</span>
-                  <Icon size={28} strokeWidth={1.55} />
-                  <p>{moment.text}</p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="section director-board-section" aria-label="لوحة إخراج الفيلم">
-        <div className="section-inner director-board-inner">
-          <div className="director-board-heading">
-            <span className="eyebrow">لوحة المخرجة</span>
-            <h2 className="section-title">من أول لقطة إلى آخر تسليم، كل مشهد له وظيفة.</h2>
-          </div>
-          <div className="director-board-grid ed-stagger">
-            {directorBoard.map((item, index) => (
-              <article key={item.label}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <small>{item.label}</small>
-                <h3>{item.ar}</h3>
-                <p>{item.detail}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section package-decision" id="packages">
-        <div className="section-inner">
-          <span className="eyebrow">اختاري حسب شكل يومك</span>
-          <h2 className="section-title">الباقات مرتبة حسب اللحظات التي تريدين الاحتفاظ بها.</h2>
-          <p className="section-copy">
-            زفة فقط، تفاصيل القاعة، First Look، أو يوم كامل من الصالون إلى القاعة. كل باقة
-            تشرح ماذا ستوثق، لمن تناسب، وكيف سيبدو القرار قبل التواصل.
-          </p>
-          <p className="packages-pdf-cta" style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
-            <Link href="/packages" aria-label="افتحي الباقات التفاعلية مع حاسبة الإضافات">
-              <Sparkles size={16} aria-hidden="true" /> الباقات التفاعلية + حاسبة الإضافات
-            </Link>
-            <a
-              href={assetPath("/packages-asmaa-studio.pdf")}
-              target="_blank"
-              rel="noreferrer"
-              download="Asmaa-Studio-Packages.pdf"
-              aria-label="تحميل دليل الباقات الكامل بصيغة PDF"
+      {/* ════ SECTION 6 — PACKAGES ════ */}
+      <section className="av2-packages" id="packages">
+        <header className="av2-head av2-reveal">
+          <span className="av2-eyebrow">الباقات</span>
+          <h2>اختاري حسب لحظات يومكِ</h2>
+          <p>أسعار واضحة قبل التواصل — من بكج الزفة إلى تغطية اليوم الكامل.</p>
+        </header>
+        <div className="av2-packages-grid">
+          {headlinePackages.map((row) => (
+            <article
+              className={`av2-glass av2-pkg av2-reveal ${row.featured ? "av2-pkg-featured" : ""}`}
+              key={row.tier}
             >
-              <Download size={16} aria-hidden="true" /> تحميل دليل الباقات (PDF)
-            </a>
-          </p>
-          <div className="packages-grid packages-grid-20x ed-stagger">
-            {packages.map((item, index) => (
-              <article className={`package-card package-card-20x ${item.featured ? "featured" : ""}`} key={item.id}>
-                <div className="package-rank" aria-hidden="true">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <em>{index === 0 ? "ENTRY" : index === packages.length - 1 ? "FULL STORY" : "SIGNATURE"}</em>
-                </div>
-                <div className="package-motion-meter" aria-hidden="true">
-                  {Array.from({ length: 5 }, (_, meterIndex) => (
-                    <span className={meterIndex <= index ? "active" : ""} key={`${item.id}-${meterIndex}`} />
-                  ))}
-                </div>
-                <header>
-                  <small>بكج {item.id}</small>
-                  <h3>{item.name}</h3>
-                  <p className="price">{item.price} ريال</p>
-                </header>
-                {item.spotlight ? <span className="package-badge">{item.spotlight}</span> : null}
-                <p>{item.summary}</p>
-                <div className="package-best">
-                  <strong>مناسب لـ</strong>
-                  <span>{item.bestFor}</span>
-                </div>
-                <div className="package-sequence">
-                  {item.sequence.map((step) => (
-                    <span key={step}>{step}</span>
-                  ))}
-                </div>
-                <ul>
-                  {item.bullets.slice(0, 2).map((bullet) => (
-                    <li key={bullet}>
-                      <Check size={14} /> {bullet}
-                    </li>
-                  ))}
-                </ul>
-                <footer>
-                  <ClockLabel value={item.duration} />
-                  <a href={whatsappLink(`package-${item.id}`)} target="_blank" rel="noreferrer">
-                    اسألي عن التوفر <ArrowLeft size={16} />
-                  </a>
-                </footer>
-              </article>
-            ))}
-          </div>
+              {row.featured ? (
+                <span className="av2-pkg-flag" aria-hidden="true">
+                  <Sparkles size={13} /> الأكثر طلباً
+                </span>
+              ) : null}
+              <span className="av2-pkg-tier">{row.tier}</span>
+              <h3>{row.pkg.name}</h3>
+              <p className="av2-pkg-price">
+                {Number(row.pkg.price).toLocaleString("en-US")} <small>ريال</small>
+              </p>
+              <span className="av2-pkg-duration">
+                <Calendar size={14} aria-hidden="true" />
+                {row.pkg.duration}
+              </span>
+              <ul>
+                {row.points.map((point) => (
+                  <li key={point}>
+                    <Check size={15} aria-hidden="true" /> {point}
+                  </li>
+                ))}
+              </ul>
+              <Link className={row.featured ? "av2-btn-gold" : "av2-btn-ghost"} href="/reserve">
+                احجزي الآن <ArrowLeft size={15} aria-hidden="true" />
+              </Link>
+            </article>
+          ))}
         </div>
+        <p className="av2-packages-note av2-reveal">
+          <Link href="/packages">كل الباقات وحاسبة الإضافات →</Link>
+        </p>
       </section>
 
-      <section className="section payment-terms-section" id="payment-terms">
-        <div className="section-inner">
-          <span className="eyebrow">طريقة الحجز خطوة بخطوة</span>
-          <h2 className="section-title">خطوات الحجز واضحة من الموقع إلى يوم المناسبة.</h2>
-          <p className="section-copy">
-            اختياركِ للبكج، تحويل العربون، وتسليم المبلغ المتبقي يوم المناسبة — كل خطوة مرتبة حتى لا تختلط
-            التفاصيل ولا تتأخر المتابعة.
-          </p>
-          <ol className="payment-terms-grid ed-stagger" aria-label="خطوات الحجز">
-            {paymentTerms.map((term) => (
-              <li className="payment-step" key={term.step}>
-                <b aria-hidden="true">{term.step}</b>
-                <p>{term.text}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="button-row wave-actions">
-            <Link className="cta" href="/reserve">
-              ابدئي رابط العروس <CalendarDays size={18} />
-            </Link>
-            <a className="ghost-cta" href={whatsappLink("payment-terms")} target="_blank" rel="noreferrer">
-              اسألي عن العربون <MessageCircle size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="section addons-section" id="addons">
-        <div className="section-inner">
-          <span className="eyebrow">إضافات اختيارية</span>
-          <h2 className="section-title">إضافات تكمل الفيلم حسب حاجة يومكِ.</h2>
-          <p className="section-copy">
-            يمكن إضافة هذه العناصر إلى أي باقة قبل تأكيد الحجز حتى يصل الطلب جاهزا للمتابعة بدون أسئلة إضافية.
-          </p>
-          <div className="addons-grid ed-stagger">
-            {packageAddOns.map((addon) => (
-              <article className="addon-card" key={addon.id}>
-                <Plus size={20} strokeWidth={1.7} aria-hidden="true" />
-                <h3>{addon.name}</h3>
-                <p className="addon-price">{addon.price}</p>
-                <p className="addon-desc">{addon.description}</p>
-                <em>{addon.nameEn}</em>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section services-band" id="experience">
-        <div className="section-inner">
-          <span className="eyebrow">ما تحتاجه العروس فعلا</span>
-          <h2 className="section-title">راحة في الاختيار، ذوق في التصوير، وترتيب في التفاصيل.</h2>
-          <p className="section-copy">
-            القرار يبدأ من ذوق العروس وراحة العميلة في فهم التفاصيل. لذلك المحتوى مكتوب بلغة
-            مباشرة: ماذا يغطي التصوير، ما الباقة الأنسب، وكيف تبدأ المتابعة.
-          </p>
-          <div className="service-grid service-grid-20x ed-stagger">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <article className="service-item" key={service.title}>
-                  <Icon size={26} strokeWidth={1.7} />
-                  <h3>{service.title}</h3>
-                  <p>{service.text}</p>
-                </article>
-              );
-            })}
-          </div>
-          <div className="trust-strip">
-            {trustSignals.map((signal) => {
-              const Icon = signal.icon;
-              return (
-                <article key={signal.title}>
-                  <Icon size={20} />
-                  <strong>{signal.title}</strong>
-                  <span>{signal.detail}</span>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="testimonial-marquee-section" aria-label="معايير تجربة Asmaa Studio">
-        <div className="testimonial-marquee">
-          {[...experienceStandards, ...experienceStandards].map((item, index) => (
-            <article key={`${item.meta}-${index}`}>
-              <Sparkles size={20} strokeWidth={1.6} />
-              <p>{item.quote}</p>
-              <span>{item.meta}</span>
+      {/* ════ SECTION 7 — TESTIMONIALS / EXPERIENCE ════ */}
+      <section className="av2-voices" aria-label="معايير التجربة">
+        <header className="av2-head av2-reveal">
+          <span className="av2-eyebrow">وعد الاستوديو</span>
+          <h2>كيف نفكّر في يومكِ</h2>
+        </header>
+        <div className="av2-voices-track">
+          {experienceVoices.map((v) => (
+            <article className="av2-glass av2-voice" key={v.meta}>
+              <Quote className="av2-voice-mark" size={40} aria-hidden="true" />
+              <p>{v.quote}</p>
+              <footer>
+                <span className="av2-stars" aria-hidden="true">
+                  {"★★★★★"}
+                </span>
+                <strong>{v.meta}</strong>
+                <em>Asmaa Studio · الشرقية</em>
+              </footer>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="section conversion-section" id="booking-path">
-        <div className="section-inner">
-          <span className="eyebrow">من الإعجاب إلى الموعد</span>
-          <h2 className="section-title">القرار يصبح أخف عندما ترى العروس الصورة كاملة.</h2>
-          <div className="conversion-grid-20x ed-stagger">
-            {conversionFlow.map((item, index) => (
-              <article className="conversion-step" key={item.label}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{item.label}</h3>
-                <p>{item.detail}</p>
-                <b>{item.metric}</b>
-              </article>
-            ))}
-          </div>
-          <div className="timeline-grid timeline-grid-20x ed-stagger">
-            {bookingSteps.map((step) => (
-              <article className="timeline-item" key={step.number}>
-                <b>{step.number}</b>
-                <h3>{step.title}</h3>
-                <p>{step.detail}</p>
-              </article>
-            ))}
-          </div>
+      {/* ════ SECTION 8 — ABOUT ════ */}
+      <section className="av2-about" id="about">
+        <div className="av2-about-portrait av2-reveal" aria-hidden="true">
+          <Image src={assetPath("/brand/asmaa-monogram-heritage.jpg")} alt="" fill sizes="(max-width: 880px) 90vw, 40vw" />
+          <span className="av2-about-frame" />
+          <figcaption>
+            <small>Director &amp; Cinematographer</small>
+            <strong>Asmaa</strong>
+          </figcaption>
         </div>
-      </section>
-
-      <section className="section seo-command" id="cities">
-        <div className="section-inner">
-          <span className="eyebrow">قريبة من مناسبتك</span>
-          <h2 className="section-title">اختاري المدينة أولا حتى تكون الباقة والكلام مناسبين لمكان يومك.</h2>
-          <div className="seo-grid seo-grid-20x">
-            <div className="seo-keywords-panel">
-              <Search size={28} />
-              <h3>القرار المحلي أوضح</h3>
-              <p>
-                الأحساء والدمام والخبر ليست نفس نوع القاعات ولا نفس طريقة السؤال. لذلك لكل مدينة صفحة
-                مختصرة توضح الأسلوب، الباقات، والخطوة التالية بدون تشتت.
-              </p>
-              <div className="keyword-cloud">
-                {serviceAreas.map((city) => (
-                  <Link href={`/${city.slug}`} key={city.slug}>{city.ar}</Link>
-                ))}
-              </div>
-            </div>
-            <div className="area-strategy-grid area-strategy-grid-20x ed-stagger">
-              {areaStrategy.map((area, index) => {
-                const Icon = area.icon;
-                const city = serviceAreas[index];
-                return (
-                  <article className="area-card" key={area.city}>
-                    <Icon size={26} strokeWidth={1.6} />
-                    <span>{area.angle}</span>
-                    <h3>{area.city}</h3>
-                    <p>{area.detail}</p>
-                    <div className="mini-keywords">
-                      {city.keywordCluster.slice(0, 3).map((keyword) => (
-                        <em key={keyword}>{keyword}</em>
-                      ))}
-                    </div>
-                    <Link href={`/${city.slug}`}>
-                      افتحي صفحة {area.city} <ArrowLeft size={15} />
-                    </Link>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-          <div className="button-row wave-actions">
-            <Link className="cta" href="/reserve">
-              رابط العروس الآن <CalendarDays size={18} />
-            </Link>
-            <Link className="ghost-cta" href="/portfolio">
-              شاهدي الألبوم <ArrowLeft size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section live-findings">
-        <div className="section-inner">
-          <span className="eyebrow">ما يحدث فعلا</span>
-          <h2 className="section-title">التجربة مصممة حول راحة العروس، لا حول كثرة الكلام.</h2>
-          <p className="section-copy">
-            أفضل موقع حجز ليس الذي يعرض كل شيء؛ بل الذي يجعل القرار آمنا وواضحا: ماذا سيصور،
-            متى يبدأ التواصل، وكيف تصل التفاصيل بدون ضياع في المحادثة.
+        <div className="av2-about-copy av2-reveal">
+          <span className="av2-eyebrow">عن الاستوديو</span>
+          <h2>أسماء — مصوّرة الذكريات الخالدة</h2>
+          <p>
+            استوديو نسائي متخصص في تصوير الأعراس والخطوبة في المنطقة الشرقية: الأحساء، الدمام، والخبر.
+            نؤمن أن الفيلم الجيد لا يجمع لقطات جميلة فقط، بل يعيد إليكِ شعور اليوم كما عشتِه — هدوء اللحظة،
+            لمعة الخاتم، نظرة الأهل، ودخولكِ الأول.
           </p>
-
-          <div className="profile-grid ed-stagger">
-            {bookingAssurance.map((item) => (
-              <article className="profile-card" key={item.title}>
-                <span>{item.title}</span>
-                <h3>{item.title}</h3>
-                <div className="copy-lines">
-                  <p>{item.detail}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section board-live">
-        <div className="section-inner">
-          <span className="eyebrow">معايير الوضوح</span>
-          <h2 className="section-title">كل قرار في الصفحة يجب أن يحمي ثقة العميلة قبل أن يطلب منها التواصل.</h2>
-          <div className="board-lever-grid ed-stagger">
-            {decisionAssurance.map((lever) => (
-              <article className="board-lever-card" key={lever.title}>
-                <h3>{lever.title}</h3>
-                <p>{lever.detail}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section guide-directory-section" id="guides">
-        <div className="section-inner">
-          <span className="eyebrow">دليل Asmaa Studio</span>
-          <h2 className="section-title">صفحات قصيرة تجيب عن أسئلة البحث قبل الحجز.</h2>
-          <p className="section-copy">
-            بدلا من انتظار محادثة طويلة، يستطيع كل زائر فتح الصفحة الأقرب لسؤاله: المدينة،
-            الزفة، الخطوبة، تفاصيل العروس، أو طريقة اختيار الباقة.
+          <p className="av2-about-en" dir="ltr">
+            A female-led wedding cinema studio in Saudi Arabia&rsquo;s Eastern Province. Calm on set,
+            cinematic on screen, and clear from the first message to final delivery.
           </p>
-          <div className="guide-card-grid home-guide-grid ed-stagger">
-            {seoGuidePages.slice(0, 6).map((page, index) => (
-              <article className="guide-card" key={page.slug}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{page.title}</h3>
-                <p>{page.summary}</p>
-                <Link href={`/guides/${page.slug}`}>
-                  فتح الصفحة <ArrowLeft size={15} />
-                </Link>
-              </article>
-            ))}
-          </div>
-          <div className="button-row wave-actions">
-            <Link className="cta" href="/guides">
-              كل صفحات الدليل <Search size={18} />
-            </Link>
-            <Link className="ghost-cta" href="/engagement">
-              صفحة الخطوبة والملكة <CalendarDays size={18} />
-            </Link>
-          </div>
+          <Link className="av2-btn-ghost" href="/about">
+            القصة الكاملة <ArrowLeft size={16} aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
-      <section className="section highlights-section" id="highlights">
-        <div className="section-inner">
-          <span className="eyebrow">هايلايت انستقرام</span>
-          <h2 className="section-title">الهايلايت يصبح دليلا صغيرا: ألبوم، باقات، تفاصيل، وطريقة حجز.</h2>
-          <div className="highlight-grid highlight-grid-20x ed-stagger">
-            {highlights.map((item) => (
-              <article className="highlight-card" key={item.label}>
-                <Image
-                  src={assetPath(`/highlights/${item.file}`)}
-                  alt={`غلاف هايلايت ${item.text}`}
-                  width={160}
-                  height={160}
-                />
-                <h3>{item.label}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-          <div className="button-row wave-actions">
-            <Link className="cta" href="/portfolio">
-              افتحي صفحة الألبوم <ArrowLeft size={18} />
-            </Link>
-            <Link className="ghost-cta" href="/reserve">
-              رابط العروس <CalendarDays size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section final-cta">
-        <div className="section-inner">
-          <span className="eyebrow">الخطوة التالية</span>
-          <h2 className="section-title">اختاري الباقة التي تشبه يومك، ثم أرسلي التفاصيل برسالة واحدة.</h2>
-          <p className="section-copy">
-            الرابط يختصر السؤال والانتظار: المدينة، التاريخ، الباقة، واللحظات المهمة في مكان واحد.
+      {/* ════ SECTION 9 — BOOKING CTA ════ */}
+      <section className="av2-cta" aria-label="ابدئي الحجز">
+        <div className="av2-cta-border av2-reveal">
+          <div className="av2-islamic av2-islamic-soft" aria-hidden="true" />
+          <p className="av2-eyebrow">الخطوة التالية</p>
+          <h2 className="av2-cta-title">جاهزة لتوثيق يومكِ؟</h2>
+          <p className="av2-cta-sub">
+            رابط العروس يجمع المدينة والتاريخ والباقة في رسالة واحدة — بدون ملف طويل ولا أسئلة متفرقة.
           </p>
-          <div className="button-row">
-            <Link className="cta" href="/reserve">
-              رابط العروس <Play size={18} />
+          <div className="av2-hero-ctas">
+            <Link className="av2-btn-gold" href="/reserve">
+              <CalendarHeart size={18} aria-hidden="true" />
+              رابط العروس
             </Link>
-            <a className="ghost-cta" href={instagramUrl} target="_blank" rel="noreferrer">
-              انستقرام <ExternalLink size={18} />
+            <a className="av2-btn-ghost" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
+              <MessageCircle size={16} aria-hidden="true" />
+              واتساب مباشر
             </a>
           </div>
         </div>
       </section>
 
-      {/* ── Site Footer Nav ── */}
-      <footer className="site-footer-nav" aria-label="روابط الموقع">
-        <div className="site-footer-nav-inner">
-          <div className="site-footer-brand">
+      {/* ════ SECTION 10 — FOOTER ════ */}
+      <footer className="av2-footer">
+        <div className="av2-footer-inner">
+          <div className="av2-footer-brand">
+            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="Asmaa Studio" width={52} height={52} />
             <strong>Asmaa Studio</strong>
             <span>تصوير فيديو زواجات نسائي · المنطقة الشرقية</span>
           </div>
-          <nav className="site-footer-links" aria-label="روابط التنقل">
+          <nav className="av2-footer-links" aria-label="روابط الموقع">
             <Link href="/packages">الباقات</Link>
             <Link href="/portfolio">الألبوم</Link>
             <Link href="/reviews">آراء العرايس</Link>
             <Link href="/about">عن الاستوديو</Link>
-            <Link href="/faq">الأسئلة الشائعة</Link>
+            <Link href="/faq">الأسئلة</Link>
             <Link href="/contact">تواصلي معنا</Link>
             <Link href="/reserve">رابط العروس</Link>
-            <Link href="/privacy">سياسة الخصوصية</Link>
+            <Link href="/privacy">الخصوصية</Link>
           </nav>
-          <p className="site-footer-copy">
-            © {new Date().getFullYear()} Asmaa Studio · جميع الحقوق محفوظة
-          </p>
-        </div>
-      </footer>
-
-            <footer className="payment-trust-row" aria-label="ضمانات Asmaa Studio">
-        <div className="payment-trust-inner">
-          <div className="trust-credential">
-            <ShieldCheck size={20} strokeWidth={1.7} aria-hidden="true" />
-            <span>{credentials.ministryAr}</span>
-            <em>{credentials.ministryEn}</em>
-          </div>
-          <div className="trust-credential">
-            <Banknote size={20} strokeWidth={1.7} aria-hidden="true" />
-            <span>عربون نصف الفاتورة لتثبيت التاريخ، والمتبقي يوم المناسبة.</span>
-            <em>50% deposit reserves the date — balance on event day.</em>
-          </div>
-          <div className="trust-credential">
-            <Sparkles size={20} strokeWidth={1.7} aria-hidden="true" />
-            <span>{credentials.equipmentAr}</span>
-            <em>{credentials.equipmentEn}</em>
+          <div className="av2-footer-social" aria-label="حسابات التواصل">
+            <a href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram">
+              <InstagramGlyph />
+            </a>
+            <a href={tiktokUrl} target="_blank" rel="noreferrer" aria-label="TikTok">
+              <Music2 size={20} aria-hidden="true" />
+            </a>
+            <a href={whatsappLink("footer")} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <MessageCircle size={20} aria-hidden="true" />
+            </a>
           </div>
         </div>
+        <p className="av2-footer-copy">© {new Date().getFullYear()} Asmaa Studio · جميع الحقوق محفوظة</p>
       </footer>
 
-      <a className="floating-whatsapp" href={whatsappLink("floating-whatsapp")} target="_blank" rel="noreferrer">
-        <MessageCircle size={24} />
-        <span>واتساب</span>
+      <a className="av2-float-wa" href={whatsappLink("floating-whatsapp")} target="_blank" rel="noreferrer" aria-label="واتساب">
+        <MessageCircle size={24} aria-hidden="true" />
       </a>
     </main>
   );
 }
 
-function ClockLabel({ value }: { value: string }) {
+function InstagramGlyph() {
   return (
-    <span className="clock-label">
-      <CalendarDays size={15} />
-      {value}
-    </span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
   );
 }
