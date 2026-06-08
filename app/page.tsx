@@ -350,7 +350,7 @@ export default function HomePage() {
         <input className="av2-radio" type="radio" name="avfilter" id="avf-engagement" />
         <input className="av2-radio" type="radio" name="avfilter" id="avf-events" />
 
-        <div className="av2-filters" role="tablist" aria-label="تصفية الألبوم">
+        <div className="av2-filters" aria-label="تصفية الألبوم">
           <label htmlFor="avf-all">الكل</label>
           <label htmlFor="avf-weddings">أفراح</label>
           <label htmlFor="avf-engagement">خطوبة</label>
@@ -447,7 +447,7 @@ export default function HomePage() {
           <span className="av2-eyebrow">وعد الاستوديو</span>
           <h2>كيف نفكّر في يومكِ</h2>
         </header>
-        <div className="av2-voices-track">
+        <div className="av2-voices-track" tabIndex={0} aria-label="بطاقات وعد الاستوديو">
           {experienceVoices.map((v) => (
             <article className="av2-glass av2-voice" key={v.meta}>
               <Quote className="av2-voice-mark" size={40} aria-hidden="true" />
