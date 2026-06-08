@@ -41,6 +41,13 @@ const localBusinessSchema = {
   priceRange: "600-2500 SAR",
   currenciesAccepted: "SAR",
   paymentAccepted: ["Cash", "Bank Transfer", "Mada", "Apple Pay"],
+  // WhatsApp-first studio — reachable every day (matches "متاح 7 أيام" / typical 2h reply).
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "10:00",
+    closes: "22:00"
+  },
   areaServed: [
     { "@type": "Country", name: "Saudi Arabia" },
     { "@type": "AdministrativeArea", name: "Eastern Province", containedInPlace: { "@type": "Country", name: "Saudi Arabia" } },

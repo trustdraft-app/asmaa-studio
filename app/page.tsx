@@ -226,6 +226,13 @@ export default function HomePage() {
     <main className="asmaa-v2">
       <JsonLd data={jsonLd} />
 
+      {/* ════ URGENCY BAND — above the fold, honest seasonal scarcity ════ */}
+      <Link className="av2-urgency" href="/reserve">
+        <span className="av2-urgency-pulse" aria-hidden="true" />
+        <span>مواعيد موسم الأعراس تُحجز بسرعة — الأماكن محدودة لكل شهر</span>
+        <b>احجزي الآن قبل اكتمال العدد</b>
+      </Link>
+
       {/* ════ SECTION 1 — HERO ════ */}
       <section className="av2-hero" id="top">
         <div className="av2-hero-media" aria-hidden="true">
