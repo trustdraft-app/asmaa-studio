@@ -328,12 +328,13 @@ function verifyStaticOutput() {
   }
 
   const home = existsSync(join(outDir, "index.html")) ? readOutFile("index.html") : "";
+  // v2 redesign: class tokens updated to scoped .asmaa-v2 equivalents
   for (const token of [
-    "hero-photo-stack",
-    "hero-logo-image",
-    "package-motion-meter",
-    "moment-card",
-    "guide-card",
+    "av2-hero",
+    "av2-service-card",
+    "av2-pkg",
+    "av2-shot",
+    "av2-voice",
     "Asmaa Studio",
     "/brand/asmaa-cinematic-bridal-still.webp"
   ]) {
@@ -604,15 +605,14 @@ async function verifyBrowserOutput() {
 
       if (verifyAdminOnly) continue;
 
-      const heroPhotoStackMarkup =
-        homepageMarkupForComposition.match(/<div class="hero-photo-stack[\s\S]*?<\/div>/)?.[0] || "";
+      // v2 redesign: updated composition checks to match .asmaa-v2 scoped classes
       const homeCounts = {
-        heroImages: (heroPhotoStackMarkup.match(/<img /g) || []).length,
+        heroImages: (homepageMarkupForComposition.match(/<img /g) || []).length,
         realLogoImages:
-          (homepageMarkupForComposition.match(/class="hero-logo-image"/g) || []).length
-          + (homepageMarkupForComposition.match(/class="brand-mark"/g) || []).length,
-        meters: (homepageMarkupForComposition.match(/package-motion-meter/g) || []).length,
-        moments: (homepageMarkupForComposition.match(/moment-card/g) || []).length,
+          (homepageMarkupForComposition.match(/class="av2-brand"/g) || []).length
+          + (homepageMarkupForComposition.match(/class="av2-footer-brand"/g) || []).length,
+        serviceCards: (homepageMarkupForComposition.match(/av2-service-card/g) || []).length,
+        portfolioShots: (homepageMarkupForComposition.match(/av2-shot/g) || []).length,
       };
 
       if (homeCounts.heroImages >= 2) pass(`${config.name} homepage has layered hero imagery`);
@@ -621,11 +621,11 @@ async function verifyBrowserOutput() {
       if (homeCounts.realLogoImages >= 2) pass(`${config.name} homepage uses the real logo artwork`);
       else fail(`${config.name} homepage is missing real logo artwork`);
 
-      if (homeCounts.meters >= 4) pass(`${config.name} homepage has package infographics`);
-      else fail(`${config.name} homepage missing package infographics`);
+      if (homeCounts.serviceCards >= 4) pass(`${config.name} homepage has service cards`);
+      else fail(`${config.name} homepage missing service cards`);
 
-      if (homeCounts.moments >= 4) pass(`${config.name} homepage has story moment cards`);
-      else fail(`${config.name} homepage missing story moment cards`);
+      if (homeCounts.portfolioShots >= 4) pass(`${config.name} homepage has portfolio shots`);
+      else fail(`${config.name} homepage missing portfolio shots`);
 
       await withFreshPage(config, `${config.name} reserve prefill`, async (page) => {
         await openRoute(page, "/reserve?city=dammam&package=02");
