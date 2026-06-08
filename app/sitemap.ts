@@ -3,6 +3,7 @@ import { serviceAreas } from "../lib/content";
 import { seoCities } from "../lib/seo-grid";
 import { seoGuidePages } from "../lib/seo-pages";
 import { servicePages } from "../lib/services";
+import { blogPosts } from "../lib/blog";
 import {
   allBudgetPairs,
   allCityServiceModifierTriples,
@@ -83,6 +84,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.86
     },
+    {
+      url: `${base}/blog`,
+      changeFrequency: "weekly",
+      priority: 0.9
+    },
+    {
+      url: `${base}/ar/blog`,
+      changeFrequency: "weekly",
+      priority: 0.82
+    },
+    ...blogPosts.map((post) => ({
+      url: `${base}/blog/${post.slug}`,
+      lastModified: post.dateModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.9
+    })),
     ...serviceAreas.map((area) => ({
       url: `${base}/${area.slug}`,
       changeFrequency: "weekly" as const,

@@ -15,15 +15,29 @@ const SITE = "https://asmaa.video";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["LocalBusiness", "ProfessionalService", "Organization"],
   "@id": `${SITE}#business`,
   name: "Asmaa Studio",
-  alternateName: "أسماء ستوديو",
+  alternateName: ["أسماء ستوديو", "أسماء للتصوير", "Asmaa Photography"],
+  // Google Business Profile description — concise, keyword-anchored, truthful.
   description:
-    "تصوير فيديو زواجات وخطوبة احترافي في الأحساء والدمام والخبر — طاقم نسائي بالكامل، مونتاج سينمائي، باقات واضحة.",
+    "أسماء ستوديو لتصوير وفيديو الأعراس والخطوبة في المنطقة الشرقية — الأحساء والدمام والخبر والقطيف. طاقم نسائي بالكامل، مونتاج سينمائي، وباقات واضحة من 600 إلى 2500 ريال. Female-only wedding photography & videography studio serving Al-Ahsa, Dammam, Khobar and Qatif in Saudi Arabia's Eastern Province.",
+  slogan: "ذكرى مرتبة وواضحة ليوم عمرك",
   url: SITE,
-  image: `${SITE}/og-image.png`,
+  image: `${SITE}/brand/asmaa-og.jpg`,
   logo: `${SITE}/favicon.png`,
+  telephone: "+966551606334",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "الأحساء",
+    addressRegion: "المنطقة الشرقية",
+    addressCountry: "SA"
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 25.3833,
+    longitude: 49.5869
+  },
   priceRange: "600-2500 SAR",
   currenciesAccepted: "SAR",
   paymentAccepted: ["Cash", "Bank Transfer", "Mada", "Apple Pay"],

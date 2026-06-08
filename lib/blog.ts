@@ -1,0 +1,285 @@
+/**
+ * Editorial blog content for asmaa.video.
+ *
+ * Why: long-form, keyword-rich articles win featured snippets and AI-overview
+ * citations for "مصورة زفاف الأحساء / تصوير زفاف الدمام / best wedding
+ * photographer Eastern Province". Data lives here (like lib/seo-pages.ts) so the
+ * route files stay thin and a single renderer (components/BlogArticle) keeps
+ * markup + JSON-LD consistent. No client JS — survives the static-export prune.
+ *
+ * Every factual claim (prices, crew, cities) mirrors lib/content.ts. Do not
+ * invent prices or services here.
+ */
+
+export type BlogSection = {
+  heading: string;
+  paragraphs: string[];
+  bullets?: string[];
+};
+
+export type BlogFaq = {
+  question: string;
+  answer: string;
+};
+
+export type BlogPost = {
+  slug: string;
+  locale: "ar-SA" | "en-SA";
+  dir: "rtl" | "ltr";
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  h1: string;
+  heroIntro: string;
+  keyPhrases: string[];
+  readingTime: string;
+  datePublished: string;
+  dateModified: string;
+  sections: BlogSection[];
+  faqs: BlogFaq[];
+  relatedPackageIds: string[];
+  relatedCitySlugs: string[];
+};
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "wedding-photography-eastern-province",
+    locale: "ar-SA",
+    dir: "rtl",
+    metaTitle: "أفضل مصورة زفاف في المنطقة الشرقية 2026 | Best Wedding Photographer Eastern Province",
+    metaDescription:
+      "دليل 2026 لاختيار مصورة زفاف في المنطقة الشرقية — الأحساء والدمام والخبر والقطيف. طاقم نسائي بالكامل، باقات من 600 إلى 2500 ريال، وفيلم سينمائي يحفظ تفاصيل اليوم.",
+    eyebrow: "دليل العروس · المنطقة الشرقية",
+    h1: "أفضل مصورة زفاف في المنطقة الشرقية 2026 — كيف تختارين بثقة؟",
+    heroIntro:
+      "إذا كنتِ تبحثين عن مصورة زفاف في الأحساء أو الدمام أو الخبر أو القطيف، فأنتِ لا تبحثين عن كاميرا فقط، بل عن طاقم نسائي يفهم خصوصية القاعة ويحفظ تفاصيل يومك بهدوء. هذا الدليل يشرح كيف تختارين، وما الفرق بين الباقات، وكم تتوقعين أن تدفعي في 2026.",
+    keyPhrases: [
+      "مصورة زفاف الأحساء",
+      "تصوير زفاف الدمام",
+      "مصورة أعراس الخبر",
+      "تصوير زفاف القطيف",
+      "best wedding photographer Saudi Arabia",
+      "wedding photographer Eastern Province"
+    ],
+    readingTime: "8 دقائق",
+    datePublished: "2026-06-08",
+    dateModified: "2026-06-08",
+    sections: [
+      {
+        heading: "لماذا يختلف تصوير الزفاف في المنطقة الشرقية؟",
+        paragraphs: [
+          "المنطقة الشرقية تجمع بين قاعات الأحساء التراثية، صالات الدمام الحديثة، وفنادق الخبر المطلة على الخليج. كل قاعة لها إضاءة مختلفة، وكل عائلة لها عادات خاصة في الزفة والدخول. مصورة الزفاف الجيدة في الشرقية ليست من تملك أغلى كاميرا، بل من تعرف كيف تتعامل مع إضاءة القاعة، وتحترم خصوصية النساء، وتلتقط اللحظة دون أن تُربك العروس أو الضيوف.",
+          "في أسماء ستوديو نعمل بطاقم نسائي بالكامل. هذا يعني أن العروس وضيوفاتها يبقين على راحتهن، ويمكن تصوير لحظات التحضير والزفة والفرح بدون أي حرج. الخصوصية ليست إضافة، بل هي الأساس الذي يجعل الصور والفيديو صادقة وعفوية بدل أن تكون متكلفة.",
+          "نخدم العرايس في الأحساء والدمام والخبر والظهران والجبيل والقطيف. ولأن المسافات بين مدن الشرقية قصيرة نسبيًا، يمكن غالبًا تغطية مناسبة في مدينة مجاورة دون تكلفة سفر كبيرة — والمهم أن تُرسلي التاريخ والموقع مبكرًا حتى يكون التوفر واضحًا."
+        ],
+        bullets: [
+          "طاقم نسائي بالكامل يحفظ خصوصية القاعة",
+          "خبرة بإضاءة قاعات الأحساء والدمام والخبر",
+          "تغطية الشرقية كلها: الأحساء، الدمام، الخبر، الظهران، الجبيل، القطيف",
+          "أسلوب هادئ لا يُربك العروس ولا الضيوف"
+        ]
+      },
+      {
+        heading: "كيف تختارين مصورة زفاف لا تندمين عليها؟",
+        paragraphs: [
+          "أول خطوة هي أن تحددي ما الذي تريدين حفظه فعلًا: هل تكفيكِ لحظة الدخول والزفة؟ أم تريدين قصة اليوم كاملة من الصالون إلى القاعة؟ هذا القرار وحده يوفر عليكِ الكثير، لأن الباقة المناسبة تتبع احتياجك لا العكس.",
+          "ثانيًا، اطلبي مشاهدة أعمال سابقة حقيقية، وليس صورًا مجمّعة من الإنترنت. شاهدي كيف يُصوَّر الدخول، وكيف تُلتقط التفاصيل الصغيرة مثل المسكة والخاتم والكوشة، وكيف يبدو المونتاج النهائي. الإيقاع والترتيب في الفيلم يكشفان احترافية المصورة أكثر من أي كلام.",
+          "ثالثًا، تأكدي من وضوح الباقة قبل السعر. الباقة الواضحة تشرح ماذا سيُصوَّر، ولماذا يهم، وما النتيجة المتوقعة. في أسماء ستوديو نعرض الباقات والأسعار بشكل صريح من 600 إلى 2500 ريال، حتى تقارني بثقة وتتخذي قرارك دون مفاجآت."
+        ],
+        bullets: [
+          "حدّدي أولًا: زفة فقط أم قصة يوم كامل",
+          "اطلبي أعمالًا حقيقية وشاهدي المونتاج النهائي",
+          "تأكدي من وضوح الباقة قبل السؤال عن السعر",
+          "أرسلي التاريخ مبكرًا لتأكيد التوفر"
+        ]
+      },
+      {
+        heading: "كم تكلفة تصوير زفاف في الشرقية 2026؟",
+        paragraphs: [
+          "تختلف الأسعار حسب مدة التغطية وعدد اللحظات التي تريدين حفظها. عند أسماء ستوديو، تبدأ باقة الزفة من 600 ريال لتوثيق لحظة الدخول بمونتاج مختصر، وترتفع التغطية تدريجيًا حتى باقة Full Day بـ 2500 ريال التي تغطي اليوم كاملًا من الصالون إلى القاعة مع زفتين.",
+          "للخطوبة والملكة، توجد باقة مخصصة بـ 1500 ريال تحفظ الشبكة والتلبيس والكيك والزفة بأسلوب راقٍ وهادئ. والفكرة دائمًا أن تدفعي مقابل ما تحتاجينه فعلًا، لا أكثر.",
+          "إذا لم تكوني متأكدة من الباقة المناسبة، أرسلي تاريخ المناسبة ومدينتها عبر واتساب، وسنرشدك إلى الخيار الأقرب لميزانيتك ولِلّحظات التي تهمّك."
+        ],
+        bullets: [
+          "بكج الزفة — 600 ريال (لحظة الدخول)",
+          "بكج الزفة المطور — 1200 ريال (الزفة + تفاصيل القاعة)",
+          "Half Day — 1700 ريال (First Look + تفاصيل + زفة)",
+          "Full Day — 2500 ريال (اليوم كامل + زفتين)",
+          "بكج الخطوبة — 1500 ريال"
+        ]
+      },
+      {
+        heading: "تفاصيل تصنع الفرق بين فيلم عادي وفيلم تتذكرينه",
+        paragraphs: [
+          "الفيلم الجميل لا يُبنى من لقطة الدخول وحدها، بل من سلسلة لحظات صغيرة: المجوهرات والمسكة والكعب والعطر، نظرة الأم، رد فعل العروس في First Look، وإيقاع المونتاج الذي ينقل المشاهد من التحضير إلى الفرح بسلاسة.",
+          "نحرص على أن يبدو الفيديو قصة مرتبة لا مجموعة لقطات عشوائية. هذا الترتيب — من الصالون إلى الكوشة إلى الزفة — هو ما يجعلكِ تعيدين مشاهدة الفيلم بعد سنوات وتشعرين أنه حفظ اليوم كما عشتِه فعلًا.",
+          "وللعرايس اللواتي يفضّلن مشاركة لحظات مختارة على إنستغرام وتيك توك، نجهّز مقاطع قصيرة أنيقة تناسب المنصّات دون أن تكشف خصوصية القاعة."
+        ]
+      },
+      {
+        heading: "Choosing the Best Wedding Photographer in the Eastern Province (English)",
+        paragraphs: [
+          "If you are searching in English for the best wedding photographer in Saudi Arabia's Eastern Province, the short answer is to prioritise privacy, a clear portfolio, and transparent packages over raw equipment claims. Asmaa Studio is a female-only wedding photography and videography studio serving Al-Ahsa, Dammam, Khobar, Dhahran, Jubail and Qatif.",
+          "Because the entire crew is female, brides and their guests stay completely comfortable, which is exactly what lets us capture honest, unposed moments during getting-ready, the zaffa entrance, and the celebration. For women's weddings in the Eastern Province this privacy is not a bonus — it is the foundation of authentic footage.",
+          "Our packages are published openly so you can compare with confidence: from 600 SAR for cinematic zaffa coverage up to 2500 SAR for a full-day film that follows your story from the salon to the final entrance, plus a dedicated 1500 SAR engagement package. To check availability, send your wedding date and city on WhatsApp at +966551606334 and we will recommend the closest package to your needs and budget."
+        ],
+        bullets: [
+          "Female-only crew — full privacy at women's weddings",
+          "Serving Al-Ahsa, Dammam, Khobar, Dhahran, Jubail, Qatif",
+          "Transparent packages from 600 to 2500 SAR",
+          "Cinematic editing that tells your day as a story"
+        ]
+      }
+    ],
+    faqs: [
+      {
+        question: "من هي أفضل مصورة زفاف في المنطقة الشرقية؟",
+        answer:
+          "أفضل مصورة هي التي تناسب احتياجك: طاقم نسائي يحفظ الخصوصية، أعمال سابقة واضحة، وباقة مفهومة. أسماء ستوديو تقدّم تصوير فيديو نسائي للأعراس في الأحساء والدمام والخبر والقطيف بباقات من 600 إلى 2500 ريال."
+      },
+      {
+        question: "هل التصوير نسائي بالكامل؟",
+        answer:
+          "نعم. الطاقم نسائي بالكامل، مما يحفظ خصوصية العروس وضيوفاتها ويتيح تصوير لحظات التحضير والزفة براحة."
+      },
+      {
+        question: "كم تكلفة تصوير زفاف في الأحساء أو الدمام؟",
+        answer:
+          "تبدأ الباقات من 600 ريال لتغطية الزفة وتصل إلى 2500 ريال لتغطية اليوم كامل. باقة الخطوبة 1500 ريال. الأسعار واضحة قبل الحجز."
+      },
+      {
+        question: "هل تغطّون مدنًا خارج الأحساء؟",
+        answer:
+          "نعم، نغطّي المنطقة الشرقية بالكامل: الأحساء، الدمام، الخبر، الظهران، الجبيل، والقطيف. أرسلي التاريخ والموقع لتأكيد التوفر."
+      },
+      {
+        question: "كيف أحجز موعد التصوير؟",
+        answer:
+          "اختاري الباقة والتاريخ والمدينة من رابط العروس، أو تواصلي مباشرة عبر واتساب على الرقم 966551606334، وسنؤكد التوفر والخطوة التالية."
+      }
+    ],
+    relatedPackageIds: ["01", "03", "04", "05"],
+    relatedCitySlugs: ["alahsa", "dammam", "khobar", "qatif"]
+  },
+  {
+    slug: "wedding-videography-saudi-2026",
+    locale: "ar-SA",
+    dir: "rtl",
+    metaTitle: "تصوير أفراح سعودية احترافية 2026 | مصور أفراح السعودية — Asmaa Studio",
+    metaDescription:
+      "دليل 2026 لتصوير حفلات الزفاف في السعودية: كيف تختارين تصوير أفراح احترافي، الفرق بين باقات الفيديو، وكم تكلفة مصور أفراح في المنطقة الشرقية. طاقم نسائي بالكامل.",
+    eyebrow: "دليل · تصوير أفراح السعودية",
+    h1: "تصوير أفراح سعودية احترافية 2026 — كل ما تحتاجين معرفته قبل الحجز",
+    heroIntro:
+      "تصوير حفلات الزفاف في السعودية تطوّر كثيرًا: لم يعد مجرد توثيق، بل أصبح فيلمًا سينمائيًا يحفظ إحساس اليوم. هذا الدليل يشرح كيف تختارين تصوير أفراح احترافي، وما الفرق بين باقات الفيديو، وكيف تضمنين نتيجة تفخرين بها.",
+    keyPhrases: [
+      "تصوير حفلات زفاف",
+      "مصور أفراح السعودية",
+      "تصوير أفراح",
+      "تصوير زفاف احترافي",
+      "wedding videography Saudi Arabia"
+    ],
+    readingTime: "7 دقائق",
+    datePublished: "2026-06-08",
+    dateModified: "2026-06-08",
+    sections: [
+      {
+        heading: "ما الذي يميّز تصوير الأفراح الاحترافي اليوم؟",
+        paragraphs: [
+          "تصوير الأفراح الاحترافي في 2026 لا يُقاس بعدد الكاميرات، بل بقدرة الطاقم على رواية قصة يومك بإيقاع متّزن. الفرق بين فيديو عادي وفيلم احترافي يظهر في ثلاثة أشياء: جودة الإضاءة داخل القاعة، التقاط التفاصيل الصغيرة بصدق، والمونتاج الذي يربط اللحظات في تسلسل طبيعي.",
+          "في أسماء ستوديو نعمل بطاقم نسائي بالكامل في المنطقة الشرقية، فنجمع بين الاحترافية والخصوصية. هذا يتيح تصوير لحظات التحضير والزفة والفرح بحرية تامة، وهو ما يصعب تحقيقه مع طاقم غير نسائي في حفلات النساء.",
+          "النتيجة فيلم يبدو كأنه حُفظ من قلب اللحظة، لا مجموعة لقطات مركّبة بعد المناسبة. وهذا بالضبط ما يجعلكِ تعيدين مشاهدته وتشاركينه بفخر."
+        ],
+        bullets: [
+          "إضاءة احترافية تناسب قاعات الشرقية",
+          "التقاط التفاصيل: المسكة، الخاتم، الكوشة، الكيك",
+          "مونتاج يحوّل اللقطات إلى قصة مرتبة",
+          "طاقم نسائي بالكامل لخصوصية كاملة"
+        ]
+      },
+      {
+        heading: "كيف تختارين الباقة المناسبة لحفلك؟",
+        paragraphs: [
+          "اختيار الباقة يبدأ من سؤال واحد: ما اللحظات التي لا تريدين أن تفوتك؟ إذا كانت لحظة الدخول هي الأهم، فباقة الزفة تكفي وتختصر القرار. أما إذا كنتِ تريدين تفاصيل التحضير و First Look وقصة اليوم كاملة، فالباقات الأطول هي الخيار الأنسب.",
+          "ننصح دائمًا بأن تكتبي اسم القاعة أو الحي وتاريخ المناسبة من البداية، حتى نرشّح لكِ الباقة الأقرب ونؤكد التوفر بسرعة. كثير من العرايس يخترن باقة Half Day لأنها توازن بين التغطية والميزانية، بينما تختار أخريات Full Day لتغطية اليوم من الصالون إلى آخر زفة.",
+          "الأهم أن تكون الباقة مفهومة قبل السعر. نحن نشرح ماذا سيُصوَّر في كل باقة ولماذا، حتى تختاري بثقة لا بتخمين."
+        ],
+        bullets: [
+          "ابدئي بسؤال: ما اللحظات التي لا تريدين فقدها؟",
+          "اكتبي اسم القاعة والتاريخ من أول رسالة",
+          "Half Day للتوازن، Full Day لليوم الكامل",
+          "الباقة الواضحة تسبق السؤال عن السعر"
+        ]
+      },
+      {
+        heading: "كم تكلفة مصور أفراح في السعودية 2026؟",
+        paragraphs: [
+          "تتفاوت أسعار تصوير الأفراح في السعودية حسب المدينة ومدة التغطية ومستوى المونتاج. في المنطقة الشرقية، تقدّم أسماء ستوديو باقات صريحة تبدأ من 600 ريال لتغطية الزفة، و1200 ريال للزفة مع تفاصيل القاعة، و1700 ريال لباقة Half Day، و2500 ريال لتغطية اليوم كامل بزفتين.",
+          "للخطوبة والملكة باقة مخصصة بـ 1500 ريال. هذه الشفافية في الأسعار تجعل المقارنة سهلة وتجنّبكِ المفاجآت، وهي جزء من أسلوبنا في تبسيط تجربة الحجز.",
+          "إذا أردتِ ترشيحًا دقيقًا لميزانيتك، أرسلي تفاصيل المناسبة عبر واتساب وسنوجّهك للباقة الأنسب دون ضغط."
+        ],
+        bullets: [
+          "تغطية الزفة من 600 ريال",
+          "Half Day بـ 1700 ريال",
+          "Full Day بـ 2500 ريال",
+          "باقة الخطوبة بـ 1500 ريال"
+        ]
+      },
+      {
+        heading: "أخطاء شائعة عند حجز تصوير الأفراح",
+        paragraphs: [
+          "أكثر خطأ شائع هو تأجيل الحجز حتى آخر أسبوعين، فتفقد العروس أفضل المواعيد. الحجز المبكر يضمن التوفر ويعطي وقتًا للتنسيق حول تفاصيل القاعة والإضاءة.",
+          "الخطأ الثاني هو اختيار باقة أكبر أو أصغر من الحاجة. باقة كبيرة جدًا تعني تكلفة زائدة، وباقة صغيرة جدًا قد تفوّت لحظات مهمة. لهذا نبدأ دائمًا من احتياجك لا من السعر.",
+          "الخطأ الثالث هو عدم توضيح الخصوصية المطلوبة. لأن طاقمنا نسائي بالكامل، تُحفظ خصوصية حفلات النساء تلقائيًا، وهو ما يجب أن يكون معيارًا أساسيًا في اختيار أي مصور أفراح في السعودية."
+        ]
+      },
+      {
+        heading: "Professional Saudi Wedding Videography in 2026 (English)",
+        paragraphs: [
+          "Wedding videography in Saudi Arabia has matured from simple documentation into cinematic storytelling. In 2026 the difference between an ordinary clip and a professional wedding film comes down to three things: lighting control inside the venue, honest capture of small details, and editing that connects moments into a natural sequence.",
+          "Asmaa Studio is a female-only studio covering the Eastern Province — Al-Ahsa, Dammam, Khobar and Qatif. A fully female crew means complete privacy at women's celebrations, so getting-ready moments, the zaffa, and candid joy can all be filmed freely. The result is a film that feels captured from inside the moment rather than assembled afterwards.",
+          "Pricing is transparent: zaffa coverage from 600 SAR, a developed zaffa package at 1200 SAR, a Half Day film at 1700 SAR, and a Full Day film with two entrances at 2500 SAR, plus a 1500 SAR engagement package. Send your date and city on WhatsApp at +966551606334 for a recommendation tailored to your celebration."
+        ],
+        bullets: [
+          "Cinematic editing, not random clips",
+          "Female-only crew for full privacy",
+          "Transparent pricing from 600 to 2500 SAR",
+          "WhatsApp booking: +966551606334"
+        ]
+      }
+    ],
+    faqs: [
+      {
+        question: "كم تكلفة تصوير حفلات الزفاف في السعودية؟",
+        answer:
+          "تختلف حسب المدينة والتغطية. في المنطقة الشرقية تقدّم أسماء ستوديو باقات من 600 ريال (الزفة) إلى 2500 ريال (اليوم كامل)، وباقة خطوبة بـ 1500 ريال."
+      },
+      {
+        question: "ما الفرق بين تصوير الزفة والتغطية الكاملة؟",
+        answer:
+          "تصوير الزفة يحفظ لحظة الدخول بمونتاج مختصر، بينما التغطية الكاملة (Full Day) تشمل الصالون والتفاصيل و First Look وزفتين في فيلم متكامل."
+      },
+      {
+        question: "هل تصوير الأفراح نسائي؟",
+        answer:
+          "نعم، الطاقم نسائي بالكامل، مما يضمن خصوصية كاملة في حفلات النساء ويتيح تصوير كل اللحظات براحة."
+      },
+      {
+        question: "متى يجب أن أحجز مصور الأفراح؟",
+        answer:
+          "كلما كان الحجز أبكر كان التوفر أفضل. أرسلي تاريخ المناسبة ومدينتها مبكرًا لتأكيد الموعد والباقة."
+      },
+      {
+        question: "هل تقدّمون مقاطع قصيرة للسوشيال ميديا؟",
+        answer:
+          "نعم، نجهّز مقاطع قصيرة أنيقة مناسبة لإنستغرام وتيك توك مع الحفاظ على خصوصية القاعة."
+      }
+    ],
+    relatedPackageIds: ["02", "03", "04", "05"],
+    relatedCitySlugs: ["alahsa", "dammam", "khobar"]
+  }
+];
+
+export function blogPostBySlug(slug: string): BlogPost | undefined {
+  return blogPosts.find((post) => post.slug === slug);
+}
