@@ -215,6 +215,7 @@ export default function HomePage() {
           priority
           sizes="100vw"
         />
+        <div className="hero-starfield" aria-hidden="true" />
         <nav className="nav" aria-label="التنقل الرئيسي">
           <a className="brand-lockup" href="#top" aria-label="Asmaa Studio">
             <span className="brand-mark" aria-hidden="true">

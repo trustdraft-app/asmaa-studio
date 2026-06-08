@@ -6512,3 +6512,43 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
   .home-feature-play, .home-feature-time i, .home-scroll-cue i,
   .home-feature-caption, .home-feature-rail { animation: none; }
 }
+
+/* ── Hero: Islamic 8-point star tessellation (Khatim lattice) — pure CSS, ~3% ── */
+.hero-starfield {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f1cb82' stroke-width='1'%3E%3Cpath d='M16 16H68V68H16Z'/%3E%3Cpath d='M42 6 78 42 42 78 6 42Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 84px 84px;
+  /* Reveal only over the dark type column, fade out across the bridal photo */
+  -webkit-mask-image: linear-gradient(90deg, #000 0 46%, transparent 78%);
+  mask-image: linear-gradient(90deg, #000 0 46%, transparent 78%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-starfield { animation: heroStarDrift 64s linear infinite; }
+}
+@keyframes heroStarDrift {
+  from { background-position: 0 0; }
+  to { background-position: 168px 84px; }
+}
+
+/* ── Primary conversion CTA: continuous slow gold shimmer (draws the eye) ── */
+/* Specificity (0,2,0) to match/beat the hero override .home-redesign-hero .cine-cta-primary */
+@media (prefers-reduced-motion: no-preference) {
+  .home-redesign-hero .cine-cta-primary,
+  .package-decision .cine-cta-primary {
+    background: linear-gradient(100deg, #d9ab5e 0%, #f1cb82 24%, #fbe6b2 50%, #f1cb82 76%, #b8924d 100%);
+    background-size: 220% auto;
+    animation: ctaGoldShimmer 5.5s linear infinite;
+  }
+}
+@keyframes ctaGoldShimmer {
+  from { background-position: 220% center; }
+  to { background-position: -20% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-starfield { animation: none; }
+}
