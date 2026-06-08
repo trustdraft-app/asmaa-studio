@@ -6787,6 +6787,9 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   z-index: 4;
+  min-height: 44px;
+  justify-content: flex-end;
+  padding-block: 4px;
 }
 .av2-scroll svg { animation: av2-bob 1.8s ease-in-out infinite; color: var(--av2-gold); }
 
@@ -6953,7 +6956,33 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
 #avf-weddings:checked ~ .av2-masonry .av2-shot:not([data-cat="weddings"]),
 #avf-engagement:checked ~ .av2-masonry .av2-shot:not([data-cat="engagement"]),
 #avf-events:checked ~ .av2-masonry .av2-shot:not([data-cat="events"]) { display: none; }
-.av2-portfolio-cta { text-align: center; margin-top: 30px; }
+.av2-portfolio-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+.av2-ig-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #f5ede0;
+  background: linear-gradient(120deg, rgba(214, 41, 118, 0.22), rgba(150, 47, 191, 0.22), rgba(201, 168, 76, 0.22));
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  transition: transform 0.3s, border-color 0.3s, background 0.3s;
+}
+.av2-ig-cta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 168, 76, 0.85);
+  background: linear-gradient(120deg, rgba(214, 41, 118, 0.34), rgba(150, 47, 191, 0.34), rgba(201, 168, 76, 0.3));
+}
+.av2-ig-cta svg { color: #c9a84c; }
 
 /* ════ SECTION 5 — STATS ════ */
 .av2-stats {
@@ -7129,7 +7158,7 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
 .av2-footer-brand strong { font-family: var(--av2-serif); font-size: 1.3rem; }
 .av2-footer-brand span { color: var(--av2-muted); font-size: 0.86rem; }
 .av2-footer-links { display: flex; flex-wrap: wrap; gap: 4px 12px; max-width: 460px; }
-.av2-footer-links a { color: rgba(246, 241, 230, 0.74); text-decoration: none; font-size: 0.9rem; transition: color 0.25s; display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; }
+.av2-footer-links a { color: rgba(246, 241, 230, 0.74); text-decoration: none; font-size: 0.9rem; transition: color 0.25s; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 8px; }
 .av2-footer-links a:hover { color: var(--av2-gold-lite); }
 .av2-footer-social { display: flex; gap: 12px; }
 .av2-footer-social a {

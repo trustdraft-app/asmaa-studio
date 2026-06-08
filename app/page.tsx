@@ -375,6 +375,10 @@ export default function HomePage() {
           <Link className="av2-btn-ghost" href="/portfolio">
             افتحي الألبوم الكامل <ArrowLeft size={16} aria-hidden="true" />
           </Link>
+          <a className="av2-ig-cta" href={instagramUrl} target="_blank" rel="noreferrer">
+            <InstagramGlyph />
+            شاهدي المزيد على انستقرام @asmaa.video
+          </a>
         </div>
       </section>
 
