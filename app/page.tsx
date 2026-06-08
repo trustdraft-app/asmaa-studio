@@ -349,55 +349,33 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-visual cine-firstlook-stage home-director-stage" aria-hidden="true">
-            <div className="hero-photo-stack home-visible-photo-stack">
-              <Image src={assetPath("/brand/asmaa-monogram-studio.jpg")} alt="" width={460} height={620} priority />
-              <Image src={assetPath("/brand/asmaa-monogram-heritage.jpg")} alt="" width={280} height={360} />
-            </div>
-            <div className="monogram-stage logo-stage home-logo-slate">
-              <Image
-                className="hero-logo-image"
-                src={assetPath("/brand/asmaa-logo-primary.jpg")}
-                alt=""
-                width={420}
-                height={630}
-                priority
-              />
-            </div>
+          <div className="hero-visual home-feature-stage" aria-hidden="true">
+            <span className="home-feature-rail">
+              <i />
+              <b>ASMAA STUDIO</b>
+              <em>Eastern Province · est. 2021</em>
+            </span>
 
-            <div className="cine-photo-frame home-cinema-poster">
-              <Image
-                className="cine-photo-image"
-                src={assetPath("/brand/asmaa-cinematic-bridal-still.webp")}
-                alt=""
-                width={860}
-                height={560}
-                priority
-              />
-              <div className="cine-photo-monogram">
-                <span>AS</span>
-                <em>ASMAA STUDIO</em>
-              </div>
-              <div className="cine-play-note">
+            <figure className="home-feature-caption">
+              <span className="home-feature-play">
                 <Play size={20} aria-hidden="true" />
-                <span>شاهدي أحدث فيلم</span>
-              </div>
-              <div className="cine-frame-caption">
-                <span>FIRST LOOK</span>
-                <strong>00:12</strong>
-              </div>
-            </div>
-
-            <div className="home-shot-list">
-              {directorBoard.slice(0, 3).map((item, index) => (
-                <span key={item.label}>
-                  <b>{String(index + 1).padStart(2, "0")}</b>
-                  <em>{item.ar}</em>
+              </span>
+              <figcaption>
+                <small>Now showing</small>
+                <strong>First Look — فيلم العروس</strong>
+                <span className="home-feature-time">
+                  <i />
+                  00:12
                 </span>
-              ))}
-            </div>
+              </figcaption>
+            </figure>
           </div>
         </div>
+
+        <a className="home-scroll-cue" href="#live-system" aria-label="اكتشفي القصة">
+          <span>اكتشفي القصة</span>
+          <i aria-hidden="true" />
+        </a>
 
         <div className="cinematic-dock home-service-dock" aria-label="خدمات Asmaa Studio">
           {heroDock.map((item) => {
