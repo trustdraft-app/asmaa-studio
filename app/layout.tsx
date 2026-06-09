@@ -39,7 +39,12 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true
-  }
+  },
+  // Google Search Console site verification — set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+  // to the token from Search Console. Omitted (no empty tag) when unset.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {})
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
