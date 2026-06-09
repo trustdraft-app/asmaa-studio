@@ -2,6 +2,12 @@ name: Deploy Netlify
 
 on:
   workflow_dispatch:
+  # Auto-deploy on every merge to main (autonomous-deploy standing order).
+  # When the Netlify token/site-id are not yet configured, push runs no-op
+  # gracefully at preflight (green) instead of failing; manual dispatch still
+  # hard-fails loudly so an intentional deploy never silently does nothing.
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -27,36 +33,50 @@ jobs:
           cache: npm
 
       - name: Preflight Netlify credentials
+        id: preflight
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN || secrets.ASMAA_NETLIFY_AUTH_TOKEN || secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID || vars.ASMAA_NETLIFY_SITE_ID }}
         run: |
-          test -n "$NETLIFY_AUTH_TOKEN" || {
-            echo "::error::A Netlify token GitHub secret is required for production Netlify deploy. Accepted names: NETLIFY_AUTH_TOKEN, ASMAA_NETLIFY_AUTH_TOKEN, NETLIFY_TOKEN."
+          if [ -n "$NETLIFY_AUTH_TOKEN" ] && [ -n "$NETLIFY_SITE_ID" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Netlify credentials present — proceeding with production deploy."
+            exit 0
+          fi
+          # Credentials missing. A manual dispatch must fail loudly; an
+          # automatic push deploy no-ops until the owner configures the token.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            test -n "$NETLIFY_AUTH_TOKEN" || echo "::error::A Netlify token GitHub secret is required for production Netlify deploy. Accepted names: NETLIFY_AUTH_TOKEN, ASMAA_NETLIFY_AUTH_TOKEN, NETLIFY_TOKEN."
+            test -n "$NETLIFY_SITE_ID" || echo "::error::A Netlify site ID GitHub variable is required for production Netlify deploy. Accepted names: NETLIFY_SITE_ID, ASMAA_NETLIFY_SITE_ID."
             exit 1
-          }
-          test -n "$NETLIFY_SITE_ID" || {
-            echo "::error::A Netlify site ID GitHub variable is required for production Netlify deploy. Accepted names: NETLIFY_SITE_ID, ASMAA_NETLIFY_SITE_ID."
-            exit 1
-          }
+          fi
+          echo "skip=true" >> "$GITHUB_OUTPUT"
+          echo "::notice::Netlify credentials not configured yet — skipping auto-deploy on push. Add the NETLIFY_AUTH_TOKEN secret and NETLIFY_SITE_ID variable to enable automatic production deploys on every merge to main."
 
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm audit --omit=dev
-      - run: npm run build:pages
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm ci
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm run lint
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm run typecheck
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm audit --omit=dev
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm run build:pages
         env:
           GITHUB_PAGES: "true"
           GITHUB_PAGES_CUSTOM_DOMAIN: "true"
           NEXT_PUBLIC_BASE_PATH: ""
 
       - name: Deploy static export to Netlify
+        if: steps.preflight.outputs.skip != 'true'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN || secrets.ASMAA_NETLIFY_AUTH_TOKEN || secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID || vars.ASMAA_NETLIFY_SITE_ID }}
         run: npx --yes netlify-cli deploy --prod --dir=out --site="$NETLIFY_SITE_ID" --auth="$NETLIFY_AUTH_TOKEN"
 
       - name: Configure Netlify custom domain
+        if: steps.preflight.outputs.skip != 'true'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN || secrets.ASMAA_NETLIFY_AUTH_TOKEN || secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID || vars.ASMAA_NETLIFY_SITE_ID }}
@@ -64,7 +84,9 @@ jobs:
         run: npm run netlify:configure-domain -- --json
 
       - name: Verify Netlify app security headers
+        if: steps.preflight.outputs.skip != 'true'
         run: npm run verify:live-security-headers -- https://asmaa-video.netlify.app https://asmaa-video.netlify.app/contact
 
       - name: Verify canonical security headers
+        if: steps.preflight.outputs.skip != 'true'
         run: npm run verify:live-security-headers -- https://asmaa.video https://asmaa.video/contact
