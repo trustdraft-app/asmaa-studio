@@ -99,6 +99,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9
     })),
+    {
+      url: `${base}/eastern-province`,
+      changeFrequency: "weekly",
+      priority: 0.86
+    },
     ...serviceAreas.map((area) => ({
       url: `${base}/${area.slug}`,
       changeFrequency: "weekly" as const,

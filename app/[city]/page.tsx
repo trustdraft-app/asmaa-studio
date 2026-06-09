@@ -218,6 +218,9 @@ export default async function CityPage({ params }: Props) {
             <Link className="ghost-cta" href={`/ar/${area.slug}/bride-checklist`}>
               تجهيز العروس قبل التصوير <ArrowLeft size={15} />
             </Link>
+            <Link className="ghost-cta" href="/eastern-province">
+              كل مدن المنطقة الشرقية <ArrowLeft size={15} />
+            </Link>
           </div>
         </div>
       </section>
