@@ -422,3 +422,13 @@
   verifiers (files=3654, ~50MB); exported HTML confirmed to retain font links + animations and contain NO
   client JS (prune-safe). Browser preview confirmed all 5 fonts load, view-timeline supported, hero +
   statement + packages (desktop & mobile RTL) render award-level, zero console errors.
+
+## 2026-06-09 — Asmaa.video — overnight: wedding-videographer-khobar SEO post (#57)
+- Audited an overnight "build EVERYTHING / cinematic rebrand" brief; found all listed features
+  (hero, /reserve wizard, /admin, package comparison, city pages, blog) already built + launch-verified.
+- Refused the brief's money/brand parts (3,500/7,500/15,000 SAR pricing, #C9A84C gold rebrand,
+  photography repositioning) — conflict with locked SAR 600–2500 + female-videography brand. Logged.
+- Shipped the one genuine gap: new `/blog/wedding-videographer-khobar` (الخبر, city-specific, real
+  pricing, FAQPage schema, zero client JS) → 8 blog posts. tsc clean; verify:launch 201/201. Merged #57.
+- Deploy note: live Netlify (canonical asmaa.video) remains owner-gated on NETLIFY_AUTH_TOKEN per prior
+  logs; merge to main triggers GitHub Pages only. Live Netlify deploy + IndexNow ping still owner-blocked.
