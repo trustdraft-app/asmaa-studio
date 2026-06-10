@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build:pages",
   "outputDirectory": "out",
-  "framework": "nextjs",
+  "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
