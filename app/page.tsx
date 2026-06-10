@@ -227,6 +227,9 @@ export default function HomePage() {
     <main className="asmaa-v2">
       <JsonLd data={jsonLd} />
 
+      {/* ════ V3 — fixed full-viewport Islamic pattern layer (pure CSS) ════ */}
+      <div className="av3-islamic-bg" aria-hidden="true" />
+
       {/* ════ URGENCY BAND — above the fold, honest seasonal scarcity ════ */}
       <Link className="av2-urgency" href="/reserve">
         <span className="av2-urgency-pulse" aria-hidden="true" />
@@ -250,6 +253,8 @@ export default function HomePage() {
           <div className="av2-islamic-12" />
           <div className="av2-particles" />
           <div className="av2-grain" />
+          <div className="av3-orb av3-orb-1" />
+          <div className="av3-orb av3-orb-2" />
         </div>
 
         <span className="av2-rec" aria-hidden="true">
@@ -282,9 +287,10 @@ export default function HomePage() {
           <p className="av2-hero-kicker">Saudi wedding cinema · تصوير نسائي في الشرقية</p>
           <h1 className="av2-hero-title av2-hero-title-stack">
             <span className="av2-line av2-line-1">نُوثِّقُ</span>
-            <span className="av2-line av2-line-2">أجملَ لحظاتِكِ</span>
-            <span className="av2-line av2-line-3">إلى الأبد</span>
+            <span className="av2-line av2-line-2">لحظاتِكِ الأثمَن</span>
+            <span className="av2-line av2-line-3">بعينِ الفنانة</span>
           </h1>
+          <span className="av3-divider" aria-hidden="true" />
           <p className="av2-hero-sub">
             تصوير زفاف نسائي سينمائي في المنطقة الشرقية — الأحساء، الدمام، والخبر.
           </p>
@@ -309,6 +315,7 @@ export default function HomePage() {
         </div>
 
         <a className="av2-scroll" href="#statement" aria-label="اكتشفي القصة">
+          <i className="av3-mouse" aria-hidden="true" />
           <span>اكتشفي القصة</span>
           <ChevronDown size={22} aria-hidden="true" />
         </a>
@@ -410,17 +417,25 @@ export default function HomePage() {
           <span className="av2-eyebrow">أعمال مختارة</span>
           <h2>من قلب المنطقة الشرقية</h2>
         </header>
-        <div className="av2-featured-row">
+        <div className="av3-featured-grid">
           {[
-            { city: "الخبر", en: "Khobar", tone: "linear-gradient(160deg,#1a1a1a,#2a2410)" },
-            { city: "الدمام", en: "Dammam", tone: "linear-gradient(160deg,#1c1814,#2a2410)" },
-            { city: "الأحساء", en: "Al Ahsa", tone: "linear-gradient(160deg,#181a16,#2a2410)" }
-          ].map((f) => (
-            <Link className="av2-featured-frame" href="/portfolio" key={f.city} style={{ background: f.tone }}>
+            { city: "الخبر", en: "Khobar", occ: "دخول الزفة", hero: true },
+            { city: "الدمام", en: "Dammam", occ: "تفاصيل العروس", hero: false },
+            { city: "الأحساء", en: "Al Ahsa", occ: "First Look", hero: false },
+            { city: "القطيف", en: "Qatif", occ: "الخطوبة والملكة", hero: false },
+            { city: "الدمام", en: "Dammam", occ: "الكوشة والقاعة", hero: false },
+            { city: "الخبر", en: "Khobar", occ: "الزفة والخاتمة", hero: false }
+          ].map((f, i) => (
+            <Link
+              className={`av3-featured-frame${f.hero ? " av3-hero-item" : ""}`}
+              href="/portfolio"
+              key={`${f.city}-${i}`}
+            >
               <span className="av2-featured-shimmer" aria-hidden="true" />
+              <span className="av3-frame-lattice" aria-hidden="true" />
               <span className="av2-featured-label">
                 <strong>{f.city}</strong>
-                <em>{f.en}</em>
+                <em>{f.en} · {f.occ}</em>
               </span>
             </Link>
           ))}
@@ -550,9 +565,7 @@ export default function HomePage() {
               <Quote className="av2-voice-mark" size={40} aria-hidden="true" />
               <p>{v.quote}</p>
               <footer>
-                <span className="av2-stars" aria-hidden="true">
-                  {"★★★★★"}
-                </span>
+                <span className="av3-voice-rule" aria-hidden="true" />
                 <strong>{v.meta}</strong>
                 <em>Asmaa Studio · الشرقية</em>
               </footer>
@@ -594,9 +607,9 @@ export default function HomePage() {
         <div className="av2-cta-border av2-reveal">
           <div className="av2-islamic av2-islamic-soft" aria-hidden="true" />
           <p className="av2-eyebrow">الخطوة التالية</p>
-          <h2 className="av2-cta-title">جاهزة لتوثيق لحظتكِ؟</h2>
+          <h2 className="av2-cta-title text-gold-gradient">لكلِّ لحظةٍ حكاية</h2>
           <p className="av2-cta-sub">
-            تواصلي معنا واحجزي موعدكِ قبل امتلاء الجدول — رابط العروس يجمع المدينة والتاريخ والباقة في رسالة واحدة.
+            دعينا نكون جزءاً من حكايتكِ — تواصلي معنا واحجزي موعدكِ قبل امتلاء الجدول — رابط العروس يجمع المدينة والتاريخ والباقة في رسالة واحدة.
           </p>
           <div className="av2-hero-ctas av2-cta-buttons">
             <a className="av2-btn-gold av2-wa-pulse" href={whatsappLink("home-closing-cta")} target="_blank" rel="noreferrer">
