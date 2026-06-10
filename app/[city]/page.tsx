@@ -93,11 +93,24 @@ export default async function CityPage({ params }: Props) {
     ]
   };
 
+  const faqJsonLd = area.faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: area.faq.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer }
+        }))
+      }
+    : null;
+
   return (
     <main className="page-shell city-page">
       <SiteHeader />
       <JsonLd data={cityJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
 
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">
