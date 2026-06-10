@@ -109,6 +109,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.82
     })),
+    // "تصوير أفراح [المدينة]" landing family — top Arabic voice/search phrase
+    ...serviceAreas.map((area) => ({
+      url: `${base}/${area.slug}/tsweer-afrah`,
+      changeFrequency: "weekly" as const,
+      priority: 0.84
+    })),
+    // Seasonal occasion landing pages
+    {
+      url: `${base}/ramadan`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7
+    },
+    {
+      url: `${base}/eid`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7
+    },
+    {
+      url: `${base}/national-day`,
+      changeFrequency: "monthly" as const,
+      priority: 0.65
+    },
     ...seoGuidePages.map((page) => ({
       url: `${base}/guides/${page.slug}`,
       changeFrequency: "weekly" as const,
