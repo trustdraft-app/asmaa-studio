@@ -8,6 +8,8 @@ const basePath = isGithubPages ? githubPagesBasePath : "";
 
 const nextConfig: NextConfig = {
   output: isGithubPages ? "export" : undefined,
+  compress: true,
+  poweredByHeader: false,
   basePath: basePath || undefined,
   assetPrefix: basePath ? `${basePath}/` : undefined,
   turbopack: {
