@@ -4,6 +4,7 @@ import { socialPreviewImages, twitterMetadata } from "../lib/metadata";
 import { LocalBusinessJsonLd } from "../components/seo/LocalBusinessJsonLd";
 import { SpeakableJsonLd } from "../components/seo/SpeakableJsonLd";
 import { ContactPointJsonLd } from "../components/seo/ContactPointJsonLd";
+import { PersonJsonLd } from "../components/seo/PersonJsonLd";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -54,6 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preload the Arabic font stylesheet so Naskh/Kufi headings paint with the LCP, not after it. */}
+        <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap"
+        />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap"
@@ -61,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <LocalBusinessJsonLd />
+        <PersonJsonLd />
         <SpeakableJsonLd />
         <ContactPointJsonLd />
         {children}

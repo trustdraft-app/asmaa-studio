@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MessageCircle, MapPin, ShieldCheck } from "lucide-react";
 import { instagramUrl, tiktokUrl, whatsappLink } from "../lib/content";
+import { ScrollWhatsApp } from "./ScrollWhatsApp";
 
 const footerColumns: { title: string; links: { href: string; label: string }[] }[] = [
   {
@@ -88,17 +89,15 @@ export function SiteFooter() {
         </div>
       </footer>
 
-      <a
+      <ScrollWhatsApp
         className="floating-whatsapp"
         href={whatsappLink("floating-whatsapp")}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="تواصلي عبر واتساب — عادةً يرد خلال ساعتين"
+        ariaLabel="تواصلي عبر واتساب — عادةً يرد خلال ساعتين"
       >
         <span className="floating-whatsapp-bubble" aria-hidden="true">عادةً يرد خلال ساعتين</span>
         <MessageCircle size={24} aria-hidden="true" />
         <span>واتساب</span>
-      </a>
+      </ScrollWhatsApp>
     </>
   );
 }

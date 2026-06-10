@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search } from "lucide-react";
+import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle, Search, Sparkles } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
-import { instagramUrl, packages, serviceAreas, tiktokUrl, whatsappLink, whatsappNumber } from "../../lib/content";
+import { ImageGalleryJsonLd } from "../../components/seo/ImageGalleryJsonLd";
+import { assetPath, instagramUrl, packages, serviceAreas, tiktokUrl, whatsappLink, whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
@@ -10,6 +12,37 @@ import { SiteFooter } from "../../components/SiteFooter";
 type Props = {
   params: Promise<{ city: string }>;
 };
+
+/**
+ * City-labeled portfolio thumbnails (real highlight artwork from /public).
+ * Cities with a dedicated highlight cover lead with it; the rest open with
+ * the zaffa frame. Labels carry the local search keyword for that city.
+ */
+const cityHighlightCovers: Record<string, string> = {
+  alahsa: "/highlights-v2/07-alahsa.png",
+  dammam: "/highlights-v2/08-dammam.png",
+  khobar: "/highlights-v2/09-khobar.png"
+};
+
+function cityPortfolioThumbs(area: { slug: string; ar: string }) {
+  return [
+    {
+      src: cityHighlightCovers[area.slug] ?? "/highlights-v2/01-zaffa.png",
+      label: `تصوير زفة في ${area.ar}`,
+      en: "Zaffa entrance"
+    },
+    {
+      src: "/highlights-v2/12-bride.png",
+      label: `تفاصيل عروس ${area.ar}`,
+      en: "Bride details"
+    },
+    {
+      src: "/highlights-v2/10-engagement.png",
+      label: `خطوبة وملكة في ${area.ar}`,
+      en: "Engagement & Milkah"
+    }
+  ];
+}
 
 export function generateStaticParams() {
   return serviceAreas.map((area) => ({ city: area.slug }));
@@ -43,6 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CityPage({ params }: Props) {
   const { city } = await params;
   const area = serviceAreas.find((item) => item.slug === city) ?? serviceAreas[0];
+  const thumbs = cityPortfolioThumbs(area);
 
   const cityJsonLd = {
     "@context": "https://schema.org",
@@ -111,6 +145,16 @@ export default async function CityPage({ params }: Props) {
       <JsonLd data={cityJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
       {faqJsonLd && <JsonLd data={faqJsonLd} />}
+      <ImageGalleryJsonLd
+        name={`أعمال Asmaa Studio في ${area.ar}`}
+        description={`لقطات من تصوير الزواجات والخطوبة النسائي في ${area.ar} — زفة، تفاصيل عروس، وملكة.`}
+        url={`https://asmaa.video/${area.slug}`}
+        images={thumbs.map((thumb) => ({
+          contentUrl: `https://asmaa.video${thumb.src}`,
+          name: thumb.label,
+          description: `${thumb.label} — Asmaa Studio`
+        }))}
+      />
 
       <section className="section city-hero-20x">
         <div className="section-inner city-hero-grid">
@@ -153,6 +197,10 @@ export default async function CityPage({ params }: Props) {
                 <em key={keyword}>{keyword}</em>
               ))}
             </div>
+            <p className="city-price-indicator">
+              <Sparkles size={15} aria-hidden="true" />
+              باقات {area.ar} تبدأ من <b>٦٠٠</b> وحتى <b>٢٥٠٠ ريال</b> — نفس السعر المعلن، بدون رسوم تنقّل داخل المدينة.
+            </p>
           </aside>
         </div>
       </section>
@@ -183,6 +231,33 @@ export default async function CityPage({ params }: Props) {
                   اسألي عن هذا البكج <ArrowLeft size={16} />
                 </a>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section city-thumbs-section">
+        <div className="section-inner">
+          <span className="eyebrow">من أعمالنا في {area.ar}</span>
+          <h2 className="section-title">لقطات بنفس اللغة البصرية التي ستوثق يومك.</h2>
+          <div className="city-thumbs-grid">
+            {thumbs.map((thumb) => (
+              <Link className="city-thumb" href="/portfolio" key={thumb.label}>
+                <span className="city-thumb-media">
+                  <Image
+                    src={assetPath(thumb.src)}
+                    alt={thumb.label}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 720px) 90vw, 30vw"
+                  />
+                  <span className="city-thumb-pattern" aria-hidden="true" />
+                </span>
+                <span className="city-thumb-caption">
+                  <strong>{thumb.label}</strong>
+                  <em>{thumb.en}</em>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
@@ -233,6 +308,24 @@ export default async function CityPage({ params }: Props) {
             </Link>
             <Link className="ghost-cta" href="/eastern-province">
               كل مدن المنطقة الشرقية <ArrowLeft size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section city-book-band" aria-label={`احجزي في ${area.ar}`}>
+        <div className="section-inner city-book-band-inner">
+          <div>
+            <span className="eyebrow">الخطوة الأخيرة</span>
+            <h2 className="section-title">احجزي الآن في {area.ar} — رسالة واحدة تكفي.</h2>
+            <p className="section-copy">المدينة محفوظة مسبقاً في الرسالة؛ أضيفي التاريخ فقط ونرد عليك بالتوفر.</p>
+          </div>
+          <div className="button-row">
+            <a className="cta" href={whatsappLink(area.slug)} target="_blank" rel="noreferrer">
+              احجزي في {area.ar} عبر واتساب <MessageCircle size={18} />
+            </a>
+            <Link className="ghost-cta" href={`/reserve?city=${area.slug}`}>
+              أو عبر رابط العروس <CalendarDays size={18} />
             </Link>
           </div>
         </div>
