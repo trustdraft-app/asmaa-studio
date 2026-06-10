@@ -1,0 +1,85 @@
+name: Deploy to Vercel
+
+on:
+  workflow_dispatch:
+  # Auto-deploy on every merge to main. When the Vercel secrets are not yet
+  # configured, push runs no-op gracefully at preflight (green); manual
+  # dispatch still hard-fails loudly so an intentional deploy never silently
+  # does nothing. Same standing-order pattern as deploy-netlify.yml.
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-production-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy to Vercel
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Preflight Vercel credentials
+        id: preflight
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ] && [ -n "$VERCEL_ORG_ID" ] && [ -n "$VERCEL_PROJECT_ID" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Vercel credentials present — proceeding with deploy."
+            exit 0
+          fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            test -n "$VERCEL_TOKEN" || echo "::error::VERCEL_TOKEN secret is required (vercel.com/account/tokens)."
+            test -n "$VERCEL_ORG_ID" || echo "::error::VERCEL_ORG_ID secret is required (Vercel project settings)."
+            test -n "$VERCEL_PROJECT_ID" || echo "::error::VERCEL_PROJECT_ID secret is required (Vercel project settings)."
+            exit 1
+          fi
+          echo "skip=true" >> "$GITHUB_OUTPUT"
+          echo "::notice::Vercel secrets not configured yet — skipping deploy. Add VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID secrets to enable automatic deploys (see VERCEL_SETUP.md)."
+
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm ci
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm run lint
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm run typecheck
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm audit --omit=dev
+      - if: steps.preflight.outputs.skip != 'true'
+        run: npm run build
+        env:
+          GITHUB_PAGES: "true"
+          GITHUB_PAGES_CUSTOM_DOMAIN: "true"
+          NEXT_PUBLIC_BASE_PATH: ""
+
+      - name: Deploy to Vercel
+        if: steps.preflight.outputs.skip != 'true'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: ${{ github.event_name == 'pull_request' && '' || '--prod' }}
+          working-directory: ./
+
+      - name: Verify canonical security headers
+        if: steps.preflight.outputs.skip != 'true' && github.event_name != 'pull_request'
+        run: npm run verify:live-security-headers -- https://asmaa.video https://asmaa.video/contact
