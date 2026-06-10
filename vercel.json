@@ -31,6 +31,36 @@
       "source": "/packages",
       "destination": "/#packages",
       "permanent": true
+    },
+    {
+      "source": "/al-khobar",
+      "destination": "/khobar",
+      "permanent": true
+    },
+    {
+      "source": "/al-ahsa",
+      "destination": "/alahsa",
+      "permanent": true
+    },
+    {
+      "source": "/al-dammam",
+      "destination": "/dammam",
+      "permanent": true
+    },
+    {
+      "source": "/al-qatif",
+      "destination": "/qatif",
+      "permanent": true
+    },
+    {
+      "source": "/zafaf",
+      "destination": "/zaffa",
+      "permanent": true
+    },
+    {
+      "source": "/feminine",
+      "destination": "/guides/female-wedding-photographer-eastern-province",
+      "permanent": true
     }
   ],
   "headers": [
