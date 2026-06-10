@@ -349,7 +349,7 @@ export function ReservationExperience() {
             <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "10%", right: "10%", height: 1, background: `linear-gradient(90deg,transparent,${GOLD},transparent)`, opacity: 0.7 }} />
 
             <ProgressBar current={step} />
-            <Stepper current={step} onNavigate={(i) => i <= step && setStep(i)} />
+            <Stepper current={step} onNavigate={(i) => setStep(i)} />
 
             {/* Step 0 — Date + City (city select visible here for URL prefill test) */}
             {step === 0 && (
@@ -371,7 +371,7 @@ export function ReservationExperience() {
                   </GoldField>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
                     {["الأحساء", "الدمام", "الخبر"].map((c) => (
-                      <button key={c} type="button" onClick={() => update("city", c)} style={{ background: form.city === c ? GOLD_DIM : SURFACE, border: `1px solid ${form.city === c ? GOLD : "rgba(255,248,236,0.10)"}`, borderRadius: 8, color: form.city === c ? GOLD : MUTED, cursor: "pointer", fontWeight: 700, padding: "10px 8px", fontSize: "0.85rem", transition: "all 180ms ease" }}>
+                      <button key={c} type="button" onClick={() => update("city", c)} style={{ background: form.city === c ? GOLD_DIM : SURFACE, border: `1px solid ${form.city === c ? GOLD : "rgba(255,248,236,0.10)"}`, borderRadius: 8, color: form.city === c ? GOLD : MUTED, cursor: "pointer", fontWeight: 700, padding: "11px 8px", minHeight: 44, fontSize: "0.85rem", transition: "all 180ms ease" }}>
                         {c}
                       </button>
                     ))}
