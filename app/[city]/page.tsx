@@ -127,24 +127,14 @@ export default async function CityPage({ params }: Props) {
     ]
   };
 
-  const faqJsonLd = area.faq.length > 0
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: area.faq.map((f) => ({
-          "@type": "Question",
-          name: f.question,
-          acceptedAnswer: { "@type": "Answer", text: f.answer }
-        }))
-      }
-    : null;
-
+  // NOTE: FAQPage JSON-LD intentionally NOT emitted — the launch verifier
+  // (scripts/verify-launch.mjs) bans deprecated FAQPage structured data on
+  // marketing routes. The visible FAQ section below still serves brides + AEO.
   return (
     <main className="page-shell city-page">
       <SiteHeader />
       <JsonLd data={cityJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      {faqJsonLd && <JsonLd data={faqJsonLd} />}
       <ImageGalleryJsonLd
         name={`أعمال Asmaa Studio في ${area.ar}`}
         description={`لقطات من تصوير الزواجات والخطوبة النسائي في ${area.ar} — زفة، تفاصيل عروس، وملكة.`}

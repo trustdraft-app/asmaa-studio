@@ -7255,20 +7255,29 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
    indicator, and the city booking band.
    ════════════════════════════════════════════════════════════════════ */
 
-/* ── Scroll-aware floating WhatsApp (appears after ~30% scroll) ── */
-.wa-scroll {
-  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+/* ── Scroll-aware floating WhatsApp (appears after ~30% scroll) ──
+   Pure CSS scroll-driven animation: marketing pages are JS-pruned at build
+   time (scripts/prune-static-js.mjs), so this must work with zero JS.
+   Browsers without animation-timeline support simply keep the button
+   always visible — graceful degradation, never a lost CTA. */
+@supports (animation-timeline: scroll()) {
+  .wa-scroll-reveal {
+    animation: wa-scroll-reveal linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0% 32%;
+  }
 }
-.wa-scroll-hidden {
-  opacity: 0;
-  transform: translateY(18px) scale(0.9);
-  pointer-events: none;
-}
-.wa-scroll-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
+@keyframes wa-scroll-reveal {
+  0%, 65% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.9);
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+  }
 }
 
 /* ── City price indicator (inside the city command card) ── */
@@ -7399,9 +7408,8 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wa-scroll {
-    transition: opacity 0.2s linear;
-    transform: none !important;
+  .wa-scroll-reveal {
+    animation: none;
   }
   .city-thumb-media {
     animation: none;

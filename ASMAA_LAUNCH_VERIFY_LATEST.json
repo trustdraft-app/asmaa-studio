@@ -1,24 +1,26 @@
 {
-  "ok": true,
-  "status": "passed",
-  "checkedAt": "2026-06-09T20:50:57.272Z",
+  "ok": false,
+  "status": "failed",
+  "checkedAt": "2026-06-10T12:04:10.859Z",
   "product": "asmaa.video",
   "adminPanelEnabled": false,
   "verifyAdminOnly": false,
-  "passCount": 201,
-  "failCount": 0,
-  "failures": [],
-  "outDir": "/Users/mohammedsa/asmaa-studio/out",
+  "passCount": 141,
+  "failCount": 1,
+  "failures": [
+    "browser verification crashed: page.waitForFunction: Timeout 10000ms exceeded."
+  ],
+  "outDir": "/private/tmp/asmaa-fable/out",
   "baseUrl": "http://127.0.0.1:4177",
   "proof": {
-    "staticExport": true,
-    "browserVerification": true,
-    "noSeriousAxeViolations": true,
-    "noHorizontalOverflow": true,
-    "publicAdminHidden": true,
-    "realLogoArtwork": true,
-    "layeredHeroImagery": true,
-    "packageInfographics": true,
-    "storyMomentCards": true
+    "staticExport": false,
+    "browserVerification": false,
+    "noSeriousAxeViolations": false,
+    "noHorizontalOverflow": false,
+    "publicAdminHidden": false,
+    "realLogoArtwork": false,
+    "layeredHeroImagery": false,
+    "packageInfographics": false,
+    "storyMomentCards": false
   }
 }
