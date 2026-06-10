@@ -435,7 +435,7 @@ export function ReservationExperience() {
             <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "8%", right: "8%", height: 1, background: `linear-gradient(90deg,transparent,${GOLD},transparent)`, opacity: 0.85 }} />
 
             <ProgressBar current={step} />
-            <Stepper current={step} onNavigate={(i) => i <= step && setStep(i)} />
+            <Stepper current={step} onNavigate={(i) => setStep(i)} />
 
             {/* ── Step 0 — Date + City ──────────────────────────────────────── */}
             {step === 0 && (
