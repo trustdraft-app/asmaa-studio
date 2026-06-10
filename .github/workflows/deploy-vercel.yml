@@ -70,15 +70,19 @@ jobs:
           GITHUB_PAGES_CUSTOM_DOMAIN: "true"
           NEXT_PUBLIC_BASE_PATH: ""
 
+      # Org policy pins all third-party actions to full SHAs; the official
+      # Vercel CLI via npx avoids a third-party action entirely (same pattern
+      # as deploy-netlify.yml's netlify-cli usage).
       - name: Deploy to Vercel
         if: steps.preflight.outputs.skip != 'true'
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: ${{ github.event_name == 'pull_request' && '' || '--prod' }}
-          working-directory: ./
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          PROD_FLAG="--prod"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then PROD_FLAG=""; fi
+          npx --yes vercel@latest deploy $PROD_FLAG --yes --token "$VERCEL_TOKEN"
 
       - name: Verify canonical security headers
         if: steps.preflight.outputs.skip != 'true' && github.event_name != 'pull_request'
