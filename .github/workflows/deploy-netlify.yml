@@ -53,6 +53,22 @@ jobs:
           echo "skip=true" >> "$GITHUB_OUTPUT"
           echo "::notice::Netlify credentials not configured yet — skipping auto-deploy on push. Add the NETLIFY_AUTH_TOKEN secret and NETLIFY_SITE_ID variable to enable automatic production deploys on every merge to main."
 
+      # Fallback: a Netlify build hook needs no auth token. When the token is
+      # absent but a hook URL secret exists, POST it so Netlify rebuilds from
+      # netlify.toml and main never goes stale (see DEPLOY_NOW.md, option 2b).
+      - name: Trigger Netlify build hook (tokenless fallback)
+        if: steps.preflight.outputs.skip == 'true'
+        env:
+          NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL || secrets.ASMAA_NETLIFY_BUILD_HOOK_URL }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK_URL" ]; then
+            echo "::notice::No NETLIFY_BUILD_HOOK_URL secret either — nothing deployed. See DEPLOY_NOW.md."
+            exit 0
+          fi
+          echo "Posting Netlify build hook to trigger a production rebuild of main..."
+          curl --fail --silent --show-error -X POST -d '{}' "$NETLIFY_BUILD_HOOK_URL"
+          echo "Build hook accepted — Netlify is rebuilding asmaa.video from main."
+
       - if: steps.preflight.outputs.skip != 'true'
         run: npm ci
       - if: steps.preflight.outputs.skip != 'true'
