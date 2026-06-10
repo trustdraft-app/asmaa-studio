@@ -525,14 +525,14 @@ async function verifyBrowserOutput() {
           await openRoute(page, route);
 
           if (config.name === "mobile" && route === "/reserve") {
+            // Cinematic wizard (PR #64): stepper is non-interactive dots; the
+            // primary tap target is the gold next button.
             await page.waitForFunction(
               () => {
-                const brandLockup = document.querySelector(".brand-lockup");
-                const stepperButton = document.querySelector(".stepper button");
-                if (!(brandLockup instanceof HTMLElement) || !(stepperButton instanceof HTMLElement)) return false;
-                const brandRect = brandLockup.getBoundingClientRect();
-                const stepperRect = stepperButton.getBoundingClientRect();
-                return brandRect.height >= 44 && stepperRect.height >= 44;
+                const stepDot = document.querySelector(".step-dot");
+                const nextButton = document.querySelector(".btn-next");
+                if (!(stepDot instanceof HTMLElement) || !(nextButton instanceof HTMLElement)) return false;
+                return nextButton.getBoundingClientRect().height >= 44;
               },
               undefined,
               { timeout: 10000 }
@@ -629,29 +629,26 @@ async function verifyBrowserOutput() {
 
       await withFreshPage(config, `${config.name} reserve prefill`, async (page) => {
         await openRoute(page, "/reserve?city=dammam&package=02");
-        await page.waitForFunction(
-          () => Array.from(document.querySelectorAll("select")).some((select) => select.value === "الدمام"),
-          undefined,
-          { timeout: 10000 }
-        );
-        const reservePrefill = await page.evaluate(() => ({
-          selectValues: Array.from(document.querySelectorAll("select")).map((select) => select.value)
-        }));
-        if (reservePrefill.selectValues.includes("الدمام")) pass(`${config.name} reserve preselects city from query`);
-        else fail(`${config.name} reserve failed to preselect city from query`);
-
-        await page.waitForSelector(".stepper button");
-        await page.locator(".stepper button").nth(1).click();
+        // The wizard exposes applied query prefill via data attributes on its root.
         await page.waitForFunction(
           () => {
-            const selected = document.querySelector('.package-picker button[aria-pressed="true"]');
-            return selected && selected.textContent && selected.textContent.includes("بكج 02");
+            const root = document.querySelector("[data-reserve-root]");
+            return root instanceof HTMLElement && root.getAttribute("data-prefill-city") === "الدمام";
           },
           undefined,
           { timeout: 10000 }
         );
-        const selectedPackage = await page.locator('.package-picker button[aria-pressed="true"]').textContent();
-        if (selectedPackage?.includes("بكج 02")) pass(`${config.name} reserve preselects package from query`);
+        const reservePrefill = await page.evaluate(() => {
+          const root = document.querySelector("[data-reserve-root]");
+          return {
+            city: root?.getAttribute("data-prefill-city") ?? "",
+            pkg: root?.getAttribute("data-prefill-package") ?? ""
+          };
+        });
+        if (reservePrefill.city === "الدمام") pass(`${config.name} reserve preselects city from query`);
+        else fail(`${config.name} reserve failed to preselect city from query`);
+
+        if (reservePrefill.pkg === "02") pass(`${config.name} reserve preselects package from query`);
         else fail(`${config.name} reserve failed to preselect package from query`);
       });
 

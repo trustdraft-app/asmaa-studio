@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { whatsappNumber } from "../lib/content";
 
 // ─── Brand tokens ─────────────────────────────────────────────────────────────
@@ -27,10 +27,26 @@ const CITIES = [
 ];
 
 const PACKAGES = [
+  { id: "01", nameAr: "بكج الزفة",        price: "600 ريال",      bullets: ["20 دقيقة", "لحظة الدخول", "مونتاج مختصر"], popular: false },
+  { id: "02", nameAr: "بكج الزفة المطور", price: "1,200 ريال",    bullets: ["ساعة", "الكوشة والكيك", "لقطات القاعة"], popular: false },
   { id: "03", nameAr: "الباقة الجزئية", price: "من 1,700 ريال", bullets: ["ساعتان", "200+ صورة", "غرفة تجهيز"], popular: false },
   { id: "04", nameAr: "يوم كامل",       price: "من 2,500 ريال", bullets: ["8 ساعات", "600+ صورة", "فيلم كامل"],    popular: true  },
   { id: "05", nameAr: "باقة الخطوبة",  price: "من 1,500 ريال", bullets: ["ساعة ونصف", "150+ صورة", "فيديو قصير"], popular: false },
 ];
+
+// City-page slugs → wizard city ids. Every /{city} page links to
+// /reserve?city={slug}; sub-areas fall back to their parent city.
+const CITY_SLUG_TO_ID: Record<string, string> = {
+  khobar: "الخبر",
+  dammam: "الدمام",
+  alahsa: "الأحساء",
+  qatif: "القطيف",
+  hofuf: "الأحساء",
+  mubarraz: "الأحساء",
+  alomran: "الأحساء",
+  altarafiyya: "الأحساء",
+  jubail: "الدمام"
+};
 
 // ─── CSS ──────────────────────────────────────────────────────────────────────
 function GlobalStyles() {
@@ -407,6 +423,26 @@ export function ReservationExperience() {
   const [pkgId,     setPkgId]     = useState("");
   const [date,      setDate]      = useState("");
   const [name,      setName]      = useState("");
+  const [prefill,   setPrefill]   = useState<{ city: string; pkg: string }>({ city: "", pkg: "" });
+
+  // Restore city/package prefill from query params (?city=dammam&package=02) —
+  // every city page and package card links here with these params so the bride
+  // never re-answers a question she already answered on the page she came from.
+  useEffect(() => {
+    // One-time sync from an external system (the URL) — must run after mount
+    // because the page is statically prerendered without query params, so a
+    // lazy useState initializer would cause a hydration mismatch.
+    const params = new URLSearchParams(window.location.search);
+    const cityId = CITY_SLUG_TO_ID[params.get("city") ?? ""] ?? "";
+    const pkgParam = (params.get("package") ?? "").padStart(2, "0");
+    const pkgMatch = PACKAGES.find((p) => p.id === pkgParam)?.id ?? "";
+    if (!cityId && !pkgMatch) return;
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (cityId) setCity(cityId);
+    if (pkgMatch) setPkgId(pkgMatch);
+    setPrefill({ city: cityId, pkg: pkgMatch });
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
 
   const canNext = [!!eventType, !!city, !!pkgId, !!(date && name.trim()), true][step];
   const next    = () => { if (canNext) setStep((s) => Math.min(s+1, 4)); };
@@ -441,7 +477,10 @@ export function ReservationExperience() {
     <>
       <GlobalStyles/>
       <IslamicBg/>
-      <div dir="rtl" style={{
+      <div dir="rtl" data-reserve-root
+        data-prefill-city={prefill.city || undefined}
+        data-prefill-package={prefill.pkg || undefined}
+        style={{
         minHeight:"100dvh",background:"#050505",
         display:"flex",flexDirection:"column",
         alignItems:"center",position:"relative",
