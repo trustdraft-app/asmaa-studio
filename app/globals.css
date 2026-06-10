@@ -8030,3 +8030,237 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
   .av2-strip-static { display: inline !important; }
   .av2-strip-count { display: none !important; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ASMAA V3 — "قصر النور" layer · pure CSS, zero client JS
+   Fixed Islamic lattice, ambient orbs, gold dividers, palace grid
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── living background: fixed full-viewport Islamic star lattice ── */
+.av3-islamic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% 0%, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(201, 168, 76, 0.05) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'%3E%3Cpolygon points='60,5 72,30 100,30 78,48 86,75 60,58 34,75 42,48 20,30 48,30'/%3E%3Cpolygon points='60,15 69,34 90,34 74,46 80,67 60,55 40,67 46,46 30,34 51,34'/%3E%3Cpolygon points='60,25 66,38 80,38 70,46 74,60 60,52 46,60 50,46 40,38 54,38'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 120px 120px;
+  animation: av3-pattern-drift 90s linear infinite;
+}
+@keyframes av3-pattern-drift {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 0 0, 0 0, 120px 120px; }
+}
+.asmaa-v2 > section,
+.asmaa-v2 > footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── ambient orbs, hero ── */
+.av3-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.06), transparent 70%);
+  animation: av3-orb-float 20s ease-in-out infinite;
+}
+.av3-orb-1 { width: 600px; height: 600px; top: -200px; inset-inline-end: -200px; }
+.av3-orb-2 { width: 400px; height: 400px; bottom: -100px; inset-inline-start: -100px; animation-delay: -10s; }
+@keyframes av3-orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.97); }
+}
+
+/* ── gold divider under hero headline: expands 0 → 80px on load ── */
+.av3-divider {
+  display: block;
+  height: 1px;
+  width: 80px;
+  margin: 22px auto 0;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+  animation: av3-divider-grow 1.4s 1s var(--ease-out-premium, ease-out) both;
+}
+@keyframes av3-divider-grow {
+  from { width: 0; opacity: 0; }
+  to { width: 80px; opacity: 1; }
+}
+
+/* ── scroll indicator mouse capsule ── */
+.av3-mouse {
+  display: block;
+  width: 24px;
+  height: 40px;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 12px;
+  position: relative;
+  margin: 0 auto 8px;
+}
+.av3-mouse::after {
+  content: "";
+  width: 4px;
+  height: 8px;
+  background: #c9a84c;
+  border-radius: 2px;
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%);
+  animation: av3-scroll-bounce 2s ease-in-out infinite;
+}
+@keyframes av3-scroll-bounce {
+  0%, 100% { top: 6px; opacity: 1; }
+  50% { top: 22px; opacity: 0; }
+}
+
+/* ── gold text gradient utility ── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 40%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #e8c96a; /* fallback */
+}
+
+/* ── featured work: 6-frame palace grid, hero frame spans 2 rows ── */
+.av3-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.av3-featured-frame {
+  position: relative;
+  display: block;
+  min-height: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 168, 76, 0.14);
+  background: linear-gradient(90deg, #1a1a10 25%, #2a2810 50%, #1a1a10 75%);
+  background-size: 200% 100%;
+  animation: av3-shimmer 3s ease-in-out infinite;
+  text-decoration: none;
+  transition: transform 0.7s var(--ease-out-premium, ease), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.av3-featured-frame.av3-hero-item { grid-row: span 2; min-height: 0; }
+.av3-featured-frame:hover,
+.av3-featured-frame:focus-visible {
+  transform: scale(1.02);
+  border-color: rgba(201, 168, 76, 0.55);
+  box-shadow: 0 0 36px rgba(201, 168, 76, 0.16);
+}
+@keyframes av3-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+/* Islamic lattice + gold tint revealed on hover */
+.av3-frame-lattice {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background-color: rgba(201, 168, 76, 0.15);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.4' stroke-width='1'%3E%3Cpath d='M36 4l9 23 23 9-23 9-9 23-9-23-23-9 23-9z'/%3E%3Ccircle cx='36' cy='36' r='10'/%3E%3Cpath d='M0 36h12M60 36h12M36 0v12M36 60v12'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+.av3-featured-frame:hover .av3-frame-lattice,
+.av3-featured-frame:focus-visible .av3-frame-lattice { opacity: 1; }
+.av3-featured-frame .av2-featured-label {
+  position: absolute;
+  bottom: 16px;
+  inset-inline-start: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 2;
+}
+.av3-featured-frame .av2-featured-label strong {
+  font-family: var(--av2-ar, inherit);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff8ec;
+}
+.av3-featured-frame .av2-featured-label em {
+  font-style: normal;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: #c9a84c;
+  font-weight: 500;
+}
+.av3-featured-frame .av2-featured-shimmer { position: absolute; inset: 0; }
+@media (max-width: 880px) {
+  .av3-featured-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .av3-featured-frame { min-height: 160px; }
+}
+
+/* ── voice cards: thin gold rule replaces decorative stars ── */
+.av3-voice-rule {
+  display: block;
+  width: 44px;
+  height: 1px;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #c9a84c, transparent);
+}
+
+/* ── portfolio tiles: corner gold brackets ── */
+.pf-tile::before,
+.pf-tile::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.45;
+  transition: opacity 0.4s ease, width 0.4s ease, height 0.4s ease;
+}
+.pf-tile::before {
+  top: 10px;
+  inset-inline-start: 10px;
+  border-top: 1px solid #c9a84c;
+  border-inline-start: 1px solid #c9a84c;
+  border-start-start-radius: 6px;
+}
+.pf-tile::after {
+  bottom: 10px;
+  inset-inline-end: 10px;
+  border-bottom: 1px solid #c9a84c;
+  border-inline-end: 1px solid #c9a84c;
+  border-end-end-radius: 6px;
+}
+.pf-tile:hover::before,
+.pf-tile:hover::after,
+.pf-tile:focus-within::before,
+.pf-tile:focus-within::after {
+  opacity: 1;
+  width: 34px;
+  height: 34px;
+}
+
+/* ── reduced motion: v3 layer stays visible, nothing moves ── */
+@media (prefers-reduced-motion: reduce) {
+  .av3-islamic-bg,
+  .av3-orb,
+  .av3-divider,
+  .av3-mouse::after,
+  .av3-featured-frame {
+    animation: none !important;
+  }
+  .av3-divider { width: 80px; opacity: 1; }
+  .av3-featured-frame,
+  .av3-featured-frame:hover { transform: none; }
+}
+
+/* ── portfolio hero sub-line ── */
+.pf-hero-sub {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 248, 236, 0.6);
+}

@@ -147,7 +147,8 @@ export default function PortfolioPage() {
       {/* ── Hero ── */}
       <section className="pf-hero">
         <span className="pf-eyebrow">معرض الأعمال</span>
-        <h1>لحظات الزفاف والخطوبة كما تستحقها</h1>
+        <h1 className="text-gold-gradient">لمسةٌ من الجمال في كلِّ إطار</h1>
+        <p className="pf-hero-sub">اكتشفي أعمالنا من المنطقة الشرقية</p>
         <p>
           طاقم نسائي بالكامل، مونتاج سينمائي هادئ، وتغطية مصمّمة لكل لحظة في الأحساء والدمام
           والخبر. نحترم خصوصية العروس، لذلك نعرض هنا أجواء الأعمال ونرسل النماذج المناسبة عبر
