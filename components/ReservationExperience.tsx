@@ -7,14 +7,18 @@ import {
   ArrowLeft,
   ArrowRight,
   CalendarDays,
+  Camera,
   CheckCircle2,
+  Clock,
   CreditCard,
+  Crown,
   Landmark,
   Loader2,
   MapPin,
   MessageCircle,
   ShieldCheck,
   Sparkles,
+  Star,
   Upload,
   User,
   Video
@@ -38,114 +42,130 @@ import {
   type ReservationInput
 } from "../lib/reservations";
 
-// ─── Brand token ────────────────────────────────────────────────────────────
-const GOLD = "#C9A84C";
-const GOLD_DIM = "rgba(201,168,76,0.18)";
+// ─── Brand tokens ─────────────────────────────────────────────────────────────
+const GOLD        = "#C9A84C";
+const GOLD_LIGHT  = "#E8C96A";
+const GOLD_DIM    = "rgba(201,168,76,0.18)";
 const GOLD_BORDER = "rgba(201,168,76,0.36)";
-const GOLD_GLOW = "rgba(201,168,76,0.12)";
-const IVORY = "rgba(255,248,236,0.92)";
-const MUTED = "rgba(255,248,236,0.60)";
-const SURFACE = "rgba(255,248,236,0.06)";
-const INK = "#0c0a08";
+const GOLD_GLOW   = "rgba(201,168,76,0.12)";
+const IVORY       = "rgba(255,248,236,0.92)";
+const MUTED       = "rgba(255,248,236,0.60)";
+const SURFACE     = "rgba(255,248,236,0.06)";
+const INK         = "#0c0a08";
 
-// ─── 5 steps (order chosen so city select is at step 0 and packages at step 1
-//     to satisfy the existing verify-launch.mjs prefill contract)
+// ─── Steps ────────────────────────────────────────────────────────────────────
+// Order: city select step=0, packages step=1 — preserves verify-launch.mjs contract
 const STEPS = [
-  { label: "التاريخ", sub: "المناسبة والمدينة" },
-  { label: "الباقة",  sub: "اختيار التغطية" },
-  { label: "الموقع",  sub: "القاعة والتفاصيل" },
-  { label: "التواصل", sub: "بياناتك" },
-  { label: "التأكيد", sub: "مراجعة وإرسال" }
+  { label: "التاريخ",  sub: "المناسبة والمدينة" },
+  { label: "الباقة",   sub: "اختيار التغطية"    },
+  { label: "الموقع",   sub: "القاعة والتفاصيل"  },
+  { label: "التواصل",  sub: "بياناتك"            },
+  { label: "التأكيد",  sub: "مراجعة وإرسال"     }
 ];
 
-// ─── Islamic geometric hero SVG ─────────────────────────────────────────────
+// ─── City cards ───────────────────────────────────────────────────────────────
+const CITIES = ["الأحساء", "الدمام", "الخبر", "القطيف"];
+
+// ─── Keyframes injected once ──────────────────────────────────────────────────
+function InjectStyles() {
+  return (
+    <style>{`
+      @keyframes pulse-gold {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.55), 0 4px 32px rgba(201,168,76,0.40); }
+        50%       { box-shadow: 0 0 0 14px rgba(201,168,76,0), 0 4px 32px rgba(201,168,76,0.25); }
+      }
+      @keyframes step-in {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0);    }
+      }
+      @keyframes glow-drift {
+        0%, 100% { opacity: 0.14; }
+        50%       { opacity: 0.22; }
+      }
+      .pulse-wa   { animation: pulse-gold 2.2s ease-in-out infinite; }
+      .step-scene { animation: step-in 360ms cubic-bezier(0.22,1,0.36,1) both; }
+      .glow-drift { animation: glow-drift 6s ease-in-out infinite; }
+    `}</style>
+  );
+}
+
+// ─── Islamic geometric SVG background ────────────────────────────────────────
 function IslamicPattern() {
   return (
     <svg
       aria-hidden="true"
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.22, pointerEvents: "none" }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.10, pointerEvents: "none" }}
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <pattern id="islamic-geo" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
-          <g fill="none" stroke={GOLD} strokeWidth="0.9">
-            <polygon points="40,8 55,16 72,16 72,33 64,40 72,47 72,64 55,64 40,72 25,64 8,64 8,47 16,40 8,33 8,16 25,16" />
-            <line x1="25" y1="16" x2="55" y2="64" />
-            <line x1="55" y1="16" x2="25" y2="64" />
-            <line x1="8"  y1="33" x2="72" y2="47" />
-            <line x1="72" y1="33" x2="8"  y2="47" />
-            <polygon points="40,24 56,40 40,56 24,40" />
+        <pattern id="geo" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke={GOLD} strokeWidth="0.8">
+            <polygon points="40,4 74,22 74,58 40,76 6,58 6,22" />
+            <polygon points="40,20 58,30 58,50 40,60 22,50 22,30" />
+            <line x1="40" y1="4"  x2="40" y2="76" />
+            <line x1="6"  y1="22" x2="74" y2="58" />
+            <line x1="74" y1="22" x2="6"  y2="58" />
+            <circle cx="40" cy="40" r="7" strokeWidth="0.5" />
+            <circle cx="40" cy="40" r="2.5" fill={GOLD} stroke="none" />
           </g>
         </pattern>
-        <linearGradient id="pattern-fade" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="geo-fade" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"   stopColor="black" stopOpacity="1" />
-          <stop offset="70%"  stopColor="black" stopOpacity="1" />
+          <stop offset="60%"  stopColor="black" stopOpacity="1" />
           <stop offset="100%" stopColor="black" stopOpacity="0" />
         </linearGradient>
-        <mask id="pattern-mask">
-          <rect width="100%" height="100%" fill="url(#pattern-fade)" />
+        <mask id="geo-mask">
+          <rect width="100%" height="100%" fill="url(#geo-fade)" />
         </mask>
       </defs>
-      <rect width="100%" height="100%" fill="url(#islamic-geo)" mask="url(#pattern-mask)" />
+      <rect width="100%" height="100%" fill="url(#geo)" mask="url(#geo-mask)" />
     </svg>
   );
 }
 
-// ─── Stepper nav (satisfies .stepper button selector used in verify-launch) ──
+// ─── Stepper — horizontal dot + connecting line ───────────────────────────────
 function Stepper({ current, onNavigate }: { current: number; onNavigate: (i: number) => void }) {
+  const progress = (current / (STEPS.length - 1)) * 100;
   return (
     <div
       className="stepper"
-      style={{
-        display: "grid",
-        gridTemplateColumns: `repeat(${STEPS.length}, minmax(0, 1fr))`,
-        gap: 6,
-        marginBottom: 22,
-        position: "relative",
-        zIndex: 1
-      }}
+      style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24, position: "relative", zIndex: 1 }}
     >
-      {STEPS.map((s, i) => (
-        <button
-          key={s.label}
-          type="button"
-          aria-current={i === current ? "step" : undefined}
-          className={i <= current ? "active" : ""}
-          onClick={() => onNavigate(i)}
-          style={{
-            background: i === current ? `linear-gradient(145deg,${GOLD_DIM},rgba(255,248,236,0.06))` : SURFACE,
-            border: `1px solid ${i <= current ? GOLD_BORDER : "rgba(255,248,236,0.10)"}`,
-            borderRadius: 8,
-            color: i <= current ? IVORY : MUTED,
-            cursor: "pointer",
-            minHeight: 76,
-            padding: "10px 8px",
-            textAlign: "start",
-            transition: "background 200ms ease, border-color 200ms ease"
-          }}
-        >
-          <span
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 26,
-              height: 26,
-              borderRadius: "50%",
-              background: i <= current ? GOLD_GLOW : "rgba(255,248,236,0.06)",
-              border: `1px solid ${i <= current ? GOLD_BORDER : "rgba(255,248,236,0.12)"}`,
-              color: i <= current ? GOLD : MUTED,
-              fontSize: "0.78rem",
-              fontWeight: 900,
-              marginBottom: 8
-            }}
+      {/* Track */}
+      <div style={{ position: "absolute", top: 13, right: 14, left: 14, height: 2, background: "rgba(255,248,236,0.10)", borderRadius: 99, zIndex: 0 }} />
+      {/* Gold fill */}
+      <div style={{ position: "absolute", top: 13, right: 14, width: `calc(${progress}% - 14px)`, height: 2, background: `linear-gradient(90deg,${GOLD},${GOLD_LIGHT})`, borderRadius: 99, zIndex: 0, transition: "width 420ms cubic-bezier(0.4,0,0.2,1)" }} />
+
+      {STEPS.map((s, i) => {
+        const done   = i < current;
+        const active = i === current;
+        return (
+          <button
+            key={s.label}
+            type="button"
+            aria-current={active ? "step" : undefined}
+            className={done || active ? "active" : ""}
+            onClick={() => i <= current && onNavigate(i)}
+            style={{ background: "transparent", border: "none", cursor: i <= current ? "pointer" : "default", display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "0 2px", position: "relative", zIndex: 1, flex: 1 }}
           >
-            {i + 1}
-          </span>
-          <strong style={{ display: "block", fontSize: "0.82rem", lineHeight: 1.3 }}>{s.label}</strong>
-          <small style={{ display: "block", color: MUTED, fontSize: "0.7rem", marginTop: 3, lineHeight: 1.4 }}>{s.sub}</small>
-        </button>
-      ))}
+            <span style={{
+              display: "flex", alignItems: "center", justifyContent: "center",
+              width: 28, height: 28, borderRadius: "50%",
+              background: active ? `linear-gradient(135deg,${GOLD},${GOLD_LIGHT})` : done ? GOLD_DIM : "rgba(255,248,236,0.06)",
+              border: `2px solid ${active || done ? GOLD : "rgba(255,248,236,0.15)"}`,
+              color: active ? INK : done ? GOLD : MUTED,
+              fontSize: "0.75rem", fontWeight: 900,
+              transition: "all 300ms ease",
+              boxShadow: active ? `0 0 14px rgba(201,168,76,0.55)` : "none"
+            }}>
+              {done ? "✓" : i + 1}
+            </span>
+            <span style={{ fontSize: "0.67rem", fontWeight: 800, color: active ? GOLD : done ? IVORY : MUTED, textAlign: "center", lineHeight: 1.2, transition: "color 300ms ease" }}>
+              {s.label}
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -154,13 +174,13 @@ function Stepper({ current, onNavigate }: { current: number; onNavigate: (i: num
 function ProgressBar({ current }: { current: number }) {
   const pct = ((current + 1) / STEPS.length) * 100;
   return (
-    <div style={{ marginBottom: 18, position: "relative", zIndex: 1 }}>
+    <div style={{ marginBottom: 20, position: "relative", zIndex: 1 }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-        <span style={{ fontSize: "0.78rem", color: MUTED }}>الخطوة {current + 1} من {STEPS.length}</span>
-        <span style={{ fontSize: "0.78rem", fontWeight: 700, color: GOLD }}>{STEPS[current].label}</span>
+        <span style={{ fontSize: "0.75rem", color: MUTED }}>الخطوة {current + 1} من {STEPS.length}</span>
+        <span style={{ fontSize: "0.75rem", fontWeight: 800, color: GOLD }}>{STEPS[current].label}</span>
       </div>
-      <div style={{ height: 3, borderRadius: 99, background: "rgba(255,248,236,0.10)", overflow: "hidden" }}>
-        <div style={{ height: "100%", width: `${pct}%`, borderRadius: 99, background: `linear-gradient(90deg,${GOLD},#e6c96a)`, transition: "width 380ms cubic-bezier(0.4,0,0.2,1)" }} />
+      <div style={{ height: 2, borderRadius: 99, background: "rgba(255,248,236,0.08)", overflow: "hidden" }}>
+        <div style={{ height: "100%", width: `${pct}%`, borderRadius: 99, background: `linear-gradient(90deg,${GOLD},${GOLD_LIGHT})`, transition: "width 440ms cubic-bezier(0.4,0,0.2,1)" }} />
       </div>
     </div>
   );
@@ -170,10 +190,57 @@ function ProgressBar({ current }: { current: number }) {
 type SubmitState = "idle" | "saving" | "saved" | "fallback" | "error";
 
 const cityFromQuery: Record<string, string> = {
-  alahsa: "الأحساء", dammam: "الدمام", khobar: "الخبر",
-  "الأحساء": "الأحساء", "الدمام": "الدمام", "الخبر": "الخبر"
+  alahsa: "الأحساء", dammam: "الدمام", khobar: "الخبر", qatif: "القطيف",
+  "الأحساء": "الأحساء", "الدمام": "الدمام", "الخبر": "الخبر", "القطيف": "القطيف"
 };
 const packageIds = new Set(packages.map((p) => p.id));
+
+// ─── Package icons ────────────────────────────────────────────────────────────
+const PKG_ICONS: Record<string, React.ReactNode> = {
+  "1": <Star    size={22} />,
+  "2": <Camera  size={22} />,
+  "3": <Video   size={22} />,
+  "4": <Crown   size={22} />
+};
+
+// ─── Shared primitives ────────────────────────────────────────────────────────
+function StepHeading({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle: string }) {
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+        <span style={{ color: GOLD }}>{icon}</span>
+        <h2 style={{ margin: 0, fontSize: "1.14rem", fontWeight: 800, color: IVORY }}>{title}</h2>
+      </div>
+      <p style={{ margin: 0, fontSize: "0.83rem", color: MUTED }}>{subtitle}</p>
+    </div>
+  );
+}
+
+function GoldField({ label, error, fullWidth, children }: { label: string; error?: string; fullWidth?: boolean; children: React.ReactNode }) {
+  return (
+    <label style={{ display: "grid", gap: 8, color: MUTED, fontWeight: 800, fontSize: "0.88rem", gridColumn: fullWidth ? "1 / -1" : undefined }}>
+      <span>{label}</span>
+      {children}
+      {error && <em style={{ color: "#ffc0b8", fontSize: "0.82rem", fontStyle: "normal", fontWeight: 700 }}>{error}</em>}
+    </label>
+  );
+}
+
+function inputStyle(): React.CSSProperties {
+  return {
+    background: "rgba(255,248,236,0.07)",
+    border: `1px solid ${GOLD_BORDER}`,
+    borderRadius: 9,
+    color: IVORY,
+    minHeight: 48,
+    outline: "none",
+    padding: "0.8rem 0.92rem",
+    width: "100%",
+    fontFamily: "inherit",
+    fontSize: "1rem",
+    transition: "border-color 180ms ease, box-shadow 180ms ease"
+  };
+}
 
 // ─── Main component ───────────────────────────────────────────────────────────
 export function ReservationExperience() {
@@ -186,10 +253,10 @@ export function ReservationExperience() {
   const [source, setSource] = useState("reserve-direct");
 
   const selectedPackage = useMemo(() => reservationPackage(form.packageId), [form.packageId]);
-  const minEventDate   = useMemo(() => new Date().toISOString().slice(0, 10), []);
-  const endpoint       = reservationEndpoint();
-  const deposit        = useMemo(() => depositAmount(form.packageId), [form.packageId]);
-  const paymentLink    = useMemo(() => reservationPaymentLink(form.packageId), [form.packageId]);
+  const minEventDate    = useMemo(() => new Date().toISOString().slice(0, 10), []);
+  const endpoint        = reservationEndpoint();
+  const deposit         = useMemo(() => depositAmount(form.packageId), [form.packageId]);
+  const paymentLink     = useMemo(() => reservationPaymentLink(form.packageId), [form.packageId]);
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -219,18 +286,12 @@ export function ReservationExperience() {
     return true;
   };
 
-  const next = () => {
-    setTouched(true);
-    if (!canAdvance()) return;
-    setStep((s) => Math.min(s + 1, STEPS.length - 1));
-    setTouched(false);
-  };
-
+  const next = () => { setTouched(true); if (!canAdvance()) return; setStep((s) => Math.min(s + 1, STEPS.length - 1)); setTouched(false); };
   const back = () => { setStep((s) => Math.max(s - 1, 0)); setTouched(false); };
 
   const buildWhatsappUrl = () => {
     const lines = [
-      "السلام عليكم، أرسلت تفاصيل الحجز من رابط Asmaa Studio:",
+      `مرحباً، أود الحجز ليوم ${form.eventDate || "-"} في ${form.city || "-"} - ${selectedPackage.name}`,
       "",
       `مصدر الحجز: ${readableWhatsappSource(source)}`,
       `اسم العروس: ${form.brideName || "-"}`,
@@ -241,9 +302,9 @@ export function ReservationExperience() {
       `المدينة: ${form.city || "-"}`,
       `القاعة/الموقع: ${form.venue || "-"}`,
       `الباقة: ${selectedPackage.name} — ${selectedPackage.price} ريال`,
-      form.guestCount ? `عدد الحضور: ${form.guestCount}` : "",
-      form.ceremonyTime ? `وقت الزفة: ${form.ceremonyTime}` : "",
-      form.notes ? `ملاحظات: ${form.notes}` : "",
+      form.guestCount   ? `عدد الحضور: ${form.guestCount}`   : "",
+      form.ceremonyTime ? `وقت الزفة: ${form.ceremonyTime}`  : "",
+      form.notes        ? `ملاحظات: ${form.notes}`           : "",
       "",
       "أرغب بتأكيد التوفر والخطوة التالية."
     ].filter(Boolean).join("\n");
@@ -276,11 +337,7 @@ export function ReservationExperience() {
     }
     setSubmitState("saving");
     try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...form, source })
-      });
+      const res = await fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ...form, source }) });
       if (!res.ok) throw new Error(`${res.status}`);
       setSubmitState("saved");
       setMessage("وصل الطلب بنجاح. ستصلك رسالة واتساب لتأكيد التوفر والخطوة التالية.");
@@ -292,7 +349,9 @@ export function ReservationExperience() {
   };
 
   return (
-    <main className="page-shell reserve-page" dir="rtl">
+    <main className="page-shell reserve-page" dir="rtl" style={{ background: "#0A0A0A", minHeight: "100svh", color: IVORY }}>
+      <InjectStyles />
+
       {/* Nav */}
       <nav className="nav reserve-nav" aria-label="تنقل رابط العروس">
         <Link className="brand-lockup" href="/">
@@ -311,22 +370,36 @@ export function ReservationExperience() {
         </a>
       </nav>
 
-      {/* Hero */}
-      <section style={{ position: "relative", overflow: "hidden", minHeight: "calc(100svh - 96px)", display: "grid", alignItems: "center", padding: "40px clamp(18px,5vw,72px) 80px" }} aria-label="نموذج حجز العروس">
+      {/* ── Hero ─────────────────────────────────────────────────────────────── */}
+      <section
+        style={{ position: "relative", overflow: "hidden", minHeight: "calc(100svh - 96px)", display: "grid", alignItems: "center", padding: "40px clamp(18px,5vw,72px) 80px" }}
+        aria-label="نموذج حجز العروس"
+      >
         <IslamicPattern />
-        <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 60% 45% at 50% -10%,rgba(201,168,76,0.14),transparent),radial-gradient(ellipse 40% 30% at 80% 60%,rgba(201,168,76,0.08),transparent)`, pointerEvents: "none" }} />
+
+        {/* Ambient radial glows */}
+        <div aria-hidden="true" className="glow-drift" style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 72% 52% at 50% -8%, rgba(201,168,76,0.17), transparent)`, pointerEvents: "none" }} />
+        <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 38% 28% at 82% 65%, rgba(201,168,76,0.08), transparent)`, pointerEvents: "none" }} />
+        <div aria-hidden="true" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "28%", background: "linear-gradient(to top,#0A0A0A,transparent)", pointerEvents: "none" }} />
 
         <div style={{ position: "relative", zIndex: 1, display: "grid", gap: "clamp(28px,6vw,76px)", gridTemplateColumns: "minmax(0,0.72fr) minmax(340px,1fr)", maxWidth: 1240, margin: "0 auto", width: "100%" }}>
 
-          {/* Copy */}
+          {/* ── Copy ─────────────────────────────────────────────────────────── */}
           <div className="reserve-copy">
-            <div style={{ width: 48, height: 3, borderRadius: 99, background: GOLD, marginBottom: 20 }} />
-            <span className="eyebrow" style={{ color: GOLD, fontWeight: 800, letterSpacing: "0.12em", fontSize: "0.78rem" }}>رابط العروس</span>
-            <h1 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2.6rem,5vw,4.4rem)", lineHeight: 1.18, margin: "16px 0", textWrap: "balance", color: IVORY }}>
-              يومك يستحق توثيقاً يليق به.
+            <div style={{ width: 58, height: 3, borderRadius: 99, background: `linear-gradient(90deg,${GOLD},${GOLD_LIGHT})`, marginBottom: 22 }} />
+            <span style={{ color: GOLD, fontWeight: 800, letterSpacing: "0.13em", fontSize: "0.74rem", textTransform: "uppercase" }}>رابط العروس</span>
+            <h1 style={{
+              fontFamily: "var(--font-display,serif)",
+              fontSize: "clamp(1.9rem,4.5vw,3.6rem)",
+              lineHeight: 1.22,
+              margin: "18px 0 16px",
+              color: GOLD,
+              textWrap: "balance"
+            }}>
+              صمّمنا رحلة الحجز<br />لتعكس لحظتك
             </h1>
-            <p style={{ color: MUTED, lineHeight: 1.9, fontSize: "1.06rem", margin: "0 0 28px" }}>
-              اختاري الباقة المناسبة، حددي التاريخ والمكان، وأضيفي تفاصيل التواصل — ثم نرتب كل شيء عبر واتساب بخطوات واضحة.
+            <p style={{ color: MUTED, lineHeight: 1.9, fontSize: "1.02rem", margin: "0 0 28px" }}>
+              خطواتٌ واضحة، تفاصيل كاملة،<br />ومتابعة مباشرة عبر واتساب.
             </p>
             <div className="trust-strip" style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
               {[
@@ -335,7 +408,7 @@ export function ReservationExperience() {
                 { icon: <MessageCircle size={16} />, text: "متابعة واتساب" },
                 { icon: <ShieldCheck size={16} />, text: "بيانات آمنة" }
               ].map(({ icon, text }) => (
-                <span key={text} style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 14px", borderRadius: 999, border: `1px solid ${GOLD_BORDER}`, background: GOLD_GLOW, color: IVORY, fontSize: "0.85rem", fontWeight: 700 }}>
+                <span key={text} style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 14px", borderRadius: 999, border: `1px solid ${GOLD_BORDER}`, background: GOLD_GLOW, color: IVORY, fontSize: "0.84rem", fontWeight: 700 }}>
                   <span style={{ color: GOLD }}>{icon}</span>
                   {text}
                 </span>
@@ -343,18 +416,31 @@ export function ReservationExperience() {
             </div>
           </div>
 
-          {/* Booking card */}
-          <div className="reserve-card" style={{ background: `linear-gradient(145deg,rgba(255,248,236,0.09),rgba(12,12,13,0.72))`, border: `1px solid ${GOLD_BORDER}`, borderRadius: 12, boxShadow: `0 32px 96px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,248,236,0.07)`, padding: "clamp(20px,3.5vw,32px)", position: "relative", overflow: "hidden" }}>
-            {/* shimmer line */}
-            <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "10%", right: "10%", height: 1, background: `linear-gradient(90deg,transparent,${GOLD},transparent)`, opacity: 0.7 }} />
+          {/* ── Booking card — glassmorphism ──────────────────────────────────── */}
+          <div
+            className="reserve-card"
+            style={{
+              background: "linear-gradient(145deg, rgba(255,248,236,0.07), rgba(10,10,10,0.88))",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: `1px solid ${GOLD_BORDER}`,
+              borderRadius: 18,
+              boxShadow: `0 48px 130px rgba(0,0,0,0.72), inset 0 1px 0 rgba(255,248,236,0.07)`,
+              padding: "clamp(20px,3.5vw,34px)",
+              position: "relative",
+              overflow: "hidden"
+            }}
+          >
+            {/* Gold shimmer top line */}
+            <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "8%", right: "8%", height: 1, background: `linear-gradient(90deg,transparent,${GOLD},transparent)`, opacity: 0.85 }} />
 
             <ProgressBar current={step} />
             <Stepper current={step} onNavigate={(i) => setStep(i)} />
 
-            {/* Step 0 — Date + City (city select visible here for URL prefill test) */}
+            {/* ── Step 0 — Date + City ──────────────────────────────────────── */}
             {step === 0 && (
-              <div className="form-scene" style={{ position: "relative", zIndex: 1 }}>
-                <StepHeading icon={<CalendarDays size={20} />} title="التاريخ والمدينة" subtitle="حددي تاريخ المناسبة ومدينتك في المنطقة الشرقية" />
+              <div key="step-0" className="form-scene step-scene" style={{ position: "relative", zIndex: 1 }}>
+                <StepHeading icon={<CalendarDays size={20} />} title="التاريخ والمدينة" subtitle="حددي تاريخ مناسبتك واختاري مدينتك في المنطقة الشرقية" />
                 <div style={{ display: "grid", gap: 14 }}>
                   <GoldField label="نوع المناسبة">
                     <select value={form.eventType} onChange={(e) => update("eventType", e.target.value)} style={inputStyle()}>
@@ -364,29 +450,57 @@ export function ReservationExperience() {
                   <GoldField label="تاريخ المناسبة" error={touched && !form.eventDate ? "اختاري تاريخ المناسبة" : undefined}>
                     <input type="date" min={minEventDate} value={form.eventDate} onChange={(e) => update("eventDate", e.target.value)} style={{ ...inputStyle(), colorScheme: "dark", fontSize: "1.1rem" }} />
                   </GoldField>
+
+                  {/* City cards — 2×2 grid */}
                   <GoldField label="المدينة" error={touched && !form.city ? "اختاري المدينة" : undefined}>
-                    <select value={form.city} onChange={(e) => update("city", e.target.value)} style={inputStyle()}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 9, marginTop: 2 }}>
+                      {CITIES.map((c) => (
+                        <button key={c} type="button" onClick={() => update("city", c)}
+                          style={{
+                            background: form.city === c ? GOLD_DIM : SURFACE,
+                            border: `1px solid ${form.city === c ? GOLD : "rgba(255,248,236,0.12)"}`,
+                            borderRadius: 11,
+                            color: form.city === c ? GOLD : MUTED,
+                            cursor: "pointer",
+                            fontWeight: 800,
+                            padding: "13px 10px",
+                            fontSize: "0.9rem",
+                            transition: "all 200ms ease",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 7,
+                            boxShadow: form.city === c ? `0 0 18px rgba(201,168,76,0.24)` : "none",
+                            transform: form.city === c ? "translateY(-1px)" : "none"
+                          }}>
+                          <MapPin size={14} style={{ opacity: form.city === c ? 1 : 0.45 } as React.CSSProperties} />
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                    {/* Hidden select — preserves verify-launch.mjs city prefill contract */}
+                    <select
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      value={form.city}
+                      onChange={(e) => update("city", e.target.value)}
+                      style={{ position: "absolute", opacity: 0, pointerEvents: "none", width: 0, height: 0 }}
+                    >
                       {cityOptions.map((c) => <option key={c}>{c}</option>)}
                     </select>
                   </GoldField>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
-                    {["الأحساء", "الدمام", "الخبر"].map((c) => (
-                      <button key={c} type="button" onClick={() => update("city", c)} style={{ background: form.city === c ? GOLD_DIM : SURFACE, border: `1px solid ${form.city === c ? GOLD : "rgba(255,248,236,0.10)"}`, borderRadius: 8, color: form.city === c ? GOLD : MUTED, cursor: "pointer", fontWeight: 700, padding: "11px 8px", minHeight: 44, fontSize: "0.85rem", transition: "all 180ms ease" }}>
-                        {c}
-                      </button>
-                    ))}
-                  </div>
-                  <div style={{ background: GOLD_GLOW, border: `1px solid ${GOLD_BORDER}`, borderRadius: 10, padding: "14px 16px", display: "flex", gap: 12, alignItems: "flex-start" }}>
-                    <CalendarDays size={18} style={{ color: GOLD, flexShrink: 0, marginTop: 2 } as React.CSSProperties} />
-                    <p style={{ margin: 0, fontSize: "0.86rem", color: MUTED, lineHeight: 1.7 }}>نتحقق من التوفر ونعود إليك خلال ساعتين عبر واتساب لتأكيد التاريخ.</p>
+
+                  <div style={{ background: GOLD_GLOW, border: `1px solid ${GOLD_BORDER}`, borderRadius: 11, padding: "13px 16px", display: "flex", gap: 11, alignItems: "flex-start" }}>
+                    <Clock size={16} style={{ color: GOLD, flexShrink: 0, marginTop: 2 } as React.CSSProperties} />
+                    <p style={{ margin: 0, fontSize: "0.84rem", color: MUTED, lineHeight: 1.7 }}>نتحقق من التوفر ونعود إليك خلال ساعتين عبر واتساب.</p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Step 1 — Package picker (test navigates here via .stepper button.nth(1)) */}
+            {/* ── Step 1 — Package picker ───────────────────────────────────── */}
             {step === 1 && (
-              <div className="form-scene" style={{ position: "relative", zIndex: 1 }}>
+              <div key="step-1" className="form-scene step-scene" style={{ position: "relative", zIndex: 1 }}>
                 <StepHeading icon={<Video size={20} />} title="اختاري الباقة" subtitle="حسب لحظات يومك ومدة التغطية المطلوبة" />
                 <div className="package-picker" style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))" }}>
                   {packages.map((pkg) => {
@@ -394,16 +508,32 @@ export function ReservationExperience() {
                     return (
                       <button key={pkg.id} type="button" aria-pressed={active} className={active ? "selected" : ""}
                         onClick={() => update("packageId", pkg.id)}
-                        style={{ background: active ? `linear-gradient(145deg,${GOLD_DIM},rgba(255,248,236,0.07))` : SURFACE, border: `1px solid ${active ? GOLD : "rgba(255,248,236,0.12)"}`, borderRadius: 10, color: IVORY, cursor: "pointer", minHeight: 160, padding: 14, textAlign: "start", transition: "transform 180ms ease,border-color 180ms ease,background 180ms ease", position: "relative", overflow: "hidden" }}>
+                        style={{
+                          background: active ? `linear-gradient(145deg,${GOLD_DIM},rgba(255,248,236,0.07))` : SURFACE,
+                          border: `1px solid ${active ? GOLD : "rgba(255,248,236,0.12)"}`,
+                          borderRadius: 13,
+                          color: IVORY,
+                          cursor: "pointer",
+                          minHeight: 172,
+                          padding: 16,
+                          textAlign: "start",
+                          transition: "transform 200ms ease, border-color 200ms ease, background 200ms ease, box-shadow 200ms ease",
+                          position: "relative",
+                          overflow: "hidden",
+                          transform: active ? "translateY(-3px)" : "none",
+                          boxShadow: active ? `0 8px 36px rgba(201,168,76,0.32)` : "none"
+                        }}>
                         {(pkg as { spotlight?: string }).spotlight && (
-                          <span style={{ position: "absolute", top: 8, insetInlineEnd: 8, background: GOLD, color: INK, fontSize: "0.62rem", fontWeight: 900, padding: "2px 6px", borderRadius: 99 }}>
+                          <span style={{ position: "absolute", top: 9, insetInlineEnd: 9, background: `linear-gradient(135deg,${GOLD},${GOLD_LIGHT})`, color: INK, fontSize: "0.59rem", fontWeight: 900, padding: "2px 7px", borderRadius: 99 }}>
                             {(pkg as { spotlight?: string }).spotlight}
                           </span>
                         )}
-                        <span style={{ display: "block", fontSize: "0.75rem", fontWeight: 900, color: GOLD, marginBottom: 6 }}>بكج {pkg.id}</span>
-                        <strong style={{ display: "block", fontSize: "1rem", marginBottom: 8 }}>{pkg.name}</strong>
-                        <em style={{ display: "block", fontStyle: "normal", fontSize: "1.5rem", fontWeight: 700, color: GOLD, lineHeight: 1, marginBottom: 6 }}>{pkg.price}</em>
-                        <small style={{ display: "block", color: MUTED, fontSize: "0.78rem" }}>{pkg.duration}</small>
+                        <span style={{ display: "block", color: active ? GOLD : MUTED, marginBottom: 10 }}>
+                          {PKG_ICONS[pkg.id] ?? <Video size={22} />}
+                        </span>
+                        <strong style={{ display: "block", fontSize: "0.95rem", marginBottom: 6, color: IVORY }}>{pkg.name}</strong>
+                        <em style={{ display: "block", fontStyle: "normal", fontSize: "1.4rem", fontWeight: 700, color: GOLD, lineHeight: 1, marginBottom: 6 }}>{pkg.price}</em>
+                        <small style={{ display: "block", color: MUTED, fontSize: "0.76rem" }}>{pkg.duration}</small>
                       </button>
                     );
                   })}
@@ -411,9 +541,9 @@ export function ReservationExperience() {
               </div>
             )}
 
-            {/* Step 2 — Venue */}
+            {/* ── Step 2 — Venue ────────────────────────────────────────────── */}
             {step === 2 && (
-              <div className="form-scene" style={{ position: "relative", zIndex: 1 }}>
+              <div key="step-2" className="form-scene step-scene" style={{ position: "relative", zIndex: 1 }}>
                 <StepHeading icon={<MapPin size={20} />} title="القاعة والتفاصيل" subtitle="اكتبي اسم القاعة أو الحي وأي تفاصيل عن المكان" />
                 <div style={{ display: "grid", gap: 14 }}>
                   <GoldField label="القاعة أو الموقع" error={touched && !form.venue ? "اكتبي اسم القاعة أو الحي" : undefined}>
@@ -429,9 +559,9 @@ export function ReservationExperience() {
               </div>
             )}
 
-            {/* Step 3 — Contact */}
+            {/* ── Step 3 — Contact ──────────────────────────────────────────── */}
             {step === 3 && (
-              <div className="form-scene" style={{ position: "relative", zIndex: 1 }}>
+              <div key="step-3" className="form-scene step-scene" style={{ position: "relative", zIndex: 1 }}>
                 <StepHeading icon={<User size={20} />} title="تفاصيل التواصل" subtitle="معلوماتك الشخصية — سرية ولا تُشارك" />
                 <div style={{ display: "grid", gap: 14, gridTemplateColumns: "1fr 1fr" }}>
                   <GoldField label="اسمك أو اسم العروس" fullWidth error={touched && form.brideName.trim().length < 2 ? "اكتبي الاسم" : undefined}>
@@ -450,29 +580,50 @@ export function ReservationExperience() {
               </div>
             )}
 
-            {/* Step 4 — Confirmation */}
+            {/* ── Step 4 — Confirmation ─────────────────────────────────────── */}
             {step === 4 && (
-              <div className="form-scene" style={{ position: "relative", zIndex: 1 }}>
+              <div key="step-4" className="form-scene step-scene" style={{ position: "relative", zIndex: 1 }}>
                 <StepHeading icon={<CheckCircle2 size={20} />} title="تأكيد الطلب" subtitle="راجعي التفاصيل ثم أرسليها عبر واتساب" />
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 10, marginBottom: 20 }}>
+
+                {/* Animated summary card */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 10, marginBottom: 22 }}>
                   {[
                     { label: "الباقة",       value: selectedPackage.name, sub: `${selectedPackage.price} ريال · ${selectedPackage.duration}` },
                     { label: "نوع المناسبة", value: form.eventType,       sub: form.eventDate || "التاريخ غير محدد" },
                     { label: "المدينة",      value: form.city,            sub: form.venue || "القاعة غير محددة" },
-                    { label: "التواصل",      value: form.brideName || "-",sub: form.phone  || "-" }
+                    { label: "التواصل",      value: form.brideName || "-", sub: form.phone || "-" }
                   ].map(({ label, value, sub }) => (
-                    <div key={label} style={{ background: SURFACE, border: `1px solid ${GOLD_BORDER}`, borderRadius: 10, padding: 14 }}>
-                      <span style={{ display: "block", color: GOLD, fontSize: "0.74rem", fontWeight: 900, marginBottom: 6 }}>{label}</span>
-                      <strong style={{ display: "block", fontSize: "0.96rem", color: IVORY, marginBottom: 4 }}>{value}</strong>
-                      <small style={{ color: MUTED, fontSize: "0.78rem" }}>{sub}</small>
+                    <div key={label} style={{ background: SURFACE, border: `1px solid ${GOLD_BORDER}`, borderRadius: 11, padding: 14 }}>
+                      <span style={{ display: "block", color: GOLD, fontSize: "0.71rem", fontWeight: 900, marginBottom: 6 }}>{label}</span>
+                      <strong style={{ display: "block", fontSize: "0.93rem", color: IVORY, marginBottom: 4 }}>{value}</strong>
+                      <small style={{ color: MUTED, fontSize: "0.75rem" }}>{sub}</small>
                     </div>
                   ))}
                 </div>
 
-                {/* Primary WhatsApp CTA */}
-                <a href={buildWhatsappUrl()} target="_blank" rel="noreferrer"
-                   style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", padding: "15px 24px", borderRadius: 10, background: `linear-gradient(135deg,${GOLD},#b8923e)`, color: INK, fontWeight: 800, fontSize: "1.05rem", textDecoration: "none", marginBottom: 12, boxShadow: `0 4px 24px rgba(201,168,76,0.35)` }}>
-                  <MessageCircle size={20} />
+                {/* Primary WhatsApp CTA — pulsing gold */}
+                <a
+                  href={buildWhatsappUrl()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pulse-wa"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 11,
+                    width: "100%",
+                    padding: "16px 24px",
+                    borderRadius: 13,
+                    background: `linear-gradient(135deg,${GOLD},${GOLD_LIGHT})`,
+                    color: INK,
+                    fontWeight: 800,
+                    fontSize: "1.07rem",
+                    textDecoration: "none",
+                    marginBottom: 12
+                  }}
+                >
+                  <MessageCircle size={22} />
                   إرسال التفاصيل عبر واتساب
                 </a>
 
@@ -483,14 +634,14 @@ export function ReservationExperience() {
                 </button>
 
                 {message && (
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, background: "rgba(130,145,118,0.16)", border: "1px solid rgba(130,145,118,0.38)", borderRadius: 8, color: IVORY, lineHeight: 1.7, marginTop: 16, padding: "12px 14px", fontSize: "0.88rem" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, background: "rgba(130,145,118,0.16)", border: "1px solid rgba(130,145,118,0.38)", borderRadius: 8, color: IVORY, lineHeight: 1.7, marginTop: 16, padding: "12px 14px", fontSize: "0.87rem" }}>
                     <CheckCircle2 size={18} style={{ color: GOLD, flexShrink: 0 } as React.CSSProperties} />
                     <span>{message}</span>
                   </div>
                 )}
 
                 {/* Deposit section */}
-                <div className="reserve-deposit" style={{ marginTop: 20, padding: 16, border: `1px solid ${GOLD_BORDER}`, borderRadius: 12, background: `linear-gradient(145deg,${GOLD_GLOW},rgba(255,248,236,0.04))`, display: "grid", gap: 12 }}>
+                <div className="reserve-deposit" style={{ marginTop: 20, padding: 16, border: `1px solid ${GOLD_BORDER}`, borderRadius: 13, background: `linear-gradient(145deg,${GOLD_GLOW},rgba(255,248,236,0.04))`, display: "grid", gap: 12 }}>
                   <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                     <strong style={{ color: IVORY }}>تثبيت التاريخ بعربون التأكيد</strong>
                     {deposit && (
@@ -501,7 +652,7 @@ export function ReservationExperience() {
                     )}
                   </div>
                   {paymentLink ? (
-                    <a href={paymentLink} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", padding: "12px 20px", borderRadius: 8, background: `linear-gradient(135deg,${GOLD},#b8923e)`, color: INK, fontWeight: 800, textDecoration: "none" }}>
+                    <a href={paymentLink} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", padding: "12px 20px", borderRadius: 9, background: `linear-gradient(135deg,${GOLD},#b8923e)`, color: INK, fontWeight: 800, textDecoration: "none" }}>
                       <CreditCard size={18} />
                       ادفعي العربون الآن (مدى / بطاقة)
                     </a>
@@ -523,7 +674,7 @@ export function ReservationExperience() {
                           </li>
                         ))}
                       </ol>
-                      <a href={receiptWhatsappUrl} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", padding: "12px 20px", borderRadius: 8, background: `linear-gradient(135deg,${GOLD},#b8923e)`, color: INK, fontWeight: 800, textDecoration: "none" }}>
+                      <a href={receiptWhatsappUrl} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", padding: "12px 20px", borderRadius: 9, background: `linear-gradient(135deg,${GOLD},#b8923e)`, color: INK, fontWeight: 800, textDecoration: "none" }}>
                         <Upload size={18} />
                         أرسلي إيصال التحويل عبر واتساب
                       </a>
@@ -537,15 +688,51 @@ export function ReservationExperience() {
               </div>
             )}
 
-            {/* Nav buttons */}
+            {/* ── Nav buttons ──────────────────────────────────────────────── */}
             {step < STEPS.length - 1 && (
               <div className="form-actions" style={{ display: "flex", gap: 10, justifyContent: "space-between", marginTop: 24, position: "relative", zIndex: 1 }}>
-                <button className="ghost-cta" disabled={step === 0} onClick={back} type="button" style={{ opacity: step === 0 ? 0.3 : 1 }}>
-                  <ArrowRight size={17} /> رجوع
+                <button
+                  className="ghost-cta"
+                  disabled={step === 0}
+                  onClick={back}
+                  type="button"
+                  style={{
+                    opacity: step === 0 ? 0.3 : 1,
+                    border: `1px solid ${GOLD_BORDER}`,
+                    color: IVORY,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "11px 20px",
+                    borderRadius: 9,
+                    cursor: step === 0 ? "default" : "pointer",
+                    background: "transparent",
+                    fontSize: "0.95rem",
+                    fontWeight: 700,
+                    transition: "opacity 200ms ease"
+                  }}
+                >
+                  <ArrowRight size={16} /> رجوع
                 </button>
-                <button onClick={next} type="button"
-                  style={{ background: `linear-gradient(135deg,${GOLD},#b8923e)`, color: INK, fontWeight: 800, border: "none", display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 8, cursor: "pointer", fontSize: "1rem" }}>
-                  التالي <ArrowLeft size={17} />
+                <button
+                  onClick={next}
+                  type="button"
+                  style={{
+                    background: `linear-gradient(135deg,${GOLD},${GOLD_LIGHT})`,
+                    color: INK,
+                    fontWeight: 800,
+                    border: "none",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "11px 26px",
+                    borderRadius: 9,
+                    cursor: "pointer",
+                    fontSize: "0.95rem",
+                    boxShadow: `0 4px 22px rgba(201,168,76,0.32)`
+                  }}
+                >
+                  التالي <ArrowLeft size={16} />
                 </button>
               </div>
             )}
@@ -553,11 +740,11 @@ export function ReservationExperience() {
         </div>
       </section>
 
-      {/* How it works */}
+      {/* ── How it works ─────────────────────────────────────────────────────── */}
       <section className="reserve-infographic" aria-label="شرح طريقة الحجز">
         {[
-          { icon: <Video size={28} />, title: "ابدئي من الباقة",           body: "اختاري بين الزفة، تفاصيل العروس، Half Day، أو تغطية يوم كامل." },
-          { icon: <MapPin size={28} />, title: "المكان والتاريخ",           body: "اكتبي المدينة والقاعة وحددي التاريخ حتى نراجع التوفر فوراً." },
+          { icon: <Video size={28} />,       title: "ابدئي من الباقة",           body: "اختاري بين الزفة، تفاصيل العروس، Half Day، أو تغطية يوم كامل." },
+          { icon: <MapPin size={28} />,      title: "المكان والتاريخ",           body: "اكتبي المدينة والقاعة وحددي التاريخ حتى نراجع التوفر فوراً." },
           { icon: <MessageCircle size={28} />, title: "متابعة واضحة في واتساب", body: "تصل رسالة مرتبة بجميع التفاصيل فتبدأ المحادثة من نقطة واضحة." }
         ].map(({ icon, title, body }) => (
           <article key={title}>
@@ -573,44 +760,7 @@ export function ReservationExperience() {
   );
 }
 
-// ─── Shared primitives ─────────────────────────────────────────────────────────
-function StepHeading({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle: string }) {
-  return (
-    <div style={{ marginBottom: 20 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-        <span style={{ color: GOLD }}>{icon}</span>
-        <h2 style={{ margin: 0, fontSize: "1.18rem", fontWeight: 800, color: IVORY }}>{title}</h2>
-      </div>
-      <p style={{ margin: 0, fontSize: "0.84rem", color: MUTED }}>{subtitle}</p>
-    </div>
-  );
-}
-
-function GoldField({ label, error, fullWidth, children }: { label: string; error?: string; fullWidth?: boolean; children: React.ReactNode }) {
-  return (
-    <label style={{ display: "grid", gap: 8, color: MUTED, fontWeight: 800, fontSize: "0.9rem", gridColumn: fullWidth ? "1 / -1" : undefined }}>
-      <span>{label}</span>
-      {children}
-      {error && <em style={{ color: "#ffc0b8", fontSize: "0.82rem", fontStyle: "normal", fontWeight: 700 }}>{error}</em>}
-    </label>
-  );
-}
-
-function inputStyle(): React.CSSProperties {
-  return {
-    background: "rgba(255,248,236,0.09)",
-    border: `1px solid ${GOLD_BORDER}`,
-    borderRadius: 8,
-    color: IVORY,
-    minHeight: 48,
-    outline: "none",
-    padding: "0.8rem 0.92rem",
-    width: "100%",
-    fontFamily: "inherit",
-    fontSize: "1rem"
-  };
-}
-
+// ─── inferSource ──────────────────────────────────────────────────────────────
 function inferSource(referrer: string, requestedCity: string | null, packageId: string) {
   const citySlug = requestedCity && cityFromQuery[requestedCity] ? requestedCity : "";
   const withIntent = (base: string) => {
@@ -624,7 +774,11 @@ function inferSource(referrer: string, requestedCity: string | null, packageId: 
     const url = new URL(referrer);
     if (url.hostname !== window.location.hostname) return withIntent("reserve-page");
     const p = url.pathname.replace(/\/$/, "") || "/";
-    const map: Record<string, string> = { "/": "home-hero", "/faq": "faq-page", "/portfolio": "portfolio-page", "/zaffa": "zaffa-page", "/engagement": "engagement-page", "/reviews": "reviews-page", "/about": "about-page", "/packages": "packages-hero" };
+    const map: Record<string, string> = {
+      "/": "home-hero", "/faq": "faq-page", "/portfolio": "portfolio-page",
+      "/zaffa": "zaffa-page", "/engagement": "engagement-page",
+      "/reviews": "reviews-page", "/about": "about-page", "/packages": "packages-hero"
+    };
     return withIntent(map[p] ?? p.slice(1) ?? "reserve-page");
   } catch {
     return withIntent("reserve-page");
