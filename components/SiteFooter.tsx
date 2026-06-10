@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, MapPin, ShieldCheck } from "lucide-react";
+import { Mail, MessageCircle, MapPin, ShieldCheck } from "lucide-react";
 import { instagramUrl, tiktokUrl, whatsappLink } from "../lib/content";
 
 const footerColumns: { title: string; links: { href: string; label: string }[] }[] = [
@@ -27,6 +27,7 @@ const footerColumns: { title: string; links: { href: string; label: string }[] }
       { href: "/alahsa", label: "الأحساء" },
       { href: "/dammam", label: "الدمام" },
       { href: "/khobar", label: "الخبر" },
+      { href: "/qatif", label: "القطيف" },
       { href: "/guides", label: "دليل الزواجات" }
     ]
   },
@@ -64,6 +65,9 @@ export function SiteFooter() {
               </a>
               <a href={tiktokUrl} target="_blank" rel="noreferrer" aria-label="تيك توك">
                 <span aria-hidden="true" style={{ fontWeight: 800, fontSize: 13 }}>TikTok</span>
+              </a>
+              <a href="mailto:info@asmaa.video" aria-label="البريد الإلكتروني">
+                <Mail size={18} aria-hidden="true" />
               </a>
             </div>
           </div>

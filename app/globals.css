@@ -7419,3 +7419,239 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
     transition: none;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   Fable 5 R2 — /portfolio rebuilt as a zero-JS server page.
+   Marketing pages are JS-pruned at build (scripts/prune-static-js.mjs),
+   so filtering = hidden radios + sibling selectors, and every hover /
+   reveal effect below is pure CSS.
+   ════════════════════════════════════════════════════════════════════ */
+
+.pf-page { background: #0a0a0a; color: #fff8ec; min-height: 100vh; }
+
+.pf-hero { padding: 72px 24px 40px; text-align: center; max-width: 760px; margin: 0 auto; }
+.pf-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: #e7cf95;
+  text-transform: uppercase;
+}
+.pf-hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  margin: 12px 0 16px;
+  line-height: 1.3;
+  background: linear-gradient(180deg, #fff8ec 0%, #e7cf95 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.pf-hero p { color: rgba(246, 241, 230, 0.72); font-size: 17px; line-height: 1.8; margin: 0; }
+
+/* ── Filters ── */
+.pf-radio { position: absolute; opacity: 0; pointer-events: none; }
+.pf-filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 24px 40px;
+}
+.pf-filters label {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(246, 241, 230, 0.66);
+  font-size: 15px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.pf-filters label:hover { border-color: rgba(201, 168, 76, 0.55); color: #e7cf95; }
+#pf-all:checked ~ .pf-filters label[for="pf-all"],
+#pf-weddings:checked ~ .pf-filters label[for="pf-weddings"],
+#pf-engagement:checked ~ .pf-filters label[for="pf-engagement"],
+#pf-zaffa:checked ~ .pf-filters label[for="pf-zaffa"] {
+  border-color: #e7cf95;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.25), rgba(241, 203, 130, 0.12));
+  color: #f1cb82;
+  font-weight: 700;
+}
+#pf-weddings:checked ~ .pf-masonry .pf-tile:not([data-cat="weddings"]),
+#pf-engagement:checked ~ .pf-masonry .pf-tile:not([data-cat="engagement"]),
+#pf-zaffa:checked ~ .pf-masonry .pf-tile:not([data-cat="zaffa"]) { display: none; }
+
+/* ── Masonry ── */
+.pf-masonry {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 150px;
+  grid-auto-flow: dense;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .pf-masonry { grid-template-columns: repeat(3, 1fr); }
+}
+.pf-tile {
+  grid-row: span 2;
+  position: relative;
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(241, 203, 130, 0.15);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.32);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: pf-rise 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+.pf-tile-tall { grid-row: span 3; }
+.pf-tile:hover,
+.pf-tile:focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(201, 168, 76, 0.6);
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.4), 0 28px 70px rgba(0, 0, 0, 0.55);
+}
+@keyframes pf-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pf-tile-bloom, .pf-tile-vignette, .pf-tile-pattern { position: absolute; inset: 0; pointer-events: none; }
+.pf-tile-vignette {
+  background: linear-gradient(to top, rgba(5, 5, 7, 0.82) 0%, rgba(5, 5, 7, 0.18) 42%, transparent 70%);
+}
+/* Islamic 8-fold star lattice, revealed on hover — pure CSS data-URI */
+.pf-tile-pattern {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.34' stroke-width='1'%3E%3Cpath d='M36 4l9 23 23 9-23 9-9 23-9-23-23-9 23-9z'/%3E%3Ccircle cx='36' cy='36' r='10'/%3E%3Cpath d='M0 36h12M60 36h12M36 0v12M36 60v12'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+.pf-tile:hover .pf-tile-pattern,
+.pf-tile:focus-within .pf-tile-pattern { opacity: 1; }
+
+.pf-tile-badge {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(241, 203, 130, 0.35);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+.pf-tile-link {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  z-index: 1;
+}
+.pf-tile-play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.13);
+  border: 2px solid rgba(255, 255, 255, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.pf-tile-play svg { margin-inline-start: 3px; }
+.pf-tile:hover .pf-tile-play,
+.pf-tile-link:focus-visible .pf-tile-play {
+  transform: scale(1.12);
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 0 28px rgba(201, 168, 76, 0.45);
+}
+.pf-tile-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+  pointer-events: none;
+}
+.pf-tile-caption h2 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+  color: #fff8ec;
+  line-height: 1.35;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+.pf-tile-meta { display: flex; align-items: center; gap: 14px; font-size: 13px; color: rgba(255, 248, 236, 0.86); }
+.pf-tile-meta > span { display: inline-flex; align-items: center; gap: 5px; }
+.pf-tile-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  opacity: 0.72;
+  transition: opacity 0.25s ease;
+}
+.pf-tile:hover .pf-tile-hint { opacity: 1; }
+
+/* ── CTA ── */
+.pf-cta {
+  text-align: center;
+  padding: 60px 24px 100px;
+  border-top: 1px solid rgba(241, 203, 130, 0.12);
+}
+.pf-cta h2 { font-size: clamp(22px, 4vw, 36px); font-weight: 700; margin: 12px 0 20px; }
+.pf-cta p { color: rgba(246, 241, 230, 0.66); font-size: 16px; max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+.pf-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 16px 36px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e7cf95, #c99953);
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(201, 153, 83, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.pf-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(201, 168, 76, 0.4), 0 12px 40px rgba(201, 153, 83, 0.4); }
+
+/* ── Home hero: word-by-word reveal (pure CSS animation-delay) ── */
+.av2-hero-title .av2-w {
+  display: inline-block;
+  background: linear-gradient(180deg, #fff8ec 0%, #e7cf95 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  animation: pf-word-in 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes pf-word-in {
+  from { opacity: 0; transform: translateY(0.35em); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-tile, .av2-hero-title .av2-w { animation: none; opacity: 1; transform: none; }
+  .pf-tile, .pf-tile-play, .pf-cta-btn { transition: none; }
+}

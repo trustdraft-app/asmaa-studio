@@ -277,7 +277,11 @@ export default function HomePage() {
 
         <div className="av2-hero-inner">
           <p className="av2-hero-kicker">Saudi wedding cinema · تصوير نسائي في الشرقية</p>
-          <h1 className="av2-hero-title">لحظات تُروى للأبد</h1>
+          <h1 className="av2-hero-title">
+            <span className="av2-w" style={{ animationDelay: "0.15s" }}>لحظات</span>{" "}
+            <span className="av2-w" style={{ animationDelay: "0.4s" }}>تُروى</span>{" "}
+            <span className="av2-w" style={{ animationDelay: "0.65s" }}>للأبد</span>
+          </h1>
           <p className="av2-hero-sub">
             Every moment of your day, filmed with the calm it deserves — في الأحساء والدمام والخبر.
           </p>
