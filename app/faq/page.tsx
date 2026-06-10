@@ -42,7 +42,7 @@ const breadcrumbJsonLd = {
 const faqs = [
   {
     q: "ما هي أسعار الباقات؟",
-    a: "تبدأ الباقات من بكج الزفة للمناسبات القصيرة، وتصل إلى الباقات الشاملة ليوم كامل. كل باقة مرتبطة بعدد اللحظات والساعات المغطاة. تواصلي عبر واتساب أو رابط العروس للحصول على السعر الدقيق حسب تاريخك ومدينتك."
+    a: "أسعارنا معلنة بالكامل: ٦٠٠ ريال لبكج الزفة، ١٢٠٠ لبكج الزفة المطور، ١٥٠٠ لبكج الخطوبة والملكة، ١٧٠٠ لباقة Half Day مع First Look، و٢٥٠٠ لباقة Full Day الشاملة. كل الأسعار مكتوبة في صفحة الباقات وملف PDF واحد قبل أي محادثة — بدون مفاجآت."
   },
   {
     q: "ما الفرق بين الباقات المتاحة؟",
@@ -132,7 +132,7 @@ export default function FaqPage() {
           <h2 className="section-title">أسئلة الأسعار والباقات والتسليم — موجودة هنا.</h2>
           <div className="faq-accordion">
             {faqs.map((item, i) => (
-              <details key={i} className="faq-item">
+              <details key={i} className="faq-item reveal-on-scroll" style={{ animationDelay: `${Math.min(i, 6) * 70}ms` }}>
                 <summary className="faq-question">
                   <span>{item.q}</span>
                   <span className="faq-chevron" aria-hidden="true">&#x25BE;</span>
@@ -150,15 +150,15 @@ export default function FaqPage() {
           <span className="eyebrow">الخطوة التالية</span>
           <h2 className="section-title">إذا أصبح كل شيء واضحًا، انتقلي مباشرة للحجز.</h2>
           <div className="board-lever-grid">
-            <article className="board-lever-card">
+            <article className="board-lever-card reveal-on-scroll">
               <h3>رابط العروس</h3>
               <p>اختاري المدينة والتاريخ والباقة واكتبي تفاصيل يومك في خطوات قصيرة.</p>
             </article>
-            <article className="board-lever-card">
+            <article className="board-lever-card reveal-on-scroll">
               <h3>واتساب مباشر</h3>
               <p>إذا عندك سؤال إضافي ابدئي المحادثة مباشرة — ذكري التاريخ والمدينة والباقة.</p>
             </article>
-            <article className="board-lever-card">
+            <article className="board-lever-card reveal-on-scroll">
               <h3>تواصلي معنا</h3>
               <p>هاتف أو إيميل أو موقعنا في المنطقة الشرقية — كل طرق التواصل في صفحة واحدة.</p>
             </article>

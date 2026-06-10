@@ -152,7 +152,7 @@ export default function ZaffaPage() {
           <h2 className="section-title">كيف تعرفين أن بكج الزفة هو الاختيار المناسب؟</h2>
           <div className="board-lever-grid">
             {decisionPoints.map((point) => (
-              <article className="board-lever-card" key={point.title}>
+              <article className="board-lever-card reveal-on-scroll" key={point.title}>
                 <Sparkles size={22} />
                 <h3>{point.title}</h3>
                 <p>{point.detail}</p>
@@ -168,7 +168,7 @@ export default function ZaffaPage() {
           <h2 className="section-title">إذا اتسعت الذكرى قليلًا، فهذه هي الخطوة التالية الأقرب.</h2>
           <div className="packages-grid packages-grid-20x guide-package-grid">
             {[zaffaPackage, enhancedZaffaPackage].map((item) => (
-              <article className="package-card package-card-20x" key={item.id}>
+              <article className="package-card package-card-20x reveal-on-scroll" key={item.id}>
                 <header>
                   <small>بكج {item.id}</small>
                   <h3>{item.name}</h3>
@@ -221,12 +221,12 @@ export default function ZaffaPage() {
           </article>
         </div>
         <div className="section-inner board-lever-grid">
-          <article className="board-lever-card">
+          <article className="board-lever-card reveal-on-scroll">
             <Clock3 size={22} />
             <h3>وقت أقل</h3>
             <p>هذه الباقة مناسبة عندما يكون جدول اليوم ضيقًا وتريدين حفظ اللحظة الأساسية فقط.</p>
           </article>
-          <article className="board-lever-card">
+          <article className="board-lever-card reveal-on-scroll">
             <CalendarDays size={22} />
             <h3>قرار أسرع</h3>
             <p>الأسعار والمدة واضحة هنا، لذلك تكون رسالة واتساب الأولى أقرب إلى الحجز من الاستفسار العام.</p>

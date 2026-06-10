@@ -154,7 +154,7 @@ export default function EngagementPage() {
           <h2 className="section-title">كيف تعرفين أن بكج الخطوبة هو المسار المناسب؟</h2>
           <div className="board-lever-grid">
             {decisionPoints.map((point) => (
-              <article className="board-lever-card" key={point.title}>
+              <article className="board-lever-card reveal-on-scroll" key={point.title}>
                 <Sparkles size={22} />
                 <h3>{point.title}</h3>
                 <p>{point.detail}</p>
@@ -170,7 +170,7 @@ export default function EngagementPage() {
           <h2 className="section-title">إذا توسعت اللقطات قبل الزفة، فهذه هي الخطوة الأقرب بعدها.</h2>
           <div className="packages-grid packages-grid-20x guide-package-grid">
             {[engagementPackage, halfDayPackage].map((item) => (
-              <article className="package-card package-card-20x" key={item.id}>
+              <article className="package-card package-card-20x reveal-on-scroll" key={item.id}>
                 <header>
                   <small>بكج {item.id}</small>
                   <h3>{item.name}</h3>
@@ -223,17 +223,17 @@ export default function EngagementPage() {
           </article>
         </div>
         <div className="section-inner board-lever-grid">
-          <article className="board-lever-card">
+          <article className="board-lever-card reveal-on-scroll">
             <Clock3 size={22} />
             <h3>المدة</h3>
             <p>ساعتان ونصف تكفي عادة لخطوبة أو ملكة مرتبة التركيز على الشبكة والتلبيس والزفة.</p>
           </article>
-          <article className="board-lever-card">
+          <article className="board-lever-card reveal-on-scroll">
             <CalendarDays size={22} />
             <h3>الحجز المباشر</h3>
             <p>يمكنك فتح رابط العروس مع اختيار باقة 05 مباشرة حتى تصل الرسالة بالبكج الصحيح من البداية.</p>
           </article>
-          <article className="board-lever-card">
+          <article className="board-lever-card reveal-on-scroll">
             <MessageCircle size={22} />
             <h3>متى يكون السؤال عبر واتساب أفضل؟</h3>
             <p>إذا كانت المناسبة تجمع بين خطوبة وتفاصيل عروس أوسع، اكتبي ذلك مباشرة لنحدد هل الخطوبة أو Half Day أنسب.</p>
