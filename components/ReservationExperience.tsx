@@ -27,12 +27,17 @@ const CITIES = [
 ];
 
 const PACKAGES = [
-  { id: "01", nameAr: "بكج الزفة",        icon: "🎞️", price: "600 ريال",      duration: "20 دقيقة",  bullets: ["لحظة الدخول", "مونتاج مختصر", "تسليم سريع"], popular: false },
-  { id: "02", nameAr: "بكج الزفة المطور", icon: "🎬", price: "1,200 ريال",    duration: "ساعة",      bullets: ["الكوشة والكيك", "لقطات القاعة", "مونتاج سينمائي"], popular: false },
-  { id: "03", nameAr: "الباقة الجزئية",   icon: "📸", price: "من 1,700 ريال", duration: "ساعتان",    bullets: ["200+ صورة محررة", "غرفة تجهيز", "تسليم خلال أسبوع"], popular: false },
-  { id: "04", nameAr: "يوم كامل",         icon: "👑", price: "من 2,500 ريال", duration: "8 ساعات",   bullets: ["600+ صورة محررة", "فيلم الزفاف الكامل", "تغطية شاملة"], popular: true  },
-  { id: "05", nameAr: "باقة الخطوبة",     icon: "💝", price: "من 1,500 ريال", duration: "ساعة ونصف", bullets: ["150+ صورة محررة", "فيديو قصير", "ألبوم رقمي"], popular: false },
+  { id: "01", nameAr: "بكج 01 — فيديو زفة فقط",      icon: "🎞️", price: "600 ريال",   priceNum: 600,  duration: "20 دقيقة",     bullets: ["إضاءة المون لايت", "مونتاج احترافي", "الحضور قبل الزفة بربع ساعة"], popular: false },
+  { id: "02", nameAr: "بكج 02 — فيديو زفة + كواليس", icon: "🎬", price: "1200 ريال",  priceNum: 1200, duration: "ساعتان",       bullets: ["فيديو زفة", "كواليس جلسة تصوير الفوتو", "مونتاج احترافي"], popular: false },
+  { id: "03", nameAr: "بكج 03 — Half Day",           icon: "📽️", price: "1700 ريال",  priceNum: 1700, duration: "3 ساعات",      bullets: ["الفيرست لوك", "تفاصيل العروس والكوشة", "كواليس الفوتو + زفة واحدة"], popular: false },
+  { id: "04", nameAr: "بكج 04 — Full Day",           icon: "👑", price: "2500 ريال",  priceNum: 2500, duration: "6 ساعات",      bullets: ["الصالون: ميك اب وشعر", "الفيرست لوك وتفاصيل العروس", "الكوشة والكواليس والزفات"], popular: true  },
+  { id: "05", nameAr: "بكج 05 — بكج الخطوبة",        icon: "💍", price: "1500 ريال",  priceNum: 1500, duration: "ساعتان ونصف",  bullets: ["الشبكة والتلبيس", "تفاصيل العروس والكوشة", "الكيك والزفة بمونتاج احترافي"], popular: false },
 ];
+
+const ADDONS = [
+  { id: "mannequin",    label: "منيكان فستان العروس",                price: 150 },
+  { id: "colorGrading", label: "التلوين السينمائي + تنعيم البشرة",   price: 350 },
+] as const;
 
 // City-page slugs → wizard city ids. Every /{city} page links to
 // /reserve?city={slug}; sub-areas fall back to their parent city.
@@ -401,11 +406,12 @@ function Field({ label, optional, children }: { label: string; optional?: boolea
   );
 }
 
-function StepDetails({ date, setDate, name, setName, phone, setPhone, notes, setNotes }: {
+function StepDetails({ date, setDate, name, setName, phone, setPhone, notes, setNotes, addons, toggleAddon }: {
   date: string; setDate: (v: string) => void;
   name: string; setName: (v: string) => void;
   phone: string; setPhone: (v: string) => void;
   notes: string; setNotes: (v: string) => void;
+  addons: Record<string, boolean>; toggleAddon: (id: string) => void;
 }) {
   return (
     <div className="step-scene" dir="rtl">
@@ -433,6 +439,32 @@ function StepDetails({ date, setDate, name, setName, phone, setPhone, notes, set
             onChange={(e) => setPhone(e.target.value.replace(/[^\d+\s]/g, ""))}
           />
         </Field>
+        <Field label="الإضافات" optional>
+          <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
+            {ADDONS.map((a) => {
+              const on = !!addons[a.id];
+              return (
+                <label key={a.id} style={{
+                  display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,
+                  cursor:"pointer",borderRadius:16,padding:"14px 16px",
+                  border:`1.5px solid ${on ? GOLD : "rgba(255,248,236,.12)"}`,
+                  background: on ? "rgba(201,168,76,.1)" : "rgba(255,255,255,.05)",
+                  boxShadow: on ? "0 0 24px rgba(201,168,76,.25)" : "none",
+                  transition:"all 250ms ease",
+                }}>
+                  <span style={{ display:"flex",alignItems:"center",gap:10 }}>
+                    <input type="checkbox" checked={on} onChange={() => toggleAddon(a.id)}
+                      style={{ accentColor:GOLD,width:18,height:18,flexShrink:0 }} />
+                    <span style={{ fontSize:".86rem",fontWeight:700,color: on ? GOLD_LIGHT : "rgba(255,248,236,.85)" }}>
+                      {a.label}
+                    </span>
+                  </span>
+                  <span style={{ fontSize:".78rem",fontWeight:900,color:GOLD,flexShrink:0 }}>+{a.price} ريال</span>
+                </label>
+              );
+            })}
+          </div>
+        </Field>
         <Field label="ملاحظات" optional>
           <textarea className="input-field" rows={3}
             placeholder="أي تفاصيل أو طلبات خاصة..."
@@ -445,16 +477,24 @@ function StepDetails({ date, setDate, name, setName, phone, setPhone, notes, set
 }
 
 // ─── Step 4 — Confirm ─────────────────────────────────────────────────────────
-function StepConfirm({ eventType, city, pkgId, date, name, phone, notes, waLink }: {
+function StepConfirm({ eventType, city, pkgId, date, name, phone, notes, addons, waLink }: {
   eventType: string; city: string; pkgId: string;
-  date: string; name: string; phone: string; notes: string; waLink: string;
+  date: string; name: string; phone: string; notes: string;
+  addons: Record<string, boolean>; waLink: string;
 }) {
   const ev  = EVENT_TYPES.find((e) => e.id === eventType);
   const pkg = PACKAGES.find((p) => p.id === pkgId);
+  const selectedAddons = ADDONS.filter((a) => addons[a.id]);
+  const addonTotal = selectedAddons.reduce((sum, a) => sum + a.price, 0);
+  const total = (pkg?.priceNum ?? 0) + addonTotal;
+  const deposit = Math.ceil(total / 2);
   const rows = [
     { label:"المناسبة", value: ev?.label ?? eventType },
     { label:"المدينة",  value: city },
     { label:"الباقة",   value: pkg ? `${pkg.nameAr} — ${pkg.price}` : pkgId },
+    ...selectedAddons.map((a) => ({ label:"إضافة", value: `${a.label} (+${a.price} ريال)` })),
+    { label:"الإجمالي", value: `${total} ريال` },
+    { label:"العربون (50%)", value: `${deposit} ريال لتأكيد الحجز` },
     { label:"التاريخ",  value: formatDateArabic(date) },
     { label:"الاسم",    value: name },
     ...(phone ? [{ label:"الجوال", value: phone }] : []),
@@ -508,7 +548,10 @@ export function ReservationExperience() {
   const [name,      setName]      = useState("");
   const [phone,     setPhone]     = useState("");
   const [notes,     setNotes]     = useState("");
+  const [addons,    setAddons]    = useState<Record<string, boolean>>({});
   const [prefill,   setPrefill]   = useState<{ city: string; pkg: string }>({ city: "", pkg: "" });
+
+  const toggleAddon = (id: string) => setAddons((prev) => ({ ...prev, [id]: !prev[id] }));
 
   // Restore city/package prefill from query params (?city=dammam&package=02) —
   // every city page and package card links here with these params so the bride
@@ -541,12 +584,21 @@ export function ReservationExperience() {
   function buildWA() {
     const ev  = EVENT_TYPES.find((e) => e.id === eventType);
     const pkg = PACKAGES.find((p) => p.id === pkgId);
+    const selectedAddons = ADDONS.filter((a) => addons[a.id]);
+    const addonTotal = selectedAddons.reduce((sum, a) => sum + a.price, 0);
+    const total = (pkg?.priceNum ?? 0) + addonTotal;
+    const deposit = Math.ceil(total / 2);
     const msg = [
-      "مرحباً 👋 أود الحجز",
+      "مرحباً 👋 أود الحجز مع أسماء فيديو",
       `المناسبة: ${ev?.label ?? eventType}`,
-      `المدينة: ${city}`,
-      `الباقة: ${pkg ? `${pkg.nameAr} — ${pkg.price}` : pkgId}`,
-      date ? `التاريخ: ${formatDateArabic(date)}` : "",
+      `📦 البكج: ${pkg ? `${pkg.nameAr} — ${pkg.price}` : pkgId}`,
+      date ? `📅 التاريخ: ${formatDateArabic(date)}` : "",
+      `📍 المدينة: ${city}`,
+      selectedAddons.length
+        ? `✨ الإضافات:\n${selectedAddons.map((a) => `   • ${a.label} (+${a.price} ريال)`).join("\n")}`
+        : "",
+      total ? `💰 الإجمالي: ${total} ريال` : "",
+      total ? `(العربون 50% = ${deposit} ريال لتأكيد الحجز — المتبقي يُسلَّم يوم المناسبة قبل بداية التصوير)` : "",
       name ? `الاسم: ${name}` : "",
       phone ? `الجوال: ${phone}` : "",
       notes.trim() ? `ملاحظات: ${notes.trim()}` : "",
@@ -560,9 +612,10 @@ export function ReservationExperience() {
       case 1: return <StepCity    city={city}           setCity={setCity} />;
       case 2: return <StepPackage pkgId={pkgId}         setPkgId={setPkgId} />;
       case 3: return <StepDetails date={date} setDate={setDate} name={name} setName={setName}
-                       phone={phone} setPhone={setPhone} notes={notes} setNotes={setNotes} />;
+                       phone={phone} setPhone={setPhone} notes={notes} setNotes={setNotes}
+                       addons={addons} toggleAddon={toggleAddon} />;
       case 4: return <StepConfirm eventType={eventType} city={city} pkgId={pkgId}
-                       date={date} name={name} phone={phone} notes={notes} waLink={buildWA()} />;
+                       date={date} name={name} phone={phone} notes={notes} addons={addons} waLink={buildWA()} />;
       default: return null;
     }
   }
@@ -595,10 +648,10 @@ export function ReservationExperience() {
           {/* Brand mark */}
           <div style={{ textAlign:"center",marginBottom:20 }}>
             <span style={{ fontSize:".72rem",fontWeight:900,letterSpacing:".25em",color:GOLD,textTransform:"uppercase",opacity:.8 }}>
-              Asmaa Studio ✦
+              Asmaa Video ✦
             </span>
             <div style={{ fontSize:".62rem",color:"rgba(255,248,236,.35)",marginTop:4,letterSpacing:".08em" }}>
-              أسماء ستوديو · المنطقة الشرقية
+              أسماء فيديو · المنطقة الشرقية
             </div>
           </div>
 
@@ -607,7 +660,7 @@ export function ReservationExperience() {
           <div style={{ flex:1 }}>{renderStep()}</div>
 
           <p style={{ textAlign:"center",fontSize:".65rem",color:"rgba(255,248,236,.2)",marginTop:24 }}>
-            © {new Date().getFullYear()} Asmaa Studio · المنطقة الشرقية
+            © {new Date().getFullYear()} Asmaa Video · المنطقة الشرقية
           </p>
         </div>
 

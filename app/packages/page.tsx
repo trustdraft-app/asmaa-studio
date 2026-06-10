@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, Check, Crown, Download, MessageCircle, Sparkles } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
-import { packages, whatsappLink } from "../../lib/content";
+import { packageAddOns, packages, paymentTerms, whatsappLink } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import PackageCalculator from "./PackageCalculator";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const META_TITLE = "باقات Asmaa Studio التفاعلية | اختاري واحجزي خلال ثوانٍ";
+const META_TITLE = "باقات تصوير الفيديو — أسماء فيديو | Asmaa Video";
 const META_DESC =
-  "صفحة باقات Asmaa Studio التفاعلية: ٥ باقات سعودية من ٦٠٠ ريال إلى ٢٥٠٠، تقاليد الزفة، حاسبة الإضافات، وحجز فوري عبر واتساب.";
+  "بكجات تصوير الفيديو في أسماء فيديو: ٥ بكجات من ٦٠٠ إلى ٢٥٠٠ ريال — فيديو زفة، زفة + كواليس، Half Day، Full Day، وبكج الخطوبة، مع الإضافات وملاحظات الحجز وحجز فوري عبر واتساب.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: META_TITLE,
     description: META_DESC,
     url: "https://asmaa.video/packages",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -40,21 +40,23 @@ const firstLookCopy = {
 };
 
 const compareFeatures = [
-  { ar: "حضور قبل الزفة", inc: [true, true, true, true, true] },
-  { ar: "تفاصيل الكوشة", inc: [false, true, true, true, true] },
-  { ar: "First Look", inc: [false, false, true, true, false] },
+  { ar: "فيديو الزفة", inc: [true, true, true, true, true] },
+  { ar: "إضاءة المون لايت", inc: [true, true, true, true, true] },
+  { ar: "كواليس جلسة الفوتو", inc: [false, true, true, true, false] },
+  { ar: "الفيرست لوك", inc: [false, false, true, true, false] },
   { ar: "تفاصيل العروس", inc: [false, false, true, true, true] },
-  { ar: "تغطية الصالون", inc: [false, false, false, true, false] },
-  { ar: "زفتان", inc: [false, false, false, true, false] },
+  { ar: "تفاصيل الكوشة", inc: [false, false, true, true, true] },
+  { ar: "تغطية الصالون (ميك اب وشعر)", inc: [false, false, false, true, false] },
+  { ar: "الشبكة والتلبيس والكيك", inc: [false, false, false, false, true] },
   { ar: "مونتاج احترافي", inc: [true, true, true, true, true] }
 ];
 
 const cardBullets: Record<string, string[]> = {
-  "01": ["لقطة دخول العروس", "إضاءة مون لايت مشمولة", "حضور قبل الزفة بربع ساعة", "مونتاج سريع جاهز للذكرى"],
-  "02": ["لقطات القاعة قبل الضيوف", "الكوشة والكيك بتفاصيل قريبة", "زفة كاملة بإضاءة احترافية", "مونتاج منسق متوازن"],
-  "03": ["First Look بلحظات عفوية", "تفاصيل الفستان والمسكة والكعب", "كواليس جلسة الفوتو", "زفة كاملة بإيقاع سينمائي"],
-  "04": ["تجهيز العروس في الصالون", "تفاصيل المكياج والشعر", "First Look وتفاصيل الكوشة", "زفتان كاملتان وفيلم اليوم كاملًا"],
-  "05": ["الشبكة والتلبيس", "قطع الكيك والجلسة العائلية", "زفة الخطوبة بأسلوب راقي", "فيلم خطوبة لذكرى الملكة"]
+  "01": ["فيديو زفة فقط", "إضاءة المون لايت تسلَّط على العروس وقت الزفة", "الحضور قبل الزفة بربع ساعة", "مونتاج احترافي"],
+  "02": ["فيديو زفة كامل", "كواليس جلسة تصوير الفوتو", "يبدأ تصوير الكواليس مع بداية جلسة الفوتو", "مونتاج احترافي"],
+  "03": ["تصوير الفيرست لوك", "تفاصيل العروس: المجوهرات، المسكة، الكعب، العطر", "تفاصيل الكوشة وكواليس جلسة الفوتو", "زفة واحدة بمونتاج احترافي"],
+  "04": ["تصوير العروس في الصالون: الميك اب والشعر", "الفيرست لوك وتفاصيل العروس", "تفاصيل الكوشة وكواليس جلسة الفوتو", "الزفات بمونتاج احترافي"],
+  "05": ["تفاصيل العروس والكوشة", "الشبكة والتلبيس", "الكيك والزفة", "مونتاج احترافي"]
 };
 
 const jsonLd = {
@@ -63,7 +65,7 @@ const jsonLd = {
     {
       "@type": "ItemList",
       "@id": "https://asmaa.video/packages#package-list",
-      name: "باقات Asmaa Studio لتصوير الأعراس النسائية",
+      name: "باقات Asmaa Video لتصوير الأعراس النسائية",
       itemListOrder: "https://schema.org/ItemListOrderAscending",
       numberOfItems: packages.length,
       itemListElement: packages.map((p, i) => ({
@@ -73,7 +75,7 @@ const jsonLd = {
           "@type": "Product",
           name: p.name,
           description: p.summary,
-          brand: { "@type": "Brand", name: "Asmaa Studio" },
+          brand: { "@type": "Brand", name: "Asmaa Video" },
           offers: {
             "@type": "Offer",
             price: p.price,
@@ -87,7 +89,7 @@ const jsonLd = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+        { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
         { "@type": "ListItem", position: 2, name: "الباقات", item: "https://asmaa.video/packages" }
       ]
     }
@@ -103,14 +105,14 @@ export default function PackagesPage() {
       {/* Hero */}
       <section className="pkg-hero">
         <div className="pkg-hero-inner">
-          <span className="eyebrow pkg-eyebrow">باقات تفاعلية — اختاري واحجزي بضغطة</span>
+          <span className="eyebrow pkg-eyebrow">بكجات تصوير الفيديو — اختاري واحجزي بضغطة</span>
           <h1 className="pkg-headline">
-            <span className="pkg-headline-ar">باقات Asmaa Studio</span>
-            <span className="pkg-headline-en">Interactive Wedding Packages</span>
+            <span className="pkg-headline-ar">بكجات تصوير الفيديو</span>
+            <span className="pkg-headline-en">Asmaa Video — Cinematic Wedding Films</span>
           </h1>
           <p className="pkg-hero-copy">
-            خمس باقات مرتّبة حسب لحظات يومكِ — من ٦٠٠ ريال لزفّة سريعة إلى ٢٥٠٠ لتغطية يوم كامل.
-            اختاري الباقة، احسبي الإضافات، وأرسلي طلبكِ عبر واتساب بدون حقول إلزامية ولا تسجيل دخول.
+            خمسة بكجات لتصوير الفيديو مرتّبة حسب لحظات يومكِ — من ٦٠٠ ريال لفيديو الزفة إلى ٢٥٠٠ لتغطية يوم كامل.
+            اختاري البكج، احسبي الإضافات، وأرسلي طلبكِ عبر واتساب بدون حقول إلزامية ولا تسجيل دخول.
           </p>
           <div className="pkg-hero-actions">
             <a className="cta pkg-cta-primary" href={whatsappLink("packages-hero")} target="_blank" rel="noreferrer">
@@ -249,6 +251,42 @@ export default function PackagesPage() {
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
+
+      {/* الإضافات — official add-ons from the studio price list */}
+      <section className="pkg-compare-section pkg-addons-section">
+        <div className="section-inner">
+          <span className="eyebrow">الإضافات</span>
+          <h2 className="section-title">لمسات إضافية لفيلمكِ — بأسعار معلنة.</h2>
+          <div className="pkg-addons-grid">
+            {packageAddOns
+              .filter((a) => a.id === "mannequin" || a.id === "color-grade")
+              .map((addon) => (
+                <article key={addon.id} className="pkg-addon-card">
+                  <h3>{addon.name}</h3>
+                  <p>{addon.description}</p>
+                  <strong className="pkg-addon-price">{addon.price}</strong>
+                </article>
+              ))}
+          </div>
+          <p className="pkg-addons-note">الساعة الإضافية على جميع البكجات: 200 ريال · إضاءة المون لايت مشمولة في بكج الزفة.</p>
+        </div>
+      </section>
+
+      {/* ملاحظات الحجز — booking terms from the official PDF */}
+      <section className="pkg-compare-section pkg-terms-section">
+        <div className="section-inner">
+          <span className="eyebrow">ملاحظات الحجز</span>
+          <h2 className="section-title">طريقة تأكيد الحجز خطوة بخطوة.</h2>
+          <ol className="pkg-terms-list">
+            {paymentTerms.map((term) => (
+              <li key={term.step}>
+                <span className="pkg-term-step" aria-hidden="true">{term.step}</span>
+                <span>{term.text}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

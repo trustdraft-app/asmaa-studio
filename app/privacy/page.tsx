@@ -7,9 +7,9 @@ import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const META_TITLE = "سياسة الخصوصية | Asmaa Studio";
+const META_TITLE = "سياسة الخصوصية | Asmaa Video";
 const META_DESC =
-  "كيف يتعامل Asmaa Studio مع بياناتك: رسائل واتساب، نموذج الحجز، والتحليلات. لا نبيع بياناتك، ونستخدمها فقط لتنسيق تصوير زفافك.";
+  "كيف يتعامل Asmaa Video مع بياناتك: رسائل واتساب، نموذج الحجز، والتحليلات. لا نبيع بياناتك، ونستخدمها فقط لتنسيق تصوير زفافك.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: META_TITLE,
     description: META_DESC,
     url: "https://asmaa.video/privacy",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -82,7 +82,7 @@ const privacySchema = {
   description: META_DESC,
   inLanguage: "ar-SA",
   url: "https://asmaa.video/privacy",
-  isPartOf: { "@type": "WebSite", "@id": "https://asmaa.video/#website", name: "Asmaa Studio" }
+  isPartOf: { "@type": "WebSite", "@id": "https://asmaa.video/#website", name: "Asmaa Video" }
 };
 
 export default function PrivacyPage() {
@@ -102,7 +102,7 @@ export default function PrivacyPage() {
             <span className="cine-headline-en">Your privacy, handled with the same care.</span>
           </h1>
           <p className="cine-lede">
-            هذه الصفحة توضّح بصدق كيف يتعامل Asmaa Studio مع بياناتك. باختصار: نستخدم ما ترسلينه فقط
+            هذه الصفحة توضّح بصدق كيف يتعامل Asmaa Video مع بياناتك. باختصار: نستخدم ما ترسلينه فقط
             لتنسيق تصوير مناسبتك، ولا نبيع بياناتك أبداً.
           </p>
         </div>

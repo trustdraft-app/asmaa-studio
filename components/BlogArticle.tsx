@@ -34,13 +34,13 @@ export function BlogArticle({ post }: { post: BlogPost }) {
     author: {
       "@type": "Organization",
       "@id": `${SITE}#business`,
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       url: SITE
     },
     publisher: {
       "@type": "Organization",
       "@id": `${SITE}#business`,
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       logo: { "@type": "ImageObject", url: `${SITE}/favicon.png` }
     }
   };
@@ -59,7 +59,7 @@ export function BlogArticle({ post }: { post: BlogPost }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: SITE },
+      { "@type": "ListItem", position: 1, name: "Asmaa Video", item: SITE },
       { "@type": "ListItem", position: 2, name: "المدونة", item: `${SITE}/blog` },
       { "@type": "ListItem", position: 3, name: post.h1, item: url }
     ]

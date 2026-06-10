@@ -26,13 +26,13 @@ function parse(slug: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = parse(slug);
-  if (!p) return { title: "Asmaa Studio" };
-  const title = `${p.service.ar} بميزانية ${p.tier.ar} | Asmaa Studio`;
-  const desc = `${p.service.ar} ضمن ميزانية ${p.tier.ar}. ${p.tier.note} — Asmaa Studio بأسعار شفافة من الـ PDF.`;
+  if (!p) return { title: "Asmaa Video" };
+  const title = `${p.service.ar} بميزانية ${p.tier.ar} | Asmaa Video`;
+  const desc = `${p.service.ar} ضمن ميزانية ${p.tier.ar}. ${p.tier.note} — Asmaa Video بأسعار شفافة من الـ PDF.`;
   return {
     title: { absolute: title }, description: desc,
     alternates: { canonical: `https://asmaa.video/ar/budget/${slug}`, languages: { "ar-SA": `https://asmaa.video/ar/budget/${slug}`, "x-default": `https://asmaa.video/ar/budget/${slug}` } },
-    openGraph: { title, description: desc, url: `https://asmaa.video/ar/budget/${slug}`, siteName: "Asmaa Studio", images: socialPreviewImages, type: "website", locale: "ar_SA" },
+    openGraph: { title, description: desc, url: `https://asmaa.video/ar/budget/${slug}`, siteName: "Asmaa Video", images: socialPreviewImages, type: "website", locale: "ar_SA" },
     twitter: twitterMetadata(title, desc), robots: { index: true, follow: true }
   };
 }
@@ -45,9 +45,9 @@ export default async function BudgetPage({ params }: Props) {
     <main className="page-shell">
       <SiteHeader />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [
-        { "@type": "Service", "@id": `https://asmaa.video/ar/budget/${slug}#service`, name: `${p.service.ar} - ${p.tier.ar}`, serviceType: `${p.service.en} budget tier ${p.tier.en}`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
+        { "@type": "Service", "@id": `https://asmaa.video/ar/budget/${slug}#service`, name: `${p.service.ar} - ${p.tier.ar}`, serviceType: `${p.service.en} budget tier ${p.tier.en}`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Video", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
         { "@type": "BreadcrumbList", itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+          { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
           { "@type": "ListItem", position: 2, name: "حسب الميزانية", item: "https://asmaa.video/ar/budget" },
           { "@type": "ListItem", position: 3, name: `${p.tier.ar} - ${p.service.ar}`, item: `https://asmaa.video/ar/budget/${slug}` }
         ]}

@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     title: post?.metaTitle,
     description: post?.metaDescription,
     url: `https://asmaa.video/blog/${slug}`,
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "article",
     locale: "ar_SA"
   },
-  twitter: twitterMetadata(post?.metaTitle ?? "Asmaa Studio", post?.metaDescription ?? "")
+  twitter: twitterMetadata(post?.metaTitle ?? "Asmaa Video", post?.metaDescription ?? "")
 };
 
 export default function Page() {

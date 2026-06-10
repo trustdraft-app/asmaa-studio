@@ -29,13 +29,13 @@ function parse(slug: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = parse(slug);
-  if (!p) return { title: "Asmaa Studio" };
-  const title = `${p.service.ar} في ${p.month.ar} — موسم ٢٠٢٦ | Asmaa Studio`;
-  const desc = `${p.service.ar} في شهر ${p.month.ar} — ${p.month.note}. السعر من ${p.service.price} ريال — Asmaa Studio بفريق نسائي مرخص.`;
+  if (!p) return { title: "Asmaa Video" };
+  const title = `${p.service.ar} في ${p.month.ar} — موسم ٢٠٢٦ | Asmaa Video`;
+  const desc = `${p.service.ar} في شهر ${p.month.ar} — ${p.month.note}. السعر من ${p.service.price} ريال — Asmaa Video بفريق نسائي مرخص.`;
   return {
     title: { absolute: title }, description: desc,
     alternates: { canonical: `https://asmaa.video/ar/seasonal/${slug}`, languages: { "ar-SA": `https://asmaa.video/ar/seasonal/${slug}`, "x-default": `https://asmaa.video/ar/seasonal/${slug}` } },
-    openGraph: { title, description: desc, url: `https://asmaa.video/ar/seasonal/${slug}`, siteName: "Asmaa Studio", images: socialPreviewImages, type: "website", locale: "ar_SA" },
+    openGraph: { title, description: desc, url: `https://asmaa.video/ar/seasonal/${slug}`, siteName: "Asmaa Video", images: socialPreviewImages, type: "website", locale: "ar_SA" },
     twitter: twitterMetadata(title, desc),
     robots: { index: true, follow: true }
   };
@@ -51,9 +51,9 @@ export default async function SeasonalPage({ params }: Props) {
     <main className="page-shell">
       <SiteHeader />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [
-        { "@type": "Service", "@id": `https://asmaa.video/ar/seasonal/${slug}#service`, name: `${p.service.ar} موسم ${p.month.ar}`, serviceType: `${p.service.en} (${p.month.en} season)`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio", url: "https://asmaa.video/", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
+        { "@type": "Service", "@id": `https://asmaa.video/ar/seasonal/${slug}#service`, name: `${p.service.ar} موسم ${p.month.ar}`, serviceType: `${p.service.en} (${p.month.en} season)`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Video", url: "https://asmaa.video/", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
         { "@type": "BreadcrumbList", itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+          { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
           { "@type": "ListItem", position: 2, name: "العروض الموسمية", item: "https://asmaa.video/ar/seasonal" },
           { "@type": "ListItem", position: 3, name: `${p.month.ar} - ${p.service.ar}`, item: `https://asmaa.video/ar/seasonal/${slug}` }
         ]}

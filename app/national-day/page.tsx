@@ -4,7 +4,7 @@ import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const title = "جلسة تصوير اليوم الوطني | Asmaa Studio";
+const title = "جلسة تصوير اليوم الوطني | Asmaa Video";
 const description =
   "جلسة تصوير نسائية بمناسبة اليوم الوطني السعودي في المنطقة الشرقية. توثيق احتفالات العائلة والمناسبات النسائية بالهوية الوطنية، بفريق نسائي بالكامل. التغطية تبدأ من ٦٠٠ ريال.";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "https://asmaa.video/national-day",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -29,7 +29,7 @@ const occasion: Occasion = {
   eyebrow: "اليوم الوطني السعودي",
   h1: "جلسة يوم وطني بلمسة نسائية وتفاصيل خضراء أنيقة",
   answerBox:
-    "أسماء ستوديو يقدم جلسات تصوير نسائية بمناسبة اليوم الوطني السعودي في المنطقة الشرقية: احتفالات العائلة، فعاليات المدارس النسائية، وجلسات بالهوية الوطنية الخضراء. فريق نسائي بالكامل يضمن الخصوصية، والتغطية تبدأ من ٦٠٠ ريال مع تسليم فيديو جاهز للمشاركة في يوم الاحتفال.",
+    "أسماء فيديو يقدم جلسات تصوير نسائية بمناسبة اليوم الوطني السعودي في المنطقة الشرقية: احتفالات العائلة، فعاليات المدارس النسائية، وجلسات بالهوية الوطنية الخضراء. فريق نسائي بالكامل يضمن الخصوصية، والتغطية تبدأ من ٦٠٠ ريال مع تسليم فيديو جاهز للمشاركة في يوم الاحتفال.",
   serviceNameAr: "جلسة يوم وطني",
   serviceNameEn: "Saudi National Day Session",
   priceFrom: 600,

@@ -106,7 +106,7 @@ export function reservationWhatsappMessage(input: ReservationInput, source = "re
   const firstLook = input.needsFirstLook ? "نعم، مهم" : "غير ضروري";
 
   return [
-    "السلام عليكم، أرسلت تفاصيل الحجز من رابط Asmaa Studio:",
+    "السلام عليكم، أرسلت تفاصيل الحجز من رابط Asmaa Video:",
     "",
     `مصدر الحجز: ${readableWhatsappSource(source)}`,
     `اسم العروس: ${input.brideName || "-"}`,

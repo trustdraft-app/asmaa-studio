@@ -17,11 +17,11 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService", "Organization"],
   "@id": `${SITE}#business`,
-  name: "Asmaa Studio",
-  alternateName: ["أسماء ستوديو", "أسماء للتصوير", "Asmaa Photography"],
+  name: "Asmaa Video",
+  alternateName: ["أسماء فيديو", "أسماء للتصوير", "Asmaa Photography"],
   // Google Business Profile description — concise, keyword-anchored, truthful.
   description:
-    "أسماء ستوديو لتصوير وفيديو الأعراس والخطوبة في المنطقة الشرقية — الأحساء والدمام والخبر والقطيف. طاقم نسائي بالكامل، مونتاج سينمائي، وباقات واضحة من 600 إلى 2500 ريال. Female-only wedding photography & videography studio serving Al-Ahsa, Dammam, Khobar and Qatif in Saudi Arabia's Eastern Province.",
+    "أسماء فيديو لتصوير وفيديو الأعراس والخطوبة في المنطقة الشرقية — الأحساء والدمام والخبر والقطيف. طاقم نسائي بالكامل، مونتاج سينمائي، وباقات واضحة من 600 إلى 2500 ريال. Female-only wedding photography & videography studio serving Al-Ahsa, Dammam, Khobar and Qatif in Saudi Arabia's Eastern Province.",
   slogan: "ذكرى مرتبة وواضحة ليوم عمرك",
   url: SITE,
   image: `${SITE}/brand/asmaa-og.jpg`,
@@ -75,7 +75,7 @@ const localBusinessSchema = {
       },
       {
         "@type": "Offer",
-        name: "بكج الزفة المطور",
+        name: "بكج الزفة والكواليس",
         description: "تصوير الزفة مع تفاصيل الكوشة والكيك ولقطات القاعة الأساسية.",
         price: "1200",
         priceCurrency: "SAR",
@@ -117,7 +117,7 @@ const websiteSchema = {
   "@type": "WebSite",
   "@id": `${SITE}#website`,
   url: SITE,
-  name: "Asmaa Studio",
+  name: "Asmaa Video",
   inLanguage: "ar-SA",
   publisher: { "@id": `${SITE}#business` },
   potentialAction: {

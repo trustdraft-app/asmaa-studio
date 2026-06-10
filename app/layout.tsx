@@ -10,11 +10,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://asmaa.video"),
   title: {
-    default: "Asmaa Studio | تصوير فيديو زواجات نسائي في الأحساء والشرقية",
-    template: "%s | Asmaa Studio"
+    default: "أسماء فيديو — تصوير فيديو الأفراح في المنطقة الشرقية | Asmaa Video",
+    template: "%s | Asmaa Video"
   },
   description:
-    "Asmaa Studio تقدم تصوير فيديو للأعراس والخطوبة في الأحساء والدمام والخبر مع باقات واضحة، مونتاج احترافي، وتواصل مباشر عبر واتساب.",
+    "Asmaa Video تقدم تصوير فيديو للأعراس والخطوبة في الأحساء والدمام والخبر مع باقات واضحة، مونتاج احترافي، وتواصل مباشر عبر واتساب.",
   alternates: {
     canonical: "https://asmaa.video/",
     languages: {
@@ -28,15 +28,15 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png"
   },
   openGraph: {
-    title: "Asmaa Studio",
+    title: "Asmaa Video",
     description: "تصوير فيديو زواجات وخطوبة للأحساء والدمام والخبر.",
     url: "https://asmaa.video",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     locale: "ar_SA",
     type: "website"
   },
-  twitter: twitterMetadata("Asmaa Studio", "تصوير فيديو زواجات وخطوبة للأحساء والدمام والخبر."),
+  twitter: twitterMetadata("Asmaa Video", "تصوير فيديو زواجات وخطوبة للأحساء والدمام والخبر."),
   robots: {
     index: true,
     follow: true

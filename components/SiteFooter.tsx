@@ -51,7 +51,7 @@ export function SiteFooter() {
       <footer className="site-footer" aria-label="تذييل الصفحة">
         <div className="site-footer-grid">
           <div className="site-footer-about">
-            <strong>Asmaa Studio</strong>
+            <strong>Asmaa Video</strong>
             <p>تصوير فيديو زواجات نسائي في الأحساء والدمام والخبر — باقات واضحة ومونتاج سينمائي هادئ.</p>
             <p className="site-footer-meta">
               <MapPin size={15} aria-hidden="true" /> المنطقة الشرقية · السعودية
@@ -88,7 +88,7 @@ export function SiteFooter() {
           <span className="site-footer-trust">
             <ShieldCheck size={15} aria-hidden="true" /> عربون نصف الفاتورة لتثبيت التاريخ — والمتبقي يوم المناسبة
           </span>
-          <p>© {new Date().getFullYear()} Asmaa Studio · جميع الحقوق محفوظة · asmaa.video</p>
+          <p>© {new Date().getFullYear()} Asmaa Video · جميع الحقوق محفوظة · asmaa.video</p>
         </div>
       </footer>
 

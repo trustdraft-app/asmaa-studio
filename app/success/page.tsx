@@ -6,9 +6,9 @@ import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const META_TITLE = "تم استلام حجزك | Asmaa Studio";
+const META_TITLE = "تم استلام حجزك | Asmaa Video";
 const META_DESC =
-  "وصلنا طلب حجزك في Asmaa Studio. سنتواصل معك عبر واتساب خلال ساعتين لتأكيد التوفر وترتيب تفاصيل تصوير مناسبتك.";
+  "وصلنا طلب حجزك في Asmaa Video. سنتواصل معك عبر واتساب خلال ساعتين لتأكيد التوفر وترتيب تفاصيل تصوير مناسبتك.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: META_TITLE,
     description: META_DESC,
     url: "https://asmaa.video/success",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -48,7 +48,7 @@ export default function SuccessPage() {
             <span className="cine-headline-en">Your booking request was received.</span>
           </h1>
           <p className="cine-lede">
-            شكراً لاختيارك Asmaa Studio. سنتواصل معك عبر واتساب خلال ساعتين لتأكيد التوفر وترتيب تفاصيل
+            شكراً لاختيارك Asmaa Video. سنتواصل معك عبر واتساب خلال ساعتين لتأكيد التوفر وترتيب تفاصيل
             تصوير مناسبتك.
           </p>
         </div>

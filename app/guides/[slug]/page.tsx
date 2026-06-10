@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: page.metaTitle,
       description: page.metaDescription,
       url: `https://asmaa.video/guides/${page.slug}`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "article",
       locale: "ar_SA"
@@ -76,13 +76,13 @@ export default async function GuidePage({ params }: Props) {
     author: {
       "@type": "Organization",
       "@id": "https://asmaa.video/#organization",
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       url: "https://asmaa.video"
     },
     publisher: {
       "@type": "Organization",
       "@id": "https://asmaa.video/#organization",
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       logo: {
         "@type": "ImageObject",
         url: "https://asmaa.video/brand/asmaa-logo-square.png"
@@ -101,7 +101,7 @@ export default async function GuidePage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Asmaa Studio",
+        name: "Asmaa Video",
         item: "https://asmaa.video"
       },
       {

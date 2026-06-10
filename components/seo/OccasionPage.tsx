@@ -53,7 +53,7 @@ export function OccasionPage({ occasion }: { occasion: Occasion }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+      { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
       { "@type": "ListItem", position: 2, name: occasion.serviceNameAr, item: pageUrl }
     ]
   };

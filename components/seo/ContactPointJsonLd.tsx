@@ -1,7 +1,7 @@
 /**
  * ContactPoint JSON-LD — WhatsApp + email contact channels.
  *
- * AEO win: when users voice-ask "how do I contact Asmaa Studio" or
+ * AEO win: when users voice-ask "how do I contact Asmaa Video" or
  * "WhatsApp wedding videographer", structured contact data lets engines
  * surface the answer directly.
  */
@@ -11,7 +11,7 @@ export function ContactPointJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://asmaa.video#contact-org",
-    name: "Asmaa Studio",
+    name: "Asmaa Video",
     url: "https://asmaa.video",
     contactPoint: [
       {

@@ -21,11 +21,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = seoServices.find((item) => item.slug === serviceSlug);
 
   if (!city || !service) {
-    return { title: "Asmaa Studio" };
+    return { title: "Asmaa Video" };
   }
 
-  const title = `${service.ar} قريب مني في ${city.ar} | Asmaa Studio`;
-  const description = `صفحة بحث محلي للعروس التي تبحث عن ${service.ar} قريب منها في ${city.ar}: الأحياء القريبة، الباقة المناسبة، وما الذي يختصر رسالة الحجز الأولى مع Asmaa Studio.`;
+  const title = `${service.ar} قريب مني في ${city.ar} | Asmaa Video`;
+  const description = `صفحة بحث محلي للعروس التي تبحث عن ${service.ar} قريب منها في ${city.ar}: الأحياء القريبة، الباقة المناسبة، وما الذي يختصر رسالة الحجز الأولى مع Asmaa Video.`;
 
   return {
     title: { absolute: title },
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: `https://asmaa.video/ar/${city.slug}/${service.slug}/near-me`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "article",
       locale: "ar_SA"
@@ -87,13 +87,13 @@ export default async function SeoNearMePage({ params }: Props) {
         author: {
           "@type": "Organization",
           "@id": "https://asmaa.video/#organization",
-          name: "Asmaa Studio",
+          name: "Asmaa Video",
           url: "https://asmaa.video/"
         },
         publisher: {
           "@type": "Organization",
           "@id": "https://asmaa.video/#organization",
-          name: "Asmaa Studio"
+          name: "Asmaa Video"
         },
         about: [city.ar, service.ar, "near me wedding videography", "voice search"]
       },
@@ -106,7 +106,7 @@ export default async function SeoNearMePage({ params }: Props) {
         provider: {
           "@type": "Organization",
           "@id": "https://asmaa.video/#organization",
-          name: "Asmaa Studio",
+          name: "Asmaa Video",
           url: "https://asmaa.video/",
           telephone: `+${whatsappNumber}`,
           sameAs: [instagramUrl, tiktokUrl]
@@ -128,7 +128,7 @@ export default async function SeoNearMePage({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+          { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
           { "@type": "ListItem", position: 2, name: city.ar, item: `https://asmaa.video/${city.slug}` },
           { "@type": "ListItem", position: 3, name: service.ar, item: `https://asmaa.video/ar/${city.slug}/${service.slug}` },
           { "@type": "ListItem", position: 4, name: "قريب مني", item: `https://asmaa.video/ar/${city.slug}/${service.slug}/near-me` }

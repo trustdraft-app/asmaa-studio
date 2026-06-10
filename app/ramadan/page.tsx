@@ -4,7 +4,7 @@ import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const title = "جلسة تصوير رمضانية في المنطقة الشرقية | Asmaa Studio";
+const title = "جلسة تصوير رمضانية في المنطقة الشرقية | Asmaa Video";
 const description =
   "جلسة تصوير رمضانية نسائية في الأحساء والدمام والخبر. توثيق الغبقات والمناسبات العائلية النسائية في رمضان بفريق نسائي بالكامل وخصوصية تامة. التغطية تبدأ من ٦٠٠ ريال.";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "https://asmaa.video/ramadan",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -29,7 +29,7 @@ const occasion: Occasion = {
   eyebrow: "مناسبات رمضان النسائية",
   h1: "جلسة تصوير رمضانية بأجواء دافئة وفريق نسائي بالكامل",
   answerBox:
-    "أسماء ستوديو يوثق المناسبات الرمضانية النسائية في المنطقة الشرقية: غبقات العائلة، حفلات القرقيعان، والملكات التي تقام في رمضان. فريق نسائي بالكامل يضمن خصوصية تامة، والتغطية تبدأ من ٦٠٠ ريال مع تسليم فيديو عالي الدقة جاهز للمشاركة. الحجز برسالة واتساب واحدة.",
+    "أسماء فيديو يوثق المناسبات الرمضانية النسائية في المنطقة الشرقية: غبقات العائلة، حفلات القرقيعان، والملكات التي تقام في رمضان. فريق نسائي بالكامل يضمن خصوصية تامة، والتغطية تبدأ من ٦٠٠ ريال مع تسليم فيديو عالي الدقة جاهز للمشاركة. الحجز برسالة واتساب واحدة.",
   serviceNameAr: "جلسة تصوير رمضانية",
   serviceNameEn: "Ramadan Session",
   priceFrom: 600,

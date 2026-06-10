@@ -15,8 +15,8 @@ import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const META_TITLE = "سياسة آراء العميلات | Asmaa Studio";
-const META_DESC = "Asmaa Studio تنشر آراء العرايس فقط بعد موافقة صريحة، وبالأحرف الأولى فقط، مع احترام حدود مشاركة العروس والعائلة.";
+const META_TITLE = "سياسة آراء العميلات | Asmaa Video";
+const META_DESC = "Asmaa Video تنشر آراء العرايس فقط بعد موافقة صريحة، وبالأحرف الأولى فقط، مع احترام حدود مشاركة العروس والعائلة.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: META_TITLE,
     description: META_DESC,
     url: "https://asmaa.video/reviews",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"

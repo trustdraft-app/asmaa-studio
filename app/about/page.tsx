@@ -7,24 +7,24 @@ import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const META_TITLE = "عن Asmaa Studio | قصة استوديو سعودي نسائي";
-const META_DESC = "قصة Asmaa Studio: استوديو تصوير فيديو سعودي نسائي في المنطقة الشرقية. الترخيص الرسمي، الفلسفة، وأهم محطات الفريق.";
+const META_TITLE = "عن Asmaa Video | قصة استوديو سعودي نسائي";
+const META_DESC = "قصة Asmaa Video: استوديو تصوير فيديو سعودي نسائي في المنطقة الشرقية. الترخيص الرسمي، الفلسفة، وأهم محطات الفريق.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
   description: META_DESC,
   alternates: { canonical: "https://asmaa.video/about", languages: { "ar-SA": "https://asmaa.video/about", "x-default": "https://asmaa.video/about" } },
-  openGraph: { title: META_TITLE, description: META_DESC, url: "https://asmaa.video/about", siteName: "Asmaa Studio", images: socialPreviewImages, type: "website", locale: "ar_SA" },
+  openGraph: { title: META_TITLE, description: META_DESC, url: "https://asmaa.video/about", siteName: "Asmaa Video", images: socialPreviewImages, type: "website", locale: "ar_SA" },
   twitter: twitterMetadata(META_TITLE, META_DESC),
   robots: { index: true, follow: true }
 };
 
 const milestones = [
-  { year: "البداية", title: "ولادة الفكرة", text: "Asmaa Studio بدأت من قناعة بسيطة: العروس السعودية تستحق استوديو نسائي يحترم خصوصيتها ويصور يومها بهدوء وذوق." },
+  { year: "البداية", title: "ولادة الفكرة", text: "Asmaa Video بدأت من قناعة بسيطة: العروس السعودية تستحق استوديو نسائي يحترم خصوصيتها ويصور يومها بهدوء وذوق." },
   { year: "الترخيص", title: "ترخيص رسمي", text: "حصلنا على ترخيص رسمي من وزارة الموارد البشرية والتنمية الاجتماعية — أساس كل اتفاق نوقّعه قبل التحويل." },
   { year: "الفلسفة", title: "فيلم لحظة لا تُعاد", text: "نحن لا نلتقط لقطات؛ نوثق لحظات. First Look، الزفة، تفاصيل الفستان — كلها تستحق فيلماً مدروساً، لا مقاطع متفرقة." },
   { year: "الأسلوب", title: "نسيج سعودي شرقي", text: "نعرف قاعات الأحساء والدمام والخبر. نعرف إيقاع الزفة المحلية، توقيت العشاء، ومسار العروس بين الكوشة وغرفتها." },
-  { year: "اليوم", title: "٣٠ مدينة، ٨ خدمات، باقات شفافة", text: "اليوم Asmaa Studio يغطي ٣٠ مدينة في الشرقية وما حولها، ٨ خدمات تصوير، وباقات بأسعار معلنة في ملف PDF واحد قبل أي محادثة." }
+  { year: "اليوم", title: "٣٠ مدينة، ٨ خدمات، باقات شفافة", text: "اليوم Asmaa Video يغطي ٣٠ مدينة في الشرقية وما حولها، ٨ خدمات تصوير، وباقات بأسعار معلنة في ملف PDF واحد قبل أي محادثة." }
 ];
 
 const values = [
@@ -40,7 +40,7 @@ const aboutSchema = {
   "@id": "https://asmaa.video/about#aboutpage",
   name: META_TITLE,
   description: META_DESC,
-  mainEntity: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio" }
+  mainEntity: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Video" }
 };
 
 export default function AboutPage() {
@@ -52,13 +52,13 @@ export default function AboutPage() {
       <section className="pkg-hero" style={{ paddingTop: 96, paddingBottom: 56 }}>
         <div className="pkg-hero-inner">
           <Link className="back-pill" href="/" style={{ marginBottom: 24 }}><ArrowLeft size={16} aria-hidden="true" /> <span>الرئيسية</span></Link>
-          <span className="cine-eyebrow">عن Asmaa Studio</span>
+          <span className="cine-eyebrow">عن Asmaa Video</span>
           <h1 className="cine-headline" style={{ marginTop: 16 }}>
             <span className="cine-headline-ar">قصة استوديو سعودي نسائي.</span>
             <span className="cine-headline-en">A Saudi women-only film studio, by design.</span>
           </h1>
           <p className="cine-lede">
-            Asmaa Studio بدأت من قناعة بسيطة: العروس السعودية تستحق فريقاً نسائياً مرخصاً، يصوّر يومها بهدوء وذوق، وبأسعار مكتوبة قبل أي تحويل.
+            Asmaa Video بدأت من قناعة بسيطة: العروس السعودية تستحق فريقاً نسائياً مرخصاً، يصوّر يومها بهدوء وذوق، وبأسعار مكتوبة قبل أي تحويل.
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function AboutPage() {
       <section className="section final-cta">
         <div className="section-inner">
           <span className="cine-eyebrow">خطوتك التالية</span>
-          <h2 className="section-title">جربي Asmaa Studio لزفافك</h2>
+          <h2 className="section-title">جربي Asmaa Video لزفافك</h2>
           <div className="button-row">
             <Link className="cine-cta-primary" href="/packages"><span>الباقات التفاعلية</span></Link>
             <Link className="cine-cta-secondary" href="/reviews"><ArrowLeft size={16} aria-hidden="true" /><span>اقرئي ما يطمئنك قبل الحجز</span></Link>

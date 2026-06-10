@@ -26,13 +26,13 @@ function parse(slug: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = parse(slug);
-  if (!p) return { title: "Asmaa Studio" };
-  const title = `${p.service.ar} لـ${p.type.ar} | Asmaa Studio`;
+  if (!p) return { title: "Asmaa Video" };
+  const title = `${p.service.ar} لـ${p.type.ar} | Asmaa Video`;
   const desc = `${p.service.ar} مصمّمة لـ${p.type.ar}: ${p.type.note}. السعر من ${p.service.price} ريال.`;
   return {
     title: { absolute: title }, description: desc,
     alternates: { canonical: `https://asmaa.video/ar/wedding-types/${slug}`, languages: { "ar-SA": `https://asmaa.video/ar/wedding-types/${slug}`, "x-default": `https://asmaa.video/ar/wedding-types/${slug}` } },
-    openGraph: { title, description: desc, url: `https://asmaa.video/ar/wedding-types/${slug}`, siteName: "Asmaa Studio", images: socialPreviewImages, type: "website", locale: "ar_SA" },
+    openGraph: { title, description: desc, url: `https://asmaa.video/ar/wedding-types/${slug}`, siteName: "Asmaa Video", images: socialPreviewImages, type: "website", locale: "ar_SA" },
     twitter: twitterMetadata(title, desc), robots: { index: true, follow: true }
   };
 }
@@ -45,9 +45,9 @@ export default async function WeddingTypePage({ params }: Props) {
     <main className="page-shell">
       <SiteHeader />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [
-        { "@type": "Service", "@id": `https://asmaa.video/ar/wedding-types/${slug}#service`, name: `${p.service.ar} لـ${p.type.ar}`, serviceType: `${p.service.en} for ${p.type.en}`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Studio", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
+        { "@type": "Service", "@id": `https://asmaa.video/ar/wedding-types/${slug}#service`, name: `${p.service.ar} لـ${p.type.ar}`, serviceType: `${p.service.en} for ${p.type.en}`, inLanguage: ["ar-SA", "en"], provider: { "@type": "Organization", "@id": "https://asmaa.video/#organization", name: "Asmaa Video", telephone: `+${whatsappNumber}` }, offers: { "@type": "Offer", price: p.service.price, priceCurrency: "SAR", url: "https://asmaa.video/packages" } },
         { "@type": "BreadcrumbList", itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+          { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
           { "@type": "ListItem", position: 2, name: "حسب نوع المناسبة", item: "https://asmaa.video/ar/wedding-types" },
           { "@type": "ListItem", position: 3, name: `${p.type.ar} - ${p.service.ar}`, item: `https://asmaa.video/ar/wedding-types/${slug}` }
         ]}
