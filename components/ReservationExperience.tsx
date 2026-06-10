@@ -13,25 +13,25 @@ const STEPS = ["المناسبة", "المدينة", "الباقة", "التفا
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const EVENT_TYPES = [
-  { id: "زواج",  label: "حفل زفاف",    icon: "💒" },
-  { id: "خطوبة", label: "جلسة خطوبة",  icon: "💍" },
-  { id: "نسائي", label: "تصوير نسائي", icon: "📸" },
-  { id: "خاص",   label: "مناسبة خاصة", icon: "✨" },
+  { id: "زواج",  label: "حفل زفاف",    icon: "💒", desc: "توثيق كامل ليومكِ الكبير",  tint: "rgba(190,18,60,.14)" },
+  { id: "خطوبة", label: "ملكة وخطوبة", icon: "💍", desc: "لحظات الفرح الأولى",        tint: "rgba(126,34,206,.14)" },
+  { id: "نسائي", label: "تصوير نسائي", icon: "✨", desc: "جلسة تُعبّر عن شخصيتك",     tint: "rgba(219,39,119,.12)" },
+  { id: "خاص",   label: "مناسبة خاصة", icon: "🌸", desc: "كل لحظة تستحق التوثيق",     tint: "rgba(217,119,6,.12)" },
 ];
 
 const CITIES = [
-  { id: "الخبر",   label: "الخبر" },
-  { id: "الدمام",  label: "الدمام" },
-  { id: "الأحساء", label: "الأحساء" },
-  { id: "القطيف",  label: "القطيف" },
+  { id: "الخبر",   label: "الخبر",   tagline: "المدينة الساحلية الراقية" },
+  { id: "الدمام",  label: "الدمام",  tagline: "قلب المنطقة الشرقية" },
+  { id: "الأحساء", label: "الأحساء", tagline: "واحة التراث والجمال" },
+  { id: "القطيف",  label: "القطيف",  tagline: "عبق الأصالة والتقاليد" },
 ];
 
 const PACKAGES = [
-  { id: "01", nameAr: "بكج الزفة",        price: "600 ريال",      bullets: ["20 دقيقة", "لحظة الدخول", "مونتاج مختصر"], popular: false },
-  { id: "02", nameAr: "بكج الزفة المطور", price: "1,200 ريال",    bullets: ["ساعة", "الكوشة والكيك", "لقطات القاعة"], popular: false },
-  { id: "03", nameAr: "الباقة الجزئية", price: "من 1,700 ريال", bullets: ["ساعتان", "200+ صورة", "غرفة تجهيز"], popular: false },
-  { id: "04", nameAr: "يوم كامل",       price: "من 2,500 ريال", bullets: ["8 ساعات", "600+ صورة", "فيلم كامل"],    popular: true  },
-  { id: "05", nameAr: "باقة الخطوبة",  price: "من 1,500 ريال", bullets: ["ساعة ونصف", "150+ صورة", "فيديو قصير"], popular: false },
+  { id: "01", nameAr: "بكج الزفة",        icon: "🎞️", price: "600 ريال",      duration: "20 دقيقة",  bullets: ["لحظة الدخول", "مونتاج مختصر", "تسليم سريع"], popular: false },
+  { id: "02", nameAr: "بكج الزفة المطور", icon: "🎬", price: "1,200 ريال",    duration: "ساعة",      bullets: ["الكوشة والكيك", "لقطات القاعة", "مونتاج سينمائي"], popular: false },
+  { id: "03", nameAr: "الباقة الجزئية",   icon: "📸", price: "من 1,700 ريال", duration: "ساعتان",    bullets: ["200+ صورة محررة", "غرفة تجهيز", "تسليم خلال أسبوع"], popular: false },
+  { id: "04", nameAr: "يوم كامل",         icon: "👑", price: "من 2,500 ريال", duration: "8 ساعات",   bullets: ["600+ صورة محررة", "فيلم الزفاف الكامل", "تغطية شاملة"], popular: true  },
+  { id: "05", nameAr: "باقة الخطوبة",     icon: "💝", price: "من 1,500 ريال", duration: "ساعة ونصف", bullets: ["150+ صورة محررة", "فيديو قصير", "ألبوم رقمي"], popular: false },
 ];
 
 // City-page slugs → wizard city ids. Every /{city} page links to
@@ -48,7 +48,25 @@ const CITY_SLUG_TO_ID: Record<string, string> = {
   jubail: "الدمام"
 };
 
-// ─── CSS ──────────────────────────────────────────────────────────────────────
+// ─── Date helpers ─────────────────────────────────────────────────────────────
+function formatDateArabic(iso: string): string {
+  if (!iso) return "";
+  const d = new Date(`${iso}T12:00:00`);
+  if (Number.isNaN(d.getTime())) return iso;
+  try {
+    const hijri = new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura", {
+      day: "numeric", month: "long", year: "numeric"
+    }).format(d);
+    const greg = new Intl.DateTimeFormat("ar-SA-u-ca-gregory", {
+      weekday: "long", day: "numeric", month: "long", year: "numeric"
+    }).format(d);
+    return `${hijri} — ${greg}`;
+  } catch {
+    return iso;
+  }
+}
+
+// ─── CSS (component-scoped; whatsapp-pulse + step-enter live in globals.css) ──
 function GlobalStyles() {
   return (
     <style>{`
@@ -56,100 +74,117 @@ function GlobalStyles() {
         0%,100%{opacity:.06;transform:scale(1) rotate(0deg);}
         50%{opacity:.11;transform:scale(1.04) rotate(30deg);}
       }
-      @keyframes pulse-gold {
-        0%,100%{box-shadow:0 0 20px rgba(201,168,76,.3),0 0 40px rgba(201,168,76,.15);}
-        50%{box-shadow:0 0 60px rgba(201,168,76,.7),0 0 100px rgba(201,168,76,.4);}
-      }
-      @keyframes step-enter{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-      @keyframes float-in{from{opacity:0;transform:translateY(10px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+      @keyframes float-in{from{opacity:0;transform:translateY(12px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+      @keyframes shimmer-sweep{0%{transform:translateX(-150%) skewX(-20deg);}100%{transform:translateX(350%) skewX(-20deg);}}
       .step-scene{animation:step-enter 380ms cubic-bezier(.22,1,.36,1) both;}
-      .float-in{animation:float-in 300ms cubic-bezier(.22,1,.36,1) both;}
-      .pulse-wa{animation:pulse-gold 2s ease-in-out infinite;}
+      .float-in{animation:float-in 320ms cubic-bezier(.22,1,.36,1) both;}
+      .pulse-wa{animation:whatsapp-pulse 2s ease-out infinite;}
       .geo-bg{animation:glow-drift 60s linear infinite;}
       .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
       .sel-card{
-        position:relative;cursor:pointer;
+        position:relative;cursor:pointer;overflow:hidden;
         background:rgba(255,255,255,.05);
         border:1.5px solid rgba(201,168,76,.2);
-        border-radius:16px;padding:20px 12px;
+        border-radius:18px;padding:20px 12px;
         display:flex;flex-direction:column;align-items:center;justify-content:center;
-        gap:10px;min-height:110px;text-align:center;
+        gap:8px;min-height:128px;text-align:center;
         transition:all 300ms ease;
         backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
       }
-      .sel-card:hover{border-color:rgba(201,168,76,.55);background:rgba(255,255,255,.09);box-shadow:0 0 28px rgba(201,168,76,.25);}
+      .sel-card:hover{border-color:rgba(201,168,76,.55);background:rgba(255,255,255,.09);box-shadow:0 0 28px rgba(201,168,76,.25);transform:translateY(-2px);}
       .sel-card.selected{border-color:#C9A84C;background:rgba(201,168,76,.1);box-shadow:0 0 32px rgba(201,168,76,.35),inset 0 0 20px rgba(201,168,76,.05);}
-      .sel-card .c-icon{font-size:28px;line-height:1;}
-      .sel-card .c-label{font-size:.82rem;font-weight:700;color:rgba(255,248,236,.85);line-height:1.3;}
+      .sel-card .c-icon{font-size:30px;line-height:1;filter:drop-shadow(0 0 12px rgba(201,168,76,.35));}
+      .sel-card .c-label{font-size:.86rem;font-weight:800;color:rgba(255,248,236,.88);line-height:1.3;}
+      .sel-card .c-desc{font-size:.66rem;color:rgba(255,248,236,.45);line-height:1.45;}
       .sel-card.selected .c-label{color:#E8C96A;}
+      .sel-card.selected .c-desc{color:rgba(255,248,236,.6);}
       .pkg-card{
-        cursor:pointer;position:relative;
+        cursor:pointer;position:relative;overflow:hidden;
         background:rgba(255,255,255,.05);
         border:1.5px solid rgba(201,168,76,.2);
-        border-radius:18px;padding:20px;
+        border-radius:20px;padding:20px;
         transition:all 300ms ease;
         backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
       }
-      .pkg-card:hover{border-color:rgba(201,168,76,.5);background:rgba(255,255,255,.08);box-shadow:0 0 30px rgba(201,168,76,.2);}
+      .pkg-card:hover{border-color:rgba(201,168,76,.5);background:rgba(255,255,255,.08);box-shadow:0 0 30px rgba(201,168,76,.2);transform:translateY(-2px);}
       .pkg-card.selected{border-color:#C9A84C;background:rgba(201,168,76,.08);box-shadow:0 0 40px rgba(201,168,76,.35),inset 0 0 24px rgba(201,168,76,.06);}
+      .pkg-card.popular{border-color:rgba(201,168,76,.45);}
+      .pkg-card.popular::after{
+        content:"";position:absolute;top:0;bottom:0;width:60px;
+        background:linear-gradient(90deg,transparent,rgba(232,201,106,.07),transparent);
+        animation:shimmer-sweep 3.2s ease-in-out infinite;pointer-events:none;
+      }
       .input-field{
         width:100%;box-sizing:border-box;
         background:rgba(255,255,255,.05);
         border:1.5px solid rgba(255,248,236,.12);
-        border-radius:14px;padding:16px;
+        border-radius:16px;padding:16px;
         color:rgba(255,248,236,.92);font-size:1rem;
         text-align:right;direction:rtl;
-        outline:none;transition:border-color 250ms ease;
+        outline:none;transition:border-color 250ms ease,box-shadow 250ms ease,background 250ms ease;
         backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-        font-family:inherit;-webkit-appearance:none;
+        font-family:inherit;-webkit-appearance:none;resize:none;
       }
-      .input-field:focus{border-color:rgba(201,168,76,.55);}
-      .input-field::placeholder{color:rgba(255,248,236,.35);}
+      .input-field:focus{border-color:rgba(201,168,76,.6);background:rgba(255,255,255,.08);box-shadow:0 0 30px rgba(201,168,76,.12);}
+      .input-field::placeholder{color:rgba(255,248,236,.32);}
       .input-field::-webkit-calendar-picker-indicator{filter:invert(.7);}
+      .input-ltr{direction:ltr;text-align:left;}
       .btn-next{
         background:linear-gradient(135deg,#C9A84C,#E8C96A);
         color:#0c0a08;font-weight:800;font-size:1rem;
-        border:none;border-radius:14px;padding:16px 32px;
-        cursor:pointer;width:100%;
-        transition:transform 200ms ease,box-shadow 200ms ease;
+        border:none;border-radius:16px;padding:16px 32px;
+        cursor:pointer;width:100%;min-height:56px;
+        box-shadow:0 0 30px rgba(201,168,76,.3);
+        transition:transform 200ms ease,box-shadow 200ms ease,opacity 200ms ease;
       }
-      .btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(201,168,76,.45);}
-      .btn-next:active{transform:translateY(0);}
-      .btn-next:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+      .btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 30px rgba(201,168,76,.5);}
+      .btn-next:active{transform:scale(.98);}
+      .btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;background:rgba(255,255,255,.1);color:rgba(255,248,236,.35);}
       .btn-back{
         background:transparent;color:rgba(255,248,236,.7);font-weight:600;font-size:.95rem;
-        border:1.5px solid rgba(201,168,76,.35);border-radius:14px;
-        padding:14px 24px;cursor:pointer;flex:1;
+        border:1.5px solid rgba(201,168,76,.35);border-radius:16px;
+        padding:14px 24px;cursor:pointer;flex:1;min-height:56px;
         transition:all 200ms ease;
       }
       .btn-back:hover{border-color:#C9A84C;color:#E8C96A;}
+      .wa-cta{
+        display:block;text-align:center;position:relative;overflow:hidden;
+        background:linear-gradient(135deg,#25D366,#128C7E);
+        color:#fff;font-weight:900;font-size:1.05rem;
+        border-radius:16px;padding:18px 24px;text-decoration:none;
+        box-shadow:0 0 40px rgba(37,211,102,.3);
+        transition:transform 150ms ease;
+      }
+      .wa-cta:active{transform:scale(.98);}
       .confirm-row{
-        display:flex;align-items:center;gap:12px;
-        padding:14px 16px;border-radius:12px;
-        background:rgba(255,255,255,.04);
-        border:1px solid rgba(201,168,76,.15);
+        display:flex;align-items:center;justify-content:space-between;gap:12px;
+        padding:13px 4px;border-bottom:1px solid rgba(255,248,236,.06);
       }
       .badge-pop{
         display:inline-block;
         background:linear-gradient(90deg,#C9A84C,#E8C96A);
         color:#0c0a08;font-size:.65rem;font-weight:900;
         border-radius:999px;padding:3px 10px;letter-spacing:.02em;
+        box-shadow:0 0 14px rgba(201,168,76,.4);
       }
       .step-dot{
-        width:28px;height:28px;border-radius:50%;
+        width:30px;height:30px;border-radius:50%;
         display:flex;align-items:center;justify-content:center;
-        font-size:.72rem;font-weight:900;
-        transition:all 320ms ease;flex-shrink:0;position:relative;z-index:1;
+        font-size:.74rem;font-weight:900;
+        transition:all 420ms ease;flex-shrink:0;position:relative;z-index:1;
       }
       .sel-dot{
-        position:absolute;top:8px;left:8px;
+        position:absolute;top:9px;left:9px;
         width:10px;height:10px;border-radius:50%;
-        background:#C9A84C;box-shadow:0 0 8px #C9A84C;
+        background:#C9A84C;box-shadow:0 0 10px #C9A84C;
       }
       @media(max-width:420px){
-        .sel-card{min-height:95px;padding:16px 10px;}
-        .sel-card .c-icon{font-size:24px;}
-        .sel-card .c-label{font-size:.78rem;}
+        .sel-card{min-height:112px;padding:16px 10px;}
+        .sel-card .c-icon{font-size:26px;}
+        .sel-card .c-label{font-size:.8rem;}
+      }
+      @media(prefers-reduced-motion:reduce){
+        .step-scene,.float-in,.pulse-wa,.geo-bg,.pkg-card.popular::after{animation:none;}
       }
     `}</style>
   );
@@ -177,11 +212,24 @@ function IslamicBg() {
         </defs>
         <rect width="100%" height="100%" fill="url(#istar)" opacity="0.08"/>
       </svg>
-      <div style={{ position:"absolute",top:"-10%",left:"-10%",width:"60vw",height:"60vw",maxWidth:600,maxHeight:600,
-        borderRadius:"50%",background:"radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%)",pointerEvents:"none" }}/>
+      <div style={{ position:"absolute",top:"-15%",left:"50%",transform:"translateX(-50%)",
+        width:"min(800px,90vw)",height:400,borderRadius:"50%",
+        background:"radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%)",filter:"blur(60px)" }}/>
       <div style={{ position:"absolute",bottom:"-10%",right:"-10%",width:"45vw",height:"45vw",maxWidth:420,maxHeight:420,
-        borderRadius:"50%",background:"radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%)",pointerEvents:"none" }}/>
+        borderRadius:"50%",background:"radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%)" }}/>
     </div>
+  );
+}
+
+// ─── Gold location pin ────────────────────────────────────────────────────────
+function PinIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+      style={{ filter:"drop-shadow(0 0 10px rgba(201,168,76,.45))" }}>
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+        stroke={GOLD} strokeWidth="1.5" fill="rgba(201,168,76,.12)"/>
+      <circle cx="12" cy="9" r="2.5" stroke={GOLD_LIGHT} strokeWidth="1.4" fill="none"/>
+    </svg>
   );
 }
 
@@ -190,12 +238,13 @@ function Stepper({ current }: { current: number }) {
   const progress = (current / (STEPS.length - 1)) * 100;
   return (
     <div style={{ position:"relative",marginBottom:28 }}>
-      <div style={{ position:"absolute",top:13,right:14,left:14,height:2,
+      <div style={{ position:"absolute",top:14,right:15,left:15,height:2,
         background:"rgba(255,248,236,.10)",borderRadius:99 }}/>
-      <div style={{ position:"absolute",top:13,right:14,
-        width:`calc(${progress}% - 14px)`,height:2,
+      <div style={{ position:"absolute",top:14,right:15,
+        width:`calc(${progress}% - 15px)`,height:2,
         background:`linear-gradient(90deg,${GOLD},${GOLD_LIGHT})`,borderRadius:99,
-        transition:"width 420ms cubic-bezier(.4,0,.2,1)" }}/>
+        boxShadow:"0 0 10px rgba(201,168,76,.5)",
+        transition:"width 700ms cubic-bezier(.4,0,.2,1)" }}/>
       <div style={{ display:"flex",justifyContent:"space-between",position:"relative" }}>
         {STEPS.map((label, i) => {
           const done   = i < current;
@@ -206,12 +255,12 @@ function Stepper({ current }: { current: number }) {
                 background: active ? `linear-gradient(135deg,${GOLD},${GOLD_LIGHT})` : done ? "rgba(201,168,76,.25)" : "rgba(255,248,236,.06)",
                 border:`2px solid ${active||done ? GOLD : "rgba(255,248,236,.15)"}`,
                 color: active ? INK : done ? GOLD : "rgba(255,248,236,.45)",
-                boxShadow: active ? `0 0 14px rgba(201,168,76,.6)` : "none",
+                boxShadow: active ? "0 0 20px rgba(201,168,76,.55)" : "none",
               }}>
                 {done ? "✓" : i+1}
               </div>
               <span style={{ fontSize:".62rem",fontWeight:800,textAlign:"center",lineHeight:1.1,
-                color: active ? GOLD : done ? "rgba(255,248,236,.7)" : "rgba(255,248,236,.35)",
+                color: active ? GOLD : done ? "rgba(255,248,236,.7)" : "rgba(255,248,236,.3)",
                 transition:"color 300ms ease" }}>
                 {label}
               </span>
@@ -223,17 +272,22 @@ function Stepper({ current }: { current: number }) {
   );
 }
 
-// ─── Step props type ──────────────────────────────────────────────────────────
-type StepProps = {
-  eventType: string; setEventType: (v: string) => void;
-  city: string;      setCity:      (v: string) => void;
-  pkgId: string;     setPkgId:     (v: string) => void;
-  date: string;      setDate:      (v: string) => void;
-  name: string;      setName:      (v: string) => void;
-};
+// ─── Step heading ─────────────────────────────────────────────────────────────
+function StepHeading({ title, sub }: { title: string; sub: string }) {
+  return (
+    <>
+      <h2 style={{ textAlign:"center",marginBottom:6,fontSize:"1.3rem",fontWeight:900,color:"rgba(255,248,236,.92)" }}>
+        {title}
+      </h2>
+      <p style={{ textAlign:"center",color:"rgba(255,248,236,.5)",fontSize:".85rem",marginBottom:24 }}>
+        {sub}
+      </p>
+    </>
+  );
+}
 
-// ─── Step 0 — Event type (OUTSIDE main component) ────────────────────────────
-function StepEvent({ eventType, setEventType }: Pick<StepProps, "eventType"|"setEventType">) {
+// ─── Step 0 — Event type ──────────────────────────────────────────────────────
+function StepEvent({ eventType, setEventType }: { eventType: string; setEventType: (v: string) => void }) {
   return (
     <div className="step-scene" dir="rtl">
       <h1 style={{
@@ -241,7 +295,7 @@ function StepEvent({ eventType, setEventType }: Pick<StepProps, "eventType"|"set
         fontSize:"clamp(1.4rem,5vw,1.9rem)",fontWeight:900,lineHeight:1.2,
         background:`linear-gradient(135deg,${GOLD},${GOLD_LIGHT})`,
         WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text",
-      }}>احجزي جلستك الآن</h1>
+      }}>احجزي موعدك</h1>
       <p style={{ textAlign:"center",color:"rgba(255,248,236,.5)",fontSize:".85rem",marginBottom:24 }}>
         اختاري نوع المناسبة للبدء
       </p>
@@ -250,10 +304,14 @@ function StepEvent({ eventType, setEventType }: Pick<StepProps, "eventType"|"set
           <div key={e.id}
             className={`sel-card float-in ${eventType===e.id ? "selected" : ""}`}
             onClick={() => setEventType(e.id)}
-            style={{ animationDelay:`${i*60}ms` }}
+            role="button" tabIndex={0}
+            onKeyDown={(ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setEventType(e.id); } }}
+            style={{ animationDelay:`${i*60}ms`,
+              backgroundImage:`linear-gradient(180deg,${e.tint},transparent 65%)` }}
           >
             <span className="c-icon">{e.icon}</span>
             <span className="c-label">{e.label}</span>
+            <span className="c-desc">{e.desc}</span>
             {eventType===e.id && <div className="sel-dot"/>}
           </div>
         ))}
@@ -262,25 +320,23 @@ function StepEvent({ eventType, setEventType }: Pick<StepProps, "eventType"|"set
   );
 }
 
-// ─── Step 1 — City (OUTSIDE main component) ───────────────────────────────────
-function StepCity({ city, setCity }: Pick<StepProps, "city"|"setCity">) {
+// ─── Step 1 — City ────────────────────────────────────────────────────────────
+function StepCity({ city, setCity }: { city: string; setCity: (v: string) => void }) {
   return (
     <div className="step-scene" dir="rtl">
-      <h2 style={{ textAlign:"center",marginBottom:6,fontSize:"1.3rem",fontWeight:900,color:"rgba(255,248,236,.92)" }}>
-        في أي مدينة؟
-      </h2>
-      <p style={{ textAlign:"center",color:"rgba(255,248,236,.5)",fontSize:".85rem",marginBottom:24 }}>
-        نغطي المنطقة الشرقية بالكامل
-      </p>
+      <StepHeading title="في أي مدينة؟" sub="نغطي المنطقة الشرقية بالكامل"/>
       <div className="card-grid">
         {CITIES.map((c, i) => (
           <div key={c.id}
             className={`sel-card float-in ${city===c.id ? "selected" : ""}`}
             onClick={() => setCity(c.id)}
+            role="button" tabIndex={0}
+            onKeyDown={(ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setCity(c.id); } }}
             style={{ animationDelay:`${i*60}ms` }}
           >
-            <span className="c-icon">📍</span>
+            <PinIcon/>
             <span className="c-label">{c.label}</span>
+            <span className="c-desc">{c.tagline}</span>
             {city===c.id && <div className="sel-dot"/>}
           </div>
         ))}
@@ -289,31 +345,32 @@ function StepCity({ city, setCity }: Pick<StepProps, "city"|"setCity">) {
   );
 }
 
-// ─── Step 2 — Package (OUTSIDE main component) ───────────────────────────────
-function StepPackage({ pkgId, setPkgId }: Pick<StepProps, "pkgId"|"setPkgId">) {
+// ─── Step 2 — Package ─────────────────────────────────────────────────────────
+function StepPackage({ pkgId, setPkgId }: { pkgId: string; setPkgId: (v: string) => void }) {
   return (
     <div className="step-scene" dir="rtl">
-      <h2 style={{ textAlign:"center",marginBottom:6,fontSize:"1.3rem",fontWeight:900,color:"rgba(255,248,236,.92)" }}>
-        اختاري باقتك
-      </h2>
-      <p style={{ textAlign:"center",color:"rgba(255,248,236,.5)",fontSize:".85rem",marginBottom:20 }}>
-        كل باقة تشمل تصوير سينمائي احترافي
-      </p>
+      <StepHeading title="اختاري باقتك" sub="كل باقة تشمل تصوير سينمائي احترافي"/>
       <div style={{ display:"flex",flexDirection:"column",gap:12 }}>
         {PACKAGES.map((pkg, i) => (
           <div key={pkg.id}
-            className={`pkg-card float-in ${pkgId===pkg.id ? "selected" : ""}`}
+            className={`pkg-card float-in ${pkgId===pkg.id ? "selected" : ""} ${pkg.popular ? "popular" : ""}`}
             onClick={() => setPkgId(pkg.id)}
+            role="button" tabIndex={0}
+            onKeyDown={(ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setPkgId(pkg.id); } }}
             style={{ animationDelay:`${i*70}ms` }}
           >
             <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8 }}>
-              <div style={{ display:"flex",alignItems:"center",gap:8 }}>
+              <div style={{ display:"flex",alignItems:"center",gap:8,flexWrap:"wrap" }}>
+                <span style={{ fontSize:"1.2rem",lineHeight:1 }}>{pkg.icon}</span>
                 <span style={{ fontSize:"1.05rem",fontWeight:900,color:"rgba(255,248,236,.92)" }}>{pkg.nameAr}</span>
                 {pkg.popular && <span className="badge-pop">الأكثر طلباً</span>}
               </div>
-              <span style={{ fontSize:".85rem",fontWeight:900,color: pkgId===pkg.id ? GOLD_LIGHT : GOLD }}>
-                {pkg.price}
-              </span>
+              <div style={{ textAlign:"left",flexShrink:0 }}>
+                <div style={{ fontSize:".88rem",fontWeight:900,color: pkgId===pkg.id ? GOLD_LIGHT : GOLD }}>
+                  {pkg.price}
+                </div>
+                <div style={{ fontSize:".68rem",color:"rgba(255,248,236,.45)" }}>{pkg.duration}</div>
+              </div>
             </div>
             <div style={{ display:"flex",gap:8,flexWrap:"wrap" }}>
               {pkg.bullets.map((b) => (
@@ -332,85 +389,111 @@ function StepPackage({ pkgId, setPkgId }: Pick<StepProps, "pkgId"|"setPkgId">) {
   );
 }
 
-// ─── Step 3 — Details (OUTSIDE main component) ───────────────────────────────
-function StepDetails({ date, setDate, name, setName }: Pick<StepProps, "date"|"setDate"|"name"|"setName">) {
+// ─── Step 3 — Details ─────────────────────────────────────────────────────────
+function Field({ label, optional, children }: { label: string; optional?: boolean; children: React.ReactNode }) {
+  return (
+    <div>
+      <label style={{ display:"block",fontSize:".78rem",fontWeight:700,color:GOLD,marginBottom:8,textAlign:"right" }}>
+        {label}{optional && <span style={{ color:"rgba(255,248,236,.4)",fontSize:".68rem",fontWeight:500 }}> (اختياري)</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function StepDetails({ date, setDate, name, setName, phone, setPhone, notes, setNotes }: {
+  date: string; setDate: (v: string) => void;
+  name: string; setName: (v: string) => void;
+  phone: string; setPhone: (v: string) => void;
+  notes: string; setNotes: (v: string) => void;
+}) {
   return (
     <div className="step-scene" dir="rtl">
-      <h2 style={{ textAlign:"center",marginBottom:6,fontSize:"1.3rem",fontWeight:900,color:"rgba(255,248,236,.92)" }}>
-        تفاصيل المناسبة
-      </h2>
-      <p style={{ textAlign:"center",color:"rgba(255,248,236,.5)",fontSize:".85rem",marginBottom:24 }}>
-        خطوة أخيرة قبل التأكيد
-      </p>
+      <StepHeading title="تفاصيل المناسبة" sub="خطوة أخيرة قبل التأكيد"/>
       <div style={{ display:"flex",flexDirection:"column",gap:16 }}>
-        <div>
-          <label style={{ display:"block",fontSize:".78rem",fontWeight:700,color:GOLD,marginBottom:8,textAlign:"right" }}>
-            تاريخ المناسبة
-          </label>
+        <Field label="تاريخ المناسبة">
           <input className="input-field" type="date" value={date}
             onChange={(e) => setDate(e.target.value)}
             min={new Date().toISOString().split("T")[0]}
           />
-        </div>
-        <div>
-          <label style={{ display:"block",fontSize:".78rem",fontWeight:700,color:GOLD,marginBottom:8,textAlign:"right" }}>
-            اسمك الكريم
-          </label>
-          <input className="input-field" type="text" placeholder="اسمك الكريم"
+          {date && (
+            <p style={{ marginTop:8,fontSize:".74rem",color:GOLD_LIGHT,textAlign:"right",opacity:.85 }}>
+              ✦ {formatDateArabic(date)}
+            </p>
+          )}
+        </Field>
+        <Field label="اسمك الكريم">
+          <input className="input-field" type="text" placeholder="مثال: نورة محمد"
             value={name} onChange={(e) => setName(e.target.value)}
           />
-        </div>
+        </Field>
+        <Field label="رقم الجوال" optional>
+          <input className="input-field input-ltr" type="tel" inputMode="tel"
+            placeholder="05xxxxxxxx" value={phone}
+            onChange={(e) => setPhone(e.target.value.replace(/[^\d+\s]/g, ""))}
+          />
+        </Field>
+        <Field label="ملاحظات" optional>
+          <textarea className="input-field" rows={3}
+            placeholder="أي تفاصيل أو طلبات خاصة..."
+            value={notes} onChange={(e) => setNotes(e.target.value)}
+          />
+        </Field>
       </div>
     </div>
   );
 }
 
-// ─── Step 4 — Confirm (OUTSIDE main component) ────────────────────────────────
-function StepConfirm({ eventType, city, pkgId, date, name, waLink }: {
+// ─── Step 4 — Confirm ─────────────────────────────────────────────────────────
+function StepConfirm({ eventType, city, pkgId, date, name, phone, notes, waLink }: {
   eventType: string; city: string; pkgId: string;
-  date: string; name: string; waLink: string;
+  date: string; name: string; phone: string; notes: string; waLink: string;
 }) {
   const ev  = EVENT_TYPES.find((e) => e.id === eventType);
   const pkg = PACKAGES.find((p) => p.id === pkgId);
   const rows = [
     { label:"المناسبة", value: ev?.label ?? eventType },
     { label:"المدينة",  value: city },
-    { label:"الباقة",   value: `${pkg?.nameAr ?? pkgId} — ${pkg?.price ?? ""}` },
-    { label:"التاريخ",  value: date },
+    { label:"الباقة",   value: pkg ? `${pkg.nameAr} — ${pkg.price}` : pkgId },
+    { label:"التاريخ",  value: formatDateArabic(date) },
     { label:"الاسم",    value: name },
+    ...(phone ? [{ label:"الجوال", value: phone }] : []),
+    ...(notes.trim() ? [{ label:"ملاحظات", value: notes.trim() }] : []),
   ];
   return (
     <div className="step-scene" dir="rtl">
-      <div style={{ textAlign:"center",marginBottom:20 }}>
-        <div style={{ fontSize:"2.5rem",marginBottom:8 }}>🌟</div>
-        <h2 style={{ fontSize:"1.3rem",fontWeight:900,color:"rgba(255,248,236,.92)",marginBottom:4 }}>
-          ملخص حجزك
-        </h2>
-        <p style={{ color:"rgba(255,248,236,.5)",fontSize:".82rem" }}>
-          راجعي التفاصيل وأرسلي طلبك عبر واتساب
-        </p>
-      </div>
-      <div style={{ display:"flex",flexDirection:"column",gap:10,marginBottom:24 }}>
-        {rows.map(({ label, value }) => (
-          <div key={label} className="confirm-row">
-            <span style={{ color:GOLD,fontSize:"1rem",flexShrink:0 }}>✦</span>
-            <div style={{ flex:1 }}>
-              <div style={{ fontSize:".75rem",color:"rgba(255,248,236,.5)" }}>{label}</div>
-              <div style={{ fontSize:".9rem",fontWeight:700,color:"rgba(255,248,236,.9)" }}>{value}</div>
+      <div style={{
+        borderRadius:24,border:"1px solid rgba(201,168,76,.25)",
+        background:"linear-gradient(180deg,rgba(255,255,255,.045),transparent)",
+        padding:"24px 20px",
+      }}>
+        <div style={{ textAlign:"center",marginBottom:14 }}>
+          <div style={{ fontSize:"2.2rem",marginBottom:6,color:GOLD,textShadow:"0 0 20px rgba(201,168,76,.5)" }}>✦</div>
+          <h2 style={{ fontSize:"1.3rem",fontWeight:900,color:"rgba(255,248,236,.92)",marginBottom:4 }}>
+            ملخص حجزك
+          </h2>
+          <p style={{ color:"rgba(255,248,236,.5)",fontSize:".82rem" }}>
+            راجعي التفاصيل وأرسلي طلبك عبر واتساب
+          </p>
+        </div>
+        <div>
+          {rows.map(({ label, value }) => (
+            <div key={label} className="confirm-row">
+              <span style={{ color:GOLD,fontSize:".8rem",fontWeight:700,flexShrink:0 }}>{label}</span>
+              <span style={{ fontSize:".88rem",fontWeight:700,color:"rgba(255,248,236,.92)",textAlign:"left" }}>
+                {value || "—"}
+              </span>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      <a href={waLink} target="_blank" rel="noopener noreferrer" className="pulse-wa"
-        style={{
-          display:"block",textAlign:"center",
-          background:`linear-gradient(135deg,${GOLD},${GOLD_LIGHT})`,
-          color:INK,fontWeight:900,fontSize:"1.05rem",
-          borderRadius:16,padding:"18px 24px",textDecoration:"none",
-        }}
-      >
-        📲 تواصلي عبر واتساب
+      <a href={waLink} target="_blank" rel="noopener noreferrer" className="wa-cta pulse-wa"
+        style={{ marginTop:20 }}>
+        <span style={{ position:"relative",zIndex:1 }}>📲 تواصلي معنا عبر واتساب</span>
       </a>
+      <p style={{ textAlign:"center",color:"rgba(255,248,236,.4)",fontSize:".7rem",marginTop:12 }}>
+        سنرد خلال ساعات · التوثيق مخصص بالكامل لكِ
+      </p>
     </div>
   );
 }
@@ -423,6 +506,8 @@ export function ReservationExperience() {
   const [pkgId,     setPkgId]     = useState("");
   const [date,      setDate]      = useState("");
   const [name,      setName]      = useState("");
+  const [phone,     setPhone]     = useState("");
+  const [notes,     setNotes]     = useState("");
   const [prefill,   setPrefill]   = useState<{ city: string; pkg: string }>({ city: "", pkg: "" });
 
   // Restore city/package prefill from query params (?city=dammam&package=02) —
@@ -444,6 +529,11 @@ export function ReservationExperience() {
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
+  // Scroll to top on step change so each scene opens from its heading.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
+
   const canNext = [!!eventType, !!city, !!pkgId, !!(date && name.trim()), true][step];
   const next    = () => { if (canNext) setStep((s) => Math.min(s+1, 4)); };
   const back    = () => setStep((s) => Math.max(s-1, 0));
@@ -452,13 +542,15 @@ export function ReservationExperience() {
     const ev  = EVENT_TYPES.find((e) => e.id === eventType);
     const pkg = PACKAGES.find((p) => p.id === pkgId);
     const msg = [
-      "مرحباً، أود الحجز",
+      "مرحباً 👋 أود الحجز",
       `المناسبة: ${ev?.label ?? eventType}`,
       `المدينة: ${city}`,
-      `الباقة: ${pkg?.nameAr ?? pkgId} — ${pkg?.price ?? ""}`,
-      `التاريخ: ${date}`,
-      `الاسم: ${name}`,
-    ].join("\n");
+      `الباقة: ${pkg ? `${pkg.nameAr} — ${pkg.price}` : pkgId}`,
+      date ? `التاريخ: ${formatDateArabic(date)}` : "",
+      name ? `الاسم: ${name}` : "",
+      phone ? `الجوال: ${phone}` : "",
+      notes.trim() ? `ملاحظات: ${notes.trim()}` : "",
+    ].filter(Boolean).join("\n");
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
   }
 
@@ -467,8 +559,10 @@ export function ReservationExperience() {
       case 0: return <StepEvent   eventType={eventType} setEventType={setEventType} />;
       case 1: return <StepCity    city={city}           setCity={setCity} />;
       case 2: return <StepPackage pkgId={pkgId}         setPkgId={setPkgId} />;
-      case 3: return <StepDetails date={date} setDate={setDate} name={name} setName={setName} />;
-      case 4: return <StepConfirm eventType={eventType} city={city} pkgId={pkgId} date={date} name={name} waLink={buildWA()} />;
+      case 3: return <StepDetails date={date} setDate={setDate} name={name} setName={setName}
+                       phone={phone} setPhone={setPhone} notes={notes} setNotes={setNotes} />;
+      case 4: return <StepConfirm eventType={eventType} city={city} pkgId={pkgId}
+                       date={date} name={name} phone={phone} notes={notes} waLink={buildWA()} />;
       default: return null;
     }
   }
@@ -494,7 +588,7 @@ export function ReservationExperience() {
 
         <div style={{
           width:"100%",maxWidth:480,
-          padding:"28px 20px 32px",
+          padding:"28px 20px 130px",
           position:"relative",zIndex:1,
           flex:1,display:"flex",flexDirection:"column",
         }}>
@@ -503,34 +597,38 @@ export function ReservationExperience() {
             <span style={{ fontSize:".72rem",fontWeight:900,letterSpacing:".25em",color:GOLD,textTransform:"uppercase",opacity:.8 }}>
               Asmaa Studio ✦
             </span>
+            <div style={{ fontSize:".62rem",color:"rgba(255,248,236,.35)",marginTop:4,letterSpacing:".08em" }}>
+              أسماء ستوديو · المنطقة الشرقية
+            </div>
           </div>
 
           <Stepper current={step}/>
 
           <div style={{ flex:1 }}>{renderStep()}</div>
 
-          {/* Nav */}
-          <div style={{ marginTop:28 }}>
+          <p style={{ textAlign:"center",fontSize:".65rem",color:"rgba(255,248,236,.2)",marginTop:24 }}>
+            © {new Date().getFullYear()} Asmaa Studio · المنطقة الشرقية
+          </p>
+        </div>
+
+        {/* Fixed bottom navigation */}
+        <div style={{
+          position:"fixed",bottom:0,insetInline:0,zIndex:5,
+          padding:"32px 16px 16px",
+          background:"linear-gradient(to top,#050505 55%,rgba(5,5,5,.95) 75%,transparent)",
+        }}>
+          <div style={{ display:"flex",gap:12,maxWidth:480,margin:"0 auto" }} dir="rtl">
+            {step > 0 && step < 4 && <button className="btn-back" onClick={back}>← رجوع</button>}
             {step < 4 ? (
-              <div style={{ display:"flex",gap:12 }}>
-                {step > 0 && <button className="btn-back" onClick={back}>← رجوع</button>}
-                <button className="btn-next" onClick={next} disabled={!canNext}
-                  style={{ flex: step>0 ? 2 : undefined }}>
-                  {step===3 ? "مراجعة الطلب ✦" : "التالي →"}
-                </button>
-              </div>
+              <button className="btn-next" onClick={next} disabled={!canNext}
+                style={{ flex: step>0 ? 3 : undefined }}>
+                {step===3 ? "مراجعة الطلب ✦" : "التالي →"}
+              </button>
             ) : (
-              <button className="btn-back" onClick={back} style={{ width:"100%" }}>← تعديل</button>
+              <button className="btn-back" onClick={back} style={{ width:"100%" }}>← تعديل التفاصيل</button>
             )}
           </div>
         </div>
-
-        {/* Bottom accent */}
-        <div style={{ width:"100%",height:1,flexShrink:0,
-          background:"linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)" }}/>
-        <p style={{ fontSize:".65rem",color:"rgba(255,248,236,.2)",padding:"10px 0 16px",zIndex:1 }}>
-          © {new Date().getFullYear()} Asmaa Studio · المنطقة الشرقية
-        </p>
       </div>
     </>
   );
