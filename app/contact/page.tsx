@@ -156,7 +156,7 @@ export default function ContactPage() {
             <div className="contact-info-stack">
               {/* WhatsApp */}
               <a
-                className="contact-card"
+                className="contact-card reveal-on-scroll"
                 href={waHref}
                 target="_blank"
                 rel="noreferrer"
@@ -172,7 +172,7 @@ export default function ContactPage() {
 
               {/* Phone */}
               <a
-                className="contact-card"
+                className="contact-card reveal-on-scroll"
                 href={phoneTel}
                 aria-label={`اتصل على ${phoneDisplay}`}
               >
@@ -186,7 +186,7 @@ export default function ContactPage() {
 
               {/* Email */}
               <a
-                className="contact-card"
+                className="contact-card reveal-on-scroll"
                 href="mailto:info@asmaa.video"
                 aria-label="راسلي عبر البريد الإلكتروني"
               >
@@ -252,15 +252,15 @@ export default function ContactPage() {
           <span className="eyebrow">الخطوة التالية</span>
           <h2 className="section-title">جاهزة للحجز؟ ابدئي من هنا.</h2>
           <div className="board-lever-grid">
-            <article className="board-lever-card">
+            <article className="board-lever-card reveal-on-scroll">
               <h3>رابط العروس</h3>
               <p>اختاري المدينة والتاريخ والباقة واكتبي تفاصيل يومك — كل شيء في نموذج واحد.</p>
             </article>
-            <article className="board-lever-card">
+            <article className="board-lever-card reveal-on-scroll">
               <h3>الأسئلة الشائعة</h3>
               <p>اقرئي إجابات الأسعار والباقات والتسليم قبل التواصل — توفر وقت الطرفين.</p>
             </article>
-            <article className="board-lever-card">
+            <article className="board-lever-card reveal-on-scroll">
               <h3>الألبوم</h3>
               <p>شاهدي أعمال سابقة من الأحساء والدمام والخبر قبل اتخاذ القرار.</p>
             </article>
