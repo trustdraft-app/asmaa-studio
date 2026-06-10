@@ -28,11 +28,6 @@
       "permanent": true
     },
     {
-      "source": "/packages",
-      "destination": "/#packages",
-      "permanent": true
-    },
-    {
       "source": "/al-khobar",
       "destination": "/khobar",
       "permanent": true
