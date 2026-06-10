@@ -28,7 +28,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "bride-experience-khobar-dammam-alahsa",
     title: "تجربة العروس مع التصوير في الخبر والدمام والأحساء",
-    metaTitle: "تجربة العروس يوم التصوير في الخبر والدمام والأحساء | Asmaa Studio",
+    metaTitle: "تجربة العروس يوم التصوير في الخبر والدمام والأحساء | Asmaa Video",
     metaDescription:
       "كيف يمر يوم التصوير على العروس في الخبر والدمام والأحساء؟ خطوات اليوم من وصول الفريق النسائي إلى تسليم الفيديو، وما الذي يجعل التجربة مريحة.",
     h1: "كيف تبدو تجربة العروس مع فريق تصوير نسائي في الخبر والدمام والأحساء؟",
@@ -86,7 +86,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-videography-al-ahsa",
     title: "تصوير فيديو زواج في الأحساء",
-    metaTitle: "تصوير فيديو زواج في الأحساء | Asmaa Studio",
+    metaTitle: "تصوير فيديو زواج في الأحساء | Asmaa Video",
     metaDescription:
       "دليل تصوير فيديو الزفاف في الأحساء: متى تختارين الزفة فقط، ومتى تحتاجين تفاصيل العروس أو تغطية أطول.",
     h1: "تصوير فيديو زواج في الأحساء للعروس التي تريد ذكرى مرتبة وواضحة",
@@ -137,7 +137,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-videography-dammam",
     title: "تصوير زواجات الدمام",
-    metaTitle: "تصوير زواجات في الدمام | Asmaa Studio",
+    metaTitle: "تصوير زواجات في الدمام | Asmaa Video",
     metaDescription:
       "تصوير زواجات وخطوبة في الدمام بأسلوب نسائي هادئ، مع شرح واضح للباقات واللحظات التي تستحق التغطية.",
     h1: "تصوير زواجات في الدمام بأسلوب مرتب يوضح الباقة قبل واتساب",
@@ -188,7 +188,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-videography-khobar",
     title: "تصوير زواجات الخبر",
-    metaTitle: "تصوير زواجات في الخبر | Asmaa Studio",
+    metaTitle: "تصوير زواجات في الخبر | Asmaa Video",
     metaDescription:
       "دليل تصوير الزواجات والخطوبة في الخبر، مع تركيز على التفاصيل الراقية ولقطات العروس وFirst Look.",
     h1: "تصوير زواجات في الخبر بتفاصيل أنيقة وقرار حجز أسهل",
@@ -238,7 +238,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "female-wedding-photographer-eastern-province",
     title: "مصورة زواجات نسائي في الشرقية",
-    metaTitle: "مصورة زواجات نسائي في الشرقية | Asmaa Studio",
+    metaTitle: "مصورة زواجات نسائي في الشرقية | Asmaa Video",
     metaDescription:
       "مصورة زواجات وخطوبة نسائية في الشرقية للأحساء والدمام والخبر، مع باقات تصوير فيديو واضحة وحجز مباشر.",
     h1: "مصورة زواجات نسائي في الشرقية للأحساء والدمام والخبر",
@@ -276,7 +276,7 @@ export const seoGuidePages: SeoGuidePage[] = [
     ],
     faqs: [
       {
-        question: "ما المدن التي تخدمها Asmaa Studio؟",
+        question: "ما المدن التي تخدمها Asmaa Video؟",
         answer: "التركيز الحالي على الأحساء أولا، ثم الدمام والخبر حسب التوفر."
       },
       {
@@ -288,7 +288,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "engagement-videography-eastern-province",
     title: "تصوير خطوبة وملكة في الشرقية",
-    metaTitle: "تصوير خطوبة وملكة في الشرقية | Asmaa Studio",
+    metaTitle: "تصوير خطوبة وملكة في الشرقية | Asmaa Video",
     metaDescription:
       "تصوير خطوبة وملكة في الأحساء والدمام والخبر، مع شرح اللقطات المهمة والباقات المناسبة للمناسبات القصيرة.",
     h1: "تصوير خطوبة وملكة في الشرقية بلقطات ناعمة وواضحة",
@@ -338,7 +338,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "zaffa-video-package",
     title: "باقة تصوير الزفة",
-    metaTitle: "باقة تصوير الزفة | Asmaa Studio",
+    metaTitle: "باقة تصوير الزفة | Asmaa Video",
     metaDescription:
       "شرح باقة تصوير الزفة: لمن تناسب، ماذا تشمل، ومتى تكون الباقات الأعلى أفضل لحفظ تفاصيل اليوم.",
     h1: "باقة تصوير الزفة لمن تريد حفظ لحظة الدخول بشكل واضح وأنيق",
@@ -357,9 +357,9 @@ export const seoGuidePages: SeoGuidePage[] = [
         bullets: ["حضور قبل الزفة", "تصوير الدخول", "مونتاج مختصر", "مدة محددة"]
       },
       {
-        heading: "متى تختارين الزفة المطورة؟",
+        heading: "متى تختارين الزفة والكواليس؟",
         body:
-          "إذا كانت الكوشة أو الكيك أو تفاصيل القاعة مهمة، فالزفة المطورة تضيف لقطات تعطي الفيلم سياقا أجمل.",
+          "إذا كانت الكوشة أو الكيك أو تفاصيل القاعة مهمة، فالزفة والكواليس تضيف لقطات تعطي الفيلم سياقا أجمل.",
         bullets: ["تفاصيل القاعة", "الكوشة", "الكيك", "لقطات قبل الدخول"]
       }
     ],
@@ -367,7 +367,7 @@ export const seoGuidePages: SeoGuidePage[] = [
       "تأكدي أن المطلوب هو الدخول فقط.",
       "اكتبي وقت الزفة المتوقع.",
       "اذكري المدينة والقاعة.",
-      "اختاري باقة الزفة أو الزفة المطورة."
+      "اختاري باقة الزفة أو الزفة والكواليس."
     ],
     faqs: [
       {
@@ -376,14 +376,14 @@ export const seoGuidePages: SeoGuidePage[] = [
       },
       {
         question: "هل يمكن إضافة تفاصيل القاعة؟",
-        answer: "نعم، الزفة المطورة مناسبة إذا كانت تفاصيل القاعة جزءا مهما من الفيلم."
+        answer: "نعم، الزفة والكواليس مناسبة إذا كانت تفاصيل القاعة جزءا مهما من الفيلم."
       }
     ]
   },
   {
     slug: "first-look-wedding-video",
     title: "تصوير First Look للعروس",
-    metaTitle: "تصوير First Look للعروس | Asmaa Studio",
+    metaTitle: "تصوير First Look للعروس | Asmaa Video",
     metaDescription:
       "دليل تصوير First Look في الزفاف: كيف يجهز، متى يصور، وأي باقة تناسب هذه اللقطة الشعورية.",
     h1: "تصوير First Look للعروس عندما تكون اللحظة جزءا من قصة اليوم",
@@ -428,12 +428,12 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-video-packages-saudi",
     title: "باقات تصوير الزواجات",
-    metaTitle: "باقات تصوير الزواجات | Asmaa Studio",
+    metaTitle: "باقات تصوير الزواجات | Asmaa Video",
     metaDescription:
       "قارني بين باقات تصوير الزواجات من الزفة إلى Full Day، واعرفي كيف تختارين حسب اللحظات لا حسب السعر فقط.",
     h1: "باقات تصوير الزواجات مرتبة حسب شكل يومك ولحظاته",
     summary:
-      "دليل يساعد العميلة على فهم فرق الباقات: الزفة، الزفة المطورة، Royal Event، وFull Day.",
+      "دليل يساعد العميلة على فهم فرق الباقات: الزفة، الزفة والكواليس، Royal Event، وFull Day.",
     searchIntent: "عميلة تبحث عن أسعار وباقات تصوير الزواجات وتحتاج مقارنة واضحة قبل التواصل.",
     promise: "المقارنة تبدأ من اللحظات التي تريدين حفظها، ثم السعر والمدة.",
     keyPhrases: ["باقات تصوير زواجات", "أسعار تصوير زواج", "بكج تصوير زواج", "تصوير فيديو عروس"],
@@ -473,7 +473,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "bridal-details-video",
     title: "تصوير تفاصيل العروس",
-    metaTitle: "تصوير تفاصيل العروس | Asmaa Studio",
+    metaTitle: "تصوير تفاصيل العروس | Asmaa Video",
     metaDescription:
       "تصوير تفاصيل العروس: الفستان، المسكة، الخاتم، العطر، والكعب ضمن فيلم زفاف ناعم ومتسلسل.",
     h1: "تصوير تفاصيل العروس يحول الفيلم من توثيق عادي إلى ذكرى متكاملة",
@@ -518,7 +518,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-videography-checklist",
     title: "قائمة تجهيز تصوير الزفاف",
-    metaTitle: "قائمة تجهيز تصوير الزفاف | Asmaa Studio",
+    metaTitle: "قائمة تجهيز تصوير الزفاف | Asmaa Video",
     metaDescription:
       "قائمة قصيرة لتجهيز تصوير الزفاف: الوقت، القاعة، اللقطات المهمة، والبيانات التي تسهل الحجز.",
     h1: "قائمة تجهيز تصوير الزفاف قبل إرسال طلب الحجز",
@@ -563,7 +563,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "how-to-choose-wedding-videographer",
     title: "كيف تختارين مصورة الزفاف",
-    metaTitle: "كيف تختارين مصورة الزفاف | Asmaa Studio",
+    metaTitle: "كيف تختارين مصورة الزفاف | Asmaa Video",
     metaDescription:
       "دليل اختيار مصورة الزفاف: الأسلوب، الباقة، وضوح التواصل، واللقطات التي تثبت أن الاختيار مناسب.",
     h1: "كيف تختارين مصورة الزفاف بدون تشتت بين الأسعار والحسابات",
@@ -608,7 +608,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-video-delivery-editing",
     title: "مونتاج وتسليم فيديو الزفاف",
-    metaTitle: "مونتاج وتسليم فيديو الزفاف | Asmaa Studio",
+    metaTitle: "مونتاج وتسليم فيديو الزفاف | Asmaa Video",
     metaDescription:
       "شرح مونتاج فيديو الزفاف وتسليم المقاطع: كيف تتحول اللقطات إلى فيلم مرتب يناسب الذكرى والمشاركة.",
     h1: "مونتاج فيديو الزفاف هو ما يجعل اللقطات قصة يمكن الرجوع لها",
@@ -653,7 +653,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "best-wedding-videographer-eastern-province-2026",
     title: "أفضل مصورة فيديو زفاف في المنطقة الشرقية ٢٠٢٦",
-    metaTitle: "أفضل مصورة فيديو زفاف بالشرقية ٢٠٢٦ | Asmaa Studio",
+    metaTitle: "أفضل مصورة فيديو زفاف بالشرقية ٢٠٢٦ | Asmaa Video",
     metaDescription:
       "كيف تختارين مصورة فيديو زفاف في المنطقة الشرقية لعام ٢٠٢٦: معايير الأسلوب، الباقات، والضمانات التي تطلبها العروس السعودية.",
     h1: "كيف تختارين أفضل مصورة فيديو زفاف في المنطقة الشرقية لعام ٢٠٢٦",
@@ -724,7 +724,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "saudi-wedding-zaffa-traditions",
     title: "تقاليد الزفة في الأعراس السعودية",
-    metaTitle: "الزفة في الزواج السعودي — التقاليد والتفاصيل | Asmaa Studio",
+    metaTitle: "الزفة في الزواج السعودي — التقاليد والتفاصيل | Asmaa Video",
     metaDescription:
       "شرح تقاليد الزفة في الأعراس السعودية وكيف يحفظها الفيلم: الدخول، الإضاءة، الفرقة، وتفاصيل العروس.",
     h1: "تقاليد الزفة في الأعراس السعودية وكيف تحفظها كاميرا الفيديو",
@@ -783,7 +783,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-videography-prices-saudi-2026",
     title: "أسعار تصوير فيديو الزفاف في السعودية ٢٠٢٦",
-    metaTitle: "أسعار تصوير فيديو الزواج بالسعودية ٢٠٢٦ | Asmaa Studio",
+    metaTitle: "أسعار تصوير فيديو الزواج بالسعودية ٢٠٢٦ | Asmaa Video",
     metaDescription:
       "دليل أسعار تصوير فيديو الزفاف في السعودية لعام ٢٠٢٦: من ٦٠٠ ريال للزفة فقط إلى ٢٥٠٠ ريال لليوم الكامل.",
     h1: "أسعار تصوير فيديو الزفاف في السعودية لعام ٢٠٢٦",
@@ -802,12 +802,12 @@ export const seoGuidePages: SeoGuidePage[] = [
     packageIds: ["01", "02", "03", "04", "05"],
     sections: [
       {
-        heading: "سلم الأسعار في Asmaa Studio",
+        heading: "سلم الأسعار في Asmaa Video",
         body:
           "تبدأ الباقات من ٦٠٠ ريال للزفة فقط، وتنتهي عند ٢٥٠٠ ريال لليوم الكامل من الصالون إلى القاعة. كل باقة تشرح ما تتضمنه قبل التواصل.",
         bullets: [
           "بكج الزفة — ٦٠٠ ريال — ٢٠ دقيقة",
-          "بكج الزفة المطور — ١٢٠٠ ريال — ساعة",
+          "بكج الزفة والكواليس — ١٢٠٠ ريال — ساعتان",
           "Half Day — ١٧٠٠ ريال — ٣ ساعات",
           "Full Day — ٢٥٠٠ ريال — ٦ ساعات",
           "بكج الخطوبة — ١٥٠٠ ريال — ساعتان ونصف"
@@ -864,7 +864,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "half-day-vs-full-day-wedding-video",
     title: "Half Day أم Full Day — كيف تختارين الباقة المناسبة",
-    metaTitle: "Half Day أم Full Day — اختيار باقة التصوير | Asmaa Studio",
+    metaTitle: "Half Day أم Full Day — اختيار باقة التصوير | Asmaa Video",
     metaDescription:
       "مقارنة بين باقة Half Day (٣ ساعات) وFull Day (٦ ساعات) لتصوير الزفاف السعودي: متى تكفي الأولى ومتى تحتاجين الثانية.",
     h1: "Half Day أم Full Day — كيف تختارين باقة الفيديو الأنسب ليومك",
@@ -923,9 +923,9 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "saudi-female-wedding-videographer-faq",
     title: "أسئلة العروس قبل حجز مصورة فيديو نسائية في السعودية",
-    metaTitle: "أسئلة قبل حجز مصورة فيديو نسائية | Asmaa Studio",
+    metaTitle: "أسئلة قبل حجز مصورة فيديو نسائية | Asmaa Video",
     metaDescription:
-      "أهم ١٠ أسئلة تطرحها العروس السعودية قبل حجز مصورة فيديو نسائية، مع إجابات واضحة من Asmaa Studio.",
+      "أهم ١٠ أسئلة تطرحها العروس السعودية قبل حجز مصورة فيديو نسائية، مع إجابات واضحة من Asmaa Video.",
     h1: "أسئلة العروس قبل حجز مصورة فيديو نسائية في السعودية",
     summary:
       "مرجع لتسريع القرار وحماية ثقة العروس قبل التواصل عبر واتساب.",
@@ -987,7 +987,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "how-to-choose-female-videographer-al-ahsa",
     title: "كيف تختارين مصورة فيديو لزفافك في الأحساء",
-    metaTitle: "كيف تختارين مصورة فيديو زفافك في الأحساء | Asmaa Studio",
+    metaTitle: "كيف تختارين مصورة فيديو زفافك في الأحساء | Asmaa Video",
     metaDescription:
       "خطوات عملية لاختيار مصورة فيديو زفاف نسائية في الأحساء: معايير الأسلوب، الباقات، الترخيص، والقاعات المحلية.",
     h1: "كيف تختارين مصورة فيديو زفافك في الأحساء — خطوات عملية للعروس",
@@ -1034,7 +1034,7 @@ export const seoGuidePages: SeoGuidePage[] = [
       {
         question: "هل المصورة تعرف قاعات الأحساء؟",
         answer:
-          "اطلبي عينة من زواج في الهفوف أو المبرز للتأكد. Asmaa Studio يغطي قاعات المحافظة بشكل منتظم."
+          "اطلبي عينة من زواج في الهفوف أو المبرز للتأكد. Asmaa Video يغطي قاعات المحافظة بشكل منتظم."
       },
       {
         question: "متى أتواصل قبل المناسبة؟",
@@ -1046,7 +1046,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "best-time-to-film-eastern-province-wedding",
     title: "أفضل وقت لتصوير حفل الزفاف في المنطقة الشرقية",
-    metaTitle: "أفضل وقت لتصوير الزفاف في الشرقية | Asmaa Studio",
+    metaTitle: "أفضل وقت لتصوير الزفاف في الشرقية | Asmaa Video",
     metaDescription:
       "متى تكون الإضاءة والأجواء الأنسب لتصوير حفل الزفاف في الأحساء والدمام والخبر — دليل العروس للحجز.",
     h1: "أفضل وقت لتصوير حفل الزفاف في المنطقة الشرقية",
@@ -1104,7 +1104,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "wedding-budget-planning-saudi-2026",
     title: "ميزانية تصوير الزفاف بالسعودية لعام ٢٠٢٦",
-    metaTitle: "ميزانية تصوير الزفاف بالسعودية ٢٠٢٦ | Asmaa Studio",
+    metaTitle: "ميزانية تصوير الزفاف بالسعودية ٢٠٢٦ | Asmaa Video",
     metaDescription:
       "خطة ميزانية واقعية لتصوير الزفاف السعودي ٢٠٢٦: تخصيص النسب، العربون، الإضافات، وكيفية تجنب التكاليف المخفية.",
     h1: "ميزانية تصوير الزفاف بالسعودية ٢٠٢٦ — تخطيط واقعي للعروس",
@@ -1124,13 +1124,13 @@ export const seoGuidePages: SeoGuidePage[] = [
       {
         heading: "النسب الموصى بها داخل ميزانية الزفاف",
         body:
-          "خبراء التخطيط يوصون بتخصيص ٨٪–١٢٪ من ميزانية الزفاف الإجمالية للتصوير (فيديو + فوتو). إذا كانت الميزانية ٢٠ ألف ريال، فحصة التصوير ١٦٠٠–٢٤٠٠ ريال، وهو ما يطابق Half Day أو بداية Full Day في Asmaa Studio.",
+          "خبراء التخطيط يوصون بتخصيص ٨٪–١٢٪ من ميزانية الزفاف الإجمالية للتصوير (فيديو + فوتو). إذا كانت الميزانية ٢٠ ألف ريال، فحصة التصوير ١٦٠٠–٢٤٠٠ ريال، وهو ما يطابق Half Day أو بداية Full Day في Asmaa Video.",
         bullets: ["٨٪ ميزانية متحفظة", "١٠٪ ميزانية متوازنة", "١٢٪ تركيز على الذكرى", "تخصيص منفصل للفيديو فقط"]
       },
       {
         heading: "العربون وكيف تخططين له",
         body:
-          "Asmaa Studio يطلب عربون ٥٠٪ من قيمة الباقة لتثبيت التاريخ. خصصي هذا العربون مبكرا في ميزانيتك حتى لا تتأخري عن المواعيد المفضلة لديك.",
+          "Asmaa Video يطلب عربون ٥٠٪ من قيمة الباقة لتثبيت التاريخ. خصصي هذا العربون مبكرا في ميزانيتك حتى لا تتأخري عن المواعيد المفضلة لديك.",
         bullets: ["عربون ٥٠٪ غير قابل للاسترداد", "تحويل بنكي مباشر", "إيصال يحفظ حقكِ", "الباقي يوم المناسبة"]
       },
       {
@@ -1163,7 +1163,7 @@ export const seoGuidePages: SeoGuidePage[] = [
   {
     slug: "saudi-photographer-tips-for-al-ahsa-bride",
     title: "نصائح من مصورة سعودية لعروس الأحساء",
-    metaTitle: "نصائح من مصورة سعودية لعروس الأحساء | Asmaa Studio",
+    metaTitle: "نصائح من مصورة سعودية لعروس الأحساء | Asmaa Video",
     metaDescription:
       "أهم النصائح لعروس الأحساء من تجربة مصورة سعودية: التحضير لليوم، التعامل مع التصوير، وحفظ راحة العائلة.",
     h1: "نصائح من مصورة سعودية لعروس الأحساء",

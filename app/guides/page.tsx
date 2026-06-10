@@ -11,21 +11,21 @@ import { SiteFooter } from "../../components/SiteFooter";
 export const metadata: Metadata = {
   title: "دليل تصوير الزواجات والخطوبة",
   description:
-    "دليل Asmaa Studio لتصوير الزواجات والخطوبة في الأحساء والدمام والخبر: باقات، تجهيزات، تفاصيل العروس، واختيار المصورة.",
+    "دليل Asmaa Video لتصوير الزواجات والخطوبة في الأحساء والدمام والخبر: باقات، تجهيزات، تفاصيل العروس، واختيار المصورة.",
   alternates: {
     canonical: "https://asmaa.video/guides"
   },
   openGraph: {
-    title: "دليل تصوير الزواجات والخطوبة | Asmaa Studio",
+    title: "دليل تصوير الزواجات والخطوبة | Asmaa Video",
     description: "صفحات عملية تساعد العروس على اختيار الباقة والمدينة وتجهيز تفاصيل الحجز.",
     url: "https://asmaa.video/guides",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
   },
   twitter: twitterMetadata(
-    "دليل تصوير الزواجات والخطوبة | Asmaa Studio",
+    "دليل تصوير الزواجات والخطوبة | Asmaa Video",
     "صفحات عملية تساعد العروس على اختيار الباقة والمدينة وتجهيز تفاصيل الحجز."
   )
 };

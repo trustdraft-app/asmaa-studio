@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { BlogIndex } from "../../components/BlogIndex";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
-const title = "المدونة | أدلة تصوير الأعراس في المنطقة الشرقية — Asmaa Studio";
+const title = "المدونة | أدلة تصوير الأعراس في المنطقة الشرقية — Asmaa Video";
 const description =
-  "مدونة أسماء ستوديو: كيف تختارين مصورة زفاف في الأحساء والدمام والخبر، الفرق بين باقات الفيديو، وكم تكلفة تصوير الأفراح في السعودية 2026.";
+  "مدونة أسماء فيديو: كيف تختارين مصورة زفاف في الأحساء والدمام والخبر، الفرق بين باقات الفيديو، وكم تكلفة تصوير الأفراح في السعودية 2026.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "https://asmaa.video/blog",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"

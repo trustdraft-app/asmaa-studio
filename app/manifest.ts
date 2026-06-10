@@ -6,8 +6,8 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Asmaa Studio | تصوير فيديو زواجات نسائي",
-    short_name: "Asmaa Studio",
+    name: "Asmaa Video | تصوير فيديو زواجات نسائي",
+    short_name: "Asmaa Video",
     description:
       "تصوير فيديو للأعراس والخطوبة في الأحساء والدمام والخبر مع باقات واضحة ومونتاج احترافي.",
     id: "/",

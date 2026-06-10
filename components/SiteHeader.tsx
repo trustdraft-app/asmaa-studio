@@ -23,11 +23,11 @@ export function SiteHeader() {
   return (
     <header className="site-header" aria-label="رأس الصفحة">
       <div className="site-header-inner">
-        <Link className="site-header-brand" href="/" aria-label="Asmaa Studio — الصفحة الرئيسية">
+        <Link className="site-header-brand" href="/" aria-label="Asmaa Video — الصفحة الرئيسية">
           <span className="site-header-mark" aria-hidden="true">
             <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={72} height={72} />
           </span>
-          <strong>Asmaa Studio</strong>
+          <strong>Asmaa Video</strong>
         </Link>
 
         <nav className="site-header-links" aria-label="التنقل الرئيسي">

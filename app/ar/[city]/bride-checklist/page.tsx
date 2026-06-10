@@ -20,11 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const city = seoCities.find((item) => item.slug === citySlug);
 
   if (!city) {
-    return { title: "Asmaa Studio" };
+    return { title: "Asmaa Video" };
   }
 
-  const title = `تجهيز العروس قبل تصوير الزفاف في ${city.ar} | Asmaa Studio`;
-  const description = `قائمة مختصرة للعروس في ${city.ar} قبل تصوير الزفاف أو الخطوبة: القاعة، وقت الزفة، تفاصيل العروس، واختيار الباقة المناسبة مع Asmaa Studio.`;
+  const title = `تجهيز العروس قبل تصوير الزفاف في ${city.ar} | Asmaa Video`;
+  const description = `قائمة مختصرة للعروس في ${city.ar} قبل تصوير الزفاف أو الخطوبة: القاعة، وقت الزفة، تفاصيل العروس، واختيار الباقة المناسبة مع Asmaa Video.`;
 
   return {
     title: { absolute: title },
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: `https://asmaa.video/ar/${city.slug}/bride-checklist`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "article",
       locale: "ar_SA"
@@ -81,26 +81,26 @@ export default async function BrideChecklistPage({ params }: Props) {
         "@type": "Article",
         "@id": `https://asmaa.video/ar/${city.slug}/bride-checklist#article`,
         headline: `تجهيز العروس قبل تصوير الزفاف في ${city.ar}`,
-        description: `قائمة مختصرة للعروس في ${city.ar} قبل تصوير الزفاف أو الخطوبة مع Asmaa Studio.`,
+        description: `قائمة مختصرة للعروس في ${city.ar} قبل تصوير الزفاف أو الخطوبة مع Asmaa Video.`,
         inLanguage: "ar-SA",
         mainEntityOfPage: `https://asmaa.video/ar/${city.slug}/bride-checklist`,
         author: {
           "@type": "Organization",
           "@id": "https://asmaa.video/#organization",
-          name: "Asmaa Studio",
+          name: "Asmaa Video",
           url: "https://asmaa.video/"
         },
         publisher: {
           "@type": "Organization",
           "@id": "https://asmaa.video/#organization",
-          name: "Asmaa Studio"
+          name: "Asmaa Video"
         },
         about: [city.ar, "تصوير الزفاف", "تصوير الخطوبة", "تجهيز رسالة الحجز"]
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+          { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
           { "@type": "ListItem", position: 2, name: city.ar, item: `https://asmaa.video/${city.slug}` },
           {
             "@type": "ListItem",

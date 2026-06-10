@@ -32,10 +32,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const city = seoCities.find((c) => c.slug === citySlug);
   const service = seoServices.find((s) => s.slug === serviceSlug);
   const modifier = seoModifiers.find((m) => m.slug === modifierSlug);
-  if (!city || !service || !modifier) return { title: "Asmaa Studio" };
+  if (!city || !service || !modifier) return { title: "Asmaa Video" };
 
-  const title = `${modifier.ar} ${service.ar} في ${city.ar} ٢٠٢٦ | Asmaa Studio`;
-  const desc = `${modifier.ar} ${service.ar} في ${city.ar}: ${service.shortDescAr} من ${service.price} ريال — Asmaa Studio بفريق نسائي مرخص.`;
+  const title = `${modifier.ar} ${service.ar} في ${city.ar} ٢٠٢٦ | Asmaa Video`;
+  const desc = `${modifier.ar} ${service.ar} في ${city.ar}: ${service.shortDescAr} من ${service.price} ريال — Asmaa Video بفريق نسائي مرخص.`;
 
   return {
     title: { absolute: title },
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description: desc,
       url: `https://asmaa.video/ar/${city.slug}/${service.slug}/${modifier.slug}`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "website",
       locale: "ar_SA"
@@ -94,7 +94,7 @@ export default async function SeoCityServiceModifierPage({ params }: Props) {
         provider: {
           "@type": "Organization",
           "@id": "https://asmaa.video/#organization",
-          name: "Asmaa Studio",
+          name: "Asmaa Video",
           url: "https://asmaa.video/",
           telephone: `+${whatsappNumber}`,
           sameAs: [instagramUrl, tiktokUrl]
@@ -116,7 +116,7 @@ export default async function SeoCityServiceModifierPage({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+          { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
           { "@type": "ListItem", position: 2, name: city.ar, item: `https://asmaa.video/${city.slug.replace(/-/g, "")}` },
           { "@type": "ListItem", position: 3, name: service.ar, item: `https://asmaa.video/ar/${city.slug}/${service.slug}` },
           { "@type": "ListItem", position: 4, name: modifier.ar, item: `https://asmaa.video/ar/${city.slug}/${service.slug}/${modifier.slug}` }
@@ -172,7 +172,7 @@ export default async function SeoCityServiceModifierPage({ params }: Props) {
       <section className="section">
         <div className="section-inner">
           <span className="eyebrow">لماذا نحن</span>
-          <h2 className="section-title">ضمانات Asmaa Studio في {city.ar}</h2>
+          <h2 className="section-title">ضمانات Asmaa Video في {city.ar}</h2>
           <p className="section-copy">{trustNote}</p>
         </div>
       </section>

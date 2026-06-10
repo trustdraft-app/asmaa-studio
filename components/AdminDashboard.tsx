@@ -148,7 +148,7 @@ export function AdminDashboard() {
               <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
             </span>
             <span>
-              <strong>Asmaa Studio</strong>
+              <strong>Asmaa Video</strong>
               <span>لوحة الحجوزات</span>
             </span>
           </Link>
@@ -187,7 +187,7 @@ export function AdminDashboard() {
             <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
           </span>
           <span>
-            <strong>Asmaa Studio</strong>
+            <strong>Asmaa Video</strong>
             <span>لوحة الحجوزات</span>
           </span>
         </Link>
@@ -340,7 +340,7 @@ function AdminSetupState() {
             <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
           </span>
           <span>
-            <strong>Asmaa Studio</strong>
+            <strong>Asmaa Video</strong>
             <span>لوحة الحجوزات</span>
           </span>
         </Link>
@@ -437,7 +437,7 @@ function whatsappForReservation(reservation: ReservationRecord) {
     .replace(/^5/, "9665");
   const text = [
     `السلام عليكم ${reservation.brideName}`,
-    "معك Asmaa Studio بخصوص طلب الحجز:",
+    "معك Asmaa Video بخصوص طلب الحجز:",
     `${reservation.eventType} بتاريخ ${reservation.eventDate}`,
     `الباقة: ${reservation.packageName}`,
     "نؤكد لك التوفر والخطوة التالية."

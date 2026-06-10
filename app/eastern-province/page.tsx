@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: metaTitle,
     description: metaDescription,
     url: "https://asmaa.video/eastern-province",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -53,7 +53,7 @@ export default function EasternProvincePage() {
     provider: {
       "@type": "Organization",
       "@id": "https://asmaa.video/#organization",
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       url: "https://asmaa.video/",
       telephone: `+${whatsappNumber}`,
       logo: "https://asmaa.video/brand/asmaa-logo-square.png",
@@ -73,7 +73,7 @@ export default function EasternProvincePage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+      { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
       { "@type": "ListItem", position: 2, name: "المنطقة الشرقية", item: "https://asmaa.video/eastern-province" }
     ]
   };
@@ -170,7 +170,7 @@ export default function EasternProvincePage() {
       <section className="section city-proof-section">
         <div className="section-inner city-proof-grid">
           <article>
-            <span className="eyebrow">لماذا أسماء ستوديو في الشرقية</span>
+            <span className="eyebrow">لماذا أسماء فيديو في الشرقية</span>
             <h2>طاقم نسائي بالكامل وخبرة بقاعات كل مدينة.</h2>
             <p>
               نعرف اختلاف قاعات الأحساء التراثية، وصالات الدمام الحديثة، وفنادق الخبر البحرية،

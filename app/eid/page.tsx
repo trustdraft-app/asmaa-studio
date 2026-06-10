@@ -4,7 +4,7 @@ import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 
-const title = "تصوير العيد والمناسبات العائلية | Asmaa Studio";
+const title = "تصوير العيد والمناسبات العائلية | Asmaa Video";
 const description =
   "تصوير مناسبات العيد النسائية في الأحساء والدمام والخبر والقطيف. توثيق اجتماعات العائلة وحفلات العيد بفريق نسائي بالكامل. التغطية تبدأ من ٦٠٠ ريال — احجزي قبل ازدحام مواسم الأعياد.";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "https://asmaa.video/eid",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -29,7 +29,7 @@ const occasion: Occasion = {
   eyebrow: "مناسبات العيد",
   h1: "تصوير العيد والمناسبات العائلية النسائية في الشرقية",
   answerBox:
-    "أسماء ستوديو يوثق مناسبات العيد النسائية في المنطقة الشرقية: اجتماع العائلة صباح العيد، حفلات النساء في الاستراحات، وأعراس أيام العيد. فريق نسائي بالكامل وخصوصية تامة، والتغطية تبدأ من ٦٠٠ ريال. مواسم الأعياد تحجز مبكرا — أرسلي تاريخك عبر واتساب اليوم.",
+    "أسماء فيديو يوثق مناسبات العيد النسائية في المنطقة الشرقية: اجتماع العائلة صباح العيد، حفلات النساء في الاستراحات، وأعراس أيام العيد. فريق نسائي بالكامل وخصوصية تامة، والتغطية تبدأ من ٦٠٠ ريال. مواسم الأعياد تحجز مبكرا — أرسلي تاريخك عبر واتساب اليوم.",
   serviceNameAr: "تصوير العيد والمناسبات",
   serviceNameEn: "Eid Coverage",
   priceFrom: 600,

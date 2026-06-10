@@ -40,7 +40,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city } = await params;
   const area = serviceAreas.find((item) => item.slug === city) ?? serviceAreas[0];
-  const title = `تصوير أفراح ${area.ar} | Asmaa Studio`;
+  const title = `تصوير أفراح ${area.ar} | Asmaa Video`;
   const description = `مصورة أفراح نسائية في ${area.ar}. فريق نسائي بالكامل يضمن الخصوصية التامة. تصوير زواجات وخطوبات وملكات بباقات معلنة من ٦٠٠ إلى ٢٥٠٠ ريال. احجزي موعدك عبر واتساب.`;
 
   return {
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: `https://asmaa.video/${area.slug}/tsweer-afrah`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "website",
       locale: "ar_SA"
@@ -69,13 +69,13 @@ export default async function CityAfrahPage({ params }: Props) {
   const pageUrl = `https://asmaa.video/${area.slug}/tsweer-afrah`;
 
   // Answer-box paragraph: 40-60 words, leads with the exact voice-search answer.
-  const answerBox = `أسماء ستوديو فريق تصوير نسائي بالكامل يوثق الأفراح والخطوبات والملكات في ${area.ar} والمنطقة الشرقية. خصوصية تامة للعروس وضيوفها، باقات معلنة تبدأ من ٦٠٠ ريال وتصل إلى ٢٥٠٠ ريال لتغطية اليوم الكامل، والحجز يتم برسالة واتساب واحدة مرتبة عبر رابط العروس.`;
+  const answerBox = `أسماء فيديو فريق تصوير نسائي بالكامل يوثق الأفراح والخطوبات والملكات في ${area.ar} والمنطقة الشرقية. خصوصية تامة للعروس وضيوفها، باقات معلنة تبدأ من ٦٠٠ ريال وتصل إلى ٢٥٠٠ ريال لتغطية اليوم الكامل، والحجز يتم برسالة واتساب واحدة مرتبة عبر رابط العروس.`;
 
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${pageUrl}#business`,
-    name: `أسماء ستوديو — تصوير أفراح ${area.ar}`,
+    name: `أسماء فيديو — تصوير أفراح ${area.ar}`,
     url: pageUrl,
     image: "https://asmaa.video/brand/asmaa-og.jpg",
     telephone: `+${whatsappNumber}`,
@@ -127,7 +127,7 @@ export default async function CityAfrahPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+      { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
       { "@type": "ListItem", position: 2, name: area.ar, item: `https://asmaa.video/${area.slug}` },
       { "@type": "ListItem", position: 3, name: `تصوير أفراح ${area.ar}`, item: pageUrl }
     ]
@@ -138,7 +138,7 @@ export default async function CityAfrahPage({ params }: Props) {
   const afrahFaqs = [
     {
       q: `من أفضل مصورة أفراح في ${area.ar}؟`,
-      a: `العروس في ${area.ar} تحتاج فريقا نسائيا يحترم خصوصية المناسبة ويعلن أسعاره قبل أول رسالة. أسماء ستوديو يقدم الاثنين معا: طاقم نسائي بالكامل وباقات مكتوبة من ٦٠٠ إلى ٢٥٠٠ ريال مع أمثلة أعمال واضحة قبل الحجز.`
+      a: `العروس في ${area.ar} تحتاج فريقا نسائيا يحترم خصوصية المناسبة ويعلن أسعاره قبل أول رسالة. أسماء فيديو يقدم الاثنين معا: طاقم نسائي بالكامل وباقات مكتوبة من ٦٠٠ إلى ٢٥٠٠ ريال مع أمثلة أعمال واضحة قبل الحجز.`
     },
     {
       q: `كم تكلفة تصوير الفرح في ${area.ar}؟`,
@@ -146,7 +146,7 @@ export default async function CityAfrahPage({ params }: Props) {
     },
     {
       q: `هل يوجد فريق تصوير نسائي في ${area.ar}؟`,
-      a: `نعم. فريق أسماء ستوديو نسائي بالكامل من الوصول إلى التسليم، وهذا يضمن خصوصية تامة للعروس والضيوف في الأفراح والمناسبات النسائية في ${area.ar}.`
+      a: `نعم. فريق أسماء فيديو نسائي بالكامل من الوصول إلى التسليم، وهذا يضمن خصوصية تامة للعروس والضيوف في الأفراح والمناسبات النسائية في ${area.ar}.`
     },
     {
       q: "كيف أحجز موعد التصوير؟",

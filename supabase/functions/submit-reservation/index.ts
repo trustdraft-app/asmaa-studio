@@ -114,7 +114,7 @@ async function notifyOwnerWhatsapp(reservation: {
   source: string;
 }) {
   const text = [
-    "🎉 حجز جديد على Asmaa Studio",
+    "🎉 حجز جديد على Asmaa Video",
     `👤 العروس: ${reservation.bride_name}`,
     `📱 الجوال: ${reservation.phone}`,
     `📦 الباقة: ${reservation.package_name}`,

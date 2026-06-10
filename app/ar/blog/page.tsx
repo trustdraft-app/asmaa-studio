@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { BlogIndex } from "../../../components/BlogIndex";
 import { socialPreviewImages, twitterMetadata } from "../../../lib/metadata";
 
-const title = "المدونة العربية | تصوير الأعراس في المنطقة الشرقية — Asmaa Studio";
+const title = "المدونة العربية | تصوير الأعراس في المنطقة الشرقية — Asmaa Video";
 const description =
-  "القسم العربي لمدونة أسماء ستوديو: أدلة اختيار مصورة الزفاف، باقات تصوير الأفراح، وأسعار التصوير في الأحساء والدمام والخبر والقطيف لعام 2026.";
+  "القسم العربي لمدونة أسماء فيديو: أدلة اختيار مصورة الزفاف، باقات تصوير الأفراح، وأسعار التصوير في الأحساء والدمام والخبر والقطيف لعام 2026.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "https://asmaa.video/ar/blog",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"

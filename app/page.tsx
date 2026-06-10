@@ -45,7 +45,7 @@ const serviceAreaJsonLd = serviceAreas.map((area) => ({
 
 const offerCatalogJsonLd = {
   "@type": "OfferCatalog",
-  name: "Asmaa Studio wedding videography packages",
+  name: "Asmaa Video wedding videography packages",
   itemListElement: packages.map((item, index) => ({
     "@type": "Offer",
     position: index + 1,
@@ -63,9 +63,9 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": "https://asmaa.video/#organization",
-      name: "Asmaa Studio",
-      legalName: "Asmaa Studio (asmaa.video)",
-      alternateName: ["Asmaa Video", "أسماء ستوديو"],
+      name: "Asmaa Video",
+      legalName: "Asmaa Video (asmaa.video)",
+      alternateName: ["Asmaa Video", "أسماء فيديو"],
       url: "https://asmaa.video/",
       logo: "https://asmaa.video/brand/asmaa-logo-square.png",
       image: [
@@ -78,7 +78,7 @@ const jsonLd = {
       description:
         "تصوير فيديو للأعراس والخطوبة في الأحساء والدمام والخبر مع باقات واضحة من ٦٠٠ إلى ٢٥٠٠ ريال.",
       disambiguatingDescription:
-        "Asmaa Studio (asmaa.video) is a Saudi female wedding videography studio in the Eastern Province (Al Ahsa, Dammam, Khobar). Not affiliated with asmaa-studio.com (UAE) or any Instagram account other than @asmaa.video.",
+        "Asmaa Video (asmaa.video) is a Saudi female wedding videography studio in the Eastern Province (Al Ahsa, Dammam, Khobar). Not affiliated with asmaa-studio.com (UAE) or any Instagram account other than @asmaa.video.",
       identifier: {
         "@type": "PropertyValue",
         name: "canonical-domain",
@@ -116,7 +116,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://asmaa.video/#website",
       url: "https://asmaa.video/",
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       inLanguage: "ar-SA",
       publisher: {
         "@id": "https://asmaa.video/#organization"
@@ -125,7 +125,7 @@ const jsonLd = {
     {
       "@type": "ItemList",
       "@id": "https://asmaa.video/#guide-list",
-      name: "دليل Asmaa Studio لتصوير الزواجات",
+      name: "دليل Asmaa Video لتصوير الزواجات",
       itemListElement: seoGuidePages.map((page, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -283,10 +283,10 @@ export default function HomePage() {
         </span>
 
         <nav className="av2-nav" aria-label="التنقل الرئيسي">
-          <a className="av2-brand" href="#top" aria-label="Asmaa Studio">
+          <a className="av2-brand" href="#top" aria-label="Asmaa Video">
             <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={44} height={44} priority />
             <span>
-              <strong>Asmaa Studio</strong>
+              <strong>Asmaa Video</strong>
               <em>Eastern Province · est. 2021</em>
             </span>
           </a>
@@ -308,11 +308,11 @@ export default function HomePage() {
           <h1 className="av2-hero-title av2-hero-title-stack">
             <span className="av2-line av2-line-1">نُوثِّقُ</span>
             <span className="av2-line av2-line-2">لحظاتِكِ الأثمَن</span>
-            <span className="av2-line av2-line-3">بعينِ الفنانة</span>
+            <span className="av2-line av2-line-3">بعدسةٍ سينمائية</span>
           </h1>
           <span className="av3-divider" aria-hidden="true" />
           <p className="av2-hero-sub">
-            تصوير زفاف نسائي سينمائي في المنطقة الشرقية — الأحساء، الدمام، والخبر.
+            تصوير فيديو أفراح نسائي سينمائي في المنطقة الشرقية — الأحساء، الدمام، والخبر.
           </p>
           <div className="av2-hero-ctas">
             <Link className="av2-btn-gold" href="/reserve">
@@ -360,7 +360,7 @@ export default function HomePage() {
       </section>
 
       {/* ════ SECTION 2 — STATEMENT BAND ════ */}
-      <section className="av2-statement" id="statement" aria-label="فلسفة Asmaa Studio">
+      <section className="av2-statement" id="statement" aria-label="فلسفة Asmaa Video">
         <div className="av2-statement-inner av2-reveal">
           <p className="av2-statement-en">We don&rsquo;t photograph weddings.</p>
           <span className="av2-statement-rule" aria-hidden="true" />
@@ -428,6 +428,26 @@ export default function HomePage() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      {/* ════ SECTION 3.2 — الفيرست لوك (signature cinematic moment) ════ */}
+      <section className="av2-firstlook" aria-label="الفيرست لوك">
+        <div className="av2-islamic av2-islamic-soft" aria-hidden="true" />
+        <div className="av2-firstlook-inner av2-reveal">
+          <span className="av2-eyebrow">لقطتنا المميزة</span>
+          <h2 className="av2-firstlook-title text-gold-gradient">الفيرست لوك</h2>
+          <p className="av2-firstlook-sub">لحظة لا تُنسى</p>
+          <p className="av2-firstlook-copy" dir="rtl">
+            يصل العريس وظهره مُداراً عن المدخل. تدخل العروس بفستان زفافها، تقترب خطوةً خطوة…
+            ثم يلتفت — لأول مرة يراها بفستان العرس. نظرةٌ صادقة، دمعةٌ مفاجئة، ضحكةٌ لا تُمثَّل.
+            نوثّق ردة الفعل الحقيقية بهدوء وإضاءة دافئة، فتبقى أصدق لقطة في فيلم يومكِ —
+            عفوية، خام، ولا تُعاد.
+          </p>
+          <p className="av2-firstlook-note">متاح في بكج 03 — Half Day وبكج 04 — Full Day</p>
+          <Link className="av2-btn-gold" href="/packages">
+            اكتشفي البكجات <ArrowLeft size={16} aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
@@ -587,7 +607,7 @@ export default function HomePage() {
               <footer>
                 <span className="av3-voice-rule" aria-hidden="true" />
                 <strong>{v.meta}</strong>
-                <em>Asmaa Studio · الشرقية</em>
+                <em>Asmaa Video · الشرقية</em>
               </footer>
             </article>
           ))}
@@ -649,8 +669,8 @@ export default function HomePage() {
       <footer className="av2-footer">
         <div className="av2-footer-inner">
           <div className="av2-footer-brand">
-            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="Asmaa Studio" width={52} height={52} />
-            <strong>Asmaa Studio</strong>
+            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="Asmaa Video" width={52} height={52} />
+            <strong>Asmaa Video</strong>
             <span>تصوير فيديو زواجات نسائي · المنطقة الشرقية</span>
             <span>المنطقة الشرقية، المملكة العربية السعودية</span>
           </div>
@@ -682,7 +702,7 @@ export default function HomePage() {
             </a>
           </div>
         </div>
-        <p className="av2-footer-copy">© {new Date().getFullYear()} Asmaa Studio · جميع الحقوق محفوظة</p>
+        <p className="av2-footer-copy">© {new Date().getFullYear()} Asmaa Video · جميع الحقوق محفوظة</p>
       </footer>
 
       <a

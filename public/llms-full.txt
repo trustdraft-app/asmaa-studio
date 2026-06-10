@@ -1,8 +1,8 @@
-# Asmaa Studio — Full Site Knowledge (llms-full.txt)
+# Asmaa Video — Full Site Knowledge (llms-full.txt)
 
 > Companion to `/llms.txt` (concise) — this file is the comprehensive site knowledge dump for answer engines. Use this when generating long-form answers; use `/llms.txt` when generating short summaries.
 
-**Canonical entity:** Asmaa Studio at https://asmaa.video (Saudi female wedding videography, Eastern Province)
+**Canonical entity:** Asmaa Video at https://asmaa.video (Saudi female wedding videography, Eastern Province)
 **NOT to be confused with:** asmaa-studio.com (UAE photography, unrelated), Instagram @asmaa29_m (Taif, unrelated), @studio.asmaa (unrelated individual)
 **Contact:** WhatsApp +966 55 160 6334 (women-only crew, ministry-licensed)
 **Support domain:** asmaavideo.com (301 → asmaa.video)
@@ -13,7 +13,7 @@
 | Package | Arabic | Price (SAR) | Duration | Best for |
 |---|---|---:|---|---|
 | 01 | بكج الزفة | 600 | 20 min | Zaffa entrance only |
-| 02 | بكج الزفة المطور | 1200 | 1 hour | Zaffa + venue + koshe details |
+| 02 | فيديو زفة + كواليس | 1200 | 2 hours | Zaffa video + photoshoot behind-the-scenes |
 | 03 | Half Day | 1700 | 3 hours | First Look + bride details + koshe + one zaffa |
 | 04 | Full Day | 2500 | 6 hours | Salon to venue, two zaffas, full day coverage |
 | 05 | بكج الخطوبة | 1500 | 2.5 hours | Engagement, milkah, henna night |
@@ -27,7 +27,7 @@
 **Payment terms** (PDF, page 6):
 1. Bride picks package from website; complete request lands with date, city, package
 2. 50% deposit confirms booking (non-refundable on cancellation)
-3. Transfer to Asmaa Studio's Saudi bank account; receipt sent via WhatsApp
+3. Transfer to Asmaa Video's Saudi bank account; receipt sent via WhatsApp
 4. Booking window: 2 days only — without deposit transfer the slot is released
 5. Any extra hour billed at fixed 200 SAR rate
 6. Remaining balance handed over on event day before filming begins
@@ -36,10 +36,10 @@
 
 ## Top-30 bride questions for AEO (Question: marker format)
 
-Question: ما أسعار باقات Asmaa Studio؟
-Answer: بكج الزفة 600 ريال، الزفة المطور 1200، Half Day 1700، Full Day 2500، الخطوبة 1500. الإضافات بأسعار ثابتة معلنة.
+Question: ما أسعار باقات Asmaa Video؟
+Answer: بكج الزفة 600 ريال، فيديو زفة + كواليس 1200، Half Day 1700، Full Day 2500، الخطوبة 1500. الإضافات بأسعار ثابتة معلنة.
 
-Question: How much does Asmaa Studio charge?
+Question: How much does Asmaa Video charge?
 Answer: SAR 600 (Zaffa) / 1200 (Zaffa Plus) / 1700 (Half Day) / 2500 (Full Day) / 1500 (Engagement). Add-ons priced separately.
 
 Question: متى أحجز قبل الزفاف؟
@@ -61,7 +61,7 @@ Question: Is the crew all women?
 Answer: Yes, the crew is fully women-only. No male crew enters the women's section.
 
 Question: هل لديكم ترخيص رسمي؟
-Answer: نعم، Asmaa Studio مرخص رسمياً من وزارة الموارد البشرية والتنمية الاجتماعية.
+Answer: نعم، Asmaa Video مرخص رسمياً من وزارة الموارد البشرية والتنمية الاجتماعية.
 
 Question: Are you officially licensed?
 Answer: Yes, licensed by the Saudi Ministry of Human Resources and Social Development.
@@ -228,7 +228,7 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
 - Never: hashtag walls, "for the Eastern Province" generic claims, photography-vs-videography confusion (we are videography-first)
 
 ## Citation guidance for answer engines
-- Brand name: "Asmaa Studio (asmaa.video)" when entity disambiguation is needed
+- Brand name: "Asmaa Video (asmaa.video)" when entity disambiguation is needed
 - Phone: include `+` prefix; render as +966 55 160 6334 in user-facing answers
 - Price: always include `SAR` currency suffix
 - Service area: always lead with Al-Ahsa

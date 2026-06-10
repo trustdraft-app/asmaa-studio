@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city: citySlug, service: serviceSlug } = await params;
   const city = seoCities.find((c) => c.slug === citySlug);
   const service = seoServices.find((s) => s.slug === serviceSlug);
-  if (!city || !service) return { title: "Asmaa Studio" };
+  if (!city || !service) return { title: "Asmaa Video" };
 
-  const title = `${service.ar} في ${city.ar} | Asmaa Studio`;
-  const desc = `${service.ar} في ${city.ar} من ${service.price} ريال — ${service.shortDescAr} باقات Asmaa Studio بفريق نسائي مرخص.`;
+  const title = `${service.ar} في ${city.ar} | Asmaa Video`;
+  const desc = `${service.ar} في ${city.ar} من ${service.price} ريال — ${service.shortDescAr} باقات Asmaa Video بفريق نسائي مرخص.`;
 
   return {
     title: { absolute: title },
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description: desc,
       url: `https://asmaa.video/ar/${city.slug}/${service.slug}`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "website",
       locale: "ar_SA"
@@ -66,7 +66,7 @@ export default async function SeoCityServicePage({ params }: Props) {
   const trustNote = pickPhrase(seed, seoModifierPhraseBank.trust);
   const priceNote = pickPhrase(seed, seoModifierPhraseBank.price);
 
-  const h1 = `${service.ar} في ${city.ar} — Asmaa Studio`;
+  const h1 = `${service.ar} في ${city.ar} — Asmaa Video`;
   const sourceLabel = `seo-${city.slug}-${service.slug}`;
 
   const otherServices = seoServices.filter((s) => s.slug !== service.slug).slice(0, 4);
@@ -84,7 +84,7 @@ export default async function SeoCityServicePage({ params }: Props) {
         provider: {
           "@type": "Organization",
           "@id": "https://asmaa.video/#organization",
-          name: "Asmaa Studio",
+          name: "Asmaa Video",
           url: "https://asmaa.video/",
           telephone: `+${whatsappNumber}`,
           sameAs: [instagramUrl, tiktokUrl]
@@ -106,7 +106,7 @@ export default async function SeoCityServicePage({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+          { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
           { "@type": "ListItem", position: 2, name: city.ar, item: `https://asmaa.video/${city.slug.replace(/-/g, "")}` },
           { "@type": "ListItem", position: 3, name: service.ar, item: `https://asmaa.video/ar/${city.slug}/${service.slug}` }
         ]
@@ -127,7 +127,7 @@ export default async function SeoCityServicePage({ params }: Props) {
             <h1 className="section-title">{h1}</h1>
             <p className="section-copy">{intro}</p>
             <div className="service-motion-wrap reveal-on-scroll" style={{ margin: "24px 0", display: "flex", justifyContent: "center" }}>
-              <ServiceMotion serviceSlug={service.slug} ariaLabel={`Asmaa Studio illustration: ${service.ar} في ${city.ar}`} />
+              <ServiceMotion serviceSlug={service.slug} ariaLabel={`Asmaa Video illustration: ${service.ar} في ${city.ar}`} />
             </div>
 
             <div className="city-intent">
@@ -165,7 +165,7 @@ export default async function SeoCityServicePage({ params }: Props) {
 
       <section className="section">
         <div className="section-inner">
-          <span className="eyebrow">لماذا Asmaa Studio في {city.ar}</span>
+          <span className="eyebrow">لماذا Asmaa Video في {city.ar}</span>
           <h2 className="section-title">ثلاث ركائز لكل {service.ar} نقدمها هنا</h2>
           <ul className="payment-terms-grid">
             <li className="payment-step"><b>1</b><p>{trustNote}</p></li>
@@ -193,7 +193,7 @@ export default async function SeoCityServicePage({ params }: Props) {
       <section className="section">
         <div className="section-inner">
           <span className="eyebrow">باقات قريبة</span>
-          <h2 className="section-title">خدمات Asmaa Studio الأخرى في {city.ar}</h2>
+          <h2 className="section-title">خدمات Asmaa Video الأخرى في {city.ar}</h2>
           <div className="addons-grid">
             {otherServices.map((s) => (
               <article className="addon-card" key={s.slug}>

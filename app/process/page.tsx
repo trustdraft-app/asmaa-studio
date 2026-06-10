@@ -19,15 +19,15 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "كيف نصوّر مع Asmaa Studio",
+    title: "كيف نصوّر مع Asmaa Video",
     description: "٧ خطوات واضحة من الحجز إلى التسليم. شفافية كاملة.",
     url: "https://asmaa.video/process",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
   },
-  twitter: twitterMetadata("كيف نصوّر مع Asmaa Studio", "٧ خطوات واضحة من الحجز إلى التسليم."),
+  twitter: twitterMetadata("كيف نصوّر مع Asmaa Video", "٧ خطوات واضحة من الحجز إلى التسليم."),
   robots: { index: true, follow: true }
 };
 
@@ -79,7 +79,7 @@ const steps = [
 const howToJsonLd = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  name: "كيف نصوّر حفل زفافك مع Asmaa Studio",
+  name: "كيف نصوّر حفل زفافك مع Asmaa Video",
   description: "٧ خطوات واضحة من الحجز للتسليم النهائي.",
   totalTime: "P30D",
   estimatedCost: { "@type": "MonetaryAmount", currency: "SAR", value: "600-2500" },

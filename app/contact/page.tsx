@@ -18,23 +18,23 @@ import { SiteFooter } from "../../components/SiteFooter";
 export const metadata: Metadata = {
   title: "تواصلي معنا",
   description:
-    "تواصلي مع Asmaa Studio عبر واتساب أو هاتف أو إيميل. نعمل في الأحساء والدمام والخبر، الأحد–الخميس 9 ص–9 م.",
+    "تواصلي مع Asmaa Video عبر واتساب أو هاتف أو إيميل. نعمل في الأحساء والدمام والخبر، الأحد–الخميس 9 ص–9 م.",
   alternates: {
     canonical: "https://asmaa.video/contact"
   },
   openGraph: {
-    title: "تواصلي معنا | Asmaa Studio",
+    title: "تواصلي معنا | Asmaa Video",
     description:
-      "واتساب، هاتف، إيميل — كل طرق التواصل مع Asmaa Studio في مكان واحد. نغطي الأحساء والدمام والخبر.",
+      "واتساب، هاتف، إيميل — كل طرق التواصل مع Asmaa Video في مكان واحد. نغطي الأحساء والدمام والخبر.",
     url: "https://asmaa.video/contact",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
   },
   twitter: twitterMetadata(
-    "تواصلي معنا | Asmaa Studio",
-    "واتساب، هاتف، إيميل — كل طرق التواصل مع Asmaa Studio في مكان واحد."
+    "تواصلي معنا | Asmaa Video",
+    "واتساب، هاتف، إيميل — كل طرق التواصل مع Asmaa Video في مكان واحد."
   )
 };
 
@@ -50,7 +50,7 @@ const breadcrumbJsonLd = {
 const contactJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Asmaa Studio",
+  name: "Asmaa Video",
   url: "https://asmaa.video",
   telephone: `+${whatsappNumber}`,
   email: "info@asmaa.video",
@@ -93,7 +93,7 @@ export default function ContactPage() {
   const phoneDisplay = `+${whatsappNumber}`;
   const phoneTel = `tel:+${whatsappNumber}`;
   const waHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    "السلام عليكم، أود الاستفسار عن خدمات Asmaa Studio وتوفر الباقات."
+    "السلام عليكم، أود الاستفسار عن خدمات Asmaa Video وتوفر الباقات."
   )}`;
 
   return (
@@ -235,7 +235,7 @@ export default function ContactPage() {
             {/* Right: map */}
             <div className="contact-map-wrap">
               <iframe
-                title="المنطقة الشرقية — Asmaa Studio"
+                title="المنطقة الشرقية — Asmaa Video"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d922862.2559053285!2d49.0!3d26.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e358c5ccf258aab%3A0x5e6b6b6b6b6b6b6b!2sEastern+Province%2C+Saudi+Arabia!5e0!3m2!1sar!2ssa!4v1700000000000"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

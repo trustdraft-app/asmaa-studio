@@ -13,7 +13,7 @@ const ADDONS: Addon[] = [
 
 const PACKAGE_PRICES: Record<string, { ar: string; price: number }> = {
   "01": { ar: "بكج الزفة", price: 600 },
-  "02": { ar: "بكج الزفة المطور", price: 1200 },
+  "02": { ar: "بكج الزفة والكواليس", price: 1200 },
   "03": { ar: "Half Day", price: 1700 },
   "04": { ar: "Full Day", price: 2500 },
   "05": { ar: "بكج الخطوبة", price: 1500 }

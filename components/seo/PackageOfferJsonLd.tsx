@@ -26,7 +26,7 @@ export function PackageOfferJsonLd({ packages, url }: PackageOfferProps) {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
     "@id": `${url}#package-catalog`,
-    name: "Asmaa Studio Wedding Packages",
+    name: "Asmaa Video Wedding Packages",
     url,
     provider: { "@id": "https://asmaa.video#business" },
     itemListElement: packages.map((pkg) => ({

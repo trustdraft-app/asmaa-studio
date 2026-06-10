@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: area.metaTitle,
       description: area.metaDescription,
       url: `https://asmaa.video/${area.slug}`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "website",
       locale: "ar_SA"
@@ -97,7 +97,7 @@ export default async function CityPage({ params }: Props) {
     provider: {
       "@type": "Organization",
       "@id": "https://asmaa.video/#organization",
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       url: "https://asmaa.video/",
       telephone: `+${whatsappNumber}`,
       logo: "https://asmaa.video/brand/asmaa-logo-square.png",
@@ -121,7 +121,7 @@ export default async function CityPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+      { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
       { "@type": "ListItem", position: 2, name: "المدن", item: "https://asmaa.video/#cities" },
       { "@type": "ListItem", position: 3, name: area.ar, item: `https://asmaa.video/${area.slug}` }
     ]
@@ -136,13 +136,13 @@ export default async function CityPage({ params }: Props) {
       <JsonLd data={cityJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
       <ImageGalleryJsonLd
-        name={`أعمال Asmaa Studio في ${area.ar}`}
+        name={`أعمال Asmaa Video في ${area.ar}`}
         description={`لقطات من تصوير الزواجات والخطوبة النسائي في ${area.ar} — زفة، تفاصيل عروس، وملكة.`}
         url={`https://asmaa.video/${area.slug}`}
         images={thumbs.map((thumb) => ({
           contentUrl: `https://asmaa.video${thumb.src}`,
           name: thumb.label,
-          description: `${thumb.label} — Asmaa Studio`
+          description: `${thumb.label} — Asmaa Video`
         }))}
       />
 

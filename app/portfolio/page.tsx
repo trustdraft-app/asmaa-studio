@@ -7,9 +7,9 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
 
-const META_TITLE = "معرض أعمال تصوير الزفاف — Asmaa Studio | الأحساء الدمام الخبر";
+const META_TITLE = "معرض أعمال تصوير الزفاف — Asmaa Video | الأحساء الدمام الخبر";
 const META_DESC =
-  "معرض أعمال Asmaa Studio لتصوير الزواجات والخطوبة بطاقم نسائي في الأحساء والدمام والخبر والقطيف — أفلام زفة، First Look، وتفاصيل العروس. نرسل النماذج المناسبة عبر واتساب حفاظاً على خصوصية العرايس.";
+  "معرض أعمال Asmaa Video لتصوير الزواجات والخطوبة بطاقم نسائي في الأحساء والدمام والخبر والقطيف — أفلام زفة، First Look، وتفاصيل العروس. نرسل النماذج المناسبة عبر واتساب حفاظاً على خصوصية العرايس.";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: META_TITLE,
     description: META_DESC,
     url: "https://asmaa.video/portfolio",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
@@ -74,7 +74,7 @@ const items: PortfolioItem[] = [
 /** Honest CTA: no public film links yet, so "watch" opens a consent-first
  *  WhatsApp request for a matching sample (mirrors /reviews policy). */
 function sampleRequestUrl(item: PortfolioItem) {
-  const text = `السلام عليكم أسماء ستوديو، أرغب بمشاهدة نموذج مشابه لـ: ${item.title} — ${item.city}. هل يمكن إرسال مقطع مناسب؟`;
+  const text = `السلام عليكم أسماء فيديو، أرغب بمشاهدة نموذج مشابه لـ: ${item.title} — ${item.city}. هل يمكن إرسال مقطع مناسب؟`;
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 }
 
@@ -101,7 +101,7 @@ const jsonLd = {
     {
       "@type": "ImageGallery",
       "@id": "https://asmaa.video/portfolio#gallery",
-      name: "معرض أعمال Asmaa Studio — تصوير زواجات وخطوبة نسائي في الشرقية",
+      name: "معرض أعمال Asmaa Video — تصوير زواجات وخطوبة نسائي في الشرقية",
       description: META_DESC,
       url: "https://asmaa.video/portfolio",
       inLanguage: "ar-SA",
@@ -112,14 +112,14 @@ const jsonLd = {
         "@id": `https://asmaa.video/portfolio#image-${index + 1}`,
         contentUrl: `https://asmaa.video${path}`,
         url: `https://asmaa.video${path}`,
-        name: items[index] ? `${items[index].title} — ${items[index].city}` : "Asmaa Studio",
+        name: items[index] ? `${items[index].title} — ${items[index].city}` : "Asmaa Video",
         representativeOfPage: index === 0
       }))
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+        { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
         { "@type": "ListItem", position: 2, name: "معرض الأعمال", item: "https://asmaa.video/portfolio" }
       ]
     }

@@ -20,7 +20,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = servicePageBySlug(slug);
-  if (!page) return { title: "خدمات Asmaa Studio" };
+  if (!page) return { title: "خدمات Asmaa Video" };
 
   return {
     title: { absolute: page.metaTitle },
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: page.metaTitle,
       description: page.metaDescription,
       url: `https://asmaa.video/services/${page.slug}`,
-      siteName: "Asmaa Studio",
+      siteName: "Asmaa Video",
       images: socialPreviewImages,
       type: "website",
       locale: "ar_SA"
@@ -63,7 +63,7 @@ export default async function ServicePage({ params }: Props) {
     provider: {
       "@type": "Organization",
       "@id": "https://asmaa.video/#organization",
-      name: "Asmaa Studio",
+      name: "Asmaa Video",
       url: "https://asmaa.video/",
       telephone: `+${whatsappNumber}`,
       sameAs: [instagramUrl, tiktokUrl]
@@ -90,7 +90,7 @@ export default async function ServicePage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Asmaa Studio", item: "https://asmaa.video/" },
+      { "@type": "ListItem", position: 1, name: "Asmaa Video", item: "https://asmaa.video/" },
       { "@type": "ListItem", position: 2, name: "الخدمات", item: "https://asmaa.video/services" },
       { "@type": "ListItem", position: 3, name: page.ar, item: `https://asmaa.video/services/${page.slug}` }
     ]
@@ -146,7 +146,7 @@ export default async function ServicePage({ params }: Props) {
       <section className="section">
         <div className="section-inner">
           <span className="eyebrow">ما تتضمنه الخدمة</span>
-          <h2 className="section-title">أهم لحظات {page.ar} في فيلم Asmaa Studio</h2>
+          <h2 className="section-title">أهم لحظات {page.ar} في فيلم Asmaa Video</h2>
           <ul className="payment-terms-grid" aria-label="مكونات الخدمة">
             {page.highlights.map((h, i) => (
               <li className="payment-step" key={i}>

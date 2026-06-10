@@ -13,22 +13,22 @@ const halfDayPackage = packages.find((item) => item.id === "03");
 export const metadata: Metadata = {
   title: "بكج الخطوبة والملكة",
   description:
-    "صفحة Asmaa Studio لبكج الخطوبة والملكة في الأحساء والدمام والخبر: السعر، المدة، وما الذي يشمله فيلم الخطوبة قبل واتساب.",
+    "صفحة Asmaa Video لبكج الخطوبة والملكة في الأحساء والدمام والخبر: السعر، المدة، وما الذي يشمله فيلم الخطوبة قبل واتساب.",
   alternates: {
     canonical: "https://asmaa.video/engagement"
   },
   openGraph: {
-    title: "بكج الخطوبة والملكة | Asmaa Studio",
+    title: "بكج الخطوبة والملكة | Asmaa Video",
     description:
       "للعروس التي تريد تصوير الشبكة والتلبيس والكيك والزفة في فيلم خطوبة راق: هذه الصفحة توضح متى يكفي بكج الخطوبة ومتى يكون Half Day أنسب.",
     url: "https://asmaa.video/engagement",
-    siteName: "Asmaa Studio",
+    siteName: "Asmaa Video",
     images: socialPreviewImages,
     type: "website",
     locale: "ar_SA"
   },
   twitter: twitterMetadata(
-    "بكج الخطوبة والملكة | Asmaa Studio",
+    "بكج الخطوبة والملكة | Asmaa Video",
     "للعروس التي تريد تصوير الشبكة والتلبيس والكيك والزفة في فيلم خطوبة راق: هذه الصفحة توضح متى يكفي بكج الخطوبة ومتى يكون Half Day أنسب."
   )
 };
