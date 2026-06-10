@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowRight,
   CalendarDays,
   CheckCircle2,
   CreditCard,
-  HeartHandshake,
   Landmark,
   Loader2,
   MapPin,
@@ -16,9 +16,16 @@ import {
   ShieldCheck,
   Sparkles,
   Upload,
+  User,
   Video
 } from "lucide-react";
-import { assetPath, packages, readableWhatsappSource, whatsappLink, whatsappNumber } from "../lib/content";
+import {
+  assetPath,
+  packages,
+  readableWhatsappSource,
+  whatsappLink,
+  whatsappNumber
+} from "../lib/content";
 import { SiteFooter } from "./SiteFooter";
 import {
   cityOptions,
@@ -33,13 +40,139 @@ import {
   type ReservationInput
 } from "../lib/reservations";
 
-type SubmitState = "idle" | "saving" | "saved" | "fallback" | "error";
+// ─── Brand token ────────────────────────────────────────────────────────────
+const GOLD = "#C9A84C";
+const GOLD_DIM = "rgba(201,168,76,0.18)";
+const GOLD_BORDER = "rgba(201,168,76,0.36)";
+const GOLD_GLOW = "rgba(201,168,76,0.12)";
+const IVORY = "rgba(255,248,236,0.92)";
+const MUTED = "rgba(255,248,236,0.60)";
+const SURFACE = "rgba(255,248,236,0.06)";
+const INK = "#0c0a08";
 
-const steps = [
-  { title: "المناسبة", text: "التاريخ والمدينة والقاعة" },
-  { title: "الباقة", text: "اختيار حسب لحظات اليوم" },
-  { title: "التأكيد", text: "تفاصيل جاهزة للمتابعة" }
-];
+// ─── Islamic geometric hero SVG ─────────────────────────────────────────────
+function IslamicPattern() {
+  return (
+    <svg
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        opacity: 0.22,
+        pointerEvents: "none"
+      }}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <pattern
+          id="islamic-geo"
+          x="0"
+          y="0"
+          width="80"
+          height="80"
+          patternUnits="userSpaceOnUse"
+        >
+          {/* 8-pointed star tile */}
+          <g fill="none" stroke={GOLD} strokeWidth="0.9">
+            {/* outer octagon */}
+            <polygon points="40,8 55,16 72,16 72,33 64,40 72,47 72,64 55,64 40,72 25,64 8,64 8,47 16,40 8,33 8,16 25,16" />
+            {/* inner star diagonals */}
+            <line x1="25" y1="16" x2="55" y2="64" />
+            <line x1="55" y1="16" x2="25" y2="64" />
+            <line x1="8" y1="33" x2="72" y2="47" />
+            <line x1="72" y1="33" x2="8" y2="47" />
+            {/* centre diamond */}
+            <polygon points="40,24 56,40 40,56 24,40" />
+          </g>
+        </pattern>
+        <linearGradient id="pattern-fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="black" stopOpacity="1" />
+          <stop offset="70%" stopColor="black" stopOpacity="1" />
+          <stop offset="100%" stopColor="black" stopOpacity="0" />
+        </linearGradient>
+        <mask id="pattern-mask">
+          <rect width="100%" height="100%" fill="url(#pattern-fade)" />
+        </mask>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#islamic-geo)`} mask="url(#pattern-mask)" />
+    </svg>
+  );
+}
+
+// ─── Progress bar ────────────────────────────────────────────────────────────
+const STEP_LABELS = ["الباقة", "التاريخ", "الموقع", "التواصل", "التأكيد"];
+
+function ProgressBar({ current }: { current: number }) {
+  const total = STEP_LABELS.length;
+  const pct = ((current + 1) / total) * 100;
+  return (
+    <div
+      style={{
+        display: "grid",
+        gap: 12,
+        marginBottom: 28,
+        position: "relative",
+        zIndex: 1
+      }}
+    >
+      {/* label row */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+        <span style={{ fontSize: "0.8rem", color: MUTED }}>
+          الخطوة {current + 1} من {total}
+        </span>
+        <span style={{ fontSize: "0.82rem", fontWeight: 700, color: GOLD }}>
+          {STEP_LABELS[current]}
+        </span>
+      </div>
+      {/* track */}
+      <div
+        style={{
+          height: 3,
+          borderRadius: 99,
+          background: "rgba(255,248,236,0.10)",
+          overflow: "hidden"
+        }}
+      >
+        <div
+          style={{
+            height: "100%",
+            width: `${pct}%`,
+            borderRadius: 99,
+            background: `linear-gradient(90deg, ${GOLD}, #e6c96a)`,
+            transition: "width 380ms cubic-bezier(0.4,0,0.2,1)"
+          }}
+        />
+      </div>
+      {/* step dots */}
+      <div style={{ display: "flex", gap: 8 }}>
+        {STEP_LABELS.map((label, i) => (
+          <div
+            key={label}
+            title={label}
+            style={{
+              flex: 1,
+              height: 4,
+              borderRadius: 99,
+              background: i <= current ? GOLD : "rgba(255,248,236,0.12)",
+              transition: "background 380ms ease"
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Type helpers ────────────────────────────────────────────────────────────
+type SubmitState = "idle" | "saving" | "saved" | "fallback" | "error";
 
 const cityFromQuery: Record<string, string> = {
   alahsa: "الأحساء",
@@ -49,27 +182,24 @@ const cityFromQuery: Record<string, string> = {
   "الدمام": "الدمام",
   "الخبر": "الخبر"
 };
+const packageIds = new Set(packages.map((p) => p.id));
 
-const packageIds = new Set(packages.map((item) => item.id));
-
+// ─── Main component ──────────────────────────────────────────────────────────
 export function ReservationExperience() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<ReservationInput>(defaultReservation);
+  const [email, setEmail] = useState("");
   const [touched, setTouched] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
   const [source, setSource] = useState("reserve-direct");
+
   const selectedPackage = useMemo(() => reservationPackage(form.packageId), [form.packageId]);
   const minEventDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
   const errors = validateReservation(form);
-  const hasErrors = Object.keys(errors).length > 0;
   const endpoint = reservationEndpoint();
   const deposit = useMemo(() => depositAmount(form.packageId), [form.packageId]);
   const paymentLink = useMemo(() => reservationPaymentLink(form.packageId), [form.packageId]);
-  const receiptWhatsappUrl = useMemo(
-    () => depositReceiptUrl(form, deposit, selectedPackage.name, source),
-    [form, deposit, selectedPackage.name, source]
-  );
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -77,442 +207,1229 @@ export function ReservationExperience() {
     const requestedPackage = query.get("package");
     const requestedSource = query.get("source") || query.get("src");
     const city = requestedCity ? cityFromQuery[requestedCity] : "";
-    const packageId = requestedPackage && packageIds.has(requestedPackage) ? requestedPackage : "";
-    const sourceLabel = requestedSource || inferReservationSource(document.referrer, requestedCity, packageId);
-
-    const timeout = window.setTimeout(() => {
-      setForm((current) => ({
-        ...current,
-        city: city || current.city,
-        packageId: packageId || current.packageId
+    const pkgId = requestedPackage && packageIds.has(requestedPackage) ? requestedPackage : "";
+    const sourceLabel =
+      requestedSource ||
+      inferReservationSource(document.referrer, requestedCity, pkgId);
+    const t = window.setTimeout(() => {
+      setForm((f) => ({
+        ...f,
+        city: city || f.city,
+        packageId: pkgId || f.packageId
       }));
       setSource(sourceLabel);
     }, 0);
-
-    return () => window.clearTimeout(timeout);
+    return () => window.clearTimeout(t);
   }, []);
 
-  const update = <Key extends keyof ReservationInput>(key: Key, value: ReservationInput[Key]) => {
-    setForm((current) => ({ ...current, [key]: value }));
+  const update = <K extends keyof ReservationInput>(key: K, value: ReservationInput[K]) => {
+    setForm((f) => ({ ...f, [key]: value }));
     setSubmitState("idle");
+  };
+
+  const canAdvance = () => {
+    if (step === 0) return !!form.packageId;
+    if (step === 1) return !!form.eventDate;
+    if (step === 2) return !!(form.city && form.venue);
+    if (step === 3) return !!(form.brideName.trim().length >= 2 && form.phone.trim().length >= 9);
+    return true;
   };
 
   const next = () => {
     setTouched(true);
-    if (step === 0 && (errors.brideName || errors.phone || errors.eventDate || errors.city || errors.venue)) {
-      return;
-    }
-    setStep((current) => Math.min(current + 1, steps.length - 1));
+    if (!canAdvance()) return;
+    setStep((s) => Math.min(s + 1, STEP_LABELS.length - 1));
+    setTouched(false);
+  };
+
+  const back = () => {
+    setStep((s) => Math.max(s - 1, 0));
+    setTouched(false);
+  };
+
+  const buildWhatsappUrl = () => {
+    const lines = [
+      "السلام عليكم، أرسلت تفاصيل الحجز من رابط Asmaa Studio:",
+      "",
+      `مصدر الحجز: ${readableWhatsappSource(source)}`,
+      `اسم العروس: ${form.brideName || "-"}`,
+      `الجوال: ${form.phone || "-"}`,
+      email ? `البريد الإلكتروني: ${email}` : "",
+      `نوع المناسبة: ${form.eventType}`,
+      `التاريخ: ${form.eventDate || "-"}`,
+      `المدينة: ${form.city || "-"}`,
+      `القاعة/الموقع: ${form.venue || "-"}`,
+      `الباقة المختارة: ${selectedPackage.name} — ${selectedPackage.price} ريال`,
+      `عدد الحضور التقريبي: ${form.guestCount || "-"}`,
+      `وقت الزفة/البداية: ${form.ceremonyTime || "-"}`,
+      `ملاحظات: ${form.notes || "-"}`,
+      "",
+      "أرغب بتأكيد التوفر والخطوة التالية."
+    ]
+      .filter((l) => l !== undefined && !(l === "" && false))
+      .join("\n");
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines)}`;
   };
 
   const submit = async () => {
     setTouched(true);
-    if (hasErrors) {
+    if (Object.keys(errors).length > 0) {
       setStep(0);
       return;
     }
-
     if (!endpoint) {
       setSubmitState("fallback");
-      window.open(reservationWhatsappUrl(form, source), "_blank", "noopener,noreferrer");
+      window.open(buildWhatsappUrl(), "_blank", "noopener,noreferrer");
       setMessage("جهزنا لك رسالة واتساب مرتبة بالتفاصيل. أرسليها ونكمل معك تأكيد التوفر والخطوة التالية.");
       return;
     }
-
     setSubmitState("saving");
     try {
-      const response = await fetch(endpoint, {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ ...form, source })
       });
-
-      if (!response.ok) {
-        throw new Error(`Reservation submit failed: ${response.status}`);
-      }
-
+      if (!res.ok) throw new Error(`${res.status}`);
       setSubmitState("saved");
       setMessage("وصل الطلب بنجاح. ستصلك رسالة واتساب لتأكيد التوفر والخطوة التالية.");
     } catch {
       setSubmitState("fallback");
-      window.open(reservationWhatsappUrl(form, source), "_blank", "noopener,noreferrer");
+      window.open(buildWhatsappUrl(), "_blank", "noopener,noreferrer");
       setMessage("جهزنا لك رسالة واتساب مرتبة بالتفاصيل. أرسليها ونكمل معك تأكيد التوفر والخطوة التالية.");
     }
   };
 
+  const receiptWhatsappUrl = useMemo(() => {
+    const lines = [
+      "السلام عليكم أسماء ستوديو، أرغب بتثبيت الحجز بدفع العربون عبر تحويل بنكي:",
+      "",
+      `اسم العروس: ${form.brideName || "-"}`,
+      `الجوال: ${form.phone || "-"}`,
+      `الباقة: ${selectedPackage.name}`,
+      deposit ? `قيمة العربون: ${deposit} ريال` : "",
+      `التاريخ: ${form.eventDate || "-"}`,
+      `المدينة: ${form.city || "-"}`,
+      "",
+      "أرجو تزويدي برقم الحساب (IBAN) لإتمام التحويل، وسأرفق صورة الإيصال هنا لتثبيت الموعد."
+    ]
+      .filter(Boolean)
+      .join("\n");
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines)}`;
+  }, [form, deposit, selectedPackage.name]);
+
   return (
     <main className="page-shell reserve-page" dir="rtl">
+      {/* ── Nav ── */}
       <nav className="nav reserve-nav" aria-label="تنقل رابط العروس">
         <Link className="brand-lockup" href="/">
           <span className="brand-mark" aria-hidden="true">
-            <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="" width={96} height={96} priority />
+            <Image
+              src={assetPath("/brand/asmaa-logo-square.png")}
+              alt=""
+              width={96}
+              height={96}
+              priority
+            />
           </span>
           <span>
             <strong>Asmaa Studio</strong>
             <span>رابط العروس</span>
           </span>
         </Link>
-        <a className="ghost-cta compact" href={whatsappLink("reserve-nav")} target="_blank" rel="noreferrer">
+        <a
+          className="ghost-cta compact"
+          href={whatsappLink("reserve-nav")}
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: GOLD, borderColor: GOLD_BORDER }}
+        >
           <MessageCircle size={17} />
           واتساب
         </a>
       </nav>
 
-      <section className="reserve-hero">
-        <div className="reserve-copy">
-          <span className="eyebrow">رابط العروس</span>
-          <h1>اختاري تغطية تناسب يومك بوضوح وهدوء.</h1>
-          <p>
-            شاهدي الباقات حسب لحظات المناسبة: الزفة، تفاصيل العروس، First Look، أو اليوم الكامل.
-            اكتبي التاريخ والمدينة والقاعة، ثم نكمل المتابعة عبر واتساب.
-          </p>
-          <div className="trust-strip" aria-label="نقاط مساعدة قبل الحجز">
-            <span>
-              <Sparkles size={18} /> تصوير نسائي
-            </span>
-            <span>
-              <CalendarDays size={18} /> فحص التوفر
-            </span>
-            <span>
-              <HeartHandshake size={18} /> متابعة واتساب
-            </span>
-          </div>
-          <p className="reserve-source-note">مصدر الطلب الحالي: {readableWhatsappSource(source)}</p>
-        </div>
+      {/* ── Hero ── */}
+      <section
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          minHeight: "calc(100svh - 96px)",
+          display: "grid",
+          alignItems: "center",
+          padding: "40px clamp(18px,5vw,72px) 80px"
+        }}
+        aria-label="نموذج حجز العروس"
+      >
+        <IslamicPattern />
 
-        <div className="reserve-card" aria-label="نموذج حجز العروس">
-          <div className="stepper" aria-label="خطوات الحجز">
-            {steps.map((item, index) => (
-              <button
-                aria-current={step === index ? "step" : undefined}
-                className={index <= step ? "active" : ""}
-                key={item.title}
-                onClick={() => setStep(index)}
-                type="button"
-              >
-                <span>{index + 1}</span>
-                <strong>{item.title}</strong>
-                <small>{item.text}</small>
-              </button>
-            ))}
-          </div>
+        {/* decorative radial glows */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `radial-gradient(ellipse 60% 45% at 50% -10%, rgba(201,168,76,0.14), transparent),
+                         radial-gradient(ellipse 40% 30% at 80% 60%, rgba(201,168,76,0.08), transparent)`,
+            pointerEvents: "none"
+          }}
+        />
 
-          {step === 0 && (
-            <div className="form-scene">
-              <div className="form-grid">
-                <Field label="اسم العروس" error={touched ? errors.brideName : undefined}>
-                  <input
-                    autoComplete="name"
-                    value={form.brideName}
-                    onChange={(event) => update("brideName", event.target.value)}
-                    placeholder="مثال: أسماء"
-                  />
-                </Field>
-                <Field label="رقم الجوال" error={touched ? errors.phone : undefined}>
-                  <input
-                    autoComplete="tel"
-                    inputMode="tel"
-                    value={form.phone}
-                    onChange={(event) => update("phone", event.target.value)}
-                    placeholder="05xxxxxxxx"
-                  />
-                </Field>
-                <Field label="نوع المناسبة">
-                  <select value={form.eventType} onChange={(event) => update("eventType", event.target.value)}>
-                    {eventTypes.map((item) => (
-                      <option key={item}>{item}</option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="تاريخ المناسبة" error={touched ? errors.eventDate : undefined}>
-                  <input
-                    min={minEventDate}
-                    type="date"
-                    value={form.eventDate}
-                    onChange={(event) => update("eventDate", event.target.value)}
-                  />
-                </Field>
-                <Field label="المدينة" error={touched ? errors.city : undefined}>
-                  <select value={form.city} onChange={(event) => update("city", event.target.value)}>
-                    {cityOptions.map((item) => (
-                      <option key={item}>{item}</option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="القاعة أو الموقع" error={touched ? errors.venue : undefined}>
-                  <input
-                    value={form.venue}
-                    onChange={(event) => update("venue", event.target.value)}
-                    placeholder="اسم القاعة أو الحي"
-                  />
-                </Field>
-              </div>
-            </div>
-          )}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            display: "grid",
+            gap: "clamp(28px,6vw,76px)",
+            gridTemplateColumns: "minmax(0,0.72fr) minmax(340px,1fr)",
+            maxWidth: 1240,
+            margin: "0 auto",
+            width: "100%"
+          }}
+        >
+          {/* copy column */}
+          <div className="reserve-copy">
+            {/* gold accent line */}
+            <div
+              style={{
+                width: 48,
+                height: 3,
+                borderRadius: 99,
+                background: GOLD,
+                marginBottom: 20
+              }}
+            />
+            <span
+              className="eyebrow"
+              style={{ color: GOLD, fontWeight: 800, letterSpacing: "0.12em", fontSize: "0.78rem" }}
+            >
+              رابط العروس
+            </span>
+            <h1
+              style={{
+                fontFamily: "var(--font-display,serif)",
+                fontSize: "clamp(2.6rem,5vw,4.4rem)",
+                lineHeight: 1.18,
+                margin: "16px 0",
+                textWrap: "balance",
+                color: IVORY
+              }}
+            >
+              يومك يستحق توثيقاً يليق به.
+            </h1>
+            <p style={{ color: MUTED, lineHeight: 1.9, fontSize: "1.06rem", margin: "0 0 28px" }}>
+              اختاري الباقة المناسبة، حددي التاريخ والمكان، وأضيفي تفاصيل التواصل — ثم نرتب كل شيء
+              عبر واتساب بخطوات واضحة.
+            </p>
 
-          {step === 1 && (
-            <div className="package-picker">
-              {packages.map((item) => (
-                <button
-                  aria-label={`اختيار ${item.name} بسعر ${item.price} ريال لمدة ${item.duration}`}
-                  aria-pressed={form.packageId === item.id}
-                  className={form.packageId === item.id ? "selected" : ""}
-                  key={item.id}
-                  onClick={() => update("packageId", item.id)}
-                  type="button"
+            {/* trust chips */}
+            <div
+              className="trust-strip"
+              style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}
+            >
+              {[
+                { icon: <Video size={16} />, text: "تصوير نسائي" },
+                { icon: <CalendarDays size={16} />, text: "فحص التوفر" },
+                { icon: <MessageCircle size={16} />, text: "متابعة واتساب" },
+                { icon: <ShieldCheck size={16} />, text: "بيانات آمنة" }
+              ].map(({ icon, text }) => (
+                <span
+                  key={text}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "8px 14px",
+                    borderRadius: 999,
+                    border: `1px solid ${GOLD_BORDER}`,
+                    background: GOLD_GLOW,
+                    color: IVORY,
+                    fontSize: "0.85rem",
+                    fontWeight: 700
+                  }}
                 >
-                  <span>بكج {item.id}</span>
-                  <strong>{item.name}</strong>
-                  <em>{item.price} ريال</em>
-                  <small>{item.duration}</small>
-                </button>
+                  <span style={{ color: GOLD }}>{icon}</span>
+                  {text}
+                </span>
               ))}
             </div>
-          )}
+          </div>
 
-          {step === 2 && (
-            <div className="form-scene">
-              <div className="summary-panel">
-                <div>
-                  <span>الباقة المختارة</span>
-                  <strong>{selectedPackage.name}</strong>
-                  <small>
-                    {selectedPackage.duration} · {selectedPackage.price} ريال
-                  </small>
-                </div>
-                <div>
-                  <span>المناسبة</span>
-                  <strong>{form.eventType}</strong>
-                  <small>
-                    {form.eventDate || "بدون تاريخ"} · {form.city}
-                  </small>
-                </div>
-                <div>
-                  <span>مصدر الوصول</span>
-                  <strong>{readableWhatsappSource(source)}</strong>
-                  <small>سيظهر مع الطلب داخل المتابعة وداخل رسالة واتساب.</small>
-                </div>
-                <div>
-                  <span>الموقع</span>
-                  <strong>{form.venue || "لم يكتب بعد"}</strong>
-                  <small>{form.brideName || "اسم العروس"}</small>
-                </div>
+          {/* ── Booking card ── */}
+          <div
+            className="reserve-card"
+            style={{
+              background: `linear-gradient(145deg,rgba(255,248,236,0.09),rgba(12,12,13,0.72))`,
+              border: `1px solid ${GOLD_BORDER}`,
+              borderRadius: 12,
+              boxShadow: `0 32px 96px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,248,236,0.07)`,
+              padding: "clamp(20px,3.5vw,32px)",
+              position: "relative",
+              overflow: "hidden"
+            }}
+          >
+            {/* card shimmer top line */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "10%",
+                right: "10%",
+                height: 1,
+                background: `linear-gradient(90deg,transparent,${GOLD},transparent)`,
+                opacity: 0.7
+              }}
+            />
+
+            <ProgressBar current={step} />
+
+            {/* ── Step 1: Package ── */}
+            {step === 0 && (
+              <StepPackage
+                selected={form.packageId}
+                onSelect={(id) => update("packageId", id)}
+              />
+            )}
+
+            {/* ── Step 2: Date ── */}
+            {step === 1 && (
+              <StepDate
+                eventDate={form.eventDate}
+                eventType={form.eventType}
+                minDate={minEventDate}
+                touched={touched}
+                error={touched && !form.eventDate ? "اختاري تاريخ المناسبة" : undefined}
+                onDateChange={(v) => update("eventDate", v)}
+                onTypeChange={(v) => update("eventType", v)}
+              />
+            )}
+
+            {/* ── Step 3: Location ── */}
+            {step === 2 && (
+              <StepLocation
+                city={form.city}
+                venue={form.venue}
+                touched={touched}
+                onCityChange={(v) => update("city", v)}
+                onVenueChange={(v) => update("venue", v)}
+              />
+            )}
+
+            {/* ── Step 4: Contact ── */}
+            {step === 3 && (
+              <StepContact
+                brideName={form.brideName}
+                phone={form.phone}
+                email={email}
+                guestCount={form.guestCount}
+                ceremonyTime={form.ceremonyTime}
+                notes={form.notes}
+                touched={touched}
+                onNameChange={(v) => update("brideName", v)}
+                onPhoneChange={(v) => update("phone", v)}
+                onEmailChange={setEmail}
+                onGuestChange={(v) => update("guestCount", v)}
+                onTimeChange={(v) => update("ceremonyTime", v)}
+                onNotesChange={(v) => update("notes", v)}
+              />
+            )}
+
+            {/* ── Step 5: Confirmation ── */}
+            {step === 4 && (
+              <StepConfirm
+                form={form}
+                email={email}
+                selectedPackage={selectedPackage}
+                deposit={deposit}
+                paymentLink={paymentLink}
+                receiptWhatsappUrl={receiptWhatsappUrl}
+                whatsappUrl={buildWhatsappUrl()}
+                source={source}
+                submitState={submitState}
+                message={message}
+                onSubmit={submit}
+              />
+            )}
+
+            {/* ── Nav buttons ── */}
+            {step < 4 && (
+              <div
+                className="form-actions"
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  justifyContent: "space-between",
+                  marginTop: 24,
+                  position: "relative",
+                  zIndex: 1
+                }}
+              >
+                <button
+                  className="ghost-cta"
+                  disabled={step === 0}
+                  onClick={back}
+                  type="button"
+                  style={{ opacity: step === 0 ? 0.3 : 1 }}
+                >
+                  <ArrowRight size={17} />
+                  رجوع
+                </button>
+                <button
+                  className="cta"
+                  onClick={next}
+                  type="button"
+                  style={{
+                    background: `linear-gradient(135deg,${GOLD},#b8923e)`,
+                    color: INK,
+                    fontWeight: 800,
+                    border: "none",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "12px 24px",
+                    borderRadius: 8,
+                    cursor: "pointer",
+                    fontSize: "1rem"
+                  }}
+                >
+                  التالي
+                  <ArrowLeft size={17} />
+                </button>
               </div>
-              <div className="form-grid">
-                <Field label="عدد الحضور التقريبي">
-                  <input
-                    inputMode="numeric"
-                    value={form.guestCount}
-                    onChange={(event) => update("guestCount", event.target.value)}
-                    placeholder="مثال: 150"
-                  />
-                </Field>
-                <Field label="وقت الزفة أو البداية">
-                  <input
-                    value={form.ceremonyTime}
-                    onChange={(event) => update("ceremonyTime", event.target.value)}
-                    placeholder="مثال: 9:30 مساء"
-                  />
-                </Field>
-              </div>
-              <label className="toggle-row">
-                <input
-                  checked={form.needsFirstLook}
-                  onChange={(event) => update("needsFirstLook", event.target.checked)}
-                  type="checkbox"
-                />
-                <span>
-                  <strong>أرغب بتوثيق First Look أو لحظة مهمة قبل الزفة</strong>
-                  <small>اختياري، لكنه يساعد على اختيار خطة التصوير المناسبة.</small>
-                </span>
-              </label>
-              <Field label="ملاحظات مهمة للتصوير">
-                <textarea
-                  rows={4}
-                  value={form.notes}
-                  onChange={(event) => update("notes", event.target.value)}
-                  placeholder="أي تفاصيل مهمة: مدخل القاعة، وقت معين، لقطة لا تريدين أن تفوت، أو سؤال عن إضافة."
-                />
-              </Field>
-
-              <div className="reserve-deposit" aria-label="تأكيد الحجز ودفع العربون">
-                <div className="reserve-deposit-head">
-                  <strong>تثبيت التاريخ بعربون التأكيد</strong>
-                  {deposit && (
-                    <span className="reserve-deposit-amount">
-                      {deposit} ريال
-                      <em>نصف قيمة الباقة · المتبقي يوم المناسبة</em>
-                    </span>
-                  )}
-                </div>
-                {paymentLink ? (
-                  <>
-                    <a className="cta deposit-pay" href={paymentLink} target="_blank" rel="noreferrer">
-                      <CreditCard size={18} />
-                      ادفعي العربون الآن (مدى / بطاقة)
-                    </a>
-                    <p className="reserve-deposit-note">
-                      دفع آمن عبر بوابة الدفع. بعد إتمام الدفع تصلك صفحة تأكيد، ونتواصل معك خلال ساعتين لترتيب التفاصيل.
-                    </p>
-                  </>
-                ) : (
-                  <div className="bank-transfer-deposit">
-                    <p className="reserve-deposit-note">
-                      <Landmark size={16} />
-                      احجزي بدفع عربون عبر تحويل بنكي — الطريقة المعتمدة لتثبيت التاريخ.
-                    </p>
-                    <ol className="bank-transfer-steps" aria-label="خطوات دفع العربون بالتحويل البنكي">
-                      <li>
-                        <span className="bank-step-num">1</span>
-                        <span>أرسلي التفاصيل أدناه ونؤكد لكِ توفّر التاريخ خلال ساعتين.</span>
-                      </li>
-                      <li>
-                        <span className="bank-step-num">2</span>
-                        <span>
-                          نزوّدك برقم حساب الاستوديو (IBAN) عبر واتساب فور تأكيد التوفر — لحماية مبلغك لا نعرض الرقم
-                          علناً على الموقع.
-                        </span>
-                      </li>
-                      <li>
-                        <span className="bank-step-num">3</span>
-                        <span>
-                          حوّلي العربون{deposit ? ` (${deposit} ريال — نصف قيمة الباقة)` : ""} ثم أرسلي صورة الإيصال
-                          عبر واتساب لتثبيت الموعد نهائياً.
-                        </span>
-                      </li>
-                    </ol>
-                    <a className="cta deposit-pay" href={receiptWhatsappUrl} target="_blank" rel="noreferrer">
-                      <Upload size={18} />
-                      أرسلي إيصال التحويل عبر واتساب
-                    </a>
-                    <p className="reserve-deposit-note bank-transfer-trust">
-                      <ShieldCheck size={15} />
-                      العربون لا يُرد عند الإلغاء · المتبقي يُسلَّم يوم المناسبة قبل التصوير.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {message && (
-            <div className={`submission-message ${submitState}`}>
-              <CheckCircle2 size={20} />
-              <span>{message}</span>
-            </div>
-          )}
-
-          <div className="form-actions">
-            <button className="ghost-cta" disabled={step === 0 || submitState === "saving"} onClick={() => setStep(step - 1)} type="button">
-              رجوع
-            </button>
-            {step < steps.length - 1 ? (
-              <button className="cta" onClick={next} type="button">
-                التالي <ArrowLeft size={17} />
-              </button>
-            ) : (
-              <button className="cta" disabled={submitState === "saving"} onClick={submit} type="button">
-                {submitState === "saving" ? <Loader2 className="spin" size={18} /> : <Sparkles size={18} />}
-                إرسال التفاصيل
-              </button>
             )}
           </div>
         </div>
       </section>
 
-      <section className="reserve-infographic" aria-label="شرح طريقة الحجز">
-        <article>
-          <Video size={28} />
-          <h2>ابدئي من شكل اليوم</h2>
-          <p>اختاري بين الزفة، التفاصيل، First Look، أو التغطية الكاملة بدون ملف طويل.</p>
-        </article>
-        <article>
-          <MapPin size={28} />
-          <h2>المكان واضح من البداية</h2>
-          <p>اكتبي المدينة والقاعة أو الحي حتى نراجع التوفر على تفاصيل مناسبة لك.</p>
-        </article>
-        <article>
-          <MessageCircle size={28} />
-          <h2>متابعة مرتبة في واتساب</h2>
-          <p>تصل الرسالة وفيها الباقة والتاريخ والموقع، فتبدأ المحادثة من نقطة واضحة.</p>
-        </article>
+      {/* ── How it works ── */}
+      <section
+        className="reserve-infographic"
+        aria-label="شرح طريقة الحجز"
+        style={{ marginTop: 0 }}
+      >
+        {[
+          {
+            icon: <Video size={28} />,
+            title: "ابدئي من الباقة",
+            body: "اختاري بين الزفة، تفاصيل العروس، Half Day، أو تغطية يوم كامل."
+          },
+          {
+            icon: <MapPin size={28} />,
+            title: "المكان والتاريخ",
+            body: "اكتبي المدينة والقاعة وحددي التاريخ حتى نراجع التوفر فوراً."
+          },
+          {
+            icon: <MessageCircle size={28} />,
+            title: "متابعة واضحة في واتساب",
+            body: "تصل رسالة مرتبة بجميع التفاصيل فتبدأ المحادثة من نقطة واضحة."
+          }
+        ].map(({ icon, title, body }) => (
+          <article key={title}>
+            <span style={{ color: GOLD }}>{icon}</span>
+            <h2>{title}</h2>
+            <p>{body}</p>
+          </article>
+        ))}
       </section>
+
       <SiteFooter />
     </main>
   );
 }
 
-function Field({
-  children,
-  error,
-  label
+// ─── Step 1: Package selection ────────────────────────────────────────────────
+function StepPackage({
+  selected,
+  onSelect
 }: {
-  children: React.ReactNode;
-  error?: string;
-  label: string;
+  selected: string;
+  onSelect: (id: string) => void;
 }) {
   return (
-    <label className="field">
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <StepHeading
+        icon={<Video size={20} />}
+        title="اختاري الباقة"
+        subtitle="حسب لحظات يومك"
+      />
+      <div
+        style={{
+          display: "grid",
+          gap: 10,
+          gridTemplateColumns: "repeat(auto-fill,minmax(140px,1fr))"
+        }}
+      >
+        {packages.map((pkg) => {
+          const active = selected === pkg.id;
+          return (
+            <button
+              key={pkg.id}
+              type="button"
+              aria-pressed={active}
+              onClick={() => onSelect(pkg.id)}
+              style={{
+                background: active
+                  ? `linear-gradient(145deg,${GOLD_DIM},rgba(255,248,236,0.07))`
+                  : SURFACE,
+                border: `1px solid ${active ? GOLD : "rgba(255,248,236,0.12)"}`,
+                borderRadius: 10,
+                color: IVORY,
+                cursor: "pointer",
+                minHeight: 160,
+                padding: 14,
+                textAlign: "start",
+                transition: "transform 180ms ease,border-color 180ms ease,background 180ms ease",
+                position: "relative",
+                overflow: "hidden"
+              }}
+            >
+              {pkg.spotlight && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: 8,
+                    insetInlineEnd: 8,
+                    background: GOLD,
+                    color: INK,
+                    fontSize: "0.65rem",
+                    fontWeight: 900,
+                    padding: "2px 7px",
+                    borderRadius: 99
+                  }}
+                >
+                  {pkg.spotlight}
+                </span>
+              )}
+              <span
+                style={{
+                  display: "block",
+                  fontSize: "0.75rem",
+                  fontWeight: 900,
+                  color: GOLD,
+                  marginBottom: 6
+                }}
+              >
+                بكج {pkg.id}
+              </span>
+              <strong style={{ display: "block", fontSize: "1rem", marginBottom: 8 }}>
+                {pkg.name}
+              </strong>
+              <em
+                style={{
+                  display: "block",
+                  fontStyle: "normal",
+                  fontSize: "1.5rem",
+                  fontWeight: 700,
+                  color: GOLD,
+                  lineHeight: 1,
+                  marginBottom: 6
+                }}
+              >
+                {pkg.price}
+              </em>
+              <small style={{ display: "block", color: MUTED, fontSize: "0.78rem" }}>
+                {pkg.duration}
+              </small>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── Step 2: Date ────────────────────────────────────────────────────────────
+function StepDate({
+  eventDate,
+  eventType,
+  minDate,
+  touched,
+  error,
+  onDateChange,
+  onTypeChange
+}: {
+  eventDate: string;
+  eventType: string;
+  minDate: string;
+  touched: boolean;
+  error?: string;
+  onDateChange: (v: string) => void;
+  onTypeChange: (v: string) => void;
+}) {
+  return (
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <StepHeading
+        icon={<CalendarDays size={20} />}
+        title="تاريخ المناسبة"
+        subtitle="نفحص التوفر فوراً بعد اختيار التاريخ"
+      />
+      <div style={{ display: "grid", gap: 16 }}>
+        <GoldField label="نوع المناسبة">
+          <select
+            value={eventType}
+            onChange={(e) => onTypeChange(e.target.value)}
+            style={inputStyle()}
+          >
+            {eventTypes.map((t) => (
+              <option key={t}>{t}</option>
+            ))}
+          </select>
+        </GoldField>
+
+        <GoldField label="تاريخ المناسبة" error={error}>
+          <input
+            type="date"
+            min={minDate}
+            value={eventDate}
+            onChange={(e) => onDateChange(e.target.value)}
+            style={{
+              ...inputStyle(),
+              colorScheme: "dark",
+              fontSize: "1.1rem"
+            }}
+          />
+        </GoldField>
+
+        <div
+          style={{
+            background: GOLD_GLOW,
+            border: `1px solid ${GOLD_BORDER}`,
+            borderRadius: 10,
+            padding: "14px 16px",
+            display: "flex",
+            gap: 12,
+            alignItems: "flex-start"
+          }}
+        >
+          <CalendarDays size={18} style={{ color: GOLD, flexShrink: 0, marginTop: 2 } as React.CSSProperties} />
+          <p style={{ margin: 0, fontSize: "0.86rem", color: MUTED, lineHeight: 1.7 }}>
+            بعد إرسال الطلب نتحقق من التوفر ونعود إليك خلال ساعتين عبر واتساب لتأكيد التاريخ.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Step 3: Location ────────────────────────────────────────────────────────
+function StepLocation({
+  city,
+  venue,
+  touched,
+  onCityChange,
+  onVenueChange
+}: {
+  city: string;
+  venue: string;
+  touched: boolean;
+  onCityChange: (v: string) => void;
+  onVenueChange: (v: string) => void;
+}) {
+  return (
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <StepHeading
+        icon={<MapPin size={20} />}
+        title="المدينة والقاعة"
+        subtitle="المنطقة الشرقية — اختاري المدينة واكتبي اسم القاعة"
+      />
+      <div style={{ display: "grid", gap: 16 }}>
+        <GoldField
+          label="المدينة"
+          error={touched && !city ? "اختاري المدينة" : undefined}
+        >
+          <select
+            value={city}
+            onChange={(e) => onCityChange(e.target.value)}
+            style={inputStyle()}
+          >
+            {cityOptions.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+        </GoldField>
+
+        <GoldField
+          label="القاعة أو الموقع"
+          error={touched && !venue ? "اكتبي اسم القاعة أو الحي" : undefined}
+        >
+          <input
+            value={venue}
+            onChange={(e) => onVenueChange(e.target.value)}
+            placeholder="اسم القاعة أو الحي"
+            style={inputStyle()}
+          />
+        </GoldField>
+
+        {/* city mini-map indicator */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            gap: 8
+          }}
+        >
+          {["الأحساء", "الدمام", "الخبر"].map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => onCityChange(c)}
+              style={{
+                background: city === c ? GOLD_DIM : SURFACE,
+                border: `1px solid ${city === c ? GOLD : "rgba(255,248,236,0.10)"}`,
+                borderRadius: 8,
+                color: city === c ? GOLD : MUTED,
+                cursor: "pointer",
+                fontWeight: 700,
+                padding: "10px 8px",
+                fontSize: "0.85rem",
+                transition: "all 180ms ease"
+              }}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Step 4: Contact ─────────────────────────────────────────────────────────
+function StepContact({
+  brideName,
+  phone,
+  email,
+  guestCount,
+  ceremonyTime,
+  notes,
+  touched,
+  onNameChange,
+  onPhoneChange,
+  onEmailChange,
+  onGuestChange,
+  onTimeChange,
+  onNotesChange
+}: {
+  brideName: string;
+  phone: string;
+  email: string;
+  guestCount: string;
+  ceremonyTime: string;
+  notes: string;
+  touched: boolean;
+  onNameChange: (v: string) => void;
+  onPhoneChange: (v: string) => void;
+  onEmailChange: (v: string) => void;
+  onGuestChange: (v: string) => void;
+  onTimeChange: (v: string) => void;
+  onNotesChange: (v: string) => void;
+}) {
+  return (
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <StepHeading
+        icon={<User size={20} />}
+        title="تفاصيل التواصل"
+        subtitle="معلوماتك الشخصية — سرية ولا تُشارك"
+      />
+      <div style={{ display: "grid", gap: 14, gridTemplateColumns: "1fr 1fr" }}>
+        <GoldField
+          label="اسمك أو اسم العروس"
+          error={touched && brideName.trim().length < 2 ? "اكتبي الاسم" : undefined}
+          fullWidth
+        >
+          <input
+            autoComplete="name"
+            value={brideName}
+            onChange={(e) => onNameChange(e.target.value)}
+            placeholder="مثال: أسماء"
+            style={inputStyle()}
+          />
+        </GoldField>
+
+        <GoldField
+          label="رقم الواتساب"
+          error={touched && phone.trim().length < 9 ? "أدخلي رقماً صحيحاً" : undefined}
+        >
+          <input
+            autoComplete="tel"
+            inputMode="tel"
+            value={phone}
+            onChange={(e) => onPhoneChange(e.target.value)}
+            placeholder="05xxxxxxxx"
+            style={inputStyle()}
+            dir="ltr"
+          />
+        </GoldField>
+
+        <GoldField label="البريد الإلكتروني (اختياري)">
+          <input
+            autoComplete="email"
+            inputMode="email"
+            value={email}
+            onChange={(e) => onEmailChange(e.target.value)}
+            placeholder="your@email.com"
+            style={inputStyle()}
+            dir="ltr"
+          />
+        </GoldField>
+
+        <GoldField label="عدد الحضور التقريبي">
+          <input
+            inputMode="numeric"
+            value={guestCount}
+            onChange={(e) => onGuestChange(e.target.value)}
+            placeholder="مثال: 150"
+            style={inputStyle()}
+          />
+        </GoldField>
+
+        <GoldField label="وقت الزفة أو البداية" fullWidth>
+          <input
+            value={ceremonyTime}
+            onChange={(e) => onTimeChange(e.target.value)}
+            placeholder="مثال: 9:30 مساء"
+            style={inputStyle()}
+          />
+        </GoldField>
+
+        <GoldField label="ملاحظات للتصوير" fullWidth>
+          <textarea
+            rows={3}
+            value={notes}
+            onChange={(e) => onNotesChange(e.target.value)}
+            placeholder="أي تفاصيل مهمة: مدخل القاعة، لقطة لا تريدين أن تفوت، سؤال عن إضافة…"
+            style={{ ...inputStyle(), resize: "vertical", lineHeight: 1.75 }}
+          />
+        </GoldField>
+      </div>
+    </div>
+  );
+}
+
+// ─── Step 5: Confirmation ────────────────────────────────────────────────────
+function StepConfirm({
+  form,
+  email,
+  selectedPackage,
+  deposit,
+  paymentLink,
+  receiptWhatsappUrl,
+  whatsappUrl,
+  source,
+  submitState,
+  message,
+  onSubmit
+}: {
+  form: ReservationInput;
+  email: string;
+  selectedPackage: (typeof packages)[number];
+  deposit: string;
+  paymentLink: string;
+  receiptWhatsappUrl: string;
+  whatsappUrl: string;
+  source: string;
+  submitState: SubmitState;
+  message: string;
+  onSubmit: () => void;
+}) {
+  return (
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <StepHeading
+        icon={<CheckCircle2 size={20} />}
+        title="تأكيد الطلب"
+        subtitle="راجعي التفاصيل ثم أرسليها عبر واتساب"
+      />
+
+      {/* Summary grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2,1fr)",
+          gap: 10,
+          marginBottom: 20
+        }}
+      >
+        {[
+          { label: "الباقة", value: selectedPackage.name, sub: `${selectedPackage.price} ريال · ${selectedPackage.duration}` },
+          { label: "نوع المناسبة", value: form.eventType, sub: form.eventDate || "التاريخ غير محدد" },
+          { label: "المدينة", value: form.city, sub: form.venue || "القاعة غير محددة" },
+          { label: "التواصل", value: form.brideName || "-", sub: form.phone || "-" }
+        ].map(({ label, value, sub }) => (
+          <div
+            key={label}
+            style={{
+              background: SURFACE,
+              border: `1px solid ${GOLD_BORDER}`,
+              borderRadius: 10,
+              padding: 14
+            }}
+          >
+            <span style={{ display: "block", color: GOLD, fontSize: "0.75rem", fontWeight: 900, marginBottom: 6 }}>
+              {label}
+            </span>
+            <strong style={{ display: "block", fontSize: "1rem", color: IVORY, marginBottom: 4 }}>
+              {value}
+            </strong>
+            <small style={{ color: MUTED, fontSize: "0.8rem" }}>{sub}</small>
+          </div>
+        ))}
+      </div>
+
+      {/* WhatsApp CTA — primary action */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 10,
+          width: "100%",
+          padding: "15px 24px",
+          borderRadius: 10,
+          background: `linear-gradient(135deg,${GOLD},#b8923e)`,
+          color: INK,
+          fontWeight: 800,
+          fontSize: "1.05rem",
+          textDecoration: "none",
+          marginBottom: 14,
+          boxShadow: `0 4px 24px rgba(201,168,76,0.35)`
+        }}
+      >
+        <MessageCircle size={20} />
+        إرسال التفاصيل عبر واتساب
+      </a>
+
+      {/* or submit to backend */}
+      <button
+        className="ghost-cta"
+        disabled={submitState === "saving"}
+        onClick={onSubmit}
+        type="button"
+        style={{
+          width: "100%",
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          borderColor: GOLD_BORDER,
+          color: IVORY
+        }}
+      >
+        {submitState === "saving" ? (
+          <Loader2 className="spin" size={18} />
+        ) : (
+          <Sparkles size={18} style={{ color: GOLD } as React.CSSProperties} />
+        )}
+        إرسال الطلب مباشرة
+      </button>
+
+      {message && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            background: "rgba(130,145,118,0.16)",
+            border: "1px solid rgba(130,145,118,0.38)",
+            borderRadius: 8,
+            color: IVORY,
+            lineHeight: 1.7,
+            marginTop: 16,
+            padding: "12px 14px",
+            fontSize: "0.88rem"
+          }}
+        >
+          <CheckCircle2 size={18} style={{ color: GOLD, flexShrink: 0 } as React.CSSProperties} />
+          <span>{message}</span>
+        </div>
+      )}
+
+      {/* Deposit section */}
+      <div
+        className="reserve-deposit"
+        style={{
+          marginTop: 20,
+          padding: 16,
+          border: `1px solid ${GOLD_BORDER}`,
+          borderRadius: 12,
+          background: `linear-gradient(145deg,${GOLD_GLOW},rgba(255,248,236,0.04))`,
+          display: "grid",
+          gap: 12
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 8
+          }}
+        >
+          <strong style={{ color: IVORY }}>تثبيت التاريخ بعربون التأكيد</strong>
+          {deposit && (
+            <span
+              style={{
+                display: "grid",
+                justifyItems: "end",
+                fontSize: "1.25rem",
+                fontWeight: 700,
+                color: GOLD,
+                lineHeight: 1.2
+              }}
+            >
+              {deposit} ريال
+              <em
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 500,
+                  fontStyle: "normal",
+                  color: MUTED
+                }}
+              >
+                نصف قيمة الباقة · المتبقي يوم المناسبة
+              </em>
+            </span>
+          )}
+        </div>
+
+        {paymentLink ? (
+          <>
+            <a
+              href={paymentLink}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                width: "100%",
+                padding: "12px 20px",
+                borderRadius: 8,
+                background: `linear-gradient(135deg,${GOLD},#b8923e)`,
+                color: INK,
+                fontWeight: 800,
+                textDecoration: "none"
+              }}
+            >
+              <CreditCard size={18} />
+              ادفعي العربون الآن (مدى / بطاقة)
+            </a>
+            <p style={{ margin: 0, fontSize: "0.84rem", color: MUTED, lineHeight: 1.7 }}>
+              دفع آمن عبر بوابة الدفع. بعد إتمام الدفع تصلك صفحة تأكيد ونتواصل معك خلال ساعتين.
+            </p>
+          </>
+        ) : (
+          <div style={{ display: "grid", gap: 12 }}>
+            <p
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 8,
+                margin: 0,
+                fontSize: "0.86rem",
+                color: MUTED,
+                lineHeight: 1.7
+              }}
+            >
+              <Landmark size={16} style={{ color: GOLD, flexShrink: 0, marginTop: 3 } as React.CSSProperties} />
+              احجزي بدفع عربون عبر تحويل بنكي — الطريقة المعتمدة لتثبيت التاريخ.
+            </p>
+            <ol
+              style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 10 }}
+            >
+              {[
+                "أرسلي التفاصيل أدناه ونؤكد لكِ توفّر التاريخ خلال ساعتين.",
+                "نزوّدك برقم حساب الاستوديو (IBAN) عبر واتساب فور تأكيد التوفر — لحماية مبلغك لا نعرض الرقم علناً.",
+                `حوّلي العربون${deposit ? ` (${deposit} ريال)` : ""} ثم أرسلي صورة الإيصال عبر واتساب لتثبيت الموعد.`
+              ].map((text, i) => (
+                <li
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 10,
+                    fontSize: "0.87rem",
+                    color: MUTED,
+                    lineHeight: 1.7
+                  }}
+                >
+                  <span
+                    style={{
+                      flexShrink: 0,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: 24,
+                      height: 24,
+                      borderRadius: 999,
+                      background: `linear-gradient(135deg,#dbb87a,${GOLD})`,
+                      color: INK,
+                      fontSize: "0.78rem",
+                      fontWeight: 900,
+                      marginTop: 1
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+                  {text}
+                </li>
+              ))}
+            </ol>
+            <a
+              href={receiptWhatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                width: "100%",
+                padding: "12px 20px",
+                borderRadius: 8,
+                background: `linear-gradient(135deg,${GOLD},#b8923e)`,
+                color: INK,
+                fontWeight: 800,
+                textDecoration: "none"
+              }}
+            >
+              <Upload size={18} />
+              أرسلي إيصال التحويل عبر واتساب
+            </a>
+            <p
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 8,
+                margin: 0,
+                fontSize: "0.8rem",
+                color: "rgba(255,248,236,0.55)",
+                lineHeight: 1.7
+              }}
+            >
+              <ShieldCheck size={14} style={{ color: "#a9c2a0", flexShrink: 0, marginTop: 3 } as React.CSSProperties} />
+              العربون لا يُرد عند الإلغاء · المتبقي يُسلَّم يوم المناسبة قبل التصوير.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Shared primitives ────────────────────────────────────────────────────────
+function StepHeading({
+  icon,
+  title,
+  subtitle
+}: {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+        <span style={{ color: GOLD }}>{icon}</span>
+        <h2
+          style={{
+            margin: 0,
+            fontSize: "1.18rem",
+            fontWeight: 800,
+            color: IVORY
+          }}
+        >
+          {title}
+        </h2>
+      </div>
+      <p style={{ margin: 0, fontSize: "0.84rem", color: MUTED }}>{subtitle}</p>
+    </div>
+  );
+}
+
+function GoldField({
+  label,
+  error,
+  fullWidth,
+  children
+}: {
+  label: string;
+  error?: string;
+  fullWidth?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <label
+      style={{
+        display: "grid",
+        gap: 8,
+        color: MUTED,
+        fontWeight: 800,
+        fontSize: "0.9rem",
+        gridColumn: fullWidth ? "1 / -1" : undefined
+      }}
+    >
       <span>{label}</span>
       {children}
-      {error && <em>{error}</em>}
+      {error && (
+        <em style={{ color: "#ffc0b8", fontSize: "0.82rem", fontStyle: "normal", fontWeight: 700 }}>
+          {error}
+        </em>
+      )}
     </label>
   );
 }
 
-function depositReceiptUrl(
-  form: ReservationInput,
-  deposit: string,
-  packageName: string,
-  source: string
-) {
-  const lines = [
-    "السلام عليكم أسماء ستوديو، أرغب بتثبيت الحجز بدفع العربون عبر تحويل بنكي:",
-    "",
-    `مصدر الطلب: ${readableWhatsappSource(source)}`,
-    `اسم العروس: ${form.brideName || "-"}`,
-    `الجوال: ${form.phone || "-"}`,
-    `الباقة: ${packageName}`,
-    deposit ? `قيمة العربون: ${deposit} ريال` : "",
-    `التاريخ: ${form.eventDate || "-"}`,
-    `المدينة: ${form.city || "-"}`,
-    "",
-    "أرجو تزويدي برقم الحساب (IBAN) لإتمام التحويل، وسأرفق صورة الإيصال هنا لتثبيت الموعد."
-  ].filter(Boolean);
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
+function inputStyle(): React.CSSProperties {
+  return {
+    background: "rgba(255,248,236,0.09)",
+    border: `1px solid ${GOLD_BORDER}`,
+    borderRadius: 8,
+    color: IVORY,
+    minHeight: 48,
+    outline: "none",
+    padding: "0.8rem 0.92rem",
+    width: "100%",
+    fontFamily: "inherit",
+    fontSize: "1rem"
+  };
 }
 
-function inferReservationSource(referrer: string, requestedCity: string | null, packageId: string) {
+// ─── Source inference ─────────────────────────────────────────────────────────
+function inferReservationSource(
+  referrer: string,
+  requestedCity: string | null,
+  packageId: string
+) {
   const citySlug = requestedCity && cityFromQuery[requestedCity] ? requestedCity : "";
-
   const withIntent = (base: string) => {
     if (citySlug && packageId) return `${base}-${citySlug}-package-${packageId}`;
     if (citySlug) return `${base}-${citySlug}`;
     if (packageId) return `${base}-package-${packageId}`;
     return base;
   };
-
   if (!referrer) return withIntent("reserve-page");
-
   try {
     const url = new URL(referrer);
     if (url.hostname !== window.location.hostname) return withIntent("reserve-page");
-
     const pathname = url.pathname.replace(/\/$/, "") || "/";
-    if (pathname === "/") return withIntent("home-hero");
-    if (pathname === "/faq") return withIntent("faq-page");
-    if (pathname === "/portfolio") return withIntent("portfolio-page");
-    if (pathname === "/zaffa") return withIntent("zaffa-page");
-    if (pathname === "/engagement") return withIntent("engagement-page");
-    if (pathname === "/reviews") return withIntent("reviews-page");
-    if (pathname === "/about") return withIntent("about-page");
-    if (pathname === "/packages") return withIntent("packages-hero");
-
-    const cityRoute = pathname.slice(1);
-    if (cityRoute in cityFromQuery) return withIntent(cityRoute);
+    const map: Record<string, string> = {
+      "/": "home-hero",
+      "/faq": "faq-page",
+      "/portfolio": "portfolio-page",
+      "/zaffa": "zaffa-page",
+      "/engagement": "engagement-page",
+      "/reviews": "reviews-page",
+      "/about": "about-page",
+      "/packages": "packages-hero"
+    };
+    return withIntent(map[pathname] ?? pathname.slice(1) ?? "reserve-page");
   } catch {
     return withIntent("reserve-page");
   }
-
-  return withIntent("reserve-page");
 }
