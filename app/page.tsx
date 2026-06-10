@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -245,7 +246,9 @@ export default function HomePage() {
             sizes="100vw"
           />
           <div className="av2-hero-veil" />
-          <div className="av2-islamic" />
+          <div className="av2-aurora" />
+          <div className="av2-islamic-12" />
+          <div className="av2-particles" />
           <div className="av2-grain" />
         </div>
 
@@ -277,18 +280,18 @@ export default function HomePage() {
 
         <div className="av2-hero-inner">
           <p className="av2-hero-kicker">Saudi wedding cinema · تصوير نسائي في الشرقية</p>
-          <h1 className="av2-hero-title">
-            <span className="av2-w" style={{ animationDelay: "0.15s" }}>لحظات</span>{" "}
-            <span className="av2-w" style={{ animationDelay: "0.4s" }}>تُروى</span>{" "}
-            <span className="av2-w" style={{ animationDelay: "0.65s" }}>للأبد</span>
+          <h1 className="av2-hero-title av2-hero-title-stack">
+            <span className="av2-line av2-line-1">نُوثِّقُ</span>
+            <span className="av2-line av2-line-2">أجملَ لحظاتِكِ</span>
+            <span className="av2-line av2-line-3">إلى الأبد</span>
           </h1>
           <p className="av2-hero-sub">
-            Every moment of your day, filmed with the calm it deserves — في الأحساء والدمام والخبر.
+            تصوير زفاف نسائي سينمائي في المنطقة الشرقية — الأحساء، الدمام، والخبر.
           </p>
           <div className="av2-hero-ctas">
             <Link className="av2-btn-gold" href="/reserve">
               <Sparkles size={18} aria-hidden="true" />
-              احجزي يومكِ
+              احجزي موعدك
             </Link>
             <Link className="av2-btn-ghost" href="/portfolio">
               <Play size={16} aria-hidden="true" />
@@ -311,6 +314,24 @@ export default function HomePage() {
         </a>
       </section>
 
+      {/* ════ SECTION 1.5 — GLASS STATS STRIP (pure-CSS count-up) ════ */}
+      <section className="av2-strip" aria-label="أرقام الاستوديو">
+        {[
+          { target: 180, suffix: "+", display: "١٨٠+", label: "عروسة سعيدة" },
+          { target: 12, suffix: "", display: "١٢", label: "مدينة في الشرقية" },
+          { target: 5, suffix: "+", display: "٥+", label: "سنوات خبرة" },
+          { target: 24, suffix: "", display: "٢٤", label: "ساعة سرعة الرد" }
+        ].map((s) => (
+          <div className="av2-strip-stat" key={s.label} style={{ "--target": s.target } as CSSProperties}>
+            <span className="av2-strip-num">
+              <span className="av2-strip-count" data-suffix={s.suffix} aria-hidden="true" />
+              <span className="av2-strip-static">{s.display}</span>
+            </span>
+            <small>{s.label}</small>
+          </div>
+        ))}
+      </section>
+
       {/* ════ SECTION 2 — STATEMENT BAND ════ */}
       <section className="av2-statement" id="statement" aria-label="فلسفة Asmaa Studio">
         <div className="av2-statement-inner av2-reveal">
@@ -321,6 +342,41 @@ export default function HomePage() {
             نحن لا نصوّر الأعراس — بل نحفظ الإحساس الذي يبقى بعد أن ينتهي اليوم.
           </blockquote>
         </div>
+      </section>
+
+      {/* ════ SECTION 2.5 — HOW IT WORKS (3 steps, gold connecting line) ════ */}
+      <section className="av2-process" id="process">
+        <header className="av2-head av2-reveal">
+          <span className="av2-eyebrow">رحلتكِ معنا</span>
+          <h2>ثلاث خطوات ليومٍ موثَّق</h2>
+          <p>من أول رسالة إلى الفيلم النهائي — مسار واضح بلا تعقيد.</p>
+        </header>
+        <ol className="av2-process-track">
+          <li className="av2-glass av2-step av2-reveal">
+            <span className="av2-step-num" aria-hidden="true">١</span>
+            <span className="av2-step-icon" aria-hidden="true">
+              <MessageCircle size={26} strokeWidth={1.6} />
+            </span>
+            <h3>تواصلي معنا</h3>
+            <p>رسالة واتساب واحدة تكفي — نرد خلال ٢٤ ساعة بكل التفاصيل.</p>
+          </li>
+          <li className="av2-glass av2-step av2-reveal">
+            <span className="av2-step-num" aria-hidden="true">٢</span>
+            <span className="av2-step-icon" aria-hidden="true">
+              <Camera size={26} strokeWidth={1.6} />
+            </span>
+            <h3>نختار الباقة</h3>
+            <p>أسعار معلنة من ٦٠٠ إلى ٢٥٠٠ ريال — تختارين ما يناسب يومكِ بالضبط.</p>
+          </li>
+          <li className="av2-glass av2-step av2-reveal">
+            <span className="av2-step-num" aria-hidden="true">٣</span>
+            <span className="av2-step-icon" aria-hidden="true">
+              <Heart size={26} strokeWidth={1.6} />
+            </span>
+            <h3>نوثّق لحظتك</h3>
+            <p>حضور هادئ يوم الحفل، ثم فيلم سينمائي يحفظ إحساس اليوم كاملاً.</p>
+          </li>
+        </ol>
       </section>
 
       {/* ════ SECTION 3 — SERVICES GRID ════ */}
@@ -346,6 +402,32 @@ export default function HomePage() {
             );
           })}
         </div>
+      </section>
+
+      {/* ════ SECTION 3.5 — FEATURED WORK TEASER (city frames) ════ */}
+      <section className="av2-featured" aria-label="أعمال مختارة من مدن الشرقية">
+        <header className="av2-head av2-reveal">
+          <span className="av2-eyebrow">أعمال مختارة</span>
+          <h2>من قلب المنطقة الشرقية</h2>
+        </header>
+        <div className="av2-featured-row">
+          {[
+            { city: "الخبر", en: "Khobar", tone: "linear-gradient(160deg,#1a1a1a,#2a2410)" },
+            { city: "الدمام", en: "Dammam", tone: "linear-gradient(160deg,#1c1814,#2a2410)" },
+            { city: "الأحساء", en: "Al Ahsa", tone: "linear-gradient(160deg,#181a16,#2a2410)" }
+          ].map((f) => (
+            <Link className="av2-featured-frame" href="/portfolio" key={f.city} style={{ background: f.tone }}>
+              <span className="av2-featured-shimmer" aria-hidden="true" />
+              <span className="av2-featured-label">
+                <strong>{f.city}</strong>
+                <em>{f.en}</em>
+              </span>
+            </Link>
+          ))}
+        </div>
+        <p className="av2-featured-cta av2-reveal">
+          <Link href="/portfolio">شاهدي المزيد ←</Link>
+        </p>
       </section>
 
       {/* ════ SECTION 4 — PORTFOLIO MASONRY (pure-CSS filtering) ════ */}
@@ -512,20 +594,21 @@ export default function HomePage() {
         <div className="av2-cta-border av2-reveal">
           <div className="av2-islamic av2-islamic-soft" aria-hidden="true" />
           <p className="av2-eyebrow">الخطوة التالية</p>
-          <h2 className="av2-cta-title">جاهزة لتوثيق يومكِ؟</h2>
+          <h2 className="av2-cta-title">جاهزة لتوثيق لحظتكِ؟</h2>
           <p className="av2-cta-sub">
-            رابط العروس يجمع المدينة والتاريخ والباقة في رسالة واحدة — بدون ملف طويل ولا أسئلة متفرقة.
+            تواصلي معنا واحجزي موعدكِ قبل امتلاء الجدول — رابط العروس يجمع المدينة والتاريخ والباقة في رسالة واحدة.
           </p>
-          <div className="av2-hero-ctas">
-            <Link className="av2-btn-gold" href="/reserve">
-              <CalendarHeart size={18} aria-hidden="true" />
-              رابط العروس
-            </Link>
-            <a className="av2-btn-ghost" href={whatsappLink("home-hero")} target="_blank" rel="noreferrer">
-              <MessageCircle size={16} aria-hidden="true" />
+          <div className="av2-hero-ctas av2-cta-buttons">
+            <a className="av2-btn-gold av2-wa-pulse" href={whatsappLink("home-closing-cta")} target="_blank" rel="noreferrer">
+              <MessageCircle size={18} aria-hidden="true" />
               واتساب مباشر
             </a>
+            <Link className="av2-btn-ghost" href="/reserve">
+              <CalendarHeart size={16} aria-hidden="true" />
+              رابط العروس
+            </Link>
           </div>
+          <p className="av2-cta-availability">مواعيد موسم ٢٠٢٦ تُحجز بسرعة — اسألينا عن الأيام المتاحة في شهركِ</p>
         </div>
       </section>
 
