@@ -89,7 +89,7 @@ export function SiteFooter() {
       </footer>
 
       <a
-        className="floating-whatsapp"
+        className="floating-whatsapp wa-scroll-reveal"
         href={whatsappLink("floating-whatsapp")}
         target="_blank"
         rel="noreferrer"

@@ -107,6 +107,8 @@ const localBusinessSchema = {
       }
     ]
   },
+  founder: { "@id": `${SITE}#asmaa` },
+  employee: { "@id": `${SITE}#asmaa` },
   sameAs: ["https://www.instagram.com/asmaa.video", "https://www.tiktok.com/@asmaa.video"]
 };
 

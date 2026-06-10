@@ -7247,3 +7247,175 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
   .asmaa-v2 .av2-reveal,
   .asmaa-v2 .av2-stat-number { animation: none; opacity: 1; transform: none; }
 }
+
+
+/* ════════════════════════════════════════════════════════════════════
+   Fable 5 advanced layer — scroll-aware WhatsApp CTA, city portfolio
+   thumbnails with Islamic-geometry hover + gold shimmer, city price
+   indicator, and the city booking band.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── Scroll-aware floating WhatsApp (appears after ~30% scroll) ──
+   Pure CSS scroll-driven animation: marketing pages are JS-pruned at build
+   time (scripts/prune-static-js.mjs), so this must work with zero JS.
+   Browsers without animation-timeline support simply keep the button
+   always visible — graceful degradation, never a lost CTA. */
+@supports (animation-timeline: scroll()) {
+  .wa-scroll-reveal {
+    animation: wa-scroll-reveal linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0% 32%;
+  }
+}
+@keyframes wa-scroll-reveal {
+  0%, 65% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.9);
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+  }
+}
+
+/* ── City price indicator (inside the city command card) ── */
+.city-price-indicator {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(201, 168, 76, 0.02));
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+.city-price-indicator svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #c9a84c;
+}
+.city-price-indicator b {
+  color: #c9a84c;
+  font-weight: 700;
+}
+
+/* ── City portfolio thumbnails ── */
+.city-thumbs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 34px;
+}
+.city-thumb {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+}
+.city-thumb-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  /* Gold shimmer skeleton — visible until the lazy image paints over it */
+  background:
+    linear-gradient(110deg, rgba(201, 168, 76, 0) 38%, rgba(201, 168, 76, 0.16) 50%, rgba(201, 168, 76, 0) 62%),
+    linear-gradient(150deg, #16120c, #0a0a0f);
+  background-size: 220% 100%, 100% 100%;
+  animation: city-thumb-shimmer 1.8s linear infinite;
+}
+@keyframes city-thumb-shimmer {
+  from { background-position: 200% 0, 0 0; }
+  to { background-position: -20% 0, 0 0; }
+}
+.city-thumb-media img {
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s ease;
+}
+/* Islamic-geometry hover overlay — gold eight-point star lattice */
+.city-thumb-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.7'%3E%3Cpath d='M32 4l7 14 15 2-11 11 3 15-14-7-14 7 3-15-11-11 15-2z'/%3E%3Crect x='20' y='20' width='24' height='24' transform='rotate(45 32 32)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 56px 56px;
+  background-color: rgba(10, 10, 15, 0.45);
+  transition: opacity 0.5s ease;
+}
+.city-thumb:hover .city-thumb-media img,
+.city-thumb:focus-visible .city-thumb-media img {
+  transform: scale(1.06);
+  filter: saturate(1.08);
+}
+.city-thumb:hover .city-thumb-pattern,
+.city-thumb:focus-visible .city-thumb-pattern {
+  opacity: 0.55;
+}
+.city-thumb-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.city-thumb-caption strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+}
+.city-thumb-caption em {
+  color: rgba(201, 168, 76, 0.85);
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+/* ── City booking band ── */
+.city-book-band .city-book-band-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 30px;
+  align-items: center;
+  padding: 38px 34px;
+  border-radius: 24px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  background:
+    radial-gradient(120% 160% at 85% 0%, rgba(201, 168, 76, 0.14), transparent 55%),
+    linear-gradient(150deg, rgba(22, 18, 12, 0.92), rgba(10, 10, 15, 0.96));
+}
+.city-book-band .city-book-band-inner .button-row {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 880px) {
+  .city-thumbs-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .city-thumb-media {
+    aspect-ratio: 4 / 3;
+  }
+  .city-book-band .city-book-band-inner {
+    grid-template-columns: 1fr;
+    padding: 28px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-scroll-reveal {
+    animation: none;
+  }
+  .city-thumb-media {
+    animation: none;
+  }
+  .city-thumb-media img,
+  .city-thumb-pattern {
+    transition: none;
+  }
+}

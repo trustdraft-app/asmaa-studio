@@ -558,7 +558,13 @@ export default function HomePage() {
         <p className="av2-footer-copy">© {new Date().getFullYear()} Asmaa Studio · جميع الحقوق محفوظة</p>
       </footer>
 
-      <a className="av2-float-wa" href={whatsappLink("floating-whatsapp")} target="_blank" rel="noreferrer" aria-label="واتساب">
+      <a
+        className="av2-float-wa wa-scroll-reveal"
+        href={whatsappLink("floating-whatsapp")}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="واتساب"
+      >
         <MessageCircle size={24} aria-hidden="true" />
       </a>
     </main>
