@@ -169,13 +169,33 @@ const servicePillars = [
 ];
 
 /* ── Section 4: portfolio shots, tagged for pure-CSS filtering ── */
+/* Each tone is a layered darkroom-print composition: a warm gold key light,
+   a faint colored fill, and a deep cinematic base — unique per shot. */
 const portfolioShots = [
-  { cat: "weddings", ar: "دخول الزفة", en: "The grand entrance", tone: "linear-gradient(150deg,#241a12,#0a0a0f)" },
-  { cat: "weddings", ar: "First Look", en: "First look", tone: "linear-gradient(150deg,#2a1d20,#0a0a0f)" },
-  { cat: "weddings", ar: "تفاصيل العروس", en: "Bride details", tone: "linear-gradient(150deg,#22201a,#0a0a0f)" },
-  { cat: "engagement", ar: "الشبكة والملكة", en: "Engagement & Milkah", tone: "linear-gradient(150deg,#1f1c26,#0a0a0f)" },
-  { cat: "events", ar: "الكوشة والقاعة", en: "Stage & venue", tone: "linear-gradient(150deg,#1a2220,#0a0a0f)" },
-  { cat: "events", ar: "تفاصيل الضيافة", en: "Hospitality details", tone: "linear-gradient(150deg,#261f17,#0a0a0f)" }
+  {
+    cat: "weddings", ar: "دخول الزفة", en: "The grand entrance",
+    tone: "radial-gradient(ellipse 60% 40% at 70% 30%, rgba(201,168,76,0.16), transparent), radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139,69,19,0.09), transparent), linear-gradient(135deg, #0d0a05 0%, #1a1408 50%, #0d0a05 100%)"
+  },
+  {
+    cat: "weddings", ar: "First Look", en: "First look",
+    tone: "radial-gradient(ellipse 50% 60% at 30% 25%, rgba(201,168,76,0.13), transparent), radial-gradient(ellipse 70% 50% at 80% 75%, rgba(120,60,80,0.1), transparent), linear-gradient(160deg, #120a0c 0%, #1d1114 55%, #0a0608 100%)"
+  },
+  {
+    cat: "weddings", ar: "تفاصيل العروس", en: "Bride details",
+    tone: "radial-gradient(ellipse 45% 35% at 55% 40%, rgba(232,201,106,0.17), transparent), radial-gradient(ellipse 90% 70% at 10% 90%, rgba(90,75,40,0.12), transparent), linear-gradient(120deg, #11100a 0%, #1c1a10 50%, #0c0b06 100%)"
+  },
+  {
+    cat: "engagement", ar: "الشبكة والملكة", en: "Engagement & Milkah",
+    tone: "radial-gradient(ellipse 55% 45% at 75% 20%, rgba(201,168,76,0.12), transparent), radial-gradient(ellipse 75% 55% at 25% 85%, rgba(90,70,140,0.11), transparent), linear-gradient(145deg, #0e0c16 0%, #191527 55%, #090710 100%)"
+  },
+  {
+    cat: "events", ar: "الكوشة والقاعة", en: "Stage & venue",
+    tone: "radial-gradient(ellipse 65% 40% at 50% 15%, rgba(201,168,76,0.14), transparent), radial-gradient(ellipse 80% 60% at 85% 90%, rgba(40,110,90,0.1), transparent), linear-gradient(170deg, #0a1310 0%, #14211c 50%, #07100c 100%)"
+  },
+  {
+    cat: "events", ar: "تفاصيل الضيافة", en: "Hospitality details",
+    tone: "radial-gradient(ellipse 50% 50% at 25% 30%, rgba(232,201,106,0.13), transparent), radial-gradient(ellipse 85% 65% at 80% 80%, rgba(150,90,40,0.1), transparent), linear-gradient(130deg, #140f08 0%, #221a0e 55%, #0d0905 100%)"
+  }
 ];
 
 /* ── Section 5: studio milestones ── */
@@ -632,7 +652,14 @@ export default function HomePage() {
             <Image src={assetPath("/brand/asmaa-logo-square.png")} alt="Asmaa Studio" width={52} height={52} />
             <strong>Asmaa Studio</strong>
             <span>تصوير فيديو زواجات نسائي · المنطقة الشرقية</span>
+            <span>المنطقة الشرقية، المملكة العربية السعودية</span>
           </div>
+          <nav className="av2-footer-links" aria-label="مدن الخدمة">
+            <Link href="/khobar">الخبر</Link>
+            <Link href="/dammam">الدمام</Link>
+            <Link href="/alahsa">الأحساء</Link>
+            <Link href="/qatif">القطيف</Link>
+          </nav>
           <nav className="av2-footer-links" aria-label="روابط الموقع">
             <Link href="/packages">الباقات</Link>
             <Link href="/portfolio">الألبوم</Link>

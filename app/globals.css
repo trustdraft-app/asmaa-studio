@@ -7761,6 +7761,7 @@ body { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(201, 168, 76, 0.4));
   animation-delay: 0.55s !important;
 }
 .av2-line-3 {
