@@ -308,8 +308,8 @@ function verifyStaticOutput() {
       if (html.includes(phrase)) fail(`${relative} contains banned wording: ${phrase}`);
     }
 
-    if (/<title>[^<]*Asmaa Studio\s*\|\s*Asmaa Studio[^<]*<\/title>/.test(html)) {
-      fail(`${relative} has a duplicated Asmaa Studio title`);
+    if (/<title>[^<]*Asmaa (Studio|Video)\s*\|\s*Asmaa (Studio|Video)[^<]*<\/title>/.test(html)) {
+      fail(`${relative} has a duplicated Asmaa brand title`);
     }
   }
 
@@ -335,7 +335,7 @@ function verifyStaticOutput() {
     "av2-pkg",
     "av2-shot",
     "av2-voice",
-    "Asmaa Studio",
+    "Asmaa Video",
     "/brand/asmaa-cinematic-bridal-still.webp"
   ]) {
     if (home.includes(token)) pass(`homepage contains ${token}`);
@@ -411,7 +411,7 @@ function verifyStaticOutput() {
 
   const llms = existsSync(join(outDir, "llms.txt")) ? readOutFile("llms.txt") : "";
   for (const token of [
-    "Asmaa Studio",
+    "Asmaa Video",
     "Al Ahsa",
     "Dammam",
     "Khobar",
