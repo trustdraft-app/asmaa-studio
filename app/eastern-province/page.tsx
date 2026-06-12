@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, CalendarDays, Check, MapPin, MessageCircle } from "lucide-react";
+import { ArrowLeft, CalendarDays, Check, MessageCircle } from "lucide-react";
 import { JsonLd } from "../../components/JsonLd";
 import { instagramUrl, packages, serviceAreas, tiktokUrl, whatsappLink, whatsappNumber } from "../../lib/content";
 import { socialPreviewImages, twitterMetadata } from "../../lib/metadata";
