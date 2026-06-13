@@ -11,6 +11,8 @@
  * Renders inside <body>; safe to inline on every page via layout.tsx.
  */
 
+import { JsonLd } from "../JsonLd";
+
 const SITE = "https://asmaa.video";
 
 const localBusinessSchema = {
@@ -112,6 +114,8 @@ const localBusinessSchema = {
   sameAs: ["https://www.instagram.com/asmaa.video", "https://www.tiktok.com/@asmaa.video"]
 };
 
+// SearchAction intentionally omitted: static export has no /search route.
+// A fake SearchAction endpoint harms structured-data trust signals.
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -119,25 +123,14 @@ const websiteSchema = {
   url: SITE,
   name: "Asmaa Video",
   inLanguage: "ar-SA",
-  publisher: { "@id": `${SITE}#business` },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: { "@type": "EntryPoint", urlTemplate: `${SITE}/search?q={search_term_string}` },
-    "query-input": "required name=search_term_string"
-  }
+  publisher: { "@id": `${SITE}#business` }
 };
 
 export function LocalBusinessJsonLd() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
+      <JsonLd data={localBusinessSchema} />
+      <JsonLd data={websiteSchema} />
     </>
   );
 }

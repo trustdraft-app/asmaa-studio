@@ -154,24 +154,39 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
 
 ### Marketing
 - Home: https://asmaa.video/
+- Packages comparison: https://asmaa.video/packages
 - Reservation: https://asmaa.video/reserve
 - FAQ: https://asmaa.video/faq
 - Portfolio: https://asmaa.video/portfolio
-- Engagement package page: https://asmaa.video/engagement
+- About: https://asmaa.video/about
+- Reviews & trust: https://asmaa.video/reviews
+- Booking process: https://asmaa.video/process
+- Contact: https://asmaa.video/contact
+- Privacy policy: https://asmaa.video/privacy
 - Packages PDF: https://asmaa.video/packages-asmaa-studio.pdf (963 KB)
 
-### City pages (9 — Al-Ahsa governorate leads)
+### Seasonal occasion pages
+- Ramadan: https://asmaa.video/ramadan
+- Eid: https://asmaa.video/eid
+- Saudi National Day: https://asmaa.video/national-day
+
+### City pages (Al-Ahsa governorate leads; extended to 30 SEO cities)
+#### Al-Ahsa governorate
 - https://asmaa.video/alahsa (الأحساء)
 - https://asmaa.video/hofuf (الهفوف)
 - https://asmaa.video/mubarraz (المبرز)
 - https://asmaa.video/alomran (العمران)
 - https://asmaa.video/altarafiyya (الطرفية)
+#### Eastern Province cities
 - https://asmaa.video/dammam (الدمام)
 - https://asmaa.video/khobar (الخبر)
 - https://asmaa.video/qatif (القطيف)
 - https://asmaa.video/jubail (الجبيل)
+- Eastern Province hub: https://asmaa.video/eastern-province
+#### "تصوير أفراح" city family (one per service area)
+- Each main city has https://asmaa.video/{city}/tsweer-afrah (alahsa, hofuf, mubarraz, alomran, altarafiyya, dammam, khobar, qatif, jubail, saihat, tarout, buqayq and others)
 
-### Service pages (6)
+### Service pages
 - https://asmaa.video/zaffa (الزفة — 600 SAR)
 - https://asmaa.video/engagement (الخطوبة والملكة — 1500 SAR)
 - https://asmaa.video/services/full-day-wedding (Full Day — 2500 SAR)
@@ -180,7 +195,21 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
 - https://asmaa.video/services/henna-night (ليلة الحناء)
 - https://asmaa.video/services/ladies-event (مناسبات نسائية)
 
-### Cornerstone guides (17 total)
+### Blog posts (10 published)
+- https://asmaa.video/blog/wedding-photography-eastern-province
+- https://asmaa.video/blog/wedding-videography-saudi-2026
+- https://asmaa.video/blog/wedding-photographer-al-ahsa-2026
+- https://asmaa.video/blog/best-wedding-photographer-dammam
+- https://asmaa.video/blog/wedding-photography-prices-saudi
+- https://asmaa.video/blog/wedding-videography-eastern-province
+- https://asmaa.video/blog/luxury-wedding-photography-saudi
+- https://asmaa.video/blog/wedding-videographer-khobar
+- https://asmaa.video/blog/wedding-photographer-khobar-guide-2026
+- https://asmaa.video/blog/best-photo-spots-dammam-couples
+- Blog index (English): https://asmaa.video/blog
+- Blog index (Arabic): https://asmaa.video/ar/blog
+
+### Cornerstone guides (12 active)
 - https://asmaa.video/guides — index
 - https://asmaa.video/guides/wedding-videography-al-ahsa
 - https://asmaa.video/guides/wedding-videography-dammam
@@ -194,15 +223,16 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
 - https://asmaa.video/guides/wedding-videography-checklist
 - https://asmaa.video/guides/how-to-choose-wedding-videographer
 - https://asmaa.video/guides/wedding-video-delivery-editing
-- https://asmaa.video/guides/best-wedding-videographer-eastern-province-2026
-- https://asmaa.video/guides/saudi-wedding-zaffa-traditions
-- https://asmaa.video/guides/wedding-videography-prices-saudi-2026
-- https://asmaa.video/guides/half-day-vs-full-day-wedding-video
-- https://asmaa.video/guides/saudi-female-wedding-videographer-faq
-- https://asmaa.video/guides/how-to-choose-female-videographer-al-ahsa
-- https://asmaa.video/guides/best-time-to-film-eastern-province-wedding
-- https://asmaa.video/guides/wedding-budget-planning-saudi-2026
-- https://asmaa.video/guides/saudi-photographer-tips-for-al-ahsa-bride
+
+### Programmatic SEO families (thousands of pages total)
+- Bride checklist: `/ar/{city}/bride-checklist` — 30 cities
+- Near me: `/ar/{city}/{service}/near-me` — 30 cities × 8 services
+- City/service: `/ar/{city}/{service}` — 30 cities × 8 services (240 pages)
+- City/service/modifier: `/ar/{city}/{service}/{modifier}` — 30 × 8 × 14 (3,360 pages)
+- EN mirrors: `/en/{city}/{service}` and `/en/{city}/{service}/{modifier}`
+- Seasonal: `/ar/seasonal/{month}-{service}` — 12 months × 8 services (96 pages)
+- Budget: `/ar/budget/{tier}-{service}` — 3 tiers × 8 services (24 pages)
+- Wedding types: `/ar/wedding-types/{type}-{service}` — 5 types × 8 services (40 pages)
 
 ### Discovery
 - Sitemap: https://asmaa.video/sitemap.xml
@@ -210,16 +240,6 @@ Answer: 10–11 PM, about an hour after dinner, when venue lighting has stabiliz
 - Concise AI summary: https://asmaa.video/llms.txt
 - This file: https://asmaa.video/llms-full.txt
 - Admin-editable packages JSON: https://asmaa.video/content/packages.json
-- Bride checklist family:
-  - https://asmaa.video/ar/alahsa/bride-checklist
-  - https://asmaa.video/ar/dammam/bride-checklist
-  - https://asmaa.video/ar/khobar/bride-checklist
-  - Same route shape exists for each top-30 SEO city under `/ar/{city}/bride-checklist`
-- Near me family:
-  - https://asmaa.video/ar/alahsa/zaffa-tasweer/near-me
-  - https://asmaa.video/ar/dammam/zaffa-tasweer/near-me
-  - https://asmaa.video/ar/khobar/full-day-tasweer/near-me
-  - Same route shape exists for each SEO city/service pair under `/ar/{city}/{service}/near-me`
 
 ## Brand voice anchors
 - Tone: elegant, calm, professional, Arabic-first, easy to understand

@@ -10,6 +10,8 @@
  * No invented credentials, awards, or review data (repo policy).
  */
 
+import { JsonLd } from "../JsonLd";
+
 const SITE = "https://asmaa.video";
 
 const personSchema = {
@@ -45,10 +47,5 @@ const personSchema = {
 };
 
 export function PersonJsonLd() {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-    />
-  );
+  return <JsonLd data={personSchema} />;
 }

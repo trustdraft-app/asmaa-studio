@@ -1,5 +1,15 @@
 # Asmaa Studio Work Log
 
+## 2026-06-13 +03
+
+- **Security/XSS hardening:** converted `LocalBusinessJsonLd`, `PersonJsonLd`, `SpeakableJsonLd`, and `ContactPointJsonLd` to use the `JsonLd` wrapper component (which escapes `<`, `>`, `&`) instead of raw `dangerouslySetInnerHTML` with unescaped `JSON.stringify`. All four components now safe.
+- **Structured data correctness:** removed fake `SearchAction potentialAction` from `websiteSchema` in `LocalBusinessJsonLd.tsx`. The static export has no `/search` route — the fake endpoint was invalid structured data that could degrade Google rich-result trust signals.
+- **Lint hygiene:** suppressed 2 false-positive `@next/next/no-page-custom-font` ESLint warnings in `app/layout.tsx`. These fired because fonts are loaded in the App Router root layout `<head>` (correct for site-wide font loading) rather than `pages/_document.js` (Pages Router convention — not applicable here). Warnings are now silenced with per-line disable comments.
+- **AEO/GEO index refresh (llms.txt):** added packages page, about, reviews, process, privacy, blog family (10 posts × 2 locales), tsweer-afrah family expansion, seasonal/budget/wedding-types programmatic families, and restructured section headers for clearer answer-engine routing.
+- **AEO/GEO index refresh (llms-full.txt):** added all missing marketing pages (about, reviews, process, privacy, packages), seasonal/eid/national-day occasion pages, extended city list (tsweer-afrah family with saihat/tarout/buqayq), all 10 blog posts, accurate guide count (12 active), and full programmatic family summaries (seasonal 96 pages, budget 24, wedding-types 40, EN mirrors 3360+).
+- **ar/blog page confirmed correct:** `app/ar/blog/page.tsx` exists, has proper ar-SA metadata, is in sitemap, and is a valid Arabic locale alias for the blog index.
+- Verified: `npm run typecheck` clean, `npm run lint` clean (0 errors, 0 warnings), `node scripts/verify-static-launch-artifacts.mjs` pass, `node scripts/verify-static-export-size.mjs` pass.
+
 ## 2026-06-07 18:40 +03
 
 - Portfolio (`app/portfolio/page.tsx`) rebuilt as an on-brand women's-wedding showcase: asymmetric masonry (tall/standard spans), richer layered cinematic gradient art with light-bloom + film-grain + vignette, real-service-city overlay text (الأحساء/الدمام/الخبر/القطيف/الجبيل — not the brief's Riyadh/Jeddah, which aren't the service area), per-card play button, and IntersectionObserver lazy reveal. Honest CTA: no public film links exist yet, so play/"watch" opens a consent-first WhatsApp sample request rather than fake video links.

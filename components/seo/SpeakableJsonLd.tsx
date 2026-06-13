@@ -6,6 +6,8 @@
  * or "أفضل مصورة زواج في الأحساء", structured Speakable helps us be cited.
  */
 
+import { JsonLd } from "../JsonLd";
+
 interface SpeakableProps {
   cssSelectors?: string[];
 }
@@ -22,10 +24,5 @@ export function SpeakableJsonLd({
     },
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLd data={schema} />;
 }

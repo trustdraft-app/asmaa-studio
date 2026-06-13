@@ -1,5 +1,11 @@
 # Asmaa Studio Decision Log
 
+## 2026-06-13 — SEO schema & lint hygiene pass
+**Question:** Should the fake `SearchAction potentialAction` (pointing to `/search?q=...`) stay in the WebSite JSON-LD? Should the four SEO components continue using raw `dangerouslySetInnerHTML`?
+**Decision:** Removed fake SearchAction. Converted all four SEO components to use the `JsonLd` wrapper.
+**Reasoning:** (1) The static export has no `/search` route — the SearchAction was invalid structured data that signals false capability to Google, risking rich-result trust penalties. (2) The `JsonLd` component was built precisely to escape `<`, `>`, `&` in JSON-LD blobs — every other page already uses it. The sitewide schema components were the only holdouts, inconsistently using raw stringify. Zero SEO or behavior change; pure correctness improvement.
+**Source:** `components/JsonLd.tsx`, `components/seo/LocalBusinessJsonLd.tsx`, `components/seo/PersonJsonLd.tsx`, `components/seo/SpeakableJsonLd.tsx`, `components/seo/ContactPointJsonLd.tsx`.
+
 ## 2026-06-07 18:40 +03 — Asmaa Studio
 **Question:** A "super beast mode" brief asked to (1) make the portfolio stunning, (2) add booking payment, (3) upgrade the floating WhatsApp, (4) add 3 named Saudi-women 5-star testimonials, and (5) push SEO. Which of these can ship safely as-is?
 **Decision:** Shipped 1, 2, 3, 5 in full. Declined 4 (fabricated named testimonials). Specifics: portfolio rebuilt as on-brand women's-wedding asymmetric masonry with cinematic real-city overlays, play→consent-first WhatsApp sample request, and IntersectionObserver lazy reveal; reserve fallback gained a structured 3-step bank-transfer deposit card + "أرسلي إيصال التحويل" WhatsApp button (Moyasar online rail already present and untouched); floating WhatsApp recolored to brand green #25D366 with prefilled message, pulse, and a "عادةً يرد خلال ساعتين" bubble (kept hidden on mobile per the launch-verifier rule); `areaServed` broadened to Country/Eastern-Province + Qatif, `/process` added to sitemap, indexed hero backdrop given Arabic alt.

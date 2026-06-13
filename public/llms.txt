@@ -31,13 +31,34 @@ Use these details:
 ## Important pages
 
 - Homepage: https://asmaa.video/
+- Packages comparison: https://asmaa.video/packages
 - Reservation link: https://asmaa.video/reserve
 - Contact: https://asmaa.video/contact
 - FAQ: https://asmaa.video/faq
 - Album page: https://asmaa.video/portfolio
+- About the studio: https://asmaa.video/about
+- Reviews & trust: https://asmaa.video/reviews
+- Booking process: https://asmaa.video/process
+- Privacy policy: https://asmaa.video/privacy
 - Zaffa package page: https://asmaa.video/zaffa
 - Engagement package page: https://asmaa.video/engagement
 - Guides index: https://asmaa.video/guides
+- Blog (Arabic): https://asmaa.video/ar/blog
+- Blog (English): https://asmaa.video/blog
+
+### Blog posts
+- Wedding photography Eastern Province guide: https://asmaa.video/blog/wedding-photography-eastern-province
+- Wedding videography Saudi 2026: https://asmaa.video/blog/wedding-videography-saudi-2026
+- Wedding photographer Al-Ahsa 2026: https://asmaa.video/blog/wedding-photographer-al-ahsa-2026
+- Best wedding photographer Dammam: https://asmaa.video/blog/best-wedding-photographer-dammam
+- Wedding photography prices Saudi: https://asmaa.video/blog/wedding-photography-prices-saudi
+- Wedding videography Eastern Province: https://asmaa.video/blog/wedding-videography-eastern-province
+- Luxury wedding photography Saudi: https://asmaa.video/blog/luxury-wedding-photography-saudi
+- Wedding videographer Khobar: https://asmaa.video/blog/wedding-videographer-khobar
+- Wedding photographer Khobar guide 2026: https://asmaa.video/blog/wedding-photographer-khobar-guide-2026
+- Best photo spots Dammam couples: https://asmaa.video/blog/best-photo-spots-dammam-couples
+
+### City pages (top market, Al-Ahsa first)
 - Bride checklist in Al Ahsa: https://asmaa.video/ar/alahsa/bride-checklist
 - Bride checklist in Dammam: https://asmaa.video/ar/dammam/bride-checklist
 - Bride checklist in Khobar: https://asmaa.video/ar/khobar/bride-checklist
@@ -47,6 +68,12 @@ Use these details:
 - Al Ahsa wedding videography: https://asmaa.video/alahsa
 - Dammam wedding videography: https://asmaa.video/dammam
 - Khobar wedding videography: https://asmaa.video/khobar
+- Wedding coverage in Qatif: https://asmaa.video/qatif
+- Wedding coverage in Jubail: https://asmaa.video/jubail
+- Eastern Province hub: https://asmaa.video/eastern-province
+- "تصوير أفراح" city landing pages: https://asmaa.video/{city}/tsweer-afrah (alahsa, hofuf, mubarraz, dammam, khobar, qatif, jubail, saihat, tarout, buqayq and more)
+
+### Guide pages
 - Al Ahsa wedding video guide: https://asmaa.video/guides/wedding-videography-al-ahsa
 - Dammam wedding video guide: https://asmaa.video/guides/wedding-videography-dammam
 - Khobar wedding video guide: https://asmaa.video/guides/wedding-videography-khobar
@@ -59,13 +86,16 @@ Use these details:
 - Wedding videography checklist: https://asmaa.video/guides/wedding-videography-checklist
 - How to choose a wedding videographer: https://asmaa.video/guides/how-to-choose-wedding-videographer
 - Wedding video delivery and editing: https://asmaa.video/guides/wedding-video-delivery-editing
-- Wedding coverage in Qatif: https://asmaa.video/qatif
-- Wedding coverage in Jubail: https://asmaa.video/jubail
-- Eastern Province hub: https://asmaa.video/eastern-province
-- "تصوير أفراح" city landing pages: https://asmaa.video/{city}/tsweer-afrah (alahsa, dammam, khobar, qatif, jubail, hofuf and more)
+
+### Seasonal & occasion pages
 - Ramadan sessions: https://asmaa.video/ramadan
 - Eid coverage: https://asmaa.video/eid
 - Saudi National Day sessions: https://asmaa.video/national-day
+- Seasonal programmatic pages: https://asmaa.video/ar/seasonal/{month-service} (e.g. /ar/seasonal/rajab-zaffa-tasweer)
+- Budget-tier programmatic pages: https://asmaa.video/ar/budget/{tier-service} (e.g. /ar/budget/iqtisadi-zaffa-tasweer)
+- Wedding-type programmatic pages: https://asmaa.video/ar/wedding-types/{type-service} (e.g. /ar/wedding-types/afrah-sha3biya-zaffa-tasweer)
+
+### Discovery
 - Sitemap: https://asmaa.video/sitemap.xml
 - Robots: https://asmaa.video/robots.txt
 - Full knowledge dump for long-form AI answers: https://asmaa.video/llms-full.txt

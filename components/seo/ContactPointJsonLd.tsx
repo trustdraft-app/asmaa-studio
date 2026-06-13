@@ -6,6 +6,8 @@
  * surface the answer directly.
  */
 
+import { JsonLd } from "../JsonLd";
+
 export function ContactPointJsonLd() {
   const schema = {
     "@context": "https://schema.org",
@@ -30,10 +32,5 @@ export function ContactPointJsonLd() {
       },
     ],
   };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLd data={schema} />;
 }
